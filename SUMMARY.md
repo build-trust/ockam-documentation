@@ -4,14 +4,12 @@
   * [Concepts](readme/concepts.md)
   * [Use Cases](readme/use-cases.md)
   * [Ockam vs Other Software](readme/ockam-vs-other-software.md)
-
-## Get Started
-
-* [Command](get-started/command-line.md)
-* [Cloud](get-started/cloud.md)
-* [Container](get-started/container.md)
-* [Rust](get-started/rust.md)
-* [Messaging API](get-started/messaging-api.md)
+* [Get Started](get-started/README.md)
+  * [Command](get-started/command-line.md)
+  * [Cloud](get-started/cloud.md)
+  * [Container](get-started/container.md)
+  * [Rust](get-started/rust.md)
+  * [Messaging API](get-started/messaging-api.md)
 
 ## Guides
 
