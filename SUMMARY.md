@@ -1,9 +1,9 @@
 # Table of contents
 
 * [What is Ockam?](README.md)
-  * [Concepts](readme/concepts.md)
-  * [Use Cases](readme/use-cases.md)
-  * [Ockam vs Other Software](readme/ockam-vs-other-software.md)
+  * [Concepts](introduction/concepts.md)
+  * [Use Cases](introduction/use-cases.md)
+  * [Ockam vs Other Software](introduction/ockam-vs-other-software.md)
 * [Get Started](get-started/README.md)
   * [Command](get-started/command-line.md)
   * [Cloud](get-started/cloud.md)
