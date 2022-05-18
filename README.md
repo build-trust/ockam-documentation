@@ -1,1 +1,6 @@
-# ockam-documentation
+---
+layout: landing
+---
+
+# Ockam
+
