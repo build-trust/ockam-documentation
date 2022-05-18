@@ -11,8 +11,7 @@
 * [Cloud](get-started/cloud.md)
 * [Container](get-started/container.md)
 * [Rust](get-started/rust.md)
-* [API](get-started/api/README.md)
-  * [Messaging](get-started/api/messaging.md)
+* [Messaging API](get-started/messaging-api.md)
 
 ## Guides
 
