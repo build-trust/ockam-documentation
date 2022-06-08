@@ -1,3 +1,4 @@
 # Spaces
 
-{% include schema.cddl }
+\{% include ./schema.cddl }
+
