@@ -1,2 +1,3 @@
 # Spaces
 
+{% include schema.cddl }
