@@ -1,4 +1,0 @@
-# Spaces
-
-\{% include ./schema.cddl }
-

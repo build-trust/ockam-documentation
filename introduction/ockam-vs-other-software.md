@@ -1,2 +1,0 @@
-# Ockam vs Other Software
-
