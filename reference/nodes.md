@@ -2,7 +2,7 @@
 
 {% tabs %}
 {% tab title="CLI" %}
-```
+```bash
 ockam node create {name}
 ```
 {% endtab %}
