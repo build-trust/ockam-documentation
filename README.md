@@ -1,6 +1,6 @@
 # What is Ockam?
 
-```shell
+```bash
 # Install Ockam Command using Homebrew
 brew install build-trust/ockam/command
 
