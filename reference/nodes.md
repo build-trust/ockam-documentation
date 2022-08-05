@@ -1,23 +1,3 @@
 # Nodes
 
-{% tabs %}
-{% tab title="CLI" %}
-```bash
-ockam node create {name}
-```
-{% endtab %}
-
-{% tab title="Rust" %}
-
-{% endtab %}
-
-{% tab title="Messaging API" %}
-#### **Request**
-
-
-
-#### **Response**
-
-<mark style="color:purple;">****</mark>
-{% endtab %}
-{% endtabs %}
+An Ockam Node is an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called [Ockam Workers](workers.md). A node can deliver messages from one worker to another worker. Nodes can also route messages to workers on other remote nodes.
