@@ -7,6 +7,7 @@
 
 ## Reference
 
+* [Routing](reference/routing.md)
 * [Nodes](reference/nodes.md)
 * [Workers](reference/workers.md)
 * [Messages](reference/messages.md)

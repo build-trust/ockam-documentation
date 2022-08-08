@@ -1,11 +1,20 @@
 # What is Ockam?
 
+```shell
+
+
+```
+
 ```bash
 # Install Ockam Command using Homebrew
-brew install build-trust/ockam/command
+brew install build-trust/ockam/oc
 
 # Create three Ockam nodes n1, n2 & n3
 for i in {1..3}; do ockam node create "n$i"; done
+
+# Route a message 
+ockam message send "hello" --from n1 --to /node/n2/node/n3/service/uppercase
+HELLO
 
 # Create a mutually authenticated, authorized, end-to-end encrypted secure channel
 # from node n1, via node n2, over two tcp hops to api service on node n3.
