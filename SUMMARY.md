@@ -1,9 +1,7 @@
 # Table of contents
 
 * [What is Ockam?](README.md)
-* [Get Started](get-started/README.md)
-  * [Command](get-started/command-line.md)
-  * [Rust](get-started/rust.md)
+* [Get Started](get-started.md)
 
 ## Reference
 
