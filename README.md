@@ -18,7 +18,7 @@ HELLO
 # using this channel.
 # 
 # n2 cannot see or tamper the onroute message
-ockam secure-channel create --from n1 --to /ip4/127.0.0.1/tcp/6002/ip4/127.0.0.1/tcp/6003/service/uppercase/service/api
+ockam secure-channel create --from n1 --to /ip4/127.0.0.1/tcp/6002/ip4/127.0.0.1/tcp/6003/service/api \
     | ockam message send "hello" --from n1 --to -/service/uppercase
 HELLO
 
