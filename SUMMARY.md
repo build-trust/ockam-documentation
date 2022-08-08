@@ -1,14 +1,14 @@
 # Table of contents
 
 * [What is Ockam?](README.md)
-* [Get Started](get-started.md)
+* [Get Started](get-started/README.md)
 
 ## Reference
 
-* [Routing](reference/routing.md)
 * [Nodes](reference/nodes.md)
 * [Workers](reference/workers.md)
 * [Messages](reference/messages.md)
+* [Routing](reference/routing.md)
 * [Transports](reference/transports.md)
 * [Vaults](reference/vaults.md)
 * [Identities](reference/identities.md)
