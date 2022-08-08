@@ -42,7 +42,7 @@ HELLO
 # using this channel.
 # 
 # n2 cannot see or tamper the onroute message
-ockam secure-channel create --from n1 --to /node/n2/node/n3/service/api
+ockam secure-channel create --from n1 --to /node/n2/node/n3/service/api \
     | ockam message send "hello" --from n1 --to -/service/uppercase
 HELLO
 ```
