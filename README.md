@@ -1,5 +1,7 @@
 # What is Ockam?
 
+Orchestrate end-to-end encryption, mutual authentication, key management, credential management & authorization policy enforcement — at scale.
+
 ```shell
 # Install Ockam Command using Homebrew
 brew install build-trust/ockam/ockam
