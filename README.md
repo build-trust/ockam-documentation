@@ -2,7 +2,7 @@
 
 ```shell
 # Install Ockam Command using Homebrew
-brew install build-trust/ockam/oc
+brew install build-trust/ockam/ockam
 
 # Create three Ockam nodes n1, n2 & n3
 for i in {1..3}; do ockam node create "n$i" --tcp-listener-address "127.0.0.1:600$i"; done
@@ -26,7 +26,7 @@ HELLO
 
 ```bash
 # Install Ockam Command using Homebrew
-brew install build-trust/ockam/oc
+brew install build-trust/ockam/ockam
 
 # Create three Ockam nodes n1, n2 & n3
 for i in {1..3}; do ockam node create "n$i"; done
