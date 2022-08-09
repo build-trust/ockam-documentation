@@ -8,9 +8,11 @@ Orchestrate end-to-end encryption, mutual authentication, key management, creden
 
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data.
 
-In oder to trust information or instructions, that are received over the network, applications must **authenticate** all senders of data and verify the **integrity of data** received to know that it is exactly what was sent by its sender — free from errors or tampering.
+In oder to trust information or instructions, that are received over the network, applications must **authenticate** all senders of data and verify the **integrity of data** received to know that it is exactly what was sent by its sender — free from errors or en-route tampering.
 
-Application layer communication is bi-directional since, at the very least, we have to acknowledge receipt of data to its senders. This means that authentication and the data integrity guarantee within our applications must be **mutual** between any two parts that are communicating .
+Application layer communication is bi-directional since, at the very least, we have to acknowledge receipt of data to its senders. This means that authentication and the data integrity guarantee within our applications must be **mutual** between any two communicating parts.
+
+Our applications have moved out of data center boundaries&#x20;
 
 
 
