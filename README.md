@@ -10,7 +10,7 @@ Modern applications are distributed and have an unwieldy number of interconnecti
 
 In oder to trust information or instructions, that are received over the network, applications must **authenticate** all senders of data and verify the **integrity of data** received to know that it is exactly what was sent by its sender — free from errors or tampering.
 
-Most communication is bi-directional since, at the very least, we have to acknowledge receipt of data to its senders. This means that authentication and the data integrity guarantee within our applications must be **mutual** between any two parts that are communicating with each other.&#x20;
+Application layer communication is bi-directional since, at the very least, we have to acknowledge receipt of data to its senders. This means that authentication and the data integrity guarantee within our applications must be **mutual** between any two parts that are communicating .
 
 
 
