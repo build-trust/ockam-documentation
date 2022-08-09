@@ -1,52 +1,8 @@
 ---
-description: Build Trust for Data-in-Motion.
+description: Trust for Data-in-Motion
 ---
 
 # What is Ockam?
-
-Orchestrate end-to-end encryption, mutual authentication, key management, credential management & authorization policy enforcement — at scale.
-
-Modern applications are distributed and have an unwieldy number of interconnections that must _trustfully_ exchange data.  Data, within applications, routinely flows over complex, multi-hop, multi-protocol routes — _across data centers, through queues and caches, via gateways and brokers_ — before reaching its end destination.
-
-
-
-
-
-
-
-
-
-Zero-Trust
-
-Secure by Default
-
-Shift Left
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Data, within modern distributed applications, are rarely exchanged over a single point-to-point transport connection. Application messages routinely flow over complex, multi-hop, multi-protocol routes — _across data centers, through queues and caches, via gateways and brokers_ — before reaching their end destination.
-
-
-
-
 
 ```shell
 # Install Ockam Command using Homebrew
