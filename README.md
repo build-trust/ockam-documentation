@@ -26,6 +26,20 @@ Most communication is bi-directional since, at the very least, we have to acknow
 
 
 
+Data, within modern distributed applications, are rarely exchanged over a single point-to-point transport connection. Application messages routinely flow over complex, multi-hop, multi-protocol routes — across data centers, through queues and caches, via gateways and brokers — before reaching their end destination. Transport layer security protocols are unable to protect application messages because their protection is constrained by the length and duration of the underlying transport connection.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
