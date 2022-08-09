@@ -4,6 +4,46 @@ description: Trust for Data-in-Motion
 
 # What is Ockam?
 
+Orchestrate end-to-end encryption, mutual authentication, key management, credential management & authorization policy enforcement — at scale.
+
+Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data.
+
+In oder to trust information or instructions, that are received over the network, applications must **authenticate** all senders of data and verify the integrity of data received to know that it is exactly what was sent by its sender.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ockam is a suite of open source tools and cloud services that makes it simple for applications to guarantee end-to-end integrity, authenticity, and confidentiality of data.
+
+
+
+
+
+
+
+
+
 ```shell
 # Install Ockam Command using Homebrew
 > brew install build-trust/ockam/ockam
