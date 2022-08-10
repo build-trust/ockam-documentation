@@ -24,7 +24,7 @@ Zero trust presents a shift from a location-centric model to a more data-centric
 
 #### Least privileged, per-request access and privacy controls&#x20;
 
-#### Managing keys, identities and credentials – safely, at scale
+#### Manage keys, identities and credentials – safely, at scale
 
 
 
