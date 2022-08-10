@@ -22,9 +22,9 @@ Applications have moved out of enterprise data centers into multi-tenant cloud a
 
 Data, within applications, routinely flows over complex, multi-hop, multi-protocol routes — across network boundaries, beyond data centers, through queues and caches, via gateways and brokers — before reaching its end destination. The vulnerability surfaces of all these dependencies get added to the vulnerability surface of our application data and make it _unmanageable_.
 
-Ockam [secure channels](reference/secure-channels.md) enable end-to-end **application layer encryption** of **data-in-motion**. This creates a deny-by-default security posture that minimized our vulnerability surface and gives our application true control over every data or service access decision. ****&#x20;
+Ockam [secure channels](reference/secure-channels.md) enable end-to-end **application layer encryption** of **data-in-motion**. The data integrity and confidentiality guarantee, of these channels, creates a deny-by-default security posture that minimizes our vulnerability surface and gives our application true control over every data or service access decision. ****&#x20;
 
-
+#### Identity driven, least privileged, per-request access and privacy controls
 
 
 
@@ -38,7 +38,7 @@ The number ways our application's data can be&#x20;
 
 Zero trust presents a shift from a location-centric model to a more data-centric approach
 
-#### Identity driven, least privileged, per-request access and privacy controls&#x20;
+#### &#x20;
 
 #### Manage keys, identities and credentials – safely, at scale
 
