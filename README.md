@@ -26,35 +26,7 @@ Ockam [secure channels](reference/secure-channels.md) enable end-to-end **applic
 
 #### Identity driven, least privileged, per-request access and privacy controls
 
-
-
-
-
-To take back control of the security and privacy properties&#x20;
-
-
-
-The number ways our application's data can be&#x20;
-
-Zero trust presents a shift from a location-centric model to a more data-centric approach
-
-#### &#x20;
-
 #### Manage keys, identities and credentials – safely, at scale
-
-
-
-
-
-&#x20;
-
-
-
-
-
-
-
-
 
 
 
