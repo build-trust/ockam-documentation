@@ -1,7 +1,8 @@
 ---
 description: Trust for Data-in-Motion
 cover: .gitbook/assets/Linkedin.png
-coverY: 0
+coverY: 94.42815249266862
+layout: landing
 ---
 
 # What is Ockam?
