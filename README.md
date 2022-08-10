@@ -20,13 +20,15 @@ With Ockam, applications can, in a few lines of code, create mutually authentica
 
 Applications have moved out of enterprise data centers into multi-tenant cloud and edge environments. They operate in untrusted networks and increasingly rely on third-party managed services and infrastructure. This creates exponential growth in the **vulnerability surface of our application data**.
 
-Data, within applications, routinely flows over complex, multi-hop, multi-protocol routes — across network boundaries, beyond data centers, through queues and caches, via gateways and brokers — before reaching its end destination. The vulnerability surfaces of all these dependencies get added to the vulnerability surface of our application data and make it _unmanageable_.
+Data, within our applications, routinely flows over complex, multi-hop, multi-protocol routes — across network boundaries, beyond data centers, through queues and caches, via gateways and brokers — before reaching its end destination. The vulnerability surfaces of all these dependencies get added to the vulnerability surface of our application data and make it _unmanageable_.
 
-Ockam end-to-end [secure channels](reference/secure-channels.md) enable **application layer encryption** of **data-in-motion**. The data integrity and confidentiality guarantee, of these channels, creates a deny-by-default security posture that minimizes our vulnerability surface and gives our application true control over every data or service access decision. ****&#x20;
+Ockam end-to-end [secure channels](reference/secure-channels.md) enable **application layer encryption** of all **data-in-motion**. The data integrity and confidentiality guarantee, of these channels, creates a deny-by-default security posture that minimizes our vulnerability surface and gives our application true control over every data or service access decision. ****&#x20;
 
 #### Identity driven, least privileged, per-request access and privacy controls
 
-#### Manage keys, identities and credentials – safely, at scale
+####
+
+#### Manage identities, keys, and credentials – safely, at scale
 
 
 
