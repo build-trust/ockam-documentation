@@ -8,7 +8,7 @@ coverY: 0
 
 Ockam is a suite of **open source** tools, programming libraries and cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management & authorization policy enforcement — at scale.
 
-Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. Ockam makes it simple to build applications that are **secure** and **private by-design** with granular control over every access decision:
+Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. Ockam makes it simple to build applications that are **private** and **secure by-design** with granular control over every access decision.
 
 #### Mutual authentication and end-to-end data integrity
 
@@ -16,9 +16,11 @@ In order to trust information or instructions, that are received over the networ
 
 Application layer communication is also usually bi-directional since, at the very least, we have to acknowledge receipt of data to its senders. This means that authentication and the data integrity guarantee within applications must be **mutual** between any two communicating parts.
 
+With Ockam, applications can, in a few lines of code, create mutually authenticated, end-to-end secure channels that guarantee data integrity&#x20;
+
 #### **Zero trust in the network boundaries, infrastructure and intermediaries**
 
-Applications have moved out of enterprise network boundaries into multi-tenant cloud environments, edge environments.&#x20;
+Applications have moved out of enterprise network boundaries into multi-tenant cloud and edge environments.&#x20;
 
 Data, within applications, routinely flows over complex, multi-hop, multi-protocol routes — across network boundaries, beyond data centers, through queues and caches, via gateways and brokers — before reaching its end destination.
 
@@ -44,7 +46,7 @@ Zero trust presents a shift from a location-centric model to a more data-centric
 
 
 
-## Hello Ockam
+### Hello Ockam
 
 Let's create a mutually authenticated and authorized secure channel, in three simple commands and then send an end-to-end encrypted message through this channel.
 
