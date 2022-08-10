@@ -1,7 +1,5 @@
 ---
 description: Trust for Data-in-Motion
-cover: .gitbook/assets/Linkedin.png
-coverY: -2.0527859237536745
 ---
 
 # What is Ockam?
@@ -10,7 +8,7 @@ Ockam is a suite of **open source** tools, programming libraries and cloud servi
 
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. Ockam makes it simple to build **secure by-design** applications that have granular control over every access decision.
 
-#### Mutual authentication and end-to-end data integrity
+#### **Mutual authentication and end-to-end data integrity**
 
 In order to trust information or instructions, that are received over the network, applications must **authenticate** all senders and **verify the integrity of data** **received** to assert what was received is exactly what was sent — free from errors or en-route tampering.
 
