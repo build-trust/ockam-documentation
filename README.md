@@ -16,7 +16,7 @@ Application layer communication is also usually bi-directional since, at the ver
 
 With Ockam, applications can, in a few lines of code, create mutually authenticated [secure channels](reference/secure-channels.md) that guarantee end-to-end data integrity to senders and receivers of data.
 
-#### **Zero trust in network boundaries, infrastructure and intermediaries**
+#### **Zero trust in network boundaries,** third-party services, and infrastructure
 
 Applications have moved out of enterprise data centers into multi-tenant cloud and edge environments. They increasingly rely on third-party managed services and infrastructure. We observe exponential growth in the **vulnerability surface of our application data**.
 
@@ -24,7 +24,7 @@ Data, within applications, routinely flows over complex, multi-hop, multi-protoc
 
 Zero trust presents a shift from a location-centric model to a more data-centric approach
 
-#### Least privileged, per-request access and privacy controls&#x20;
+#### Identity driven, least privileged, per-request access and privacy controls&#x20;
 
 #### Manage keys, identities and credentials – safely, at scale
 
