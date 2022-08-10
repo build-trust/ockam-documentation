@@ -3,11 +3,6 @@
 * [What is Ockam?](README.md)
 * [Get Started](get-started/README.md)
 
-## CONCEPTS
-
-* [End-to-End Encryption](concepts/end-to-end-encryption.md)
-* [Application Layer Routing](concepts/application-layer-routing.md)
-
 ## Reference
 
 * [Nodes](reference/nodes.md)
