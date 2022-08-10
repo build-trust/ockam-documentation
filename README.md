@@ -18,9 +18,9 @@ With Ockam, applications can, in a few lines of code, create mutually authentica
 
 #### **Zero trust in network boundaries,** third-party services, and infrastructure
 
-Applications have moved out of enterprise data centers into multi-tenant cloud and edge environments. They increasingly rely on third-party managed services and infrastructure. This creates exponential growth in the **vulnerability surface of our application data**.
+Applications have moved out of enterprise data centers into multi-tenant cloud and edge environments. The operate in untrusted networks and increasingly rely on third-party managed services and infrastructure. This creates exponential growth in the **vulnerability surface of our application data**.
 
-Data, within applications, routinely flows over complex, multi-hop, multi-protocol routes — across network boundaries, beyond data centers, through queues and caches, via gateways and brokers — before reaching its end destination. The vulnerability surfaces of all these dependencies get added to the vulnerability surface of our application data and make it unmanageable.
+Data, within applications, routinely flows over complex, multi-hop, multi-protocol routes — across network boundaries, beyond data centers, through queues and caches, via gateways and brokers — before reaching its end destination. The vulnerability surfaces of all these dependencies get added to the vulnerability surface of our application data and make it _unmanageable_.
 
 Ockam [secure channels](reference/secure-channels.md) enable end-to-end **application layer encryption** of **data-in-motion**. ****&#x20;
 
