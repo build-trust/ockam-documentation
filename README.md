@@ -6,11 +6,27 @@ description: Trust for Data-in-Motion
 
 Ockam is a suite of **open source** tools, programming libraries and cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management & authorization policy enforcement — at scale.
 
+
+
+#### Mutual authentication and end-to-end data integrity
+
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data.
 
 In order to trust information or instructions, that are received over the network, applications must **authenticate** all senders and **verify the integrity of data** **received** to assert what was received is exactly what was sent — free from errors or en-route tampering.
 
 Application layer communication is also usually bi-directional since, at the very least, we have to acknowledge receipt of data to its senders. This means that authentication and the data integrity guarantee within applications must be **mutual** between any two communicating parts.
+
+#### Managing keys, identities and credentials&#x20;
+
+
+
+Identity&#x20;
+
+
+
+
+
+
 
 Our applications have moved out of enterprise network boundaries into multi-tenant cloud environments, edge environments.&#x20;
 
@@ -20,7 +36,7 @@ Data, within applications, routinely flows over complex, multi-hop, multi-protoc
 
 ## Hello Ockam
 
-
+Let's create a mutually authenticated and authorized secure channel, in three simple commands and then send an end-to-end encrypted message through this channel.
 
 {% code overflow="wrap" %}
 ```bash
