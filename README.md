@@ -11,7 +11,7 @@ Here's a  a simple example using `ockam` command.
 <pre class="language-bash" data-overflow="wrap"><code class="lang-bash"># Install Ockam Command using Homebrew
 > brew install build-trust/ockam/ockam
 
-# Create three Ockam nodes n1, n2 &#x26; n3
+# Create three local Ockam nodes n1, n2 &#x26; n3
 > for i in {1..3}; do ockam node create "n$i"; done
 
 # Create a mutually authenticated, authorized, end-to-end encrypted secure channel
@@ -20,7 +20,7 @@ Here's a  a simple example using `ockam` command.
 </strong>    | ockam message send "hello ockam!" --from n1 --to -/service/uppercase
 HELLO OCKAM!</code></pre>
 
-Here we created an end-to-end secure channel over two tcp connection hops
+In the highlighted line, we created a mutually authenticated, authorized, end-to-end encrypted secure channel over two TCP transport connection hops.&#x20;
 
 
 
