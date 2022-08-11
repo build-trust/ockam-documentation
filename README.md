@@ -6,7 +6,7 @@ description: Trust for Data-in-Motion
 
 Ockam is a suite of **open source** tools, programming libraries and cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management & authorization policy enforcement — at scale.
 
-Before we dive in, here's a simple example:
+Here's a simple example using `ockam` command
 
 {% code overflow="wrap" %}
 ```bash
@@ -17,15 +17,13 @@ Before we dive in, here's a simple example:
 > for i in {1..3}; do ockam node create "n$i"; done
 
 # Create a mutually authenticated, authorized, end-to-end encrypted secure channel
-# from node n1, via node n2, over two tcp hops to api service on node n3.
+# from node n1, via node n2, over two tcp hops to the api service on node n3.
 #
 # Then send an end-to-end encrypted message to the uppercase service on n3,
-# using this channel.
-# 
-# n2 cannot see or tamper the onroute message
+# using this channel. n2 cannot see or tamper the onroute message
 > ockam secure-channel create --from n1 --to /node/n1/node/n2/node/n3/service/api
     | ockam message send "hello ockam!" --from n1 --to -/service/uppercase
-HELLO OCKAM
+HELLO OCKAM!
 ```
 {% endcode %}
 
