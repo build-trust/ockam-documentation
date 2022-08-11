@@ -20,7 +20,7 @@ Here's a  a simple example using `ockam` command.
 </strong>    | ockam message send "hello ockam!" --from n1 --to -/service/uppercase
 HELLO OCKAM!</code></pre>
 
-In the highlighted line, we created a mutually authenticated, authorized, end-to-end encrypted secure channel over two TCP transport connection hops. Later, in these docs, we'll discuss how this works and how you can do the same thing with Ockam libraries for Rust and Elixir.
+In the highlighted line, we created a mutually authenticated, authorized, end-to-end encrypted secure channel over two TCP transport connection hops. The middle node n2 would see encrypted data and would be unable to tamper with it, without detection. Later, in these docs, we'll discuss how this works and how you can do the same thing with Ockam libraries for Rust and Elixir.
 
 ### Why Ockam?
 
