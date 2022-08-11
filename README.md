@@ -8,21 +8,21 @@ Ockam is a suite of **open source** tools, programming libraries and cloud servi
 
 Here's a  a simple example using `ockam` command.
 
-{% code overflow="wrap" %}
-```bash
-# Install Ockam Command using Homebrew
+<pre class="language-bash" data-overflow="wrap"><code class="lang-bash"># Install Ockam Command using Homebrew
 > brew install build-trust/ockam/ockam
 
-# Create three Ockam nodes n1, n2 & n3
+# Create three Ockam nodes n1, n2 &#x26; n3
 > for i in {1..3}; do ockam node create "n$i"; done
 
 # Create a mutually authenticated, authorized, end-to-end encrypted secure channel
 # and send an end-to-end encrypted message through it.
-> ockam secure-channel create --from n1 --to /node/n1/node/n2/node/n3/service/api
-    | ockam message send "hello ockam!" --from n1 --to -/service/uppercase
-HELLO OCKAM!
-```
-{% endcode %}
+<strong>> ockam secure-channel create --from n1 --to /node/n1/node/n2/node/n3/service/api
+</strong>    | ockam message send "hello ockam!" --from n1 --to -/service/uppercase
+HELLO OCKAM!</code></pre>
+
+Here we created an end-to-end secure channel over two tcp connection hops
+
+
 
 Later we'll see how to do the same using Rust.&#x20;
 
