@@ -24,7 +24,11 @@ Here's a  a simple example using `ockam` command.
 </strong><strong>    | ockam message send "hello ockam!" --from n1 --to -/service/uppercase
 </strong>HELLO OCKAM!</code></pre>
 
-In the highlighted lines, we created a mutually authenticated, authorized, and end-to-end encrypted secure channel over two TCP transport connection hops. The middle node n2 only sees encrypted data and is unable to tamper with it, without detection. The end nodes n1 and n3 mutually authenticate each other and can verify the source and integrity of exchanged messages. Later, in these docs, we'll discuss how this works and how you can also do the same thing with Ockam libraries for Rust and Elixir.
+In the highlighted lines, we created a mutually authenticated, authorized, and end-to-end encrypted secure channel over two TCP transport connection hops.&#x20;
+
+The middle node n2 only sees encrypted data and is unable to tamper with it, without detection. The end nodes n1 and n3 mutually authenticate each other and can verify the source and integrity of exchanged messages.
+
+Later, in these docs, we'll discuss how this works and how to do the same thing using Ockam libraries for Rust and Elixir.
 
 ### Why Ockam?
 
@@ -44,11 +48,13 @@ Data, within our applications, routinely flows over complex, multi-hop, multi-pr
 
 Ockam end-to-end [secure channels](reference/secure-channels.md) enable **application layer encryption** of all **data-in-motion**. The data integrity and confidentiality guarantee, of these channels, create a deny-by-default security posture that minimizes our vulnerability surface and gives our application true control over every data or service access decision. ****&#x20;
 
-#### Identity driven, least privileged, per-request access and privacy controls
+#### Identity driven, attribute based, least privileged, privacy and access controls
 
-
+Armed with a foundation of _end-to-end secure channels,_ applications can have granular control over every trust and access decision.
 
 #### Manage identities, keys, and credentials – safely, at scale
 
+Any environment
 
+operator liability
 
