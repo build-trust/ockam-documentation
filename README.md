@@ -6,7 +6,7 @@ description: Trust for Data-in-Motion
 
 Ockam is a suite of **open source** tools, programming libraries and cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management & authorization policy enforcement — at scale.
 
-Here's a  a simple example using `ockam` command. Later we'll see how to do the same using Rust.&#x20;
+Here's a  a simple example using `ockam` command.
 
 {% code overflow="wrap" %}
 ```bash
@@ -23,6 +23,8 @@ Here's a  a simple example using `ockam` command. Later we'll see how to do the 
 HELLO OCKAM!
 ```
 {% endcode %}
+
+Later we'll see how to do the same using Rust.&#x20;
 
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. Ockam makes it simple to build **secure by-design** applications that have granular control over every trust and access decision.
 
