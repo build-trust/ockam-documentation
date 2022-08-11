@@ -17,10 +17,7 @@ Here's a  a simple example using `ockam` command. Later we'll see how to do the 
 > for i in {1..3}; do ockam node create "n$i"; done
 
 # Create a mutually authenticated, authorized, end-to-end encrypted secure channel
-# from node n1, via node n2, over two tcp hops to the api service on node n3.
-#
-# Then send an end-to-end encrypted message to the uppercase service on n3,
-# using this channel. n2 cannot see or tamper the onroute message
+# and send an end-to-end encrypted message through it.
 > ockam secure-channel create --from n1 --to /node/n1/node/n2/node/n3/service/api
     | ockam message send "hello ockam!" --from n1 --to -/service/uppercase
 HELLO OCKAM!
