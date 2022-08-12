@@ -20,7 +20,7 @@ Here's a  a simple example using `ockam` command.
 
 # Create a mutually authenticated, authorized, end-to-end encrypted secure channel
 # and send an end-to-end encrypted message through it.
-<strong>> ockam secure-channel create --from n1 --to /node/n1/node/n2/node/n3/service/api
+<strong>> ockam secure-channel create --from n1 --to /node/n1/node/n2/node/n3/service/api \
 </strong><strong>    | ockam message send "hello ockam!" --from n1 --to -/service/uppercase
 </strong>HELLO OCKAM!</code></pre>
 
