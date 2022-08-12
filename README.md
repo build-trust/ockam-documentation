@@ -48,13 +48,3 @@ Data, within our applications, routinely flows over complex, multi-hop, multi-pr
 
 Ockam end-to-end [secure channels](reference/secure-channels.md) enable **application layer encryption** of all **data-in-motion**. The data integrity and confidentiality guarantee, of these channels, create a deny-by-default security posture that minimizes our vulnerability surface and gives our application true control over every data or service access decision. ****&#x20;
 
-#### Identity driven, attribute based, least privileged, privacy and access controls
-
-Armed with a foundation of _end-to-end secure channels,_ applications can have granular control over every trust and access decision.
-
-#### Manage identities, keys, and credentials – safely, at scale
-
-Any environment
-
-operator liability
-
