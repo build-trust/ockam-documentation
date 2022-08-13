@@ -10,7 +10,7 @@ Modern applications are distributed and have an unwieldy number of interconnecti
 
 ### Hello Ockam
 
-Here's a  a simple example using `ockam` command.
+Here's a simple example using `ockam` command.
 
 <pre class="language-bash" data-overflow="wrap"><code class="lang-bash"># Install Ockam Command using Homebrew
 > brew install build-trust/ockam/ockam
