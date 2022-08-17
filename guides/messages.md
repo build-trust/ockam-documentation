@@ -1,5 +1,5 @@
 ---
-description: End-to-end encrypted, secure, and private relays – for any application.
+description: End-to-end encrypted cloud relays – for any application.
 ---
 
 # Private Cloud Relays
