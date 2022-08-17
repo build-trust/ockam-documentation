@@ -4,7 +4,9 @@ description: End-to-end encrypted, secure and private cloud relays – for any a
 
 # Private Cloud Relays
 
-```bash
+
+
+```shell
 # Install Ockam
 $ brew install build-trust/ockam/ockam
 
