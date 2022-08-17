@@ -5,7 +5,7 @@
 
 ## Guides
 
-* [End-to-End Encryption](guides/messages.md)
+* [Private Cloud Relays](guides/messages.md)
 
 ## Reference
 
