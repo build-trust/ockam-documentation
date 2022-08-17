@@ -3,6 +3,10 @@
 * [What is Ockam?](README.md)
 * [Get Started](get-started/README.md)
 
+## Guides
+
+* [End-to-End Encryption](guides/messages.md)
+
 ## Reference
 
 * [Nodes](reference/nodes.md)
