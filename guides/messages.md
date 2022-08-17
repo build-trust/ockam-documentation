@@ -1,8 +1,10 @@
 ---
-description: End-to-end encrypted cloud relays – for any application.
+description: End-to-end encrypted, secure and private cloud relays – for any application.
 ---
 
 # Private Cloud Relays
+
+
 
 ```shell
 # Install Ockam
@@ -36,6 +38,6 @@ $ ockam node create client-sidecar
 $ ockam secure-channel create --from /node/client-sidecar --to /node/cloud-private-relay/service/forwarder-to-service-sidecar/service/api \
     | ockam tcp-inlet create --at /node/client-sidecar --from 127.0.0.1:7000 --to -/service/outlet
 
-# Access the application service though our end-to-end encrypted relay
+# Access the application service though the end-to-end encrypted, secure relay
 $ curl 127.0.0.1:7000
 ```
