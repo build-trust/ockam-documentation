@@ -26,3 +26,22 @@ The result is a way for messages to be exchanged in a trustful manner.
     | ockam message send "hello ockam!" --from n1 --to -/service/uppercase
 HELLO OCKAM
 ```
+
+```bash
+> ockam node create n1
+> ockam node create n2
+
+> ockam secure-channel create --from /node/n1 --to /node/n2/service/api \
+    | ockam message send hello --from /node/n1 --to -/service/uppercase
+HELLO
+```
+
+```bash
+> ockam node create n1
+> ockam node create n2
+
+> ockam secure-channel-listener create "listener" --at /node/n2
+> ockam secure-channel create --from /node/n1 --to /node/n2/service/listener \
+    | ockam message send hello --from /node/n1 --to -/service/uppercase
+HELLO
+```
