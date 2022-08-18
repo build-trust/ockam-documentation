@@ -5,7 +5,7 @@
 
 ## Guides
 
-* [Private Cloud Relays](guides/messages.md)
+* [Encrypted Cloud Relays](guides/messages.md)
 
 ## Reference
 
