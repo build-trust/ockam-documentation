@@ -12,7 +12,7 @@ $ ockam secure-channel create --from /node/n1 --to /node/n2/service/api \
 HELLO
 ```
 
-The Ockam Secure Channels protocol is based on a cryptographic handshake designs proposed in the Noise Protocol Framework. This gives us a light wight handshake that&#x20;
+The Ockam Secure Channels protocol is based on a cryptographic handshake designs proposed in the Noise Protocol Framework.&#x20;
 
 Ockam Secure Channels protocol is layered above Ockam Routing and is decoupled from transport protocols like TCP, UDP, Bluetooth etc. This allows Ockam Secure Channels to be end-to-end over multiple transport layer hops.
 
@@ -56,6 +56,8 @@ The result is a way for messages to be exchanged in a trustful manner.
     | ockam message send "hello ockam!" --from n1 --to -/service/uppercase
 HELLO OCKAM
 ```
+
+#### Create a secure channel between two nodes and send a message through the secure channel
 
 ```bash
 > ockam node create n1
