@@ -57,7 +57,9 @@ The result is a way for messages to be exchanged in a trustful manner.
 HELLO OCKAM
 ```
 
-#### Create a secure channel between two nodes and send a message through the secure channel
+Below are examples of how to create secure channels.
+
+#### Create a secure channel between two nodes and send a message through the secure channel:
 
 ```bash
 > ockam node create n1
@@ -67,6 +69,8 @@ HELLO OCKAM
     | ockam message send hello --from /node/n1 --to -/service/uppercase
 HELLO
 ```
+
+#### Create a secure channel with a secure channel listener:
 
 ```bash
 > ockam node create n1

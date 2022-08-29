@@ -18,3 +18,4 @@
 * [Vaults](reference/vaults.md)
 * [Identities](reference/identities.md)
 * [Secure Channels](reference/secure-channels.md)
+* [Forwarders](reference/forwarders.md)
