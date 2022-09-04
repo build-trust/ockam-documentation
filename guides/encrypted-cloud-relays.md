@@ -4,36 +4,41 @@ description: End-to-end encrypted, secure and private cloud relays – for any a
 
 # Encrypted Cloud Relays
 
+Let’s walk through a simple example to create an end-to-end encrypted, mutually authenticated, secure and private cloud relay – for any application.
 
+First install the Ockam command, if you haven't already
 
 ```
-Let's walk through a simple example to create an end-to-end encrypted,
-mutually authenticated, secure and private cloud relay – for any application.
+brew install build-trust/ockam/ockam
+```
 
-First let's enroll with Ockam Orchestrator where we'll create a managed cloud
-based relay that will move end-to-end encrypted  data between distributed parts
-of our application.
+The let's enroll with Ockam Orchestrator where we'll create a managed cloud based relay that will move end-to-end encrypted data between distributed parts of our application.
 
-# Create a cryptographic identity and enroll with Ockam Orchestrator.
-# This will sign you up for an account with Ockam Orchestrator and setup a
-# hobby space and project for you.
-$ ockam enroll
+```bash
+ockam enroll
+```
+
+Create a cryptographic identity and enroll with Ockam Orchestrator. This will sign you up for an account with Ockam Orchestrator and setup a hobby space and project for you.
 
 You can also create encrypted relays outside the orchestrator.
-See `ockam forwarder --help`.
 
-Application Service
-------
+### Application Service
 
 Next let's prepare the service side of our application.
 
-# Start our application service, listening on a local ip and port, that clients
-# would access through the cloud relay. We'll use a simple http server for our
-# first example but this could be some other application service.
-$ python3 -m http.server --bind 127.0.0.1 5000
+Start our application service, listening on a local ip and port, that clients would access through the cloud relay. We'll use a simple http server for our first example but this could be some other application service.
 
-# Setup an ockam node, called blue, as a sidecar next to our application service.
-$ ockam node create blue
+```
+python3 -m http.server --bind 127.0.0.1 5000
+```
+
+Setup an ockam node, called blue, as a sidecar next to our application service.
+
+```
+ockam node create blue
+```
+
+```
 
 # Create a tcp outlet on the blue node to send raw tcp traffic to the application service.
 $ ockam tcp-outlet create --at /node/blue --from /service/outlet --to 127.0.0.1:5000
