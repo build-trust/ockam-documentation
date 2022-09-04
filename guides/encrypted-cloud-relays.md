@@ -38,40 +38,45 @@ Setup an ockam node, called blue, as a sidecar next to our application service.
 ockam node create blue
 ```
 
+Create a tcp outlet on the blue node to send raw tcp traffic to the application service.
+
+```
+ockam tcp-outlet create --at /node/blue --from /service/outlet --to 127.0.0.1:5000
 ```
 
-# Create a tcp outlet on the blue node to send raw tcp traffic to the application service.
-$ ockam tcp-outlet create --at /node/blue --from /service/outlet --to 127.0.0.1:5000
+Then create a forwarding relay at your default orchestrator project to blue.
 
-# Then create a forwarding relay at your default orchestrator project to blue.
-$ ockam forwarder create blue --at /project/default --to /node/blue
+```
+ockam forwarder create blue --at /project/default --to /node/blue
+```
 
-Application Client
-------
+### Application Client
 
 Now on the client side:
 
-# Setup an ockam node, called green, as a sidecar next to our application service.
-$ ockam node create green
+Setup an ockam node, called green, as a sidecar next to our application service.
 
-# Then create an end-to-end encrypted secure channel with blue, through the cloud relay.
-# Then tunnel traffic from a local tcp inlet through this end-to-end secure channel.
-$ ockam secure-channel create --from /node/green \
+```
+ockam node create green
+```
+
+Then create an end-to-end encrypted secure channel with blue, through the cloud relay. Then tunnel traffic from a local tcp inlet through this end-to-end secure channel.
+
+```bash
+ockam secure-channel create --from /node/green \
     --to /project/default/service/forward_to_blue/service/api \
         | ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
-
-# Access the application service though the end-to-end encrypted, secure relay.
-$ curl 127.0.0.1:7000
-
-We just created end-to-end encrypted, mutually authenticated, and authorized
-secure communication between a tcp client and server. This client and server
-can be running in separate private networks / NATs. We didn't have to expose
-our server by opening a port on the Internet or punching a hole in our firewall.
-
-The two sides authenticated and authorized each other's known, cryptographically
-provable identifiers. In later examples we'll see how we can build granular,
-attribute-based access control with authorization policies.
 ```
+
+Access the application service though the end-to-end encrypted, secure relay.
+
+```
+curl 127.0.0.1:7000
+```
+
+We just created end-to-end encrypted, mutually authenticated, and authorized secure communication between a tcp client and server. This client and server can be running in separate private networks / NATs. We didn't have to expose our server by opening a port on the Internet or punching a hole in our firewall.
+
+The two sides authenticated and authorized each other's known, cryptographically provable identifiers. In later examples we'll see how we can build granular, attribute-based access control with authorization policies.
 
 
 
