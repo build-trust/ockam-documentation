@@ -8,7 +8,7 @@ Let’s walk through a simple example to create an end-to-end encrypted, mutuall
 
 First install the Ockam command, if you haven't already
 
-```
+```bash
 brew install build-trust/ockam/ockam
 ```
 
@@ -28,7 +28,7 @@ Next let's prepare the service side of our application.
 
 Start our application service, listening on a local ip and port, that clients would access through the cloud relay. We'll use a simple http server for our first example but this could be some other application service.
 
-```
+```bash
 python3 -m http.server --bind 127.0.0.1 5000
 ```
 
@@ -40,13 +40,13 @@ ockam node create blue
 
 Create a tcp outlet on the blue node to send raw tcp traffic to the application service.
 
-```
+```bash
 ockam tcp-outlet create --at /node/blue --from /service/outlet --to 127.0.0.1:5000
 ```
 
 Then create a forwarding relay at your default orchestrator project to blue.
 
-```
+```bash
 ockam forwarder create blue --at /project/default --to /node/blue
 ```
 
@@ -56,7 +56,7 @@ Now on the client side:
 
 Setup an ockam node, called green, as a sidecar next to our application service.
 
-```
+```bash
 ockam node create green
 ```
 
@@ -70,7 +70,7 @@ ockam secure-channel create --from /node/green \
 
 Access the application service though the end-to-end encrypted, secure relay.
 
-```
+```bash
 curl 127.0.0.1:7000
 ```
 
