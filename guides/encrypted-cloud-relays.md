@@ -80,7 +80,7 @@ The two sides authenticated and authorized each other's known, cryptographically
 
 
 
-
+#### Orchestrator
 
 ```bash
 brew install build-trust/ockam/ockam
@@ -105,9 +105,7 @@ ockam secure-channel create --from /node/green
 curl 127.0.0.1:7000
 ```
 
-
-
-
+#### Local
 
 ```bash
 brew install build-trust/ockam/ockam
