@@ -78,6 +78,8 @@ We just created end-to-end encrypted, mutually authenticated, and authorized sec
 
 The two sides authenticated and authorized each other's known, cryptographically provable identifiers. In later examples we'll see how we can build granular, attribute-based access control with authorization policies.
 
+### Full Example
+
 #### Orchestrator
 
 ```bash
