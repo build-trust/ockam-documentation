@@ -64,8 +64,8 @@ Then create an end-to-end encrypted secure channel with blue, through the cloud 
 
 ```bash
 ockam secure-channel create --from /node/green \
-    --to /project/default/service/forward_to_blue/service/api \
-        | ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
+  --to /project/default/service/forward_to_blue/service/api \
+  | ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
 ```
 
 Access the application service though the end-to-end encrypted, secure relay.
@@ -103,7 +103,8 @@ $ ockam forwarder create --at /node/cloud-relay --from /service/forwarder-for-bl
 # --- APPLICATION CLIENT ----
 
 $ ockam node create green
-$ ockam secure-channel create --from /node/green --to /node/cloud-relay/service/forwarder-for-blue/service/api \
+$ ockam secure-channel create --from /node/green 
+    --to /node/cloud-relay/service/forwarder-for-blue/service/api \
     | ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
 
 $ curl 127.0.0.1:7000
