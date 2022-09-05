@@ -82,7 +82,28 @@ The two sides authenticated and authorized each other's known, cryptographically
 
 
 
+```bash
+brew install build-trust/ockam/ockam
+ockam enroll
 
+# --- APPLICATION SERVICE ----
+
+python3 -m http.server --bind 127.0.0.1 5000
+
+ockam node create blue
+ockam tcp-outlet create --at /node/blue --from /service/outlet --to 127.0.0.1:5000
+ockam forwarder create --at /project/default \
+  --from /service/forwarder-for-blue --for /node/blue
+
+# --- APPLICATION CLIENT ----
+
+ockam node create green
+ockam secure-channel create --from /node/green 
+  --to /project/default/service/forwarder-for-blue/service/api \
+  | ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
+
+curl 127.0.0.1:7000
+```
 
 
 
@@ -94,18 +115,19 @@ ockam node create cloud-relay
 
 # --- APPLICATION SERVICE ----
 
-$ python3 -m http.server --bind 127.0.0.1 5000
+python3 -m http.server --bind 127.0.0.1 5000
 
-$ ockam node create blue
-$ ockam tcp-outlet create --at /node/blue --from /service/outlet --to 127.0.0.1:5000
-$ ockam forwarder create --at /node/cloud-relay --from /service/forwarder-for-blue --for /node/blue
+ockam node create blue
+ockam tcp-outlet create --at /node/blue --from /service/outlet --to 127.0.0.1:5000
+ockam forwarder create --at /node/cloud-relay \
+  --from /service/forwarder-for-blue --for /node/blue
 
 # --- APPLICATION CLIENT ----
 
-$ ockam node create green
-$ ockam secure-channel create --from /node/green 
-    --to /node/cloud-relay/service/forwarder-for-blue/service/api \
-    | ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
+ockam node create green
+ockam secure-channel create --from /node/green 
+  --to /node/cloud-relay/service/forwarder-for-blue/service/api \
+  | ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
 
-$ curl 127.0.0.1:7000
+curl 127.0.0.1:7000
 ```
