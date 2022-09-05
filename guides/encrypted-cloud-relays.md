@@ -78,8 +78,8 @@ We just created end-to-end encrypted, mutually authenticated, and authorized sec
 
 The two sides authenticated and authorized each other's known, cryptographically provable identifiers. In later examples we'll see how we can build granular, attribute-based access control with authorization policies.
 
-{% tabs %}
-{% tab title="Orchestrator" %}
+#### Orchestrator
+
 ```bash
 brew install build-trust/ockam/ockam
 ockam enroll
@@ -102,9 +102,9 @@ ockam secure-channel create --from /node/green
 
 curl 127.0.0.1:7000
 ```
-{% endtab %}
 
-{% tab title="Local" %}
+#### Local
+
 ```bash
 brew install build-trust/ockam/ockam
 ockam node create cloud-relay
@@ -127,5 +127,3 @@ ockam secure-channel create --from /node/green
 
 curl 127.0.0.1:7000
 ```
-{% endtab %}
-{% endtabs %}
