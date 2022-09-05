@@ -104,7 +104,7 @@ curl 127.0.0.1:7000
 ```
 {% endtab %}
 
-{% tab title="Second Tab" %}
+{% tab title="Local" %}
 ```bash
 brew install build-trust/ockam/ockam
 ockam node create cloud-relay
