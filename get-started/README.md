@@ -50,4 +50,10 @@ chmod u+x ockam
 {% endtab %}
 {% endtabs %}
 
-### &#x20;
+### Upgrade&#x20;
+
+#### Homebrew
+
+```
+brew update && brew upgrade ockam
+```

@@ -1,9 +1,5 @@
 # Workers
 
-<pre><code><strong>Ockam nodes run very lightweight, concurrent, stateful actors called Ockam Workers.
-</strong>Workers have addresses and a node can deliver messages to workers on the same node or
-on a different node using the Ockam Routing Protocol and its Transports.</code></pre>
-
 Ockam Workers are lightweight, concurrent, stateful actors.
 
 Workers:
