@@ -11,6 +11,7 @@
 
 * [Nodes](reference/nodes.md)
 * [Workers](reference/workers.md)
+* [Services](reference/services.md)
 * [Messages](reference/messages.md)
 * [Routing](reference/routing.md)
 * [Transports](reference/transports/README.md)
