@@ -17,7 +17,7 @@ brew install build-trust/ockam/ockam
 ```bash
 # download ockam command binary for your architecture
 curl --proto '=https' --tlsv1.2 -sSfL -O \
-  https://github.com/build-trust/ockam/releases/download/ockam_v0.72.0/ockam.x86_64-apple-darwin
+  https://github.com/build-trust/ockam/releases/download/ockam_v0.73.0/ockam.x86_64-apple-darwin
 
 # rename the download binary and give it permission to execute
 mv ockam.x86_64-apple-darwin ockam
@@ -54,6 +54,6 @@ chmod u+x ockam
 
 #### Homebrew
 
-```
+```bash
 brew update && brew upgrade ockam
 ```
