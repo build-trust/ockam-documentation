@@ -2,15 +2,29 @@
 
 ## Command
 
-### Install
+### Homebrew
 
-#### Homebrew
+#### Install
 
 ```bash
 brew install build-trust/ockam/ockam
 ```
 
-#### Precompiled Binaries
+#### Upgrade
+
+```bash
+brew update && brew upgrade ockam
+```
+
+#### Uninstall
+
+```bash
+brew uninstall ockam
+```
+
+### Precompiled Binaries
+
+#### Install
 
 {% tabs %}
 {% tab title="x86_64-unknown-linux-gnu" %}
@@ -62,14 +76,10 @@ chmod u+x ockam
 {% endtab %}
 {% endtabs %}
 
-### Upgrade&#x20;
-
-#### Homebrew
-
-```bash
-brew update && brew upgrade ockam
-```
-
-#### Precompiled Binaries
+#### Upgrade
 
 Download a newer version and replace the old binary file.
+
+#### Uninstall
+
+Delete the old binary file.
