@@ -6,21 +6,23 @@ description: End-to-end encrypted, secure and private cloud relays – for any a
 
 Let’s walk through a simple example to create an end-to-end encrypted, mutually authenticated, secure and private cloud relay – for any application.
 
-First install the Ockam command, if you haven't already
+First [install](../get-started/#command) the Ockam command, if you haven't already.
 
 ```bash
 brew install build-trust/ockam/ockam
 ```
 
-The let's enroll with Ockam Orchestrator where we'll create a managed cloud based relay that will move end-to-end encrypted data between distributed parts of our application.
+If you're on linux, see how to installed [precompiled binaries](../get-started/#precompiled-binaries).
+
+Then let's enroll with Ockam Orchestrator where we'll create a managed cloud based relay that will move end-to-end encrypted data between distributed parts of our application.
 
 ```bash
 ockam enroll
 ```
 
-Create a cryptographic identity and enroll with Ockam Orchestrator. This will sign you up for an account with Ockam Orchestrator and setup a hobby space and project for you.
+Create a cryptographic identity and enroll with Ockam Orchestrator. This will sign you up for an account with Ockam Orchestrator and setup a trial space and project for you. This space will work for 15 days in trial mode. After that please [contact us](mailto:hello@ockam.io).
 
-You can also create encrypted relays outside the orchestrator.
+You can also create encrypted relays [outside the orchestrator.](encrypted-cloud-relays.md#local)
 
 ### Application Service
 
@@ -86,21 +88,19 @@ The two sides authenticated and authorized each other's known, cryptographically
 brew install build-trust/ockam/ockam
 ockam enroll
 
-# --- APPLICATION SERVICE ----
+# -- APPLICATION SERVICE --
 
 python3 -m http.server --bind 127.0.0.1 5000
 
 ockam node create blue
 ockam tcp-outlet create --at /node/blue --from /service/outlet --to 127.0.0.1:5000
-ockam forwarder create --at /project/default \
-  --from /service/forwarder-for-blue --for /node/blue
+ockam forwarder create blue --at /project/default --to /node/blue
 
-# --- APPLICATION CLIENT ----
+# -- APPLICATION CLIENT --
 
 ockam node create green
-ockam secure-channel create --from /node/green 
-  --to /project/default/service/forwarder-for-blue/service/api \
-| ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
+ockam secure-channel create --from /node/green --to /project/default/service/forward_to_blue/service/api \
+  | ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
 
 curl 127.0.0.1:7000
 ```
@@ -109,23 +109,21 @@ curl 127.0.0.1:7000
 
 ```bash
 brew install build-trust/ockam/ockam
-ockam node create cloud-relay
+ockam node create relay
 
-# --- APPLICATION SERVICE ----
+# -- APPLICATION SERVICE --
 
 python3 -m http.server --bind 127.0.0.1 5000
 
 ockam node create blue
 ockam tcp-outlet create --at /node/blue --from /service/outlet --to 127.0.0.1:5000
-ockam forwarder create --at /node/cloud-relay \
-  --from /service/forwarder-for-blue --for /node/blue
+ockam forwarder create blue --at /node/relay --to /node/blue
 
-# --- APPLICATION CLIENT ----
+# -- APPLICATION CLIENT --
 
 ockam node create green
-ockam secure-channel create --from /node/green 
-  --to /node/cloud-relay/service/forwarder-for-blue/service/api \
-| ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
+ockam secure-channel create --from /node/green --to /node/relay/service/forward_to_blue/service/api \
+  | ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
 
 curl 127.0.0.1:7000
 ```
