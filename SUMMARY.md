@@ -1,6 +1,7 @@
 # Table of contents
 
 * [What is Ockam?](README.md)
+* [Why Ockam?](why-ockam.md)
 * [Get Started](get-started/README.md)
 
 ## Guides
