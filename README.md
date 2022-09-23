@@ -14,23 +14,14 @@ We make it simple for anyone to build modern, secure by-design applications.
 
 
 
-
-
 * Create end-to-end encrypted and authenticated **Channels** over any transport topology –across data centers, through queues and caches, via gateways and brokers.
 * Create encrypted **Relays** for end-to-end secure communication within applications that are distributed across many private edge, cloud and data center networks.
 * Bring integrity, authenticity, and confidentiality to legacy protocols by tunneling them through end-to-end encrypted and mutually authenticated **Portals.**
 * Generate unique cryptographic **Identities** and store their private cryptographic keys in secure hardware or in cloud key management systems.
-* Operate project specific, secure and scalable **Credential Authorities** to issue light weight, short-lived, easy to revoke, granular, attribute-based credentials to application identities.
-* Enroll fleets of self-sovereign, application identities and issue them attribute based credentials.
-* Manage rotation and revocation of keys and credentials at scale.
-
-
-
-* Scale
-* Policies
-* ABAC / RBAC / ACLs
-* Add-Ons
-* Integrate with Enterprise Identity Providers
-* Policy Providers
+* Operate project specific, secure and scalable **Credential Authorities** to issue lightweight, short-lived, easy to revoke, attribute-based credentials to application identities.
+* Enroll fleets of self-sovereign, application identities and issue them credentials.
+* Manage **rotation and revocation** of keys and credentials at scale.
+* Define and enforce project-wide **Attribute Based Access Control** policies within cloud and edge applications.
+* Integrate with Enterprise Identity Providers, Policy Providers,&#x20;
 
 <mark style="background-color:yellow;"></mark>
