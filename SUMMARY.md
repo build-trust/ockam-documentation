@@ -8,14 +8,14 @@
 ## OPEN SOURCE
 
 * [Get Started](get-started/README.md)
+* [Create a Local Relay](open-source/encrypted-cloud-relays.md)
 
 ## ORCHESTRATOR
 
 * [Get Started](orchestrator/get-started.md)
+* [Connect to a Relay in Orchestrator](orchestrator/encrypted-cloud-relays.md)
 
 ## Guides
-
-* [How to use Relays in Orchestrator](guides/encrypted-cloud-relays.md)
 
 ## COMMAND LINE USERS
 

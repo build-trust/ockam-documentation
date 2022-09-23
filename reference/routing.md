@@ -4,6 +4,19 @@ description: Application Layer Routing
 
 # Routing
 
+```
+The Ockam Routing Protocol is a very simple application layer protocol that allows
+the sender of a message to describe the `onward_route` and `return_route` of message.
+
+The routing layer in a node can then be used route these messages between workers within
+a node or across nodes using transports. Messages can be sent over multiple hops, within
+one node or across many nodes.
+```
+
+
+
+
+
 Ockam Routing is an application layer routing protocol that provides the ability to route messages between [workers](workers.md) within a [node](nodes.md) or across nodes using [transports](transports/).
 
 Messages can be sent over multiple hops, within one node or across many nodes.
