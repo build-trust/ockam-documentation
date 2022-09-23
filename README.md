@@ -1,8 +1,8 @@
 ---
-description: Trust for Data-in-Motion
+description: Ockam is Trust for Data-in-Motion
 ---
 
-# Ockam is Trust for Data-in-Motion
+# Introduction
 
 Ockam makes it simple for everyone to build modern, secure by-design applications.
 

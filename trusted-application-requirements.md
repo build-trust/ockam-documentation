@@ -1,4 +1,10 @@
-# Why Ockam?
+---
+description: >-
+  Modern applications are distributed and have an unwieldy number of
+  interconnections that must trustfully exchange data.
+---
+
+# Trusted application requirements
 
 **Mutual authentication and end-to-end data integrity**
 

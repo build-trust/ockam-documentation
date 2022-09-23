@@ -1,7 +1,7 @@
 # Table of contents
 
-* [Ockam is Trust for Data-in-Motion](README.md)
-* [Modern application requirements](the-requirements-of-a-modern-application..md)
+* [Introduction](README.md)
+* [Trusted application requirements](trusted-application-requirements.md)
 * [Ockam was built for you](which-ockam.md)
 * [Concepts](concepts.md)
 

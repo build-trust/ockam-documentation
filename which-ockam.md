@@ -1,4 +1,8 @@
-# Which Ockam?
+---
+description: We made it simple for everyone to build modern, secure by-design applications.
+---
+
+# Ockam was built for you
 
 We've built Ockam with **all** builders in mind and have two different configurations to choose from:
 
