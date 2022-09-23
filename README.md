@@ -29,8 +29,8 @@ Ockam Orchestrator is an enterprise ready, managed cloud service that enables te
 
 * Create encrypted cloud relays for end-to-end secure communication within applications that are distributed across many&#x20;
 * Operate project specific, secure and scalable Credential Authorities to issue light weight, short-lived, easy to revoke, granular, attribute-based credentials.
-* Easily provision and enroll fleets of&#x20;
-* Manage the lifecycle&#x20;
+* Easily provision and enroll fleets of self-sovereign, application identities&#x20;
+* Manage rotation and revocation of keys and credentials at scale.&#x20;
 * Scale
 * Policies
 * ABAC / RBAC / ACLs
