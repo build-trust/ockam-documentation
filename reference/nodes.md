@@ -1,5 +1,19 @@
 # Nodes
 
+An Ockam node is any running application that can communicate with other applications using various Ockam protocols like [Routing](routing.md), [Secure Channels](secure-channels.md), [Forwarding](forwarders.md) etc.
+
+We can create Ockam nodes using this command line or using various Ockam programming libraries like our Rust and Elixir libraries.
+
+
+
+
+
+
+
+
+
+
+
 An Ockam Node is an asynchronous execution environment that can run very lightweight, concurrent, stateful [actors](https://en.wikipedia.org/wiki/Actor\_model) called [Ockam Workers](workers.md). A node can deliver messages from one worker to another worker. Nodes can also route messages to workers on other remote nodes.
 
 ### Create a node

@@ -3,7 +3,14 @@
 * [What is Ockam?](README.md)
 * [Why Ockam?](why-ockam.md)
 * [Concepts](concepts.md)
-* [Get Started](get-started/README.md)
+
+## OPEN SOURCE
+
+* [Get Started](open-source/get-started.md)
+
+## ORCHESTRATOR
+
+* [Get Started](orchestrator/get-started.md)
 
 ## Guides
 
