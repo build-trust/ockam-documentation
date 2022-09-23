@@ -1,8 +1,8 @@
 ---
-description: Ockam is Trust for Data-in-Motion
+description: Trust for Data-in-Motion
 ---
 
-# Introduction
+# Introduction to Ockam
 
 Ockam makes it simple for everyone to build modern, secure by-design applications.
 
@@ -16,20 +16,16 @@ We make it simple for anyone to build modern, secure by-design applications.
 
 
 
-* Create end-to-end encrypted and authenticated **Channels** over any transport topology – _across data centers, through queues and caches, via gateways and brokers._
+* Create end-to-end encrypted and authenticated **Channels** over any transport topology –across data centers, through queues and caches, via gateways and brokers.
 * Create encrypted **Relays** for end-to-end secure communication within applications that are distributed across many private edge, cloud and data center networks.
 * Bring integrity, authenticity, and confidentiality to legacy protocols by tunneling them through end-to-end encrypted and mutually authenticated **Portals.**
+* Generate unique cryptographic **Identities** and store their private cryptographic keys in secure hardware or in cloud key management systems.
+* Operate project specific, secure and scalable **Credential Authorities** to issue light weight, short-lived, easy to revoke, granular, attribute-based credentials to application identities.
+* Enroll fleets of self-sovereign, application identities and issue them attribute based credentials.
+* Manage rotation and revocation of keys and credentials at scale.
 
 
 
-* Generate unique cryptographic identities and use them for mutual authentication.
-* Easily provision and enroll fleets of self-sovereign, application identities&#x20;
-* Safely generate and store private keys in hardware or in cloud key management systems.
-*
-* Issue attribute based credentials and use them to granularly authorize access.
-* Operate project specific, secure and scalable Credential Authorities to issue light weight, short-lived, easy to revoke, granular, attribute-based credentials.
-* Easily rotate and revoke private keys and credentials.
-* . Manage rotation and revocation of keys and credentials at scale
 * Scale
 * Policies
 * ABAC / RBAC / ACLs
