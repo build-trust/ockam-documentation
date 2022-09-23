@@ -6,19 +6,19 @@ description: Trust for Data-in-Motion
 
 Ockam is a suite of open source tools, programming libraries, and managed cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management & authorization policy enforcement — at scale.
 
-Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. Secure by-design applications have granular control over every trust and access decision. We make it simple for anyone to build modern, secure by-design applications.
-
-that guarantee end-to-end integrity, authenticity, and confidentiality of data.
+Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. Secure by-design applications have granular control over every trust and access decision. They guarantee end-to-end integrity, authenticity, and confidentiality of data. We make it simple for anyone to build modern, secure by-design applications.
 
 ### Ockam Open Source
 
-Ockam Open Source tools and programming libraries allow applications to:
+Ockam Open Source tools and programming libraries allow your applications to:
 
-* Create end-to-end encrypted and authenticated channels over any transport topology.
-* Generate unique, provable cryptographic identities and use them for authentication.
-* Safely generate and store private keys in hardware or in cloud key management systems.
-* Issue attribute based credentials and use them to granularly authorize access.
-* Easily rotate and revoke private keys and credentials.
+* Create end-to-end encrypted and mutually authenticated secure channels,
+* Generate unique cryptographic identities and store their keys in hardware.
+* Issue attribute based credentials and use them to authorize access.
+
+{% content-ref url="get-started/" %}
+[get-started](get-started/)
+{% endcontent-ref %}
 
 ### Ockam Orchestrator
 
@@ -29,3 +29,7 @@ Ockam Orchestrator is an enterprise ready, managed cloud service that makes it e
 * Provision
 * Manage
 * Scale
+
+{% content-ref url="get-started/" %}
+[get-started](get-started/)
+{% endcontent-ref %}
