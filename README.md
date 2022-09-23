@@ -8,19 +8,17 @@ Ockam is a suite of open source tools, programming libraries, and managed cloud 
 
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. Secure by-design applications have granular control over every trust and access decision. We make it simple for anyone to build modern, secure by-design applications.
 
-
-
 that guarantee end-to-end integrity, authenticity, and confidentiality of data.
 
 ### Ockam Open Source
 
-Ockam Open Source tools and programming libraries allow your applications to:
+Ockam Open Source tools and programming libraries allow applications to:
 
-* Create end-to-end encrypted and mutually authenticated secure channels in&#x20;
-* Generate unique cryptographic identities and store their private keys in hardware.
+* Create end-to-end encrypted and mutually authenticated secure channels over any transport topology
+* Generate unique cryptographic identities
+* and safely store private keys in hardware or in cloud key management systems.
 * Issue attribute based credentials and use them to authorize access.
-
-
+* &#x20;easy to rotate and revoke identity keys.
 
 ### Ockam Orchestrator
 

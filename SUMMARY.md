@@ -6,7 +6,7 @@
 
 ## OPEN SOURCE
 
-* [Get Started](open-source/get-started.md)
+* [Get Started](get-started/README.md)
 
 ## ORCHESTRATOR
 
