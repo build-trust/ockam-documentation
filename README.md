@@ -20,6 +20,8 @@ Ockam Open Source tools and programming libraries allow applications to:
 * Issue attribute based credentials and use them to granularly authorize access.
 * Easily rotate and revoke private keys and credentials.
 
+<mark style="background-color:yellow;"></mark>[<mark style="background-color:yellow;">Get Started with Ockam Open Source</mark>](get-started/)<mark style="background-color:yellow;"></mark>
+
 ### Ockam Orchestrator
 
 Ockam Orchestrator is an enterprise ready, managed cloud service that makes it easy:
@@ -32,3 +34,5 @@ Ockam Orchestrator is an enterprise ready, managed cloud service that makes it e
 * Policies
 * ABAC / RBAC / ACLs
 * &#x20;
+
+<mark style="background-color:yellow;"></mark>[<mark style="background-color:yellow;">Get Started with Ockam Orchestrator</mark>](orchestrator/get-started.md)<mark style="background-color:yellow;"></mark>
