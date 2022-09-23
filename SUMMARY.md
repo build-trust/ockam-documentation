@@ -1,7 +1,7 @@
 # Table of contents
 
-* [Introduction](README.md)
-* [Trusted application requirements](trusted-application-requirements.md)
+* [Introduction to Ockam](README.md)
+* [Trusted application requirements](the-requirements-of-a-modern-application..md)
 * [Ockam was built for you](which-ockam.md)
 * [Concepts](concepts.md)
 
