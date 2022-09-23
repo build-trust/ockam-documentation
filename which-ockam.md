@@ -1,6 +1,6 @@
 # Which Ockam?
 
-We've built Ockam with all builders in mind and have two different configurations to choose from.&#x20;
+We've built Ockam with **all** builders in mind and have two different configurations to choose from:
 
 Ockam Open Source can be used for small scale personal projects where manual configuration and simple architectures fit the bill.
 
