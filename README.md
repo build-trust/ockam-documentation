@@ -27,15 +27,15 @@ Ockam Open Source tools and programming libraries enable applications to:
 
 Ockam Orchestrator is an enterprise ready, managed cloud service that enables teams to:
 
-* Create Encrypted Cloud Relays for high throughput, end-to-end secure communication.
+* Create encrypted cloud relays for end-to-end secure communication within applications that are distributed across many&#x20;
 * Operate project specific, secure and scalable Credential Authorities to issue light weight, short-lived, easy to revoke, granular, attribute-based credentials.
-* Provision&#x20;
-* Manage
+* Easily provision and enroll fleets of&#x20;
+* Manage the lifecycle&#x20;
 * Scale
 * Policies
 * ABAC / RBAC / ACLs
 * Add-Ons
-* Identity Providers
+* Integrate with Enterprise Identity Providers
 * Policy Providers
 
 <mark style="background-color:yellow;"></mark>[<mark style="background-color:yellow;">Get Started with Ockam Orchestrator</mark>](orchestrator/get-started.md)<mark style="background-color:yellow;"></mark>
