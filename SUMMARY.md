@@ -15,7 +15,7 @@
 
 ## Guides
 
-* [Encrypted Cloud Relays](guides/encrypted-cloud-relays.md)
+* [How to use Relays in Orchestrator](guides/encrypted-cloud-relays.md)
 
 ## COMMAND LINE USERS
 
