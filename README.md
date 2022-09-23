@@ -16,7 +16,7 @@ We make it simple for applications to:
 * Provision encrypted **Relays** for trustful communication within applications that are distributed across many private edge, cloud and data center networks.
 * Bring integrity, authenticity, and confidentiality to legacy protocols by tunneling them through mutually authenticated and encrypted **Portals.**
 * Generate unique cryptographic **Identities** and store their private keys in secure hardware or cloud key management systems.
-* Operate project specific, secure and scalable **Credential Authorities** to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
+* Operate project specific, secure, and scalable **Credential Authorities** to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
 * Enroll fleets of self-sovereign, application identities and issue them credentials.
 * **Rotation** and **Revoke** of keys and credentials – at scale.
 * Define and enforce project-wide **Attribute Based Access Control** policies.
