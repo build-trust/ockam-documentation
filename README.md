@@ -6,7 +6,7 @@ description: Trust for Data-in-Motion
 
 Ockam is a suite of open source tools, programming libraries, and managed cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management & authorization policy enforcement — at scale.
 
-Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. Secure by-design applications have granular control over every trust and access decision. We make it simple for anyone to build modern, secure by-design applications.
+Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. Secure by-design applications have granular control over every trust and access decision. They guarantee end-to-end integrity, authenticity, and confidentiality of data. We make it simple for anyone to build modern, secure by-design applications.
 
 ### Ockam Open Source
 
@@ -16,12 +16,20 @@ Ockam Open Source tools and programming libraries allow your applications to:
 * Generate unique cryptographic identities and store their keys in hardware.
 * Issue attribute based credentials and use them to authorize access.
 
+{% content-ref url="get-started/" %}
+[get-started](get-started/)
+{% endcontent-ref %}
+
 ### Ockam Orchestrator
 
 Ockam Orchestrator is an enterprise ready, managed cloud service that makes it easy:
 
-* Coordinate and relay end-to-end encrypted communication with heavily distributed applications.
+* Coordinate and relay end-to-end encrypted communication within heavily distributed applications.
 * Enroll
 * Provision
 * Manage
 * Scale
+
+{% content-ref url="get-started/" %}
+[get-started](get-started/)
+{% endcontent-ref %}
