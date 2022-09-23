@@ -15,7 +15,7 @@ that guarantee end-to-end integrity, authenticity, and confidentiality of data.
 Ockam Open Source tools and programming libraries allow applications to:
 
 * Create end-to-end encrypted and authenticated channels over any transport topology.
-* Generate unique, provable cryptographic identities and use them for authentication.
+* Generate unique cryptographic identities and use them for mutual authentication.
 * Safely generate and store private keys in hardware or in cloud key management systems.
 * Issue attribute based credentials and use them to granularly authorize access.
 * Easily rotate and revoke private keys and credentials.
