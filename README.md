@@ -1,16 +1,16 @@
 ---
-description: Trust for Data-in-Motion
+description: What is Ockam?
 ---
 
-# What is Ockam?
+# Ockam is Trust for Data-in-Motion
 
-Ockam is a suite of open source tools, programming libraries, and managed cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management & authorization policy enforcement — at scale.
+Ockam makes it simple for everyone to build modern, secure by-design applications.
 
-Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. They must guarantee end-to-end integrity, authenticity, and confidentiality of data.
+Ockam is a suite of open source tools, programming libraries, and managed cloud services that orchestrate the end-to-end encryption, mutual authentication, key / credential management, and authorization policy enforcements of data-in-motion; at massive scale.
 
-Secure by-design applications have granular control over every trust and access decision.&#x20;
+Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. Applications can only trust the data that they receive when the data has end-to-end integrity, authenticity, and confidentiality guarantees.
 
-We make it simple for anyone to build modern, secure by-design applications.
+
 
 
 
@@ -24,7 +24,7 @@ We enable applications to:
 * Issue attribute based credentials and use them to granularly authorize access.
 * Operate project specific, secure and scalable Credential Authorities to issue light weight, short-lived, easy to revoke, granular, attribute-based credentials.
 * Easily rotate and revoke private keys and credentials.
-*
+* Be given granular control over every trust and access decision that they need to make. &#x20;
 
 <mark style="background-color:yellow;"></mark>
 

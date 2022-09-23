@@ -1,6 +1,6 @@
 # Table of contents
 
-* [What is Ockam?](README.md)
+* [Ockam is Trust for Data-in-Motion](README.md)
 * [Why Ockam?](why-ockam.md)
 * [Which Ockam?](which-ockam.md)
 * [Concepts](concepts.md)
