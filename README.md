@@ -10,16 +10,18 @@ Ockam is a suite of open source tools, programming libraries, and managed cloud 
 
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. Applications can only trust the data that they receive when the data has end-to-end integrity, authenticity, and confidentiality guarantees.
 
-We make it simple for applications to:
+We make it simple for anyone to build modern, secure by-design applications.
 
-* Create end-to-end encrypted and authenticated **Channels** over any transport topology.
-* Provision encrypted **Relays** for trustful communication within applications that are distributed across many private edge, cloud and data center networks.
-* Bring integrity, authenticity, and confidentiality to legacy protocols by tunneling them through mutually authenticated and encrypted **Portals.**
-* Generate unique cryptographic **Identities** and store private keys in secure hardware or cloud key management systems.
-* Operate project specific and scalable **Credential Authorities** to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
+
+
+* Create end-to-end encrypted and authenticated **Channels** over any transport topology –across data centers, through queues and caches, via gateways and brokers.
+* Create encrypted **Relays** for end-to-end secure communication within applications that are distributed across many private edge, cloud and data center networks.
+* Bring integrity, authenticity, and confidentiality to legacy protocols by tunneling them through end-to-end encrypted and mutually authenticated **Portals.**
+* Generate unique cryptographic **Identities** and store their private cryptographic keys in secure hardware or in cloud key management systems.
+* Operate project specific, secure and scalable **Credential Authorities** to issue lightweight, short-lived, easy to revoke, attribute-based credentials to application identities.
 * Enroll fleets of self-sovereign, application identities and issue them credentials.
-* **Rotate** and **revoke** keys and credentials – at scale.
-* Define and enforce project-wide **Attribute Based Access Control** (ABAC) policies.
+* Manage **rotation and revocation** of keys and credentials at scale.
+* Define and enforce project-wide **Attribute Based Access Control** policies within cloud and edge applications.
 * Integrate with Enterprise Identity Providers, Policy Providers,&#x20;
 
 <mark style="background-color:yellow;"></mark>
