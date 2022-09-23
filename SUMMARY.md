@@ -2,7 +2,7 @@
 
 * [Ockam is Trust for Data-in-Motion](README.md)
 * [Modern application requirements](the-requirements-of-a-modern-application..md)
-* [Ockam was built for you](ockam-was-built-for-you.md)
+* [Ockam was built for you](which-ockam.md)
 * [Concepts](concepts.md)
 
 ## OPEN SOURCE

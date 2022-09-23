@@ -1,4 +1,4 @@
-# Which Ockam?
+# Ockam was built for you
 
 We've built Ockam with **all** builders in mind and have two different configurations to choose from:
 

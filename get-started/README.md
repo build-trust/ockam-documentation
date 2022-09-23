@@ -1,5 +1,7 @@
 # Get Started
 
+To get started, with Ockam Open Source you will need the Ockam CLI.&#x20;
+
 ## Command
 
 ### Homebrew
