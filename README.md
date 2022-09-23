@@ -12,22 +12,23 @@ that guarantee end-to-end integrity, authenticity, and confidentiality of data.
 
 ### Ockam Open Source
 
-Ockam Open Source tools and programming libraries allow applications to:
+Ockam Open Source tools and programming libraries enable applications to:
 
 * Create end-to-end encrypted and authenticated channels over any transport topology.
 * Generate unique cryptographic identities and use them for mutual authentication.
 * Safely generate and store private keys in hardware or in cloud key management systems.
 * Issue attribute based credentials and use them to granularly authorize access.
 * Easily rotate and revoke private keys and credentials.
+*
 
 <mark style="background-color:yellow;"></mark>[<mark style="background-color:yellow;">Get Started with Ockam Open Source</mark>](get-started/)<mark style="background-color:yellow;"></mark>
 
 ### Ockam Orchestrator
 
-Ockam Orchestrator is an enterprise ready, managed cloud service that makes it easy:
+Ockam Orchestrator is an enterprise ready, managed cloud service that enables applications to:
 
-* Relay end-to-end encrypted communication within heavily distributed applications.
-* Operate project specific, secure and scalable Credential Authorities to issue light weight, short-lived, granular, attribute-based credentials.
+* Create Encrypted Cloud Relays for high throughput, end-to-end secure communication.
+* Operate project specific, secure and scalable Credential Authorities to issue light weight, short-lived, easy to rotate, granular, attribute-based credentials.
 * Provision
 * Manage
 * Scale
