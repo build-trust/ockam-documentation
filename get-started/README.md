@@ -1,32 +1,20 @@
+---
+description: Use Ockam Open Source for hacking and personal projects.
+---
+
 # Get Started
 
-To get started, with Ockam Open Source you will need the Ockam CLI.&#x20;
+To get started with Ockam Open Source you will need the Ockam CLI.&#x20;
 
-## Command
+## 1. Install the Ockam CLI
 
 ### Homebrew
-
-#### Install
 
 ```bash
 brew install build-trust/ockam/ockam
 ```
 
-#### Upgrade
-
-```bash
-brew update && brew upgrade ockam
-```
-
-#### Uninstall
-
-```bash
-brew uninstall ockam
-```
-
 ### Precompiled Binaries
-
-#### Install
 
 {% tabs %}
 {% tab title="x86_64-unknown-linux-gnu" %}
@@ -78,10 +66,4 @@ chmod u+x ockam
 {% endtab %}
 {% endtabs %}
 
-#### Upgrade
-
-Download a newer version and replace the old binary file.
-
-#### Uninstall
-
-Delete the old binary file.
+####

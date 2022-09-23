@@ -1,4 +1,4 @@
-# Modern application requirements
+# Why Ockam?
 
 **Mutual authentication and end-to-end data integrity**
 
