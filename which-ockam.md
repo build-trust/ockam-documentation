@@ -1,6 +1,10 @@
 # Which Ockam?
 
+We've built Ockam with all builders in mind and have two different configurations to choose from.&#x20;
 
+Ockam Open Source can be used for small scale personal projects where manual configuration and simple architectures fit the bill.
+
+Ockam Orchestrator should be used in a company setting. Orchestrator has all of the features that you'll need to collaborate with your team, integrate with automated infrastructure, and serve massive scale throughput.
 
 ### Ockam Open Source
 
