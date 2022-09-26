@@ -9,7 +9,8 @@ Applications must **build trust** in all data and instructions they receive over
 ```
                                       ┌─ ── ── ── ── ── ── ── ── ── ── ── ── ── ── 
                                       │         Data and access requests          │
-                                      └ ── ── ── ── ── ── ── ── ── ── ── ── ── ── ┘
+                                                    over the network              │
+                                      └─ ── ── ── ── ── ── ── ── ── ── ── ── ── ── 
 Application code is the only part     ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 an application can implicitly     ──▶ ┃             Application Code              ┃
 trust. Everything else, must be       ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
