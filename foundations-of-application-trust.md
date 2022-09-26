@@ -4,7 +4,7 @@ description: Zero [implicit] Trust.
 
 # Foundations of Application Trust
 
-Applications must **build trust** in their infrastructure, their dependencies, and their data.
+Applications must **build trust** in their dependencies, and the data they receive over the network.
 
 ****
 
