@@ -1,10 +1,10 @@
 ---
-description: Zero [implicit] Trust.
+description: Zero [implicit] Trust - in infrastructure,
 ---
 
 # Foundations of Application Trust
 
-****
+Applications must **build trust** in their infrastructure, their dependencies, and their data.
 
 ****
 
