@@ -16,7 +16,7 @@ In a few simple steps, with Ockam, you can add these controls and guarantees to 
 * Add end-to-end encryption to enterprise messaging and event streaming systems.
 * Generate unique cryptographically provable **Identities** and store private keys in safe hardware or cloud key management systems.
 * Operate project specific and scalable **Credential Authorities** to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
-* Onboard fleets of self-sovereign application identities using secure enrollment protocols to issue credentials to application clients and services.
+* Onboard fleets of self-sovereign application identities using **Secure Enrollment Protocols** to issue credentials to application clients and services.
 * **Rotate** and **revoke** keys and credentials – at scale, across fleets.
 * Define and enforce project-wide **Attribute Based Access Control** (ABAC) policies.
 * Integrate with enterprise Identity Providers and Policy Providers.
