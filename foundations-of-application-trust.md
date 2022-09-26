@@ -6,9 +6,20 @@ description: Zero [ implicit ] Trust.
 
 Applications must **build trust** in their dependencies, and the data they receive over the network.
 
-****
-
-****
+```
+                                       ┌─ ── ── ── ── ── ── ── ── ── ── ── ── ── ── 
+                                       │         Data and access requests          │
+                                       └ ── ── ── ── ── ── ── ── ── ── ── ── ── ── ┘
+The only part an application can       ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+implicitly trust, everything else ───▶ ┃             Application Code              ┃
+must be explicitly verified.           ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+                                       ┌─ ── ── ── ── ── ── ┐ ┌─ ── ── ── ── ── ── ┐
+                                       │     Libraries      │ │      Services      │
+                                        ── ── ── ── ── ── ──   ── ── ── ── ── ── ── 
+                                       ┌─ ── ── ── ── ── ── ┐ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ 
+                                       │   Infrastructure   │        Network       │
+                                        ── ── ── ── ── ── ──  └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ 
+```
 
 ****
 
