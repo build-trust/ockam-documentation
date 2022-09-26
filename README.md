@@ -19,4 +19,4 @@ In a few simple steps, with Ockam, you can add these controls and guarantees to 
 * Onboard fleets of self-sovereign application identities using **Secure Enrollment Protocols** to issue credentials to application clients and services.
 * **Rotate** and **revoke** keys and credentials – at scale, across fleets.
 * Define and enforce project-wide **Attribute Based Access Control** (ABAC) policies.
-* Add-Ons to integrate with enterprise Identity Providers and Policy Providers.
+* Add-Ons to integrate with enterprise Identity Providers, Policy Providers and more.
