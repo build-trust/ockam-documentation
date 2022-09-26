@@ -1,7 +1,7 @@
 # Table of contents
 
 * [Introduction to Ockam](README.md)
-* [Application Layer Trust](application-layer-trust.md)
+* [Foundation of Application Trust](foundation-of-application-trust.md)
 * [Ockam was built for you](which-ockam.md)
 * [Concepts](concepts.md)
 
