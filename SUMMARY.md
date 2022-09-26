@@ -2,7 +2,7 @@
 
 * [Introduction to Ockam](README.md)
 * [Foundations of Application Trust](foundations-of-application-trust.md)
-* [Ockam was built for you](which-ockam.md)
+* [Build secure-by-design applications](build-secure-by-design-applications.md)
 * [Concepts](concepts.md)
 
 ## OPEN SOURCE
