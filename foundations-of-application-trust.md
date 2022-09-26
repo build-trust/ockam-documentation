@@ -7,18 +7,18 @@ description: Zero [ implicit ] Trust.
 Applications must **build trust** in data in data and instructions they receive over the network.
 
 ```
-                                       ┌─ ── ── ── ── ── ── ── ── ── ── ── ── ── ── 
-                                       │         Data and access requests          │
-                                       └ ── ── ── ── ── ── ── ── ── ── ── ── ── ── ┘
-The only part an application can       ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-implicitly trust. Everything else ───▶ ┃             Application Code              ┃
-must be explicitly verified.           ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-                                       ┌─ ── ── ── ── ── ── ┐ ┌─ ── ── ── ── ── ── ┐
-                                       │     Libraries      │ │      Services      │
-                                        ── ── ── ── ── ── ──   ── ── ── ── ── ── ── 
-                                       ┌─ ── ── ── ── ── ── ┐ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ 
-                                       │   Infrastructure   │        Network       │
-                                        ── ── ── ── ── ── ──  └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ 
+                                      ┌─ ── ── ── ── ── ── ── ── ── ── ── ── ── ── 
+                                      │         Data and access requests          │
+                                      └ ── ── ── ── ── ── ── ── ── ── ── ── ── ── ┘
+The only part an application can      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+implicitly trust. Everything else ──▶ ┃             Application Code              ┃
+must be explicitly verified.          ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+                                      ┌─ ── ── ── ── ── ── ┐ ┌─ ── ── ── ── ── ── ┐
+                                      │     Libraries      │ │      Services      │
+                                       ── ── ── ── ── ── ──   ── ── ── ── ── ── ── 
+                                      ┌─ ── ── ── ── ── ── ┐ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ 
+                                      │   Infrastructure   │        Network       │
+                                       ── ── ── ── ── ── ──  └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ 
 ```
 
 ****
