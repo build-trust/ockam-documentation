@@ -1,5 +1,5 @@
 ---
-description: Zero [implicit] Trust.
+description: Zero [ implicit ] Trust.
 ---
 
 # Foundations of Application Trust
