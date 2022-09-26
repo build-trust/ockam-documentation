@@ -2,7 +2,7 @@
 description: Zero [implicit] Trust.
 ---
 
-# Application Layer Trust
+# Foundations of Application Trust
 
 ****
 
