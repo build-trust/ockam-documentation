@@ -10,10 +10,10 @@ Applications must **build trust** in all data and instructions they receive over
                                       ┌─ ── ── ── ── ── ── ── ── ── ── ── ── ── ── 
                                       │         Data and access requests          │
                                       └ ── ── ── ── ── ── ── ── ── ── ── ── ── ── ┘
-The only part an application can      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-implicitly trust. Everything else  ─▶ ┃             Application Code              ┃
-must be explicitly verified.          ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-                                      ┌─ ── ── ── ── ── ── ┐ ┌─ ── ── ── ── ── ── ┐
+Application code is the only part     ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+an application can implicitly     ──▶ ┃             Application Code              ┃
+trust. Everything else, must be       ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+explicitly verified.                  ┌─ ── ── ── ── ── ── ┐ ┌─ ── ── ── ── ── ── ┐
                                       │     Libraries      │ │      Services      │
                                        ── ── ── ── ── ── ──   ── ── ── ── ── ── ── 
                                       ┌─ ── ── ── ── ── ── ┐ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ 
