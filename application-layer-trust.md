@@ -1,10 +1,8 @@
 ---
-description: >-
-  Modern applications are distributed and have an unwieldy number of
-  interconnections that must trustfully exchange data.
+description: Zero [implicit] Trust.
 ---
 
-# The foundations of Trust
+# Application Layer Trust
 
 ****
 
