@@ -14,9 +14,9 @@ In a few simple steps, with Ockam, you can add these controls and guarantees to 
 * Provision encrypted **Relays** for trustful communication within applications that are distributed across many edge, cloud and data-center private networks.
 * Tunnel legacy protocols through mutually authenticated and encrypted **Portals.**
 * Add-ons to bring end-to-end encryption to enterprise messaging, pub/sub and event streams.
-* Generate unique cryptographically provable **Identities** and store private keys in safe hardware or cloud key management systems.
+* Generate unique cryptographically provable **Identities** and store private keys in safe **Vaults.** Add-ons for hardware or cloud key management systems.
 * Operate project specific and scalable **Credential Authorities** to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
 * Onboard fleets of self-sovereign application identities using **Secure Enrollment Protocols** to issue credentials to application clients and services.
 * **Rotate** and **revoke** keys and credentials – at scale, across fleets.
 * Define and enforce project-wide **Attribute Based Access Control** (ABAC) policies.
-* Add-Ons to integrate with enterprise Identity Providers, Policy Providers and more.
+* Add-ons to integrate with enterprise **Identity Providers** and **Policy Providers**.
