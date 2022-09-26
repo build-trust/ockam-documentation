@@ -15,19 +15,17 @@
 * [Get Started](orchestrator/get-started.md)
 * [Connect to a Relay in Orchestrator](orchestrator/encrypted-cloud-relays.md)
 
-## Guides
+## COMMAND LINE
 
-## COMMAND LINE USERS
-
-* [Nodes](reference/nodes.md)
-* [Workers](reference/workers.md)
-* [Services](reference/services.md)
-* [Messages](reference/messages.md)
-* [Routing](reference/routing.md)
-* [Transports](reference/transports/README.md)
-  * [TCP](reference/transports/tcp/README.md)
-    * [Inlets/Outlets](reference/transports/tcp/inlets-outlets.md)
-* [Vaults](reference/vaults.md)
-* [Identities](reference/identities.md)
-* [Secure Channels](reference/secure-channels.md)
-* [Forwarders](reference/forwarders.md)
+* [Nodes](command-line/nodes.md)
+* [Workers](command-line/workers.md)
+* [Services](command-line/services.md)
+* [Messages](command-line/messages.md)
+* [Routing](command-line/routing.md)
+* [Transports](command-line/transports/README.md)
+  * [TCP](command-line/transports/tcp/README.md)
+    * [Inlets/Outlets](command-line/transports/tcp/inlets-outlets.md)
+* [Vaults](command-line/vaults.md)
+* [Identities](command-line/identities.md)
+* [Secure Channels](command-line/secure-channels.md)
+* [Forwarders](command-line/forwarders.md)
