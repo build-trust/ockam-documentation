@@ -8,7 +8,7 @@ Ockam is a suite of open source tools, programming libraries, and managed cloud 
 
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To **build** **trust** for **data-in-motion**, applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be **private** and **secure** **by-design**, applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
 
-Ockam was made for millions of builders. We are passionate about simple developer experiences and easy to use tools. Just like Stripe did for payment rails and Twilio did for telecom, Ockam abstracts away complex infrastructure and cryptography orchestration to empower millions of developers.
+Ockam was made for millions of builders. We are passionate about simple developer experiences and easy to use tools. Just like Stripe did for payment rails and Twilio did for telecom, Ockam abstracts away complex infrastructure and cryptography to empower millions of developers.
 
 Ockam empowers you to:
 
