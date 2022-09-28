@@ -3,6 +3,10 @@
 * [Introduction to Ockam](README.md)
 * [Foundations of Application Trust](foundations-of-application-trust.md)
 * [Build Secure-by-Design Applications](build-secure-by-design-applications.md)
+* [Use Cases](use-cases/README.md)
+  * [Orchestrate at Scale](use-cases/orchestrate-at-scale.md)
+  * [Get Out of the Middle](use-cases/get-out-of-the-middle.md)
+  * [Trust Anything, Anywhere](use-cases/trust-anything-anywhere.md)
 * [Concepts](concepts.md)
 
 ## OPEN SOURCE
