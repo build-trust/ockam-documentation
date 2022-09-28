@@ -6,7 +6,7 @@
 * [Use Cases](use-cases/README.md)
   * [Orchestrate at Scale](use-cases/orchestrate-at-scale.md)
   * [Get Out of the Middle](use-cases/get-out-of-the-middle.md)
-  * [Build Trust in Anything, Anywhere](use-cases/build-trust-in-anything-anywhere.md)
+  * [Build Trust in Anything, Anywhere](use-cases/trust-anything-anywhere.md)
 * [Concepts](concepts.md)
 
 ## OPEN SOURCE
