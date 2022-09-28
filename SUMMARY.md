@@ -15,12 +15,12 @@
   * [Connect to a Relay in Orchestrator](orchestrator/encrypted-cloud-relays.md)
 * [Concepts](concepts.md)
 
-## BUILDING BLOCKS
+## HOW OCKAM WORKS
 
-* [Nodes, Workers, and Services](building-blocks/nodes-workers-and-services.md)
-* [Routing, Messages, and Transports](building-blocks/routing-messages-and-transports.md)
-* [Secure Channels](building-blocks/secure-channels.md)
-* [Relays and Portals ](building-blocks/relays-and-portals.md)
-* [Identities, Keys, and Vaults](building-blocks/identities-keys-and-vaults.md)
-* [Attributes, Credentials, and Authorities](building-blocks/attributes-credentials-and-authorities.md)
-* [Access Control and Policies](building-blocks/access-control-and-policies.md)
+* [Nodes, Workers, and Services](how-ockam-works/nodes-workers-and-services.md)
+* [Routing, Messages, and Transports](how-ockam-works/routing-messages-and-transports.md)
+* [Secure Channels](how-ockam-works/secure-channels.md)
+* [Relays and Portals ](how-ockam-works/relays-and-portals.md)
+* [Identities, Keys, and Vaults](how-ockam-works/identities-keys-and-vaults.md)
+* [Attributes, Credentials, and Authorities](how-ockam-works/attributes-credentials-and-authorities.md)
+* [Access Control and Policies](how-ockam-works/access-control-and-policies.md)
