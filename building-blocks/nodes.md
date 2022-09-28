@@ -1,6 +1,6 @@
 # Nodes
 
-An Ockam node is any running application that can communicate with other applications using various Ockam protocols like [Routing](routing.md), [Secure Channels](secure-channels.md), [Forwarding](forwarders.md) etc.
+An Ockam node is any running application that can communicate with other applications using various Ockam protocols like [Routing](routing.md), [Secure Channels](secure-channels.md), [Forwarding](relays.md) etc.
 
 We can create Ockam nodes using this command line or using various Ockam programming libraries like our Rust and Elixir libraries.
 
