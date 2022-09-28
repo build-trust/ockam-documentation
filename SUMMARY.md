@@ -29,3 +29,4 @@
 * [Identities](command-line/identities.md)
 * [Secure Channels](command-line/secure-channels.md)
 * [Forwarders](command-line/forwarders.md)
+* [Credentials](command-line/credentials.md)
