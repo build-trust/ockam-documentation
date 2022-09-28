@@ -23,4 +23,4 @@
 * [Relays and Portals ](how-ockam-works/relays-and-portals.md)
 * [Identities, Keys, and Vaults](how-ockam-works/identities-keys-and-vaults.md)
 * [Attributes, Credentials, and Authorities](how-ockam-works/attributes-credentials-and-authorities.md)
-* [Access Control and Policies](how-ockam-works/access-control-and-policies.md)
+* [Trust, Access Control and Policies](how-ockam-works/trust-access-control-and-policies.md)
