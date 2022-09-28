@@ -30,3 +30,4 @@
 * [Secure Channels](command-line/secure-channels.md)
 * [Forwarders](command-line/forwarders.md)
 * [Credentials](command-line/credentials.md)
+* [Credential Authorities](command-line/credential-authorities.md)
