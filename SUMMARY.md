@@ -17,9 +17,7 @@
 
 ## BUILDING BLOCKS
 
-* [Nodes](building-blocks/nodes.md)
-* [Workers](building-blocks/workers.md)
-* [Services](building-blocks/services.md)
+* [Nodes, Workers and Services](building-blocks/nodes.md)
 * [Messages](building-blocks/messages.md)
 * [Routing](building-blocks/routing.md)
 * [Transports](building-blocks/transports/README.md)

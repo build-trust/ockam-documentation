@@ -1,4 +1,4 @@
-# Nodes
+# Nodes, Workers and Services
 
 An Ockam node is any running application that can communicate with other applications using various Ockam protocols like [Routing](routing.md), [Secure Channels](secure-channels.md), [Forwarding](relays.md) etc.
 
@@ -14,7 +14,7 @@ We can create Ockam nodes using this command line or using various Ockam program
 
 
 
-An Ockam Node is an asynchronous execution environment that can run very lightweight, concurrent, stateful [actors](https://en.wikipedia.org/wiki/Actor\_model) called [Ockam Workers](workers.md). A node can deliver messages from one worker to another worker. Nodes can also route messages to workers on other remote nodes.
+An Ockam Node is an asynchronous execution environment that can run very lightweight, concurrent, stateful [actors](https://en.wikipedia.org/wiki/Actor\_model) called [Ockam Workers](broken-reference). A node can deliver messages from one worker to another worker. Nodes can also route messages to workers on other remote nodes.
 
 ### Create a node
 
@@ -177,3 +177,30 @@ $ ockam node delete --all --force
 
 
 
+<pre><code><strong>Ockam nodes run very lightweight, concurrent, stateful actors called Ockam Workers.
+</strong>Workers have addresses and a node can deliver messages to workers on the same node or
+on a different node using the Ockam Routing Protocol and its Transports.</code></pre>
+
+Ockam Workers are lightweight, concurrent, stateful actors.
+
+Workers:
+
+* Run in an Ockam Node.
+* Have an application-defined address (like a postal mail or email address).
+* Can maintain internal state.
+* Can start other new workers.
+* Can handle messages from other workers running on the same or a different node.
+* Can send messages to other workers running on the same or a different node.
+
+```
+One or more Ockam Workers can work as a team to offer a Service. Services have
+addressed represented by /service/{ADDRESS}. Services can be attached to identities and
+authorization policies to enforce attribute based access control rules.
+
+Nodes created using `ockam` command usually start a pre-defined set of default services.
+
+This includes:
+    - A uppercase service at /service/uppercase
+    - A secure channel listener at /service/api
+    - A tcp listener listening at some TCP port
+```
