@@ -12,7 +12,7 @@ Ockam was made for millions of builders. We are passionate about simple develope
 
 Ockam empowers you to:
 
-* Create end-to-end encrypted and authenticated **Channels** over any transport topology.
+* Create end-to-end encrypted, authenticated **Secure Channels** over any transport topology.
 * Provision encrypted **Relays** for trustful communication within applications that are distributed across many edge, cloud and data-center private networks.
 * Tunnel legacy protocols through mutually authenticated and encrypted **Portals.**
 * Add-ons to bring end-to-end encryption to enterprise messaging, pub/sub and event streams.

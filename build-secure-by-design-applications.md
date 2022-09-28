@@ -6,12 +6,16 @@ Ockam Open Source can be used for small scale personal projects where manual con
 
 Ockam Orchestrator should be used in a company setting. Orchestrator has all of the features that you'll need to collaborate with your team, integrate with automated infrastructure, and serve massive scale throughput.
 
+
+
 ### Ockam Open Source
 
 Ockam Open Source tools and programming libraries enable applications to:
 
-* Create end-to-end encrypted and authenticated channels over any transport topology.
-* Generate unique cryptographic identities and use them for mutual authentication.
+* Create end-to-end encrypted, authenticated **Secure Channels** over any transport topology.
+* Provision encrypted **Relays** for trustful communication within applications that are distributed across many edge, cloud and data-center private networks.
+* Tunnel legacy protocols through mutually authenticated and encrypted **Portals.**
+* Generate unique cryptographically provable **Identities** and store private keys in safe **Vaults.**
 * Safely generate and store private keys in hardware or in cloud key management systems.
 * Issue attribute based credentials and use them to granularly authorize access.
 * Easily rotate and revoke private keys and credentials.
@@ -33,5 +37,12 @@ Ockam Orchestrator is a managed cloud service that enables companies to:
 * Add-Ons
 * Integrate with Enterprise Identity Providers
 * Policy Providers
+* Add-ons to bring end-to-end encryption to enterprise messaging, pub/sub and event streams.
+* Add-ons for hardware or cloud key management systems.
+* Operate project specific and scalable **Credential Authorities** to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
+* Onboard fleets of self-sovereign application identities using **Secure Enrollment Protocols** to issue credentials to application clients and services.
+* **Rotate** and **revoke** keys and credentials – at scale, across fleets.
+* Generate unique cryptographically provable **Identities** and store private keys in safe **Vaults.**
+* Add-ons to integrate with enterprise **Identity Providers** and **Policy Providers**.
 
 [<mark style="background-color:yellow;">Get Started with Ockam Orchestrator</mark>](orchestrator/get-started.md)<mark style="background-color:yellow;"></mark>
