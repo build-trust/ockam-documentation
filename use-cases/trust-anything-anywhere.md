@@ -1,2 +1,2 @@
-# Build Trust in Anything, Anywhere
+# Trust Anything, Anywhere
 

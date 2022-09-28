@@ -7,17 +7,13 @@
   * [Orchestrate at Scale](use-cases/orchestrate-at-scale.md)
   * [Get Out of the Middle](use-cases/get-out-of-the-middle.md)
   * [Build Trust in Anything, Anywhere](use-cases/trust-anything-anywhere.md)
+* [Open Source](open-source/README.md)
+  * [Get Started](get-started/README.md)
+  * [Create a Local Relay](open-source/encrypted-cloud-relays.md)
+* [Orchestrator](orchestrator/README.md)
+  * [Get Started](orchestrator/get-started.md)
+  * [Connect to a Relay in Orchestrator](orchestrator/encrypted-cloud-relays.md)
 * [Concepts](concepts.md)
-
-## OPEN SOURCE
-
-* [Get Started](get-started/README.md)
-* [Create a Local Relay](open-source/encrypted-cloud-relays.md)
-
-## ORCHESTRATOR
-
-* [Get Started](orchestrator/get-started.md)
-* [Connect to a Relay in Orchestrator](orchestrator/encrypted-cloud-relays.md)
 
 ## COMMAND LINE
 
