@@ -17,10 +17,8 @@
 
 ## BUILDING BLOCKS
 
-* [Nodes, Workers and Services](building-blocks/nodes.md)
-* [Messages](building-blocks/messages.md)
-* [Routing](building-blocks/routing.md)
-* [Transports](building-blocks/transports.md)
+* [Nodes, Workers, and Services](building-blocks/nodes-workers-and-services.md)
+* [Routing, Messages, and Transports](building-blocks/routing-messages-and-transports.md)
 * [Vaults](building-blocks/vaults.md)
 * [Identities](building-blocks/identities.md)
 * [Credentials](building-blocks/credentials.md)
