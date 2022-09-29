@@ -45,4 +45,4 @@ Ockam Orchestrator is a managed cloud service that enables companies to:
 * Generate unique cryptographically provable **Identities** and store private keys in safe **Vaults.**
 * Add-ons to integrate with enterprise **Identity Providers** and **Policy Providers**.
 
-[<mark style="background-color:yellow;">Get Started with Ockam Orchestrator</mark>](orchestrator/get-started.md)<mark style="background-color:yellow;"></mark>
+[<mark style="background-color:yellow;">Get Started with Ockam Orchestrator</mark>](orchestrator/get-the-ockam-cli.md)<mark style="background-color:yellow;"></mark>

@@ -2,7 +2,7 @@
 description: End-to-end encrypted, secure and private cloud relays – for any application.
 ---
 
-# Encrypted Cloud Relays
+# Connect to a Relay in Orchestrator
 
 Let’s walk through a simple example to create an end-to-end encrypted, mutually authenticated, secure and private cloud relay – for any application.
 
@@ -105,25 +105,3 @@ ockam secure-channel create --from /node/green --to /project/default/service/for
 curl 127.0.0.1:7000
 ```
 
-#### Local
-
-```bash
-brew install build-trust/ockam/ockam
-ockam node create relay
-
-# -- APPLICATION SERVICE --
-
-python3 -m http.server --bind 127.0.0.1 5000
-
-ockam node create blue
-ockam tcp-outlet create --at /node/blue --from /service/outlet --to 127.0.0.1:5000
-ockam forwarder create blue --at /node/relay --to /node/blue
-
-# -- APPLICATION CLIENT --
-
-ockam node create green
-ockam secure-channel create --from /node/green --to /node/relay/service/forward_to_blue/service/api \
-  | ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
-
-curl 127.0.0.1:7000
-```
