@@ -17,7 +17,7 @@ If you're on linux, see how to installed [precompiled binaries](../get-started/#
 Then let's enroll with Ockam Orchestrator where we'll create a managed cloud based relay that will move end-to-end encrypted data between distributed parts of our application.
 
 ```bash
-ockam enroll
+ockam node create relay
 ```
 
 Create a cryptographic identity and enroll with Ockam Orchestrator. This will sign you up for an account with Ockam Orchestrator and setup a trial space and project for you. This space will work for 15 days in trial mode. After that please [contact us](mailto:hello@ockam.io).
