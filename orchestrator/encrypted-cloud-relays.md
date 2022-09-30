@@ -80,9 +80,13 @@ We just created end-to-end encrypted, mutually authenticated, and authorized sec
 
 The two sides authenticated and authorized each other's known, cryptographically provable identifiers. In later examples we'll see how we can build granular, attribute-based access control with authorization policies.
 
+If something breaks or if you'd like to start from the beginning as you try this example, please run&#x20;
+
+```
+ockam reset
+```
+
 ### Full Example
-
-
 
 ```bash
 brew install build-trust/ockam/ockam
