@@ -34,7 +34,7 @@ Start our application service, listening on a local ip and port, that clients wo
 python3 -m http.server --bind 127.0.0.1 5000
 ```
 
-Setup an ockam node, called blue, as a sidecar next to our application service.
+Setup an Ockam node, called blue, as a sidecar next to our application service.
 
 ```
 ockam node create blue
@@ -82,30 +82,7 @@ The two sides authenticated and authorized each other's known, cryptographically
 
 ### Full Example
 
-#### Orchestrator
 
-```bash
-brew install build-trust/ockam/ockam
-ockam enroll
-
-# -- APPLICATION SERVICE --
-
-python3 -m http.server --bind 127.0.0.1 5000
-
-ockam node create blue
-ockam tcp-outlet create --at /node/blue --from /service/outlet --to 127.0.0.1:5000
-ockam forwarder create blue --at /project/default --to /node/blue
-
-# -- APPLICATION CLIENT --
-
-ockam node create green
-ockam secure-channel create --from /node/green --to /project/default/service/forward_to_blue/service/api \
-  | ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to -/service/outlet
-
-curl 127.0.0.1:7000
-```
-
-#### Local
 
 ```bash
 brew install build-trust/ockam/ockam

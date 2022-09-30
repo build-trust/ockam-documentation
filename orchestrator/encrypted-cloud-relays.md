@@ -82,7 +82,7 @@ The two sides authenticated and authorized each other's known, cryptographically
 
 ### Full Example
 
-#### Orchestrator
+
 
 ```bash
 brew install build-trust/ockam/ockam
