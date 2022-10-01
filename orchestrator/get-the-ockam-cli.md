@@ -20,7 +20,7 @@ brew install build-trust/ockam/ockam
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
 ```
 
-### Support
+## Support
 
 Just lust launched this docs site in the past week. Updates will come fast and furious.
 

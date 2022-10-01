@@ -22,7 +22,13 @@ explicitly verified.                  ┌─ ── ── ── ── ── 
                                        ── ── ── ── ── ── ──  └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ 
 ```
 
-### **Mutual authentication and end-to-end data integrity**
+****
+
+****
+
+****
+
+**Mutual authentication and end-to-end data integrity**
 
 In order to trust information or instructions, that are received over the network, applications must **authenticate** all senders and **verify the integrity of data** **received** to assert what was received is exactly what was sent — free from errors or en-route tampering.
 
@@ -30,7 +36,7 @@ Application layer communication is also usually bi-directional since, at the ver
 
 With Ockam, applications can, in a few lines of code, create mutually authenticated secure channels that guarantee end-to-end data integrity to senders and receivers of data.
 
-### **Zero trust in network boundaries,** third-party services, and infrastructure
+#### **Zero trust in network boundaries,** third-party services, and infrastructure
 
 Applications have moved out of enterprise data centers into multi-tenant cloud and edge environments. They operate in untrusted networks and increasingly rely on third-party managed services and infrastructure. This creates exponential growth in the **vulnerability surface of our application data**.
 
