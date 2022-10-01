@@ -22,3 +22,11 @@ Ockam empowers you to:
 * **Rotate** and **revoke** keys and credentials – at scale, across fleets.
 * Define and enforce project-wide **Attribute Based Access Control** (ABAC) policies.
 * Add-ons to integrate with enterprise **Identity Providers** and **Policy Providers**.
+
+### **Support**
+
+Just lust launched this docs site in the past week. Updates will come fast and furious.
+
+In the meantime we are here to help you build with Ockam. If you need help, please start a Discussion in GitHub and our team will help you.
+
+****[**Start a Discussion here**](https://github.com/build-trust/ockam/discussions/categories/support)****
