@@ -22,7 +22,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-tru
 
 ## Support
 
-Just lust launched this docs site in the past week. Updates will come fast and furious.
+We just launched this docs site in the past week. Updates will come fast and furious.
 
 In the meantime we are here to help you build with Ockam. If you need help, please start a Discussion in GitHub and our team will help you.
 
