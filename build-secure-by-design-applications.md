@@ -12,18 +12,18 @@ Ockam Orchestrator should be used in a company setting. Orchestrator has all of 
 
 Ockam Open Source tools and programming libraries enable applications to:
 
+* Operate in any environment - cloud virtual machines or constrained embedded devices.
 * Safely Generate, Store, Rotate and Revoke **Cryptographic Keys.**
 * Generate unique cryptographically provable **Identities** and manage private keys in safe **Vaults.**
 * **Vault Add-Ons** for various TEEs, TPMs, HSMs, Secure Enclaves, and Cloud KMSs.
-* Deliver messages reliably between distributed applications using - Application Layer **Routing**.
-* Create end-to-end encrypted, authenticated **Secure Channels** over any **Transport** topology.
-* **Transport Add-Ons** for various protocols TCP, UDP
-* Provision encrypted **Relays** for trustful communication within applications that are distributed across many edge, cloud and data-center private networks.
+* Deliver messages reliably over any Transport topology using - Application Layer **Routing**.
+* Create end-to-end encrypted, mutually authenticated, and authorized **Secure Channels** over multi-hop, multi-protocol **Transport** topologies.
+* **Transport Add-Ons** for various protocols TCP, UDP, WebSockets, Bluetooth, LoRaWAN etc.
+* Securely traverse NATs and protocol gateways using **** end-to-end encrypted **Relays.**&#x20;
 * Tunnel any application protocol through mutually authenticated and encrypted **Portals.**
-* Safely generate and store private keys in hardware or in cloud key management systems.
-* Issue attribute based credentials and use them to granularly authorize access.
-* Easily rotate and revoke private keys and credentials.
-*
+* Create **Credential Authorities** to issue lightweight, attribute-based credentials**.**
+* Securely Issue, Store, Present, and Verify cryptographically verifiable **Credentials**.
+* Define and enforce Attribute Based Access Control (ABAC) **Policies**.
 
 <mark style="background-color:yellow;"></mark>[<mark style="background-color:yellow;">Get Started with Ockam Open Source</mark>](get-started/)<mark style="background-color:yellow;"></mark>
 
@@ -31,6 +31,7 @@ Ockam Open Source tools and programming libraries enable applications to:
 
 Ockam Orchestrator is a managed cloud service that enables companies to:
 
+* Provision encrypted **Relays** for trustful communication within applications that are distributed across many edge, cloud and data-center private networks.
 * Create encrypted cloud relays for end-to-end secure communication within applications that are distributed across many&#x20;
 * Operate project specific, secure and scalable Credential Authorities to issue light weight, short-lived, easy to revoke, granular, attribute-based credentials.
 * Easily provision and enroll fleets of self-sovereign, application identities&#x20;
