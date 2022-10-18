@@ -21,7 +21,7 @@ Ockam Open Source tools and programming libraries enable applications to:
 * **Transport Add-Ons** for various protocols TCP, UDP, WebSockets, Bluetooth, LoRaWAN etc.
 * Securely traverse NATs and protocol gateways using **** end-to-end encrypted **Relays.**&#x20;
 * Tunnel any application protocol through mutually authenticated and encrypted **Portals.**
-* Create **Credential Authorities** to issue lightweight, attribute-based credentials**.**
+* Create **Credential Authorities** to issue lightweight, fine-grained attribute-based credentials**.**
 * Securely Issue, Store, Present, and Verify cryptographically verifiable **Credentials**.
 * Define and enforce Attribute Based Access Control (ABAC) **Policies**.
 
