@@ -12,10 +12,14 @@ Ockam Orchestrator should be used in a company setting. Orchestrator has all of 
 
 Ockam Open Source tools and programming libraries enable applications to:
 
-* Create end-to-end encrypted, authenticated **Secure Channels** over any transport topology.
+* Safely Generate, Store, Rotate and Revoke **Cryptographic Keys.**
+* Generate unique cryptographically provable **Identities** and manage private keys in safe **Vaults.**
+* **Vault Add-Ons** for various TEEs, TPMs, HSMs, Secure Enclaves, and Cloud KMSs.
+* Deliver messages reliably between distributed applications using - Application Layer **Routing**.
+* Create end-to-end encrypted, authenticated **Secure Channels** over any **Transport** topology.
+* **Transport Add-Ons** for various protocols TCP, UDP
 * Provision encrypted **Relays** for trustful communication within applications that are distributed across many edge, cloud and data-center private networks.
-* Tunnel legacy protocols through mutually authenticated and encrypted **Portals.**
-* Generate unique cryptographically provable **Identities** and store private keys in safe **Vaults.**
+* Tunnel any application protocol through mutually authenticated and encrypted **Portals.**
 * Safely generate and store private keys in hardware or in cloud key management systems.
 * Issue attribute based credentials and use them to granularly authorize access.
 * Easily rotate and revoke private keys and credentials.
