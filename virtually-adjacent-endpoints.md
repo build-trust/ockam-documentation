@@ -1,4 +1,10 @@
-# Virtually Adjacent
+---
+description: >-
+  How to create virtual adjacencies between all of your distributed applications
+  / services to create a giant, virtual, local monolith.
+---
+
+# Virtually Adjacent Endpoints
 
 Modern applications are delivered by composing together a variety of distributed services. Development teams focus on building only the parts that are core to their business and leverage third-party managed infrastructure and services for everything else.
 

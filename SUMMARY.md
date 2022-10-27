@@ -1,7 +1,7 @@
 # Table of contents
 
 * [Introduction to Ockam](README.md)
-* [Virtually Adjacent](virtually-adjacent.md)
+* [Virtually Adjacent Endpoints](virtually-adjacent-endpoints.md)
 * [Foundations of Application Trust](foundations-of-application-trust.md)
 * [Build Secure-by-Design Applications](build-secure-by-design-applications.md)
 * [Use Cases](use-cases/README.md)
