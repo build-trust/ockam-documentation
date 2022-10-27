@@ -6,7 +6,7 @@
 * [Open Source](open-source/README.md)
   * [Get the Ockam CLI](get-started/README.md)
   * [Create a Local Relay](open-source/encrypted-cloud-relays.md)
-* [☁ Orchestrator](orchestrator/README.md)
+* [Orchestrator](orchestrator/README.md)
   * [Get the Ockam CLI](orchestrator/get-the-ockam-cli.md)
   * [Connect to a Relay in Orchestrator](orchestrator/encrypted-cloud-relays.md)
 * [Use Cases](use-cases/README.md)
