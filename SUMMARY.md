@@ -3,17 +3,16 @@
 * [Introduction to Ockam](README.md)
 * [Virtually Adjacent Endpoints](virtually-adjacent-endpoints.md)
 * [Foundations of Application Trust](foundations-of-application-trust.md)
-* [Build Secure-by-Design Applications](build-secure-by-design-applications.md)
+* [Open Source](open-source/README.md)
+  * [Get the Ockam CLI](get-started/README.md)
+  * [Create a Local Relay](open-source/encrypted-cloud-relays.md)
+* [☁ Orchestrator](orchestrator/README.md)
+  * [Get the Ockam CLI](orchestrator/get-the-ockam-cli.md)
+  * [Connect to a Relay in Orchestrator](orchestrator/encrypted-cloud-relays.md)
 * [Use Cases](use-cases/README.md)
   * [Orchestrate at Scale](use-cases/orchestrate-at-scale.md)
   * [Get Out of the Middle](use-cases/get-out-of-the-middle.md)
   * [Build Trust in Anything, Anywhere](use-cases/trust-anything-anywhere.md)
-* [Open Source](open-source/README.md)
-  * [Get the Ockam CLI](get-started/README.md)
-  * [Create a Local Relay](open-source/encrypted-cloud-relays.md)
-* [Orchestrator](orchestrator/README.md)
-  * [Get the Ockam CLI](orchestrator/get-the-ockam-cli.md)
-  * [Connect to a Relay in Orchestrator](orchestrator/encrypted-cloud-relays.md)
 
 ## HOW OCKAM WORKS
 

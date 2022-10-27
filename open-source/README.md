@@ -4,8 +4,22 @@ description: Use Ockam Open Source for hacking and personal projects.
 
 # Open Source
 
-We just launched this docs site in the past week. Updates will come fast and furious.
+Ockam Open Source tools and programming libraries enable applications to:
 
-In the meantime we are here to help you build with Ockam. If you need help, please start a Discussion in GitHub and our team will help you.
+* Safely Generate, Store, Rotate and Revoke **Cryptographic Keys.**
+* Generate unique cryptographically provable **Identities** and manage private keys in safe **Vaults.**
+* Enable **Vault Add-Ons** for various TEEs, TPMs, HSMs, Secure Enclaves, and Cloud KMSs.
+* Create **Credential Authorities** to issue lightweight, fine-grained attribute-based credentials**.**
+* Securely Issue, Store, Present, and Verify cryptographically verifiable **Credentials**.
+* Define and enforce Attribute Based Access Control (ABAC) **Policies**.
+* Deliver messages reliably over any Transport topology using - Application Layer **Routing**.
+* Create end-to-end encrypted, mutually authenticated, and authorized **Secure Channels** over multi-hop, multi-protocol **Transport** topologies.
+* Enable **Transport Add-Ons** for various protocols TCP, UDP, WebSockets, BLE, LoRaWAN etc.
+* Securely traverse NATs and protocol gateways using **** end-to-end encrypted **Relays.**&#x20;
+* Tunnel any application protocol through mutually authenticated and encrypted **Portals.**
+* Operate in **any environment** - cloud virtual machines or constrained embedded devices.
+* Integrate deeply using our **rust** **library** or run as an application **sidecar** process or container.
+* Licensed under the Apache 2.0 open source license.&#x20;
+* Community Support.
 
-****[**Start a Discussion here**](https://github.com/build-trust/ockam/discussions/categories/support)****
+****
