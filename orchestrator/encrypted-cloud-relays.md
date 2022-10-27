@@ -6,13 +6,13 @@ description: End-to-end encrypted, secure and private cloud relays – for any a
 
 Let’s walk through a simple example to create an end-to-end encrypted, mutually authenticated, secure and private cloud relay – for any application.
 
-First [install](../ockam-open-source/get-started.md#command) the Ockam command, if you haven't already.
+First [install](../get-started/#command) the Ockam command, if you haven't already.
 
 ```bash
 brew install build-trust/ockam/ockam
 ```
 
-If you're on linux, see how to installed [precompiled binaries](../ockam-open-source/get-started.md#precompiled-binaries).
+If you're on linux, see how to installed [precompiled binaries](../get-started/#precompiled-binaries).
 
 Then let's enroll with Ockam Orchestrator where we'll create a managed cloud based relay that will move end-to-end encrypted data between distributed parts of our application.
 
