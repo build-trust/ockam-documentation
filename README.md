@@ -1,5 +1,5 @@
 ---
-description: How to Trust for Data-in-Motion
+description: How to Build Trust for Data-in-Motion
 ---
 
 # Introduction to Ockam
