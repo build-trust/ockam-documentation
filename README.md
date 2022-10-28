@@ -17,7 +17,7 @@ $ ockam secure-channel create --from /node/n1 --to /node/n2/service/api \
 HELLO
 ```
 
-We handle all the underlying protocol complexity and provide secure, scalable, and reliable building blocks for your applications. In the snippet above we used Ockam Command, it's also just as easy to establish secure channels within your application code using our [Rust Library](https://github.com/build-trust/ockam#next-steps-with-the-rust-library).
+We handle all the underlying protocol complexity and provide secure, scalable, and reliable building blocks for your applications.
 
 Ockam empowers you to:
 
