@@ -10,7 +10,7 @@ First [install](../get-started/#command) the Ockam command, if you haven't alrea
 brew install build-trust/ockam/ockam
 ```
 
-If you're on linux, see how to installed [precompiled binaries](../get-started/#precompiled-binaries).
+If you're on linux, see how to install [precompiled binaries](../get-started/#precompiled-binaries).
 
 ```bash
 ockam node create relay
