@@ -8,7 +8,16 @@ Ockam is a suite of open source tools, programming libraries, and managed cloud 
 
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To **trust data-in-motion**, applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be **private** and **secure** **by-design**, applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
 
-Ockam was made for millions of builders. We are passionate about simple developer experiences and easy to use tools. If you can spin up EC2 or write data to a database from your application, then you are one of the millions of builders that already have the expertise to use Ockam.&#x20;
+We are passionate about making powerful cryptographic and messaging protocols **simple and safe to use** for millions of builders. For example, to create a mutually authenticated and end-to-end encrypted secure channel between two Ockam nodes, all you have to do is:
+
+```shell-session
+$ ockam secure-channel create --from /node/n1 --to /node/n2/service/api \
+    | ockam message send hello --from /node/n1 --to -/service/uppercase
+
+HELLO
+```
+
+We handle all the underlying protocol complexity and provide secure, scalable, and reliable building blocks for your applications. In the snippet above we used Ockam Command, it's also just as easy to establish secure channels within your application code using our [Rust Library](https://github.com/build-trust/ockam#next-steps-with-the-rust-library).
 
 Ockam empowers you to:
 
