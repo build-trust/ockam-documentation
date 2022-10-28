@@ -4,6 +4,8 @@ description: Use Ockam Open Source for hacking and personal projects.
 
 # Ockam Open Source
 
+<figure><img src="../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM.png" alt=""><figcaption></figcaption></figure>
+
 Ockam Open Source tools and programming libraries enable applications to:
 
 * Safely Generate, Store, Rotate and Revoke **Cryptographic Keys.**
