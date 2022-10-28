@@ -1,6 +1,6 @@
 # Add end-to-end encryption to any client and server application
 
-Let's build a solution for a very common topology. A application service and an application client running in two private networks wish to communicate with each other without exposing ports on the Internet.
+Let's build a solution for a very common topology. An application service and an application client running in two private networks wish to communicate with each other without exposing ports on the Internet.
 
 <figure><img src="../.gitbook/assets/infrastructure.webp" alt=""><figcaption></figcaption></figure>
 
