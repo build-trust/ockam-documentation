@@ -1,8 +1,12 @@
 # Table of contents
 
 * [Introduction to Ockam](README.md)
-  * [Virtual Adjacencies](readme/virtual-adjacencies.md)
-  * [Foundations of Application Trust](readme/foundations-of-application-trust.md)
+  * [Powerful Protocols, Made Simple](readme/powerful-protocols-made-simple.md)
+  * [Secure by Design Applications](readme/secure-by-design-applications.md)
+  * [Virtual Adjacencies](virtually-adjacent-endpoints.md)
+  * [End-to-End Data Integrity and Authenticity](readme/end-to-end-data-integrity-and-authenticity.md)
+  * [Zero \[ Implicit \] Trust](readme/zero-implicit-trust.md)
+  * [Shift Security Left](readme/shift-security-left.md)
 * [Use Cases](use-cases/README.md)
   * [Add end-to-end encryption to any client and server application](use-cases/add-end-to-end-encryption-to-any-client-and-server-application.md)
 * [Ockam Open Source](open-source/README.md)
