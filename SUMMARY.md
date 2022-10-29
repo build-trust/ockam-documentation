@@ -1,8 +1,8 @@
 # Table of contents
 
 * [Introduction to Ockam](README.md)
-  * [Powerful Protocols, Made Simple](readme/powerful-protocols-made-simple.md)
   * [Secure by Design Applications](readme/secure-by-design-applications.md)
+  * [Powerful Protocols, Made Simple](readme/powerful-protocols-made-simple.md)
   * [Virtual Adjacencies](virtually-adjacent-endpoints.md)
   * [End-to-End Data Integrity and Authenticity](readme/end-to-end-data-integrity-and-authenticity.md)
   * [Zero \[ Implicit \] Trust](readme/zero-implicit-trust.md)
