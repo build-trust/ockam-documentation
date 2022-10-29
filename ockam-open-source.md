@@ -4,7 +4,7 @@ description: Use Ockam Open Source for hacking and personal projects.
 
 # Ockam Open Source
 
-<figure><img src="../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM.png" alt=""><figcaption></figcaption></figure>
 
 Ockam Open Source tools and programming libraries enable applications to:
 
@@ -24,4 +24,18 @@ Ockam Open Source tools and programming libraries enable applications to:
 * Licensed under the Apache 2.0 open source license.&#x20;
 * Community Support.
 
-****
+### Get Started
+
+#### Homebrew
+
+```bash
+brew install build-trust/ockam/ockam
+```
+
+#### Precompiled Binaries
+
+```shell
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
+```
+
+After the binary downloads, please move it to a location in your shell's `$PATH`, like `/usr/local/bin`.
