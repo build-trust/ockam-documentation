@@ -28,11 +28,15 @@ Ockam Open Source tools and programming libraries enable applications to:
 
 #### Homebrew
 
+If you use Homebrew, you can install Ockam using `brew`.
+
 ```bash
 brew install build-trust/ockam/ockam
 ```
 
 #### Precompiled Binaries
+
+Otherwise, you can download our latest architecture specific pre-compiled binary by running:
 
 ```shell
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
