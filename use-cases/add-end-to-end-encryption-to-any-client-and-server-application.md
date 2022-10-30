@@ -4,13 +4,13 @@ Let's build a solution for a very common topology. An application service and an
 
 <figure><img src="../.gitbook/assets/infrastructure.webp" alt=""><figcaption></figcaption></figure>
 
-First [install](broken-reference) the Ockam command, if you haven't already.
+First install the Ockam command, if you haven't already.
 
 ```bash
 brew install build-trust/ockam/ockam
 ```
 
-If you're on linux, see how to install [precompiled binaries](broken-reference).
+If you're on linux, see how to install [precompiled binaries](../ockam-open-source.md#precompiled-binaries).
 
 ```bash
 ockam node create relay
