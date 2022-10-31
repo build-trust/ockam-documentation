@@ -9,6 +9,6 @@
   * [Shift Security Left](readme/shift-security-left.md)
 * [Use Cases](use-cases/README.md)
   * [Create secure communication with a private database, from anywhere](use-cases/create-secure-communication-with-a-private-database-from-anywhere.md)
-  * [Add end-to-end encryption to any client and server application](use-cases/add-end-to-end-encryption-to-any-client-and-server-application.md)
+  * [Add end-to-end encryption to any client and server application, with no code change](use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change.md)
 * [Ockam Open Source](ockam-open-source.md)
 * [Ockam Orchestrator](ockam-orchestrator.md)
