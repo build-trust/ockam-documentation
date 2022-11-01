@@ -21,6 +21,5 @@ Ockam Orchestrator is a managed cloud service that enables team and companies to
 * Enable **Stream Add-Ons** to bring end-to-end encryption to enterprise messaging and event streaming systems like Kafka, RabbitMQ, Kinesis etc.
 * Enable **Vault Add-Ons** to safely store keys in cloud key management systems.
 * Enterprise Support.
-* Buy on the AWS Marketplace.
 
-****[**Start a Discussion here**](https://github.com/build-trust/ockam/discussions/categories/support)****
+****[**Ockam Orchestrator is available through the AWS Marketplace.**](https://aws.amazon.com/marketplace/pp/prodview-wsd42efzcpsxk)****
