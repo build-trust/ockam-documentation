@@ -4,7 +4,7 @@ description: Use Ockam Open Source for hacking and personal projects.
 
 # Ockam Open Source
 
-<figure><img src=".gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM.png" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 Ockam Open Source tools and programming libraries enable applications to:
 
