@@ -15,7 +15,7 @@ Start the PostgreSQL server process
 postgres -D /opt/homebrew/var/postgresql@14
 
 # Create a database
-createdb app_database
+createdb app_db
 ```
 
 Connect to the database on its default listening port `5432` on localhost `127.0.0.1`
@@ -58,11 +58,11 @@ ockam forwarder create db_sidecar --at /node/relay --to /node/db_sidecar
 ockam node create client_sidecar
 
 ockam secure-channel create --from /node/client_sidecar --to /node/relay/service/forward_to_db_sidecar/service/api \
-  | ockam tcp-inlet create --at /node/client_sidecar --from 127.0.0.1:7000 --to -/service/outlet
+  | ockam tcp-inlet create --at /node/client_sidecar --from 127.0.0.1:7777 --to -/service/outlet
 ```
 
 ### Connect to the application database
 
 ```
-psql --host='127.0.0.1' --port=7000 app_db
+psql --host='127.0.0.1' --port=7777 app_db
 ```
