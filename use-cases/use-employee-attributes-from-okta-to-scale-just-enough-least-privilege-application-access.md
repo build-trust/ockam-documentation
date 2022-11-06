@@ -1,4 +1,4 @@
-# Use employee attributes from Okta to scale
+# Use employee attributes from Okta to scale just-enough, least-privilege application access
 
 ### Enroller
 
