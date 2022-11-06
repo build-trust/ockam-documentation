@@ -1,6 +1,8 @@
 # Apply fine-grained permissions, at scale, with Attribute-Based Access Control (ABAC)
 
-Attribute-Based Access Control (ABAC) is an authorization strategy that defines permissions based on an attributes.
+Attribute-Based Access Control (ABAC) is an authorization strategy that grants or denies access based on attributes.
+
+A subject’s request to perform an operation on a resource is granted or denied based on attributes of the **subject**, attributes of the **operation**, attributes of the **resource**, and attributes of the **environment**. This is driven based on **policies** that define and enforced based on those attributes.
 
 ```
 ockam enroll
