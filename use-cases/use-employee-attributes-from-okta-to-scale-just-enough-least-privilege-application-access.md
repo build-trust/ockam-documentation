@@ -26,7 +26,7 @@ python3 -m http.server --bind 127.0.0.1 5000
 
 ```bash
 ockam node create m1 --project project.json --enrollment-token $m1_token
-ockam policy set --at m1 --resource outlet --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.location "New York"))'
+ockam policy set --at m1 --resource outlet --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.location "New York")))'
 ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
 ockam forwarder create blue --at /project/default --to /node/m1
 ```
@@ -52,10 +52,14 @@ ockam project authenticate --project project.json
 ockam policy set --at support --resource inlet --expression '(= subject.application "Smart Factory")'
 ```
 
+The following is denied:
+
 ```
 ockam tcp-inlet create --at /node/support --from 127.0.0.1:8000 --to /project/default/service/forward_to_m1/secure/api/service/outlet
 curl --head 127.0.0.1:8000
 ```
+
+The following is granted:
 
 ```
 ockam tcp-inlet create --at /node/support --from 127.0.0.1:8000 --to /project/default/service/forward_to_m2/secure/api/service/outlet
