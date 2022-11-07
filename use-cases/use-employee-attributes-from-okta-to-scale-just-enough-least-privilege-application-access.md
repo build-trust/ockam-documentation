@@ -2,42 +2,46 @@
 
 <figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption></figcaption></figure>
 
-### Enroller
+### Administrator
 
 ```bash
 ockam enroll
-ockam project addon configure okta --tenant trial-9434859.okta.com --client-id 0oa2pi8no6Kb04frP697 --attribute email --attribute permission
+ockam project addon configure okta \
+  --tenant trial-9434859.okta.com --client-id 0oa2pi8no6Kb04frP697 \
+  --attribute email --attribute location --attribute department
 ```
 
 ```
 ockam project info --output json > project.json
-blue_token=$(ockam project enroll --attribute permission=data)
-green_token=$(ockam project enroll --attribute permission=data)
+
+m1_token=$(ockam project enroll --attribute application="Smart Factory")
+m2_token=$(ockam project enroll --attribute application="Smart Factory")
 ```
 
-### Blue
+### Machine 1 in New York
 
 ```
 python3 -m http.server --bind 127.0.0.1 5000
 ```
 
 ```bash
-ockam node create blue --project project.json --enable-credential-checks --enrollment-token $blue_token
-ockam policy set --at blue --resource outlet --expression '(or (= subject.permission "data") (= subject.permission "support"))'
-ockam tcp-outlet create --at /node/blue --from /service/outlet --to 127.0.0.1:5000
-ockam forwarder create blue --at /project/default --to /node/blue
+ockam node create m1 --project project.json --enable-credential-checks --enrollment-token $m1_token
+ockam policy set --at m1 --resource outlet --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.location "New York"))'
+ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
+ockam forwarder create blue --at /project/default --to /node/m1
 ```
 
-### Green
+### Machine 2 in San Francisco
+
+```
+python3 -m http.server --bind 127.0.0.1 6000
+```
 
 ```bash
-ockam node create green --project project.json --enable-credential-checks --enrollment-token $green_token
-ockam policy set --at green --resource inlet --expression '(= subject.permission "data")'
-ockam tcp-inlet create --at /node/green --from 127.0.0.1:7000 --to /project/default/service/forward_to_blue/secure/api/service/outlet
-```
-
-```
-curl --head 127.0.0.1:7000
+ockam node create m2 --project project.json --enable-credential-checks --enrollment-token $m2_token
+ockam policy set --at m2 --resource outlet --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.location "San Francisco"))'
+ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
+ockam forwarder create m2 --at /project/default --to /node/m2
 ```
 
 ### Support Engineer
@@ -45,10 +49,15 @@ curl --head 127.0.0.1:7000
 ```bash
 ockam node create support --project project.json --enable-credential-checks
 ockam project authenticate --project project.json
-ockam policy set --at support --resource inlet --expression '(= subject.permission "data")'
-ockam tcp-inlet create --at /node/support --from 127.0.0.1:8000 --to /project/default/service/forward_to_blue/secure/api/service/outlet
+ockam policy set --at support --resource inlet --expression '(= subject.application "Smart Factory")'
+ockam tcp-inlet create --at /node/support --from 127.0.0.1:8000 --to /project/default/service/forward_to_m2/secure/api/service/outlet
+curl --head 127.0.0.1:8000
 ```
 
 ```
+ockam node create support --project project.json --enable-credential-checks
+ockam project authenticate --project project.json
+ockam policy set --at support --resource inlet --expression '(= subject.application "Smart Factory")'
+ockam tcp-inlet create --at /node/support --from 127.0.0.1:8000 --to /project/default/service/forward_to_m2/secure/api/service/outlet
 curl --head 127.0.0.1:8000
 ```
