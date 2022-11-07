@@ -50,14 +50,14 @@ ockam forwarder create m2 --at /project/default --to /node/m2
 ockam node create support --project project.json --enable-credential-checks
 ockam project authenticate --project project.json
 ockam policy set --at support --resource inlet --expression '(= subject.application "Smart Factory")'
-ockam tcp-inlet create --at /node/support --from 127.0.0.1:8000 --to /project/default/service/forward_to_m2/secure/api/service/outlet
+```
+
+```
+ockam tcp-inlet create --at /node/support --from 127.0.0.1:8000 --to /project/default/service/forward_to_m1/secure/api/service/outlet
 curl --head 127.0.0.1:8000
 ```
 
 ```
-ockam node create support --project project.json --enable-credential-checks
-ockam project authenticate --project project.json
-ockam policy set --at support --resource inlet --expression '(= subject.application "Smart Factory")'
 ockam tcp-inlet create --at /node/support --from 127.0.0.1:8000 --to /project/default/service/forward_to_m2/secure/api/service/outlet
 curl --head 127.0.0.1:8000
 ```
