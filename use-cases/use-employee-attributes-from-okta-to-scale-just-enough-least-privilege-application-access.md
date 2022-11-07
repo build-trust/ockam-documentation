@@ -59,7 +59,7 @@ ockam tcp-inlet create --at /node/support --from 127.0.0.1:8000 --to /project/de
 curl --head 127.0.0.1:8000
 ```
 
-The following is granted:
+The following is allowed:
 
 ```
 ockam tcp-inlet create --at /node/support --from 127.0.0.1:8000 --to /project/default/service/forward_to_m2/secure/api/service/outlet
