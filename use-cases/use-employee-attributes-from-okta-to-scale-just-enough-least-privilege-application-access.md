@@ -25,7 +25,7 @@ python3 -m http.server --bind 127.0.0.1 5000
 ```
 
 ```bash
-ockam node create m1 --project project.json --enable-credential-checks --enrollment-token $m1_token
+ockam node create m1 --project project.json --enrollment-token $m1_token
 ockam policy set --at m1 --resource outlet --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.location "New York"))'
 ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
 ockam forwarder create blue --at /project/default --to /node/m1
@@ -38,7 +38,7 @@ python3 -m http.server --bind 127.0.0.1 6000
 ```
 
 ```bash
-ockam node create m2 --project project.json --enable-credential-checks --enrollment-token $m2_token
+ockam node create m2 --project project.json --enrollment-token $m2_token
 ockam policy set --at m2 --resource outlet --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.location "San Francisco"))'
 ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
 ockam forwarder create m2 --at /project/default --to /node/m2
@@ -47,7 +47,7 @@ ockam forwarder create m2 --at /project/default --to /node/m2
 ### Support Engineer
 
 ```bash
-ockam node create support --project project.json --enable-credential-checks
+ockam node create support --project project.json
 ockam project authenticate --project project.json
 ockam policy set --at support --resource inlet --expression '(= subject.application "Smart Factory")'
 ```
