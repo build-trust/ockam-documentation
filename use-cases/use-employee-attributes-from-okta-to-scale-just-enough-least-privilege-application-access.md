@@ -39,7 +39,7 @@ python3 -m http.server --bind 127.0.0.1 6000
 
 ```bash
 ockam node create m2 --project project.json --enrollment-token $m2_token
-ockam policy set --at m2 --resource outlet --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.location "San Francisco"))'
+ockam policy set --at m2 --resource outlet --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.location "San Francisco")))'
 ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
 ockam forwarder create m2 --at /project/default --to /node/m2
 ```
