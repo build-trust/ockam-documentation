@@ -1,6 +1,6 @@
 # Use employee attributes from Okta to scale just-enough, least-privilege application access
 
-<figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 ### Administrator
 
