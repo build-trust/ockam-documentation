@@ -1,5 +1,7 @@
 # Use employee attributes from Okta to scale just-enough, least-privilege application access
 
+<figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption></figcaption></figure>
+
 ### Enroller
 
 ```bash
