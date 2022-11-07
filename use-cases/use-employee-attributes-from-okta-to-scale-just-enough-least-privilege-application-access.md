@@ -12,7 +12,7 @@ ockam project addon configure okta \
 ```
 
 ```
-ockam project info --output json > project.json
+ockam project information --output json > project.json
 
 m1_token=$(ockam project enroll --attribute application="Smart Factory")
 m2_token=$(ockam project enroll --attribute application="Smart Factory")
