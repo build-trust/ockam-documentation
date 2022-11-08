@@ -46,7 +46,7 @@ curl --fail --head --max-time 10 127.0.0.1:7000
 
 ### X
 
-This will not be allowed.
+The following is denied:
 
 ```bash
 ockam node create x --project project.json --enrollment-token $x_token
