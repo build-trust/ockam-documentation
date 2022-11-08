@@ -43,7 +43,7 @@ ockam node create m2 --project project.json --enrollment-token $m2_token
 ockam policy set --at m2 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "New York")))'
 ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
-ockam forwarder create m1 --at /project/default --to /node/m2
+ockam forwarder create m2 --at /project/default --to /node/m2
 ```
 
 ### Alice - Field Engineer for San Francisco
