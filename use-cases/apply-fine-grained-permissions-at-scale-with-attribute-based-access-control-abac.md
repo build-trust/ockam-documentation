@@ -46,6 +46,8 @@ curl --fail --head --max-time 10 127.0.0.1:7000
 
 ### X
 
+This will not be allowed.
+
 ```bash
 ockam node create x --project project.json --enrollment-token $x_token
 ockam policy set --at x --resource tcp-inlet \
