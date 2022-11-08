@@ -4,6 +4,10 @@ Attribute-Based Access Control (ABAC) is an authorization strategy that grants o
 
 A subject’s request to perform an operation on a resource is granted or denied based on attributes of the **subject**, attributes of the **operation**, attributes of the **resource**, and attributes of the **environment**. This is driven based on **policies** that define and enforced based on those attributes.
 
+<figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/diagrams.004.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
+
 ### Administrator
 
 ```bash
