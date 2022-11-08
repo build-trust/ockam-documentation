@@ -29,8 +29,7 @@ python3 -m http.server --bind 127.0.0.1 5000
 
 ```bash
 ockam node create control_plane1 --project project.json --enrollment-token $cp1_token
-ockam policy set --at control_plane1 --resource tcp-outlet \
-  --expression '(= subject.component "edge")'
+ockam policy set --at control_plane1 --resource tcp-outlet --expression '(= subject.component "edge")'
 ockam tcp-outlet create --at /node/control_plane1 --from /service/outlet --to 127.0.0.1:5000
 ockam forwarder create control_plane1 --at /project/default --to /node/control_plane1
 ```
@@ -39,8 +38,7 @@ ockam forwarder create control_plane1 --at /project/default --to /node/control_p
 
 ```bash
 ockam node create edge_plane1 --project project.json --enrollment-token $ep1_token
-ockam policy set --at edge_plane1 --resource tcp-inlet \
-  --expression '(= subject.component "control")'
+ockam policy set --at edge_plane1 --resource tcp-inlet --expression '(= subject.component "control")'
 ockam tcp-inlet create --at /node/edge_plane1 --from 127.0.0.1:7000 --to /project/default/service/forward_to_control_plane1/secure/api/service/outlet
 ```
 
@@ -52,10 +50,8 @@ The following is denied:
 
 ```bash
 ockam node create x --project project.json --enrollment-token $x_token
-ockam policy set --at x --resource tcp-inlet \
-  --expression '(= subject.component "control")'
-ockam tcp-inlet create --at /node/x --from 127.0.0.1:8000 \
-  --to /project/default/service/forward_to_control_plane1/secure/api/service/outlet
+ockam policy set --at x --resource tcp-inlet --expression '(= subject.component "control")'
+ockam tcp-inlet create --at /node/x --from 127.0.0.1:8000 --to /project/default/service/forward_to_control_plane1/secure/api/service/outlet
 curl --fail --head --max-time 10 127.0.0.1:8000
 ```
 
