@@ -22,7 +22,7 @@ In scenarios where human users are authenticating with cloud services, we have s
 
 Ockam makes it simple to safely generate unique **cryptographically provable identifiers** and store their private keys in safe vaults. Ockam Secure Channels enable **mutual authentication** using these cryptographically provable identifiers.
 
-On this foundation of mutually authenticated secure channels that guarantee end-to-end data authenticity, integrity and confidentiality, we give your application the tools to make fine-grained trust and authorization decisions.
+On this foundation of mutually authenticated secure channels that guarantee end-to-end data authenticity, integrity and confidentiality, we give your tools to make fine-grained trust and authorization decisions.
 
 ### Attributes and **Cryptographically Provable** Credentials
 
