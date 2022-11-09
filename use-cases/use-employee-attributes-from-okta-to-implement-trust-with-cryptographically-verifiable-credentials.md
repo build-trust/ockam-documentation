@@ -4,6 +4,12 @@ description: Authenticate and authorize every access decision.
 
 # Use employee attributes from Okta to implement Trust with Cryptographically Verifiable Credentials
 
+Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data and instructions.
+
+In order to trust information or instructions, that are received over the network, applications must **authenticate** all senders and **verify the integrity of data** **received** to assert what was received is exactly what was sent — free from errors or en-route tampering.
+
+Applications must also decide if a sender of a request is **authorized** to trigger the requested action or view the requested data.
+
 
 
 <figure><img src="../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
