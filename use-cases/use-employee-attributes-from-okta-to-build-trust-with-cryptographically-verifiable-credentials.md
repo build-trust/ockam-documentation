@@ -4,6 +4,10 @@ description: Authenticate and authorize every access decision.
 
 # Use employee attributes from Okta to Build Trust with Cryptographically Verifiable Credentials
 
+In this guide, we’ll step through a demo of how workforce identities in Okta can be combined with application identities in Ockam to bring policy driven, attribute-based access control of distributed applications using cryptographically verifiable credentials.
+
+
+
 
 
 <figure><img src="../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
