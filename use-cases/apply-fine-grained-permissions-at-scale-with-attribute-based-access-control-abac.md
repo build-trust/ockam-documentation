@@ -2,7 +2,9 @@
 
 Attribute-Based Access Control (ABAC) is an authorization strategy that grants or denies access based on attributes.
 
-A subject’s request to perform an operation on a resource is granted or denied based on attributes of the **subject**, attributes of the **operation**, attributes of the **resource**, and attributes of the **environment**. This is driven based on **policies** that define and enforced based on those attributes.
+A subject’s request to perform an operation on a resource is granted or denied based on attributes of the **subject**, attributes of the **operation**, attributes of the **resource**, and attributes of the **environment**. Access is controlled using **policies** that are defined in terms of those attributes.
+
+Ockam’s ABAC design allows you to choose your access control model - ACLs, RBAC, ABAC etc.
 
 In this guide we’ll walk through
 
@@ -19,14 +21,6 @@ In scenarios where human users are authenticating with cloud services, we have s
 **Secure** **by-design** applications must ensure that all machine-to-machine application layer communication is authenticated and authorized. For this, **applications must prove identifiers and attributes.**
 
 Ockam makes it simple to safely generate unique **cryptographically provable identifiers** and store their private keys in safe vaults. Ockam Secure Channels guarantee end-to-end data integrity and enable **mutual authentication** using these cryptographically provable identifiers.
-
-
-
-
-
-
-
-
 
 <figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
