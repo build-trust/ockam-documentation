@@ -1,12 +1,10 @@
-# Apply fine-grained permissions, at scale, with Attribute-Based Access Control (ABAC)
+# Apply fine-grained permissions with Attribute-Based Access Control (ABAC)
 
 Attribute-Based Access Control (ABAC) is an authorization strategy that grants or denies access based on attributes.
 
 A subject’s request to perform an operation on a resource is granted or denied based on attributes of the **subject**, attributes of the **operation**, attributes of the **resource**, and attributes of the **environment**. Access is controlled using **policies** that are defined in terms of those attributes.
 
-Ockam’s ABAC design allows you to choose your access control model - ACLs, RBAC, ABAC etc.
-
-In this guide we’ll walk through
+In this guide we’ll walk through a step-by-step [demo](apply-fine-grained-permissions-with-attribute-based-access-control-abac.md#step-by-step-walkthrough) of using Ockam to add policy driven, attribute-based access control to any application using cryptographically verifiable credentials.&#x20;
 
 ## Background
 
@@ -20,11 +18,31 @@ In scenarios where human users are authenticating with cloud services, we have s
 
 **Secure** **by-design** applications must ensure that all machine-to-machine application layer communication is authenticated and authorized. For this, **applications must prove identifiers and attributes.**
 
-Ockam makes it simple to safely generate unique **cryptographically provable identifiers** and store their private keys in safe vaults. Ockam Secure Channels guarantee end-to-end data integrity and enable **mutual authentication** using these cryptographically provable identifiers.
+Ockam makes it simple to safely generate unique **cryptographically provable identifiers** and store their private keys in safe vaults. Ockam Secure Channels enable **mutual authentication** using these cryptographically provable identifiers.
+
+On this foundation of mutually authenticated secure channels that guarantee end-to-end data authenticity, integrity and confidentiality, we give your application the tools to make fine-grained trust and authorization decisions.
+
+##
+
+## Enrollment Protocols
+
+
+
+
 
 <figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/diagrams.004.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
+
+## Step-by-Step Walkthrough
+
+First install the Ockam command, if you haven't already. If you use Homebrew, you can install Ockam using `brew`.
+
+```bash
+brew install build-trust/ockam/ockam
+```
+
+If you're on linux, see how to install [precompiled binaries](../ockam-open-source.md#precompiled-binaries).
 
 ### Administrator
 

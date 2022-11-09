@@ -20,7 +20,9 @@ In scenarios where human users are authenticating with cloud services, we have s
 
 **Secure** **by-design** applications must ensure that all machine-to-machine application layer communication is authenticated and authorized. For this, **applications must prove identifiers and attributes.**
 
-Ockam makes it simple to safely generate unique **cryptographically provable identifiers** and store their private keys in safe vaults. Ockam Secure Channels guarantee end-to-end data integrity and enable **mutual authentication** using these cryptographically provable identifiers.
+Ockam makes it simple to safely generate unique **cryptographically provable identifiers** and store their private keys in safe vaults. Ockam Secure Channels enable **mutual authentication** using these cryptographically provable identifiers.
+
+On this foundation of mutually authenticated secure channels that guarantee end-to-end data authenticity, integrity and confidentiality, we give your application the tools to make fine-grained trust and authorization decisions.
 
 ## Step-by-Step Walkthrough
 
