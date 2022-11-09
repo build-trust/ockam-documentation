@@ -1,12 +1,12 @@
+---
+description: Authenticate and authorize every access decision.
+---
+
 # Use employee attributes from Okta to implement Trust with Cryptographically Verifiable Credentials
 
+
+
 <figure><img src="../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
-
-
-
-
-
-
 
 
 
