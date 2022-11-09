@@ -203,3 +203,10 @@ curl --head 127.0.0.1:9000
 
 # this will do nothing and eventually timeout
 ```
+
+When new employees join the Field Engineering team in San Francisco, they will get an Okta workforce identity and can also request access to services they are responsible for in San Francisco without any change to the system.
+
+These attribute based policies can easily span the spectrum of very simple to be highly fine-grained and dynamic depending on the needs of an application. At the same time, this approach is highly scalable because it decouples enterprise identity administration form an application's trust policies.
+
+
+
