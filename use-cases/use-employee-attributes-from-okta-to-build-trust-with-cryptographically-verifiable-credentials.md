@@ -24,19 +24,27 @@ In scenarios where human users are authenticating with cloud services, we have s
 
 Ockam makes it simple to safely generate unique **cryptographically provable identifiers** and store their private keys in safe vaults. Ockam Secure Channels enable **mutual authentication** using these cryptographically provable identifiers.
 
-On this foundation of mutually authenticated secure channels that guarantee end-to-end data authenticity, integrity and confidentiality, we give your tools to make fine-grained trust and authorization decisions.
+On this foundation of mutually authenticated secure channels that guarantee end-to-end data authenticity, integrity and confidentiality, we give you tools to make fine-grained trust and authorization decisions.
 
 ### Attributes and **Cryptographically Provable** Credentials
 
-
+An attribute is a `{name, value}` pair that describes some property of an entity.&#x20;
 
 ### Credential Authorities and Enrollment Protocols
+
+
 
 
 
 <figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 ### Attribute Based Access Control Policies
+
+
+
+<figure><img src="../.gitbook/assets/diagrams.004.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
+
+##
 
 ## Step-by-Step Walkthrough
 
