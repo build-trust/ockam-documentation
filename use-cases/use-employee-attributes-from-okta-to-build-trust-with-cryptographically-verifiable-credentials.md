@@ -12,7 +12,7 @@ Applications must also decide if a sender of a request is **authorized** to trig
 
 In scenarios where human users are authenticating with cloud services, we have mature protocols like OAuth 2.0 and OpenID Connect (OIDC). However, majority of data that flows within modern applications doesn’t involve humans. Microservices interact with other microservices, devices interact with other devices and cloud services, internal services interact with partner systems and infrastructure services etc.
 
-To be **secure** **by-design**, applications must ensure that all machine-to-machine application layer communication is authenticated and authorized. For this, **applications need to prove identifiers and attributes.**
+**Secure** **by-design** applications must ensure that all machine-to-machine application layer communication is authenticated and authorized. For this, **applications must prove identifiers and attributes.**
 
 
 
