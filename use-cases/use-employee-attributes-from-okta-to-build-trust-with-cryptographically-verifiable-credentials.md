@@ -170,11 +170,27 @@ Same as before, we then set an attribute based policy on the the tcp-outlet that
 
 ### Engineer for San Francisco
 
+There is a problem in one of the micro-services in San Francisco and we need to give Alice (an engineer from San Francisco) secure, short lived, revocable access to just that service and nothing more.
+
+Since the Okta Add-On is enabled. Alice can simple start a node within the project and authenticate.
+
 ```bash
 ockam node create alice --project project.json
 ockam project authenticate --project project.json
 ockam policy set --at alice --resource tcp-inlet --expression '(= subject.application "Smart Factory")'
 ```
+
+The `project authenticate` command will launch Okta login and when it completes return a an Ockam cryptographic credential that includes the city and department attributes of Alice's profile in Okta Universal Directory.
+
+
+
+<figure><img src="../.gitbook/assets/200395627-827d672a-2140-4752-a8d5-526ec5f0be68.png" alt=""><figcaption><p>User Profile in Okta</p></figcaption></figure>
+
+
+
+
+
+
 
 The following is allowed:
 
