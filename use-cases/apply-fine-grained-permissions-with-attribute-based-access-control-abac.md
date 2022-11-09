@@ -26,7 +26,7 @@ On this foundation of mutually authenticated secure channels that guarantee end-
 
 One simple model of trust and authorization that is possible using only cryptographically provable identifiers is Access Control Lists (ACLs). A resource server is given a list of identifiers that it will allow access to a resource through an authenticated channel. This works great for simple scenarios but is hard to scale. As new clients or users need access to this resource, the access control list has to updated.
 
-A much more powerful model becomes feasible with cryptographically provable credentials
+A much more powerful and scalable model becomes feasible with cryptographically provable credentials
 
 
 
