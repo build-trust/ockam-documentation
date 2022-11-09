@@ -28,11 +28,21 @@ One simple model of trust and authorization that is possible using only cryptogr
 
 A much more powerful and scalable model becomes feasible with cryptographically provable credentials
 
+### Authenticated Attributes and Cryptographic Credentials
+
+When making fine-grained trust and access control decisions, applications often need to reason about the properties or attributes of an entity that is requesting access to a resource or reporting some data. For example, an application may require that its inventory micorservice is the only service that is allowed to report the current status of inventory. For this to work, applications need to a way to authenticate attributes.
+
+Ockam enables attribute authentication using **cryptographically verifiable credentials.**
+
+A credential **Verifier** trusts the public identifier of a credential **Authority**. A **Prover** that wishes to authenticate an attribute to this verifier gets a cryptographically signed credential from this same credential authority. By issuing a credential, the authority attests to one or more attributes of the prover. For example the authority may attest that a particular identifier has the attributes `service-type=inventory, location="New York"`  &#x20;
+
+<figure><img src="../.gitbook/assets/diagrams.004.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
+
+
+
 
 
 <figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
-
-<figure><img src="../.gitbook/assets/diagrams.004.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 ## Step-by-Step Walkthrough
 
