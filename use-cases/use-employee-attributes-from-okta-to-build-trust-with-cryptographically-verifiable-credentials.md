@@ -180,28 +180,26 @@ ockam project authenticate --project project.json
 ockam policy set --at alice --resource tcp-inlet --expression '(= subject.application "Smart Factory")'
 ```
 
-The `project authenticate` command will launch Okta login and when it completes return a an Ockam cryptographic credential that includes the city and department attributes of Alice's profile in Okta Universal Directory.
+The `project authenticate` command will launch Okta login and when it completes return a an Ockam cryptographic credential that includes the city and department attributes of Alice's profile in Okta Universal Directory. Only these two attributes are attested because the administrator specified those two attributes when enabling the Okta Add-On.&#x20;
 
 
 
 <figure><img src="../.gitbook/assets/200395627-827d672a-2140-4752-a8d5-526ec5f0be68.png" alt=""><figcaption><p>User Profile in Okta</p></figcaption></figure>
 
-
-
-
-
-
-
-The following is allowed:
+Alice's `city` in Okta is "San Francisco". Her request to access Machine 1 in San Francisco is allowed&#x20;
 
 ```
-ockam tcp-inlet create --at /node/alice --from 127.0.0.1:8000 --to /project/default/service/forward_to_m1/secure/api/service/outlet
+ockam tcp-inlet create --at /node/alice --from 127.0.0.1:8000 \
+  --to /project/default/service/forward_to_m1/secure/api/service/outlet
 curl --head 127.0.0.1:8000
 ```
 
-The following is denied:
+Her request to access Machine 2 in New York is denied.&#x20;
 
 ```
-ockam tcp-inlet create --at /node/alice --from 127.0.0.1:9000 --to /project/default/service/forward_to_m2/secure/api/service/outlet
+ockam tcp-inlet create --at /node/alice --from 127.0.0.1:9000 \
+  --to /project/default/service/forward_to_m2/secure/api/service/outlet
 curl --head 127.0.0.1:9000
+
+# this will do nothing and eventually timeout
 ```
