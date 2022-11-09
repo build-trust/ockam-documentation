@@ -1,4 +1,4 @@
-# Use employee attributes from Okta to scale just-enough, least-privilege application access
+# Use employee attributes from Okta to implement Trust with Cryptographically Verifiable Credentials
 
 <figure><img src="../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
@@ -46,7 +46,7 @@ ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
 ockam forwarder create m2 --at /project/default --to /node/m2
 ```
 
-### Alice - Field Engineer for San Francisco
+### Platform Engineer for San Francisco
 
 ```bash
 ockam node create alice --project project.json
