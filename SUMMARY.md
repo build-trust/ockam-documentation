@@ -10,7 +10,7 @@
 * [Use Cases](use-cases/README.md)
   * [Add end-to-end encryption to any client and server application, with no code change](use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change.md)
   * [Apply fine-grained permissions, at scale, with Attribute-Based Access Control (ABAC)](use-cases/apply-fine-grained-permissions-at-scale-with-attribute-based-access-control-abac.md)
-  * [Use employee attributes from Okta to scale just-enough, least-privilege application access](use-cases/use-employee-attributes-from-okta-to-scale-just-enough-least-privilege-application-access.md)
+  * [Use employee attributes from Okta to implement trust with cryptographically verifiable credentials](use-cases/use-employee-attributes-from-okta-to-implement-trust-with-cryptographically-verifiable-credentials.md)
   * [Create secure communication with a private database, from anywhere](use-cases/create-secure-communication-with-a-private-database-from-anywhere.md)
 * [Ockam Open Source](ockam-open-source.md)
 * [Ockam Orchestrator](ockam-orchestrator.md)
