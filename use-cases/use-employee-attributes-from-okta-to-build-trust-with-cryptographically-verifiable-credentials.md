@@ -48,19 +48,21 @@ Once we have authenticated attributes, a resource owner can make trust decisions
 
 <figure><img src="../.gitbook/assets/diagrams.004.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
+### Credential Authorities and Enrollment Protocols
 
-
-
-
-
+Any Ockam Identifier can issue credentials about another Identifier, however some credential authorities are central to the success and scale of a distributed application. For such Ockam Orchestrator offers highly scalable and secure managed credential authorities as a cloud service.
 
 
 
 <figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
+### Okta Add-On for Ockam Orchestrator
+
+
+
 <figure><img src="../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
-##
+
 
 ## Step-by-Step Walkthrough
 
