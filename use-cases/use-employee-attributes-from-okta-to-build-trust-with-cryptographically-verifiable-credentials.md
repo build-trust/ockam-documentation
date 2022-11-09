@@ -52,21 +52,27 @@ Once we have authenticated attributes, a resource owner can make trust decisions
 
 Any Ockam Identifier can issue credentials about another Identifier, however some credential authorities are central to the success and scale of a distributed application. For such authorities Ockam Orchestrator offers highly scalable and secure managed credential authorities as a cloud service.
 
-We also have to consider how credentials are issued to a large number of application entities. Ockam offers several pluggable enrollment protocols. Once simple option is to use one-time-use enrollment tokens.
+We also have to consider how credentials are issued to a large number of application entities. Ockam offers several pluggable enrollment protocols. Once simple option is to use one-time-use enrollment tokens. This is a great option to enroll large fleets of applications, service, or devices. It is also easy to use with automated provisioning scripts and tools.
 
 <figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 ### Okta Add-On for Ockam Orchestrator
 
-For most enterprises,&#x20;
+For most enterprises, workforce identities are already defined in enterprise identity systems like Okta. Ockam Orchestrator offers an Okta Add-On that uses OIDC to allows enterprise employees to get Ockam credentials using their regular corporate login.
+
+Their user profile information like department, city, team etc. is included in the credential and securely attested by the Credential Authority.
+
+This combination is incredibly powerful. It allows **employees to get just-in-time, short lived, fine-grained revocable credentials to only the application components that they need to access.** It eliminates long lived static keys and credentials from being stored on work machines.
 
 
 
 <figure><img src="../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
-
-
 ## Step-by-Step Walkthrough
+
+Let's walk through a simple example where were&#x20;
+
+###
 
 ### Setup
 

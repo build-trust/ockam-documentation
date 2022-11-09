@@ -42,9 +42,11 @@ Once we have authenticated attributes, a resource owner can make trust decisions
 
 <figure><img src="../.gitbook/assets/diagrams.004.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
+### Credential Authorities and Enrollment Protocols
 
+Any Ockam Identifier can issue credentials about another Identifier, however some credential authorities are central to the success and scale of a distributed application. For such authorities Ockam Orchestrator offers highly scalable and secure managed credential authorities as a cloud service.
 
-
+We also have to consider how credentials are issued to a large number of application entities. Ockam offers several pluggable enrollment protocols. Once simple option is to use one-time-use enrollment tokens. This is a great option to enroll large fleets of applications, service, or devices. It is also easy to use with automated provisioning scripts and tools.
 
 <figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
