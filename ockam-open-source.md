@@ -9,7 +9,7 @@ description: Use Ockam Open Source for hacking and personal projects.
 Ockam Open Source tools and programming libraries enable applications to:
 
 * Safely Generate, Store, Rotate and Revoke **Cryptographic Keys.**
-* Generate unique cryptographically provable **Identities** and manage private keys in safe **Vaults.**
+* Generate unique cryptographically provable **Identifiers** and manage private keys in safe **Vaults.**
 * Enable **Vault Add-Ons** for various TEEs, TPMs, HSMs, Secure Enclaves, and Cloud KMSs.
 * Create **Credential Authorities** to issue lightweight, fine-grained attribute-based credentials**.**
 * Securely Issue, Store, Present, and Verify cryptographically verifiable **Credentials**.

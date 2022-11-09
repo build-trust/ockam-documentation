@@ -10,9 +10,15 @@ In order to trust information or instructions, that are received over the networ
 
 Applications must also decide if a sender of a request is **authorized** to trigger the requested action or view the requested data.
 
-In scenarios where human users are authenticating with cloud services, we have mature protocols like OAuth 2.0 and OpenID Connect (OIDC). However, majority of data that flows within modern applications doesn’t involve humans. Microservices interact with other microservices, devices interact with other devices and cloud services, internal services interact with partner systems and infrastructure services etc.
+In scenarios where human users are authenticating with cloud services, we have some mature protocols like OAuth 2.0 and OpenID Connect (OIDC) that help tackle parts of the problem. However, majority of data that flows within modern applications doesn’t involve humans. Microservices interact with other microservices, devices interact with other devices and cloud services, internal services interact with partner systems and infrastructure services etc.
 
 **Secure** **by-design** applications must ensure that all machine-to-machine application layer communication is authenticated and authorized. For this, **applications must prove identifiers and attributes.**
+
+Ockam makes it simple to safely generate unique cryptographically provable identifiers and store their private keys in safe vaults.&#x20;
+
+****
+
+****
 
 
 
