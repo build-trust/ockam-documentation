@@ -2,7 +2,7 @@
 description: Authenticate and authorize every access decision.
 ---
 
-# Use employee attributes from Okta to implement Trust with Cryptographically Verifiable Credentials
+# Use employee attributes from Okta to Build Trust with Cryptographically Verifiable Credentials
 
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data and instructions.
 
@@ -10,13 +10,15 @@ In order to trust information or instructions, that are received over the networ
 
 Applications must also decide if a sender of a request is **authorized** to trigger the requested action or view the requested data.
 
+In scenarios where human users are authenticating with cloud service, we have mature protocols like OAuth 2.0 and OpenID Connect (OIDC). However, majority of data that flows with modern applications doesn't involve humans. Microservices interact with other microservices, devices interact with other devices, devices interact with cloud services, internal services interact with partner systems and infrastructure services etc.
+
 
 
 <figure><img src="../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 
 
-First install the Ockam command, if you haven't already.
+First install the Ockam command, if you haven't already. If you use Homebrew, you can install Ockam using `brew`.
 
 ```bash
 brew install build-trust/ockam/ockam
