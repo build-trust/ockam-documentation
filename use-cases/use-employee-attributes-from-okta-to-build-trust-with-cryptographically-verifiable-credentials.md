@@ -40,7 +40,11 @@ When making fine-grained trust and access control decisions, applications often 
 
 Ockam enables attribute authentication using **cryptographically verifiable credentials.**
 
-A credential **Verifier** trusts the public identifier of a credential **Authority**. A **Prover** that wishes to authenticate an attribute to this verifier gets a cryptographically signed credential from this same credential authority. By issuing a credential, the authority attests to one or more attributes of the prover. For example the authority may attest that a particular identifier has the attributes `service-type=inventory, location="New York"`  &#x20;
+A credential **Verifier** trusts the public identifier of a credential **Authority**. A **Prover** that wishes to authenticate an attribute to this verifier gets a cryptographically signed credential from this same credential authority. By issuing a credential, the authority attests to one or more attributes of the prover. For example the authority may attest that a particular identifier has the attributes `service-type=inventory, location="New York"` .
+
+Credentials are issued over mutually authenticated, end-to-end secure channels and carry a cryptographic signature over an authenticated identifier and its attributes. This then allows a verifier to check signatures and authenticate attributes.
+
+Once we have authenticated attributes, a resource owner can make trust and access control decisions based on these authenticated attributes.
 
 <figure><img src="../.gitbook/assets/diagrams.004.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
