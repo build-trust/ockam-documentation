@@ -70,6 +70,14 @@ This combination is incredibly powerful. It allows **employees to get just-in-ti
 
 ## Step-by-Step Walkthrough
 
+Let's walkthrough a simple example of Okta + Ockam in action.
+
+We have a distributed application which has micro-service components running in San Francisco and New York. These components have Ockam Identities and Credentials and communicating trustfully using Ockam Secure Channels.
+
+There is a problem in one of the micro-services in San Francisco and we need to give Alice (an engineer from San Francisco) secure, short lived, revocable access to just that service and nothing more.
+
+First we'll create our application components and then see how to give access to the Alice.
+
 ### Setup
 
 If you use Homebrew, you can install Ockam using `brew`.
@@ -86,7 +94,9 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-tru
 
 After the binary downloads, please move it to a location in your shell's `$PATH`, like `/usr/local/bin`.
 
-#### Administrator
+### Administrator
+
+Next we provision our system. We enroll with Ockam Orchestrator, enable the Okta Add-On and export the project configuration to share with our application machines Machine 1 and 2.
 
 ```bash
 ockam enroll
@@ -97,12 +107,16 @@ ockam project addon configure okta \
 ockam project information --output json > project.json
 ```
 
+This will create a managed Credential Authority for our project.
+
+Next we generate two one-time-use enrollment tokens to enable Machine 1 and 2 to enroll and get credentials. Notice how we specify the attributes to attest for these two machines - `city` and `application`
+
 ```
 m1_token=$(ockam project enroll --attribute application="Smart Factory" --attribute city="San Francisco")
 m2_token=$(ockam project enroll --attribute application="Smart Factory" --attribute city="New York")
 ```
 
-#### Machine 1 in New York
+### Machine 1 in New York
 
 ```
 python3 -m http.server --bind 127.0.0.1 5000
@@ -116,7 +130,7 @@ ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
 ockam forwarder create m1 --at /project/default --to /node/m1
 ```
 
-#### Machine 2 in San Francisco
+### Machine 2 in San Francisco
 
 ```
 python3 -m http.server --bind 127.0.0.1 6000
@@ -130,7 +144,7 @@ ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
 ockam forwarder create m2 --at /project/default --to /node/m2
 ```
 
-#### Platform Engineer for San Francisco
+### Engineer for San Francisco
 
 ```bash
 ockam node create alice --project project.json
