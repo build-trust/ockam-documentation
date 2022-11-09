@@ -4,6 +4,12 @@ description: Authenticate and authorize every access decision.
 
 # Use employee attributes from Okta to Build Trust with Cryptographically Verifiable Credentials
 
+
+
+<figure><img src="../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
+
+## Background
+
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data and instructions.
 
 In order to trust information or instructions, that are received over the network, applications must **authenticate** all senders and **verify the integrity of data** **received** to assert what was received is exactly what was sent — free from errors or en-route tampering.
@@ -14,17 +20,9 @@ In scenarios where human users are authenticating with cloud services, we have s
 
 **Secure** **by-design** applications must ensure that all machine-to-machine application layer communication is authenticated and authorized. For this, **applications must prove identifiers and attributes.**
 
-Ockam makes it simple to safely generate unique cryptographically provable identifiers and store their private keys in safe vaults.&#x20;
+Ockam makes it simple to safely generate unique **cryptographically provable identifiers** and store their private keys in safe vaults. Ockam Secure Channels guarantee end-to-end data integrity and enable **mutual authentication** using these cryptographically provable identifiers.
 
-****
-
-****
-
-
-
-<figure><img src="../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
-
-
+## Step-by-Step Walkthrough
 
 First install the Ockam command, if you haven't already. If you use Homebrew, you can install Ockam using `brew`.
 
@@ -34,7 +32,7 @@ brew install build-trust/ockam/ockam
 
 If you're on linux, see how to install [precompiled binaries](../ockam-open-source.md#precompiled-binaries).
 
-### Administrator
+#### Administrator
 
 ```bash
 ockam enroll
@@ -50,7 +48,7 @@ m1_token=$(ockam project enroll --attribute application="Smart Factory" --attrib
 m2_token=$(ockam project enroll --attribute application="Smart Factory" --attribute city="New York")
 ```
 
-### Machine 1 in New York
+#### Machine 1 in New York
 
 ```
 python3 -m http.server --bind 127.0.0.1 5000
@@ -64,7 +62,7 @@ ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
 ockam forwarder create m1 --at /project/default --to /node/m1
 ```
 
-### Machine 2 in San Francisco
+#### Machine 2 in San Francisco
 
 ```
 python3 -m http.server --bind 127.0.0.1 6000
@@ -78,7 +76,7 @@ ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
 ockam forwarder create m2 --at /project/default --to /node/m2
 ```
 
-### Platform Engineer for San Francisco
+#### Platform Engineer for San Francisco
 
 ```bash
 ockam node create alice --project project.json
