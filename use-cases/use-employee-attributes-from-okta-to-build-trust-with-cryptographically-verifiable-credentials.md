@@ -70,10 +70,6 @@ This combination is incredibly powerful. It allows **employees to get just-in-ti
 
 ## Step-by-Step Walkthrough
 
-Let's walk through a simple example where were&#x20;
-
-###
-
 ### Setup
 
 If you use Homebrew, you can install Ockam using `brew`.
