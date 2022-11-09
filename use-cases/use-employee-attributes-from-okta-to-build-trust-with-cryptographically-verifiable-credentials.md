@@ -4,7 +4,7 @@ description: Authenticate and authorize every access decision.
 
 # Use employee attributes from Okta to Build Trust with Cryptographically Verifiable Credentials
 
-In this guide, we’ll step through a demo of how workforce identities in Okta can be combined with application identities in Ockam to bring policy driven, attribute-based access control of distributed applications using cryptographically verifiable credentials.
+In this guide, we’ll step through a demo of how workforce identities in Okta can be combined with application identities in Ockam to bring policy driven, attribute-based access control of distributed applications – using cryptographically verifiable credentials.
 
 
 
@@ -50,13 +50,15 @@ Once we have authenticated attributes, a resource owner can make trust decisions
 
 ### Credential Authorities and Enrollment Protocols
 
-Any Ockam Identifier can issue credentials about another Identifier, however some credential authorities are central to the success and scale of a distributed application. For such Ockam Orchestrator offers highly scalable and secure managed credential authorities as a cloud service.
+Any Ockam Identifier can issue credentials about another Identifier, however some credential authorities are central to the success and scale of a distributed application. For such authorities Ockam Orchestrator offers highly scalable and secure managed credential authorities as a cloud service.
 
-
+We also have to consider how credentials are issued to a large number of application entities. Ockam offers several pluggable enrollment protocols. Once simple option is to use one-time-use enrollment tokens.
 
 <figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 ### Okta Add-On for Ockam Orchestrator
+
+For most enterprises,&#x20;
 
 
 
