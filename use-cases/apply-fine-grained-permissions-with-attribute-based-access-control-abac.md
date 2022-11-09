@@ -38,7 +38,7 @@ A credential **Verifier** trusts the public identifier of a credential **Authori
 
 Credentials are issued over mutually authenticated, end-to-end secure channels and carry a cryptographic signature over an authenticated identifier and its attributes. This then allows a verifier to check signatures and authenticate attributes.
 
-Once we have authenticated attributes, a resource owner can make trust and access control decisions based on these attributes rooted in attestations by a trusted authorities.
+Once we have authenticated attributes, a resource owner can make trust decisions based on these attributes rooted in attestations by trusted authorities.
 
 <figure><img src="../.gitbook/assets/diagrams.004.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
