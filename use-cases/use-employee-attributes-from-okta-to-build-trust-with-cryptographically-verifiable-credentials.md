@@ -130,15 +130,28 @@ Next we transfer project configuration and one enrollment token to Machine 1 and
 ockam node create m1 --project project.json --enrollment-token $m1_token
 ockam policy set --at m1 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))'
-  ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
-  ockam forwarder create m1 --at /project/default --to /node/m1
+ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
+ockam forwarder create m1 --at /project/default --to /node/m1
 ```
 
+We then set an attribute based policy on the the tcp-outlet that delivers traffic to our application service. This policy says to allow requests if the subject (the entity requesting access) is part of the same application or if the subject is a Field Engineer based in San Francisco.
+
+```
+(or (= subject.application "Smart Factory")
+    (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))
+```
+
+The first part of the policy allows various application component services to communicate with each other. The second part is what will enable Alice. However, note that there is no mention of Alice here, only a department and a city.
+
 ### Machine 2 in San Francisco
+
+We'll represent the application service on Machine 2 with a simple http server listening on port 6`000` but this could be any application service:
 
 ```
 python3 -m http.server --bind 127.0.0.1 6000
 ```
+
+Next we transfer project configuration and one enrollment token to Machine 2 and use that to create and Ockam node that will run as a sidecar process next to our application service.
 
 ```bash
 ockam node create m2 --project project.json --enrollment-token $m2_token
@@ -146,6 +159,13 @@ ockam policy set --at m2 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "New York")))'
 ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
 ockam forwarder create m2 --at /project/default --to /node/m2
+```
+
+Same as before, we then set an attribute based policy on the the tcp-outlet that delivers traffic to our application service. This policy says to allow requests if the subject (the entity requesting access) is part of the same application or if the subject is a Field Engineer based in New York.
+
+```
+(or (= subject.application "Smart Factory")
+    (and (= subject.department "Field Engineering") (= subject.city "New York")))
 ```
 
 ### Engineer for San Francisco
