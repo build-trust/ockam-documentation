@@ -118,16 +118,20 @@ m2_token=$(ockam project enroll --attribute application="Smart Factory" --attrib
 
 ### Machine 1 in New York
 
+We'll represent the application service on Machine 1 with a simple http server listening on port `5000` but this could be any application service:
+
 ```
 python3 -m http.server --bind 127.0.0.1 5000
 ```
+
+Next we transfer project configuration and one enrollment token to Machine 1 and use that to create and Ockam node that will run as a sidecar process next to our application service.
 
 ```bash
 ockam node create m1 --project project.json --enrollment-token $m1_token
 ockam policy set --at m1 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))'
-ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
-ockam forwarder create m1 --at /project/default --to /node/m1
+  ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
+  ockam forwarder create m1 --at /project/default --to /node/m1
 ```
 
 ### Machine 2 in San Francisco
