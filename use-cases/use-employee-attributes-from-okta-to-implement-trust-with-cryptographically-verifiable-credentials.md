@@ -2,6 +2,22 @@
 
 <figure><img src="../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
+
+
+
+
+
+
+
+
+First install the Ockam command, if you haven't already.
+
+```bash
+brew install build-trust/ockam/ockam
+```
+
+If you're on linux, see how to install [precompiled binaries](../ockam-open-source.md#precompiled-binaries).
+
 ### Administrator
 
 ```bash
