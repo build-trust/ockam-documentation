@@ -1,12 +1,14 @@
 # Table of contents
 
 * [Introduction to Ockam](README.md)
+  * [Get Started](get-started.md)
   * [Secure by Design Applications](readme/secure-by-design-applications.md)
   * [Powerful Protocols, Made Simple](readme/powerful-protocols-made-simple.md)
   * [Virtual Adjacencies](virtually-adjacent-endpoints.md)
   * [End-to-End Data Integrity and Authenticity](readme/end-to-end-data-integrity-and-authenticity.md)
   * [Zero \[ Implicit \] Trust](readme/zero-implicit-trust.md)
   * [Shift Security Left](readme/shift-security-left.md)
+* [Get Started](get-started.md)
 * [Use Cases](use-cases/README.md)
   * [Add end-to-end encryption to any client and server application, with no code change](use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change.md)
   * [Apply fine-grained permissions with Attribute-Based Access Control (ABAC)](use-cases/apply-fine-grained-permissions-with-attribute-based-access-control-abac.md)
