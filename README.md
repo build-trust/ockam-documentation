@@ -1,37 +1,33 @@
----
-description: How to Build Trust for Data-in-Motion
----
+# Get Started
 
-# Introduction to Ockam
+### Install Ockam Command
 
-Ockam is a suite of open source tools, programming libraries, and managed cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.
+Ockam Command is our Command Line Interface (CLI) for interfacing with Ockam processes.&#x20;
 
-Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To **trust data-in-motion**, applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be **private** and **secure** **by-design**, applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
+{% tabs %}
+{% tab title="MacOS + Homebrew" %}
+If you use Homebrew, you can install Ockam using brew:
 
-We are passionate about making powerful cryptographic and messaging protocols **simple and safe to use** for millions of builders. For example, to create a mutually authenticated and end-to-end encrypted secure channel between two Ockam nodes, all you have to do is:
+```
+brew install build-trust/ockam/ockam
+```
+{% endtab %}
 
-```shell-session
-$ ockam secure-channel create --from /node/n1 --to /node/n2/service/api \
-    | ockam message send hello --from /node/n1 --to -/service/uppercase
-
-HELLO
+{% tab title="Other systems" %}
+```
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
 ```
 
-We handle all the underlying protocol complexity and provide secure, scalable, and reliable building blocks for your applications.
+After the binary downloads, please move it to a location in your shell's $PATH, like /usr/local/bin.
+{% endtab %}
+{% endtabs %}
 
-Ockam empowers you to:
+#### Check Your Install
 
-* Create end-to-end encrypted, authenticated **Secure Channels** over any transport topology.
-* Provision **Encrypted** **Relays** for trustful communication within applications that are distributed across many edge, cloud and data-center private networks.
-* Tunnel legacy protocols through mutually authenticated and encrypted **Portals.**
-* Add-ons to bring end-to-end encryption to enterprise messaging, pub/sub and event streams.
-* Generate unique cryptographically provable **Identities** and store private keys in safe **Vaults.** Add-ons for hardware or cloud key management systems.
-* Operate project specific and scalable **Credential Authorities** to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
-* Onboard fleets of self-sovereign application identities using **Secure Enrollment Protocols** to issue credentials to application clients and services.
-* **Rotate** and **revoke** keys and credentials – at scale, across fleets.
-* Define and enforce project-wide **Attribute Based Access Control** (ABAC) policies.
-* Add-ons to integrate with enterprise **Identity Providers** and **Policy Providers**.
+Check that your install has worked successfully by enrolling with the Ockam Orchestrator:
 
-## **Support**
+```bash
+ockam enroll
+```
 
-We are here to help you build with Ockam. If you need help, **** [**please reach out to us**](https://www.ockam.io/contact)!
+Next we'll cover some of the core concepts that enable Ockam to build secure by-design applications.
