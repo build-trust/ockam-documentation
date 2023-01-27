@@ -19,4 +19,5 @@
   * [End-to-end encrypted Kafka](examples/end-to-end-encrypted-kafka.md)
 * [Ockam Open Source](ockam-open-source.md)
 * [Ockam Orchestrator](ockam-orchestrator.md)
-* [Ockam Command](ockam-command.md)
+* [Ockam Command](ockam-command/README.md)
+  * [Nodes, Worker, and Services](ockam-command/nodes-worker-and-services.md)
