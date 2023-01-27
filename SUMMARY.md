@@ -15,5 +15,7 @@
   * [Create secure communication with a private database, from anywhere](use-cases/create-secure-communication-with-a-private-database-from-anywhere.md)
 * [Examples](examples/README.md)
   * [Basic Web App](examples/basic-web-app.md)
+  * [Telegraf + InfluxDB](examples/telegraf-+-influxdb.md)
+  * [End-to-end encrypted Kafka](examples/end-to-end-encrypted-kafka.md)
 * [Ockam Open Source](ockam-open-source.md)
 * [Ockam Orchestrator](ockam-orchestrator.md)
