@@ -1,4 +1,4 @@
-# Nodes, Worker, and Services
+# Nodes, Workers, and Services
 
 At Ockam’s core are a collection of cryptographic and messaging protocols. These protocols make it possible to create **private** and **secure by design** applications that provide end-to-end application layer trust it data.
 
@@ -113,7 +113,7 @@ You can also delete all nodes with:
 
 ## Worker
 
-Ockam [Nodes](nodes-worker-and-services.md#node) run very lightweight, concurrent, and stateful actors called Ockam Workers.
+Ockam [Nodes](nodes-workers-and-services.md#node) run very lightweight, concurrent, and stateful actors called Ockam Workers.
 
 When a worker is started on a node, it is given one or more addresses. The node maintains a mailbox for each address and whenever a message arrives for a specific address it delivers that message to the corresponding registered worker. In response to a message, an worker can: make local decisions, create more workers, send more messages, or change its internal state.
 
