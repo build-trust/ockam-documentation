@@ -4,7 +4,7 @@ At Ockam’s core are a collection of cryptographic and messaging protocols. The
 
 We wanted to make these powerful protocols **easy** and **safe** to use **in any application environment** – from highly scalable cloud services to tiny battery operated microcontroller based devices.
 
-However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. Ockam [Nodes](nodes-workers-and-services.md#node), [Workers](nodes-workers-and-services.md#worker), and [Services](nodes-workers-and-services.md#service) help us decouple from the host environment and provide simple interfaces to complex, stateful, and asynchronous message-based protocols.
+However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. Ockam [Nodes](nodes.md#node), [Workers](nodes.md#worker), and [Services](nodes.md#service) help us decouple from the host environment and provide simple interfaces to complex, stateful, and asynchronous message-based protocols.
 
 ## Node
 
@@ -12,7 +12,7 @@ An Ockam Node is any program that can interact with other Ockam Nodes using vari
 
 Ockam Nodes are designed to leverage the strengths of their operating environment. Our Rust implementation makes it easy to adapt to various architectures and processors. It can run efficiently on tiny microcontrollers or scale horizontally in cloud environments. You can create Ockam nodes using Ockam Command or embed one directly into your application using various Ockam programming libraries.
 
-Typically, an Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called [Ockam Workers](nodes-workers-and-services.md#worker). Using Ockam Routing, a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
+Typically, an Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called [Ockam Workers](nodes.md#worker). Using Ockam Routing, a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
 
 Ockam Command makes is super easy to create and manage local or remote Ockam Nodes.
 
@@ -113,7 +113,7 @@ You can also delete all nodes with:
 
 ## Worker
 
-Ockam [Nodes](nodes-workers-and-services.md#node) run very lightweight, concurrent, and stateful actors called Ockam Workers.
+Ockam [Nodes](nodes.md#node) run very lightweight, concurrent, and stateful actors called Ockam Workers.
 
 When a worker is started on a node, it is given one or more addresses. The node maintains a mailbox for each address and whenever a message arrives for a specific address it delivers that message to the corresponding registered worker. In response to a message, an worker can: make local decisions, change its internal state, create more workers, or send more messages.
 
@@ -131,13 +131,11 @@ Node: n1
     ...
 ```
 
-Note the workers in node `n1` with address `echo` and `uppercase`. We’ll send them some messages below as we look at services.
+Note the workers in node `n1` with address `echo` and `uppercase`. We’ll send them some messages below as we look at services. A node can also deliver messages to workers on a different node using the Ockam Routing Protocol and its Transports. Later in this guide, when we dig into routing, we’ll send some messages across nodes.
 
-From Ockam Command, we don’t create workers directly but instead start predefined [services](nodes-workers-and-services.md#service) like Transports and Secure Channels that in turn start one or more workers. Using the Ockam Rust Library you can also build your own workers.
+From Ockam Command, we don’t usually create workers directly but instead start predefined [services](nodes.md#service) like Transports and Secure Channels that in turn start one or more workers. Using the Ockam Rust Library you can also build your own workers.
 
-Workers take over the responsibility of running multi-step, stateful, and asynchronous message-based protocols. This makes it possible for Ockam Command and Ockam Programming Libraries to expose very simple interfaces for these protocols.&#x20;
-
-A node can also deliver messages to workers on a different node using the Ockam Routing Protocol and its Transports.
+Because workers are stateful and can asynchronously send and receive messages they are a  potent abstraction that can take over the responsibility of running multi-step, stateful, and asynchronous message-based protocols. This makes it possible for Ockam Command and Ockam Programming Libraries to expose very simple and safe interfaces for powerful protocols.&#x20;
 
 ## Service
 
