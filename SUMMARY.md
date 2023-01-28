@@ -19,7 +19,7 @@
   * [End-to-end encrypted Kafka](examples/end-to-end-encrypted-kafka.md)
 * [Ockam Open Source](ockam-open-source.md)
 * [Ockam Orchestrator](ockam-orchestrator.md)
-* [Ockam Programming Libraries](libraries/README.md)
+* [Ockam Programming Libraries](ockam-programming-libraries.md)
   * [Ockam Rust Library](libraries/rust.md)
 * [Ockam Command](command/README.md)
   * [Nodes, Workers, and Services](command/nodes.md)
