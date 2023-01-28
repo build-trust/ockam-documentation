@@ -131,6 +131,12 @@ Node: n1
     ...
 ```
 
+Note the workers in node `n1` with address `echo` and `uppercase`. We’ll send them some messages below as we look at services.
+
+From Ockam Command, we don’t create workers directly but instead start predefined [services](nodes-workers-and-services.md#service) like Transports and Secure Channels that in turn start one or more workers. Using the Ockam Rust Library you can also build your own workers.
+
+Workers take over the responsibility of running multi-step, stateful, and asynchronous message-based protocols. This makes it possible for Ockam Command and Ockam Programming Libraries to expose very simple interfaces for these protocols.&#x20;
+
 A node can also deliver messages to workers on a different node using the Ockam Routing Protocol and its Transports.
 
 ## Service
