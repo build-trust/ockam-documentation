@@ -126,6 +126,9 @@ Node: n1
     0bd13aa25990fcf84d69868ea62cb67e
     1305ca7d55d9694ff30f04906ff5396f
     222e361a13756be8eadac6dab91f99e4
+    echo
+    uppercase
+    ...
 ```
 
 A node can also deliver messages to workers on a different node using the Ockam Routing Protocol and its Transports.
