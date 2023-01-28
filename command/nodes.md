@@ -139,15 +139,35 @@ Because workers are stateful and can asynchronously send and receive messages th
 
 ## Service
 
-One or more Ockam Workers can work as a team to offer a Service.
+One or more Ockam Workers can work as a team to offer a Service. Services can also be attached to identities and authorization policies to enforce attribute based access control rules.
 
-a service has an address /node/one/service/uppercase
+For example, nodes that are created with Ockam Command come with some predefined services including an example service `/service/uppercase` that responds with an uppercased version of whatever message you send it:
 
-Services have addresses represented by /service/{ADDRESS}.
+```
+» ockam message send hello --to /node/n1/service/uppercase
+HELLO
+```
 
-Services can be attached to identities and authorization policies to enforce attribute based access control rules. Nodes created using ockam command usually start a pre-defined set of default services. This includes: A uppercase service at /service/uppercase A secure channel listener at /service/api A tcp listener listening at some TCP port command has an easy way to discover this from node name
+Services have addresses represented by `/service/{ADDRESS}`.
 
+You can see a list of all services on a node by running:
 
+```
+» ockam service list --at n1
+Node: n1
+  Services:
+    Service:
+      Type: Uppercase
+      Address: /service/uppercase
+    Service:
+      Type: Echoer
+      Address: /service/echo
+    Service:
+      Type: SecureChannelListener
+      Address: /service/api
+    ...
+```
 
+Later in this guide, we’ll explore other commands that interact with other pre-defined services like `/service/api` – every node created with Ockam Command starts a secure channel listener at this address to allow other nodes to create mutually authenticated channels with it.
 
-
+Next, let’s explore how Ockam Routing enables us to create protocols that provide end-to-end security and privacy guarantees.
