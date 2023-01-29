@@ -16,7 +16,7 @@ Rust bases Ockam Nodes run very lightweight, concurrent, stateful actors called 
 
 A node requires an asynchronous runtime to concurrently execute workers. The default Ockam Node implementation uses `tokio`, a popular asynchronous runtime in the Rust ecosystem. We also support Ockam Node implementations for various `no_std` embedded targets.
 
-### Create a node
+#### Create a node
 
 The first thing any Ockam rust program must do is initialize and start an Ockam node. This setup can be done manually but the most convenient way is to use the `#[ockam::node]` attribute that injects the initialization code. It creates the asynchronous environment, initializes worker management, sets up routing and initializes the node context.
 
@@ -57,14 +57,13 @@ This will download various dependencies, compile and then run our code. When it 
 
 Ockam [Nodes](nodes.md#node) run very lightweight, concurrent, and stateful actors called Ockam Workers.
 
-When a worker is started on a node, it is given one or more addresses. The node maintains a mailbox for each address and whenever a message arrives for a specific address it delivers that message to the corresponding registered worker. In response to a message, an worker can: make local decisions, change its internal state, create more workers, or send more messages.
+When a worker is started on a node, it is given one or more addresses. The node maintains a mailbox for each address and whenever a message arrives for a specific address it delivers that message to the corresponding registered worker.
 
-* Can handle messages from other workers running on the same or a different node.
-* Can send messages to other workers running on the same or a different node.
+Workers can handle messages from other workers running on the same or a different node. In response to a message, an worker can: make local decisions, change its internal state, create more workers, or send more messages to other workers running on the same or a different node.
 
-Now that we've [created our first node](nodes.md#create-a-node), let's create a new worker, send it a message, and receive a reply.
+Above we've [created our first node](nodes.md#create-a-node), now let's create a new worker, send it a message, and receive a reply.
 
-### Echoer worker
+#### **Echoer worker**
 
 To create a worker, we create a struct that can optionally have some fields to store the worker's internal state. If the worker is stateless, it can be defined as a field-less unit struct.
 
@@ -112,13 +111,13 @@ In the Echoer's `handle_message(..)`, we print any incoming message, along with 
 To make this Echoer type accessible to our main program, export it from `src/lib.rs` file by adding the following to it:
 
 ```rust
-// src/mod
+// src/lib.rs
 
 mod echoer;
 pub use echoer::*;
 ```
 
-### App worker
+#### App worker
 
 When a new node starts and calls an `async` main function, it turns that function into a worker with address of `"app"`. This makes it easy to send and receive messages from the main function (i.e the `"app"` worker).
 
@@ -165,6 +164,20 @@ cargo run --example 02-worker
 
 You'll see console output that shows `"Hello Ockam!"` received by the `"echoer"` and then an echo of it received by the `"app"`.
 
-### Message Flow
+#### Message Flow
+
+
+
+```mermaid
+sequenceDiagram
+    app    ->> echoer: Hello Ockam!
+    echoer ->> app: Hello Ockam!
+
+
+```
+
+
+
+
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
