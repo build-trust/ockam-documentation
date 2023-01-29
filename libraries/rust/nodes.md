@@ -166,18 +166,15 @@ You'll see console output that shows `"Hello Ockam!"` received by the `"echoer"`
 
 #### Message Flow
 
-
+The message flow looked like this:
 
 ```mermaid
 sequenceDiagram
-    app    ->> echoer: Hello Ockam!
-    echoer ->> app: Hello Ockam!
+    app    ->> echoer: "Hello Ockam!"
+    echoer ->> app: "Hello Ockam!"
 
 
 ```
 
 
 
-
-
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
