@@ -10,17 +10,33 @@ However, many of these protocols require multiple steps and have complicated int
 
 An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam Protocols like Ockam Routing and Ockam Secure Channels.
 
-Using the Ockam Rust crates, you can easily turn any application into a lightweight Ockam Node. This flexible approach allows your to build secure by design applications that can run efficiently on tiny microcontrollers or scale horizontally in cloud environments.
+Ockam Nodes are designed to leverage the strengths of their operating environment. Our Rust implementation makes it easy to adapt to various architectures and processors. It can run efficiently on tiny microcontrollers or scale horizontally in cloud environments. Using the Ockam Rust crate, you can embed Ockam nodes directly into your applications.
 
-Rust bases Ockam Nodes run very lightweight, concurrent, stateful actors called Ockam [Workers](nodes.md#worker). Using Ockam Routing, a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
 
-A node requires an asynchronous runtime to concurrently execute workers. The default Ockam Node implementation uses `tokio`, a popular asynchronous runtime in the Rust ecosystem. We also support Ockam Node implementations for various `no_std` embedded targets.
+
+
+
+
+
+
+
+Typically, an Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called Ockam Workers. Using Ockam Routing, a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
+
+Ockam Command makes is super easy to create and manage local or remote Ockam Nodes.
+
+If you run `ockam node create`, it will create and start a node in the background and give it a random name:
+
+## Node
+
+An Ockam Node is an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called Ockam Workers. A node can deliver messages from one worker to another worker. Nodes can also route messages to workers on other remote nodes.
+
+A node requires an asynchronous runtime to concurrently execute workers. The default Ockam Node implementation uses Tokio, a popular asynchronous runtime in the Rust ecosystem. Over time, we plan to support Ockam Node implementations for various `no_std` embedded targets.
+
+The first thing any Ockam program must do is initialize and start an Ockam node. This setup can be done manually but the most convenient way is to use the `#[ockam::node]` attribute that injects the initialization code. It creates the asynchronous environment, initializes worker management, sets up routing and initializes the node context.
 
 ### Create a node
 
-The first thing any Ockam rust program must do is initialize and start an Ockam node. This setup can be done manually but the most convenient way is to use the `#[ockam::node]` attribute that injects the initialization code. It creates the asynchronous environment, initializes worker management, sets up routing and initializes the node context.
-
-For your new node, create a new file at `examples/01-node.rs` in your [hello\_ockam](./#get-started) project:
+For your new node, create a new file at `examples/01-node.rs` in your [hello\_ockam](broken-reference) project:
 
 ```
 touch examples/01-node.rs
