@@ -24,3 +24,4 @@
 * [Ockam Programming Libraries](ockam-programming-libraries.md)
   * [Ockam Rust Library](libraries/rust/README.md)
     * [Nodes and Workers](libraries/rust/nodes.md)
+    * [Routing and Transports](libraries/rust/routing.md)
