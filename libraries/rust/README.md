@@ -1,4 +1,10 @@
+---
+description: A step-by-step guide
+---
+
 # Ockam Rust Library
+
+In this step-by-step guide we will write many small rust programs to understand the various building blocks that make up Ockam. We’ll dive into Node, Workers, Routing, Transport, Secure Channels and more.
 
 ## Get Started
 

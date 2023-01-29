@@ -1,3 +1,7 @@
+---
+description: A step-by-step guide
+---
+
 # Ockam Command
 
 ## Get Started
