@@ -121,7 +121,7 @@ cargo run --example 03-routing
 
 Note the message flow and how routing information is manipulated as the message travels.
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Routing over many hops
 
