@@ -2,7 +2,7 @@
 
 So far, we've [created an `"echoer"` worker](broken-reference) on our node, sent it a message, and received a reply.
 
-This worker was a simple one hop away from our `"app"` worker. Ockam's application layer routing protocols allows us to send messages over multiple hops, within one node, or across many nodes.
+This worker was a simple one hop away from our `"app"` worker. Ockam's Application Layer Routing protocol allows us to send messages over multiple hops, within one node, or across many nodes. This enables us to layer other protocols that provide end-to-end security and privacy guarantees.
 
 To achieve this, messages carry with them two meta fields: `onward_route` and `return_route`, where a route is a list of addresses.
 
