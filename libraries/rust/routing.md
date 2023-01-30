@@ -12,6 +12,25 @@ To achieve this, messages carry with them two meta fields: `onward_route` and `r
 
 To get a sense of how that works, let's route a message over two hops.
 
+### Protocol
+
+Sender:
+
+* Needs to know the route to a destination, makes that route the onward\_route of a new message
+* Makes its own address the the return\_route of the new message
+
+Hop:
+
+* Removes its own address from beginning of onward\_route
+* Adds its own address to beginning of return\_route
+
+Replier:
+
+* Makes return\_route of incoming message, onward\_route of outgoing message
+* Makes its own address the the return\_route of the new message
+
+
+
 ```mermaid
 %%{init: { "fontFamily": "monospace", "sequence": {"mirrorActors": false} }}%%
 sequenceDiagram
@@ -20,6 +39,29 @@ sequenceDiagram
 
 
 
+```
+
+```mermaid
+%%{init: { "fontFamily": "monospace", "sequence": {"mirrorActors": false} }}%%
+sequenceDiagram
+    app    ->> h1:     "payload": "Hello Ockam!"<br>"onward_route": ["h1", "echoer"]<br>"return_route": ["app"]
+    h1     ->> echoer: "payload": "Hello Ockam!"<br>"onward_route": ["echoer"]<br>"return_route": ["h1", "app"]
+    echoer ->> h1:     "payload": "Hello Ockam!"<br>"onward_route": ["h1", "app"]<br>"return_route": ["echoer"]
+    h1     ->> app:    "payload": "Hello Ockam!"<br>"onward_route": ["app"]<br>"return_route": ["h1", "echoer"]
+
+
+
+```
+
+```mermaid
+%%{init: { "fontFamily": "monospace", "sequence": {"mirrorActors": false} }}%%
+sequenceDiagram
+    app    ->> h1:     "payload": "Hello Ockam!"<br>"onward_route": ["h1", "h2" ... "hn-1", "hn", "echoer"]<br>"return_route": ["app"]
+    h1    -->> hn: 
+    hn     ->> echoer: "payload": "Hello Ockam!"<br>"onward_route": ["echoer"]<br>"return_route": ["hn", "hn-1" ... "h2", "h1", "app"]
+    echoer ->> hn:     "payload": "Hello Ockam!"<br>"onward_route": ["hn", "hn-1" ... "h2", "h1", "app"]<br>"return_route": ["echoer"]
+    hn    -->> h1: 
+    h1     ->> app:    "payload": "Hello Ockam!"<br>"onward_route": ["app"]<br>"return_route": ["h1", "h2" ... "hn-1", "hn", "echoer"]
 ```
 
 #### Hop worker
@@ -134,18 +176,6 @@ cargo run --example 03-routing
 ```
 
 Note the message flow and how routing information is manipulated as the message travels.
-
-```mermaid
-%%{init: { "fontFamily": "monospace", "sequence": {"mirrorActors": false} }}%%
-sequenceDiagram
-    app    ->> hop1:   "payload": "Hello Ockam!"<br>"onward_route": ["hop1", "echoer"]<br>"return_route": ["app"]
-    hop1   ->> echoer: "payload": "Hello Ockam!"<br>"onward_route": ["echoer"]<br>"return_route": ["hop1", "app"]
-    echoer ->> hop1:   "payload": "Hello Ockam!"<br>"onward_route": ["hop1", "app"]<br>"return_route": ["echoer"]
-    hop1   ->> app:    "payload": "Hello Ockam!"<br>"onward_route": ["app"]<br>"return_route": ["hop1", "echoer"]
-
-
-
-```
 
 #### Routing over many hops
 
