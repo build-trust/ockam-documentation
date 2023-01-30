@@ -121,7 +121,7 @@ cargo run --example 03-routing
 
 Note the message flow and how routing information is manipulated as the message travels.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 #### Routing over many hops
 
@@ -176,7 +176,7 @@ cargo run --example 03-routing-many-hops
 
 Note the message flow.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Transport
 
@@ -269,7 +269,7 @@ cargo run --example 04-routing-over-transport-initiator
 
 Note the message flow.
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 #### Routing over two transport hops
 
