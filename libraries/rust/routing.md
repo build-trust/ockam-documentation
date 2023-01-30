@@ -12,6 +12,16 @@ To achieve this, messages carry with them two meta fields: `onward_route` and `r
 
 To get a sense of how that works, let's route a message over two hops.
 
+```mermaid
+%%{init: { "fontFamily": "monospace", "sequence": {"mirrorActors": false} }}%%
+sequenceDiagram
+    app ->> echoer: "payload": "Hello Ockam!"<br>"onward_route": ["echoer"]<br>"return_route": ["app"]
+    app ->> echoer: "payload": "Hello Ockam!"<br>"onward_route": ["app"]<br>"return_route": ["echoer"]
+
+
+
+```
+
 #### Hop worker
 
 For demonstration, we'll create a simple worker, called `Hop`, that takes every incoming message and forwards it to the next address in the `onward_route` of that message.
@@ -136,8 +146,6 @@ sequenceDiagram
 
 
 ```
-
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 #### Routing over many hops
 
