@@ -176,7 +176,7 @@ cargo run --example 03-routing-many-hops
 
 Note the message flow.
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 ### Transport
 
