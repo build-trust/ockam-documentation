@@ -56,14 +56,16 @@ sequenceDiagram
 ```mermaid
 %%{init: { "fontFamily": "monospace", "sequence": {"mirrorActors": false, "noteAlign": "left"} }}%%
 sequenceDiagram
+    Note over app:     Sender<br>-<br>Know the route to a destination,<br>makes that route the onward_route of<br>a new message.<br>-<br>Makes its own address the the<br>return_route of the new message
     app    ->> h1:     "payload": "Hello Ockam!"<br>"onward_route": ["h1", ... "hn-1", "hn", "echoer"]<br>"return_route": ["app"]
-    Note over h1,hn:   Each hop<br/>-<br/>Removes its own address <br>from the beginning of<br>onward_route.<br>-<br>Adds its own address<br>to beginning of<br>return_route
-
+    Note over h1,hn:   Each hop<br>-<br>Removes its own address <br>from the beginning of<br>onward_route.<br>-<br>Adds its own address<br>to beginning of<br>return_route
 
     hn     ->> echoer: "payload": "Hello Ockam!"<br>"onward_route": ["echoer"]<br>"return_route": ["hn", "hn-1" ... "h1", "app"]
+    Note over echoer:  Replier<br>-<br>Makes return_route of incoming message,<br>onward_route of outgoing message<br>-<br>Makes its own address the the<br>return_route of the new message
+
     echoer ->> hn:     "payload": "Hello Ockam!"<br>"onward_route": ["hn", "hn-1" ... "h1", "app"]<br>"return_route": ["echoer"]
 
-    Note over h1,hn:   Each hop<br/>-<br/>Removes its own address <br>from the beginning of<br>onward_route.<br>-<br>Adds its own address<br>to beginning of<br>return_route
+    Note over h1,hn:   Each hop<br>-<br>Removes its own address <br>from the beginning of<br>onward_route.<br>-<br>Adds its own address<br>to beginning of<br>return_route
     h1     ->> app:    "payload": "Hello Ockam!"<br>"onward_route": ["app"]<br>"return_route": ["h1",... "hn-1", "hn", "echoer"]
 ```
 
