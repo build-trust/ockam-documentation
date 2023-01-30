@@ -1,5 +1,9 @@
 # Routing and Transports
 
+
+
+### Routing
+
 So far, we've created an [`"echoer"` worker](nodes.md#echoer-worker) in our node, sent it a message, and received a reply. This worker was a simple one hop away from our `"app"` worker.
 
 Ockam's Application Layer Routing protocol allows us to send messages over any number of hops, within one node, or across many nodes. This enables us to layer other protocols that provide end-to-end security and privacy guarantees.
@@ -120,6 +124,18 @@ cargo run --example 03-routing
 ```
 
 Note the message flow and how routing information is manipulated as the message travels.
+
+```mermaid
+%%{init: { "fontFamily": "monospace", "sequence": {"mirrorActors": false} }}%%
+sequenceDiagram
+    app    ->> hop1:   "payload": "Hello Ockam!"<br>"onward_route": ["hop1", "echoer"]<br>"return_route": ["app"]
+    hop1   ->> echoer: "payload": "Hello Ockam!"<br>"onward_route": ["echoer"]<br>"return_route": ["hop1", "app"]
+    echoer ->> hop1:   "payload": "Hello Ockam!"<br>"onward_route": ["hop1", "app"]<br>"return_route": ["echoer"]
+    hop1   ->> app:    "payload": "Hello Ockam!"<br>"onward_route": ["app"]<br>"return_route": ["hop1", "echoer"]
+
+
+
+```
 
 <figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
