@@ -54,14 +54,17 @@ sequenceDiagram
 ```
 
 ```mermaid
-%%{init: { "fontFamily": "monospace", "sequence": {"mirrorActors": false} }}%%
+%%{init: { "fontFamily": "monospace", "sequence": {"mirrorActors": false, "noteAlign": "left"} }}%%
 sequenceDiagram
-    app    ->> h1:     "payload": "Hello Ockam!"<br>"onward_route": ["h1", "h2" ... "hn-1", "hn", "echoer"]<br>"return_route": ["app"]
-    h1    -->> hn: 
-    hn     ->> echoer: "payload": "Hello Ockam!"<br>"onward_route": ["echoer"]<br>"return_route": ["hn", "hn-1" ... "h2", "h1", "app"]
-    echoer ->> hn:     "payload": "Hello Ockam!"<br>"onward_route": ["hn", "hn-1" ... "h2", "h1", "app"]<br>"return_route": ["echoer"]
-    hn    -->> h1: 
-    h1     ->> app:    "payload": "Hello Ockam!"<br>"onward_route": ["app"]<br>"return_route": ["h1", "h2" ... "hn-1", "hn", "echoer"]
+    app    ->> h1:     "payload": "Hello Ockam!"<br>"onward_route": ["h1", ... "hn-1", "hn", "echoer"]<br>"return_route": ["app"]
+    Note over h1,hn:   Each hop<br/>-<br/>Removes its own address <br>from the beginning of<br>onward_route.<br>-<br>Adds its own address<br>to beginning of<br>return_route
+
+
+    hn     ->> echoer: "payload": "Hello Ockam!"<br>"onward_route": ["echoer"]<br>"return_route": ["hn", "hn-1" ... "h1", "app"]
+    echoer ->> hn:     "payload": "Hello Ockam!"<br>"onward_route": ["hn", "hn-1" ... "h1", "app"]<br>"return_route": ["echoer"]
+
+    Note over h1,hn:   Each hop<br/>-<br/>Removes its own address <br>from the beginning of<br>onward_route.<br>-<br>Adds its own address<br>to beginning of<br>return_route
+    h1     ->> app:    "payload": "Hello Ockam!"<br>"onward_route": ["app"]<br>"return_route": ["h1",... "hn-1", "hn", "echoer"]
 ```
 
 #### Hop worker
