@@ -168,12 +168,6 @@ You'll see console output that shows `"Hello Ockam!"` received by the `"echoer"`
 
 The message flow looked like this:
 
-```mermaid
-sequenceDiagram
-    app    ->> echoer: "Hello Ockam!"
-    echoer ->> app: "Hello Ockam!"
+<figure><img src="../../.gitbook/assets/simple.png" alt=""><figcaption></figcaption></figure>
 
-
-```
-
-Next, let’s explore how Ockam’s Application Layer Routing protocol enables us to create protocols that provide end-to-end security and privacy guarantees.
+Next, let’s explore how Ockam’s [Application Layer Routing](routing.md) protocol enables us to create protocols that provide end-to-end security and privacy guarantees.
