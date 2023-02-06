@@ -4,7 +4,9 @@ At Ockam’s core are a collection of cryptographic and messaging protocols. The
 
 We wanted to make these powerful protocols **easy** and **safe** to use **in any application environment** – from highly scalable cloud services to tiny battery operated microcontroller based devices.
 
-However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. Ockam [Nodes](nodes.md#node), [Workers](nodes.md#worker), and [Services](nodes.md#service) help us decouple from the host environment and provide simple interfaces to complex, stateful, and asynchronous message-based protocols.
+However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. It can be quite challenging to make them simple to use, secure and platform independent.
+
+Ockam [Nodes](nodes.md#node), [Workers](nodes.md#worker), and [Services](nodes.md#service) help us decouple from the host environment and provide simple interfaces to complex, stateful, and asynchronous message-based protocols.
 
 ## Node
 
