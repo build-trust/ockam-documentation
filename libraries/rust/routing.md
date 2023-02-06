@@ -12,7 +12,7 @@ To achieve this, messages carry with them two meta fields: `onward_route` and `r
 
 To get a sense of how that works, let's route a message over two hops.
 
-### Protocol
+#### Protocol
 
 Sender:
 
@@ -29,7 +29,25 @@ Replier:
 * Makes return\_route of incoming message, onward\_route of outgoing message
 * Makes its own address the the return\_route of the new message
 
-<figure><img src="../../.gitbook/assets/diagram-2533206941246959346.png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+<figure><img src="../../.gitbook/assets/one-hop (1).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/two-hops (2).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/n-hops.png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
 
 #### Hop worker
 
@@ -197,8 +215,6 @@ cargo run --example 03-routing-many-hops
 
 Note the message flow.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
-
 ### Transport
 
 An Ockam Transport is a plugin for Ockam Routing. It moves Ockam Routing messages using a specific transport protocol like TCP, UDP, WebSockets, Bluetooth etc.
@@ -290,7 +306,7 @@ cargo run --example 04-routing-over-transport-initiator
 
 Note the message flow.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Routing over two transport hops
 
