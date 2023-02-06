@@ -29,9 +29,7 @@ Replier:
 * Makes return\_route of incoming message, onward\_route of outgoing message
 * Makes its own address the the return\_route of the new message
 
-####
-
-<figure><img src="../../.gitbook/assets/two-hops (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/diagram-2533206941246959346.png" alt=""><figcaption></figcaption></figure>
 
 #### Hop worker
 
