@@ -29,41 +29,9 @@ Replier:
 * Makes return\_route of incoming message, onward\_route of outgoing message
 * Makes its own address the the return\_route of the new message
 
+####
 
-
-```mermaid
-%%{init: { "fontFamily": "monospace", "sequence": {"mirrorActors": false, "noteAlign": "left"} }}%%
-sequenceDiagram
-    Note over    app: Sender<br>-<br>Knows the route to a destination,<br>makes that route the onward_route of<br>a new message.<br>-<br>Makes its own address the the<br>return_route of the new message
-    app   ->> echoer: "payload": "Hello Ockam!"<br>"onward_route": ["echoer"]<br>"return_route": ["app"]
-    Note over echoer:  Replier<br>-<br>Makes return_route of incoming message,<br>onward_route of outgoing message<br>-<br>Makes its own address the <br>return_route of the outgoing message
-    echoer   ->> app: "payload": "Hello Ockam!"<br>"onward_route": ["app"]<br>"return_route": ["echoer"]
-
-
-
-```
-
-```mermaid
-%%{init: { "fontFamily": "monospace", "sequence": {"mirrorActors": false, "noteAlign": "left"} }}%%
-sequenceDiagram
-    app    ->> h1:     "payload": "Hello Ockam!"<br>"onward_route": ["h1", "echoer"]<br>"return_route": ["app"]
-    Note  over h1:     Each hop<br>-<br>Removes its own address <br>from the beginning of<br>onward_route.<br>-<br>Adds its own address<br>to beginning of<br>return_route
-    h1     ->> echoer: "payload": "Hello Ockam!"<br>"onward_route": ["echoer"]<br>"return_route": ["h1", "app"]
-    echoer ->> h1:     "payload": "Hello Ockam!"<br>"onward_route": ["h1", "app"]<br>"return_route": ["echoer"]
-    h1     ->> app:    "payload": "Hello Ockam!"<br>"onward_route": ["app"]<br>"return_route": ["h1", "echoer"]
-
-
-
-```
-
-```mermaid
-%%{init: { "fontFamily": "monospace", "sequence": {"mirrorActors": false, "noteAlign": "left"} }}%%
-sequenceDiagram
-    app    ->> h1:     "payload": "Hello Ockam!"<br>"onward_route": ["h1", ... "hn-1", "hn", "echoer"]<br>"return_route": ["app"]
-    hn     ->> echoer: "payload": "Hello Ockam!"<br>"onward_route": ["echoer"]<br>"return_route": ["hn", "hn-1" ... "h1", "app"]
-    echoer ->> hn:     "payload": "Hello Ockam!"<br>"onward_route": ["hn", "hn-1" ... "h1", "app"]<br>"return_route": ["echoer"]
-    h1     ->> app:    "payload": "Hello Ockam!"<br>"onward_route": ["app"]<br>"return_route": ["h1",... "hn-1", "hn", "echoer"]
-```
+<figure><img src="../../.gitbook/assets/two-hops (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Hop worker
 
@@ -324,7 +292,7 @@ cargo run --example 04-routing-over-transport-initiator
 
 Note the message flow.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 #### Routing over two transport hops
 
