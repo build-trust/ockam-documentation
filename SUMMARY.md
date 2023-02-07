@@ -23,6 +23,7 @@
 * [Ockam Orchestrator](ockam-orchestrator.md)
 * [Ockam Command](command/README.md)
   * [Nodes, Workers, and Services](command/nodes.md)
+  * [Routing and Transports](command/routing.md)
 * [Ockam Programming Libraries](ockam-programming-libraries.md)
   * [Ockam Rust Library](libraries/rust/README.md)
     * [Nodes and Workers](libraries/rust/nodes.md)
