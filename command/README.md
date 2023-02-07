@@ -4,7 +4,7 @@ description: A step-by-step guide
 
 # Ockam Command
 
-In this step-by-step guide we try various Ockam sub commands to understand the various building blocks that make up Ockam.
+In this step-by-step guide we try various Ockam sub commands to understand the various building blocks that make up Ockam. We’ll dive into Node, Workers, Routing, Transport, Secure Channels and more.
 
 ## Get Started
 
