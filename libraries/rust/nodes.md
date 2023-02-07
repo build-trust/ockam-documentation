@@ -10,7 +10,7 @@ Ockam [Nodes](nodes.md#node) and [Workers](nodes.md#worker) help us decouple fro
 
 ## Node
 
-An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam Protocols like Ockam Routing and Ockam Secure Channels.
+An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam Protocols like Ockam [Routing](routing.md) and Ockam Secure Channels.
 
 Using the Ockam Rust crates, you can easily turn any application into a lightweight Ockam Node. This flexible approach allows your to build secure by design applications that can run efficiently on tiny microcontrollers or scale horizontally in cloud environments.
 
@@ -169,6 +169,8 @@ You'll see console output that shows `"Hello Ockam!"` received by the `"echoer"`
 #### Message Flow
 
 The message flow looked like this:
+
+
 
 <figure><img src="../../.gitbook/assets/simple.png" alt=""><figcaption></figcaption></figure>
 
