@@ -10,7 +10,7 @@ Time series databases (e.g., InfluxDB, TimescaleDB, Graphite, Prometheus, etc.) 
 
 ### The problem
 
-The producer of this data could be a microservice operating cluster in a public cloud, an IoT device in someone's home, an industrial device running within a warehouse, an environmental monitor in a smart city installation, or anything inbetween. This presents a series of challenges that vary based on how much control you have over the device in question, how much you need to ensure the integrity of the information you receive, and the network topolgy between the producer and time series backend.
+The producer of this data could be a microservice cluster operating in a public cloud, an IoT device in someone's home, an industrial device running within a warehouse, an environmental monitor in a smart city installation, or anything inbetween. This presents a series of challenges that vary based on how much control you have over the device in question, how much you need to ensure the integrity of the information you receive, and the network topolgy between the producer and time series backend.
 
 For many of these use cases the data needs to be sent from a remote network to time series backend, which involves exposing the time series backend directly to the public internet. These backends also typically do not support the access controls essential to support hundreds or thousands of discrete devices connection resulting in coarsed grained credentials being shared across numerous producers. This in turn creates an opportunity for an exposed credential to allow a third-party to generate erroneous data that can not be easily removed from the aggregated results. Or possibly even worse: a privilege escalation.
 
