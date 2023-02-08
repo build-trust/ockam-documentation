@@ -8,9 +8,9 @@ Ockam is a suite of open source tools, programming libraries, and managed cloud 
 
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To **trust data-in-motion**, applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be **private** and **secure** **by-design**, applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
 
-## Learn more about:
+## Use Cases
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere</td><td></td></tr><tr><td><strong></strong><a href="use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere</td><td></td></tr><tr><td><strong></strong><a href="use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere</td><td></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere</td><td></td><td></td></tr><tr><td><strong></strong><a href="use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere</td><td></td><td></td></tr><tr><td><strong></strong><a href="use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere</td><td></td><td></td></tr></tbody></table>
 
 ## Quick Start
 
@@ -67,9 +67,7 @@ To be private and secure by design, applications must have granular control over
 
 Developers have to think about creating unique cryptographic keys and issuing credentials to all application entities. They have to design ways to safely store secrets in hardware and securely distribute roots of trust. They must setup communication channels that guarantee data authenticity and integrity. They must enforce authorization policies. They also need protocols that rotate and revoke credentials.
 
-We handle all the underlying protocol complexity and provide secure, scalable, and reliable building blocks for your applications.
-
-Ockam empowers you to:
+We handle all of this for you and give you simple tools to:
 
 * Create end-to-end encrypted, authenticated **Secure Channels** over any transport topology.
 * Provision **Encrypted** **Relays** for trustful communication within applications that are distributed across many edge, cloud and data-center private networks.
@@ -82,6 +80,10 @@ Ockam empowers you to:
 * Define and enforce project-wide **Attribute Based Access Control** (ABAC) policies.
 * Add-ons to integrate with enterprise **Identity Providers** and **Policy Providers**.
 
-## **Get Help**
+## Learn more
+
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="command/"><strong>Ockam Command</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="libraries/rust/"><strong>Ockam Rust Crates</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="ockam-orchestrator.md"><strong>Ockam Orchestrator</strong></a><strong></strong></td><td></td><td></td></tr></tbody></table>
+
+## **Get help**
 
 We are here to help you build with Ockam. If you need help, **** [**please reach out to us**](https://www.ockam.io/contact)!
