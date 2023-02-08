@@ -22,7 +22,7 @@ Ockam Orchestrator is a managed cloud service that enables team and companies to
 * Enable **Vault Add-Ons** to safely store keys in cloud key management systems.
 * Enterprise Support.
 
-If you've already [installed Ockam Command](./#install-ockam-command), then you can get started with Ockam Orchestrator with a single command:
+If you've already [installed Ockam Command](<README (1).md#install-ockam-command>), then you can get started with Ockam Orchestrator with a single command:
 
 ```bash
 ockam enroll

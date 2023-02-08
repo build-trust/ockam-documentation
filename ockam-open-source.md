@@ -26,4 +26,4 @@ Ockam Open Source tools and programming libraries enable applications to:
 
 ### Get Started
 
-The best way to get started is by [installing Ockam Command](./#install-ockam-command), and trying one of the [examples](examples/).
+The best way to get started is by [installing Ockam Command](<README (1).md#install-ockam-command>), and trying one of the [examples](examples/).

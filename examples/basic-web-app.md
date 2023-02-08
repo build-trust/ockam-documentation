@@ -8,7 +8,7 @@ This is a demo that shows how to use Ockam sidecars to connect a traditional web
 
 ### Prerequisites
 
-* [Ockam Command](../#install-ockam-command)
+* [Ockam Command](<../README (1).md#install-ockam-command>)
 * Python
 * Postgresql
 

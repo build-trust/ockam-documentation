@@ -1,13 +1,8 @@
 # Table of contents
 
-* [Get Started](README.md)
-* [Introduction to Ockam](<README (1).md>)
-  * [Secure by Design Applications](readme/secure-by-design-applications.md)
-  * [Powerful Protocols, Made Simple](readme/powerful-protocols-made-simple.md)
+* [Introduction to Ockam](README.md)
+  * [Secure by Design](readme/secure-by-design.md)
   * [Virtual Adjacencies](virtually-adjacent-endpoints.md)
-  * [End-to-End Data Integrity and Authenticity](readme/end-to-end-data-integrity-and-authenticity.md)
-  * [Zero \[ Implicit \] Trust](readme/zero-implicit-trust.md)
-  * [Shift Security Left](readme/shift-security-left.md)
 * [Use Cases](use-cases/README.md)
   * [Secure database access](use-cases/secure-database-access.md)
   * [Connecting distributed clients to time series backends](use-cases/connecting-distributed-clients-to-time-series-backends.md)
@@ -15,6 +10,7 @@
   * [Add end-to-end encryption to any client and server application, with no code change](use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change.md)
   * [Apply fine-grained permissions with Attribute-Based Access Control (ABAC)](use-cases/apply-fine-grained-permissions-with-attribute-based-access-control-abac.md)
   * [Create secure communication with a private database, from anywhere](use-cases/create-secure-communication-with-a-private-database-from-anywhere.md)
+* [Get Started](<README (1).md>)
 * [Examples](examples/README.md)
   * [Basic Web App](examples/basic-web-app.md)
   * [Telegraf + InfluxDB](examples/telegraf-+-influxdb.md)
