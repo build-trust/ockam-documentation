@@ -48,7 +48,7 @@ ockam secure-channel create --from /node/c --to /project/default/service/forward
 curl --head 127.0.0.1:7000
 ```
 
-
+<figure><img src=".gitbook/assets/infrastructure.webp" alt=""><figcaption></figcaption></figure>
 
 We handle all the underlying protocol complexity and provide secure, scalable, and reliable building blocks for your applications.
 
