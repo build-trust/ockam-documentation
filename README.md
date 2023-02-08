@@ -57,7 +57,7 @@ ockam secure-channel create --from /node/c --to /project/default/service/forward
 curl --head 127.0.0.1:7000
 ```
 
-## Powerful Protocols, Made Simple
+#### Powerful Protocols, Made Simple
 
 To be private and secure by design, applications must have granular control over every trust and access decision.
 
@@ -82,6 +82,6 @@ Ockam empowers you to:
 * Define and enforce project-wide **Attribute Based Access Control** (ABAC) policies.
 * Add-ons to integrate with enterprise **Identity Providers** and **Policy Providers**.
 
-## **Support**
+## **Get Help**
 
 We are here to help you build with Ockam. If you need help, **** [**please reach out to us**](https://www.ockam.io/contact)!
