@@ -98,7 +98,7 @@ We handle all of this for you and give you simple tools to:
 
 ## Learn more
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="broken-reference"><strong>Ockam Command</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="broken-reference"><strong>Ockam Rust Crates</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="manuals/command/ockam-orchestrator.md"><strong>Ockam Orchestrator</strong></a><strong></strong></td><td></td><td></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="command/"><strong>Ockam Command</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="libraries/rust/"><strong>Ockam Rust Crates</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="manuals/command/ockam-orchestrator.md"><strong>Ockam Orchestrator</strong></a><strong></strong></td><td></td><td></td></tr></tbody></table>
 
 ## **Get help**
 
