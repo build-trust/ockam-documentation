@@ -10,7 +10,7 @@ Modern applications are distributed and have an unwieldy number of interconnecti
 
 ## Use Cases
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere</td><td></td><td></td></tr><tr><td><strong></strong><a href="use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere</td><td></td><td></td></tr><tr><td><strong></strong><a href="use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere</td><td></td><td></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere.</td><td></td><td></td></tr><tr><td><strong></strong><a href="use-cases/secure-database-access.md"><strong>Connecting distributed clients to time series backends</strong></a><strong></strong></td><td>Send messages, metrics, and events from thousands of devices to services such as InfluxDB, without exposing your data store to the internet.</td><td></td><td></td></tr></tbody></table>
 
 ## Quick Start
 
@@ -34,7 +34,11 @@ brew install build-trust/ockam/ockam
 {% endtab %}
 
 {% tab title="Other Systems" %}
+```shell
+ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
+```
 
+After the binary downloads, please move it to a location in your shell's `$PATH`, like `/usr/local/bin`.
 {% endtab %}
 {% endtabs %}
 
@@ -77,16 +81,20 @@ ockam secure-channel create --from /node/c --to /project/default/service/forward
 curl --head 127.0.0.1:7000
 ```
 
-#### Powerful Protocols, Made Simple
+#### Private & secure by design
 
-To be private and secure by design, applications must have granular control over every trust and access decision. This requires a variety of complex cryptographic and messaging protocols to work together in a secure and scalable way.
+In the example above we've created two nodes and established a secure channel between them. While the example above is running on a single machine for the sake of simplicity, each node also be running on completely separate devices with same end result: an end-to-end encrypted and authenticated secure channel. Any network configuration, transport topology, or services being connected can now have a secure means of communicating without the risk of eavesdropping or MITM attacks irrespective protocols being used. Privacy has been moved to the communication channel itself, which means _any_ use of that channel is secure by design. The use of Ockam's [programming libraries](manuals/programming-libraries/) pushes that secure channel beyond the network level and embeds it directly into your application or device. Underlying all of this is a variety of complex cryptographic and messaging protocols that work together in a secure and scalable way.
 
-Developers have to think about creating unique cryptographic keys and issuing credentials to all application entities. They have to design ways to safely store secrets in hardware and securely distribute roots of trust. They must setup communication channels that guarantee data authenticity and integrity. They must enforce authorization policies. They also need protocols that rotate and revoke credentials.
+#### Trust for data-in-motion
 
-We handle all of this for you and give you simple tools to:
+Not obvious from this example is that each node also has a unique identity, with a set of unique cryptographic keys. Creating a secure tunnel between services can provide privacy, but how do you know who is communicating on the other side of that tunnel? Ockam's approach to provable identities means that secure communication channels also guarantee data authenticity and integrity. With an integrated approach to enforcing authorization policies, and protocols for rotating and revoking credentials.&#x20;
 
-* Create end-to-end encrypted, authenticated **Secure Channels** over any transport topology.
-* Provision **Encrypted** **Relays** for trustful communication within applications that are distributed across many edge, cloud and data-center private networks.
+#### Powerful protocols, made simple
+
+No more having to think about creating unique cryptographic keys and issuing credentials to all application entities. No more designing ways to safely store secrets in hardware and securely distribute roots of trust. Ockam takes away this complexity and give you simple tools to:
+
+* Create end-to-end encrypted, authenticated secure channels over any transport topology.
+* Provision encrypted relays for trustful communication within applications that are distributed across many edge, cloud and data-center private networks.
 * Tunnel legacy protocols through mutually authenticated and encrypted **Portals.**
 * Add-ons to bring end-to-end encryption to enterprise messaging, pub/sub and event streams.
 * Generate unique cryptographically provable **Identities** and store private keys in safe **Vaults.** Add-ons for hardware or cloud key management systems.
@@ -98,7 +106,7 @@ We handle all of this for you and give you simple tools to:
 
 ## Learn more
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="command/"><strong>Ockam Command</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="libraries/rust/"><strong>Ockam Rust Crates</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="manuals/command/ockam-orchestrator.md"><strong>Ockam Orchestrator</strong></a><strong></strong></td><td></td><td></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="broken-reference"><strong>Ockam Command</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="broken-reference"><strong>Ockam Rust Crates</strong></a><strong></strong></td><td></td><td></td></tr></tbody></table>
 
 ## **Get help**
 
