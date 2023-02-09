@@ -12,7 +12,7 @@ Ockam [Nodes](nodes.md#node), [Workers](nodes.md#worker), and [Services](nodes.m
 
 An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam Protocols like Ockam Routing and Ockam Secure Channels.
 
-Ockam Nodes are designed to leverage the strengths of their operating environment. Our Rust implementation makes it easy to adapt to various architectures and processors. It can run efficiently on tiny microcontrollers or scale horizontally in cloud environments. You can create Ockam nodes using Ockam Command or embed one directly into your application using various Ockam [programming libraries](../ockam-programming-libraries.md).
+Ockam Nodes are designed to leverage the strengths of their operating environment. Our Rust implementation makes it easy to adapt to various architectures and processors. It can run efficiently on tiny microcontrollers or scale horizontally in cloud environments. You can create Ockam nodes using Ockam Command or embed one directly into your application using various Ockam [programming libraries](broken-reference).
 
 Typically, an Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called Ockam [Workers](nodes.md#worker). Using Ockam Routing, a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
 
@@ -135,9 +135,9 @@ Node: n1
 
 Note the workers in node `n1` with address `echo` and `uppercase`. We’ll send them some messages below as we look at services. A node can also deliver messages to workers on a different node using the Ockam Routing Protocol and its Transports. Later in this guide, when we dig into routing, we’ll send some messages across nodes.
 
-From Ockam Command, we don’t usually create workers directly but instead start predefined [services](nodes.md#service) like Transports and Secure Channels that in turn start one or more workers. Using the Ockam [Rust Library](../libraries/rust/) you can also build your own workers.
+From Ockam Command, we don’t usually create workers directly but instead start predefined [services](nodes.md#service) like Transports and Secure Channels that in turn start one or more workers. Using the Ockam [Rust Library](broken-reference) you can also build your own workers.
 
-Because workers are stateful and can asynchronously send and receive messages they are a  potent abstraction that can take over the responsibility of running multi-step, stateful, and asynchronous message-based protocols. This makes it possible for Ockam Command and Ockam [Programming Libraries](../ockam-programming-libraries.md) to expose very simple and safe interfaces for powerful protocols.&#x20;
+Because workers are stateful and can asynchronously send and receive messages they are a  potent abstraction that can take over the responsibility of running multi-step, stateful, and asynchronous message-based protocols. This makes it possible for Ockam Command and Ockam [Programming Libraries](broken-reference) to expose very simple and safe interfaces for powerful protocols.&#x20;
 
 ## Service
 

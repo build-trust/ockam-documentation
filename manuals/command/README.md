@@ -1,8 +1,4 @@
----
-description: A step-by-step guide
----
-
-# Ockam Command
+# Command
 
 In this step-by-step guide we try various Ockam sub commands to understand the various building blocks that make up Ockam.
 

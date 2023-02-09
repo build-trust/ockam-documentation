@@ -1,4 +1,4 @@
-# Add end-to-end encryption to any client and server application
+# Add end-to-end encryption to any client and server application, with no code change
 
 Let's build a solution for a very common topology. An application service and an application client running in two private networks wish to communicate with each other without exposing ports on the Internet.
 
@@ -10,7 +10,7 @@ First install the Ockam command, if you haven't already.
 brew install build-trust/ockam/ockam
 ```
 
-If you're on linux, see how to install [precompiled binaries](../ockam-open-source.md#precompiled-binaries).
+If you're on linux, see how to install [precompiled binaries](../manuals/command/ockam-open-source.md#precompiled-binaries).
 
 ```bash
 ockam node create relay
@@ -43,6 +43,3 @@ We ask the server\_sidecar to create a TCP outlet to the application server and 
 Ockam gives you the tools to create many such end-to-end secure topologies. In this example topology, the application sidecar nodes create outgoing TCP connections to the relay which allows them to communicate from behind private NATs. The relay node routes encrypted data and cannot see or tamper it.
 
 In a few simple commands, without dealing with the cryptographic details, we added end-to-end data integrity, authenticity and privacy to applications that don’t have built in trust guarantees.
-
-
-

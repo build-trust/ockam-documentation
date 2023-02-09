@@ -32,7 +32,7 @@ Install the Ockam command, if you haven't already.
 brew install build-trust/ockam/ockam
 ```
 
-If you're on linux, see how to install [precompiled binaries](../ockam-open-source.md#precompiled-binaries).
+If you're on linux, see how to install [precompiled binaries](../manuals/command/ockam-open-source.md#precompiled-binaries).
 
 ### Create an end-to-end encrypted relay
 

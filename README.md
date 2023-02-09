@@ -20,6 +20,24 @@ An application service and an application client running in two private networks
 
 First, install Ockam Command and then follow these instructions:&#x20;
 
+### Install Ockam Command
+
+Ockam Command is our Command Line Interface (CLI) for interfacing with Ockam processes.&#x20;
+
+{% tabs %}
+{% tab title="Homebrew" %}
+If you use Homebrew, you can install Ockam using brew:
+
+```
+brew install build-trust/ockam/ockam
+```
+{% endtab %}
+
+{% tab title="Other Systems" %}
+
+{% endtab %}
+{% endtabs %}
+
 ```sh
 # Install Ockam Command using Homebrew
 brew install build-trust/ockam/ockam
@@ -80,7 +98,7 @@ We handle all of this for you and give you simple tools to:
 
 ## Learn more
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="command/"><strong>Ockam Command</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="libraries/rust/"><strong>Ockam Rust Crates</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="ockam-orchestrator.md"><strong>Ockam Orchestrator</strong></a><strong></strong></td><td></td><td></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="broken-reference"><strong>Ockam Command</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="broken-reference"><strong>Ockam Rust Crates</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="manuals/command/ockam-orchestrator.md"><strong>Ockam Orchestrator</strong></a><strong></strong></td><td></td><td></td></tr></tbody></table>
 
 ## **Get help**
 

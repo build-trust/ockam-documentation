@@ -33,15 +33,15 @@ Replier:
 
 
 
-<figure><img src="../../.gitbook/assets/one-hop (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/one-hop (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/two-hops (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/two-hops (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/n-hops.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/n-hops.png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -306,7 +306,7 @@ cargo run --example 04-routing-over-transport-initiator
 
 Note the message flow.
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Routing over two transport hops
 

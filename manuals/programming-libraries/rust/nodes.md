@@ -22,7 +22,7 @@ A node requires an asynchronous runtime to concurrently execute workers. The def
 
 The first thing any Ockam rust program must do is initialize and start an Ockam node. This setup can be done manually but the most convenient way is to use the `#[ockam::node]` attribute that injects the initialization code. It creates the asynchronous environment, initializes worker management, sets up routing and initializes the node context.
 
-For your new node, create a new file at `examples/01-node.rs` in your [hello\_ockam](./#get-started) project:
+For your new node, create a new file at `examples/01-node.rs` in your [hello\_ockam](broken-reference) project:
 
 ```
 touch examples/01-node.rs
@@ -172,6 +172,6 @@ The message flow looked like this:
 
 
 
-<figure><img src="../../.gitbook/assets/simple (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/simple (1).png" alt=""><figcaption></figcaption></figure>
 
 Next, let’s explore how Ockam’s [Application Layer Routing](routing.md) enables us to create protocols that provide end-to-end security and privacy guarantees.
