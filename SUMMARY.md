@@ -18,7 +18,6 @@
 ## MANUALS
 
 * [Command](manuals/command/README.md)
-  * [Ockam Orchestrator](manuals/command/ockam-orchestrator.md)
   * [Nodes, Workers, and Services](manuals/command/nodes.md)
   * [Routing and Transports](manuals/command/routing.md)
 * [Programming Libraries](manuals/programming-libraries/README.md)
