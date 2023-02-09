@@ -42,7 +42,7 @@ After the binary downloads, please move it to a location in your shell's `$PATH`
 {% endtab %}
 {% endtabs %}
 
-```sh
+```bash
 # Install Ockam Command using Homebrew
 brew install build-trust/ockam/ockam
 
