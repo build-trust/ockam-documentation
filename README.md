@@ -18,8 +18,6 @@ Let's build a quick solution for a very common secure communication topology tha
 
 An application service and an application client running in two private networks wish to communicate with each other without exposing ports on the Internet. In a few simple commands, we’ll make them talk to each other through an End-to-End Encrypted Cloud Relay.
 
-<figure><img src=".gitbook/assets/infrastructure.webp" alt=""><figcaption></figcaption></figure>
-
 First, install Ockam Command and then follow these instructions:&#x20;
 
 ```sh
