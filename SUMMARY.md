@@ -1,14 +1,8 @@
 # Table of contents
 
-## OCKAM <a href="#introduction" id="introduction"></a>
-
-* [Page 1](README.md)
-* [Secure by Design](introduction/secure-by-design.md)
-* [Virtual Adjacencies](introduction/virtual-adjacencies.md)
-
-***
-
-* [Introduction to Ockam](readme.md)
+* [Introduction to Ockam](README.md)
+  * [Secure by Design](readme/secure-by-design.md)
+  * [Virtual Adjacencies](readme/virtual-adjacencies.md)
 * [Use Cases](use-cases/README.md)
   * [Secure database access](use-cases/secure-database-access.md)
   * [Connecting distributed clients to time series backends](use-cases/connecting-distributed-clients-to-time-series-backends.md)
