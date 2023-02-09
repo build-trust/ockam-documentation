@@ -52,30 +52,46 @@ We also have to consider how credentials are issued to a large number of applica
 
 ## Step-by-Step Walkthrough
 
-### Setup
+### Install Ockam Command
 
-If you use Homebrew, you can install Ockam using `brew`.
+Ockam Command is our Command Line Interface (CLI) for interfacing with Ockam processes.&#x20;
 
-```bash
+{% tabs %}
+{% tab title="Homebrew" %}
+If you use Homebrew, you can install Ockam using brew:
+
+```
 brew install build-trust/ockam/ockam
 ```
+{% endtab %}
 
-Otherwise, you can download our latest architecture specific pre-compiled binary by running:
-
+{% tab title="Other Systems" %}
 ```shell
-curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
+ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
 ```
 
 After the binary downloads, please move it to a location in your shell's `$PATH`, like `/usr/local/bin`.
+{% endtab %}
+{% endtabs %}
 
 ### Administrator
 
 ```bash
+# Check that everything was installed by enrolling with Ockam Orchestrator.
+#
+# This will provision an End-to-End Encrypted Cloud Relay service for you in
+# your `default` project at `/project/default`. 
 ockam enroll
+
+# This will output the newly provisioned project information.
+# This project info file can be used on seperate machines
+# to target a specific project.
 ockam project information --output json > project.json
 ```
 
 ```bash
+# Creates enrollment tokens for the three types of identities that 
+# will be created and used within this example
 cp1_token=$(ockam project enroll --attribute component=control)
 ep1_token=$(ockam project enroll --attribute component=edge)
 x_token=$(ockam project enroll --attribute component=x)
@@ -83,12 +99,24 @@ x_token=$(ockam project enroll --attribute component=x)
 
 ### Control Plane
 
-```
+```bash
+# In a seperate terminal window:
+# Start an application service, listening on a local ip and port, that clients
+# would access through the cloud encrypted relay. We'll use a simple http server
+# for this first example but this could be any other application service.
 python3 -m http.server --bind 127.0.0.1 5000
 ```
 
 ```bash
-ockam node create control_plane1 --project project.json --enrollment-token $cp1_token
+# Create an identity and authenticate the identity for this control plane
+# with the Orchestator project.
+ockam identity create control_identity
+ockam project authenticate --token $cp1_token --identity control_identity
+
+# Create a node targeting the project as the control identity.
+ockam node create control_plane1 --project project.json --identity control_identity
+
+# Set a policy, create the tcp-outlet and forwarder.
 ockam policy set --at control_plane1 --resource tcp-outlet --expression '(= subject.component "edge")'
 ockam tcp-outlet create --at /node/control_plane1 --from /service/outlet --to 127.0.0.1:5000
 ockam forwarder create control_plane1 --at /project/default --to /node/control_plane1
@@ -96,22 +124,47 @@ ockam forwarder create control_plane1 --at /project/default --to /node/control_p
 
 ### Edge Plane
 
-```bash
-ockam node create edge_plane1 --project project.json --enrollment-token $ep1_token
+<pre class="language-bash"><code class="lang-bash"># Create an identity and authenticate the identity for this edge plane
+# with the Orchestator project.
+ockam identity create edge_identity
+ockam project authenticate --token $ep1_token --identity edge_identity
+<strong>
+</strong><strong># Create a node targeting the project as the edge identity.
+</strong><strong>ockam node create edge_plane1 --project project.json --identity edge_identity
+</strong>
+# Set a policy, and create the tcp-inlet.
 ockam policy set --at edge_plane1 --resource tcp-inlet --expression '(= subject.component "control")'
 ockam tcp-inlet create --at /node/edge_plane1 --from 127.0.0.1:7000 --to /project/default/service/forward_to_control_plane1/secure/api/service/outlet
-```
+</code></pre>
 
-```
+```bash
+# Send a request to our tcp-inlet at the `edge_plane1` node.
+#
+# This request will successfully be forwarded through the Ockam Orchestrator
+# project to the `control_plane1` node and out to the python server
+# all with full end-to-end encryption and Attribute-Based Access Control.
 curl --fail --head --max-time 10 127.0.0.1:7000
 ```
 
 The following is denied:
 
 ```bash
+# Create an identity and authenticate the identity for this x node
+# with the Orchestator project.
+#
+# This identity will use the enrollment token that has the attribute of
+# `component=x` attached
+ockam identity create x_identity
+ockam project authenticate --token $x_token --identity x_identity
+
+# Create a node targeting the project as the x identity.
 ockam node create x --project project.json --enrollment-token $x_token
+
+# Set a policy and create a new tcp-inlet for node x.
 ockam policy set --at x --resource tcp-inlet --expression '(= subject.component "control")'
 ockam tcp-inlet create --at /node/x --from 127.0.0.1:8000 --to /project/default/service/forward_to_control_plane1/secure/api/service/outlet
+
+# Sends a request to our `x` tcp-inlet and will be denied
 curl --fail --head --max-time 10 127.0.0.1:8000
 ```
 
