@@ -24,7 +24,7 @@ First, let’s install Ockam Command, our Command Line Interface (CLI) for build
 
 {% tabs %}
 {% tab title="Homebrew" %}
-If you use Homebrew, you can install Ockam using brew. This will download a precompiled binary and add it to your path.
+If you use Homebrew, you can install Ockam using brew.
 
 
 
@@ -35,7 +35,7 @@ brew install build-trust/ockam/ockam
 
 
 
-If you don’t use Homebrew, you can also install on Linux and MacOS systems using curl. See instructions for other systems in the next tab.
+This will download a precompiled binary and add it to your path. If you don’t use Homebrew, you can also install on Linux and MacOS systems using curl. See instructions for other systems in the next tab.
 {% endtab %}
 
 {% tab title="Other Systems" %}
