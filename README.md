@@ -10,7 +10,7 @@ Modern applications are distributed and have an unwieldy number of interconnecti
 
 ## Use Cases
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="guides/use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere.</td><td></td><td></td></tr><tr><td><strong></strong><a href="guides/use-cases/secure-database-access.md"><strong>Connecting distributed clients to time series backends</strong></a><strong></strong></td><td>Send messages, metrics, and events from thousands of devices to services such as InfluxDB, without exposing your data store to the internet.</td><td></td><td></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="guides/use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere.</td><td></td><td></td></tr><tr><td><strong></strong><a href="guides/use-cases/secure-database-access.md"><strong>Connect distributed clients to time series backends</strong></a><strong></strong></td><td>Send messages, metrics, and events from thousands of devices to services such as InfluxDB, without exposing your data store to the internet.</td><td></td><td></td></tr></tbody></table>
 
 ## Quick Start
 
@@ -18,34 +18,39 @@ Let's build a quick solution for a very common secure communication topology tha
 
 An application service and an application client running in two private networks wish to communicate with each other without exposing ports on the Internet. In a few simple commands, we’ll make them talk to each other through an End-to-End Encrypted Cloud Relay.
 
-First, install Ockam Command and then follow these instructions:&#x20;
+#### Install Ockam Command
 
-### Install Ockam Command
-
-Ockam Command is our Command Line Interface (CLI) for interfacing with Ockam processes.&#x20;
+First, let’s install Ockam Command, our Command Line Interface (CLI) for building and orchestrating secure distributed applications using Ockam.
 
 {% tabs %}
 {% tab title="Homebrew" %}
-If you use Homebrew, you can install Ockam using brew:
+If you use Homebrew, you can install Ockam using brew.
 
-```
+```sh
+# Tap and install Ockam Command
 brew install build-trust/ockam/ockam
 ```
+
+
+
+This will download a precompiled binary and add it to your path. If you don’t use Homebrew, you can install on Linux and MacOS systems using curl. See[ instructions for other systems](./#other-systems).
 {% endtab %}
 
 {% tab title="Other Systems" %}
 ```shell
- curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
+ curl --proto '=https' --tlsv1.2 -sSf \
+   https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
 ```
 
 After the binary downloads, please move it to a location in your shell's `$PATH`, like `/usr/local/bin`.
 {% endtab %}
 {% endtabs %}
 
-```bash
-# Install Ockam Command using Homebrew
-brew install build-trust/ockam/ockam
 
+
+
+
+```bash
 # Check that everything was installed by enrolling with Ockam Orchestrator.
 #
 # This will provision an End-to-End Encrypted Cloud Relay service for you in
