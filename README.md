@@ -54,7 +54,9 @@ After the binary downloads, please move it to a location that is in your shell's
 {% endtab %}
 {% endtabs %}
 
-#### Run Quick Start
+#### End-to-end encrypted and mutually authenticated communication
+
+Next, l
 
 ```bash
 # Check that everything was installed correctly by enrolling with Ockam Orchestrator.
