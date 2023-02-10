@@ -170,8 +170,6 @@ You'll see console output that shows `"Hello Ockam!"` received by the `"echoer"`
 
 The message flow looked like this:
 
-
-
-<figure><img src="../../../.gitbook/assets/simple (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/diagrams.001.jpeg" alt=""><figcaption></figcaption></figure>
 
 Next, let’s explore how Ockam’s [Application Layer Routing](routing.md) enables us to create protocols that provide end-to-end security and privacy guarantees.
