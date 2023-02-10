@@ -84,7 +84,7 @@ ockam forwarder create s --at /project/default --to /node/s
 # end-to-end encrypted secure channel with s, through the cloud relay. Finally, tunnel traffic
 # from a local tcp inlet through this end-to-end secure channel.
 ockam node create c --project default-project.json
-ockam secure-channel create --from /node/c --to /project/default/service/forward_to_s/service/api \
+ockam secure-channel create --from /node/c --to /project/default/service/forward_to_s/service/api\
   | ockam tcp-inlet create --at /node/c --from 127.0.0.1:7000 --to -/service/outlet
 
 # Access the application service, that may be in a remote private network though the end-to-end
