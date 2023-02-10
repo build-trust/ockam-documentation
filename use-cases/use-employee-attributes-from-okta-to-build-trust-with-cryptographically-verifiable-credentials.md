@@ -127,7 +127,9 @@ python3 -m http.server --bind 127.0.0.1 5000
 Next we transfer project configuration and one enrollment token to Machine 1 and use that to create and Ockam node that will run as a sidecar process next to our application service.
 
 ```bash
-ockam node create m1 --project project.json --enrollment-token $m1_token
+ocakm identity create m1
+ockam project authenticate --token $m1_token --identity m1 --project-path project.json
+ocakm node create m1 --project project.json --identity m1
 ockam policy set --at m1 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))'
 ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
@@ -154,7 +156,9 @@ python3 -m http.server --bind 127.0.0.1 6000
 Next we transfer project configuration and one enrollment token to Machine 2 and use that to create and Ockam node that will run as a sidecar process next to our application service.
 
 ```bash
-ockam node create m2 --project project.json --enrollment-token $m2_token
+ocakm identity create m2
+ockam project authenticate --token $m2_token --identity m2 --project-path project.json
+ockam node create m2 --project project.json --identity m2
 ockam policy set --at m2 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "New York")))'
 ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
@@ -176,7 +180,7 @@ Since the Okta Add-On is enabled. Alice can simple start a node within the proje
 
 ```bash
 ockam node create alice --project project.json
-ockam project authenticate --project project.json
+ockam project authenticate --project-path project.json --okta
 ockam policy set --at alice --resource tcp-inlet --expression '(= subject.application "Smart Factory")'
 ```
 
@@ -207,6 +211,3 @@ curl --head 127.0.0.1:9000
 When new employees join the Field Engineering team in San Francisco, they will get an Okta workforce identity and can also request access to services they are responsible for in San Francisco without any change to the system.
 
 These attribute based policies can easily span the spectrum of very simple to be highly fine-grained and dynamic depending on the needs of an application. At the same time, this approach is highly scalable because it decouples enterprise identity administration form an application's trust policies.
-
-
-
