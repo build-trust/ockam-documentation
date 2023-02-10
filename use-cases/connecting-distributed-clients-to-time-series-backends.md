@@ -24,4 +24,6 @@ These connections are established and authenticated on-demand and, for supported
 
 ### Get started
 
-We're actively recruiting people to provide feedback on improvements we've made to the Ockam add-ons that enable uses cases with event stream processing and time series database. If this is an area of interest to you [please reach out to the team](https://www.ockam.io/contact/form) to talk about your use cases.
+You can see an end-to-end example of this in our [Telegraf + InfluxDB code example](../code-examples/telegraf-+-influxdb.md), or follow our [getting started guide to install Ockam](../#quick-start) and start using it in just a few minutes.
+
+We're also actively recruiting people to provide feedback on new features we're making to the Ockam add-ons that enable enhanced capabilities with event stream processing and time series databases. If this is an area of interest to you [please reach out to the team](https://www.ockam.io/contact/form) to talk about your use cases.
