@@ -39,12 +39,18 @@ This will download a precompiled binary and add it to your path. If you don’t 
 {% endtab %}
 
 {% tab title="Other Systems" %}
+On Linux and MacOS, you can download precompiled binaries for your architecture using curl.
+
+
+
 ```shell
  curl --proto '=https' --tlsv1.2 -sSf \
    https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
 ```
 
-After the binary downloads, please move it to a location in your shell's `$PATH`, like `/usr/local/bin`.
+
+
+After the binary downloads, please move it to a location in your shell's `$PATH`, for example `/usr/local/bin`.
 {% endtab %}
 {% endtabs %}
 
