@@ -46,9 +46,7 @@ After the binary downloads, please move it to a location in your shell's `$PATH`
 {% endtab %}
 {% endtabs %}
 
-
-
-
+#### Run Quick Start
 
 ```bash
 # Check that everything was installed by enrolling with Ockam Orchestrator.
