@@ -2,7 +2,7 @@
 
 Let's build a solution for a very common topology. An application service and an application client running in two private networks wish to communicate with each other without exposing ports on the Internet.
 
-<figure><img src="../.gitbook/assets/infrastructure.webp" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/infrastructure.webp" alt=""><figcaption></figcaption></figure>
 
 First install the Ockam command, if you haven't already.
 

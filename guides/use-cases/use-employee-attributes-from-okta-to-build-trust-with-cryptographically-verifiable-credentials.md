@@ -10,7 +10,7 @@ In this guide, we’ll step through a demo of how workforce identities in Okta c
 
 
 
-<figure><img src="../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 ## Background
 
@@ -46,7 +46,7 @@ Credentials are issued over mutually authenticated, end-to-end secure channels a
 
 Once we have authenticated attributes, a resource owner can make trust decisions based on these attributes rooted in attestations by trusted authorities.
 
-<figure><img src="../.gitbook/assets/diagrams.004.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/diagrams.004.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 ### Credential Authorities and Enrollment Protocols
 
@@ -54,7 +54,7 @@ Any Ockam Identifier can issue credentials about another Identifier, however som
 
 We also have to consider how credentials are issued to a large number of application entities. Ockam offers several pluggable enrollment protocols. Once simple option is to use one-time-use enrollment tokens. This is a great option to enroll large fleets of applications, service, or devices. It is also easy to use with automated provisioning scripts and tools.
 
-<figure><img src="../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 ### Okta Add-On for Ockam Orchestrator
 
@@ -66,7 +66,7 @@ This combination is incredibly powerful. It allows **employees to get just-in-ti
 
 
 
-<figure><img src="../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 ## Step-by-Step Walkthrough
 
@@ -188,7 +188,7 @@ The `project authenticate` command will launch Okta login and when it completes 
 
 
 
-<figure><img src="../.gitbook/assets/200395627-827d672a-2140-4752-a8d5-526ec5f0be68.png" alt=""><figcaption><p>User Profile in Okta</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/200395627-827d672a-2140-4752-a8d5-526ec5f0be68.png" alt=""><figcaption><p>User Profile in Okta</p></figcaption></figure>
 
 Alice's `city` in Okta is "San Francisco". Her request to access Machine 1 in San Francisco is allowed&#x20;
 
