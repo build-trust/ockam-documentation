@@ -27,4 +27,4 @@
   * [Rust](reference/programming-libraries/rust/README.md)
     * [Nodes and Workers](reference/programming-libraries/rust/nodes.md)
     * [Routing and Transports](reference/programming-libraries/rust/routing.md)
-    * [Manual](https://docs.rs/ockam/latest/ockam/)
+    * [docs.rs/ockam](https://docs.rs/ockam/)
