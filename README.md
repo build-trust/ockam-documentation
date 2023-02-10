@@ -16,7 +16,7 @@ Modern applications are distributed and have an unwieldy number of interconnecti
 
 Let's build a quick solution for a very common secure communication topology that applies to many real world use cases.
 
-An application service and an application client running in two private networks wish to communicate with each other without exposing ports on the Internet. In a few simple commands, we’ll make them talk to each other through an End-to-End Encrypted Cloud Relay.
+An application service and an application client running in two private networks wish to securely communicate with each other without exposing ports on the Internet. In a few simple commands, we’ll make them talk to each other through an End-to-End Encrypted Cloud Relay.
 
 #### Install Ockam Command <a href="#install" id="install"></a>
 
