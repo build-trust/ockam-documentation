@@ -59,8 +59,8 @@ After the binary downloads, please move it to a location that is in your shell's
 ```bash
 # Check that everything was installed correctly by enrolling with Ockam Orchestrator.
 #
-# This will create a Space and Project in for you in the Orchestrator and provision an
-# End-to-End Encrypted Cloud Relay service for you your `default` project at `/project/default`.
+# This will create a Space and Project for you in Ockam Orchestrator and provision an
+# End-to-End Encrypted Cloud Relay service in your `default` project at `/project/default`.
 ockam enroll
 ockam project information --output json > default-project.json
 
