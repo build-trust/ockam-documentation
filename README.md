@@ -56,7 +56,7 @@ After the binary downloads, please move it to a location that is in your shell's
 
 #### End-to-end encrypted and mutually authenticated communication
 
-Next, l
+Next, step through the following commands to setup secure and private communication between our application service and an application client.
 
 ```bash
 # Check that everything was installed correctly by enrolling with Ockam Orchestrator.
@@ -95,9 +95,11 @@ curl --head 127.0.0.1:7000
 
 ```
 
-#### Private & secure by design
+#### Secure by design
 
-In the example above we've created two nodes and established a secure channel between them. While the example above is running on a single machine for the sake of simplicity, each node also be running on completely separate devices with same end result: an end-to-end encrypted and authenticated secure channel. Any network configuration, transport topology, or services being connected can now have a secure means of communicating without the risk of eavesdropping or MITM attacks irrespective protocols being used. Privacy has been moved to the communication channel itself, which means _any_ use of that channel is secure by design. The use of Ockam's [programming libraries](manuals/programming-libraries/) pushes that secure channel beyond the network level and embeds it directly into your application or device. Underlying all of this is a variety of complex cryptographic and messaging protocols that work together in a secure and scalable way.
+In the example above, we’ve created two nodes and established an end-to-end secure channel between them. While we ran this example on a single machine, for the sake of simplicity, each node can also be run on completely separate machine with same end result: an end-to-end encrypted and mutually authenticated secure channel.
+
+Any network configuration, transport topology, or services being connected can now have a secure means of communicating without the risk of eavesdropping or MITM attacks irrespective protocols being used. Privacy has been moved to the communication channel itself, which means _any_ use of that channel is secure by design. The use of Ockam's [programming libraries](manuals/programming-libraries/) pushes that secure channel beyond the network level and embeds it directly into your application or device. Underlying all of this is a variety of complex cryptographic and messaging protocols that work together in a secure and scalable way.
 
 #### Trust for data-in-motion
 
