@@ -6,7 +6,7 @@ description: How to build secure by design applications that can trust all data 
 
 Ockam is a suite of open source tools, programming libraries, and managed cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.
 
-Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To [trust data-in-motion](./#trust-for-data-in-motion), applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be [private and secure by-design](./#private-and-secure-by-design), applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
+Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To [trust data-in-motion](./#trust-for-data-in-motion), applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be [private](./#private-and-secure-by-design) and [secure by-design](./#private-and-secure-by-design), applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
 
 ## Use Cases
 
@@ -135,7 +135,7 @@ No more having to think about creating unique cryptographic keys and issuing cre
 
 ## Deep Dive
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="manuals/command/"><strong>Ockam Command</strong></a><strong></strong></td><td>A command line interface to build and orchestrate highly scalable, secure, and private distributed applications.</td><td></td></tr><tr><td><strong></strong><a href="manuals/programming-libraries/"><strong>Ockam Programming Libraries</strong></a><strong></strong></td><td>Rust crates to integrate</td><td></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="manuals/command/"><strong>Ockam Command</strong></a><strong></strong></td><td>A command line interface to build and orchestrate highly scalable, secure, and private distributed applications.</td><td></td></tr><tr><td><strong></strong><a href="manuals/programming-libraries/"><strong>Ockam Programming Libraries</strong></a><strong></strong></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td></tr></tbody></table>
 
 ## **Get help**
 
