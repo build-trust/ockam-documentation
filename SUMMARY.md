@@ -1,8 +1,8 @@
 # Table of contents
 
 * [Introduction to Ockam](README.md)
-  * [Secure by Design](readme/secure-by-design.md)
-  * [Virtually Adjacent](readme/virtually-adjacent.md)
+  * [Secure by design](readme/secure-by-design.md)
+  * [Virtually adjacent](readme/virtually-adjacent.md)
 
 ## Guides
 
