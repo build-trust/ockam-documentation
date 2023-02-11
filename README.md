@@ -121,7 +121,8 @@ Ockam takes away this complexity and give you simple tools to:
 * Provision encrypted relays for applications distributed across many edge, cloud and data-center private networks.
 * Tunnel legacy protocols through mutually authenticated and encrypted portals**.**
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams.
-* Generate unique cryptographically provable identities and store private keys in safe vaults, including hardware tokens or cloud key management systems.
+* Generate cryptographically provable unique identities.
+* Store private keys in safe vaults - hardware secure enclaves and cloud key management systems.
 * Operate scalable credential **** authorities to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
 * Onboard fleets of self-sovereign application identities using secure enrollment protocols.
 * Rotate **** and **** revoke keys and credentials – at scale, across fleets.
