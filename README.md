@@ -107,7 +107,7 @@ Ockam secure channels can be established across network and clouds over multi-ho
 
 Behind the scenes, the above commands generated unique cryptographically provable identities and saved corresponding keys in a vault. Your orchestrator project was provisioned with a managed credential authority and every node was setup to anchor trust in credentials issued by this authority. Identities were issued project membership credentials and these cryptographically verifiable credentials were then combined with attribute based access control policies to setup a mutually authenticated and authorized end-to-end secure channel.
 
-Applications can be certain about the source of all data and instructions and can make granular access control decisions at every request.
+Applications can make granular access control decisions at every request because they can be certain about the source and integrity of all data and instructions.
 
 #### Powerful protocols, made simple
 
