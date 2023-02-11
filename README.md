@@ -118,7 +118,7 @@ No more having to think about creating unique cryptographic keys and issuing cre
 Ockam takes away this complexity and give you simple tools to:
 
 * Create end-to-end encrypted, authenticated secure channels over any transport topology.
-* Provision encrypted relays for trustful communication within applications that are distributed across many edge, cloud and data-center private networks.
+* Provision encrypted relays for applications that are distributed across many edge, cloud and data-center private networks.
 * Tunnel legacy protocols through mutually authenticated and encrypted portals**.**
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams.
 * Generate unique cryptographically provable identities and store private keys in safe vaults, including hardware tokens or cloud key management systems.
