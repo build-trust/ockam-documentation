@@ -1,5 +1,5 @@
 ---
-description: How to Build Trust for Data-in-Motion
+description: How to build secure by design applications that can trust all data in motion.
 ---
 
 # Introduction to Ockam
