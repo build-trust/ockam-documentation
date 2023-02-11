@@ -10,7 +10,7 @@ Modern applications are distributed and have an unwieldy number of interconnecti
 
 ## Use Cases
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="guides/use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere.</td><td></td><td></td></tr><tr><td><strong></strong><a href="guides/use-cases/secure-database-access.md"><strong>Connect distributed clients to time series backends</strong></a><strong></strong></td><td>Send messages, metrics, and events from thousands of devices to services such as InfluxDB, without exposing your data store to the internet.</td><td></td><td></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="guides/use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere. Stop exposing service ports to the public internet and use short-lived revocable credentials.</td><td></td><td></td></tr><tr><td><strong></strong><a href="guides/use-cases/secure-database-access.md"><strong>Connect distributed clients to time series backends</strong></a><strong></strong></td><td>Send messages, metrics, and events from thousands of devices to services such as InfluxDB, without exposing your data store to the internet.</td><td></td><td></td></tr></tbody></table>
 
 ## Quick Start
 
@@ -133,7 +133,9 @@ No more having to think about creating unique cryptographic keys and issuing cre
 * Define and enforce project-wide attribute based access control policies - ABAC, RBAC or ACLs.
 * Integrate with enterprise identity providers and policy providers for seamless employee access.
 
-## Deep Dive
+## Deep Dives
+
+
 
 <table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="manuals/command/"><strong>Ockam Command</strong></a><strong></strong></td><td>A command line interface to build and orchestrate highly scalable, secure, and private distributed applications.</td><td></td></tr><tr><td><strong></strong><a href="manuals/programming-libraries/"><strong>Ockam Programming Libraries</strong></a><strong></strong></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td></tr></tbody></table>
 
