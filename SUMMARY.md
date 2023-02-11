@@ -2,7 +2,7 @@
 
 * [Introduction to Ockam](README.md)
   * [Secure by Design](readme/secure-by-design.md)
-  * [Virtually Adjacent](readme/virtually-adjacent.md)
+  * [Virtual Adjacencies](readme/virtual-adjacencies.md)
 
 ## Guides
 
