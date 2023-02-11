@@ -120,7 +120,7 @@ No more having to think about creating unique cryptographic keys and issuing cre
 * Create end-to-end encrypted, authenticated secure channels over any transport topology.
 * Create secure channels over multi-hop, multi-protocol routes - TCP, UDP, WebSockets, BLE, etc.&#x20;
 * Provision encrypted relays for applications distributed across many edge, cloud and data-center private networks.
-* Tunnel legacy protocols through mutually authenticated and encrypted portals**.**
+* Male legacy protocols secure by tunneling them through mutually authenticated and encrypted portals.
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams - Kafka, Kinesis, RabbitMQ etc.
 
 <mark style="color:blue;">Identity-based, policy driven, application layer trust</mark>
@@ -130,7 +130,7 @@ No more having to think about creating unique cryptographic keys and issuing cre
 * Operate scalable credential **** authorities to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
 * Onboard fleets of self-sovereign application identities using secure enrollment protocols.
 * Rotate **** and **** revoke keys and credentials – at scale, across fleets.
-* Define and enforce project-wide attribute based access control policies - ABAC, RBAC or ACLs
+* Define and enforce project-wide attribute based access control policies - ABAC, RBAC or ACLs.
 * Integrate with enterprise identity providers and policy providers for seamless employee access.
 
 ## Deep Dive
