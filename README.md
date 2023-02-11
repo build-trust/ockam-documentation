@@ -99,30 +99,34 @@ curl --head 127.0.0.1:7000
 
 In the example above, we’ve created two nodes and established an end-to-end secure channel between them through an encrypted cloud relay. For the sake of simplicity, we ran both ends on a single machine but they could also be run on completely separate machines with the same result: an end-to-end encrypted and mutually authenticated secure channel.
 
-Distributed applications that are connected in this way can communicate without the risk of spoofing, tampering, or eavesdropping attacks irrespective of transport protocols, communication topologies, and network configuration. As application data flows _across data centers, through queues and caches, via gateways and brokers -_ these intermediaries, like the cloud relay in the above example, can facilitate communication but cannot eavesdrop or tamper the data.
+Distributed applications that are connected in this way can communicate without the risk of spoofing, tampering, or eavesdropping attacks irrespective of transport protocols, communication topologies, and network configuration. As application data flows _across data centers, through queues and caches, via gateways and brokers -_ these intermediaries, like the cloud relay in the above example, can facilitate communication but cannot eavesdrop or tamper data.
 
-You can establish secure channels across networks and clouds over multi-hop, multi-protocol routes to build private and [secure by design](readme/secure-by-design.md) distributed applications that have full control over data authenticity, integrity, and confidentiality.
+You can establish secure channels across networks and clouds over multi-hop, multi-protocol routes to build private and [secure by design](readme/secure-by-design.md) distributed applications that have a small vulnerability surface and full control over data authenticity, integrity, and confidentiality.
 
 #### Trust for data-in-motion
 
 Behind the scenes, the above commands generated unique cryptographically provable identities and saved corresponding keys in a vault. Your orchestrator project was provisioned with a managed credential authority and every node was setup to anchor trust in credentials issued by this authority. Identities were issued project membership credentials and these cryptographically verifiable credentials were then combined with attribute based access control policies to setup a mutually authenticated and authorized end-to-end secure channel.
 
-Your applications can make granular access control decisions at every request because they can be certain about the source and integrity of all data and instructions. You place [zero implicit trust](readme/secure-by-design.md#zero-implicit-trust) in network boundaries and intermediaries to build applications that end-to-end application layer trust for all data in motion.
+Your applications can make granular access control decisions at every request because they can be certain about the source and integrity of all data and instructions. You place [zero implicit trust](readme/secure-by-design.md#zero-implicit-trust) in network boundaries and intermediaries to build applications that have end-to-end application layer trust for all data in motion.
 
 #### Powerful protocols, made simple
 
-No more having to think about creating unique cryptographic keys and issuing credentials to all application entities. No more designing ways to safely store secrets in hardware and securely distribute roots of trust. Ockam takes away this complexity and give you simple tools to:
+Underlying all of this is a variety of complex cryptographic and messaging protocols that work together in a secure and scalable way. We’ve made these protocols simple and safe to use in any application.
+
+No more having to think about creating unique cryptographic keys and issuing credentials to all application entities. No more designing ways to safely store secrets in hardware and securely distribute roots of trust.
+
+Ockam takes away this complexity and give you simple tools to:
 
 * Create end-to-end encrypted, authenticated secure channels over any transport topology.
 * Provision encrypted relays for trustful communication within applications that are distributed across many edge, cloud and data-center private networks.
-* Tunnel legacy protocols through mutually authenticated and encrypted **Portals.**
-* Add-ons to bring end-to-end encryption to enterprise messaging, pub/sub and event streams.
-* Generate unique cryptographically provable **Identities** and store private keys in safe **Vaults.** Add-ons for hardware or cloud key management systems.
-* Operate project specific and scalable **Credential Authorities** to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
-* Onboard fleets of self-sovereign application identities using **Secure Enrollment Protocols** to issue credentials to application clients and services.
-* **Rotate** and **revoke** keys and credentials – at scale, across fleets.
-* Define and enforce project-wide **Attribute Based Access Control** (ABAC) policies.
-* Add-ons to integrate with enterprise **Identity Providers** and **Policy Providers**.
+* Tunnel legacy protocols through mutually authenticated and encrypted portals**.**
+* Bring end-to-end encryption to enterprise messaging, pub/sub and event streams.
+* Generate unique cryptographically provable identities and store private keys in safe vaults, including hardware tokens or cloud key management systems.
+* Operate project specific and scalable credential **** authorities to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
+* Onboard fleets of self-sovereign application identities using secure enrollment protocols.
+* Rotate **** and **** revoke keys and credentials – at scale, across fleets.
+* Define and enforce project-wide attribute based access control policies.
+* Integrate with enterprise identity providers and policy providers for seamless employee access.
 
 ## Learn more
 
