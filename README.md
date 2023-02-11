@@ -134,7 +134,7 @@ No more having to think about creating unique cryptographic keys and issuing cre
 
 ## Deep Dive
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="broken-reference"><strong>Ockam Command</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="broken-reference"><strong>Ockam Rust Crates</strong></a><strong></strong></td><td></td><td></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="manuals/command/"><strong>Ockam Command</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="manuals/programming-libraries/"><strong>Ockam Programming Libraries</strong></a><strong></strong></td><td></td><td></td></tr></tbody></table>
 
 ## **Get help**
 
