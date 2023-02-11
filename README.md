@@ -111,14 +111,19 @@ Your applications can make granular access control decisions at every request be
 
 #### Powerful protocols, made simple
 
-Underlying all of this is a variety of cryptographic and messaging protocols that work together in a secure and scalable way. We’ve made these protocols safe and easy to use in any application.
+Underlying all of this is a variety of cryptographic and messaging protocols. We’ve made these protocols safe and easy to use in any application.
 
 No more having to think about creating unique cryptographic keys and issuing credentials to all application entities. No more designing ways to safely store secrets in hardware and securely distribute roots of trust. Ockam’s integrated approach takes away this complexity and gives you simple tools to:
+
+
 
 * Create end-to-end encrypted, authenticated secure channels over any transport topology.
 * Provision encrypted relays for applications distributed across many edge, cloud and data-center private networks.
 * Tunnel legacy protocols through mutually authenticated and encrypted portals**.**
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams.
+
+
+
 * Generate cryptographically provable unique identities.
 * Store private keys in safe vaults - hardware secure enclaves and cloud key management systems.
 * Operate scalable credential **** authorities to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
