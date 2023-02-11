@@ -101,13 +101,13 @@ In the example above, we’ve created two nodes and established an end-to-end se
 
 Distributed applications that are connected in this way can communicate without the risk of spoofing, tampering, or eavesdropping attacks irrespective of transport protocols, communication topologies, and network configuration. As application data flows _across data centers, through queues and caches, via gateways and brokers -_ these intermediaries, like the cloud relay in the above example, can facilitate communication but cannot eavesdrop or tamper the data.
 
-Ockam secure channels can be established across network and clouds over multi-hop, multi-protocol routes and enable private and [secure by design](readme/secure-by-design.md) distributed applications that have full control over data authenticity, integrity, and confidentiality.
+You can establish secure channels across networks and clouds over multi-hop, multi-protocol routes to build private and [secure by design](readme/secure-by-design.md) distributed applications that have full control over data authenticity, integrity, and confidentiality.
 
 #### Trust for data-in-motion
 
 Behind the scenes, the above commands generated unique cryptographically provable identities and saved corresponding keys in a vault. Your orchestrator project was provisioned with a managed credential authority and every node was setup to anchor trust in credentials issued by this authority. Identities were issued project membership credentials and these cryptographically verifiable credentials were then combined with attribute based access control policies to setup a mutually authenticated and authorized end-to-end secure channel.
 
-Applications can make granular access control decisions at every request because they can be certain about the source and integrity of all data and instructions.
+Your applications can make granular access control decisions at every request because they can be certain about the source and integrity of all data and instructions. You place [zero implicit trust](readme/secure-by-design.md#zero-implicit-trust) in network boundaries and intermediaries to build applications that end-to-end application layer trust for all data in motion.
 
 #### Powerful protocols, made simple
 
