@@ -113,7 +113,7 @@ Your applications can make granular access control decisions at every request be
 
 Underlying all of this is a variety of cryptographic and messaging protocols. We’ve made these protocols safe and easy to use in any application.
 
-No more having to think about creating unique cryptographic keys and issuing credentials to all application entities. No more designing ways to safely store secrets in hardware and securely distribute roots of trust. Ockam’s integrated approach takes away this complexity and gives you simple tools to:
+No more having to think about creating unique cryptographic keys and issuing credentials to all application entities. No more designing ways to safely store secrets in hardware and securely distribute roots of trust. Ockam’s integrated approach takes away this complexity and gives you simple tools for:
 
 <mark style="color:blue;">End-to-end data integrity and privacy in any communication topology</mark>
 
@@ -122,7 +122,7 @@ No more having to think about creating unique cryptographic keys and issuing cre
 * Tunnel legacy protocols through mutually authenticated and encrypted portals**.**
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams.
 
-<mark style="color:blue;">Identity-based, policy driven, application layer trust — authentication and authorization.</mark>
+<mark style="color:blue;">Identity-based, policy driven, application layer trust</mark>
 
 * Generate cryptographically provable unique identities.
 * Store private keys in safe vaults - hardware secure enclaves and cloud key management systems.
@@ -132,9 +132,9 @@ No more having to think about creating unique cryptographic keys and issuing cre
 * Define and enforce project-wide attribute based access control policies.
 * Integrate with enterprise identity providers and policy providers for seamless employee access.
 
-## Learn more
+## Deep Dive
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="broken-reference"><strong>Ockam Command</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="broken-reference"><strong>Ockam Rust Crates</strong></a><strong></strong></td><td></td><td></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="broken-reference"><strong>Ockam Command</strong></a><strong></strong></td><td></td><td></td></tr><tr><td><strong></strong><a href="broken-reference"><strong>Ockam Rust Crates</strong></a><strong></strong></td><td></td><td></td></tr></tbody></table>
 
 ## **Get help**
 
