@@ -95,15 +95,17 @@ curl --head 127.0.0.1:7000
 
 ```
 
-#### Secure by design
+#### Private and secure by design
 
-In the example above, we’ve created two nodes and established an end-to-end secure channel between them. While we ran this example on a single machine, for the sake of simplicity, each node can also be run on completely separate machine with same end result: an end-to-end encrypted and mutually authenticated secure channel.
+In the example above, we’ve created two nodes and established an end-to-end secure channel between them through an encrypted cloud relay. For the sake of simplicity, we ran both ends on a single machine but they could also be run on completely separate machines with the same result: an end-to-end encrypted and mutually authenticated secure channel.
 
-Any network configuration, transport topology, or services being connected can now have a secure means of communicating without the risk of eavesdropping or MITM attacks irrespective protocols being used. Privacy has been moved to the communication channel itself, which means _any_ use of that channel is secure by design. The use of Ockam's [programming libraries](manuals/programming-libraries/) pushes that secure channel beyond the network level and embeds it directly into your application or device. Underlying all of this is a variety of complex cryptographic and messaging protocols that work together in a secure and scalable way.
+Distributed applications that are connected in this way can communicate without the risk of spoofing, tampering, or eavesdropping attacks irrespective of transport protocols, communication topologies, and network configuration. As application data flows _across data centers, through queues and caches, via gateways and brokers -_ intermediaries, like the cloud relay in the above example, can facilitate communication but cannot eavesdrop or tamper the data.
+
+Ockam secure channels can be established over complex, multi-hop, multi-protocol routes and enable private and [secure by design](readme/secure-by-design.md) distributed applications that have full control over data authenticity, integrity, and confidentiality.
 
 #### Trust for data-in-motion
 
-Not obvious from this example is that each node also has a unique identity, with a set of unique cryptographic keys. Creating a secure tunnel between services can provide privacy, but how do you know who is communicating on the other side of that tunnel? Ockam's approach to provable identities means that secure communication channels also guarantee data authenticity and integrity. With an integrated approach to enforcing authorization policies, and protocols for rotating and revoking credentials.&#x20;
+Behind the scenes, the above commands generated unique cryptographically provable identities and saved corresponding keys in a vault. The Orchestrator project was provisioned with a managed credential authority and every node was setup to anchor trust in credentials issued by this authority. Identities were issued issued project membership credentials and these cryptographically verifiable credentials were then combined with attribute based access control policies to setup a mutually authenticated and authorized end-to-end secure channel.&#x20;
 
 #### Powerful protocols, made simple
 
