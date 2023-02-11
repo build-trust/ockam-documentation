@@ -122,7 +122,7 @@ Ockam takes away this complexity and give you simple tools to:
 * Tunnel legacy protocols through mutually authenticated and encrypted portals**.**
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams.
 * Generate unique cryptographically provable identities and store private keys in safe vaults, including hardware tokens or cloud key management systems.
-* Operate project specific and scalable credential **** authorities to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
+* Operate scalable credential **** authorities to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
 * Onboard fleets of self-sovereign application identities using secure enrollment protocols.
 * Rotate **** and **** revoke keys and credentials – at scale, across fleets.
 * Define and enforce project-wide attribute based access control policies.
