@@ -101,11 +101,11 @@ In the example above, we’ve created two nodes and established an end-to-end se
 
 Distributed applications that are connected in this way can communicate without the risk of spoofing, tampering, or eavesdropping attacks irrespective of transport protocols, communication topologies, and network configuration. As application data flows _across data centers, through queues and caches, via gateways and brokers -_ intermediaries, like the cloud relay in the above example, can facilitate communication but cannot eavesdrop or tamper the data.
 
-Ockam secure channels can be established over complex, multi-hop, multi-protocol routes and enable private and [secure by design](readme/secure-by-design.md) distributed applications that have full control over data authenticity, integrity, and confidentiality.
+Ockam secure channels can be established across network and clouds over multi-hop, multi-protocol routes and enable private and [secure by design](readme/secure-by-design.md) distributed applications that have full control over data authenticity, integrity, and confidentiality.
 
 #### Trust for data-in-motion
 
-Behind the scenes, the above commands generated unique cryptographically provable identities and saved corresponding keys in a vault. The Orchestrator project was provisioned with a managed credential authority and every node was setup to anchor trust in credentials issued by this authority. Identities were issued issued project membership credentials and these cryptographically verifiable credentials were then combined with attribute based access control policies to setup a mutually authenticated and authorized end-to-end secure channel.&#x20;
+Behind the scenes, the above commands generated unique cryptographically provable identities and saved corresponding keys in a vault. Your orchestrator project was provisioned with a managed credential authority and every node was setup to anchor trust in credentials issued by this authority. Identities were issued project membership credentials and these cryptographically verifiable credentials were then combined with attribute based access control policies to setup a mutually authenticated and authorized end-to-end secure channel.&#x20;
 
 #### Powerful protocols, made simple
 
