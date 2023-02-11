@@ -99,13 +99,15 @@ curl --head 127.0.0.1:7000
 
 In the example above, we’ve created two nodes and established an end-to-end secure channel between them through an encrypted cloud relay. For the sake of simplicity, we ran both ends on a single machine but they could also be run on completely separate machines with the same result: an end-to-end encrypted and mutually authenticated secure channel.
 
-Distributed applications that are connected in this way can communicate without the risk of spoofing, tampering, or eavesdropping attacks irrespective of transport protocols, communication topologies, and network configuration. As application data flows _across data centers, through queues and caches, via gateways and brokers -_ intermediaries, like the cloud relay in the above example, can facilitate communication but cannot eavesdrop or tamper the data.
+Distributed applications that are connected in this way can communicate without the risk of spoofing, tampering, or eavesdropping attacks irrespective of transport protocols, communication topologies, and network configuration. As application data flows _across data centers, through queues and caches, via gateways and brokers -_ these intermediaries, like the cloud relay in the above example, can facilitate communication but cannot eavesdrop or tamper the data.
 
 Ockam secure channels can be established across network and clouds over multi-hop, multi-protocol routes and enable private and [secure by design](readme/secure-by-design.md) distributed applications that have full control over data authenticity, integrity, and confidentiality.
 
 #### Trust for data-in-motion
 
-Behind the scenes, the above commands generated unique cryptographically provable identities and saved corresponding keys in a vault. Your orchestrator project was provisioned with a managed credential authority and every node was setup to anchor trust in credentials issued by this authority. Identities were issued project membership credentials and these cryptographically verifiable credentials were then combined with attribute based access control policies to setup a mutually authenticated and authorized end-to-end secure channel.&#x20;
+Behind the scenes, the above commands generated unique cryptographically provable identities and saved corresponding keys in a vault. Your orchestrator project was provisioned with a managed credential authority and every node was setup to anchor trust in credentials issued by this authority. Identities were issued project membership credentials and these cryptographically verifiable credentials were then combined with attribute based access control policies to setup a mutually authenticated and authorized end-to-end secure channel.
+
+Applications can be certain about the source of all data and instructions and can make granular access control decisions at every request.
 
 #### Powerful protocols, made simple
 
