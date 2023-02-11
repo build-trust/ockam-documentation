@@ -115,14 +115,14 @@ Underlying all of this is a variety of cryptographic and messaging protocols. We
 
 No more having to think about creating unique cryptographic keys and issuing credentials to all application entities. No more designing ways to safely store secrets in hardware and securely distribute roots of trust. Ockam’s integrated approach takes away this complexity and gives you simple tools to:
 
-
+<mark style="color:blue;">End-to-end data integrity and privacy in any communication topology</mark>
 
 * Create end-to-end encrypted, authenticated secure channels over any transport topology.
 * Provision encrypted relays for applications distributed across many edge, cloud and data-center private networks.
 * Tunnel legacy protocols through mutually authenticated and encrypted portals**.**
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams.
 
-
+<mark style="color:blue;">Identity-based, policy driven, application layer trust — authentication and authorization.</mark>
 
 * Generate cryptographically provable unique identities.
 * Store private keys in safe vaults - hardware secure enclaves and cloud key management systems.
