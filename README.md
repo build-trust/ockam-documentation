@@ -48,9 +48,11 @@ curl --proto '=https' --tlsv1.2 -sSf \
     https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
 ```
 
+After the binary downloads, please move it to a location that is in your shell's `$PATH`.
 
-
-After the binary downloads, please move it to a location that is in your shell's `$PATH`. For example `mv ockam /usr/local/bin`
+```bash
+mv ockam /usr/local/bin
+```
 {% endtab %}
 {% endtabs %}
 
