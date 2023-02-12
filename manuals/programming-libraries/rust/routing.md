@@ -1,4 +1,18 @@
+---
+description: Enable protocols that provide end-to-end security and privacy guarantees.
+---
+
 # Routing and Transports
+
+Ockam's Application Layer Routing protocol allows us to send messages over any number of hops, within one node, or across many nodes. This enables us to layer other protocols that provide end-to-end security and privacy guarantees.
+
+### Routing
+
+So far, we've created an [`"echoer"` worker](nodes.md#echoer-worker) in our node, sent it a message, and received a reply. This worker was a simple one hop away from our [`"app"` worker.](nodes.md#app-worker)
+
+To achieve this, messages carry with them two meta fields: `onward_route` and `return_route`, where a route is a list of addresses.
+
+To get a sense of how that works, let's route a message over two hops.
 
 <figure><img src="../../../.gitbook/assets/simple.001 (1).jpeg" alt=""><figcaption></figcaption></figure>
 
@@ -8,15 +22,7 @@
 
 <figure><img src="../../../.gitbook/assets/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
-### Routing
-
-So far, we've created an [`"echoer"` worker](nodes.md#echoer-worker) in our node, sent it a message, and received a reply. This worker was a simple one hop away from our [`"app"` worker.](nodes.md#app-worker)
-
-Ockam's Application Layer Routing protocol allows us to send messages over any number of hops, within one node, or across many nodes. This enables us to layer other protocols that provide end-to-end security and privacy guarantees.
-
-To achieve this, messages carry with them two meta fields: `onward_route` and `return_route`, where a route is a list of addresses.
-
-To get a sense of how that works, let's route a message over two hops.
+###
 
 #### Protocol
 

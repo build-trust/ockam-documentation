@@ -1,3 +1,9 @@
+---
+description: >-
+  Decouple applications from the host environment and get simple interfaces to
+  complex, stateful, and asynchronous message-based protocols.
+---
+
 # Nodes and Workers
 
 At Ockam’s core are a collection of cryptographic and messaging protocols. These protocols make it possible to create **private** and **secure by design** applications that provide end-to-end application layer trust it data.
@@ -169,6 +175,8 @@ You'll see console output that shows `"Hello Ockam!"` received by the `"echoer"`
 #### Message Flow
 
 The message flow looked like this:
+
+
 
 <figure><img src="../../../.gitbook/assets/diagrams.001.jpeg" alt=""><figcaption></figcaption></figure>
 
