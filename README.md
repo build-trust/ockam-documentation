@@ -145,4 +145,4 @@ No more having to think about creating unique cryptographic keys and issuing cre
 
 ## **Get help**
 
-We are here to help you build with Ockam. If you need help, \*\*\*\* [**please reach out to us**](https://www.ockam.io/contact)!
+We are here to help you build with Ockam. If you need help, [**please reach out to us**](https://www.ockam.io/contact)!
