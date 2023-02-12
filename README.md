@@ -48,6 +48,8 @@ curl --proto '=https' --tlsv1.2 -sSf \
     https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
 ```
 
+
+
 After the binary downloads, please move it to a location that is in your shell's `$PATH`.
 
 ```bash
@@ -137,9 +139,9 @@ No more having to think about creating unique cryptographic keys and issuing cre
 
 ## Deep Dives
 
-Now that you understand how Ockam empowers you to add strong security controls and guarantees to any application, [read more](./#use-cases) about how developers are using Ockam for many [use cases](guides/use-cases/) across industries or start building by diving into our [command line](manuals/command/) and p[rogramming libraries](manuals/programming-libraries/).
+Next [read more](./#use-cases) about how developers are using Ockam for many [use cases](guides/use-cases/) across industries or start building by diving into our step by step guide on Ockam Command and Ockam Programming Libraries.
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="manuals/command/"><strong>Ockam Command</strong></a><strong></strong></td><td>A command line interface to build and orchestrate highly scalable, secure, and private distributed applications.</td><td></td></tr><tr><td><strong></strong><a href="manuals/programming-libraries/"><strong>Ockam Programming Libraries</strong></a><strong></strong></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="manuals/command/"><strong>Ockam Command</strong></a><strong></strong></td><td>Command line tools to build and orchestrate highly scalable, secure, and private distributed applications. </td><td></td></tr><tr><td><strong></strong><a href="manuals/programming-libraries/"><strong>Ockam Programming Libraries</strong></a><strong></strong></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td></tr></tbody></table>
 
 ## **Get help**
 
