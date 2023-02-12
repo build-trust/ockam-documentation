@@ -10,7 +10,7 @@ Modern applications are distributed and have an unwieldy number of interconnecti
 
 ## Use Cases
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="guides/use-cases/secure-database-access.md"><strong>Secure database access</strong></a><strong></strong></td><td>Create secure communication with a private database from anywhere. Stop exposing service ports to the public internet and use short-lived credentials.</td><td></td><td></td></tr><tr><td><strong></strong><a href="guides/use-cases/secure-database-access.md"><strong>Connect distributed clients to time series backends</strong></a><strong></strong></td><td>Send messages, metrics, and events from thousands of devices to services such as InfluxDB, without exposing your data store to the internet.</td><td></td><td></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden></th></tr></thead><tbody><tr><td><a href="guides/use-cases/secure-database-access.md"><strong>Secure database access</strong></a></td><td>Create secure communication with a private database from anywhere. Stop exposing service ports to the public internet and use short-lived credentials.</td><td></td><td></td></tr><tr><td><strong></strong><a href="guides/use-cases/create-secure-communication-with-a-private-database-from-anywhere.md"><strong>Connect distributed clients to time series backends</strong></a><strong></strong></td><td>Send messages, metrics, and events from thousands of devices to services such as InfluxDB, without exposing your data store to the internet.</td><td></td><td></td></tr></tbody></table>
 
 ## Quick Start
 
@@ -26,14 +26,10 @@ First, let’s install Ockam Command. Ockam Command is our Command Line Interfac
 {% tab title="Homebrew" %}
 If you use Homebrew, you can install Ockam using brew.
 
-
-
 ```sh
 # Tap and install Ockam Command
 brew install build-trust/ockam/ockam
 ```
-
-
 
 This will download a precompiled binary and add it to your path. If you don’t use Homebrew, you can also install on Linux and MacOS systems using curl. See instructions for other systems in the next tab.
 {% endtab %}
@@ -41,14 +37,10 @@ This will download a precompiled binary and add it to your path. If you don’t 
 {% tab title="Other Systems" %}
 On Linux and MacOS, you can download precompiled binaries for your architecture using curl.
 
-
-
 ```shell
 curl --proto '=https' --tlsv1.2 -sSf \
     https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
 ```
-
-
 
 After the binary downloads, please move it to a location that is in your shell's `$PATH`.
 
@@ -122,7 +114,7 @@ No more having to think about creating unique cryptographic keys and issuing cre
 <mark style="color:blue;">End-to-end data authenticity, integrity, and privacy in any communication topology</mark>
 
 * Create end-to-end encrypted, authenticated secure channels over any transport topology.
-* Create secure channels over multi-hop, multi-protocol routes - TCP, UDP, WebSockets, BLE, etc.&#x20;
+* Create secure channels over multi-hop, multi-protocol routes - TCP, UDP, WebSockets, BLE, etc.
 * Provision encrypted relays for applications distributed across many edge, cloud and data-center private networks.
 * Make legacy protocols secure by tunneling them through mutually authenticated and encrypted portals.
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams - Kafka, Kinesis, RabbitMQ etc.
@@ -131,9 +123,9 @@ No more having to think about creating unique cryptographic keys and issuing cre
 
 * Generate cryptographically provable unique identities.
 * Store private keys in safe vaults - hardware secure enclaves and cloud key management systems.
-* Operate scalable credential **** authorities to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
+* Operate scalable credential \*\*\*\* authorities to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
 * Onboard fleets of self-sovereign application identities using secure enrollment protocols.
-* Rotate **** and **** revoke keys and credentials – at scale, across fleets.
+* Rotate \*\*\*\* and \*\*\*\* revoke keys and credentials – at scale, across fleets.
 * Define and enforce project-wide attribute based access control policies - ABAC, RBAC or ACLs.
 * Integrate with enterprise identity providers and policy providers for seamless employee access.
 
@@ -141,8 +133,8 @@ No more having to think about creating unique cryptographic keys and issuing cre
 
 [Read more](guides/use-cases/) about how teams are using Ockam for many [use cases](guides/use-cases/) across industries or dive into our step-by-step reference on our [command line](reference/command/) and [rust libraries](reference/libraries/).
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="reference/command/"><strong>Ockam Command</strong></a><strong></strong></td><td>Command line tools to build and orchestrate highly scalable and secure distributed applications. Orchestrate nodes, vaults, identities, credentials, secure channels, relays, portals and more.</td><td></td></tr><tr><td><strong></strong><a href="reference/libraries/"><strong>Ockam Programming Libraries</strong></a><strong></strong></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><a href="reference/command/"><strong>Ockam Command</strong></a></td><td>Command line tools to build and orchestrate highly scalable and secure distributed applications. Orchestrate nodes, vaults, identities, credentials, secure channels, relays, portals and more.</td><td></td></tr><tr><td><a href="reference/libraries/"><strong>Ockam Programming Libraries</strong></a></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td></tr></tbody></table>
 
 ## **Get help**
 
-We are here to help you build with Ockam. If you need help, **** [**please reach out to us**](https://www.ockam.io/contact)!
+We are here to help you build with Ockam. If you need help, \*\*\*\* [**please reach out to us**](https://www.ockam.io/contact)!
