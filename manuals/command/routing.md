@@ -1,5 +1,9 @@
 # Routing and Transports
 
+Ockam's Application Layer Routing protocol allows us to send messages over any number of hops, within one node, or across many nodes. This enables us to layer other protocols that provide end-to-end security and privacy guarantees.
+
+## Routing
+
 ```
 » ockam message send hello --to /node/n1/service/echo
 hello
