@@ -1,4 +1,0 @@
-# Ockam Programming Libraries
-
-
-

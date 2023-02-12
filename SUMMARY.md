@@ -20,9 +20,9 @@
 
 ## Reference
 
-* [Command](manuals/command/README.md)
-  * [Nodes and Workers](manuals/command/nodes.md)
-  * [Routing and Transports](manuals/command/routing.md)
+* [Command](reference/command/README.md)
+  * [Nodes and Workers](reference/command/nodes.md)
+  * [Routing and Transports](reference/command/routing.md)
 * [Programming Libraries](reference/libraries/README.md)
   * [Rust](reference/libraries/rust/README.md)
     * [Nodes and Workers](reference/libraries/rust/nodes.md)
