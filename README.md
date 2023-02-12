@@ -139,9 +139,9 @@ No more having to think about creating unique cryptographic keys and issuing cre
 
 ## Deep Dives
 
-Next [read more](./#use-cases) about how developers are using Ockam for many [use cases](guides/use-cases/) across industries or start building by diving into our step by step guides on [Ockam Command](manuals/command/) and [Ockam Programming Libraries](manuals/programming-libraries/).
+[Read more](guides/use-cases/) about how teams are using Ockam for many [use cases](guides/use-cases/) across industries or dive into our step-by-step reference on our [command line](manuals/command/) and [rust libraries](manuals/programming-libraries/).
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="manuals/command/"><strong>Ockam Command</strong></a><strong></strong></td><td>Command line tools to build and orchestrate highly scalable, secure, and private distributed applications. </td><td></td></tr><tr><td><strong></strong><a href="manuals/programming-libraries/"><strong>Ockam Programming Libraries</strong></a><strong></strong></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="manuals/command/"><strong>Ockam Command</strong></a><strong></strong></td><td>Command line tools to build and orchestrate highly scalable and secure distributed applications.</td><td></td></tr><tr><td><strong></strong><a href="manuals/programming-libraries/"><strong>Ockam Programming Libraries</strong></a><strong></strong></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td></tr></tbody></table>
 
 ## **Get help**
 
