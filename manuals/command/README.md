@@ -2,6 +2,46 @@
 
 <figure><img src="../../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM.png" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
+#### Install Ockam Command <a href="#install" id="install"></a>
+
+First, let’s install Ockam Command. Ockam Command is our Command Line Interface (CLI) to build and orchestrate secure distributed applications using Ockam.
+
+{% tabs %}
+{% tab title="Homebrew" %}
+If you use Homebrew, you can install Ockam using brew.
+
+
+
+```sh
+# Tap and install Ockam Command
+brew install build-trust/ockam/ockam
+```
+
+
+
+This will download a precompiled binary and add it to your path. If you don’t use Homebrew, you can also install on Linux and MacOS systems using curl. See instructions for other systems in the next tab.
+{% endtab %}
+
+{% tab title="Other Systems " %}
+On Linux and MacOS, you can download precompiled binaries for your architecture using curl.
+
+
+
+```shell
+curl --proto '=https' --tlsv1.2 -sSf \
+    https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
+```
+
+
+
+After the binary downloads, please move it to a location that is in your shell's `$PATH`.
+
+```bash
+mv ockam /usr/local/bin
+```
+{% endtab %}
+{% endtabs %}
+
 Ockam Open Source tools and programming libraries enable applications to:
 
 * Safely Generate, Store, Rotate and Revoke **Cryptographic Keys.**
