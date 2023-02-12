@@ -32,3 +32,5 @@
     * [Implementation and Internals](reference/libraries/rust/internals/README.md)
       * [Nodes and Workers](reference/libraries/rust/internals/nodes.md)
     * [docs.rs/ockam](https://docs.rs/ockam/)
+* [Protocols](reference/protocols/README.md)
+  * [Routing and Transports](reference/protocols/routing-and-transports.md)
