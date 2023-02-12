@@ -51,10 +51,6 @@ curl --proto '=https' --tlsv1.2 -sSf \
 
 
 After the binary downloads, please move it to a location that is in your shell's `$PATH`.
-
-```bash
-mv ockam /usr/local/bin
-```
 {% endtab %}
 {% endtabs %}
 
