@@ -44,13 +44,18 @@ On Linux and MacOS, you can download precompiled binaries for your architecture 
 
 
 ```shell
- curl --proto '=https' --tlsv1.2 -sSf \
-   https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
+curl --proto '=https' --tlsv1.2 -sSf \
+    https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
 ```
 
 
 
-After the binary downloads, please move it to a location that is in your shell's `$PATH`, for example `/usr/local/bin`.
+After the binary downloads, please move it to a location that is in your shell's `$PATH`.
+
+```bash
+mv ockam /usr/local/bin
+ockam --version
+```
 {% endtab %}
 {% endtabs %}
 
