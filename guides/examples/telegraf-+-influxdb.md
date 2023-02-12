@@ -10,7 +10,7 @@ We're currently partnering with InfluxData on even more enhancements to this int
 
 ### Prerequisites
 
-* [Ockam Command](../../#install-ockam-command)
+* [Ockam Command](broken-reference)
 * [InfluxDB](https://docs.influxdata.com/influxdb/v2.6/install/)
 * [Influx CLI](https://docs.influxdata.com/influxdb/v2.6/tools/influx-cli/)
 * [Telegraf](https://github.com/influxdata/telegraf)

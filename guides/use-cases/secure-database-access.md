@@ -22,7 +22,7 @@ Service-to-database use cases can have more fine-grained control applied on top 
 
 ### Get started
 
-You can see an end-to-end example of this in our [basic web app demo](../examples/basic-web-app.md), or follow our [getting started guide to install Ockam](../../#quick-start) and start using it in just a few minutes.
+You can see an end-to-end example of this in our [basic web app demo](../examples/basic-web-app.md), or follow our [getting started guide to install Ockam](broken-reference) and start using it in just a few minutes.
 
 We'd also love to talk to you in more detail about your potential use cases, so [please reach out to the team](https://www.ockam.io/contact/form) to chat.
 
