@@ -54,7 +54,6 @@ After the binary downloads, please move it to a location that is in your shell's
 
 ```bash
 mv ockam /usr/local/bin
-ockam --version
 ```
 {% endtab %}
 {% endtabs %}
