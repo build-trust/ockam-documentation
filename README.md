@@ -135,7 +135,7 @@ No more having to think about creating unique cryptographic keys and issuing cre
 
 ## Deep Dives
 
-Now that you understand how Ockam empowers you to add strong security controls and guarantees to any application, [read more](./#use-cases) about how developers are using Ockam for many [use cases across industries](./#use-cases) or start building by diving into our command line and programming libraries:&#x20;
+Now that you understand how Ockam empowers you to add strong security controls and guarantees to any application, [read more](./#use-cases) about how developers are using Ockam for many [use cases](guides/use-cases/) across industries or start building by diving into our [command line](manuals/command/) and p[rogramming libraries](manuals/programming-libraries/).
 
 <table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="manuals/command/"><strong>Ockam Command</strong></a><strong></strong></td><td>A command line interface to build and orchestrate highly scalable, secure, and private distributed applications.</td><td></td></tr><tr><td><strong></strong><a href="manuals/programming-libraries/"><strong>Ockam Programming Libraries</strong></a><strong></strong></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td></tr></tbody></table>
 
