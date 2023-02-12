@@ -6,10 +6,6 @@ description: >-
 
 # Command
 
-<figure><img src="../../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM.png" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
-
-#### Install Ockam Command <a href="#install" id="install"></a>
-
 First, let’s install Ockam Command. Ockam Command is our Command Line Interface (CLI) to build and orchestrate secure distributed applications using Ockam.
 
 {% tabs %}
@@ -68,5 +64,5 @@ Ockam Open Source tools and programming libraries enable applications to:
 
 In this step-by-step guide we try various Ockam sub commands to understand the various building blocks that make up Ockam.
 
-
+<figure><img src="../../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM.png" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 

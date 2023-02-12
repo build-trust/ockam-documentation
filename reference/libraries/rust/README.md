@@ -7,8 +7,6 @@ description: >-
 
 # Rust
 
-##
-
 {% tabs %}
 {% tab title="Get Started" %}
 If you don't have it, please [install](https://www.rust-lang.org/tools/install) the latest version of Rust.
@@ -30,14 +28,6 @@ cargo new --lib hello_ockam && cd hello_ockam && mkdir examples \
 
 If the above instructions don't work on your machine, please [post a question](https://github.com/build-trust/ockam/discussions), we’d love to help.
 {% endtab %}
-
-{% tab title="Second Tab" %}
-
-{% endtab %}
 {% endtabs %}
-
-##
-
-
 
 <figure><img src="../../../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM.png" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
