@@ -18,11 +18,11 @@ Through the use of authenticated secure channels your database is able to regist
 
 As a result, the only way to establish a connection to the database is via an Ockam secure channel: an end-to-end encrypted and authenticated connection between the two nodes. These connections are established and authenticated on-demand. The just-in-time nature of this means no long-lived assumptions about what other networks or ports should be open and permanently allowed access to your database.
 
-Service-to-database use cases can have more fine-grained control applied on top of this via [Attribute-Based Access Control](../code-examples/). For restricting how people access services, such as the data scientist scenario outlined earlier, you can [integrate with your Identity Provider](use-employee-attributes-from-okta-to-build-trust-with-cryptographically-verifiable-credentials.md).
+Service-to-database use cases can have more fine-grained control applied on top of this via [Attribute-Based Access Control](../examples/). For restricting how people access services, such as the data scientist scenario outlined earlier, you can [integrate with your Identity Provider](use-employee-attributes-from-okta-to-build-trust-with-cryptographically-verifiable-credentials.md).
 
 ### Get started
 
-You can see an end-to-end example of this in our [basic web app demo](../code-examples/basic-web-app.md), or follow our [getting started guide to install Ockam](../../#quick-start) and start using it in just a few minutes.
+You can see an end-to-end example of this in our [basic web app demo](../examples/basic-web-app.md), or follow our [getting started guide to install Ockam](../../#quick-start) and start using it in just a few minutes.
 
 We'd also love to talk to you in more detail about your potential use cases, so [please reach out to the team](https://www.ockam.io/contact/form) to chat.
 

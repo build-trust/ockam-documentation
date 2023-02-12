@@ -105,13 +105,13 @@ In the example above, we’ve created two nodes and established an end-to-end se
 
 Distributed applications that are connected in this way can communicate without the risk of spoofing, tampering, or eavesdropping attacks irrespective of transport protocols, communication topologies, and network configuration. As application data flows _across data centers, through queues and caches, via gateways and brokers -_ these intermediaries, like the cloud relay in the above example, can facilitate communication but cannot eavesdrop or tamper data.
 
-You can establish secure channels across networks and clouds over multi-hop, multi-protocol routes to build private and [secure by design](readme/secure-by-design.md) distributed applications that have a small vulnerability surface and full control over data authenticity, integrity, and confidentiality.
+You can establish secure channels across networks and clouds over multi-hop, multi-protocol routes to build private and [secure by design](introduction/secure-by-design.md) distributed applications that have a small vulnerability surface and full control over data authenticity, integrity, and confidentiality.
 
 #### Trust for data-in-motion
 
 Behind the scenes, the above commands generated unique cryptographically provable identities and saved corresponding keys in a vault. Your orchestrator project was provisioned with a managed credential authority and every node was setup to anchor trust in credentials issued by this authority. Identities were issued project membership credentials and these cryptographically verifiable credentials were then combined with attribute based access control policies to setup a mutually authenticated and authorized end-to-end secure channel.
 
-Your applications can make granular access control decisions at every request because they can be certain about the source and integrity of all data and instructions. You place [zero implicit trust](readme/secure-by-design.md#zero-implicit-trust) in network boundaries and intermediaries to build applications that have end-to-end application layer trust for all data in motion.
+Your applications can make granular access control decisions at every request because they can be certain about the source and integrity of all data and instructions. You place [zero implicit trust](introduction/secure-by-design.md#zero-implicit-trust) in network boundaries and intermediaries to build applications that have end-to-end application layer trust for all data in motion.
 
 #### Powerful protocols, made simple
 
@@ -139,9 +139,9 @@ No more having to think about creating unique cryptographic keys and issuing cre
 
 ## Deep Dives
 
-[Read more](guides/use-cases/) about how teams are using Ockam for many [use cases](guides/use-cases/) across industries or dive into our step-by-step reference on our [command line](manuals/command/) and [rust libraries](manuals/programming-libraries/).
+[Read more](guides/use-cases/) about how teams are using Ockam for many [use cases](guides/use-cases/) across industries or dive into our step-by-step reference on our [command line](manuals/command/) and [rust libraries](reference/libraries/).
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="manuals/command/"><strong>Ockam Command</strong></a><strong></strong></td><td>Command line tools to build and orchestrate highly scalable and secure distributed applications. Orchestrate nodes, vaults, identities, credentials, secure channels, relays, portals and more.</td><td></td></tr><tr><td><strong></strong><a href="manuals/programming-libraries/"><strong>Ockam Programming Libraries</strong></a><strong></strong></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th></tr></thead><tbody><tr><td><strong></strong><a href="manuals/command/"><strong>Ockam Command</strong></a><strong></strong></td><td>Command line tools to build and orchestrate highly scalable and secure distributed applications. Orchestrate nodes, vaults, identities, credentials, secure channels, relays, portals and more.</td><td></td></tr><tr><td><strong></strong><a href="reference/libraries/"><strong>Ockam Programming Libraries</strong></a><strong></strong></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td></tr></tbody></table>
 
 ## **Get help**
 

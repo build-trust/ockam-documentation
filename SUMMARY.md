@@ -1,8 +1,8 @@
 # Table of contents
 
 * [Introduction to Ockam](README.md)
-  * [Secure by design](readme/secure-by-design.md)
-  * [Virtually adjacent](readme/virtually-adjacent.md)
+  * [Secure by design](introduction/secure-by-design.md)
+  * [Virtually adjacent](introduction/virtually-adjacent.md)
 
 ## Guides
 
@@ -13,18 +13,18 @@
   * [Apply fine-grained permissions with Attribute-Based Access Control (ABAC)](guides/use-cases/apply-fine-grained-permissions-with-attribute-based-access-control-abac.md)
   * [Use employee attributes from Okta to Build Trust with Cryptographically Verifiable Credentials](guides/use-cases/use-employee-attributes-from-okta-to-build-trust-with-cryptographically-verifiable-credentials.md)
   * [Create secure communication with a private database, from anywhere](guides/use-cases/create-secure-communication-with-a-private-database-from-anywhere.md)
-* [Code Examples](guides/code-examples/README.md)
-  * [Basic Web App](guides/code-examples/basic-web-app.md)
-  * [Telegraf + InfluxDB](code-examples/telegraf-+-influxdb.md)
-  * [End-to-end encrypted Kafka](guides/code-examples/end-to-end-encrypted-kafka.md)
+* [Code Examples](guides/examples/README.md)
+  * [Basic Web App](guides/examples/basic-web-app.md)
+  * [Telegraf + InfluxDB](guides/examples/telegraf-+-influxdb.md)
+  * [End-to-end encrypted Kafka](guides/examples/end-to-end-encrypted-kafka.md)
 
 ## Reference
 
 * [Command](manuals/command/README.md)
   * [Nodes and Workers](manuals/command/nodes.md)
   * [Routing and Transports](manuals/command/routing.md)
-* [Programming Libraries](manuals/programming-libraries/README.md)
-  * [Rust](manuals/programming-libraries/rust/README.md)
-    * [Nodes and Workers](manuals/programming-libraries/rust/nodes.md)
-    * [Routing and Transports](manuals/programming-libraries/rust/routing.md)
+* [Programming Libraries](reference/libraries/README.md)
+  * [Rust](reference/libraries/rust/README.md)
+    * [Nodes and Workers](reference/libraries/rust/nodes.md)
+    * [Routing and Transports](reference/libraries/rust/routing.md)
     * [docs.rs/ockam](https://docs.rs/ockam/)

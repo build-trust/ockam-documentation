@@ -1,10 +1,10 @@
 ---
 description: >-
-  Decouple applications from the host environment and get simple interfaces to
-  complex, stateful, and asynchronous message-based protocols.
+  Decouple applications from the host environment and enable simple interfaces
+  to complex, stateful, and asynchronous message-based protocols.
 ---
 
-# Nodes, Workers, and Services
+# Nodes and Workers
 
 At Ockam’s core are a collection of cryptographic and messaging protocols. These protocols make it possible to create **private** and **secure by design** applications that provide end-to-end application layer trust it data.
 
