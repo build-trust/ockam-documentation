@@ -39,15 +39,9 @@ Replier:
 
 
 
-<figure><img src="../../../.gitbook/assets/one-hop (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../../.gitbook/assets/two-hops (2).png" alt=""><figcaption></figcaption></figure>
-
-
-
-<figure><img src="../../../.gitbook/assets/n-hops.png" alt=""><figcaption></figcaption></figure>
 
 
 
