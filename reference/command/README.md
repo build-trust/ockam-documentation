@@ -8,7 +8,9 @@ description: >-
 
 Ockam Command is our Command Line Interface (CLI) to build highly secure distributed applications. It makes it easy to orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.
 
-No more having to think about creating unique cryptographic keys and issuing credentials to all application entities. No more designing ways to safely store secrets in hardware and securely distribute roots of trust. In a few simple commands your applications get:
+No more having to think about creating unique cryptographic keys and issuing credentials to your fleet of application entities. No more designing ways to safely store secrets in hardware and securely distribute roots of trust.
+
+In a few simple commands your applications get:
 
 #### End-to-end data authenticity, integrity, and privacy in any communication topology
 
