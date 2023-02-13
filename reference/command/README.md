@@ -6,7 +6,31 @@ description: >-
 
 # Command
 
-First, let’s install Ockam Command. Ockam Command is our Command Line Interface (CLI) to build and orchestrate secure distributed applications using Ockam.
+Ockam Command is our Command Line Interface (CLI) to build and orchestrate secure distributed applications using Ockam.
+
+#### End-to-end data authenticity, integrity, and privacy in any communication topology
+
+* Create end-to-end encrypted, authenticated secure channels over any transport topology.
+* Create secure channels over multi-hop, multi-protocol routes - TCP, UDP, WebSockets, BLE, etc.
+* Provision encrypted relays for applications distributed across many edge, cloud and data-center private networks.
+* Make legacy protocols secure by tunneling them through mutually authenticated and encrypted portals.
+* Bring end-to-end encryption to enterprise messaging, pub/sub and event streams - Kafka, Kinesis, RabbitMQ etc.
+
+#### Identity-based, policy driven, application layer trust – granular authentication and authorization
+
+* Generate cryptographically provable unique identities.
+* Store private keys in safe vaults - hardware secure enclaves and cloud key management systems.
+* Operate scalable credential authorities to issue lightweight, short-lived, revokable, attribute-based credentials.
+* Onboard fleets of self-sovereign application identities using secure enrollment protocols.
+* Rotate and revoke keys and credentials – at scale, across fleets.
+* Define and enforce project-wide attribute based access control policies - ABAC, RBAC or ACLs.
+* Integrate with enterprise identity providers and policy providers for seamless employee access.
+
+<figure><img src="../../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM.png" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
+
+## A step by step introduction
+
+In this step-by-step guide we try various Ockam sub commands to understand the various building blocks that make up Ockam.
 
 {% tabs %}
 {% tab title="Homebrew" %}
@@ -43,26 +67,3 @@ mv ockam /usr/local/bin
 ```
 {% endtab %}
 {% endtabs %}
-
-Ockam Open Source tools and programming libraries enable applications to:
-
-* Safely Generate, Store, Rotate and Revoke **Cryptographic Keys.**
-* Generate unique cryptographically provable **Identifiers** and manage private keys in safe **Vaults.**
-* Enable **Vault Add-Ons** for various TEEs, TPMs, HSMs, Secure Enclaves, and Cloud KMSs.
-* Create **Credential Authorities** to issue lightweight, fine-grained attribute-based credentials**.**
-* Securely Issue, Store, Present, and Verify cryptographically verifiable **Credentials**.
-* Define and enforce Attribute Based Access Control (ABAC) **Policies**.
-* Deliver messages reliably over any Transport topology using - Application Layer **Routing**.
-* Create end-to-end encrypted, mutually authenticated, and authorized **Secure Channels** over multi-hop, multi-protocol **Transport** topologies.
-* Enable **Transport Add-Ons** for various protocols TCP, UDP, WebSockets, BLE, LoRaWAN etc.
-* Securely traverse NATs and protocol gateways using **** end-to-end encrypted **Relays.**&#x20;
-* Tunnel any application protocol through mutually authenticated and encrypted **Portals.**
-* Operate in **any environment** - cloud virtual machines or constrained embedded devices.
-* Integrate deeply using our **rust** **library** or run as an application **sidecar** process or container.
-* Licensed under the Apache 2.0 open source license.&#x20;
-* Community Support.
-
-In this step-by-step guide we try various Ockam sub commands to understand the various building blocks that make up Ockam.
-
-<figure><img src="../../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM.png" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
-
