@@ -31,6 +31,8 @@
   * [Rust](reference/libraries/rust/README.md)
     * [Nodes and Workers](reference/libraries/rust/nodes.md)
     * [Routing and Transports](reference/libraries/rust/routing.md)
+    * [Vaults and Idenities](reference/libraries/rust/vaults-and-idenities.md)
+    * [Secure Channels](reference/libraries/rust/secure-channels.md)
     * [Implementation and Internals](reference/libraries/rust/internals/README.md)
       * [Nodes and Workers](reference/libraries/rust/internals/nodes.md)
     * [docs.rs/ockam](https://docs.rs/ockam/)
