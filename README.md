@@ -131,7 +131,7 @@ No more having to think about creating unique cryptographic keys and issuing cre
 
 * Generate cryptographically provable unique identities.
 * Store private keys in safe vaults - hardware secure enclaves and cloud key management systems.
-* Operate scalable credential authorities to issue lightweight, short-lived, easy to revoke, attribute-based credentials.
+* Operate scalable credential authorities to issue lightweight, short-lived, revokable, attribute-based credentials.
 * Onboard fleets of self-sovereign application identities using secure enrollment protocols.
 * Rotate and revoke keys and credentials – at scale, across fleets.
 * Define and enforce project-wide attribute based access control policies - ABAC, RBAC or ACLs.
