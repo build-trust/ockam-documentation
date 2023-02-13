@@ -6,7 +6,7 @@ description: >-
 
 # Command
 
-Ockam Command is our Command Line Interface (CLI) to build and orchestrate secure distributed applications using Ockam.
+Ockam Command is our Command Line Interface (CLI) to build secure distributed applications.
 
 #### End-to-end data authenticity, integrity, and privacy in any communication topology
 
