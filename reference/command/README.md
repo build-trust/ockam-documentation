@@ -1,7 +1,7 @@
 ---
 description: >-
-  Command line tools to build and orchestrate highly scalable and secure
-  distributed applications.
+  Command line tools to build and orchestrate highly secure distributed
+  applications.
 ---
 
 # Command
