@@ -14,7 +14,7 @@ Modern applications are distributed and have an unwieldy number of interconnecti
 
 ## Quick Start
 
-Let's build a quick solution for a very common secure communication topology that applies to many real world use cases.
+Let's build a solution for a very common secure communication topology that applies to many real world use cases.
 
 An application service and an application client running in two private networks wish to securely communicate with each other without exposing ports on the Internet. In a few simple commands, we’ll make them safely talk to each other through an End-to-End Encrypted Cloud Relay.
 
