@@ -1,20 +1,18 @@
 # Nodes and Workers
 
-## ockam-core crate
+The `ockam-core` crate defines types and modules for creating routes and sending messages:
 
-The `ockam-core` crate defines types for creating routes and sending of messages:
+* An <mark style="color:orange;">`Address`</mark> is a data structure to describe a location that can receive a message.
+* Each <mark style="color:orange;">`Address`</mark> has a <mark style="color:orange;">`TransportType`</mark> and a  <mark style="color:orange;">`Vec<u8>`</mark> value.
+* <mark style="color:orange;">`TransportType`</mark> <mark style="color:orange;"></mark><mark style="color:orange;"></mark> represents the mechanism that should be used to deliver a message to this address.
 
-* `Address`: a location on a machine, accessible via a `TransportType`
+
+
 * `TransportType`: a type of protocol for routing payloads between addresses
 * `Route`: a list of addresses used to send messages between peers
 * `TransportMessage`: a payload that is routed between a sender and a receiver through a `Route`. The deserialized payload can be processed by a `Worker` at the end of the onward route and messages created by a worker can be sent through the return route.
 * `LocalMessage`: a `TransportMessage` with additional metadata which is safe to be read inside a local node
 * `RelayMessage`: a `LocalMessage` with a source and destination which might be different than the end of the underlying return route and the end of the underlying onward route
-* `Mailbox`: an `Address` with access control policies used when a `Worker` receives or emits messages
-* `Mailboxes`: a list of `Addresses` for a `Worker` with a main address and some alias addresses
-* `AccessControl`: a policy for authorizing a `RelayMessage`, either before its processing by a `Worker` or a message sent by a `Worker`
-* `Worker`: an asynchronous handler of messages
-* `Processor`: an asynchronous activity producing side-effects (reading from a socket for example)
 
 This diagram shows the relationships for messages:
 
@@ -23,12 +21,15 @@ This diagram shows the relationships for messages:
 title: Messages
 ---
 classDiagram
+
     class TransportType
     TransportType <|-- TCP
     TransportType <|-- UDP
     TransportType <|-- BLE
+
     class Address
     Address --> TransportType
+
     class Route
     Route "1" o-- "1..n" Address
 
@@ -42,6 +43,7 @@ classDiagram
     class LocalMessage
     LocalMessage --> TransportMessage
     LocalMessage "1" o-- "0..n" LocalInfo
+
     class LocalInfo {
       type: String
       data: Vec[u8]
@@ -51,11 +53,18 @@ classDiagram
       source: Address
       destination: Address
     }
+
     RelayMessage --> LocalMessage
-    class Mailbox
+    
 ```
 
 This diagram shows the relationships for mailboxes:
+
+* `Mailbox`: an `Address` with access control policies used when a `Worker` receives or emits messages
+* `Mailboxes`: a list of `Addresses` for a `Worker` with a main address and some alias addresses
+* `AccessControl`: a policy for authorizing a `RelayMessage`, either before its processing by a `Worker` or a message sent by a `Worker`
+* `Worker`: an asynchronous handler of messages
+* `Processor`: an asynchronous activity producing side-effects (reading from a socket for example)
 
 ```mermaid
 ---
@@ -68,6 +77,7 @@ classDiagram
 
     class Address
     Mailbox --> "1" Address
+
     class Mailboxes
     Mailboxes *--> "1" Mailbox: main
     Mailboxes *--> "0..n" Mailbox: aliases
