@@ -23,6 +23,8 @@
 * [Command](reference/command/README.md)
   * [Nodes and Workers](reference/command/nodes.md)
   * [Routing and Transports](reference/command/routing.md)
+  * [Vaults and Identities](reference/command/vaults-and-identities.md)
+  * [Secure Channels and Identifier Authentication ](reference/command/secure-channels.md)
   * [Implementation and Internals](reference/command/internals/README.md)
     * [Nodes and Workers](reference/command/internals/nodes.md)
 * [Programming Libraries](reference/libraries/README.md)
