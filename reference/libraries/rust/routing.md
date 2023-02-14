@@ -10,7 +10,7 @@ Ockam's Application Layer Routing protocol allows us to send messages over any n
 
 So far, we've created an [`"echoer"` worker](nodes.md#echoer-worker) in our node, sent it a message, and received a reply. This worker was a simple one hop away from our [`"app"` worker.](nodes.md#app-worker)
 
-To achieve this, messages carry with them two meta fields: `onward_route` and `return_route`, where a route is a list of addresses.
+To achieve this, messages carry with them two metadata fields: `onward_route` and `return_route`, where a route is a list of addresses.
 
 To get a sense of how that works, let's route a message over two hops.
 
