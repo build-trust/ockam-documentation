@@ -8,7 +8,7 @@
 
 * [Use Cases](guides/use-cases/README.md)
   * [Secure database access](guides/use-cases/secure-database-access.md)
-  * [Connecting distributed clients to time series backends](guides/use-cases/connecting-distributed-clients-to-time-series-backends.md)
+  * [Connect distributed clients to time series backends](guides/use-cases/connecting-distributed-clients-to-time-series-backends.md)
   * [Add end-to-end encryption to any client and server application, with no code change](guides/use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change.md)
   * [Apply fine-grained permissions with Attribute-Based Access Control (ABAC)](guides/use-cases/apply-fine-grained-permissions-with-attribute-based-access-control-abac.md)
   * [Use employee attributes from Okta to Build Trust with Cryptographically Verifiable Credentials](guides/use-cases/use-employee-attributes-from-okta-to-build-trust-with-cryptographically-verifiable-credentials.md)
