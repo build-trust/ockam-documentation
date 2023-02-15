@@ -1,0 +1,19 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName Courier
+skinparam roundcorner 0
+
+hide footbox
+
+|||
+
+app ->  echoer: 'Hello Ockam!'
+
+|||
+|||
+
+echoer -> app: 'Hello Ockam!'
+
+|||
+
+@enduml

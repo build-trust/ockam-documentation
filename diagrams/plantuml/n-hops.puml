@@ -1,0 +1,22 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName Courier
+skinparam roundcorner 0
+skinparam wrapWidth 175
+
+|||
+
+note over hn
+Each hop
+
+- Removes its own address from the beginning of onward_route.
+
+- Adds its own address to beginning of return_route.
+end note
+
+
+[--> hn: {\n  'payload': 'Hello'\n  'onward_route': ['hn', 'hn+1', ..., 'echoer']\n  'return_route': ['hn-1', ..., 'h1', 'app']\n}
+hn -->]: {\n  'payload': 'Hello'\n  'onward_route': ['hn+1', ..., 'echoer']\n  'return_route': ['hn', 'hn-1', ..., 'h1', 'app']\n}
+
+|||
+@enduml

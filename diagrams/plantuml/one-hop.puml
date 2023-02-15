@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName Courier
+skinparam roundcorner 0
+skinparam wrapWidth 175
+
+hide footbox
+
+note over app
+Sender
+
+- Knows the onward_route to a destination.
+
+- Makes its own address the return_route.
+end note
+app ->  echoer: {\n  'payload': 'Hello'\n  'onward_route': ['echoer']\n  'return_route': ['app']\n}
+
+|||
+|||
+
+note over echoer
+Replier
+
+- Makes return_route of incoming message the onward_route of outgoing message.
+
+- Makes its own address the return_route of the outgoing message.
+end note
+echoer -> app: {\n  'payload': 'Hello'\n  'onward_route': ['app']\n  'return_route': ['echoer']\n}
+
+@enduml
