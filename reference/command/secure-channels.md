@@ -1,6 +1,6 @@
 # Secure Channels
 
-```
+```shell-session
 » ockam node create n1
 » ockam node create n2
 
