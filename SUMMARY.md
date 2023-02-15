@@ -25,8 +25,6 @@
   * [Routing and Transports](reference/command/routing.md)
   * [Vaults and Identities](reference/command/vaults-and-identities.md)
   * [Secure Channels](reference/command/secure-channels.md)
-  * [Implementation and Internals](reference/command/internals/README.md)
-    * [Nodes and Workers](reference/command/internals/nodes.md)
 * [Programming Libraries](reference/libraries/README.md)
   * [Rust](reference/libraries/rust/README.md)
     * [Nodes and Workers](reference/libraries/rust/nodes.md)
