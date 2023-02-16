@@ -1,7 +1,8 @@
 ---
 description: >-
-  Decouple applications from the host environment and enable simple interfaces
-  to complex, stateful, and asynchronous message-based protocols.
+  Ockam Nodes and Workers decouple applications from the host environment and
+  enable simple interfaces to complex, stateful, and asynchronous message-based
+  protocols.
 ---
 
 # Nodes and Workers

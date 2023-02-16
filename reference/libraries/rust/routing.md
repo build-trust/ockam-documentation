@@ -1,5 +1,7 @@
 ---
-description: Enable protocols that provide end-to-end security and privacy guarantees.
+description: >-
+  Ockam’s Application Layer Routing protocol makes it possible to create
+  protocols that provide end-to-end security and privacy guarantees.
 ---
 
 # Routing and Transports
