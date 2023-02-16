@@ -1,6 +1,20 @@
 # Nodes and Workers
 
 ```mermaid
+---
+title: ctx.start_worker("echoer", Echoer, AllowAll, AllowAll)
+---
+sequenceDiagram
+  User->>Context(app): 1. start_worker
+  Context(app)->>Context(worker): 2. create worker context
+  Context(worker)->>WorkerRelay: 3. create worker relay
+  WorkerRelay->>WorkerRelay: 4. start receiving loop
+  Context(worker)->>Router: 5. send(StartWorker)
+  Router->>Router: 6. register(worker address, context sender)
+
+```
+
+```mermaid
 
 sequenceDiagram
   User->>Context(app): 1. send("echoer", "Hello Ockam!")
