@@ -125,7 +125,7 @@ Ockam [Nodes](nodes.md#node) run very lightweight, concurrent, and stateful acto
 
 When a worker is started on a node, it is given one or more addresses. The node maintains a mailbox for each address and whenever a message arrives for a specific address it delivers that message to the corresponding registered worker. In response to a message, an worker can: make local decisions, change its internal state, create more workers, or send more messages.
 
-You see the list of workers in a node by running:
+You can see the list of workers in a node by running:
 
 ```
 » ockam worker list --at n1
@@ -139,7 +139,7 @@ Node: n1
     ...
 ```
 
-Note the workers in node `n1` with address `echo` and `uppercase`. We’ll send them some messages below as we look at services. A node can also deliver messages to workers on a different node using the Ockam Routing Protocol and its Transports. Later in this guide, when we dig into routing, we’ll send some messages across nodes.
+Note the workers in node `n1` with address `echo` and `uppercase`. We’ll send them some messages below as we look at services. A node can also deliver messages to workers on a different node using the [Ockam Routing Protocol](routing.md) and its Transports. Later in this guide, when we [dig into routing](routing.md), we’ll send some messages across nodes.
 
 From Ockam Command, we don’t usually create workers directly but instead start predefined [services](nodes.md#service) like Transports and Secure Channels that in turn start one or more workers. Using the Ockam [Rust Library](broken-reference) you can also build your own workers.
 
