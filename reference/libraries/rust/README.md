@@ -31,9 +31,11 @@ No more having to think about creating unique cryptographic keys and issuing cre
 
 <figure><img src="../../../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM (1).png" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
-## A step by step introduction
+## A step by step introduction <a href="#introduction" id="introduction"></a>
 
-In this step-by-step guide we try various various building blocks that make up Ockam.
+Ockam Rust crates provide the above collection of composable building blocks. In a step-by-step hands-on guide let’s walk through each building block to understand how you can use them to build end-to-end trustful communication for any application in any communication topology.
+
+The first step is to install Rust and create a cargo project called `hello_ockam` We’ll use this project to try out various examples.
 
 {% tabs %}
 {% tab title="Get Started" %}
@@ -57,3 +59,4 @@ cargo new --lib hello_ockam && cd hello_ockam && mkdir examples \
 If the above instructions don't work on your machine, please [post a question](https://github.com/build-trust/ockam/discussions), we’d love to help.
 {% endtab %}
 {% endtabs %}
+
