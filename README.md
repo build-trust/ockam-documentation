@@ -55,6 +55,8 @@ After the binary downloads, please move it to a location that is in your shell's
 ```bash
 mv ockam /usr/local/bin
 ```
+
+If the above instructions don't work on your machine, please [post a question](https://github.com/build-trust/ockam/discussions), we’d love to help.
 {% endtab %}
 {% endtabs %}
 
