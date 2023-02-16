@@ -32,7 +32,7 @@ In a few simple commands your applications get:
 
 <figure><img src="../../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM (1).png" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
-## A step by step introduction
+## A step by step introduction <a href="#introduction" id="introduction"></a>
 
 Ockam Command provides a collection of composable building blocks that are accessible through various sub commands. In this step-by-step guide we try various Ockam sub commands to understand how you can use them to build end-to-end trustful communication for any application.
 
@@ -75,3 +75,13 @@ mv ockam /usr/local/bin
 ```
 {% endtab %}
 {% endtabs %}
+
+Check that everything was installed correctly by enrolling with Ockam Orchestrator.
+
+```sh
+# This will create a Space and Project for you in Ockam Orchestrator and provision
+# an End-to-End Encrypted Cloud Relay service in your default project at /project/default.
+ockam enroll
+```
+
+Next let‘s dive in and learn [how use nodes and workers](nodes.md).
