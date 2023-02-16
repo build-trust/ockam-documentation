@@ -1,5 +1,9 @@
 # Secure Channels
 
+Now that we understand the basics of Nodes, Workers, and Routing ... let's create our first encrypted secure channel.
+
+Establishing a secure channel requires establishing a shared secret key between the two entities that wish to communicate securely. This is usually achieved using a cryptographic key agreement protocol to safely derive a shared secret without transporting it over the network. In Ockam, we currently have support for two different key agreement protocols - one based on the Noise Protocol Framework and another based on Signal's X3DH design.
+
 ```shell-session
 » ockam node create n1
 » ockam node create n2
