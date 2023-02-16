@@ -36,9 +36,9 @@ In a few simple commands your applications get:
 
 Ockam Command provides a collection of composable building blocks that are accessible through various sub commands. In this step-by-step guide we try various Ockam sub commands to understand how you can use them to build end-to-end trustful communication for any application.
 
+#### Install Ockam Command <a href="#install" id="install"></a>
 
-
-If you haven't already, the first step is to install Ockam Command
+If you haven't already, the first step is to install Ockam Command:
 
 {% tabs %}
 {% tab title="Homebrew" %}
