@@ -34,7 +34,7 @@ In a few simple commands your applications get:
 
 ## A step by step introduction <a href="#introduction" id="introduction"></a>
 
-Ockam Command provides a collection of composable building blocks that are accessible through various sub commands. In this step-by-step guide we try various Ockam sub commands to understand how you can use them to build end-to-end trustful communication for any application.
+Ockam Command provides the above collection of composable building blocks that are accessible through various sub commands. In a step-by-step guide let’s walk through various Ockam sub commands to understand how you can use them to build end-to-end trustful communication for any application in any communication topology.
 
 #### Install Ockam Command <a href="#install" id="install"></a>
 
