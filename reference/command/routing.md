@@ -18,10 +18,21 @@ We want to enable [secure channels](secure-channels.md) that have end-to-end gua
 
 ## Routing
 
+Let’s start by creating a node and sending it a message.
+
 ```
+» ockam node create n1
+...
+
 » ockam message send hello --to /node/n1/service/echo
 hello
 ```
+
+We get a reply back and the message flow looked like this.
+
+To achieve this, Ockam Routing Protocols messages carry with them two metadata fields: `onward_route` and `return_route`, where a route is a list of addresses.
+
+
 
 <figure><img src="../../diagrams/plantuml/simple/simple.001.jpeg" alt=""><figcaption></figcaption></figure>
 
