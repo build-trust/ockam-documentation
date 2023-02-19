@@ -37,7 +37,3 @@
     * [docs.rs/ockam](https://docs.rs/ockam/)
 * [Protocols](reference/protocols/README.md)
   * [Routing and Transports](reference/protocols/routing-and-transports.md)
-
-***
-
-* [Star us on Github](https://github.com/build-trust/ockam)
