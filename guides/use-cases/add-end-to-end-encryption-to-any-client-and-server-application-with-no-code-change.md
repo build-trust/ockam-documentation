@@ -26,7 +26,7 @@ ockam forwarder create server_sidecar --at /node/relay --to /node/server_sidecar
 # -- APPLICATION CLIENT --
 
 ockam node create client_sidecar
-ockam secure-channel create --from /node/client_sidecar --to /node/relay/service/hop/service/forward_to_server_sidecar/service/api \
+ockam secure-channel create --from /node/client_sidecar --to /node/relay/service/forward_to_server_sidecar/service/api \
     | ockam tcp-inlet create --at /node/client_sidecar --from 127.0.0.1:7000 --to -/service/outlet
 
 curl --head 127.0.0.1:7000
