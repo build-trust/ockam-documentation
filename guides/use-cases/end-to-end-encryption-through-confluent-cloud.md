@@ -16,3 +16,6 @@ Ockam's Confluent Cloud add-on is a drop-in solution at both the producer and co
 
 ### Get started
 
+You can see an example of this in our [end-to-end encrypted Kafka](../examples/end-to-end-encrypted-kafka.md) demo, or follow our [getting started guide to install Ockam](broken-reference) and start using it in just a few minutes.
+
+We'd also love to talk to you in more detail about your potential use cases, so [please reach out to the team](https://www.ockam.io/contact/form) to chat.
