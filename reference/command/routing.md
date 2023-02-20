@@ -1,14 +1,14 @@
 ---
 description: >-
-  Ockam’s Application Layer Routing protocol enables other Ockam protocols to
-  provide end-to-end guarantees.
+  Application Layer Routing protocol enables other Ockam protocols to provide
+  end-to-end trust guarantees.
 ---
 
 # Routing and Transports
 
 Data, within modern applications, routinely flows over complex, multi-hop, multi-protocol routes — across network boundaries, beyond data centers, through queues and caches, via gateways and brokers — before reaching its end destination.
 
-Traditionally secure communication protocols are tightly coupled with transport protocols. For example most TLS[^1] implementations are coupled with TCP[^2] in a way that all the security guarantees of TLS are limited to the length and duration of the underlying TCP connection.
+Traditional secure communication protocol implementations are tightly coupled with transport protocols. For example most TLS[^1] implementations are coupled with TCP[^2] in a way that all the security guarantees of TLS are limited to the length and duration of the underlying TCP connection.
 
 If your application’s data and requests travel over two TCP connection hops `TCP -> TCP` then all TLS guarantees break at the bridge between the two networks. This bridge, gateway or load balancer then becomes a point of weakness for application data. To makes matters worse, if you don't setup another mutually authenticated TLS connection on the second hop between the gateway and your destination server then the entire second hop network – all applications and machines within it – become an attack vector to your application and its data.&#x20;
 
