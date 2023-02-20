@@ -10,7 +10,7 @@ Ockam Command is our command line interface to build secure by design applicatio
 
 In a few simple commands your applications get:
 
-<mark style="color:orange;">\_\_End-to-end data authenticity, integrity, and privacy in any communication topology\_\_</mark>
+<mark style="color:orange;">End-to-end data authenticity, integrity, and privacy in any communication topology</mark>
 
 * Create end-to-end encrypted, authenticated secure channels over any transport topology.
 * Create secure channels over multi-hop, multi-protocol routes - TCP, UDP, WebSockets, BLE, etc.
@@ -18,7 +18,7 @@ In a few simple commands your applications get:
 * Make legacy protocols secure by tunneling them through mutually authenticated and encrypted portals.
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams - Kafka, Kinesis, RabbitMQ etc.
 
-#### Identity-based, policy driven, application layer trust – granular authentication and authorization
+<mark style="color:orange;">Identity-based, policy driven, application layer trust – granular authentication and authorization</mark>
 
 * Generate cryptographically provable unique identities.
 * Store private keys in safe vaults - hardware secure enclaves and cloud key management systems.
