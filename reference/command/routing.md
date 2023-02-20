@@ -12,17 +12,17 @@ We wanted to enable [secure channels](secure-channels.md) that have end-to-end g
 
 However, traditional secure communication protocol implementations are typically tightly coupled with transport protocols in a way that all their security is limited to the length and duration of the underlying transport connections
 
-For example most TLS[^1] implementations are coupled with TCP[^2] in a way that all the security guarantees of TLS are limited to the length and duration of the underlying TCP connection. If your application’s data and requests travel over two TCP connection hops `TCP -> TCP` then all TLS guarantees break at the bridge between the two networks. This bridge, gateway or load balancer then becomes a point of weakness for application data. To makes matters worse, if you don't setup another mutually authenticated TLS connection on the second hop between the gateway and your destination server then the entire second hop network – all applications and machines within it – become an attack vector to your application and its data.&#x20;
+For example, most TLS[^1] implementations are coupled with TCP[^2] in a way that all the security guarantees of TLS are limited to the length and duration of the underlying TCP connection. If your application’s data and requests travel over two TCP connection hops `TCP -> TCP` then all TLS guarantees break at the bridge between the two networks. This bridge, gateway or load balancer then becomes a point of weakness for application data. To makes matters worse, if you don't setup another mutually authenticated TLS connection on the second hop between the gateway and your destination server then the entire second hop network – all applications and machines within it – become an attack vector to your application and its data.&#x20;
 
 Traditional secure communication protocols are also unable to protect your application’s data if it travels over multiple different transport protocols. They can’t guarantee data authenticity or data integrity if your application’s communication path is `UDP -> TCP` or `BLE -> TCP`.
 
 This is where Ockam Routing shines. It is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange message over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` and more.
 
-By layering Ockam [Secure Channels](secure-channels.md) and other protocols over Ockam Routing, we can provide end-to-end guarantees of data authenticity, integrity and confidentiality in any communication topology.&#x20;
+By layering Ockam [Secure Channels](secure-channels.md) and other protocols over Ockam Routing, we can provide end-to-end guarantees over arbitrary transport topologies.
 
 ## Routing
 
-Let’s start by creating a node and sending it a message.
+Let’s start by creating a node and sending a message to a worker on that node.
 
 ```
 » ockam node create n1
