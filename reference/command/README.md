@@ -6,7 +6,9 @@ description: Command line tools to build and orchestrate secure by design applic
 
 Ockam Command is our command line interface to build secure by design applications that can trust all data in motion. It makes it easy to orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.
 
-In a few simple commands your applications get:
+No more having to design error-prone ad-hoc ways to distribute sensitive credentials and roots of trust. Ockam’s integrated approach takes away this complexity and gives you simple tools for:
+
+
 
 <mark style="color:orange;">End-to-end data authenticity, integrity, and privacy in any communication topology</mark>
 
@@ -15,6 +17,8 @@ In a few simple commands your applications get:
 * Provision encrypted relays for applications distributed across many edge, cloud and data-center private networks.
 * Make legacy protocols secure by tunneling them through mutually authenticated and encrypted portals.
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams - Kafka, Kinesis, RabbitMQ etc.
+
+
 
 <mark style="color:orange;">Identity-based, policy driven, application layer trust – granular authentication and authorization</mark>
 
