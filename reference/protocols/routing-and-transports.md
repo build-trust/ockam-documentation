@@ -18,7 +18,7 @@ Traditional secure communication protocols are also unable to protect your appli
 
 This is where Ockam Routing shines. It is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange message over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` and more.
 
-We want to enable [secure channels](../command/secure-channels.md) that have end-to-end guarantees of data authenticity, integrity and confidentiality in any communication topology. This is where Ockam’s [Routing](routing-and-transports.md#routing) Protocol comes in. It is a lightweight, layer 7, routing protocol that can bidirectionally deliver messages over any number of hops, within one Ockam [Node](../command/nodes.md), or across many nodes.
+By layering Ockam [Secure Channels](../command/secure-channels.md) and other protocols over Ockam Routing, we can provide end-to-end guarantees of data authenticity, integrity and confidentiality in any communication topology.&#x20;
 
 <figure><img src="../../diagrams/plantuml/simple/simple.001.jpeg" alt=""><figcaption></figcaption></figure>
 

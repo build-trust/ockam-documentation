@@ -18,6 +18,8 @@ Traditional secure communication protocols are also unable to protect your appli
 
 This is where Ockam Routing shines. It is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange message over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` and more.
 
+By layering Ockam [Secure Channels](../../command/secure-channels.md) and other protocols over Ockam Routing, we can provide end-to-end guarantees of data authenticity, integrity and confidentiality in any communication topology.&#x20;
+
 ## Routing
 
 So far, we've created an [`"echoer"` worker](nodes.md#echoer-worker) in our node, sent it a message, and received a reply. This worker was a simple one hop away from our [`"app"` worker.](nodes.md#app-worker)
