@@ -14,7 +14,7 @@ If your application’s data and requests travel over two TCP connection hops `T
 
 Traditional secure communication protocols are also unable to protect your application’s data if it travel over multiple different transport protocols. They can’t guaranty data authenticity or data integrity if your application’s communication path is `UDP -> TCP` or `BLE -> TCP`.
 
-This is where Ockam Routing shines. It is a simple and lightweight message based protocol that makes it possible to  create bidirectional communication over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` etc.
+This is where Ockam Routing shines. It is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange message over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` and more.
 
 
 
