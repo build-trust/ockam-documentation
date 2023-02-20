@@ -1,7 +1,5 @@
 ---
-description: >-
-  Command line tools to build and orchestrate secure by design applications that
-  can trust all data in motion.
+description: Command line tools to build and orchestrate secure by design applications.
 ---
 
 # Command
