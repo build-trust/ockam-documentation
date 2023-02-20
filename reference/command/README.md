@@ -8,11 +8,9 @@ description: >-
 
 Ockam Command is our command line interface to build secure by design applications that can trust all data in motion. It makes it easy to orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.
 
-No more having to think about creating unique cryptographic keys and issuing credentials to your fleet of application entities. No more designing ways to safely store secrets in hardware and securely distribute roots of trust.
-
 In a few simple commands your applications get:
 
-#### End-to-end data authenticity, integrity, and privacy in any communication topology
+<mark style="color:orange;">\_\_End-to-end data authenticity, integrity, and privacy in any communication topology\_\_</mark>
 
 * Create end-to-end encrypted, authenticated secure channels over any transport topology.
 * Create secure channels over multi-hop, multi-protocol routes - TCP, UDP, WebSockets, BLE, etc.
