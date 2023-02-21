@@ -7,15 +7,9 @@ description: >-
 
 # Routing and Transports
 
-Data, within modern applications, routinely flows over complex, multi-hop, multi-protocol routes before reaching its end destination. It’s common for application layer requests and data to move across network boundaries, beyond data centers, via shared or public networks, through queues and caches, via gateways and brokers to reach remote services and other distributed parts of an application.
+Data, within modern applications, routinely flows over complex, multi-hop, multi-protocol topologies before reaching its end destination. It’s common for application layer requests and data to move across network boundaries, beyond data centers, via shared or public networks, through queues and caches, from gateways and brokers to reach remote services and other distributed parts of an application.
 
-Our goal is to enable end-to-end application layer guarantees in any communication topology.
-
-
-
-
-
-We wanted to enable [secure channels](secure-channels.md) that have end-to-end guarantees of data authenticity, integrity and confidentiality in any communication topology.
+Our goal is to enable end-to-end application layer guarantees in any communication topology. For example Ockam [Secure Channels](secure-channels.md) provide end-to-end guarantees of data authenticity, integrity, and confidentiality in any of the above communication topologies.
 
 However, traditional secure communication protocol implementations are typically tightly coupled with transport protocols in a way that all their security is limited to the length and duration of the underlying transport connections
 
