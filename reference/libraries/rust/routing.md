@@ -1,7 +1,8 @@
 ---
 description: >-
-  Application Layer Routing protocol enables other Ockam protocols to provide
-  end-to-end trust guarantees.
+  Ockam Routing and Transports enable other Ockam protocols to provide
+  end-to-end guarantees like trust, security, privacy, reliable delivery,
+  ordering etc.
 ---
 
 # Routing and Transports
