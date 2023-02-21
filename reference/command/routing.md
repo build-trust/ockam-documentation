@@ -7,7 +7,7 @@ description: >-
 
 # Routing and Transports
 
-Data, within modern applications, routinely flows over complex, multi-hop, multi-protocol routes — across network boundaries, via shared networks, beyond data centers, through queues and caches, via gateways and brokers — before reaching its end destination.
+Data, within modern applications, routinely flows over complex, multi-hop, multi-protocol routes before reaching its end destination. It’s common for application layer requests and data to move across network boundaries, beyond data centers, via shared or public networks, through queues and caches, via gateways and brokers to reach remote services and other distributed parts of the application.
 
 We wanted to enable [secure channels](secure-channels.md) that have end-to-end guarantees of data authenticity, integrity and confidentiality in any communication topology.
 
