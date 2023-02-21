@@ -17,7 +17,7 @@ Ockam [Nodes](nodes.md#node), [Workers](nodes.md#worker), and [Services](nodes.m
 
 ## Node
 
-An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam Protocols like Ockam Routing and Ockam Secure Channels.
+An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam Protocols like Ockam [Routing](routing.md) and Ockam [Secure Channels](secure-channels.md).
 
 Ockam Nodes are designed to leverage the strengths of their operating environment. Our Rust implementation makes it easy to adapt to various architectures and processors. It can run efficiently on tiny microcontrollers or scale horizontally in cloud environments. You can create Ockam nodes using Ockam Command or embed one directly into your application using various Ockam [programming libraries](broken-reference).
 
