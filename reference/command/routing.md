@@ -1,7 +1,8 @@
 ---
 description: >-
   Ockam Routing and Transports enable other Ockam protocols to provide
-  end-to-end trust, privacy, message delivery guarantees.
+  end-to-end guarantees like trust, security, privacy, reliable delivery,
+  ordering etc.
 ---
 
 # Routing and Transports
