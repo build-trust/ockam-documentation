@@ -164,7 +164,7 @@ ockam node create x --project project.json --enrollment-token $x_token
 ockam policy set --at x --resource tcp-inlet --expression '(= subject.component "control")'
 ockam tcp-inlet create --at /node/x --from 127.0.0.1:8000 --to /project/default/service/forward_to_control_plane1/secure/api/service/outlet
 
-# Sends a request to our `x` tcp-inlet and will be denied
+# Sends a request to our `x` tcp-inlet and will be denied (this will timeout)
 curl --fail --head --max-time 10 127.0.0.1:8000
 ```
 

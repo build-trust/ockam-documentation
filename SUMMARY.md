@@ -8,14 +8,14 @@
 
 * [Use Cases](guides/use-cases/README.md)
   * [Secure database access](guides/use-cases/secure-database-access.md)
-  * [Connect distributed clients to time series backends](guides/use-cases/connecting-distributed-clients-to-time-series-backends.md)
+  * [Connect distributed clients to InfluxDB](guides/use-cases/connecting-distributed-clients-to-time-series-backends.md)
   * [End-to-end encryption through Confluent Cloud](guides/use-cases/end-to-end-encryption-through-confluent-cloud.md)
   * [Add end-to-end encryption to any client and server application, with no code change](guides/use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change.md)
   * [Apply fine-grained permissions with Attribute-Based Access Control (ABAC)](guides/use-cases/apply-fine-grained-permissions-with-attribute-based-access-control-abac.md)
   * [Use employee attributes from Okta to Build Trust with Cryptographically Verifiable Credentials](guides/use-cases/use-employee-attributes-from-okta-to-build-trust-with-cryptographically-verifiable-credentials.md)
-  * [Create secure communication with a private database, from anywhere](guides/use-cases/create-secure-communication-with-a-private-database-from-anywhere.md)
 * [Code Examples](guides/examples/README.md)
   * [Basic Web App](guides/examples/basic-web-app.md)
+  * [Create secure communication with a private database, from anywhere](guides/examples/create-secure-communication-with-a-private-database-from-anywhere.md)
   * [Telegraf + InfluxDB](guides/examples/telegraf-+-influxdb.md)
   * [End-to-end encrypted Kafka](guides/examples/end-to-end-encrypted-kafka.md)
 
