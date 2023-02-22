@@ -1,5 +1,5 @@
 ---
-description: How to build secure by design applications that can trust all data in motion.
+description: Build secure-by-design applications that can trust all data-in-motion.
 ---
 
 # Introduction to Ockam
