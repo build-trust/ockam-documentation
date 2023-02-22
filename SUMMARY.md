@@ -17,6 +17,7 @@
   * [Basic Web App](guides/examples/basic-web-app.md)
   * [Create secure communication with a private database, from anywhere](guides/examples/create-secure-communication-with-a-private-database-from-anywhere.md)
   * [Telegraf + InfluxDB](guides/examples/telegraf-+-influxdb.md)
+  * [InfluxDB Cloud token lease management](guides/examples/influxdb-cloud-token-lease-management.md)
   * [End-to-end encrypted Kafka](guides/examples/end-to-end-encrypted-kafka.md)
 
 ## Reference
