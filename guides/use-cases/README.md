@@ -1,10 +1,12 @@
 ---
 description: >-
-  Ockam is a set of building blocks that can Build Trust between all
+  Ockam is a set of building blocks to Build Trust between distributed
   applications.
 ---
 
 # Use Cases
+
+Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To [trust data-in-motion](./#trust-for-data-in-motion), applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be [private](./#private-and-secure-by-design) and [secure-by-design](./#private-and-secure-by-design), applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
 
 ## Virtually-adjacent databases
 
