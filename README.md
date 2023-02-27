@@ -64,6 +64,8 @@ If the above instructions don't work on your machine, please [post a question](h
 
 Next, step through the following commands to setup secure and private communication between our application service and an application client.
 
+{% tabs %}
+{% tab title="Run on your machine" %}
 ```bash
 # Check that everything was installed correctly by enrolling with Ockam Orchestrator.
 #
@@ -100,6 +102,16 @@ ockam secure-channel create --from /node/c --to /project/default/service/forward
 curl --head 127.0.0.1:7000
 
 ```
+{% endtab %}
+
+{% tab title="Run in the browser" %}
+{% embed url="https://replit.com/@ockam/Ockam-Command-QuickStart-Server#main.sh?embed=true" %}
+
+
+
+{% embed url="https://replit.com/@ockam/Ockam-Command-QuickStart-Client#main.sh?embed=true" %}
+{% endtab %}
+{% endtabs %}
 
 #### Private and secure by design
 
