@@ -105,11 +105,9 @@ curl --head 127.0.0.1:7000
 {% endtab %}
 
 {% tab title="Run in the browser" %}
-{% embed url="https://replit.com/@ockam/Ockam-Command-QuickStart-Server#main.sh?embed=true" %}
+{% embed url="https://replit.com/@ockam/Ockam-Command-QuickStart-Server?embed=true" %}
 
-
-
-{% embed url="https://replit.com/@ockam/Ockam-Command-QuickStart-Client#main.sh?embed=true" %}
+{% embed url="https://replit.com/@ockam/Ockam-Command-QuickStart-Client?embed=true" %}
 {% endtab %}
 {% endtabs %}
 
