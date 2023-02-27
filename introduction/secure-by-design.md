@@ -1,7 +1,8 @@
 ---
 description: >-
   Secure By Design applications minimize their vulnerability surface and embrace
-  the principle of least privilege. They shrink the target and the blast radius.
+  the principle of least privilege. They shrink both the target and the blast
+  radius.
 ---
 
 # Build to be Secure by Design
@@ -15,10 +16,6 @@ In order to trust information or instructions, that are received over the networ
 Application layer communication is also usually bi-directional since, at the very least, we have to acknowledge receipt of data to its senders. This means that authentication and the data integrity guarantee within applications must be <mark style="color:orange;">mutual</mark> **** between any two communicating parts.
 
 With Ockam, applications can, in a few lines of code, create mutually authenticated secure channels that guarantee end-to-end data integrity to senders and receivers of data.
-
-
-
-
 
 ## Zero \[ Implicit ] Trust
 
