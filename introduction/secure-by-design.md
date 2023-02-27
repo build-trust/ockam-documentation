@@ -1,12 +1,12 @@
 ---
 description: >-
   Secure By Design applications minimize their vulnerability surface and embrace
-  the principle of least privilege.
+  the principle of least privilege. They shrink the target and the blast radius.
 ---
 
 # Build to be Secure by Design
 
-Ockam’s end-to-end secure channels guarantee authenticity, integrity, and confidentiality of all data-in-motion at the application layer. This enables a deny-by-default security posture that exponentially <mark style="color:orange;">reduces the vulnerability surface</mark> of an application and gives it true control over every access decision.
+Ockam’s end-to-end secure channels guarantee authenticity, integrity, and confidentiality of all data-in-motion at the application layer. This enables a deny-by-default security posture that <mark style="color:orange;">exponentially reduces the vulnerability surface</mark> of an application and gives it true control over every access decision.
 
 ## End-to-End Data Integrity and Authenticity <a href="#end-to-end" id="end-to-end"></a>
 
