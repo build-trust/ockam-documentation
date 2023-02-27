@@ -1,8 +1,24 @@
-# Secure by Design
+---
+description: >-
+  Secure By Design applications minimize their vulnerability surface and embrace
+  the principle of least privilege.
+---
 
-Secure By Design applications minimize their vulnerability surface and embrace the principle of least privilege.
+# Build to be Secure by Design
 
-Ockam’s end-to-end secure channels guarantee application layer data integrity and authenticity for all data-in-motion. This enables a deny-by-default security posture that minimizes an application’s vulnerability surface and brings true control over every access decision.
+Ockam’s end-to-end secure channels guarantee authenticity, integrity, and confidentiality of all data-in-motion at the application layer. This enables a deny-by-default security posture that exponentially <mark style="color:orange;">reduces the vulnerability surface</mark> of an application and gives it true control over every access decision.
+
+## End-to-End Data Integrity and Authenticity <a href="#end-to-end" id="end-to-end"></a>
+
+In order to trust information or instructions, that are received over the network, applications must <mark style="color:orange;">authenticate</mark> all senders and <mark style="color:orange;">verify the integrity of data received</mark> to assert what was received is exactly what was sent — free from errors or en-route tampering.
+
+Application layer communication is also usually bi-directional since, at the very least, we have to acknowledge receipt of data to its senders. This means that authentication and the data integrity guarantee within applications must be <mark style="color:orange;">mutual</mark> **** between any two communicating parts.
+
+With Ockam, applications can, in a few lines of code, create mutually authenticated secure channels that guarantee end-to-end data integrity to senders and receivers of data.
+
+
+
+
 
 ## Zero \[ Implicit ] Trust
 
@@ -22,10 +38,5 @@ Software cannot be secured from the outside. Ockam provides powerful building bl
 
 Application layer trust guarantees along with tools to manage keys, credentials and authorization policies give you granular control on the security and privacy properties of your application.
 
-## End-to-End Data Integrity and Authenticity
+##
 
-In order to trust information or instructions, that are received over the network, applications must **authenticate** all senders and **verify the integrity of data** **received** to assert what was received is exactly what was sent — free from errors or en-route tampering.
-
-Application layer communication is also usually bi-directional since, at the very least, we have to acknowledge receipt of data to its senders. This means that authentication and the data integrity guarantee within applications must be **mutual** between any two communicating parts.
-
-With Ockam, applications can, in a few lines of code, create mutually authenticated secure channels that guarantee end-to-end data integrity to senders and receivers of data.
