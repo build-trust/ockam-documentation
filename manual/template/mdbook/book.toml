@@ -1,0 +1,10 @@
+[book]
+authors = ["Ockam Developers"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Ockam Command Manual"
+
+[output.html]
+default-theme = "rust"
+preferred-dark-theme = "navy"
