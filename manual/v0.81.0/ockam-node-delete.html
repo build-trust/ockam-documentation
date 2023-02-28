@@ -142,17 +142,25 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="delete"><a class="header" href="#delete"><code>delete</code></a></h2>
+                        <h2 id="node--delete"><a class="header" href="#node--delete">node  delete</a></h2>
+<hr />
+<p><code>ockam node delete [OPTIONS] [NODE_NAME]</code></p>
 <p>Delete a node</p>
-<p><strong>Usage:</strong> <code>ockam node delete [OPTIONS] [NODE_NAME]</code></p>
 <h4 id="arguments"><a class="header" href="#arguments"><strong>Arguments:</strong></a></h4>
 <ul>
-<li><code>&lt;NODE_NAME&gt;</code> — Name of the node</li>
+<li><code>&lt;NODE_NAME&gt;</code><br/>
+Name of the node</li>
 </ul>
 <h4 id="options"><a class="header" href="#options"><strong>Options:</strong></a></h4>
 <ul>
-<li><code>-a</code>, <code>--all</code> — Terminate all node processes and delete all node configurations</li>
-<li><code>-f</code>, <code>--force</code> — Terminate node process(es) immediately (uses SIGKILL instead of SIGTERM)</li>
+<li>
+<p><code>-a</code>, <code>--all</code><br/>
+Terminate all node processes and delete all node configurations</p>
+</li>
+<li>
+<p><code>-f</code>, <code>--force</code><br/>
+Terminate node process(es) immediately (uses SIGKILL instead of SIGTERM)</p>
+</li>
 </ul>
 
                     </main>

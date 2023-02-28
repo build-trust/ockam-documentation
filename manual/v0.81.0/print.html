@@ -143,139 +143,211 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="ockam"><a class="header" href="#ockam"><code>ockam</code></a></h2>
+                        <h2 id="ockam"><a class="header" href="#ockam">ockam</a></h2>
+<hr />
+<p><code>ockam [OPTIONS] &lt;COMMAND&gt;</code></p>
 <p>Orchestrate end-to-end encryption, mutual authentication, key management,
 credential management, and authorization policy enforcement — at scale.</p>
-<p><strong>Usage:</strong> <code>ockam [OPTIONS] &lt;COMMAND&gt;</code></p>
 <h4 id="subcommands"><a class="header" href="#subcommands"><strong>Subcommands:</strong></a></h4>
 <ul>
-<li>enroll</li>
-<li>space</li>
-<li>project</li>
-<li>status</li>
-<li>reset</li>
-<li>node</li>
-<li>identity</li>
-<li>tcp-listener</li>
-<li>tcp-connection</li>
-<li>tcp-outlet</li>
-<li>tcp-inlet</li>
-<li>secure-channel-listener</li>
-<li>secure-channel</li>
-<li>forwarder</li>
-<li>message</li>
-<li>worker</li>
-<li>completion</li>
-<li>vault</li>
-<li>lease</li>
+<li><a href="-ockam-enroll.html">enroll</a></li>
+<li><a href="-ockam-space.html">space</a></li>
+<li><a href="-ockam-project.html">project</a></li>
+<li><a href="-ockam-status.html">status</a></li>
+<li><a href="-ockam-reset.html">reset</a></li>
+<li><a href="-ockam-node.html">node</a></li>
+<li><a href="-ockam-identity.html">identity</a></li>
+<li><a href="-ockam-tcp-listener.html">tcp-listener</a></li>
+<li><a href="-ockam-tcp-connection.html">tcp-connection</a></li>
+<li><a href="-ockam-tcp-outlet.html">tcp-outlet</a></li>
+<li><a href="-ockam-tcp-inlet.html">tcp-inlet</a></li>
+<li><a href="-ockam-secure-channel-listener.html">secure-channel-listener</a></li>
+<li><a href="-ockam-secure-channel.html">secure-channel</a></li>
+<li><a href="-ockam-forwarder.html">forwarder</a></li>
+<li><a href="-ockam-message.html">message</a></li>
+<li><a href="-ockam-worker.html">worker</a></li>
+<li><a href="-ockam-completion.html">completion</a></li>
+<li><a href="-ockam-vault.html">vault</a></li>
+<li><a href="-ockam-lease.html">lease</a></li>
 </ul>
 <h4 id="options"><a class="header" href="#options"><strong>Options:</strong></a></h4>
 <ul>
-<li><code>-h</code>, <code>--help</code> — Print help information (-h compact, --help extensive)</li>
-<li><code>-q</code>, <code>--quiet</code> — Do not print any trace messages</li>
-<li><code>-v</code>, <code>--verbose</code> — Increase verbosity of trace messages</li>
-<li><code>--no-color</code> — Output without any colors</li>
-<li><code>--output &lt;OUTPUT_FORMAT&gt;</code> — Output format</li>
-<li><code>--test-argument-parser</code></li>
+<li>
+<p><code>-h</code>, <code>--help</code><br/>
+Print help information (-h compact, --help extensive)</p>
+</li>
+<li>
+<p><code>-q</code>, <code>--quiet</code><br/>
+Do not print any trace messages</p>
+</li>
+<li>
+<p><code>-v</code>, <code>--verbose</code><br/>
+Increase verbosity of trace messages</p>
+</li>
+<li>
+<p><code>--no-color</code><br/>
+Output without any colors</p>
+</li>
+<li>
+<p><code>--output &lt;OUTPUT_FORMAT&gt;</code><br/>
+Output format</p>
+</li>
+<li>
+<p><code>--test-argument-parser</code></p>
+</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="node"><a class="header" href="#node"><code>node</code></a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="node"><a class="header" href="#node">node</a></h2>
+<hr />
+<p><code>ockam node &lt;COMMAND&gt;</code></p>
 <p>Manage Nodes</p>
-<p><strong>Usage:</strong> <code>ockam node &lt;COMMAND&gt;</code></p>
 <h4 id="subcommands-1"><a class="header" href="#subcommands-1"><strong>Subcommands:</strong></a></h4>
 <ul>
-<li>create</li>
-<li>delete</li>
-<li>list</li>
-<li>logs</li>
-<li>show</li>
-<li>start</li>
-<li>stop</li>
-<li>default</li>
+<li><a href="ockam-node-create.html">create</a></li>
+<li><a href="ockam-node-delete.html">delete</a></li>
+<li><a href="ockam-node-list.html">list</a></li>
+<li><a href="ockam-node-logs.html">logs</a></li>
+<li><a href="ockam-node-show.html">show</a></li>
+<li><a href="ockam-node-start.html">start</a></li>
+<li><a href="ockam-node-stop.html">stop</a></li>
+<li><a href="ockam-node-default.html">default</a></li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="create"><a class="header" href="#create"><code>create</code></a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="node--create"><a class="header" href="#node--create">node  create</a></h2>
+<hr />
+<p><code>ockam node create [OPTIONS] [NODE_NAME]</code></p>
 <p>Create a node</p>
-<p><strong>Usage:</strong> <code>ockam node create [OPTIONS] [NODE_NAME]</code></p>
 <h4 id="arguments"><a class="header" href="#arguments"><strong>Arguments:</strong></a></h4>
 <ul>
-<li><code>&lt;NODE_NAME&gt;</code> — Name of the node (Optional)</li>
+<li><code>&lt;NODE_NAME&gt;</code><br/>
+Name of the node (Optional)</li>
 </ul>
 <h4 id="options-1"><a class="header" href="#options-1"><strong>Options:</strong></a></h4>
 <ul>
-<li><code>-f</code>, <code>--foreground</code> — Run the node in foreground</li>
-<li><code>-e</code>, <code>--exit-on-eof</code> — Watch stdin for EOF</li>
-<li><code>-t</code>, <code>--tcp-listener-address &lt;SOCKET_ADDRESS&gt;</code> — TCP listener address</li>
-<li><code>--child-process</code> — ockam_command started a child process to run this node in foreground</li>
-<li><code>--enrollment-token &lt;ENROLLMENT_TOKEN&gt;</code> — An enrollment token to allow this node to enroll into a project</li>
-<li><code>--launch-config &lt;LAUNCH_CONFIG&gt;</code> — JSON config to setup a foreground node</li>
-<li><code>--trusted-identities &lt;TRUSTED_IDENTITIES&gt;</code></li>
-<li><code>--trusted-identities-file &lt;TRUSTED_IDENTITIES_FILE&gt;</code></li>
-<li><code>--reload-from-trusted-identities-file &lt;RELOAD_FROM_TRUSTED_IDENTITIES_FILE&gt;</code></li>
-<li><code>--project &lt;PROJECT&gt;</code></li>
-<li><code>--vault &lt;VAULT&gt;</code></li>
-<li><code>--identity &lt;IDENTITY&gt;</code></li>
+<li>
+<p><code>-f</code>, <code>--foreground</code><br/>
+Run the node in foreground</p>
+</li>
+<li>
+<p><code>-e</code>, <code>--exit-on-eof</code><br/>
+Watch stdin for EOF</p>
+</li>
+<li>
+<p><code>-t</code>, <code>--tcp-listener-address &lt;SOCKET_ADDRESS&gt;</code><br/>
+TCP listener address</p>
+</li>
+<li>
+<p><code>--child-process</code><br/>
+ockam_command started a child process to run this node in foreground</p>
+</li>
+<li>
+<p><code>--enrollment-token &lt;ENROLLMENT_TOKEN&gt;</code><br/>
+An enrollment token to allow this node to enroll into a project</p>
+</li>
+<li>
+<p><code>--launch-config &lt;LAUNCH_CONFIG&gt;</code><br/>
+JSON config to setup a foreground node</p>
+</li>
+<li>
+<p><code>--trusted-identities &lt;TRUSTED_IDENTITIES&gt;</code></p>
+</li>
+<li>
+<p><code>--trusted-identities-file &lt;TRUSTED_IDENTITIES_FILE&gt;</code></p>
+</li>
+<li>
+<p><code>--reload-from-trusted-identities-file &lt;RELOAD_FROM_TRUSTED_IDENTITIES_FILE&gt;</code></p>
+</li>
+<li>
+<p><code>--project &lt;PROJECT&gt;</code></p>
+</li>
+<li>
+<p><code>--vault &lt;VAULT&gt;</code></p>
+</li>
+<li>
+<p><code>--identity &lt;IDENTITY&gt;</code></p>
+</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="default"><a class="header" href="#default"><code>default</code></a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="node--default"><a class="header" href="#node--default">node  default</a></h2>
+<hr />
+<p><code>ockam node default [NODE_NAME]</code></p>
 <p>Changes default node</p>
-<p><strong>Usage:</strong> <code>ockam node default [NODE_NAME]</code></p>
 <h4 id="arguments-1"><a class="header" href="#arguments-1"><strong>Arguments:</strong></a></h4>
 <ul>
-<li><code>&lt;NODE_NAME&gt;</code> — Name of the node</li>
+<li><code>&lt;NODE_NAME&gt;</code><br/>
+Name of the node</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="delete"><a class="header" href="#delete"><code>delete</code></a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="node--delete"><a class="header" href="#node--delete">node  delete</a></h2>
+<hr />
+<p><code>ockam node delete [OPTIONS] [NODE_NAME]</code></p>
 <p>Delete a node</p>
-<p><strong>Usage:</strong> <code>ockam node delete [OPTIONS] [NODE_NAME]</code></p>
 <h4 id="arguments-2"><a class="header" href="#arguments-2"><strong>Arguments:</strong></a></h4>
 <ul>
-<li><code>&lt;NODE_NAME&gt;</code> — Name of the node</li>
+<li><code>&lt;NODE_NAME&gt;</code><br/>
+Name of the node</li>
 </ul>
 <h4 id="options-2"><a class="header" href="#options-2"><strong>Options:</strong></a></h4>
 <ul>
-<li><code>-a</code>, <code>--all</code> — Terminate all node processes and delete all node configurations</li>
-<li><code>-f</code>, <code>--force</code> — Terminate node process(es) immediately (uses SIGKILL instead of SIGTERM)</li>
+<li>
+<p><code>-a</code>, <code>--all</code><br/>
+Terminate all node processes and delete all node configurations</p>
+</li>
+<li>
+<p><code>-f</code>, <code>--force</code><br/>
+Terminate node process(es) immediately (uses SIGKILL instead of SIGTERM)</p>
+</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="list"><a class="header" href="#list"><code>list</code></a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="node--list"><a class="header" href="#node--list">node  list</a></h2>
+<hr />
+<p><code>ockam node list</code></p>
 <p>List nodes</p>
-<p><strong>Usage:</strong> <code>ockam node list</code></p>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="logs"><a class="header" href="#logs"><code>logs</code></a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="node--logs"><a class="header" href="#node--logs">node  logs</a></h2>
+<hr />
+<p><code>ockam node logs [OPTIONS] [NODE_NAME]</code></p>
 <p>Get the stdout/stderr log file of a node</p>
-<p><strong>Usage:</strong> <code>ockam node logs [OPTIONS] [NODE_NAME]</code></p>
 <h4 id="arguments-3"><a class="header" href="#arguments-3"><strong>Arguments:</strong></a></h4>
 <ul>
-<li><code>&lt;NODE_NAME&gt;</code> — Name of the node</li>
+<li><code>&lt;NODE_NAME&gt;</code><br/>
+Name of the node</li>
 </ul>
 <h4 id="options-3"><a class="header" href="#options-3"><strong>Options:</strong></a></h4>
 <ul>
-<li><code>--err</code> — Show the standard error log file</li>
+<li><code>--err</code><br/>
+Show the standard error log file</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="show"><a class="header" href="#show"><code>show</code></a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="node--show"><a class="header" href="#node--show">node  show</a></h2>
+<hr />
+<p><code>ockam node show [NODE_NAME]</code></p>
 <p>Show node details</p>
-<p><strong>Usage:</strong> <code>ockam node show [NODE_NAME]</code></p>
 <h4 id="arguments-4"><a class="header" href="#arguments-4"><strong>Arguments:</strong></a></h4>
 <ul>
-<li><code>&lt;NODE_NAME&gt;</code> — Name of the node</li>
+<li><code>&lt;NODE_NAME&gt;</code><br/>
+Name of the node</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="start"><a class="header" href="#start"><code>start</code></a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="node--start"><a class="header" href="#node--start">node  start</a></h2>
+<hr />
+<p><code>ockam node start [OPTIONS] [NODE_NAME]</code></p>
 <p>Start a node</p>
-<p><strong>Usage:</strong> <code>ockam node start [OPTIONS] [NODE_NAME]</code></p>
 <h4 id="arguments-5"><a class="header" href="#arguments-5"><strong>Arguments:</strong></a></h4>
 <ul>
-<li><code>&lt;NODE_NAME&gt;</code> — Name of the node</li>
+<li><code>&lt;NODE_NAME&gt;</code><br/>
+Name of the node</li>
 </ul>
 <h4 id="options-4"><a class="header" href="#options-4"><strong>Options:</strong></a></h4>
 <ul>
 <li><code>--aws-kms</code></li>
 <li><code>--force</code></li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="stop"><a class="header" href="#stop"><code>stop</code></a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="node--stop"><a class="header" href="#node--stop">node  stop</a></h2>
+<hr />
+<p><code>ockam node stop [OPTIONS] [NODE_NAME]</code></p>
 <p>Stop a node</p>
-<p><strong>Usage:</strong> <code>ockam node stop [OPTIONS] [NODE_NAME]</code></p>
 <h4 id="arguments-6"><a class="header" href="#arguments-6"><strong>Arguments:</strong></a></h4>
 <ul>
-<li><code>&lt;NODE_NAME&gt;</code> — Name of the node</li>
+<li><code>&lt;NODE_NAME&gt;</code><br/>
+Name of the node</li>
 </ul>
 <h4 id="options-5"><a class="header" href="#options-5"><strong>Options:</strong></a></h4>
 <ul>
-<li><code>--force</code> — Whether to use the SIGTERM or SIGKILL signal to stop the node</li>
+<li><code>--force</code><br/>
+Whether to use the SIGTERM or SIGKILL signal to stop the node</li>
 </ul>
 
                     </main>
