@@ -28,6 +28,7 @@
   * [Routing and Transports](reference/command/routing.md)
   * [Vaults and Identities](reference/command/vaults-and-identities.md)
   * [Secure Channels](reference/command/secure-channels.md)
+  * [Manual](https://command.ockam.io/manual/v0.81.0/)
 * [Programming Libraries](reference/libraries/README.md)
   * [Rust](reference/libraries/rust/README.md)
     * [Nodes and Workers](reference/libraries/rust/nodes.md)
