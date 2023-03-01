@@ -1,29 +1,33 @@
 #!/usr/bin/env bash
 set -uexo pipefail
 
-version="v0.81.0"
+# version of ockam for which we wish to generate markdown help
+target_version="$1"
+prefix="ockam_"
+version=${target_version/#$prefix}
 
-# the build script would look something like this
+# remove folders that will be generated
+rm -rf book src "$version" "../../$version"
 
-rm -rf src "$version" "../../$version"
+# get the version
+git clone --depth 1 git@github.com:build-trust/ockam.git "$version"
+cd "$version"
+git checkout "$target_version"
 
-# git clone --depth 1 --branch "ockam_$version" git@github.com:build-trust/ockam.git "$version"
-git clone git@github.com:murex971/ockam.git "$version"
-cd "$version" && git checkout murex971/markdown
+# generate markdown in src
 cargo run --release --bin ockam markdown
 mv ockam_markdown_pages ../src
 cd ..
 
+# generate mdbook - using ./src, into ../../$version
 cp SUMMARY.md src/
-
 mdbook build
-
-# move to version folder
 mv book "../../$version"
 
+# remove folders that were used during generation
 rm -rf book src "$version"
 
 # make latest
 cd ../..
-GLOBIGNORE='template:v*'; rm -rf *
+GLOBIGNORE='template:develop:v*'; rm -rf *
 cp -R "$version"/. .

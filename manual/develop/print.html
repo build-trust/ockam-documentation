@@ -564,6 +564,7 @@ Override the default API node</li>
 <h4 id="subcommands-7"><a class="header" href="#subcommands-7"><strong>Subcommands:</strong></a></h4>
 <ul>
 <li><a href="ockam-tcp-outlet-create.html">create</a></li>
+<li><a href="ockam-tcp-outlet-list.html">list</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="tcp-outlet--create"><a class="header" href="#tcp-outlet--create">tcp-outlet  create</a></h2>
 <hr />
@@ -780,7 +781,7 @@ Address for this listener</li>
 Node at which to create the listener</p>
 </li>
 <li>
-<p><code>-a</code>, <code>--authorized-identifiers &lt;IDENTIFIERS&gt;</code><br/>
+<p><code>-a</code>, <code>--authorized &lt;IDENTIFIERS&gt;</code><br/>
 Authorized Identifiers of secure channel initiators</p>
 </li>
 <li>
@@ -1124,7 +1125,7 @@ Name of the project</li>
 <h4 id="subcommands-17"><a class="header" href="#subcommands-17"><strong>Subcommands:</strong></a></h4>
 <ul>
 <li><a href="ockam-project-addon-configure-okta.html">okta</a></li>
-<li><a href="ockam-project-addon-configure-influx-db.html">influx-db</a></li>
+<li><a href="ockam-project-addon-configure-influxdb.html">influxdb</a></li>
 <li><a href="ockam-project-addon-configure-confluent.html">confluent</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="project-addon-configure--confluent"><a class="header" href="#project-addon-configure--confluent">project addon configure  confluent</a></h2>
@@ -1142,54 +1143,12 @@ Ockam project name</p>
 Confluent Cloud bootstrap server address</p>
 </li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="project-addon-configure--influx-db"><a class="header" href="#project-addon-configure--influx-db">project addon configure  influx-db</a></h2>
-<hr />
-<p><code>ockam project addon configure influx-db [OPTIONS] --endpoint-url &lt;ENDPOINT_URL&gt; --token &lt;INFLUXDB_TOKEN&gt; --org-id &lt;ORGANIZATION_ID&gt;</code></p>
-<p>Configure the InfluxDB Cloud addon for a project</p>
-<h4 id="options-45"><a class="header" href="#options-45"><strong>Options:</strong></a></h4>
-<ul>
-<li>
-<p><code>--project &lt;PROJECT_NAME&gt;</code><br/>
-Ockam Project Name</p>
-</li>
-<li>
-<p><code>-e</code>, <code>--endpoint-url &lt;ENDPOINT_URL&gt;</code><br/>
-Url of the InfluxDB instance</p>
-</li>
-<li>
-<p><code>-t</code>, <code>--token &lt;INFLUXDB_TOKEN&gt;</code><br/>
-InfluxDB Token with permissions to perform CRUD token operations</p>
-</li>
-<li>
-<p><code>-o</code>, <code>--org-id &lt;ORGANIZATION_ID&gt;</code><br/>
-InfluxDB Organization ID</p>
-</li>
-<li>
-<p><code>--permissions &lt;PERMISSIONS_JSON&gt;</code><br/>
-InfluxDB Permissions as a JSON String https://docs.influxdata.com/influxdb/v2.0/api/#operation/PostAuthorizations</p>
-</li>
-<li>
-<p><code>--permissions-path &lt;PERMISSIONS_JSON_PATH&gt;</code><br/>
-InfluxDB Permissions JSON PATH. Use either this or --permissions</p>
-</li>
-<li>
-<p><code>--max-ttl &lt;MAX_TTL_SECS&gt;</code><br/>
-Max TTL of Tokens within the Lease Manager [Defaults to 3 Hours]</p>
-</li>
-<li>
-<p><code>--user-access-role &lt;USER_ACCESS_ROLE&gt;</code><br/>
-Ockam Access Rule for who can use the token lease service</p>
-</li>
-<li>
-<p><code>--adamin-access-role &lt;ADMIN_ACCESS_ROLE&gt;</code><br/>
-Ockam Access Rule for who can manage the token lease service</p>
-</li>
-</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="influxdb"><a class="header" href="#influxdb">influxdb</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="project-addon-configure--okta"><a class="header" href="#project-addon-configure--okta">project addon configure  okta</a></h2>
 <hr />
 <p><code>ockam project addon configure okta [OPTIONS] --tenant &lt;TENANT&gt; --client-id &lt;CLIENT_ID&gt;</code></p>
 <p>Configure the Okta addon for a project</p>
-<h4 id="options-46"><a class="header" href="#options-46"><strong>Options:</strong></a></h4>
+<h4 id="options-45"><a class="header" href="#options-45"><strong>Options:</strong></a></h4>
 <ul>
 <li>
 <p><code>--project &lt;PROJECT_NAME&gt;</code><br/>
@@ -1219,7 +1178,7 @@ Attributes names to copy from Okta userprofile into Ockam credential</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="project-addon--disable"><a class="header" href="#project-addon--disable">project addon  disable</a></h2>
 <hr />
 <p><code>ockam project addon disable --project &lt;PROJECT_NAME&gt; --addon &lt;ADDON_ID&gt;</code></p>
-<h4 id="options-47"><a class="header" href="#options-47"><strong>Options:</strong></a></h4>
+<h4 id="options-46"><a class="header" href="#options-46"><strong>Options:</strong></a></h4>
 <ul>
 <li>
 <p><code>--project &lt;PROJECT_NAME&gt;</code><br/>
@@ -1233,7 +1192,7 @@ Addon id/name</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="project-addon--list"><a class="header" href="#project-addon--list">project addon  list</a></h2>
 <hr />
 <p><code>ockam project addon list --project &lt;PROJECT_NAME&gt;</code></p>
-<h4 id="options-48"><a class="header" href="#options-48"><strong>Options:</strong></a></h4>
+<h4 id="options-47"><a class="header" href="#options-47"><strong>Options:</strong></a></h4>
 <ul>
 <li><code>--project &lt;PROJECT_NAME&gt;</code><br/>
 Project name</li>
@@ -1242,7 +1201,7 @@ Project name</li>
 <hr />
 <p><code>ockam status [OPTIONS]</code></p>
 <p>Display Ockam Status</p>
-<h4 id="options-49"><a class="header" href="#options-49"><strong>Options:</strong></a></h4>
+<h4 id="options-48"><a class="header" href="#options-48"><strong>Options:</strong></a></h4>
 <ul>
 <li><code>-a</code>, <code>--all</code><br/>
 Show status for all identities, default: enrolled only</li>
@@ -1251,7 +1210,7 @@ Show status for all identities, default: enrolled only</li>
 <hr />
 <p><code>ockam reset [OPTIONS]</code></p>
 <p>Full Ockam Reset</p>
-<h4 id="options-50"><a class="header" href="#options-50"><strong>Options:</strong></a></h4>
+<h4 id="options-49"><a class="header" href="#options-49"><strong>Options:</strong></a></h4>
 <ul>
 <li><code>-y</code>, <code>--yes</code></li>
 </ul>
@@ -1259,7 +1218,7 @@ Show status for all identities, default: enrolled only</li>
 <hr />
 <p><code>ockam completion --shell &lt;SHELL&gt;</code></p>
 <p>Generate Shell Completion Scripts</p>
-<h4 id="options-51"><a class="header" href="#options-51"><strong>Options:</strong></a></h4>
+<h4 id="options-50"><a class="header" href="#options-50"><strong>Options:</strong></a></h4>
 <ul>
 <li><code>-s</code>, <code>--shell &lt;SHELL&gt;</code><br/>
 The type of shell (bash, zsh, fish)</li>
