@@ -1,7 +1,7 @@
 ---
 description: >-
-  Improve the security of your InfluxDB Cloud database through automated
-  token/key revokation.
+  Improve security of your InfluxDB Cloud database with automated token/key
+  revocation.
 ---
 
 # InfluxDB Cloud token management
