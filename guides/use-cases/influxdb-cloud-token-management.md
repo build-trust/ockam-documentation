@@ -6,7 +6,7 @@ description: >-
 
 # InfluxDB Cloud token management
 
-InfluxDB is often used as a time-series database that hundreds, if not thousands, of clients are regularly writing data to.&#x20;
+InfluxDB is used as a time-series database that hundreds, if not thousands, of clients are regularly writing data to.&#x20;
 
 ### The problem
 
