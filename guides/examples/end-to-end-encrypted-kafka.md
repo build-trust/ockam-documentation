@@ -23,16 +23,8 @@ ockam enroll
 Configuring your Ockam project to use the Confluent add-on begins by pointing it to your bootstrap server address:
 
 ```bash
-ockam project addon configure confluent --bootstrap-server pkc-6ojv2.us-west4.gcp.confluent.cloud:9092
-
-cat > kafka.config <<EOF
-request.timeout.ms=30000
-security.protocol=SASL_PLAINTEXT
-sasl.mechanism=PLAIN
-sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
-        username="QCGPGX6RR74XTORV" \
-        password="/URn7AqPH3ndlt3XHvXf2B3y7/ceLivjEG51MF2EKgy/vlXJCJbvSvP1/WhzBQdS";
-EOF
+ockam project addon configure confluent \
+    --bootstrap-server YOUR_CONFLUENT_CLOUD_BOOTSTRAP_SERVER_ADDRESS
 ```
 
 We'll then need to save our Ockam project configuration so we can use it later to register our producers and consumer, so save the output to a file name `project.json`:
