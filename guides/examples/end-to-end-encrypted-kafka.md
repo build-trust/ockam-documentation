@@ -1,8 +1,10 @@
 ---
-description: End-to-end encrypt Kafka producers and consumers
+description: >-
+  Guarantee authenticity and integrity of events from many producers all-the-way
+  to end consumers.
 ---
 
-# End-to-end encrypted Kafka
+# End-to-end encryption through Kafka
 
 ### Prerequisites
 
@@ -175,7 +177,7 @@ kafka-console-producer.sh --topic demo-topic --bootstrap-server localhost:6000 -
 
 Your second producer will now have generated its own unique set of cryptographic keys, and will be using them to send data through the Kafka brokers in Confluent Cloud and on to your consumer which will then be able to decrypt it.
 
-### What's changed?
+### Trust your data-in-motion
 
 In just a few minutes the producers and consumers are seamlessly connected. The final result will look and feel exactly like a traditional Kafka setup, behind the scenes however Ockam has abstracted away a number of important security and integrity improvements:
 
