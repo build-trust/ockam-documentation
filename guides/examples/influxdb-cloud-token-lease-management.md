@@ -1,3 +1,7 @@
+---
+description: Time-based, revocable, leased – dynamic access credentials for InfluxDB
+---
+
 # InfluxDB Cloud token lease management
 
 ### Prerequisites
