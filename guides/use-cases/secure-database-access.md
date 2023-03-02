@@ -20,9 +20,9 @@ As a result, the only way to establish a connection to the database is via an Oc
 
 Service-to-database use cases can have more fine-grained control applied on top of this via [Attribute-Based Access Control](../examples/). For restricting how people access services, such as the data scientist scenario outlined earlier, you can [integrate with your Identity Provider](use-employee-attributes-from-okta-to-build-trust-with-cryptographically-verifiable-credentials.md).
 
-### Get started
+### Next steps
 
-You can see an end-to-end example of this in our [basic web app demo](../examples/basic-web-app.md), or follow our [getting started guide to install Ockam](broken-reference) and start using it in just a few minutes.
-
-We'd also love to talk to you in more detail about your potential use cases, so [please reach out to the team](https://www.ockam.io/contact/form) to chat.
-
+* See an end-to-end example of this in our [basic web app demo](../examples/basic-web-app.md).
+* Follow our [getting started guide to install Ockam](broken-reference) and start using it in just a few minutes.
+* [Reach out to the team](https://www.ockam.io/contact/form), we'd love to talk to you in more detail about your potential use cases.
+* Join the growing community of developers who want to build trust by making applications that are secure-by-design, in the [Build Trust Discord server](https://discord.gg/RAbjRr3kds).

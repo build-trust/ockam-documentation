@@ -14,8 +14,9 @@ Some companies may be unwilling or unable (e.g., regulatory or compliance reason
 
 Ockam's Confluent Cloud add-on is a drop-in solution at both the producer and consumer ends of your Kafka system that requires no code changes at either end. Via the Ockam protocol, the producer and consumer are able to directly generate and exchange credentials with each other which removes the vulnerability surface of a centralized and permanent keystore. The automatically rotating keys with forward secrecy also means that if a credential was ever leaked the risk is minimized to messages that are in-flight +/- the credential rotation period. The result is significant reductions in the likelihood of credential leak, the expoitable window of time if a leak did occur, and the amount of data exposed if it did occur.&#x20;
 
-### Get started
+### Next steps
 
-You can see an example of this in our [end-to-end encrypted Kafka](../examples/end-to-end-encrypted-kafka.md) demo, or follow our [getting started guide to install Ockam](broken-reference) and start using it in just a few minutes.
-
-We'd also love to talk to you in more detail about your potential use cases, so [please reach out to the team](https://www.ockam.io/contact/form) to chat.
+* See an example of this in our [end-to-end encrypted Kafka](../examples/end-to-end-encrypted-kafka.md) demo.
+* Follow our [getting started guide to install Ockam](broken-reference) and start using it in just a few minutes.
+* [Reach out to the team](https://www.ockam.io/contact/form), we'd love to talk to you in more detail about your potential use cases.
+* Join the growing community of developers who want to build trust by making applications that are secure-by-design, in the [Build Trust Discord server](https://discord.gg/RAbjRr3kds).

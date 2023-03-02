@@ -18,8 +18,9 @@ The InfluxDB add-on for Ockam automates token management for InfluxDB Cloud. By 
 
 By integrating directly with InfluxDB, Ockam is able to provide a solution that works seamlessly with any other InfluxDB sources (e.g., Telegraf, language SDKs, HTTP) and reduces security risks without increasing operational complexity.
 
-### Get started
+### Next steps
 
-You can see an example of this in our [InfluxDB Cloud token lease management](../examples/influxdb-cloud-token-lease-management.md) demo, or follow our [getting started guide to install Ockam](broken-reference) and start using it in just a few minutes.
-
-We'd also love to talk to you in more detail about your potential use cases, so [please reach out to the team](https://www.ockam.io/contact/form) to chat.
+* See an example of this in our [InfluxDB Cloud token lease management](../examples/influxdb-cloud-token-lease-management.md) demo.
+* Follow our [getting started guide to install Ockam](broken-reference) and start using it in just a few minutes.
+* [Reach out to the team](https://www.ockam.io/contact/form), we'd love to talk to you in more detail about your potential use cases.
+* Join the growing community of developers who want to build trust by making applications that are secure-by-design, in the [Build Trust Discord server](https://discord.gg/RAbjRr3kds).

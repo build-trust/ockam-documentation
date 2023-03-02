@@ -4,7 +4,7 @@ description: >-
   high trust data
 ---
 
-# Connect distributed clients to time series backends
+# Connect distributed clients to InfluxDB
 
 Time series databases (e.g., InfluxDB, TimescaleDB, Graphite, Prometheus, etc.) have become increasingly popular in recent years. Especially for use cases where many discrete devices need to aggregate and store large volumes of time-stamped data for monitoring, alerting, or just general product/device usage.
 
@@ -22,8 +22,9 @@ Ockam's enrollment protocol means that each producer is able to be registered se
 
 These connections are established and authenticated on-demand and, for supported backends, short-lived credentials are generated for the connecting node. This ensures that not only is each node and the data it generates is uniquely identifiable but any risk of an exposed credential is mitigated based on the session length of the generated token.
 
-### Get started
+### Next steps
 
-You can see an end-to-end example of this in our [Telegraf + InfluxDB code example](../examples/telegraf-+-influxdb.md), or follow our [getting started guide to install Ockam](../#quick-start) and start using it in just a few minutes.
-
-We're also actively recruiting people to provide feedback on new features we're making to the Ockam add-ons that enable enhanced capabilities with event stream processing and time series databases. If this is an area of interest to you [please reach out to the team](https://www.ockam.io/contact/form) to talk about your use cases.
+* See an end-to-end example of this in our [Telegraf + InfluxDB code ](../examples/telegraf-+-influxdb.md)demo.
+* Follow our [getting started guide to install Ockam](broken-reference) and start using it in just a few minutes.
+* [Reach out to the team](https://www.ockam.io/contact/form), we'd love to talk to you in more detail about your potential use cases.
+* Join the growing community of developers who want to build trust by making applications that are secure-by-design, in the [Build Trust Discord server](https://discord.gg/RAbjRr3kds).
