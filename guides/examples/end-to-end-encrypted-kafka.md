@@ -2,10 +2,10 @@
 description: >-
   Guarantee data authenticity and integrity of events from many producers
   all-the-way to end consumers. End-to-end encryption protects your data as it
-  moves through Confluent Cloud.
+  moves through Kafka.
 ---
 
-# End-to-end encryption through Kafka in Confluent Cloud
+# End-to-end encryption through Kafka
 
 Kafka deployments typically combine authentication tokens and Transport Layer Security (TLS) to protect data moving into and out of Kafka topics. While this does secure data in transit over the Internet, it doesn't provide a complete solution to securing data as it travels _through_ Kafka. The Kafka broker will be able to temporarily see the plaintext data.
 
