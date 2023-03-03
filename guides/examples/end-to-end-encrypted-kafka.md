@@ -72,49 +72,36 @@ ockam identity create consumer
 Copy the `project.json` and `consumer.token` files from the previous section, and then use them to authenticate and enroll this identity into your Ockam project:
 
 ```bash
-ockam project authenticate \
-  --project-path project.json \
-  --identity consumer \
-  --token $(cat consumer.token)
+ockam project authenticate --project-path project.json \
+  --identity consumer --token $(cat consumer.token)
 ```
 
 An Ockam node is a way to connect securely connect different services to each other, so we'll create one here that we'll use to communicate through the Confluent Cloud cluster using the identity we just created:
 
 ```bash
-ockam node create consumer \
-  --project project.json 
-  --identity consumer
+ockam node create consumer --project project.json --identity consumer
 ```
 
 Once that completes we can now expose our Kafka bootstrap server. This is like the remote Kafka bootsrtap server and brokers have become virtually adjacent on `localhost:4000`:
 
 ```bash
-ockam service start kafka-consumer \
-  --node consumer \
-  --project-route /project/default \
-  --bootstrap-server-ip 127.0.0.1 \
-  --bootstrap-server-port 4000 \
+ockam service start kafka-consumer --node consumer --project-route /project/default \
+  --bootstrap-server-ip 127.0.0.1 --bootstrap-server-port 4000 \
   --brokers-port-range 4001-4100
 ```
 
 Copy the `kafka.config` file across, and use it to create a new topic that we'll use for sending messages between the producer and consumer in this demo (in this case we've called the topic `demo-topic`)
 
 ```bash
-kafka-topics.sh \
-  --bootstrap-server localhost:4000 \
-  --command-config kafka.config \
-  --create \
-  --topic demo-topic \
-  --partitions 3
+kafka-topics.sh --bootstrap-server localhost:4000 --command-config kafka.config \
+  --create --topic demo-topic --partitions 3
 ```
 
 The final step is to start our consumer script, pointing it to `localhost:4000` as our bootstrap server:
 
 ```bash
-kafka-console-consumer.sh \
-  --topic demo-topic \
-  --bootstrap-server localhost:4000 \
-  --consumer.config kafka.config
+kafka-console-consumer.sh --topic demo-topic \
+  --bootstrap-server localhost:4000 --consumer.config kafka.config
 ```
 
 The consumer code will push all communication into the Ockam node process that is running on the local host. That local Ockam process will automatically manage the generation of cryptographic keys, establishing a secure channel for communication with any producer nodes, and then subsequently receiving, decrypting, and forwarding on any messages that are received by the broker running on our Confluent Cloud cluster.
@@ -130,38 +117,29 @@ ockam identity create producer1
 Copy over the `project.json` and `producer1.token` files from the earlier section and use it to authenticate and enroll into our Ockam project:
 
 ```bash
-ockam project authenticate \
-  --project-path project.json \
-  --identity producer1  \
-  --token $(cat producer1.token)
+ockam project authenticate --project-path project.json \
+  --identity producer1 --token $(cat producer1.token)
 ```
 
 Create a node and link it to both the project and identity we've created:
 
 ```bash
-ockam node create producer1 \
-  --project project.json \
-  --identity producer1
+ockam node create producer1 --project project.json --identity producer1
 ```
 
 And expose our Kafka bootstrap server on port `5000` so we can start sending messages through Confluent Cloud:
 
 ```bash
-ockam service start kafka-producer \
-  --node producer1 \
-  --project-route /project/default \
-  --bootstrap-server-ip 127.0.0.1 \
-  --bootstrap-server-port 5000 \
+ockam service start kafka-producer --node producer1 --project-route /project/default \
+  --bootstrap-server-ip 127.0.0.1 --bootstrap-server-port 5000 \
   --brokers-port-range 5001-5100
 ```
 
 Make sure to copy the `kafka.config` file across, and start your producer:
 
 ```bash
-kafka-console-producer.sh \
-  --topic demo-topic \
-  --bootstrap-server localhost:5000 \
-  --producer.config kafka.config
+kafka-console-producer.sh --topic demo-topic \
+  --bootstrap-server localhost:5000 --producer.config kafka.config
 ```
 
 Your existing producer code will now be running, communicating with the broker via the secure portal we've created that has exposed the Kafka bootstrap server and Kafka brokers on local ports, and sending messages through to the consumer that was setup in the previous step. However all message payloads will be transparently encrypted as they enter the node on the producer, and not decrypted until they exit the consumer node. At no point in transit can the broker see the plaintext message payload that was initially sent by the producer..config kafka.config
