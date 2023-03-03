@@ -5,9 +5,11 @@ description: >-
   moves through Confluent Cloud.
 ---
 
-# End-to-end encryption through Kafka
+# End-to-end encryption through Kafka in Confluent Cloud
 
-Typical Kafka deployments involve using a combination of authentication and Transport Layer Security (TLS) to protect data moving into and out of Kafka topics. While they do provide benefits for securing data in transit, they don't provide a complete solution to securing data as it travels _through_ Kafka. The Kafka broker will be able to temporarily see the plaintext data. Encrypting communication both into and out of your Kafka broker combined with encryption of data at rest won't be sufficient protection from a data breach if the Kafka broker or the infrastructure it is running on is compromised, as the plaintext data and the keys to decrypt the data are available in memory.
+Kafka deployments typically combine authentication tokens and Transport Layer Security (TLS) to protect data moving into and out of Kafka topics. While this does secure data in transit over the Internet, it doesn't provide a complete solution to securing data as it travels _through_ Kafka. The Kafka broker will be able to temporarily see the plaintext data.
+
+Encrypting communication both into and out of your Kafka broker combined with encryption of data at rest, inside Kafka, won't be sufficient protection from a data breach if the Kafka broker or the infrastructure it is running on is compromised, as the plaintext data and the keys to decrypt the data are available in memory.
 
 Ockam solves these problems, while providing additional risk mitigating benefits and data integrity assurances, via the Confluent add-on for Ockam Orchestrator.
 
@@ -144,7 +146,11 @@ kafka-console-producer.sh --topic demo-topic \
   --bootstrap-server localhost:5000 --producer.config kafka.config
 ```
 
-Your existing producer code will now be running, communicating with the broker via the secure portal we've created that has exposed the Kafka bootstrap server and Kafka brokers on local ports, and sending messages through to the consumer that was setup in the previous step. However all message payloads will be transparently encrypted as they enter the node on the producer, and not decrypted until they exit the consumer node. At no point in transit can the broker see the plaintext message payload that was initially sent by the producer..config kafka.config
+Your existing producer code will now be running, communicating with the broker via the secure portal we've created that has exposed the Kafka bootstrap server and Kafka brokers on local ports, and sending messages through to the consumer that was setup in the previous step. However all message payloads will be transparently encrypted as they enter the node on the producer, and not decrypted until they exit the consumer node. At no point in transit can the broker see the plaintext message payload that was initially sent by the producer.
+
+If you look at the encrypted messages inside Confluent Cloud, they will render as unrecognizable characters like in the following screen capture:
+
+<figure><img src="../../.gitbook/assets/ockam-end-to-end-encryption-kafka-confluent.gif" alt=""><figcaption><p>End-to-end Encrypted Messages bing written to demo-topic in Kafka in Confluent Cloud</p></figcaption></figure>
 
 #### Producer2
 
