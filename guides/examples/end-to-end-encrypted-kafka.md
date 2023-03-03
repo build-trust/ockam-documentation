@@ -1,7 +1,8 @@
 ---
 description: >-
-  Guarantee authenticity and integrity of events from many producers all-the-way
-  to end consumers.
+  Guarantee data authenticity and integrity of events from many producers
+  all-the-way to end consumers. End-to-end encryption protects your data as it
+  moves through Confluent Cloud or Amazon MSK
 ---
 
 # End-to-end encryption through Kafka
