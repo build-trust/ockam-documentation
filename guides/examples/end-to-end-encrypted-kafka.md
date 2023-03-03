@@ -108,7 +108,7 @@ kafka-console-consumer.sh --topic demo-topic \
   --bootstrap-server localhost:4000 --consumer.config kafka.config
 ```
 
-The consumer code will push all communication into the Ockam node process that is running on the local host. That local Ockam process will automatically manage the generation of cryptographic keys, establishing a secure channel for communication with any producer nodes, and then subsequently receiving, decrypting, and forwarding on any messages that are received by the broker running on our Confluent Cloud cluster.
+The consumer code will push all communication into the Ockam node process that is running on the local host. That local Ockam process will automatically manage the generation of cryptographic keys, establishing a secure channel for communication with any producer nodes, and then subsequently receiving, decrypting, and forwarding on any messages that are received from the broker running on our Confluent Cloud cluster.
 
 #### Producer1
 
