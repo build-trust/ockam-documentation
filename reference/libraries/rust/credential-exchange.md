@@ -1,4 +1,4 @@
-# Credential exchange
+# Credential Authentication
 
 Secure channels allow to exchange encrypted messages that are non-repudiable: there is a cryptographic proof that the data received over secure channel has indeed be created by the identity which you created the channel with.
 
@@ -173,7 +173,7 @@ When we run this node:
 We are now ready to create and start a node for Alice. Create first a new file at:
 
 ```
-touch examples/06-credential-exchange-bob.rs
+touch examples/06-credential-exchange-alice.rs
 ```
 
 And add the following code:
