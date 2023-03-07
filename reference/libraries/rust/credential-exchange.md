@@ -1,10 +1,6 @@
 # Credentials and Authorities
 
-Secure channels allow to exchange encrypted messages that are non-repudiable: there is a cryptographic proof that the data received over secure channel has indeed be created by the identity which you created the channel with.
-
-This doesn't mean however that this identity is trustworthy! If the message says "withdraw 1M USD from this account" you might still want to validate that the identity sending the message has the right to do so.
-
-In order to perform this kind of verification we can associate attributes to an identity, for example `withdraw_limit=1000000` and have those attributes being authentified by a third party which you trust. The set of attributes authenticated by a third-party is called a `Credential` and possesses a few attributes:
+The set of attributes authenticated by a third-party is called a `Credential` and possesses a few attributes:
 
 * `attributes` a list of attribute name / attribute value
 * `subject` an identity identifier (the identity possessing these attributes)
