@@ -1,4 +1,4 @@
-# Credential Authentication
+# Credentials and Authorities
 
 Secure channels allow to exchange encrypted messages that are non-repudiable: there is a cryptographic proof that the data received over secure channel has indeed be created by the identity which you created the channel with.
 
@@ -28,8 +28,8 @@ And add the following code:
 use ockam::access_control::IdentityIdAccessControl;
 use ockam::identity::credential_issuer::CredentialIssuer;
 use ockam::identity::TrustEveryonePolicy;
-use ockam::{Context, TcpTransport};
-use ockam_core::{AllowAll, Result};
+use ockam::{Context, Result, TcpTransport};
+use ockam_core::AllowAll;
 
 /// This node starts a temporary credential issuer accessible via TCP on localhost:5000
 ///
@@ -74,6 +74,7 @@ async fn main(ctx: Context) -> Result<()> {
 
     Ok(())
 }
+
 ```
 
 You can then start the node by running
@@ -101,8 +102,7 @@ use ockam::access_control::AllowAll;
 use ockam::authenticated_storage::AuthenticatedAttributeStorage;
 use ockam::identity::credential_issuer::{CredentialIssuerApi, CredentialIssuerClient};
 use ockam::identity::{Identity, TrustEveryonePolicy};
-use ockam::{vault::Vault, Context, Result, TcpTransport};
-use ockam_core::route;
+use ockam::{route, vault::Vault, Context, Result, TcpTransport};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -145,7 +145,8 @@ async fn main(ctx: Context) -> Result<()> {
 
     // Start an echoer service which will only allow subjects with name = alice
     let alice_only = AbacAccessControl::create(bob.authenticated_storage(), "name", "alice");
-    ctx.start_worker("echoer", Echoer, alice_only, AllowAll).await?;
+    ctx.start_worker("echoer", Echoer, alice_only, AllowAll)
+        .await?;
 
     // Create a TCP listener and wait for incoming connections
     tcp.listen("127.0.0.1:4000").await?;
@@ -235,6 +236,7 @@ async fn main(mut ctx: Context) -> Result<()> {
 
     ctx.stop().await
 }
+
 ```
 
 Then start Alice's node with:
