@@ -61,7 +61,6 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
 }
-
 ```
 
 ```
@@ -133,7 +132,6 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
 }
-
 ```
 
 ```
@@ -205,9 +203,9 @@ async fn main(mut ctx: Context) -> Result<()> {
     let reply = ctx.receive::<String>().await?;
     println!("Received: {}", reply); // should print "Hello Ockam!"
 
-    ctx.stop().await
+    // Don't call ctx.stop() here so this node runs forever.
+    Ok(())
 }
-
 ```
 
 ```
