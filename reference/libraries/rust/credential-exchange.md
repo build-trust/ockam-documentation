@@ -1,24 +1,10 @@
 # Credentials and Authorities
 
-The set of attributes authenticated by a third-party is called a `Credential` and possesses a few attributes:
 
-* `attributes` a list of attribute name / attribute value
-* `subject` an identity identifier (the identity possessing these attributes)
-* `issuer` the identity which signed those attributes to prove their authenticity
-* `created` the date/time when those attributes were signed
-* `expires` the date/time until those attributes are considered valid
-
-Let's now see an example of exchange of credentials over a secure channel.
-
-We are first going to need to start a node acting as a `CredentialIssuer`.&#x20;
-
-Create a new file at:
 
 ```
 touch examples/06-credential-exchange-issuer.rs
 ```
-
-And add the following code:
 
 ```rust
 use hex;
@@ -150,7 +136,9 @@ async fn main(ctx: Context) -> Result<()> {
 
 ```
 
-
+```
+cargo run --example 06-credential-exchange-server
+```
 
 
 
@@ -220,5 +208,9 @@ async fn main(mut ctx: Context) -> Result<()> {
     ctx.stop().await
 }
 
+```
+
+```
+cargo run --example 06-credential-exchange-client
 ```
 
