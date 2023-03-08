@@ -1,6 +1,10 @@
 # Credentials and Authorities
 
+[setup](./#get-started) and create an [echoer worker](nodes.md#echoer-worker)
 
+```
+cargo add hex
+```
 
 ```
 touch examples/06-credential-exchange-issuer.rs
