@@ -31,8 +31,8 @@ async fn main(ctx: Context) -> Result<()> {
     println!("Credential Issuer Identifier: {}", issuer.identity().identifier());
     println!("Credential Issuer Change History: {}", hex::encode(exported));
 
-    // Tell this credential issuer about a set public identifiers that are known,
-    // in advance, to be members of the production cluster.
+    // Tell this credential issuer about a set of public identifiers that are
+    // known, in advance, to be members of the production cluster.
     let known_identifiers = vec![
         "P529d43ac7b01e23d3818d00e083508790bfe8825714644b98134db6c1a7a6602".try_into()?,
         "P0189a2aec3799fe9d0dc0f982063022b697f18562a403eb46fa3d32be5bd31f8".try_into()?,
@@ -70,6 +70,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 {% endcode %}
 
@@ -98,11 +99,16 @@ use ockam::{route, Context, Result, TcpTransport};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    // Intialize the TCP Transport
     let tcp = TcpTransport::create(&ctx).await?;
     let vault = Vault::create();
 
-    println!("\nEnter the identifier change history of the issuer: ");
+    // Ask for Credential Issuer's Change History to be input on standard input
+    // The Change History represents the full history of public identifiers and
+    // public keys used by the Issuer.
+    //
+    // Later in this program we'll use this history of public keys to decide
+    // who will be allowed to access the Echoer service provided by this server.
+    println!("\nEnter the Credential Issuer's Change History: ");
     let mut h = String::new();
     io::stdin().read_line(&mut h).expect("Error reading from stdin.");
     let issuer_change_history = hex::decode(h.trim()).expect("Error decoding hex input.");
@@ -112,14 +118,19 @@ async fn main(ctx: Context) -> Result<()> {
     // Load a hardcoded secret key corresponding to the following public identifier
     // P0189a2aec3799fe9d0dc0f982063022b697f18562a403eb46fa3d32be5bd31f8
     //
-    // We're hard coding this specific identity bacause this public identifier is known
+    // We're hard coding this specific identity bacause its public identifier is known
     // to the credential issuer as a member of the production cluster.
     let key_id = "0189a2aec3799fe9d0dc0f982063022b697f18562a403eb46fa3d32be5bd31f8".to_string();
     let secret = "08ddb4458a53d5493eac7e9941a1b0d06896efa2d1efac8cf225ee1ccb824458";
     let identity = Identity::create_identity_with_secret(&ctx, vault, &key_id, secret).await?;
     let store = identity.authenticated_storage();
 
-    // Connect with the credential issuer and get a credential
+    // Connect with the credential issuer and authenticate using the latest private
+    // key of this program's hardcoded identity.
+    //
+    // The credential issuer already knows the public identifier of this identity
+    // as a member of the production cluster so it returns a signed credential
+    // attesting to that knowledge.
     let issuer_connection = tcp.connect("127.0.0.1:5000").await?;
     let issuer_route = route![issuer_connection, "secure"];
     let issuer_client = CredentialIssuerClient::new(&ctx, &identity, issuer_route).await?;
@@ -127,15 +138,23 @@ async fn main(ctx: Context) -> Result<()> {
     println!("Credential: {}", credential.clone());
     identity.set_credential(credential).await;
 
+    // Start an echoer worker that will only accept incoming requests from
+    // identities that have authenticated credentials issued by the above credential
+    // issuer. These credentials must also attest that requesting identity is
+    // a member of the production cluster.
+    let allow_production = AbacAccessControl::create(store, "cluster", "production");
+    ctx.start_worker("echoer", Echoer, allow_production, AllowAll).await?;
+
+    // Start a credential exchange worker that will present credentials issued
+    // to this server's hardcoded identity and authenticate credentials issued by
+    // the user supplied issuer public identity.
     let s = AuthenticatedAttributeStorage::new(store.clone());
     identity.start_credential_exchange_worker(vec![issuer], "credentials", true, s).await?;
 
-    // Create a secure channel listener
+    // Start a secure channel listener that only allows channels with
+    // authenticated identities.
     let policy = TrustEveryonePolicy;
     identity.create_secure_channel_listener("secure", policy).await?;
-
-    let allow_production = AbacAccessControl::create(store, "cluster", "production");
-    ctx.start_worker("echoer", Echoer, allow_production, AllowAll).await?;
 
     // Create a TCP listener, and wait for connections.
     tcp.listen("127.0.0.1:4000").await?;
@@ -143,6 +162,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 {% endcode %}
 
