@@ -1,10 +1,14 @@
 # Credentials and Authorities
 
+### Setup
+
 [setup](./#get-started) and create an [echoer worker](nodes.md#echoer-worker)
 
 ```
 cargo add hex
 ```
+
+### Credential Issuer
 
 ```
 touch examples/06-credential-exchange-issuer.rs
@@ -73,7 +77,7 @@ async fn main(ctx: Context) -> Result<()> {
 cargo run --example 06-credential-exchange-issuer
 ```
 
-
+### Server
 
 ```
 touch examples/06-credential-exchange-server.rs
@@ -146,9 +150,7 @@ async fn main(ctx: Context) -> Result<()> {
 cargo run --example 06-credential-exchange-server
 ```
 
-
-
-
+### Client
 
 ```
 touch examples/06-credential-exchange-client.rs
