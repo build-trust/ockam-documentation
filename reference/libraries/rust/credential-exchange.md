@@ -21,53 +21,58 @@ touch examples/06-credential-exchange-issuer.rs
 And add the following code:
 
 ```rust
-use ockam::access_control::IdentityIdAccessControl;
+use hex;
+
+use ockam::access_control::{AllowAll, IdentityIdAccessControl};
 use ockam::identity::credential_issuer::CredentialIssuer;
 use ockam::identity::TrustEveryonePolicy;
 use ockam::{Context, Result, TcpTransport};
-use ockam_core::AllowAll;
 
-/// This node starts a temporary credential issuer accessible via TCP on localhost:5000
-///
-/// In a real-life scenario this node would be an "Authority", a node holding
-/// attributes for a number of identities and able to issue credentials signed with its own key.
-///
-/// The process by which we declare to that Authority which identity holds which attributes is an
-/// enrollment process and would be driven by an "enroller node".
-/// For the simplicity of the example provided here we preload the credential issues node with some existing attributes
-/// for both Alice's and Bob's identities.
-///
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    // Initialize the TCP Transport.
-    let tcp = TcpTransport::create(&ctx).await?;
+    let issuer = CredentialIssuer::create(&ctx).await?;
+    let issuer_change_history = issuer.identity().change_history().await;
+    let exported = issuer_change_history.export().unwrap();
+    println!("Credential Issuer Identifier: {}", issuer.identity().identifier());
+    println!("Credential Issuer Change History: {}", hex::encode(exported));
 
-    // Create a TCP listener and wait for incoming connections.
+    // Tell this credential issuer about a set public identifiers that are known,
+    // in advance, to be members of the production cluster.
+    let known_identifiers = vec![
+        "P529d43ac7b01e23d3818d00e083508790bfe8825714644b98134db6c1a7a6602".try_into()?,
+        "P0189a2aec3799fe9d0dc0f982063022b697f18562a403eb46fa3d32be5bd31f8".try_into()?,
+    ];
+
+    // Tell this credential issuer about the attributes to include in credentials
+    // that will be issued to each of the above known_identifiers, after and only
+    // if, they authenticate with their corresponding latest private key.
+    //
+    // Since this issuer knows that the above identifiers are for members of the
+    // production cluster, it will issue a credential that attests to the attribute
+    // set: [{cluster, production}] for all identifiers in the above list.
+    //
+    // For a different application this attested attribute set can be different and
+    // distinct for each identifier, but for this example we'll keep things simple.
+    for identifier in known_identifiers.iter() {
+        issuer.put_attribute_value(&identifier, "cluster", "production").await?;
+    }
+
+    // Start a secure channel listener that only allows channels where the identity
+    // at the other end of the channel can authenticate with the latest private key
+    // corresponding to one of the above known public identifiers.
+    let p = TrustEveryonePolicy;
+    issuer.identity().create_secure_channel_listener("secure", p).await?;
+
+    // Start a credential issuer worker that will only accept incoming requests from
+    // authenticated secure channels with our known public identifiers.
+    let allow_known = IdentityIdAccessControl::new(known_identifiers);
+    ctx.start_worker("issuer", issuer, allow_known, AllowAll).await?;
+
+    // Initialize TCP Transport, create a TCP listener, and wait for connections.
+    let tcp = TcpTransport::create(&ctx).await?;
     tcp.listen("127.0.0.1:5000").await?;
 
-    // Create a CredentialIssuer which stores attributes for Alice and Bob, knowing their identity
-    let issuer = CredentialIssuer::create(&ctx).await?;
-    let alice = "P529d43ac7b01e23d3818d00e083508790bfe8825714644b98134db6c1a7a6602".try_into()?;
-    let bob = "P0189a2aec3799fe9d0dc0f982063022b697f18562a403eb46fa3d32be5bd31f8".try_into()?;
-
-    issuer.put_attribute_value(&alice, "name", "alice").await?;
-    issuer.put_attribute_value(&bob, "name", "bob").await?;
-
-    // Start a secure channel listener that alice and bob can use to retrieve their credential
-    issuer
-        .identity()
-        .create_secure_channel_listener("issuer_listener", TrustEveryonePolicy)
-        .await?;
-    println!("created a secure channel listener");
-
-    ctx.start_worker(
-        "issuer",
-        issuer,
-        IdentityIdAccessControl::new(vec![alice, bob]),
-        AllowAll,
-    )
-    .await?;
-
+    // Don't call ctx.stop() here so this node runs forever.
     Ok(())
 }
 
@@ -90,67 +95,65 @@ touch examples/06-credential-exchange-bob.rs
 And add the following code
 
 ```rust
-// This node starts a tcp listener, a secure channel listener, and an echoer worker.
-// It then runs forever waiting for messages.
 use hello_ockam::Echoer;
+use std::io;
+
 use ockam::abac::AbacAccessControl;
 use ockam::access_control::AllowAll;
 use ockam::authenticated_storage::AuthenticatedAttributeStorage;
 use ockam::identity::credential_issuer::{CredentialIssuerApi, CredentialIssuerClient};
-use ockam::identity::{Identity, TrustEveryonePolicy};
-use ockam::{route, vault::Vault, Context, Result, TcpTransport};
+use ockam::identity::{Identity, PublicIdentity, TrustEveryonePolicy};
+use ockam::vault::Vault;
+use ockam::{route, Context, Result, TcpTransport};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    // Initialize the TCP Transport
+    // Intialize the TCP Transport
     let tcp = TcpTransport::create(&ctx).await?;
-
-    // Create an Identity representing Bob
-    // We preload Bob's vault with a secret key corresponding to the identity identifier
-    // P0189a2aec3799fe9d0dc0f982063022b697f18562a403eb46fa3d32be5bd31f8
-    // which is an identifier known to the credential issuer, with some preset attributes
     let vault = Vault::create();
+
+    println!("\nEnter the identifier change history of the issuer: ");
+    let mut h = String::new();
+    io::stdin().read_line(&mut h).expect("Error reading from stdin.");
+    let issuer_change_history = hex::decode(h.trim()).expect("Error decoding hex input.");
+    let issuer = PublicIdentity::import(issuer_change_history.as_slice(), &vault).await?;
+    println!("Credential Issuer Identifier: {}", issuer.identifier());
+
+    // Load a hardcoded secret key corresponding to the following public identifier
+    // P0189a2aec3799fe9d0dc0f982063022b697f18562a403eb46fa3d32be5bd31f8
+    //
+    // We're hard coding this specific identity bacause this public identifier is known
+    // to the credential issuer as a member of the production cluster.
     let key_id = "0189a2aec3799fe9d0dc0f982063022b697f18562a403eb46fa3d32be5bd31f8".to_string();
     let secret = "08ddb4458a53d5493eac7e9941a1b0d06896efa2d1efac8cf225ee1ccb824458";
-    let bob = Identity::create_identity_with_secret(&ctx, vault, &key_id, secret).await?;
+    let identity = Identity::create_identity_with_secret(&ctx, vault, &key_id, secret).await?;
+    let store = identity.authenticated_storage();
 
-    // Create a client to a credential issuer
+    // Connect with the credential issuer and get a credential
     let issuer_connection = tcp.connect("127.0.0.1:5000").await?;
-    let issuer_route = route![issuer_connection, "issuer_listener"];
-    let issuer = CredentialIssuerClient::new(&ctx, &bob, issuer_route).await?;
+    let issuer_route = route![issuer_connection, "secure"];
+    let issuer_client = CredentialIssuerClient::new(&ctx, &identity, issuer_route).await?;
+    let credential = issuer_client.get_credential(identity.identifier()).await?.unwrap();
+    println!("Credential: {}", credential.clone());
+    identity.set_credential(credential).await;
 
-    // Get a credential for Bob (this is done via a secure channel)
-    let credential = issuer.get_credential(bob.identifier()).await?.unwrap();
-    println!("got a credential from the issuer\n{credential}");
-    bob.set_credential(credential).await;
+    let s = AuthenticatedAttributeStorage::new(store.clone());
+    identity.start_credential_exchange_worker(vec![issuer], "credentials", true, s).await?;
 
-    // Start a worker which will receive credentials sent by Alice and issued by the issuer node
-    let issuer_identity = issuer.public_identity().await?;
-    bob.start_credential_exchange_worker(
-        vec![issuer_identity],
-        "credential_exchange",
-        true,
-        AuthenticatedAttributeStorage::new(bob.authenticated_storage().clone()),
-    )
-    .await?;
+    // Create a secure channel listener
+    let policy = TrustEveryonePolicy;
+    identity.create_secure_channel_listener("secure", policy).await?;
 
-    // Create a secure channel listener to allow Alice to create a secure channel to Bob's node
-    bob.create_secure_channel_listener("bob_listener", TrustEveryonePolicy)
-        .await?;
-    println!("created a secure channel listener");
+    let allow_production = AbacAccessControl::create(store, "cluster", "production");
+    ctx.start_worker("echoer", Echoer, allow_production, AllowAll).await?;
 
-    // Start an echoer service which will only allow subjects with name = alice
-    let alice_only = AbacAccessControl::create(bob.authenticated_storage(), "name", "alice");
-    ctx.start_worker("echoer", Echoer, alice_only, AllowAll)
-        .await?;
-
-    // Create a TCP listener and wait for incoming connections
+    // Create a TCP listener, and wait for connections.
     tcp.listen("127.0.0.1:4000").await?;
-    println!("created a TCP listener");
 
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 
 Then start the node with:
@@ -176,59 +179,61 @@ touch examples/06-credential-exchange-alice.rs
 And add the following code:
 
 ```rust
+use std::io;
+
 use ockam::authenticated_storage::AuthenticatedAttributeStorage;
 use ockam::identity::credential_issuer::{CredentialIssuerApi, CredentialIssuerClient};
-use ockam::identity::{Identity, TrustEveryonePolicy};
-use ockam::{route, vault::Vault, Context, Result, TcpTransport};
+use ockam::identity::{Identity, PublicIdentity, TrustEveryonePolicy};
+use ockam::vault::Vault;
+use ockam::{route, Context, Result, TcpTransport};
 
 #[ockam::node]
 async fn main(mut ctx: Context) -> Result<()> {
-    // Initialize the TCP Transport
+    // Intialize the TCP Transport
     let tcp = TcpTransport::create(&ctx).await?;
-
-    // Create an Identity representing Alice
-    // We preload Alice's vault with a secret key corresponding to the identity identifier
-    // P529d43ac7b01e23d3818d00e083508790bfe8825714644b98134db6c1a7a6602
-    // which is an identifier known to the credential issuer, with some preset attributes
     let vault = Vault::create();
+
+    println!("\nEnter the identifier change history of the issuer: ");
+    let mut h = String::new();
+    io::stdin().read_line(&mut h).expect("Error reading from stdin.");
+    let issuer_change_history = hex::decode(h.trim()).expect("Error decoding hex input.");
+    let issuer = PublicIdentity::import(issuer_change_history.as_slice(), &vault).await?;
+    println!("Credential Issuer Identifier: {}", issuer.identifier());
+
+    // Load a hardcoded secret key corresponding to the following public identifier
+    // P529d43ac7b01e23d3818d00e083508790bfe8825714644b98134db6c1a7a6602
+    //
+    // We're hard coding this specific identity bacause this public identifier is known
+    // to the credential issuer as a member of the production cluster.
     let key_id = "529d43ac7b01e23d3818d00e083508790bfe8825714644b98134db6c1a7a6602".to_string();
     let secret = "acaf50c540be1494d67aaad78aca8d22ac62c4deb4fb113991a7b30a0bd0c757";
-    let alice = Identity::create_identity_with_secret(&ctx, vault, &key_id, secret).await?;
+    let identity = Identity::create_identity_with_secret(&ctx, vault, &key_id, secret).await?;
 
-    // Create a client to the credential issuer
+    // Connect with the credential issuer and get a credential
     let issuer_connection = tcp.connect("127.0.0.1:5000").await?;
-    let issuer_route = route![issuer_connection, "issuer_listener"];
-    let issuer = CredentialIssuerClient::new(&ctx, &alice, issuer_route).await?;
+    let issuer_route = route![issuer_connection, "secure"];
+    let issuer_client = CredentialIssuerClient::new(&ctx, &identity, issuer_route).await?;
+    let credential = issuer_client.get_credential(identity.identifier()).await?.unwrap();
+    println!("Credential: {}", credential.clone());
+    identity.set_credential(credential).await;
 
-    // Get a credential for Alice (this is done via a secure channel)
-    let credential = issuer.get_credential(alice.identifier()).await?.unwrap();
-    println!("got a credential from the issuer\n{credential}");
-    alice.set_credential(credential).await;
+    // Create a secure channel to the node that is running the Echoer service.
+    let server_connection = tcp.connect("127.0.0.1:4000").await?;
+    let server_route = route![server_connection, "secure"];
+    let policy = TrustEveryonePolicy;
+    let channel = identity.create_secure_channel(server_route, policy).await?;
 
-    // Create a secure channel to Bob's node
-    let bob_connection = tcp.connect("127.0.0.1:4000").await?;
-    let channel = alice
-        .create_secure_channel(route![bob_connection, "bob_listener"], TrustEveryonePolicy)
-        .await?;
-    println!("created a secure channel at {channel:?}");
+    // Present credentials over the secure channel
+    let r = route![channel.clone(), "credentials"];
+    let s = &AuthenticatedAttributeStorage::new(identity.authenticated_storage().clone());
+    identity.present_credential_mutual(r, vec![&issuer], s, None).await?;
 
-    // Send Alice credentials over the secure channel
-    alice
-        .present_credential_mutual(
-            route![channel.clone(), "credential_exchange"],
-            vec![&issuer.public_identity().await?],
-            &AuthenticatedAttributeStorage::new(alice.authenticated_storage().clone()),
-            None,
-        )
-        .await?;
-    println!("exchange done!");
+    // Send a message to the worker at address "echoer".
+    ctx.send(route![channel, "echoer"], "Hello Ockam!".to_string()).await?;
 
-    // The echoer service should now be accessible to Alice because she
-    // presented the right credentials to Bob
-    let received: String = ctx
-        .send_and_receive(route![channel, "echoer"], "Hello!".to_string())
-        .await?;
-    println!("{received}");
+    // Wait to receive a reply and print it.
+    let reply = ctx.receive::<String>().await?;
+    println!("Received: {}", reply); // should print "Hello Ockam!"
 
     ctx.stop().await
 }
