@@ -6,6 +6,7 @@
 touch examples/06-credential-exchange-issuer.rs
 ```
 
+{% code lineNumbers="true" %}
 ```rust
 use hex;
 
@@ -62,6 +63,7 @@ async fn main(ctx: Context) -> Result<()> {
     Ok(())
 }
 ```
+{% endcode %}
 
 ```
 cargo run --example 06-credential-exchange-issuer
@@ -73,6 +75,7 @@ cargo run --example 06-credential-exchange-issuer
 touch examples/06-credential-exchange-server.rs
 ```
 
+{% code lineNumbers="true" %}
 ```rust
 use hello_ockam::Echoer;
 use std::io;
@@ -133,6 +136,7 @@ async fn main(ctx: Context) -> Result<()> {
     Ok(())
 }
 ```
+{% endcode %}
 
 ```
 cargo run --example 06-credential-exchange-server
@@ -146,6 +150,7 @@ cargo run --example 06-credential-exchange-server
 touch examples/06-credential-exchange-client.rs
 ```
 
+{% code lineNumbers="true" %}
 ```rust
 use std::io;
 
@@ -207,6 +212,7 @@ async fn main(mut ctx: Context) -> Result<()> {
     Ok(())
 }
 ```
+{% endcode %}
 
 ```
 cargo run --example 06-credential-exchange-client
