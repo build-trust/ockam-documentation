@@ -78,21 +78,15 @@ async fn main(ctx: Context) -> Result<()> {
 
 ```
 
-You can then start the node by running
-
 ```
 cargo run --example 06-credential-exchange-issuer
 ```
 
-That node starts a worker, `issuer`, which can issue credentials for both `alice` and `bob` , whose public identities are known to the issuer.&#x20;
 
-We are now going to create a node for an identity named "bob" which will start a secure channel listener allowing "alice" to connect. Create a new file at:
 
 ```
-touch examples/06-credential-exchange-bob.rs
+touch examples/06-credential-exchange-server.rs
 ```
-
-And add the following code
 
 ```rust
 use hello_ockam::Echoer;
@@ -156,27 +150,15 @@ async fn main(ctx: Context) -> Result<()> {
 
 ```
 
-Then start the node with:
+
+
+
+
+
 
 ```
-cargo run --example 06-credential-exchange-bob
+touch examples/06-credential-exchange-client.rs
 ```
-
-When we run this node:
-
-* we create an identity for Bob. We make sure to initialize Bob's Vault with the private key corresponding to his public identity known by the issuer node
-* we retrieve credentials for Bob from the issuer node
-* we start a _credential exchange worker_ which will be ready to exchange credentials with alice over a secure channel
-* we start a secure channel listener
-* we start an echoer service and we specify that it is only accessible to an identity having the attribute `name=alice`&#x20;
-
-We are now ready to create and start a node for Alice. Create first a new file at:
-
-```
-touch examples/06-credential-exchange-alice.rs
-```
-
-And add the following code:
 
 ```rust
 use std::io;
@@ -240,24 +222,3 @@ async fn main(mut ctx: Context) -> Result<()> {
 
 ```
 
-Then start Alice's node with:
-
-```
-cargo run --example 06-credential-exchange-alice
-```
-
-When that node starts:
-
-* we create an identity for Alice. We make sure to initialize Alice's Vault with the private key corresponding to her public identity known by the issuer node
-* we retrieve credentials for Alice from the issuer node
-* we start a secure channel to Bob's node&#x20;
-* we proceed to a credential exchange (by connecting to the credential exchange worker on Bob's node)
-* we finally send a message to the echoer service on Bob's node to verify that we can indeed access that service
-
-And when that node has finished running you should see:
-
-```
-"Hello!"
-```
-
-Which is the message returned by the echoer service on Bob's node. That message has been returned after Bob was able to verify Alice's credential (from an issuer that he trusts) and use the attributes contained in the credential to validate the access to the echoer service (using the `AbacAccessControl` check).
