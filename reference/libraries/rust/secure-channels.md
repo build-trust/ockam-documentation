@@ -1,3 +1,9 @@
+---
+description: >-
+  Create end-to-end encrypted, authenticated secure channels over any transport
+  topology.
+---
+
 # Secure Channels
 
 Now that we understand the basics of Nodes, Workers, and Routing ... let's create our first encrypted secure channel.

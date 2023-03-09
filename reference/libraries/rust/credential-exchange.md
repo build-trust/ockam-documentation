@@ -1,4 +1,10 @@
+---
+description: Issue lightweight, short-lived, revokable, attribute-based credentials.
+---
+
 # Credentials and Authorities
+
+
 
 ### Setup
 
@@ -202,13 +208,18 @@ async fn main(mut ctx: Context) -> Result<()> {
     // Load a hardcoded secret key corresponding to the following public identifier
     // P529d43ac7b01e23d3818d00e083508790bfe8825714644b98134db6c1a7a6602
     //
-    // We're hard coding this specific identity bacause this public identifier is known
+    // We're hard coding this specific identity bacause its public identifier is known
     // to the credential issuer as a member of the production cluster.
     let key_id = "529d43ac7b01e23d3818d00e083508790bfe8825714644b98134db6c1a7a6602".to_string();
     let secret = "acaf50c540be1494d67aaad78aca8d22ac62c4deb4fb113991a7b30a0bd0c757";
     let identity = Identity::create_identity_with_secret(&ctx, vault, &key_id, secret).await?;
 
-    // Connect with the credential issuer and get a credential
+    // Connect with the credential issuer and authenticate using the latest private
+    // key of this program's hardcoded identity.
+    //
+    // The credential issuer already knows the public identifier of this identity
+    // as a member of the production cluster so it returns a signed credential
+    // attesting to that knowledge.
     let issuer_connection = tcp.connect("127.0.0.1:5000").await?;
     let issuer_route = route![issuer_connection, "secure"];
     let issuer_client = CredentialIssuerClient::new(&ctx, &identity, issuer_route).await?;
@@ -237,6 +248,7 @@ async fn main(mut ctx: Context) -> Result<()> {
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 {% endcode %}
 

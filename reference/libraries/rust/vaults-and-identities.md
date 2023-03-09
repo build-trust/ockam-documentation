@@ -1,3 +1,9 @@
+---
+description: >-
+  Generate cryptographically provable unique identities and store their secret
+  keys in safe vaults.
+---
+
 # Vaults and Identities
 
 ```rust
