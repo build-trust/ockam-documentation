@@ -33,7 +33,7 @@
   * [Rust](reference/libraries/rust/README.md)
     * [Nodes and Workers](reference/libraries/rust/nodes.md)
     * [Routing and Transports](reference/libraries/rust/routing.md)
-    * [Vaults and Identities](reference/libraries/rust/vaults-and-identities.md)
+    * [Identities and Vaults](reference/libraries/rust/vaults-and-identities.md)
     * [Secure Channels](reference/libraries/rust/secure-channels.md)
     * [Credentials and Authorities](reference/libraries/rust/credential-exchange.md)
     * [Implementation and Internals](reference/libraries/rust/internals/README.md)

@@ -1,10 +1,10 @@
 ---
-description: Issue lightweight, short-lived, revokable, attribute-based credentials.
+description: >-
+  Scale mutual trust using lightweight, short-lived, revokable, attribute-based
+  credentials.
 ---
 
 # Credentials and Authorities
-
-
 
 ### Setup
 
