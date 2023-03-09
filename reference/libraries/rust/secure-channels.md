@@ -33,7 +33,7 @@ Add the following code to this file:
 use hello_ockam::Echoer;
 use ockam::access_control::AllowAll;
 use ockam::identity::{Identity, TrustEveryonePolicy};
-use ockam::{vault::Vault, Context, Result, TcpTransport};
+use ockam::{vault::Vault, Context, Result, TcpListenerTrustOptions, TcpTransport};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -42,24 +42,23 @@ async fn main(ctx: Context) -> Result<()> {
     // Initialize the TCP Transport.
     let tcp = TcpTransport::create(&ctx).await?;
 
-    // Create a TCP listener and wait for incoming connections.
-    tcp.listen("127.0.0.1:4000").await?;
-
     // Create a Vault to safely store secret keys for Bob.
     let vault = Vault::create();
 
     // Create an Identity to represent Bob.
-    let bob = Identity::create(&ctx, &vault).await?;
+    let bob = Identity::create(&ctx, vault).await?;
 
     // Create a secure channel listener for Bob that will wait for requests to
     // initiate an Authenticated Key Exchange.
     bob.create_secure_channel_listener("bob_listener", TrustEveryonePolicy)
         .await?;
 
+    // Create a TCP listener and wait for incoming connections.
+    tcp.listen("127.0.0.1:4000", TcpListenerTrustOptions::new()).await?;
+
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
 }
-
 ```
 
 ### Middle node
@@ -75,27 +74,32 @@ Add the following code to this file:
 ```rust
 // examples/05-secure-channel-over-two-transport-hops-middle.rs
 // This node creates a tcp connection to a node at 127.0.0.1:4000
+// Starts a forwarder worker to forward messages to 127.0.0.1:4000
 // Starts a tcp listener at 127.0.0.1:3000
 // It then runs forever waiting to route messages.
 
-use hello_ockam::Hop;
+use hello_ockam::Forwarder;
 use ockam::access_control::AllowAll;
-use ockam::{Context, Result, TcpTransport};
+use ockam::{Context, Result, TcpConnectionTrustOptions, TcpListenerTrustOptions, TcpTransport};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    ctx.start_worker("hop", Hop, AllowAll, AllowAll).await?;
-
     // Initialize the TCP Transport.
     let tcp = TcpTransport::create(&ctx).await?;
 
+    // Create a TCP connection to Bob.
+    let connection_to_bob = tcp.connect("127.0.0.1:4000", TcpConnectionTrustOptions::new()).await?;
+
+    // Start a Forwarder to forward messages to Bob using the TCP connection.
+    ctx.start_worker("forward_to_bob", Forwarder(connection_to_bob), AllowAll, AllowAll)
+        .await?;
+
     // Create a TCP listener and wait for incoming connections.
-    tcp.listen("127.0.0.1:3000").await?;
+    tcp.listen("127.0.0.1:3000", TcpListenerTrustOptions::new()).await?;
 
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
 }
-
 ```
 
 ### Initiator node
@@ -114,21 +118,24 @@ Add the following code to this file:
 // It then routes a message, to a worker on a different node, through this encrypted channel.
 
 use ockam::identity::{Identity, TrustEveryonePolicy};
-use ockam::{route, vault::Vault, Context, Result, TcpTransport, TCP};
+use ockam::{route, vault::Vault, Context, Result, TcpConnectionTrustOptions, TcpTransport};
 
 #[ockam::node]
 async fn main(mut ctx: Context) -> Result<()> {
     // Initialize the TCP Transport.
-    TcpTransport::create(&ctx).await?;
+    let tcp = TcpTransport::create(&ctx).await?;
 
     // Create a Vault to safely store secret keys for Alice.
     let vault = Vault::create();
 
     // Create an Identity to represent Alice.
-    let alice = Identity::create(&ctx, &vault).await?;
+    let alice = Identity::create(&ctx, vault).await?;
+
+    // Create a TCP connection to the middle node.
+    let connection_to_middle_node = tcp.connect("localhost:3000", TcpConnectionTrustOptions::new()).await?;
 
     // Connect to a secure channel listener and perform a handshake.
-    let r = route![(TCP, "localhost:3000"), "hop", (TCP, "localhost:4000"), "bob_listener"];
+    let r = route![connection_to_middle_node, "forward_to_bob", "bob_listener"];
     let channel = alice.create_secure_channel(r, TrustEveryonePolicy).await?;
 
     // Send a message to the echoer worker via the channel.
@@ -141,7 +148,6 @@ async fn main(mut ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     ctx.stop().await
 }
-
 ```
 
 ### Run

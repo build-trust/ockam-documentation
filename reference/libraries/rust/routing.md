@@ -44,7 +44,7 @@ To get a sense of how that works, let's route a message over two hops.
 Sender:
 
 * Needs to know the route to a destination, makes that route the onward\_route of a new message
-* Makes its own address the the return\_route of the new message
+* Makes its own address the return\_route of the new message
 
 Hop:
 
@@ -54,7 +54,7 @@ Hop:
 Replier:
 
 * Makes return\_route of incoming message, onward\_route of outgoing message
-* Makes its own address the the return\_route of the new message
+* Makes its own address the return\_route of the new message
 
 
 
@@ -259,19 +259,19 @@ Add the following code to this file:
 
 use hello_ockam::Echoer;
 use ockam::access_control::AllowAll;
-use ockam::{Context, Result, TcpTransport};
+use ockam::{Context, Result, TcpListenerTrustOptions, TcpTransport};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Initialize the TCP Transport.
     let tcp = TcpTransport::create(&ctx).await?;
-
-    // Create a TCP listener and wait for incoming connections.
-    tcp.listen("127.0.0.1:4000").await?;
-
+  
     // Create an echoer worker
     ctx.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
-
+  
+    // Create a TCP listener and wait for incoming connections.
+    tcp.listen("127.0.0.1:4000", TcpListenerTrustOptions::new()).await?;
+  
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
 }
@@ -291,24 +291,28 @@ Add the following code to this file:
 // examples/04-routing-over-transport-initiator.rs
 // This node routes a message, to a worker on a different node, over the tcp transport.
 
-use ockam::{route, Context, Result, TcpTransport, TCP};
+use ockam::{route, Context, Result, TcpConnectionTrustOptions, TcpTransport};
 
 #[ockam::node]
 async fn main(mut ctx: Context) -> Result<()> {
     // Initialize the TCP Transport.
-    let _tcp = TcpTransport::create(&ctx).await?;
-
-    // Send a message to the "echoer" worker, on a different node, over a tcp transport.
-    let r = route![(TCP, "localhost:4000"), "echoer"];
+    let tcp = TcpTransport::create(&ctx).await?;
+  
+    // Create a TCP connection to a different node.
+    let connection_to_responder = tcp.connect("localhost:4000", TcpConnectionTrustOptions::new()).await?;
+  
+    // Send a message to the "echoer" worker on a different node, over a tcp transport.
+    let r = route![connection_to_responder, "echoer"];
     ctx.send(r, "Hello Ockam!".to_string()).await?;
-
+  
     // Wait to receive a reply and print it.
     let reply = ctx.receive::<String>().await?;
     println!("App Received: {}", reply); // should print "Hello Ockam!"
-
+  
     // Stop all workers, stop the node, cleanup and return.
     ctx.stop().await
 }
+
 ```
 
 #### Run
@@ -331,6 +335,67 @@ Note the message flow.
 
 #### Routing over two transport hops
 
+#### Forwarder worker
+
+For demonstration, we'll create another worker, called `Forwarder`, that takes every incoming message and forwards it to the predefined address.
+
+Just before forwarding the message, `Forwarder`'s handle message function will:
+
+1. Print the message
+2. Remove its own address (first address) from the `onward_route`, by calling `step()`
+3. Insert predefined address as the first address in the `onward_route` by calling `prepend()`
+
+Create a new file at:
+
+```
+touch src/forwarder.rs
+```
+
+Add the following code to this file:
+
+```rust
+// src/forwarder.rs
+
+use ockam::{Address, Any, Context, LocalMessage, Result, Routed, Worker};
+
+pub struct Forwarder(pub Address);
+
+#[ockam::worker]
+impl Worker for Forwarder {
+    type Context = Context;
+    type Message = Any;
+
+    /// This handle function takes any incoming message and forwards
+    /// it to the next hop in it's onward route
+    async fn handle_message(&mut self, ctx: &mut Context, msg: Routed<Any>) -> Result<()> {
+        println!("Address: {}, Received: {}", ctx.address(), msg);
+
+        // Some type conversion
+        let mut transport_message = msg.into_local_message().into_transport_message();
+
+        transport_message
+            .onward_route
+            .modify()
+            .pop_front() // Remove my address from the onward_route
+            .prepend(self.0.clone()); // Prepend predefined address to the onward_route
+
+        // Wipe all local info (e.g. transport types)
+        let message = LocalMessage::new(transport_message, vec![]);
+
+        // Send the message on its onward_route
+        ctx.forward(message).await
+    }
+}
+```
+
+To make this `Forwarder` type accessible to our main program, export it from `src/lib.rs` by adding the following to it:
+
+```rust
+mod forwarder;
+pub use forwarder::*;
+```
+
+
 #### Responder node
 
 Create a new file at:
@@ -348,18 +413,18 @@ Add the following code to this file:
 
 use hello_ockam::Echoer;
 use ockam::access_control::AllowAll;
-use ockam::{Context, Result, TcpTransport};
+use ockam::{Context, Result, TcpListenerTrustOptions, TcpTransport};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Initialize the TCP Transport.
     let tcp = TcpTransport::create(&ctx).await?;
 
-    // Create a TCP listener and wait for incoming connections.
-    tcp.listen("127.0.0.1:4000").await?;
-
     // Create an echoer worker
     ctx.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
+
+    // Create a TCP listener and wait for incoming connections.
+    tcp.listen("127.0.0.1:4000", TcpListenerTrustOptions::new()).await?;
 
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
@@ -379,23 +444,33 @@ Add the following code to this file:
 ```rust
 // examples/04-routing-over-transport-two-hops-middle.rs
 // This node creates a tcp connection to a node at 127.0.0.1:4000
+// Starts a forwarder worker to forward messages to 127.0.0.1:4000
 // Starts a tcp listener at 127.0.0.1:3000
 // It then runs forever waiting to route messages.
 
-use hello_ockam::Hop;
+use hello_ockam::Forwarder;
 use ockam::access_control::AllowAll;
-use ockam::{Context, Result, TcpTransport};
+use ockam::{Context, Result, TcpConnectionTrustOptions, TcpListenerTrustOptions, TcpTransport};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Initialize the TCP Transport.
     let tcp = TcpTransport::create(&ctx).await?;
 
-    // Create a TCP listener and wait for incoming connections.
-    tcp.listen("127.0.0.1:3000").await?;
+    // Create a TCP connection to the responder node.
+    let connection_to_responder = tcp.connect("127.0.0.1:4000", TcpConnectionTrustOptions::new()).await?;
 
-    // Create a Hop worker
-    ctx.start_worker("hop", Hop, AllowAll, AllowAll).await?;
+    // Create a Forwarder worker
+    ctx.start_worker(
+        "forward_to_responder",
+        Forwarder(connection_to_responder),
+        AllowAll,
+        AllowAll,
+    )
+    .await?;
+
+    // Create a TCP listener and wait for incoming connections.
+    tcp.listen("127.0.0.1:3000", TcpListenerTrustOptions::new()).await?;
 
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
@@ -416,15 +491,18 @@ Add the following code to this file:
 // examples/04-routing-over-transport-two-hops-initiator.rs
 // This node routes a message, to a worker on a different node, over two tcp transport hops.
 
-use ockam::{route, Context, Result, TcpTransport, TCP};
+use ockam::{route, Context, Result, TcpConnectionTrustOptions, TcpTransport};
 
 #[ockam::node]
 async fn main(mut ctx: Context) -> Result<()> {
     // Initialize the TCP Transport.
-    let _tcp = TcpTransport::create(&ctx).await?;
+    let tcp = TcpTransport::create(&ctx).await?;
+
+    // Create a TCP connection to the middle node.
+    let connection_to_middle_node = tcp.connect("localhost:3000", TcpConnectionTrustOptions::new()).await?;
 
     // Send a message to the "echoer" worker, on a different node, over two tcp hops.
-    let r = route![(TCP, "localhost:3000"), "hop", (TCP, "localhost:4000"), "echoer"];
+    let r = route![connection_to_middle_node, "forward_to_responder", "echoer"];
     ctx.send(r, "Hello Ockam!".to_string()).await?;
 
     // Wait to receive a reply and print it.

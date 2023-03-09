@@ -8,6 +8,8 @@ description: >-
 
 ```rust
 use ockam::{Context, Result};
+use ockam::identity::Identity;
+use ockam::vault::Vault;
 
 #[ockam::node]
 async fn main(mut ctx: Context) -> Result<()> {
@@ -15,7 +17,7 @@ async fn main(mut ctx: Context) -> Result<()> {
     let vault = Vault::create();
 
     // Create an Identity to represent Alice.
-    let alice = Identity::create(&ctx, &vault).await?;
+    let alice = Identity::create(&ctx, vault).await?;
 
     // Stop the node.
     ctx.stop().await
