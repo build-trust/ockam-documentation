@@ -6,9 +6,19 @@ description: >-
 
 # Credentials and Authorities
 
+Ockam Secure Channels enable you to setup mutually authenticated and end-to-end encrypted communication. Once a channel is established, it has the following guarantees:
+
+1. **Authenticity:** Each end of the channel knows that messages received on the channel must have been sent by someone who possesses the secret keys of specific Ockam Cryptographic Identifier.
+2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tapered en-route and are exactly what was sent by the authenticated sender at the other end of the channel.
+3. **Confidentiality:**  Each end of the channel knows that the contents of messages received on the channel could not have been observed en-route between the sender and the receiver.
+
+These **guarantees however don't automatically imply trust**. They don't tell us if a particular sender is trusted to inform us about a particular topic or if the sender is authorized to get a response to a particular request.
+
+One way to create trust and authorize requests would be to use Access Control Lists (ACLs), where every receiver of messages would have a preconfigured list of Ockam Identifiers that are trusted to inform about a certain topic or trigger certain requests. This approach works but doesn't scale very well. It becomes very cumbersome to manage mutual trust if you have more that a few nodes communicating with each other.
+
 ### Setup
 
-[setup](./#get-started) and create an [echoer worker](nodes.md#echoer-worker)
+To get started please create the initial [hello\_ockam project](./#get-started) and define and [echoer worker](nodes.md#echoer-worker). We'll also need the `hex` crate for this example so add that to your `Cargo.toml` using `cargo add` :
 
 ```
 cargo add hex
