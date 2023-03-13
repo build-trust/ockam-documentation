@@ -16,7 +16,9 @@ These guarantees however don't automatically imply trust. They don't tell us if 
 
 One way to create trust and authorize requests would be to use Access Control Lists (ACLs), where every receiver of messages would have a preconfigured list of identifiers that are trusted to inform about a certain topic or trigger certain requests. This approach works but doesn't scale very well. It becomes very cumbersome to manage mutual trust if you have more that a few nodes communicating with each other.
 
-Another, and significantly more scalable, approach is to use Ockam <mark style="color:orange;">Credentials</mark> combined with <mark style="color:orange;">Attribute Based Access Control</mark>. In this setup every participant starts off by trusting a single Credential Issuer to be the authority on the attributes of an Identifier. This authority issues cryptographically signed credentials to attest to these attributes.
+Another, and significantly more scalable, approach is to use Ockam <mark style="color:orange;">Credentials</mark> combined with <mark style="color:orange;">Attribute Based Access Control</mark>. In this setup every participant starts off by trusting a single Credential Issuer to be the authority on the attributes of an Identifier. This authority issues cryptographically signed credentials to attest to these attributes. Participants can then exchange and authenticate each others’ credentials to collect authenticated attributes about an identifier. Every participant uses these authenticated attributes to make authorization decisions based on attribute-based access control policies.
+
+Let’s walk through an example of how you can setup ABAC in a few lines of code:
 
 ### Setup
 
@@ -28,9 +30,13 @@ cargo add hex
 
 ### Credential Issuer
 
+Any Ockam Identity can issue Credentials. As a first step we’ll create a credential issuer that will act as an authority for this example application:
+
 ```
 touch examples/06-credential-exchange-issuer.rs
 ```
+
+This issuer, knows a predefined list of identifiers that will issue credentials to. In a a later guide, we'll dig into how Ockam enables you to define various pluggable Enrollment Protocols to decide who should be issued credentials. For this example we'll assume that this list is known in advance.
 
 {% code lineNumbers="true" %}
 ```rust
