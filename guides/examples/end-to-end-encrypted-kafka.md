@@ -60,8 +60,8 @@ request.timeout.ms=30000
 security.protocol=SASL_PLAINTEXT
 sasl.mechanism=PLAIN
 sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
-        username="YOUR_CONFLUENT_CLOUD_USER_NAME" \
-        password="YOUR_CONFLUENT_CLOUD_PASSWORD";
+        username="YOUR_CONFLUENT_CLOUD_KAFKA_CLUSTER_API_KEY" \
+        password="YOUR_CONFLUENT_CLOUD_KAFKA_CLUSTER_API_SECRET";
 EOF
 ```
 
