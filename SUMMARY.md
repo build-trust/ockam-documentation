@@ -41,3 +41,4 @@
     * [docs.rs/ockam](https://docs.rs/ockam/)
 * [Protocols](reference/protocols/README.md)
   * [Routing and Transports](reference/protocols/routing-and-transports.md)
+  * [Secure Channels](reference/protocols/secure-channels.md)
