@@ -30,6 +30,8 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 * Define and enforce project-wide attribute based access control policies - ABAC, RBAC or ACLs.
 * Integrate with enterprise identity providers and policy providers for seamless employee access.
 
+
+
 <figure><img src="../../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM (1).png" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 ## A step by step introduction <a href="#introduction" id="introduction"></a>
@@ -63,18 +65,12 @@ On Linux and MacOS, you can download precompiled binaries for your architecture 
 
 ```shell
 curl --proto '=https' --tlsv1.2 -sSf \
-    https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
+    https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | bash
 ```
 
 
 
-After the binary downloads, please move it to a location that is in your shell's `$PATH`.
-
-```bash
-mv ockam /usr/local/bin
-```
-
-If the above instructions don't work on your machine, please [post a question](https://github.com/build-trust/ockam/discussions), we’d love to help.
+This will download a precompiled binary and add it to your path. If the above instructions don't work on your machine, please [post a question](https://github.com/build-trust/ockam/discussions), we’d love to help.
 {% endtab %}
 {% endtabs %}
 
