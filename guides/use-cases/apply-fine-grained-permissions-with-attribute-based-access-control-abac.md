@@ -158,7 +158,7 @@ ockam identity create x_identity
 ockam project authenticate --token $x_token --identity x_identity
 
 # Create a node targeting the project as the x identity.
-ockam node create x --project project.json --enrollment-token $x_token
+ockam node create x --project project.json --identity x_identity
 
 # Set a policy and create a new tcp-inlet for node x.
 ockam policy set --at x --resource tcp-inlet --expression '(= subject.component "control")'
