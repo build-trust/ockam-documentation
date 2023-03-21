@@ -128,7 +128,9 @@ export OCKAM_TELEGRAF_TOKEN=$(ockam project enroll --attribute component=telegra
 Now we can create a node for our InfluxDB service:
 
 ```bash
-ockam node create influxdb --project project.json --enrollment-token $OCKAM_INFLUXDB_TOKEN
+ockam identity create influxdb
+ockam project authenticate --identity influxdb --token $OCKAM_INFLUXDB_TOKEN --project-path project.json
+ockam node create influxdb --project project.json --identity influxdb
 ockam policy set --at influxdb --resource tcp-outlet --expression '(= subject.component "telegraf")'
 ockam tcp-outlet create --at /node/influxdb --from /service/outlet --to 127.0.0.1:8086
 ockam forwarder create influxdb --at /project/default --to /node/influxdb
@@ -143,10 +145,13 @@ There's a few things that have happened in those commands, so let's quickly unpa
 
 It's now time to establish the other side of this connection by creating the corresponding client node for Telegraf:
 
-<pre class="language-bash"><code class="lang-bash"><strong>ockam node create telegraf --project project.json --enrollment-token $OCKAM_TELEGRAF_TOKEN
-</strong>ockam policy set --at telegraf --resource tcp-inlet --expression '(= subject.component "influxdb")'
+```bash
+ockam identity create telegraf
+ockam project authenticate --identity telegraf --token $OCKAM_TELEGRAF_TOKEN --project-path project.json
+ockam node create telegraf --project project.json --identity telegraf
+ockam policy set --at telegraf --resource tcp-inlet --expression '(= subject.component "influxdb")'
 ockam tcp-inlet create --at /node/telegraf --from 127.0.0.1:8087 --to /project/default/service/forward_to_influxdb/secure/api/service/outlet
-</code></pre>
+```
 
 Now we can unpack these three commands and what they've done:
 
