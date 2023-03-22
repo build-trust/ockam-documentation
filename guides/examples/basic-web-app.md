@@ -89,12 +89,13 @@ export WEB_TOKEN=$(ockam project enroll --attribute component=web)
 
 Next we'll create and enroll our node, set a policy to say it is only allowed to create inlet connections to the `db` component, and then finally we create that inlet:
 
-<pre class="language-bash"><code class="lang-bash">ockam identity create web
+```bash
+ockam identity create web
 ockam project authenticate --identity web --token $WEB_TOKEN --project-path project.json
-<strong>ockam node create web --project project.json --identity web
-</strong>ockam policy set --at web --resource tcp-inlet --expression '(= subject.component "db")'
+ockam node create web --project project.json --identity web
+ockam policy set --at web --resource tcp-inlet --expression '(= subject.component "db")'
 ockam tcp-inlet create --at /node/web --from 127.0.0.1:5432 --to /project/default/service/forward_to_db/secure/api/service/outlet
-</code></pre>
+```
 
 Take note of the `--from` and `--to` values above. The `--from` is telling the node to listen on port 5432, the default postgres port, and to forward it `--to` the forwarder service to the database that we created in the previous section. This means requests to localhost:5432 will be forwarded to whatever node has registered as `db`, wherever it is!
 
