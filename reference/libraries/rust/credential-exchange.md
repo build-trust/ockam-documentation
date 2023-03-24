@@ -18,7 +18,7 @@ One way to create trust and authorize requests would be to use Access Control Li
 
 Another, and significantly more scalable, approach is to use Ockam <mark style="color:orange;">Credentials</mark> combined with <mark style="color:orange;">Attribute Based Access Control (ABAC)</mark>. In this setup every participant starts off by trusting a single Credential Issuer to be the authority on the attributes of an Identifier. This authority issues cryptographically signed credentials to attest to these attributes. Participants can then exchange and authenticate each others’ credentials to collect authenticated attributes about an identifier. Every participant uses these authenticated attributes to make authorization decisions based on attribute-based access control policies.
 
-Let’s walk through a example of setting up ABAC using cryptographically verifiable credentials.
+Let’s walk through an example of setting up ABAC using cryptographically verifiable credentials.
 
 ### Setup
 
@@ -119,8 +119,7 @@ use ockam::abac::AbacAccessControl;
 use ockam::access_control::AllowAll;
 use ockam::authenticated_storage::AuthenticatedAttributeStorage;
 use ockam::identity::credential_issuer::{CredentialIssuerApi, CredentialIssuerClient};
-use ockam::identity::{Identity, SecureChannelListenerTrustOptions, SecureChannelTrustOptions, TrustEveryonePolicy};
-use ockam::sessions::Sessions;
+use ockam::identity::{Identity, SecureChannelListenerTrustOptions, SecureChannelTrustOptions};
 use ockam::{route, vault::Vault, Context, Result, TcpConnectionTrustOptions, TcpListenerTrustOptions, TcpTransport};
 use std::sync::Arc;
 
@@ -147,15 +146,9 @@ async fn main(ctx: Context) -> Result<()> {
     // The credential issuer already knows the public identifier of this identity
     // as a member of the production cluster so it returns a signed credential
     // attesting to that knowledge.
-    let sessions = Sessions::default();
-    let session_id = sessions.generate_session_id();
-    let issuer_tcp_trust_options = TcpConnectionTrustOptions::new().with_session(&sessions, &session_id);
-    let issuer_connection = tcp.connect("127.0.0.1:5000", issuer_tcp_trust_options).await?;
-    let issuer_trust_options = SecureChannelTrustOptions::new()
-        .with_trust_policy(TrustEveryonePolicy)
-        .with_ciphertext_session(&sessions, &session_id);
+    let issuer_connection = tcp.connect("127.0.0.1:5000", TcpConnectionTrustOptions::new()).await?;
     let issuer_channel = server
-        .create_secure_channel(route![issuer_connection, "secure"], issuer_trust_options)
+        .create_secure_channel(route![issuer_connection, "secure"], SecureChannelTrustOptions::new())
         .await?;
     let issuer = CredentialIssuerClient::new(&ctx, route![issuer_channel]).await?;
     let credential = issuer.get_credential(server.identifier()).await?.unwrap();
@@ -178,15 +171,10 @@ async fn main(ctx: Context) -> Result<()> {
 
     // Start a secure channel listener that only allows channels with
     // authenticated identities.
-    let listener_session_id = sessions.generate_session_id();
-    let trust_options = SecureChannelListenerTrustOptions::new()
-        .with_trust_policy(TrustEveryonePolicy)
-        .with_session(&sessions, &listener_session_id);
-    server.create_secure_channel_listener("secure", trust_options).await?;
+    server.create_secure_channel_listener("secure", SecureChannelListenerTrustOptions::new()).await?;
 
     // Create a TCP listener and wait for incoming connections
-    let tcp_listener_trust_options = TcpListenerTrustOptions::new().with_session(&sessions, &listener_session_id);
-    tcp.listen("127.0.0.1:4000", tcp_listener_trust_options).await?;
+    tcp.listen("127.0.0.1:4000", TcpListenerTrustOptions::new()).await?;
 
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
@@ -208,8 +196,7 @@ touch examples/06-credential-exchange-client.rs
 ```rust
 use ockam::authenticated_storage::AuthenticatedAttributeStorage;
 use ockam::identity::credential_issuer::{CredentialIssuerApi, CredentialIssuerClient};
-use ockam::identity::{Identity, SecureChannelTrustOptions, TrustEveryonePolicy};
-use ockam::sessions::Sessions;
+use ockam::identity::{Identity, SecureChannelTrustOptions};
 use ockam::{route, vault::Vault, Context, Result, TcpConnectionTrustOptions, TcpTransport};
 use std::sync::Arc;
 
@@ -241,15 +228,9 @@ async fn main(mut ctx: Context) -> Result<()> {
     // The credential issuer already knows the public identifier of this identity
     // as a member of the production cluster so it returns a signed credential
     // attesting to that knowledge.
-    let sessions = Sessions::default();
-    let session_id = sessions.generate_session_id();
-    let issuer_tcp_trust_options = TcpConnectionTrustOptions::new().with_session(&sessions, &session_id);
-    let issuer_connection = tcp.connect("127.0.0.1:5000", issuer_tcp_trust_options).await?;
-    let issuer_trust_options = SecureChannelTrustOptions::new()
-        .with_trust_policy(TrustEveryonePolicy)
-        .with_ciphertext_session(&sessions, &session_id);
+    let issuer_connection = tcp.connect("127.0.0.1:5000", TcpConnectionTrustOptions::new()).await?;
     let issuer_channel = client
-        .create_secure_channel(route![issuer_connection, "secure"], issuer_trust_options)
+        .create_secure_channel(route![issuer_connection, "secure"], SecureChannelTrustOptions::new())
         .await?;
     let issuer_client = CredentialIssuerClient::new(&ctx, route![issuer_channel]).await?;
     let credential = issuer_client.get_credential(client.identifier()).await?.unwrap();
@@ -257,14 +238,9 @@ async fn main(mut ctx: Context) -> Result<()> {
     client.set_credential(credential).await;
 
     // Create a secure channel to the node that is running the Echoer service.
-    let server_session_id = sessions.generate_session_id();
-    let server_tcp_trust_options = TcpConnectionTrustOptions::new().with_session(&sessions, &server_session_id);
-    let server_connection = tcp.connect("127.0.0.1:4000", server_tcp_trust_options).await?;
-    let channel_trust_options = SecureChannelTrustOptions::new()
-        .with_trust_policy(TrustEveryonePolicy)
-        .with_ciphertext_session(&sessions, &server_session_id);
+    let server_connection = tcp.connect("127.0.0.1:4000", TcpConnectionTrustOptions::new()).await?;
     let channel = client
-        .create_secure_channel(route![server_connection, "secure"], channel_trust_options)
+        .create_secure_channel(route![server_connection, "secure"], SecureChannelTrustOptions::new())
         .await?;
 
     // Present credentials over the secure channel
@@ -280,8 +256,7 @@ async fn main(mut ctx: Context) -> Result<()> {
     let reply = ctx.receive::<String>().await?;
     println!("Received: {}", reply); // should print "Hello Ockam!"
 
-    // Don't call ctx.stop() here so this node runs forever.
-    Ok(())
+    ctx.stop().await
 }
 ```
 {% endcode %}
