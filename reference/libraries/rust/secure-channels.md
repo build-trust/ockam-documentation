@@ -152,13 +152,13 @@ async fn main(mut ctx: Context) -> Result<()> {
 
 ### Run
 
-Run the responder:
+Run the responder in a separate terminal tab and keep it running:
 
 ```
 cargo run --example 05-secure-channel-over-two-transport-hops-responder
 ```
 
-Run middle:
+Run the middle node in a separate terminal tab and keep it running:
 
 ```
 cargo run --example 05-secure-channel-over-two-transport-hops-middle
