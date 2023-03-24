@@ -312,12 +312,11 @@ async fn main(mut ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     ctx.stop().await
 }
-
 ```
 
 #### Run
 
-Run the responder:
+Run the responder in a separate terminal tab and keep it running:
 
 ```
 cargo run --example 04-routing-over-transport-responder
@@ -516,13 +515,13 @@ async fn main(mut ctx: Context) -> Result<()> {
 
 #### Run
 
-Run the responder:
+Run the responder in a separate terminal tab and keep it running:
 
 ```
 cargo run --example 04-routing-over-transport-two-hops-responder
 ```
 
-Run middle:
+Run the middle node in a separate terminal tab and keep it running:
 
 ```
 cargo run --example 04-routing-over-transport-two-hops-middle
