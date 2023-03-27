@@ -13,7 +13,7 @@ Our goal is to make these powerful protocols <mark style="color:orange;">easy</m
 
 However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. It can be quite challenging to make them simple to use, secure, and platform independent.
 
-Ockam [Nodes](nodes.md#node), [Workers](nodes.md#worker), and [Services](nodes.md#service) help us decouple from the host environment and provide simple interfaces to complex, stateful, and asynchronous message-based protocols.
+Ockam [Nodes](nodes.md#node), [Workers](nodes.md#worker), and [Services](nodes.md#service) help us decouple from the host environment and provide simple interfaces to our stateful and asynchronous message-based protocols.
 
 ## Node
 
