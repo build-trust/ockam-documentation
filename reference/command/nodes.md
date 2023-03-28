@@ -19,9 +19,9 @@ Ockam [Nodes](nodes.md#node), [Workers](nodes.md#worker), and [Services](nodes.m
 
 An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam Protocols like Ockam [Routing](routing.md) and Ockam [Secure Channels](secure-channels.md).
 
-You can create an Ockam node using Ockam [Command](./) or embed one directly into your application using various Ockam [programming libraries](../libraries/). Ockam Nodes are designed to leverage the strengths of their operating environment. Our Rust implementation, for example, makes it easy to adapt to various architectures and processors. It can run efficiently on tiny microcontrollers or scale horizontally in cloud environments.&#x20;
+You can create a standalone Ockam node using Ockam [Command](./) or embed one directly into your application using various Ockam [programming libraries](../libraries/). Ockam Nodes are built to leverage the strengths of their operating environment. Our [Rust](../libraries/rust/) implementation, for example, makes it easy to adapt to various architectures and processors. It can run efficiently on tiny microcontrollers or scale horizontally in cloud environments.&#x20;
 
-Typically, an Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called Ockam [Workers](nodes.md#worker). Using Ockam Routing, a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
+A typical Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called Ockam [Workers](nodes.md#worker). Using Ockam Routing, a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
 
 Ockam Command makes is super easy to create and manage local or remote Ockam Nodes.
 
