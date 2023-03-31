@@ -23,7 +23,7 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 * Operate scalable credential authorities to issue lightweight, short-lived, revokable, attribute-based credentials.
 * Onboard fleets of self-sovereign application identities using secure enrollment protocols.
 * Rotate and revoke keys and credentials – at scale, across fleets.
-* Define and enforce project-wide attribute based access control policies. Chose ABAC, RBAC or ACLs.
+* Define and enforce project-wide attribute based access control policies. Choose ABAC, RBAC or ACLs.
 * Integrate with enterprise identity providers and policy providers for seamless employee access.
 
 
