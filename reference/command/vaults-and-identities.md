@@ -2,7 +2,7 @@
 description: >-
   Ockam Identities are unique, cryptographically verifiable digital identities.
   Ockam Vaults allow you to safely store and use cryptographic keys for these
-  identities.
+  identities in files, KMSs, HSMs etc.
 ---
 
 # Identities and Vaults
