@@ -1,3 +1,10 @@
+---
+description: >-
+  Ockam Secure Channels are mutually authenticated and end-to-end encrypted
+  messaging channels that guarantee data authenticity, integrity, and
+  confidentiality.
+---
+
 # Secure Channels
 
 Now that we understand the basics of Nodes, Workers, and Routing ... let's create our first encrypted secure channel.
