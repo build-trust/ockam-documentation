@@ -1,8 +1,8 @@
 ---
 description: >-
   Ockam Routing and Transports enable other Ockam protocols to provide
-  end-to-end guarantees even when messages are traveling across network and
-  protocols boundaries.
+  end-to-end guarantees to messages that are traveling across many network
+  connection hops and protocols boundaries.
 ---
 
 # Routing and Transports
