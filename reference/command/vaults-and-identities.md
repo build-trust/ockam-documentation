@@ -1,4 +1,10 @@
-# Vaults and Identities
+---
+description: >-
+  Ockam Identities and Vaults make it simple to create unique, cryptographically
+  verifiable digital identities.
+---
+
+# Identities and Vaults
 
 ```shell-session
 » ockam vault create v1
