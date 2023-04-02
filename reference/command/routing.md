@@ -97,11 +97,14 @@ Next list the TCP connections on n1 and n2 to get their worker addresses:
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 ```
 
+Note that the TCP connection from `n1 to n2` has the worker address `f3a2e2814b0ae3ca446aa43aba2ee33d` and the TCP connection from `n2 to n3` has the worker address `6af0e5768b510d14835154bd10060ed0`. We can combine this information to send a message over two TCP hops.
+
 ```
-» ockam message send hello --from n1 \
---to /worker/f3a2e2814b0ae3ca446aa43aba2ee33d/worker/6af0e5768b510d14835154bd10060ed0/service/uppercase
+» ockam message send hello --from n1 --to /worker/f3a2e2814b0ae3ca446aa43aba2ee33d/worker/6af0e5768b510d14835154bd10060ed0/service/uppercase
 HELLO
 ```
+
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
