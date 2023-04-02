@@ -108,7 +108,9 @@ The message in the above command took the following route:&#x20;
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
-In this example, we ran a simple uppercase request/response protocol between n1 and n3, two nodes that weren't directly connected to each other. This is the foundation of <mark style="color:orange;">end-to-end</mark> <mark style="color:orange;">protocols</mark> in Ockam.
+In this example, we ran a simple uppercase request and response protocol between `n1` and `n3`, two nodes that weren't directly connected to each other. This is the foundation of <mark style="color:orange;">end-to-end</mark> <mark style="color:orange;">protocols</mark> in Ockam.
+
+We can have any number of TCP hops along the path to the uppercase service.
 
 
 
