@@ -108,6 +108,8 @@ We can also say that the message must originate from node `n1` and sent to node 
 HELLO
 ```
 
+This worked a shown in the following diagram. A message was routed over TCP using Ockam Routing.
+
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="A message routed from node n1 to node n2 and back over TCP" class="gitbook-drawing">
 
 [^1]: Transport Layer Security
