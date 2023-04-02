@@ -13,7 +13,11 @@ Vault created: v1
 
 » ockam identity create i1 --vault v1
 Identity created: Pf87c30a63cd56b4848ed0aa17d582db67fe143279b37e6af1eb460f020685f41
+```
 
+
+
+```
 » ockam identity show i1 --full
 Change History:
   Change[0]:
@@ -25,4 +29,3 @@ Change History:
     signatures:
       [0]: SelfSign c9733663024bcb0ef0cc8e8989d25d459f8dc76881efb7d153b89bd555170c96acf5a4228f710fb4ad28caf6bdfdc3aaafc93bfabeb0b558f9a802aeafdcf407
 ```
-
