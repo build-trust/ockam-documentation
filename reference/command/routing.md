@@ -61,38 +61,47 @@ So far, we’ve routed messages within one Node.  Next let's see how we can rout
 
 Ockam Transports make Ockam Routing work over any transport protocol - TCP, UDP, BLE etc.
 
-To see this in action, let’s create a new node `n2`  and explicitly specify that it should listen on the local TCP address `127.0.0.1:7000`
+To see this in action, let’s create two new nodes `n2` and `n3`  and explicitly specify that they should listen on the local TCP addresses `127.0.0.1:7000` and `127.0.0.1:8000` respectively
 
 ```
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
 ...
+» ockam node create n3 --tcp-listener-address=127.0.0.1:8000
+...
 ```
 
-We can send messages to services on this new node  as follows, similar to the way we did above:
+Next let's create two TCP connections from `n1 to n2` and `n2 to n3`:
 
 ```
-» ockam message send hello --to /node/n2/service/uppercase
+» ockam tcp-connection create --from n1 --to 127.0.0.1:7000
+...
+» ockam tcp-connection create --from n2 --to 127.0.0.1:8000
+...
+```
+
+Next list the TCP connections on n1 and n2 to get their worker addresses:
+
+```
+» ockam tcp-connection list --node n1
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| 012dd419f165b7db47f4556948c76d42 | TCP            | Remote connection | 127.0.0.1:7000 | 0#f3a2e2814b0ae3ca446aa43aba2ee33d |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+
+» ockam tcp-connection list --node n2
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| c1cf9616e6c89cae6a098a7177b58a2e | TCP            | Remote connection | 127.0.0.1:8000 | 0#6af0e5768b510d14835154bd10060ed0 |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+```
+
+```
+» ockam message send hello --from n1 --to /worker/f3a2e2814b0ae3ca446aa43aba2ee33d/worker/6af0e5768b510d14835154bd10060ed0/service/uppercase
 HELLO
 ```
-
-Or using the `127.0.0.1` IPv4 address and  `7000` TCP port:
-
-```
-» ockam message send hello --to /ip4/127.0.0.1/tcp/7000/service/uppercase
-HELLO
-```
-
-We can also say that the message must originate from node `n1` and be sent to node `n2`
-
-```
-» ockam message send hello --from n1 --to /ip4/127.0.0.1/tcp/7000/service/uppercase
-HELLO
-```
-
-This worked as shown in the following diagram. A message was routed over TCP using Ockam Routing.
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
-
-## Forwarders
 
 [^1]: Transport Layer Security
