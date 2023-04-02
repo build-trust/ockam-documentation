@@ -182,4 +182,8 @@ Node: n1
 
 Later in this guide, we’ll explore other commands that interact with other pre-defined services like `/service/api` – every node created with Ockam Command starts a secure channel listener at this address to allow other nodes to create mutually authenticated channels with it.
 
+{% hint style="info" %}
+You can cleanup all the nodes with `ockam node delete --all`
+{% endhint %}
+
 Next, let’s explore how Ockam’s [Application Layer Routing](routing.md) protocol enables us to create protocols that provide end-to-end security and privacy guarantees.
