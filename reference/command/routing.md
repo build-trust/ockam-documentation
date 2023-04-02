@@ -101,4 +101,6 @@ Or even the `127.0.0.1` IP address and  `50303` TCP port:
 HELLO
 ```
 
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+
 [^1]: Transport Layer Security
