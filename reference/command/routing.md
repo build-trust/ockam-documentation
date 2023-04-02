@@ -61,7 +61,7 @@ So far, we’ve routed messages within one Node.  Next let's see how we can rout
 
 Ockam Transports make Ockam Routing work over any transport protocol - TCP, UDP, BLE etc.
 
-Let’s create a new node `n2` , you'll notice in the output that is starts a TCP transport listener and picks a random port to listen. `50303` in the below example:&#x20;
+To see this in action, let’s create a new node `n2` , you'll notice in the output that is starts a TCP transport listener and picks a random port to listen. `50303` in the below example:&#x20;
 
 ```
 » ockam node create n2
@@ -110,10 +110,8 @@ HELLO
 
 This worked as shown in the following diagram. A message was routed over TCP using Ockam Routing.
 
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="A message routed from node n1 to node n2 and back over TCP" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
-Similar to how we routed messages over multiple hops on a single node, we can also send messages over multiple TCP hops:
-
-ocka
+Similar to how we routed messages over multiple hops on a single node, we can also send messages over multiple TCP hops.
 
 [^1]: Transport Layer Security
