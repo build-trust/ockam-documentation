@@ -7,11 +7,11 @@ description: >-
 
 # Identities and Vaults
 
-
-
 ```shell-session
-» ockam identity create
-Default vault created: ad368e1f
-Identity created: P1be289f6e6582bb2770cb8c91d7d655ed3221e8d09f0a36ca688218665059f4a
+» ockam vault create v1
+Vault created: v1
+
+» ockam identity create i1 --vault v1
+Identity created: Pf87c30a63cd56b4848ed0aa17d582db67fe143279b37e6af1eb460f020685f41
 ```
 
