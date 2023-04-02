@@ -30,27 +30,33 @@ Let’s start by creating a [node](nodes.md#node) and sending a message to a [se
 ...
 
 » ockam message send 'Hello Ockam!' --to /node/n1/service/echo
-hello
+Hello Ockam!
 ```
 
 We get a reply back and the message flow looked like this.
 
 <figure><img src="../../.gitbook/assets/simple.001 (1).jpeg" alt=""><figcaption></figcaption></figure>
 
-To achieve this, Ockam Routing Protocols messages carry with them two metadata fields: `onward_route` and `return_route`. A&#x20;
+To achieve this, Ockam Routing Protocols messages carry, with them, two metadata fields: `onward_route` and `return_route`.
 
 <figure><img src="../../.gitbook/assets/one-hop.001.jpeg" alt=""><figcaption></figcaption></figure>
 
+The sender of a message&#x20;
+
+
+
+Workers that are hops along a route&#x20;
+
 ```
-» ockam message send hello --to /node/n1/service/hop/service/echo
-hello
+» ockam message send Hello --to /node/n1/service/hop/service/echo
+Hello
 ```
 
 <figure><img src="../../.gitbook/assets/two-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
 ```
-» ockam message send hello --to /node/n1/service/hop/service/hop/service/echo
-hello
+» ockam message send 'Hello Ockam!' --to /node/n1/service/hop/service/hop/service/echo
+Hello Ockam!
 ```
 
 <figure><img src="../../.gitbook/assets/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
