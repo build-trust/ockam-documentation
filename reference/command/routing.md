@@ -41,12 +41,6 @@ To achieve this, Ockam Routing Protocols messages carry, with them, two metadata
 
 <figure><img src="../../.gitbook/assets/one-hop.001.jpeg" alt=""><figcaption></figcaption></figure>
 
-The sender of a message&#x20;
-
-
-
-Workers that are hops along a route&#x20;
-
 ```
 » ockam message send Hello --to /node/n1/service/hop/service/echo
 Hello
