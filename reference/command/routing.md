@@ -110,7 +110,7 @@ The message in the above command took the following route:&#x20;
 
 In this example, we ran a simple uppercase request and response protocol between `n1` and `n3`, two nodes that weren't directly connected to each other. This is the foundation of <mark style="color:orange;">end-to-end</mark> <mark style="color:orange;">protocols</mark> in Ockam.
 
-We can have any number of TCP hops along the path to the uppercase service.
+We can have any number of TCP hops along the route to the uppercase service. We can also easily have some hops that use a completely different transport protocol like UDP, WebSockets, Bluetooth etc. New Ockam Transports are very easy to implement and there is a growing base of them in the Ockam Github Repository.
 
 
 
