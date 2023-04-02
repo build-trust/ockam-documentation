@@ -29,7 +29,7 @@ Let’s start by creating a [node](nodes.md#node) and sending a message to a [se
 » ockam node create n1
 ...
 
-» ockam message send hello --to /node/n1/service/echo
+» ockam message send 'Hello Ockam!' --to /node/n1/service/echo
 hello
 ```
 
