@@ -26,6 +26,7 @@
 * [Command](reference/command/README.md)
   * [Nodes and Workers](reference/command/nodes.md)
   * [Routing and Transports](reference/command/routing.md)
+  * [Relays and Portals](reference/command/relays.md)
   * [Identities and Vaults](reference/command/vaults-and-identities.md)
   * [Secure Channels](reference/command/secure-channels.md)
   * [Credentials and Authorities](reference/command/credentials-and-authorities.md)
