@@ -64,20 +64,8 @@ Ockam Transports make Ockam Routing work over any transport protocol - TCP, UDP,
 To see this in action, let’s create a new node `n2` , you'll notice in the output that is starts a TCP transport listener and picks a random port to listen. `50303` in the below example:&#x20;
 
 ```
-» ockam node create n2
-Node:
-  Name: n2
-  Status: UP
-  Route To Node:
-    Short: /node/n2
-    Verbose: /dnsaddr/localhost/tcp/50303
-  Identity: Pa2d6d8eb9021bbefa581013fa6ac5b730dcb20de618b03da6b0c144f27dc3023
-  Transports:
-    Transport:
-      Type: TCP
-      Mode: Listening
-      Socket: 127.0.0.1:50303
-  ...
+» ockam node create n2 --tcp-listener-address=127.0.0.1:7000
+...
 ```
 
 We can send this new node messages as follows, similar to the way we did above:
@@ -87,24 +75,17 @@ We can send this new node messages as follows, similar to the way we did above:
 HELLO
 ```
 
-We could also use `localhost` name and `50303` port:
+Or using the `127.0.0.1` IPv4 address and  `7000` TCP port:
 
 ```
-» ockam message send hello --to /dnsaddr/localhost/tcp/50303/service/uppercase
-HELLO
-```
-
-Or even the `127.0.0.1` IP address and  `50303` TCP port:
-
-```
-» ockam message send hello --to /ip4/127.0.0.1/tcp/50303/service/uppercase
+» ockam message send hello --to /ip4/127.0.0.1/tcp/7000/service/uppercase
 HELLO
 ```
 
 We can also say that the message must originate from node `n1` and sent to node `n2`
 
 ```
-» ockam message send hello --from /node/n1 --to /ip4/127.0.0.1/tcp/50303/service/uppercase
+» ockam message send hello --from n1 --to /ip4/127.0.0.1/tcp/7000/service/uppercase
 HELLO
 ```
 
