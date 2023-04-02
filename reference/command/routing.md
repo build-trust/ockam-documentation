@@ -114,5 +114,5 @@ We can have any number of TCP hops along the route to the uppercase service. We 
 
 Ockam [Routing](routing.md#routing) and Ockam [Transports](routing.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology.&#x20;
 
-Next, let's explore how Ockam [Relays and Portals](relays.md) make it simple to connect applications across networks.
+Next, let's explore how Ockam [Relays and Portals](relays.md) make it simple to connect existing applications across networks.
 
