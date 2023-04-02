@@ -93,6 +93,6 @@ This worked as shown in the following diagram. A message was routed over TCP usi
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
-Similar to how we routed messages over multiple hops on a single node, we can also send messages over multiple TCP hops.
+## Forwarders
 
 [^1]: Transport Layer Security
