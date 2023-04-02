@@ -61,14 +61,14 @@ So far, we’ve routed messages within one Node.  Next let's see how we can rout
 
 Ockam Transports make Ockam Routing work over any transport protocol - TCP, UDP, BLE etc.
 
-To see this in action, let’s create a new node `n2` , you'll notice in the output that is starts a TCP transport listener and picks a random port to listen. `50303` in the below example:&#x20;
+To see this in action, let’s create a new node `n2`  and explicitly specify that it should listen on the local TCP address `127.0.0.1:7000`
 
 ```
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
 ...
 ```
 
-We can send this new node messages as follows, similar to the way we did above:
+We can send messages to services on this new node  as follows, similar to the way we did above:
 
 ```
 » ockam message send hello --to /node/n2/service/uppercase
@@ -82,7 +82,7 @@ Or using the `127.0.0.1` IPv4 address and  `7000` TCP port:
 HELLO
 ```
 
-We can also say that the message must originate from node `n1` and sent to node `n2`
+We can also say that the message must originate from node `n1` and be sent to node `n2`
 
 ```
 » ockam message send hello --from n1 --to /ip4/127.0.0.1/tcp/7000/service/uppercase
