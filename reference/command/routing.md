@@ -42,8 +42,8 @@ To achieve this, Ockam Routing Protocols messages carry, with them, two metadata
 <figure><img src="../../.gitbook/assets/one-hop.001.jpeg" alt=""><figcaption></figcaption></figure>
 
 ```
-» ockam message send Hello --to /node/n1/service/hop/service/echo
-Hello
+» ockam message send hello --to /node/n1/service/hop/service/echo
+hello
 ```
 
 <figure><img src="../../.gitbook/assets/two-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
@@ -55,6 +55,50 @@ Hello Ockam!
 
 <figure><img src="../../.gitbook/assets/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
+So far, we’ve routed messages within one Node.  Next let's see how we can route messages across nodes using Ockam Transports.
+
 ## Transports
+
+Ockam Transports make Ockam Routing work over any transport protocol - TCP, UDP, BLE etc.
+
+Let’s create a new node `n2` , you'll notice in the output that is starts a TCP transport listener and picks a random port to listen. `50303` in the below example:&#x20;
+
+```
+» ockam node create n2
+Node:
+  Name: n2
+  Status: UP
+  Route To Node:
+    Short: /node/n2
+    Verbose: /dnsaddr/localhost/tcp/50303
+  Identity: Pa2d6d8eb9021bbefa581013fa6ac5b730dcb20de618b03da6b0c144f27dc3023
+  Transports:
+    Transport:
+      Type: TCP
+      Mode: Listening
+      Socket: 127.0.0.1:50303
+  ...
+```
+
+We can send this new node messages as follows, similar to the way we did above:
+
+```
+» ockam message send hello --to /node/n2/service/uppercase
+HELLO
+```
+
+We could also use `localhost` name and `50303` port:
+
+```
+» ockam message send hello --to /dnsaddr/localhost/tcp/50303/service/uppercase
+HELLO
+```
+
+Or even the `127.0.0.1` IP address and  `50303` TCP port:
+
+```
+» ockam message send hello --to /ip4/127.0.0.1/tcp/50303/service/uppercase
+HELLO
+```
 
 [^1]: Transport Layer Security
