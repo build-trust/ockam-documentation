@@ -101,6 +101,13 @@ Or even the `127.0.0.1` IP address and  `50303` TCP port:
 HELLO
 ```
 
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+We can also say that the message must originate from node `n1` and sent to node `n2`
+
+```
+» ockam message send hello --from /node/n1 --to /ip4/127.0.0.1/tcp/50303/service/uppercase
+HELLO
+```
+
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="A message routed from node n1 to node n2 and back over TCP" class="gitbook-drawing">
 
 [^1]: Transport Layer Security
