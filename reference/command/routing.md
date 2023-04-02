@@ -13,7 +13,7 @@ Our goal is to enable end-to-end application layer guarantees in any communicati
 
 In contrast, traditional secure communication protocol implementations are typically tightly coupled with transport protocols in a way that all their security is limited to the length and duration of the underlying transport connections.
 
-For example, most TLS[^1] implementations are coupled the underlying TCP connection. If your application’s data and requests travel over two TCP connection hops `TCP -> TCP` then all TLS guarantees break at the bridge between the two networks. This bridge, gateway or load balancer then becomes a point of weakness for application data. To makes matters worse, if you don't setup another mutually authenticated TLS connection on the second hop between the gateway and your destination server then the entire second hop network – all applications and machines within it – become attack vectors to your application and its data.&#x20;
+For example, most TLS implementations are coupled the underlying TCP connection. If your application’s data and requests travel over two TCP connection hops `TCP -> TCP` then all TLS guarantees break at the bridge between the two networks. This bridge, gateway or load balancer then becomes a point of weakness for application data. To makes matters worse, if you don't setup another mutually authenticated TLS connection on the second hop between the gateway and your destination server then the entire second hop network – all applications and machines within it – become attack vectors to your application and its data.&#x20;
 
 Traditional secure communication protocols are also unable to protect your application’s data if it travels over multiple different transport protocols. They can’t guarantee data authenticity or data integrity if your application’s communication path is `UDP -> TCP` or `BLE -> TCP`.
 
@@ -114,8 +114,5 @@ We can have any number of TCP hops along the route to the uppercase service. We 
 
 Ockam [Routing](routing.md#routing) and Ockam [Transports](routing.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology.&#x20;
 
-Next, let's explore how Ockam [Relays and Portals](relays.md) make it simple to bring Ockam Routing to common real world topologies and existing applications.
+Next, let's explore how Ockam [Relays and Portals](relays.md) make it simple to connect applications across networks.
 
-
-
-[^1]: Transport Layer Security
