@@ -108,8 +108,12 @@ We can also say that the message must originate from node `n1` and sent to node 
 HELLO
 ```
 
-This worked a shown in the following diagram. A message was routed over TCP using Ockam Routing.
+This worked as shown in the following diagram. A message was routed over TCP using Ockam Routing.
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="A message routed from node n1 to node n2 and back over TCP" class="gitbook-drawing">
+
+Similar to how we routed messages over multiple hops on a single node, we can also send messages over multiple TCP hops:
+
+ocka
 
 [^1]: Transport Layer Security
