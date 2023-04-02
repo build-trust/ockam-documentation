@@ -104,6 +104,12 @@ Note that the TCP connection from `n1 to n2` has the worker address `f3a2e2814b0
 HELLO
 ```
 
+The message in the above command took the following route:&#x20;
+
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+
+In this example, we ran a simple uppercase request/response protocol between n1 and n3, two nodes that weren't directly connected to each other. This is the foundation of <mark style="color:orange;">end-to-end</mark> <mark style="color:orange;">protocols</mark> in Ockam.
+
+
 
 [^1]: Transport Layer Security
