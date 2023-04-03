@@ -7,3 +7,40 @@ description: >-
 
 # Relays and Portals
 
+In the previous section, we learnt how Ockam [Routing](relays.md#routing) and Ockam [Transports](relays.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology. We also stepped through an example
+
+## Relays
+
+```
+» ockam node create n1
+...
+
+» ockam node create n2 --tcp-listener-address=127.0.0.1:7000
+...
+
+» ockam node create n3
+...
+
+» ockam tcp-connection create --from n1 --to 127.0.0.1:7000
+...
+
+» ockam tcp-connection list --node n1
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| 96ca858eaa4962d9788b7f4e35872cc5 | TCP            | Remote connection | 127.0.0.1:7000 | 0#f3a318045e7b0420d02d5489ff75f126 |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+
+» ockam forwarder create n3 --at /node/n2 --to /node/n3
+/service/forward_to_n3
+
+» ockam message send hello --from /node/n1 --to /service/f3a318045e7b0420d02d5489ff75f126/service/forward_to_n3/service/uppercase
+HELLO
+```
+
+## Portals
+
+```
+» ockam tcp-inlet create --at /node/n1 --from 127.0.0.1:6000 \
+    --to /service/f3a318045e7b0420d02d5489ff75f126/service/forward_to_n3/service/outlet
+```
