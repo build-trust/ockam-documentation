@@ -150,7 +150,7 @@ Because workers are stateful and can asynchronously send and receive messages th
 
 ## Service
 
-One or more Ockam Workers can work as a team to offer a Service. Services can also be attached to identities and authorization policies to enforce attribute based access control rules.
+One or more Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#worker) can work as a team to offer a Service. Services can also be attached to identities and authorization policies to enforce attribute based access control rules.
 
 For example, nodes that are created with Ockam Command come with some predefined services including an example service `/service/uppercase` that responds with an uppercased version of whatever message you send it:
 
@@ -186,7 +186,7 @@ Later in this guide, we’ll explore other commands that interact with other pre
 
 ## Space
 
-An Ockam Space is an infinitely scalable Ockam [Node](nodes.md#node) in the cloud. Ockam Orchestrator can create, manage, and scale spaces for you. Like other nodes, Spaces offer services. For example, you create projects within a space, invite team mates to it, or attach payment subscriptions.
+An Ockam Space is an infinitely scalable Ockam [<mark style="color:blue;">Node</mark>](nodes.md#node) in the cloud. Ockam Orchestrator can create, manage, and scale spaces for you. Like other nodes, Spaces offer services. For example, you create projects within a space, invite team mates to it, or attach payment subscriptions.
 
 When your run `ockam enroll` for the first time, we create a space for your to host your projects.
 
@@ -204,9 +204,9 @@ When your run `ockam enroll` for the first time, we create a space for your to h
 
 ## Project
 
-An Ockam Project is also an infinitely scalable Ockam [Node](nodes.md#node) in the cloud. Ockam Orchestrator can create, manage, and scale projects for you.
+An Ockam Project is also an infinitely scalable Ockam [<mark style="color:blue;">Node</mark>](nodes.md#node) in the cloud. Ockam Orchestrator can create, manage, and scale projects for you.
 
-When your run `ockam enroll` for the first time, we create a default project for you, within your default space. Projects are created within a [Space](nodes.md#space) and can inherit permissions and subscriptions from their parent space. There can be many projects within one space.
+When your run `ockam enroll` for the first time, we create a default project for you, within your default space. Projects are created within a [<mark style="color:blue;">Space</mark>](nodes.md#space) and can inherit permissions and subscriptions from their parent space. There can be many projects within one space.
 
 ```
 » ockam enroll
@@ -220,7 +220,7 @@ When your run `ockam enroll` for the first time, we create a default project for
 +--------------------------------------+---------+-------+------------+
 ```
 
-Like other nodes, Project offer services. For example, the default project has an `echo` service just like the local nodes we created above. We can send messages and get replies from this service. It replies with the same message we send it.
+Like other nodes, Projects offer services. For example, the default project has an `echo` service just like the local nodes we created above. We can send messages and get replies from this service. It replies with the same message we send it.
 
 ```
 » ockam message send hello --to /project/default/service/echo
