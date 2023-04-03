@@ -227,9 +227,9 @@ Like other nodes, Projects offer services. For example, the default project has 
 hello
 ```
 
-#### Conclusion
+#### Recap
 
-Ockam Nodes and Workers decouple applications from the host environment and enable simple interfaces for stateful and asynchronous message-based protocols.
+An Ockam [<mark style="color:blue;">Node</mark>](nodes.md#node) is any program that can interact with other Ockam Nodes using various Ockam protocols like Ockam Routing and Ockam Secure Channels. Ockam Nodes run very lightweight, concurrent, and stateful actors called Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#worker). One or more Ockam <mark style="color:blue;">Workers</mark> can work as a team to offer a [<mark style="color:blue;">Service</mark>](nodes.md#service)<mark style="color:blue;">.</mark>
 
 {% hint style="info" %}
 You can cleanup all the nodes with `ockam node delete --all`
