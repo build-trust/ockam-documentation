@@ -186,9 +186,9 @@ Later in this guide, we’ll explore other commands that interact with other pre
 
 ## Space
 
-An Ockam Space is an infinitely large Ockam Node in the cloud. Ockam Orchestrator can create, manage and scale spaces for you.
+An Ockam Space is an infinitely scalable Ockam [Node](nodes.md#node) in the cloud. Ockam Orchestrator can create, manage, and scale spaces for you. Like other nodes, Spaces offer services. For example, you create projects within a space, invite team mates to it, or attach payment subscriptions.
 
-When your run Ockam&#x20;
+When your run `ockam enroll` for the first time, we create a space for your to host your projects.
 
 ```
 » ockam enroll
@@ -204,6 +204,10 @@ When your run Ockam&#x20;
 
 ## Project
 
+An Ockam Project is also an infinitely scalable Ockam [Node](nodes.md#node) in the cloud. Ockam Orchestrator can create, manage, and scale projects for you.
+
+When your run `ockam enroll` for the first time, we create a default project for you, within your default space. Projects are created within a [Space](nodes.md#space) and can inherit permissions and subscriptions from their parent space. There can be many projects within one space.
+
 ```
 » ockam enroll
 ...
@@ -215,6 +219,8 @@ When your run Ockam&#x20;
 | 91c57e59-ad52-4b4e-9c4a-dd03113da939 | default |       | f27d39e1   |
 +--------------------------------------+---------+-------+------------+
 ```
+
+Like other nodes, Project offer services. For example, the default project has an `echo` service just like the local nodes we created above. We can send messages and get replies from this service. It replies with the same message we send it.
 
 ```
 » ockam message send hello --to /project/default/service/echo
