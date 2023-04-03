@@ -19,7 +19,7 @@ Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#node), [<mark style="col
 
 ## Node
 
-An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam Protocols like Ockam [<mark style="color:blue;">Routing</mark>](routing.md) and Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md).
+An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam protocols like Ockam [<mark style="color:blue;">Routing</mark>](routing.md) and Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md).
 
 You can create a standalone Ockam node using Ockam [<mark style="color:blue;">Command</mark>](./) or embed one directly into your application using various Ockam [<mark style="color:blue;">programming libraries</mark>](../libraries/). Ockam Nodes are built to leverage the strengths of their operating environment. Our [<mark style="color:blue;">Rust</mark>](../libraries/rust/) implementation, for example, makes it easy to adapt to various architectures and processors. It can run efficiently on tiny microcontrollers or scale horizontally in cloud environments.&#x20;
 
