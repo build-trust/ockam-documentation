@@ -11,9 +11,9 @@ At Ockam’s core are a collection of cryptographic and messaging protocols. The
 
 Ockam is designed to make these powerful protocols <mark style="color:orange;">easy</mark> and <mark style="color:orange;">safe</mark> to use in <mark style="color:orange;">any application environment</mark> – from highly scalable cloud services to tiny battery operated microcontroller based devices.
 
-However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. It can be quite challenging to make them simple to use, secure, and platform independent.
-
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+
+However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. It can be quite challenging to make them simple to use, secure, and platform independent.
 
 Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#node), [<mark style="color:blue;">Workers</mark>](nodes.md#worker), and [<mark style="color:blue;">Services</mark>](nodes.md#service) help us decouple from the host environment and provide simple interfaces to our stateful and asynchronous message-based protocols.
 
