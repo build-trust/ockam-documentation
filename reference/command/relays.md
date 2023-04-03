@@ -7,7 +7,7 @@ description: >-
 
 # Relays and Portals
 
-In the previous section, we learnt how Ockam [Routing](relays.md#routing) and Ockam [Transports](relays.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology. We also stepped through an example
+In the previous section, we learnt how Ockam [Routing](relays.md#routing) and Ockam [Transports](relays.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology.
 
 ## Relays
 
@@ -41,6 +41,18 @@ HELLO
 ## Portals
 
 ```
+» python3 -m http.server --bind 127.0.0.1 9000
+```
+
+```
+» ockam tcp-outlet create --at /node/n3 --from /service/outlet --to 127.0.0.1:9000
+...
+
 » ockam tcp-inlet create --at /node/n1 --from 127.0.0.1:6000 \
     --to /service/f3a318045e7b0420d02d5489ff75f126/service/forward_to_n3/service/outlet
+```
+
+```
+» curl --head 127.0.0.1:6000
+HTTP/1.0 200 OK
 ```
