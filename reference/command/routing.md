@@ -71,9 +71,9 @@ So far, we’ve routed messages within one Node. Next let's see how we can route
 
 ## Transports
 
-An Ockam Transport makes Ockam Routing work over a specific transport protocol - TCP, UDP, BLE etc.
+An Ockam Transport makes Ockam Routing work over a specific transport protocol - TCP, UDP, WebSockets, BLE etc.
 
-To see this in action, let’s create two new nodes `n2` and `n3`  and explicitly specify that they should listen on the local TCP addresses `127.0.0.1:7000` and `127.0.0.1:8000` respectively
+To see this in action, let’s explore the TCP transport. Create two new nodes `n2` and `n3`  and explicitly specify that they should listen on the local TCP addresses `127.0.0.1:7000` and `127.0.0.1:8000` respectively:
 
 ```
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
@@ -82,7 +82,7 @@ To see this in action, let’s create two new nodes `n2` and `n3`  and explicitl
 ...
 ```
 
-Next let's create two TCP connections from `n1 to n2` and `n2 to n3`:
+Next let's create two TCP connections, one from `n1 to n2` and the other from `n2 to n3`:
 
 ```
 » ockam tcp-connection create --from n1 --to 127.0.0.1:7000
@@ -109,7 +109,7 @@ Next list the TCP connections on n1 and n2 to get their worker addresses:
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 ```
 
-Note that the TCP connection from `n1 to n2` has the worker address `f3a2e2814b0ae3ca446aa43aba2ee33d` on `n1` and the TCP connection from `n2 to n3` has the worker address `6af0e5768b510d14835154bd10060ed0` on `n2`. We can combine this information to send a message over two TCP hops.
+Note, from the above output, that the TCP connection from `n1 to n2` has worker address `f3a2e2814b0ae3ca446aa43aba2ee33d` on `n1` and the TCP connection from `n2 to n3` has the worker address `6af0e5768b510d14835154bd10060ed0` on `n2`. We can combine this information to send a message over two TCP hops.
 
 ```
 » ockam message send hello --from n1 --to /worker/f3a2e2814b0ae3ca446aa43aba2ee33d/worker/6af0e5768b510d14835154bd10060ed0/service/uppercase
