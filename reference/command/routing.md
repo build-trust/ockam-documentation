@@ -124,13 +124,19 @@ In this example, we ran a simple uppercase request and response protocol between
 
 We can have any number of TCP hops along the route to the uppercase service. We can also easily have some hops that use a completely different transport protocol like UDP, WebSockets, Bluetooth etc. New Ockam Transports are very easy to implement and there is a growing base of them in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam).
 
+#### Recap
+
+{% hint style="info" %}
+To cleanup and delete all nodes, run: `ockam node delete --all`
+{% endhint %}
+
 Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing) and Ockam [<mark style="color:blue;">Transports</mark>](routing.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology.&#x20;
 
 {% hint style="info" %}
-You can cleanup all the nodes by running: `ockam node delete --all`
-
 If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
 {% endhint %}
+
+#### Next
 
 Next, let's explore how Ockam [<mark style="color:blue;">Relays and Portals</mark>](advanced-routing.md) make it simple to connect existing applications across networks.
 
