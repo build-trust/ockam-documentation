@@ -153,6 +153,6 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 
 <table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="reference/command/"><strong>Ockam Command</strong></a></td><td>Command line tools to build and orchestrate highly scalable and secure distributed applications. Orchestrate nodes, vaults, identities, credentials, secure channels, relays, portals and more.</td><td></td><td><a href="reference/command/">command</a></td></tr><tr><td><a href="reference/libraries/"><strong>Ockam Programming Libraries</strong></a></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td><td><a href="reference/libraries/rust/">rust</a></td></tr></tbody></table>
 
-## **Get help**
+### **Get help**
 
 We are here to help you build with Ockam. If you need help, [**please reach out to us**](https://www.ockam.io/contact)!
