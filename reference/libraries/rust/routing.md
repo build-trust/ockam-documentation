@@ -13,7 +13,7 @@ Our goal is to enable end-to-end application layer guarantees in any communicati
 
 In contrast, traditional secure communication protocol implementations are typically tightly coupled with transport protocols in a way that all their security is limited to the length and duration of the underlying transport connections.
 
-For example, most TLS[^1] implementations are coupled the underlying TCP connection. If your application’s data and requests travel over two TCP connection hops `TCP -> TCP` then all TLS guarantees break at the bridge between the two networks. This bridge, gateway or load balancer then becomes a point of weakness for application data. To makes matters worse, if you don't setup another mutually authenticated TLS connection on the second hop between the gateway and your destination server then the entire second hop network – all applications and machines within it – become attack vectors to your application and its data.&#x20;
+For example, most TLS[^1] implementations are coupled the underlying TCP connection. If your application’s data and requests travel over two TCP connection hops `TCP -> TCP` then all TLS guarantees break at the bridge between the two networks. This bridge, gateway or load balancer then becomes a point of weakness for application data. To makes matters worse, if you don't setup another mutually authenticated TLS connection on the second hop between the gateway and your destination server then the entire second hop network – all applications and machines within it – become attack vectors to your application and its data.
 
 Traditional secure communication protocols are also unable to protect your application’s data if it travels over multiple different transport protocols. They can’t guarantee data authenticity or data integrity if your application’s communication path is `UDP -> TCP` or `BLE -> TCP`.
 
@@ -29,13 +29,13 @@ To achieve this, messages carry with them two metadata fields: `onward_route` an
 
 To get a sense of how that works, let's route a message over two hops.
 
-<figure><img src="../../../diagrams/plantuml/simple/simple.001.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/simple.001 (1).jpeg" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../diagrams/plantuml/one-hop/one-hop.001.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/one-hop.001.jpeg" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../diagrams/plantuml/two-hops/two-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/two-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../diagrams/plantuml/n-hops/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
 ###
 
@@ -55,20 +55,6 @@ Replier:
 
 * Makes return\_route of incoming message, onward\_route of outgoing message
 * Makes its own address the return\_route of the new message
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #### Hop worker
 
@@ -130,7 +116,7 @@ pub use hop::*;
 
 #### Echoer worker
 
-We'll also use the `Echoer` worker that we created in the [previous example](broken-reference). So make sure that it stays exported from `src/lib.rs`.
+We'll also use the `Echoer` worker that we created in the [previous example](broken-reference/). So make sure that it stays exported from `src/lib.rs`.
 
 #### App worker
 
@@ -393,7 +379,6 @@ To make this `Forwarder` type accessible to our main program, export it from `sr
 mod forwarder;
 pub use forwarder::*;
 ```
-
 
 #### Responder node
 

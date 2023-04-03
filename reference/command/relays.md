@@ -56,3 +56,7 @@ HELLO
 » curl --head 127.0.0.1:6000
 HTTP/1.0 200 OK
 ```
+
+{% hint style="info" %}
+You can cleanup all the nodes with `ockam node delete --all`
+{% endhint %}

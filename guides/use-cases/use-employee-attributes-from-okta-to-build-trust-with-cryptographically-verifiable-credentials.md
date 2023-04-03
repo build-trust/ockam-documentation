@@ -6,10 +6,6 @@ description: Authenticate and authorize every access decision.
 
 In this guide, we’ll step through a demo of how workforce identities in Okta can be combined with application identities in Ockam to bring policy driven, attribute-based access control of distributed applications – using cryptographically verifiable credentials.
 
-
-
-
-
 <figure><img src="../../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 ## Background
@@ -63,8 +59,6 @@ For most enterprises, workforce identities are already defined in enterprise ide
 Their user profile information like department, city, team etc. is included in the credential and securely attested by the Credential Authority.
 
 This combination is incredibly powerful. It allows **employees to get just-in-time, short lived, fine-grained revocable credentials to only the application components that they need to access.** It eliminates long lived static keys and credentials from being stored on work machines.
-
-
 
 <figure><img src="../../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
@@ -127,9 +121,9 @@ python3 -m http.server --bind 127.0.0.1 5000
 Next we transfer project configuration and one enrollment token to Machine 1 and use that to create and Ockam node that will run as a sidecar process next to our application service.
 
 ```bash
-ocakm identity create m1
+ockam identity create m1
 ockam project authenticate --token $m1_token --identity m1 --project-path project.json
-ocakm node create m1 --project project.json --identity m1
+ockam node create m1 --project project.json --identity m1
 ockam policy set --at m1 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))'
 ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
@@ -156,7 +150,7 @@ python3 -m http.server --bind 127.0.0.1 6000
 Next we transfer project configuration and one enrollment token to Machine 2 and use that to create and Ockam node that will run as a sidecar process next to our application service.
 
 ```bash
-ocakm identity create m2
+ockam identity create m2
 ockam project authenticate --token $m2_token --identity m2 --project-path project.json
 ockam node create m2 --project project.json --identity m2
 ockam policy set --at m2 --resource tcp-outlet \
@@ -184,13 +178,11 @@ ockam project authenticate --project-path project.json --okta
 ockam policy set --at alice --resource tcp-inlet --expression '(= subject.application "Smart Factory")'
 ```
 
-The `project authenticate` command will launch Okta login and when it completes return a an Ockam cryptographic credential that includes the city and department attributes of Alice's profile in Okta Universal Directory. Only these two attributes are attested because the administrator specified those two attributes when enabling the Okta Add-On.&#x20;
-
-
+The `project authenticate` command will launch Okta login and when it completes return a an Ockam cryptographic credential that includes the city and department attributes of Alice's profile in Okta Universal Directory. Only these two attributes are attested because the administrator specified those two attributes when enabling the Okta Add-On.
 
 <figure><img src="../../.gitbook/assets/200395627-827d672a-2140-4752-a8d5-526ec5f0be68.png" alt=""><figcaption><p>User Profile in Okta</p></figcaption></figure>
 
-Alice's `city` in Okta is "San Francisco". Her request to access Machine 1 in San Francisco is allowed&#x20;
+Alice's `city` in Okta is "San Francisco". Her request to access Machine 1 in San Francisco is allowed
 
 ```
 ockam tcp-inlet create --at /node/alice --from 127.0.0.1:8000 \
@@ -198,7 +190,7 @@ ockam tcp-inlet create --at /node/alice --from 127.0.0.1:8000 \
 curl --head 127.0.0.1:8000
 ```
 
-Her request to access Machine 2 in New York is denied.&#x20;
+Her request to access Machine 2 in New York is denied.
 
 ```
 ockam tcp-inlet create --at /node/alice --from 127.0.0.1:9000 \
