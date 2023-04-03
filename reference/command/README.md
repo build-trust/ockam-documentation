@@ -78,4 +78,4 @@ Check that everything was installed correctly by enrolling with Ockam Orchestrat
 ockam enroll
 ```
 
-Next let‘s dive in and learn how to use [nodes and workers](nodes.md).
+Next let‘s dive in and learn how to use [<mark style="color:blue;">nodes and workers</mark>](nodes.md).
