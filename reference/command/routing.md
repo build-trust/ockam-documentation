@@ -65,17 +65,13 @@ hello
 
 <figure><img src="../../diagrams/plantuml/n-hops/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
-This&#x20;
+This seemingly simple protocol can transform how we build trust in modern distributed applications.
 
-
-
-
-
-So far, we’ve routed messages within one Node.  Next let's see how we can route messages across nodes using Ockam Transports.
+So far, we’ve routed messages within one Node. Next let's see how we can route messages across nodes and machines using Routing add-ons called Ockam Transports.
 
 ## Transports
 
-Ockam Transports make Ockam Routing work over any transport protocol - TCP, UDP, BLE etc.
+An Ockam Transport makes Ockam Routing work over a specific transport protocol - TCP, UDP, BLE etc.
 
 To see this in action, let’s create two new nodes `n2` and `n3`  and explicitly specify that they should listen on the local TCP addresses `127.0.0.1:7000` and `127.0.0.1:8000` respectively
 
