@@ -11,6 +11,12 @@ In the previous section, we learnt how Ockam [Routing](relays.md#routing) and Oc
 
 ## Relays
 
+The message in the above command took the following route:&#x20;
+
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+
+In this example, we ran a sim
+
 ```
 » ockam node create n1
 ...
