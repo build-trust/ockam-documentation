@@ -209,6 +209,11 @@ Later in this guide, we’ll explore other commands that interact with other pre
 +--------------------------------------+---------+-------+------------+
 ```
 
+```
+» ockam message send hello --to /project/default/service/echo
+hello
+```
+
 {% hint style="info" %}
 You can cleanup all the nodes with `ockam node delete --all`
 {% endhint %}
