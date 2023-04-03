@@ -65,6 +65,12 @@ hello
 
 <figure><img src="../../diagrams/plantuml/n-hops/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
+This&#x20;
+
+
+
+
+
 So far, we’ve routed messages within one Node.  Next let's see how we can route messages across nodes using Ockam Transports.
 
 ## Transports
