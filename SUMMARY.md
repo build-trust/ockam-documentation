@@ -30,7 +30,7 @@
   * [Identities and Vaults](reference/command/identities.md)
   * [Secure Channels](reference/command/secure-channels.md)
   * [Credentials and Authorities](reference/command/credentials-and-authorities.md)
-  * [Access Control and Authorization Policies](reference/command/access-control.md)
+  * [Authorization and Policies](reference/command/access-control.md)
   * [Manual](https://command.ockam.io/manual/)
 * [Programming Libraries](reference/libraries/README.md)
   * [Rust](reference/libraries/rust/README.md)
