@@ -9,7 +9,7 @@ description: >-
 
 Data, within modern applications, routinely flows over complex, multi-hop, multi-protocol routes before reaching its end destination. It’s common for application layer requests and data to move across network boundaries, beyond data centers, via shared or public networks, through queues and caches, from gateways and brokers to reach remote services and other distributed parts of an application.
 
-Our goal is to enable end-to-end application layer guarantees in any communication topology. For example Ockam [Secure Channels](secure-channels.md) can provide end-to-end guarantees of data authenticity, integrity, and confidentiality in any of the above communication topologies.
+Our goal is to enable end-to-end application layer guarantees in any communication topology. For example Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md) can provide end-to-end guarantees of data authenticity, integrity, and confidentiality in any of the above communication topologies.
 
 In contrast, traditional secure communication protocol implementations are typically tightly coupled with transport protocols in a way that all their security is limited to the length and duration of the underlying transport connections.
 
@@ -17,13 +17,13 @@ For example, most TLS implementations are coupled the underlying TCP connection.
 
 Traditional secure communication protocols are also unable to protect your application’s data if it travels over multiple different transport protocols. They can’t guarantee data authenticity or data integrity if your application’s communication path is `UDP -> TCP` or `BLE -> TCP`.
 
-Ockam [Routing](routing.md#routing) is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange messages over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` and more. Ockam [Transports](routing.md) adapt Ockam Routing to various transport protocols.
+Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing) is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange messages over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` and more. Ockam [<mark style="color:blue;">Transports</mark>](routing.md) adapt Ockam Routing to various transport protocols.
 
-By layering Ockam [Secure Channels](secure-channels.md) and other protocols over Ockam Routing, we can provide end-to-end guarantees over arbitrary transport topologies.
+By layering Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md) and other protocols over Ockam Routing, we can provide end-to-end guarantees over arbitrary transport topologies.
 
 ## Routing
 
-Let’s start by creating a [node](nodes.md#node) and sending a message to a [service](nodes.md#service) on that node.
+Let’s start by creating a [<mark style="color:blue;">node</mark>](nodes.md#node) and sending a message to a [<mark style="color:blue;">service</mark>](nodes.md#service) on that node.
 
 ```
 » ockam node create n1
@@ -110,13 +110,13 @@ The message in the above command took the following route:&#x20;
 
 In this example, we ran a simple uppercase request and response protocol between `n1` and `n3`, two nodes that weren't directly connected to each other. This is the foundation of <mark style="color:orange;">end-to-end</mark> <mark style="color:orange;">protocols</mark> in Ockam.
 
-We can have any number of TCP hops along the route to the uppercase service. We can also easily have some hops that use a completely different transport protocol like UDP, WebSockets, Bluetooth etc. New Ockam Transports are very easy to implement and there is a growing base of them in the [Ockam Github Repository](https://github.com/build-trust/ockam).
+We can have any number of TCP hops along the route to the uppercase service. We can also easily have some hops that use a completely different transport protocol like UDP, WebSockets, Bluetooth etc. New Ockam Transports are very easy to implement and there is a growing base of them in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam).
 
-Ockam [Routing](routing.md#routing) and Ockam [Transports](routing.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology.&#x20;
+Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing) and Ockam [<mark style="color:blue;">Transports</mark>](routing.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology.&#x20;
 
 {% hint style="info" %}
 You can cleanup all the nodes with `ockam node delete --all`
 {% endhint %}
 
-Next, let's explore how Ockam [Relays and Portals](relays.md) make it simple to connect existing applications across networks.
+Next, let's explore how Ockam [<mark style="color:blue;">Relays and Portals</mark>](relays.md) make it simple to connect existing applications across networks.
 
