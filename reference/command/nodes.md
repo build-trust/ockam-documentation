@@ -9,7 +9,7 @@ description: >-
 
 At Ockam’s core are a collection of cryptographic and messaging protocols. These protocols make it possible to create <mark style="color:orange;">private</mark> and <mark style="color:orange;">secure by design</mark> applications that provide end-to-end application layer trust it data.
 
-Our goal is to make these powerful protocols <mark style="color:orange;">easy</mark> and <mark style="color:orange;">safe</mark> to use in <mark style="color:orange;">any application environment</mark> – from highly scalable cloud services to tiny battery operated microcontroller based devices.
+Ockam is designed to make these powerful protocols <mark style="color:orange;">easy</mark> and <mark style="color:orange;">safe</mark> to use in <mark style="color:orange;">any application environment</mark> – from highly scalable cloud services to tiny battery operated microcontroller based devices.
 
 However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. It can be quite challenging to make them simple to use, secure, and platform independent.
 
