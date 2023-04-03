@@ -25,9 +25,7 @@ You can create a standalone Ockam node using Ockam [<mark style="color:blue;">Co
 
 A typical Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#worker). Depending on the Using Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing), a node can deliver messages from one worker to another local worker. Using Ockam [<mark style="color:blue;">Transports</mark>](routing.md#transports), nodes can also route messages to workers on other remote nodes.
 
-Ockam Command makes is super easy to create and manage local or remote Ockam Nodes.
-
-If you run `ockam node create`, it will create and start a node in the background and give it a random name:
+Ockam Command makes is super easy to create and manage local or remote nodes. If you run `ockam node create`, it will create and start a node in the background and give it a random name:
 
 ```
 » ockam node create
@@ -49,7 +47,7 @@ Node:
 ...
 ```
 
-The above nodes were started in the background, you can also start a node in the foreground and optionally tell it display verbose logs:
+You could also start a node in the foreground and optionally tell it display verbose logs:
 
 ```
 » ockam node create n2 --foreground --verbose
