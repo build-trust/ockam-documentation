@@ -15,7 +15,7 @@ Ockam is designed to make these powerful protocols <mark style="color:orange;">e
 
 However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. It can be quite challenging to make them simple to use, secure, and platform independent.
 
-Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#node), [<mark style="color:blue;">Workers</mark>](nodes.md#worker), and [<mark style="color:blue;">Services</mark>](nodes.md#service) help us hide complexity and decouple from the host environment to provide simple interfaces for our stateful and asynchronous message-based protocols.
+Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#node), [<mark style="color:blue;">Workers</mark>](nodes.md#worker), and [<mark style="color:blue;">Services</mark>](nodes.md#service) help us hide complexity and decouple from the host environment - to provide simple interfaces for our stateful and asynchronous message-based protocols.
 
 ## Node
 
