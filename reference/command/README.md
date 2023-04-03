@@ -34,7 +34,7 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 
 Ockam Command provides the above collection of composable building blocks that are accessible through various sub commands. In a step-by-step guide let’s walk through various Ockam sub commands to understand how you can use them to build end-to-end trustful communication for any application in any communication topology.
 
-#### Install Ockam Command <a href="#install" id="install"></a>
+### Install Ockam Command <a href="#install" id="install"></a>
 
 If you haven't already, the first step is to install Ockam Command:
 
