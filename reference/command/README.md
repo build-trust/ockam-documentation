@@ -70,7 +70,7 @@ This will download a precompiled binary and add it to your path. If the above in
 {% endtab %}
 {% endtabs %}
 
-Check that everything was installed correctly by enrolling with Ockam Orchestrator. This will create a [Space](nodes.md#space) and [Project](nodes.md#project) for you in Ockam Orchestrator.
+Check that everything was installed correctly by enrolling with Ockam Orchestrator. This will create a [<mark style="color:blue;">Space</mark>](nodes.md#space) and [<mark style="color:blue;">Project</mark>](nodes.md#project) for you in Ockam Orchestrator.
 
 ```sh
 ockam enroll
