@@ -41,9 +41,13 @@ We get a reply back and the message flow looked like this.
 
 <figure><img src="../../diagrams/plantuml/simple/simple.001.jpeg" alt=""><figcaption></figcaption></figure>
 
-To achieve this, Ockam Routing Protocols messages carry, with them, two metadata fields: `onward_route` and `return_route`.
+To achieve this, Ockam Routing Protocol messages carry, with them, two metadata fields: `onward_route` and `return_route`. A route is an ordered list of addresses describing the path that a message to travel.
+
+Pay close attention to the sender, hop, and replier rules in the below sequence diagrams. Note how  `onward_route` and `return_route` are handled as the message travels.
 
 <figure><img src="../../diagrams/plantuml/one-hop/one-hop.001.jpeg" alt=""><figcaption></figcaption></figure>
+
+The above was just one message hop, we can extend this for two hops:
 
 ```
 » ockam message send hello --to /node/n1/service/hop/service/echo
@@ -51,6 +55,8 @@ hello
 ```
 
 <figure><img src="../../diagrams/plantuml/two-hops/two-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
+
+This very simple protocol now extends to any number of hops, try repeating `/service/hop` many times in the `--to` argument of the following command:
 
 ```
 » ockam message send 'Hello Ockam!' --to /node/n1/service/hop/service/hop/service/echo
