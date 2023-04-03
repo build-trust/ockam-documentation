@@ -227,8 +227,14 @@ Like other nodes, Projects offer services. For example, the default project has 
 hello
 ```
 
+#### Conclusion
+
+Ockam Nodes and Workers decouple applications from the host environment and enable simple interfaces for stateful and asynchronous message-based protocols.
+
 {% hint style="info" %}
 You can cleanup all the nodes with `ockam node delete --all`
 {% endhint %}
+
+#### Next
 
 Next, let’s explore how Ockam’s [<mark style="color:blue;">Application Layer Routing</mark>](routing.md) enables protocols that provide end-to-end guarantees to messages traveling across many network connection hops and protocols boundaries.
