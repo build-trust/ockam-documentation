@@ -124,7 +124,7 @@ You can also delete all nodes with:
 
 Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#node) run very lightweight, concurrent, and stateful actors called Ockam Workers.
 
-When a worker is started on a node, it is given one or more addresses. The node maintains a mailbox for each address and whenever a message arrives for a specific address it delivers that message to the corresponding registered worker. In response to a message, an worker can: make local decisions, change its internal state, create more workers, or send more messages.
+When a worker is started on a node, it is given one or more addresses. The node maintains a mailbox for each address and whenever a message arrives for a specific address it delivers that message to the corresponding worker. In response to a message, an worker can: make local decisions, change internal state, create more workers, or send more messages.
 
 You can see the list of workers in a node by running:
 
