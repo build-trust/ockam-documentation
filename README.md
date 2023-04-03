@@ -6,7 +6,7 @@ description: Build secure-by-design applications that can trust all data-in-moti
 
 Ockam is a suite of open source programming libraries, command line tools, and managed cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.
 
-Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To [<mark style="color:blue;">trust data-in-motion</mark>](./#trust-for-data-in-motion), applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be [private](./#private-and-secure-by-design) and [secure-by-design](./#private-and-secure-by-design), applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
+Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To [<mark style="color:blue;">trust data-in-motion</mark>](./#trust-for-data-in-motion), applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be [<mark style="color:blue;">private</mark>](./#private-and-secure-by-design) and [<mark style="color:blue;">secure-by-design</mark>](./#private-and-secure-by-design), applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
 
 ### Use Cases
 
@@ -113,13 +113,13 @@ In the example above, we’ve created two nodes and established an end-to-end se
 
 Distributed applications that are connected in this way can communicate without the risk of spoofing, tampering, or eavesdropping attacks irrespective of transport protocols, communication topologies, and network configuration. As application data flows _across data centers, through queues and caches, via gateways and brokers -_ these intermediaries, like the cloud relay in the above example, can facilitate communication but cannot eavesdrop or tamper data.
 
-You can establish secure channels across networks and clouds over multi-hop, multi-protocol routes to build private and [secure by design](introduction/secure-by-design.md) distributed applications that have a small vulnerability surface and full control over data authenticity, integrity, and confidentiality.
+You can establish secure channels across networks and clouds over multi-hop, multi-protocol routes to build private and [<mark style="color:blue;">secure by design</mark>](introduction/secure-by-design.md) distributed applications that have a small vulnerability surface and full control over data authenticity, integrity, and confidentiality.
 
 #### Trust for data-in-motion
 
 Behind the scenes, the above commands generated unique cryptographically provable identities and saved corresponding keys in a vault. Your orchestrator project was provisioned with a managed credential authority and every node was setup to anchor trust in credentials issued by this authority. Identities were issued project membership credentials and these cryptographically verifiable credentials were then combined with attribute based access control policies to setup a mutually authenticated and authorized end-to-end secure channel.
 
-Your applications can make granular access control decisions at every request because they can be certain about the source and integrity of all data and instructions. You place [zero implicit trust](introduction/secure-by-design.md#zero-implicit-trust) in network boundaries and intermediaries to build applications that have end-to-end application layer trust for all data in motion.
+Your applications can make granular access control decisions at every request because they can be certain about the source and integrity of all data and instructions. You place [<mark style="color:blue;">zero implicit trust</mark>](introduction/secure-by-design.md#zero-implicit-trust) in network boundaries and intermediaries to build applications that have end-to-end application layer trust for all data in motion.
 
 #### Powerful protocols, made simple
 
@@ -149,10 +149,10 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 
 ### Deep Dives
 
-[Read more](guides/use-cases/) about how teams are using Ockam for many [use cases](guides/use-cases/) across industries or dive into our step-by-step reference on our [command line](reference/command/) and [rust libraries](reference/libraries/).
+<mark style="color:blue;"></mark>[<mark style="color:blue;">Read more</mark>](guides/use-cases/) about how teams are using Ockam for many [<mark style="color:blue;">use cases</mark>](guides/use-cases/) across industries or dive into our step-by-step reference on our [<mark style="color:blue;">command line</mark>](reference/command/) and [<mark style="color:blue;">rust libraries</mark>](reference/libraries/).
 
 <table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="reference/command/"><strong>Ockam Command</strong></a></td><td>Command line tools to build and orchestrate highly scalable and secure distributed applications. Orchestrate nodes, vaults, identities, credentials, secure channels, relays, portals and more.</td><td></td><td><a href="reference/command/">command</a></td></tr><tr><td><a href="reference/libraries/"><strong>Ockam Programming Libraries</strong></a></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td><td><a href="reference/libraries/rust/">rust</a></td></tr></tbody></table>
 
 ### **Get help**
 
-We are here to help you build with Ockam. If you need help, [**please reach out to us**](https://www.ockam.io/contact)!
+We are here to help you build with Ockam. If you need help, [<mark style="color:blue;">**please reach out to us**</mark>](https://www.ockam.io/contact)!
