@@ -231,7 +231,7 @@ hello
 
 An Ockam [<mark style="color:blue;">Node</mark>](nodes.md#node) is any program that can interact with other nodes using various Ockam protocols like Routing and Secure Channels. Nodes run very lightweight, concurrent, and stateful actors called [<mark style="color:blue;">Workers</mark>](nodes.md#worker). One or more <mark style="color:blue;">Workers</mark> can work as a team to offer a [<mark style="color:blue;">Service</mark>](nodes.md#service)<mark style="color:blue;">.</mark>
 
-Services can be attached to identities and authorization policies to enforce attribute based access control rules. Ockam Orchestrator can create and manage infinitely scalable nodes in the cloud call Spaces and Projects.
+Services can be attached to identities and authorization policies to enforce attribute based access control rules. Ockam Orchestrator can create and manage infinitely scalable nodes in the cloud called [<mark style="color:blue;">Spaces</mark>](nodes.md#space) and [<mark style="color:blue;">Projects</mark>](nodes.md#project).
 
 Ockam Nodes and Workers hide complexities and enable simple interfaces for stateful and asynchronous message-based protocols.
 
@@ -243,4 +243,4 @@ If you’re stuck or have questions at any point, [<mark style="color:blue;">ple
 
 #### Next
 
-Next, let’s explore how Ockam’s [<mark style="color:blue;">Application Layer Routing</mark>](routing.md) enables protocols that provide end-to-end guarantees to messages traveling across many network connection hops and protocols boundaries.
+Next, let’s dive into how Ockam’s [<mark style="color:blue;">Application Layer Routing</mark>](routing.md) enables protocols that provide end-to-end guarantees to messages traveling across many network connection hops and protocols boundaries.
