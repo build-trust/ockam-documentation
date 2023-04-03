@@ -59,8 +59,8 @@ hello
 This very simple protocol now extends to any number of hops, try repeating `/service/hop` many times in the `--to` argument of the following command:
 
 ```
-» ockam message send 'Hello Ockam!' --to /node/n1/service/hop/service/hop/service/echo
-Hello Ockam!
+» ockam message send hello --to /node/n1/service/hop/service/hop/service/echo
+hello
 ```
 
 <figure><img src="../../diagrams/plantuml/n-hops/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
