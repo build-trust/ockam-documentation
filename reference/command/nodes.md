@@ -184,6 +184,31 @@ Node: n1
 
 Later in this guide, we’ll explore other commands that interact with other pre-defined services like `/service/api` – every node created with Ockam Command starts a secure channel listener at this address to allow other nodes to create mutually authenticated channels with it.
 
+## Space
+
+```
+» ockam enroll
+...
+
+» ockam space list
++--------------------------------------+----------+-------------------+
+| Id                                   | Name     | Users             |
++--------------------------------------+----------+-------------------+
+| 877c7a4d-b1be-4f36-8da6-be045ab64b60 | f27d39e1 | alice@example.com |
++--------------------------------------+----------+-------------------+
+```
+
+## Project
+
+```
+» ockam project list
++--------------------------------------+---------+-------+------------+
+| Id                                   | Name    | Users | Space Name |
++--------------------------------------+---------+-------+------------+
+| 91c57e59-ad52-4b4e-9c4a-dd03113da939 | default |       | f27d39e1   |
++--------------------------------------+---------+-------+------------+
+```
+
 {% hint style="info" %}
 You can cleanup all the nodes with `ockam node delete --all`
 {% endhint %}
