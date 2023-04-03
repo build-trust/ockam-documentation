@@ -236,7 +236,9 @@ Services can be attached to identities and authorization policies to enforce att
 Ockam Nodes and Workers hide complexities and enable simple interfaces for stateful and asynchronous message-based protocols.
 
 {% hint style="info" %}
-You can cleanup all the nodes with `ockam node delete --all`
+You can cleanup all the nodes by running: `ockam node delete --all`
+
+If you’re stuck or have questions at any point, [<mark style="color:blue;">**please reach out to us**</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
 {% endhint %}
 
 #### Next
