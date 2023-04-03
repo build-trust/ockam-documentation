@@ -105,7 +105,7 @@ curl --head 127.0.0.1:7000
 {% endtab %}
 {% endtabs %}
 
-### Ockam's Design Concepts
+### Design Concepts
 
 #### Private and secure by design
 
