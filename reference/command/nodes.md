@@ -228,7 +228,7 @@ hello
 #### Recap
 
 {% hint style="info" %}
-You can cleanup all the nodes by running: `ockam node delete --all`
+To cleanup and delete all nodes, run: `ockam node delete --all`
 {% endhint %}
 
 An Ockam [<mark style="color:blue;">Node</mark>](nodes.md#node) is any program that can interact with other nodes using various Ockam protocols like Routing and Secure Channels. Nodes run very lightweight, concurrent, and stateful actors called [<mark style="color:blue;">Workers</mark>](nodes.md#worker). Nodes and Workers hide complexities and enable simple interfaces for stateful, asynchronous, message-based protocols.
