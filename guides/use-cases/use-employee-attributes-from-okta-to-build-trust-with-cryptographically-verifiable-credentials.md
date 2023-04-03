@@ -127,9 +127,9 @@ python3 -m http.server --bind 127.0.0.1 5000
 Next we transfer project configuration and one enrollment token to Machine 1 and use that to create and Ockam node that will run as a sidecar process next to our application service.
 
 ```bash
-ocakm identity create m1
+ockam identity create m1
 ockam project authenticate --token $m1_token --identity m1 --project-path project.json
-ocakm node create m1 --project project.json --identity m1
+ockam node create m1 --project project.json --identity m1
 ockam policy set --at m1 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))'
 ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
@@ -156,7 +156,7 @@ python3 -m http.server --bind 127.0.0.1 6000
 Next we transfer project configuration and one enrollment token to Machine 2 and use that to create and Ockam node that will run as a sidecar process next to our application service.
 
 ```bash
-ocakm identity create m2
+ockam identity create m2
 ockam project authenticate --token $m2_token --identity m2 --project-path project.json
 ockam node create m2 --project project.json --identity m2
 ockam policy set --at m2 --resource tcp-outlet \
