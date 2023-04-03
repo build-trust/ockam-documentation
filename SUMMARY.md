@@ -31,7 +31,7 @@
   * [Secure Channels](reference/command/secure-channels.md)
   * [Credentials and Authorities](reference/command/credentials-and-authorities.md)
   * [Authorization and Policies](reference/command/access-control.md)
-  * [Enrollment Protocols and Identity Providers](reference/command/enrollment-protocols-and-identity-providers.md)
+  * [Enrollment and Identity Providers](reference/command/enrollment-and-identity-providers.md)
   * [Manual](https://command.ockam.io/manual/)
 * [Programming Libraries](reference/libraries/README.md)
   * [Rust](reference/libraries/rust/README.md)
