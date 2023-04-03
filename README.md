@@ -8,11 +8,11 @@ Ockam is a suite of open source programming libraries, command line tools, and m
 
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To [trust data-in-motion](./#trust-for-data-in-motion), applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be [private](./#private-and-secure-by-design) and [secure-by-design](./#private-and-secure-by-design), applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
 
-## Use Cases
+### Use Cases
 
 <table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong></strong><a href="guides/use-cases/#virtually-adjacent-databases"><strong>Virtually-adjacent databases</strong></a><strong></strong></td><td>Create secure communication with private databases, from anywhere. No longer do you need to expose your data to the public internet with service ports.</td><td></td><td></td><td><a href="guides/use-cases/">use-cases</a></td></tr><tr><td><strong></strong><a href="guides/use-cases/#secure-by-design-messaging"><strong>Secure-by-design messaging</strong></a><strong></strong></td><td>Guarantee data authenticity and integrity of events from producers all-the-way to end consumers. End-to-end encrypt data-in-motion through Kafka.</td><td></td><td></td><td><a href="guides/use-cases/">use-cases</a></td></tr><tr><td><strong></strong><a href="guides/use-cases/#developer-first-authorization"><strong>Developer-first authorization</strong></a><strong></strong></td><td>Authenticate and authorize every access decision. Easily add fine-grained, identity-driven controls to enforce enterprise policies everywhere.</td><td></td><td></td><td><a href="guides/use-cases/">use-cases</a></td></tr></tbody></table>
 
-## Quick Start
+### Quick Start
 
 Let's build a solution for a very common secure communication topology that applies to many real world use cases.
 
@@ -105,6 +105,8 @@ curl --head 127.0.0.1:7000
 {% endtab %}
 {% endtabs %}
 
+### Ockam's Design Concepts
+
 #### Private and secure by design
 
 In the example above, we’ve created two nodes and established an end-to-end secure channel between them through an encrypted cloud relay. For the sake of simplicity, we ran both ends on a single machine but they could also be run on completely separate machines with the same result: an end-to-end encrypted and mutually authenticated secure channel.
@@ -125,9 +127,9 @@ Underlying all of this is a variety of cryptographic and messaging protocols. We
 
 No more having to design error-prone ad-hoc ways to distribute sensitive credentials and roots of trust. Ockam’s integrated approach takes away this complexity and gives you simple tools for:
 
+### Features of Ockam
 
-
-<mark style="color:orange;">End-to-end data authenticity, integrity, and privacy in any communication topology</mark>
+#### End-to-end data authenticity, integrity, and privacy in any communication topology
 
 * Create end-to-end encrypted, authenticated secure channels over any transport topology.
 * Create secure channels over multi-hop, multi-protocol routes - TCP, UDP, WebSockets, BLE, etc.
@@ -135,9 +137,7 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 * Make legacy protocols secure by tunneling them through mutually authenticated and encrypted portals.
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams - Kafka, Kinesis, RabbitMQ etc.
 
-
-
-<mark style="color:orange;">Identity-based, policy driven, application layer trust – granular authentication and authorization</mark>
+#### Identity-based, policy driven, application layer trust – granular authentication and authorization
 
 * Generate cryptographically provable unique identities.
 * Store private keys in safe vaults - hardware secure enclaves and cloud key management systems.
@@ -147,7 +147,7 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 * Define and enforce project-wide attribute based access control policies - ABAC, RBAC or ACLs.
 * Integrate with enterprise identity providers and policy providers for seamless employee access.
 
-## Deep Dives
+### Deep Dives
 
 [Read more](guides/use-cases/) about how teams are using Ockam for many [use cases](guides/use-cases/) across industries or dive into our step-by-step reference on our [command line](reference/command/) and [rust libraries](reference/libraries/).
 
