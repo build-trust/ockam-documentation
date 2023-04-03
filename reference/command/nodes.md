@@ -201,6 +201,9 @@ Later in this guide, we’ll explore other commands that interact with other pre
 ## Project
 
 ```
+» ockam enroll
+...
+
 » ockam project list
 +--------------------------------------+---------+-------+------------+
 | Id                                   | Name    | Users | Space Name |
