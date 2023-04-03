@@ -231,7 +231,7 @@ An Ockam [<mark style="color:blue;">Node</mark>](nodes.md#node) is any program t
 
 Services can be attached to identities and authorization policies to enforce attribute based access control rules. Ockam Orchestrator can create and manage infinitely scalable nodes in the cloud called [<mark style="color:blue;">Spaces</mark>](nodes.md#space) and [<mark style="color:blue;">Projects</mark>](nodes.md#project).
 
-Ockam Nodes and Workers hide complexities and enable simple interfaces for stateful and asynchronous message-based protocols.
+Ockam Nodes and Workers hide complexities and enable simple interfaces for stateful, asynchronous, message-based protocols.
 
 {% hint style="info" %}
 You can cleanup all the nodes by running: `ockam node delete --all`
