@@ -204,9 +204,9 @@ When your run `ockam enroll` for the first time, we create a space for your to h
 
 ## Project
 
-An Ockam Project is also an infinitely scalable Ockam [<mark style="color:blue;">Node</mark>](nodes.md#node) in the cloud. Ockam Orchestrator can create, manage, and scale projects for you.
+An Ockam Project is also an infinitely scalable Ockam [<mark style="color:blue;">Node</mark>](nodes.md#node) in the cloud. Ockam Orchestrator can create, manage, and scale projects for you. Projects are created within a [<mark style="color:blue;">Space</mark>](nodes.md#space) and can inherit permissions and subscriptions from their parent space. There can be many projects within one space.
 
-When your run `ockam enroll` for the first time, we create a default project for you, within your default space. Projects are created within a [<mark style="color:blue;">Space</mark>](nodes.md#space) and can inherit permissions and subscriptions from their parent space. There can be many projects within one space.
+When your run `ockam enroll` for the first time, we create a default project for you, within your default space.
 
 ```
 » ockam enroll
