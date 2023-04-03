@@ -134,7 +134,7 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 * Create end-to-end encrypted, authenticated secure channels over any transport topology.
 * Create secure channels over multi-hop, multi-protocol routes - TCP, UDP, WebSockets, BLE, etc.
 * Provision encrypted relays for applications distributed across many edge, cloud and data-center private networks.
-* Make legacy protocols secure by tunneling them through mutually authenticated and encrypted portals.
+* Make any protocol secure by tunneling it through mutually authenticated and encrypted portals.
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams - Kafka, Kinesis, RabbitMQ etc.
 
 #### Identity-based, policy driven, application layer trust – granular authentication and authorization
