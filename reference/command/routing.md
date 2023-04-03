@@ -120,5 +120,5 @@ Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing) and Ockam [
 You can cleanup all the nodes with `ockam node delete --all`
 {% endhint %}
 
-Next, let's explore how Ockam [<mark style="color:blue;">Relays and Portals</mark>](relays.md) make it simple to connect existing applications across networks.
+Next, let's explore how Ockam [<mark style="color:blue;">Relays and Portals</mark>](advanced-routing.md) make it simple to connect existing applications across networks.
 

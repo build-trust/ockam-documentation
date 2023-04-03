@@ -7,7 +7,7 @@ description: >-
 
 # Relays and Portals
 
-In the previous section, we learnt how Ockam [Routing](relays.md#routing) and Ockam [Transports](relays.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology.
+In the previous section, we learnt how Ockam [Routing](advanced-routing.md#routing) and Ockam [Transports](advanced-routing.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology.
 
 ## Relays
 
