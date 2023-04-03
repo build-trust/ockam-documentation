@@ -186,6 +186,10 @@ Later in this guide, we’ll explore other commands that interact with other pre
 
 ## Space
 
+An Ockam Space is an infinitely large Ockam Node in the cloud. Ockam Orchestrator can create, manage and scale spaces for you.
+
+When your run Ockam&#x20;
+
 ```
 » ockam enroll
 ...

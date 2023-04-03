@@ -70,11 +70,9 @@ This will download a precompiled binary and add it to your path. If the above in
 {% endtab %}
 {% endtabs %}
 
-Check that everything was installed correctly by enrolling with Ockam Orchestrator.
+Check that everything was installed correctly by enrolling with Ockam Orchestrator. This will create a [Space](nodes.md#space) and [Project](nodes.md#project) for you in Ockam Orchestrator.
 
 ```sh
-# This will create a Space and Project for you in Ockam Orchestrator and provision
-# an End-to-End Encrypted Cloud Relay service in your default project at /project/default.
 ockam enroll
 ```
 
