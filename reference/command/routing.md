@@ -67,7 +67,7 @@ hello
 
 So far, we’ve routed messages between Workers on one Node. Next let's see how we can route messages across nodes and machines using Ockam Routing adapters called Transports.
 
-## Transports
+## Transport
 
 Ockam Transports adapt Ockam [Routing](routing.md#routing) for specific transport protocol like TCP, UDP, WebSockets, Bluetooth etc. There is a growing base of Ockam Transport implementations in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam).
 

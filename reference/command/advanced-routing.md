@@ -9,7 +9,7 @@ description: >-
 
 In the previous section, we learnt how Ockam [Routing](advanced-routing.md#routing) and Ockam [Transports](advanced-routing.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology.
 
-## Relays
+## Relay
 
 The message in the above command took the following route:&#x20;
 
@@ -37,7 +37,7 @@ In this example, we ran a sim
 HELLO
 ```
 
-## Portals
+## Portal
 
 ```
 » python3 -m http.server --bind 127.0.0.1 9000
@@ -56,7 +56,7 @@ HTTP/1.0 200 OK
 
 ## Orchestrator
 
-### Relays
+### Relay <a href="#orchestrator-relay" id="orchestrator-relay"></a>
 
 ```
 » ockam project information --output json > project.json
@@ -71,7 +71,7 @@ HTTP/1.0 200 OK
 HELLO
 ```
 
-### Portals
+### Portal <a href="#orchestrator-portal" id="orchestrator-portal"></a>
 
 ```
 » ockam tcp-outlet create --at /node/n3 --from /service/outlet --to 127.0.0.1:9000
