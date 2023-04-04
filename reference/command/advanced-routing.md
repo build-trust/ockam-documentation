@@ -37,8 +37,6 @@ In this example, we ran a sim
 HELLO
 ```
 
-
-
 ## Portals
 
 ```
@@ -56,13 +54,11 @@ HELLO
 HTTP/1.0 200 OK
 ```
 
-## Relay Service
+#### Relays in Orchestrator
 
 ```
-» ockam node delete --all
-
-» ockam enroll
 » ockam project information --output json > project.json
+
 » ockam node create n1 --project project.json
 » ockam node create n3 --project project.json
 
@@ -72,6 +68,14 @@ HTTP/1.0 200 OK
 » ockam message send hello --to /project/default/service/forward_to_n3/service/uppercase
 HELLO
 ```
+
+```
+» ockam tcp-outlet create --at /node/n3 --from /service/outlet --to 127.0.0.1:9000
+» ockam tcp-inlet create --at /node/n1 --from 127.0.0.1:6000 \
+    --to /project/default/forward_to_n3/service/outlet
+```
+
+
 
 {% hint style="info" %}
 You can cleanup all the nodes with `ockam node delete --all`
