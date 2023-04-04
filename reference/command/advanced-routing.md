@@ -13,7 +13,7 @@ In the previous section, we learnt how Ockam [Routing](advanced-routing.md#routi
 
 The message in the above command took the following route:&#x20;
 
-<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
 In this example, we ran a sim
 
