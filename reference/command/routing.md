@@ -107,7 +107,7 @@ Next list the TCP connections on n1 and n2 to get their worker addresses:
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 ```
 
-Note, from the above output, that the TCP connection from `n1 to n2` has worker address `f3a2e2814b0ae3ca446aa43aba2ee33d` on `n1` and the TCP connection from `n2 to n3` has the worker address `6af0e5768b510d14835154bd10060ed0` on `n2`. We can combine this information to send a message over two TCP hops.
+Note, from the above output, that the TCP connection from `n1 to n2` on `n1` has worker address `f3a2e2814b0ae3ca446aa43aba2ee33d` and the TCP connection from `n2 to n3` on `n2` has the worker address `6af0e5768b510d14835154bd10060ed0`. We can combine this information to send a message over two TCP hops.
 
 ```
 » ockam message send hello --from n1 --to /worker/f3a2e2814b0ae3ca446aa43aba2ee33d/worker/6af0e5768b510d14835154bd10060ed0/service/uppercase
@@ -118,9 +118,9 @@ The message in the above command took the following route:&#x20;
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
-In this example, we ran a simple uppercase request and response protocol between `n1` and `n3`, two nodes that weren't directly connected to each other. This is the foundation of <mark style="color:orange;">end-to-end</mark> <mark style="color:orange;">protocols</mark> in Ockam.
+In this example, we ran a simple `uppercase` request and response protocol between `n1` and `n3`, two nodes that weren't directly connected to each other. This simple combination of Ockam Routing and Transports the foundation of <mark style="color:orange;">end-to-end</mark> <mark style="color:orange;">protocols</mark> in Ockam.
 
-We can have any number of TCP hops along the route to the uppercase service. We can also easily have some hops that use a completely different transport protocol like UDP, WebSockets, Bluetooth etc. New Ockam Transports are very easy to implement and there is a growing base of them in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam).
+We can have any number of TCP hops along the route to the uppercase service. We can also easily have some hops that use a completely different transport protocol like UDP or Bluetooth. Transports are pluggable and there is a growing base of them in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam).
 
 #### Recap
 
@@ -128,7 +128,7 @@ We can have any number of TCP hops along the route to the uppercase service. We 
 To cleanup and delete all nodes, run: `ockam node delete --all`
 {% endhint %}
 
-Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing) and Ockam [<mark style="color:blue;">Transports</mark>](routing.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology.&#x20;
+Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing) and Ockam [<mark style="color:blue;">Transports</mark>](routing.md#transports) give us a simple, yet extremely flexible, foundation to describe end-to-end, application layer protocols that can operate in any communication topology.&#x20;
 
 {% hint style="info" %}
 If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
