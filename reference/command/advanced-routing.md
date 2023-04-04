@@ -44,6 +44,25 @@ In this example, we ran a sim
 HELLO
 ```
 
+
+
+```
+» ockam node delete --all
+» ockam project information --output json > project.json
+
+» ockam node create n1 --project project.json
+...
+
+» ockam node create n3 --project project.json
+...
+
+» ockam forwarder create n3 --at /project/default --to /node/n3
+/service/forward_to_n3
+
+» ockam message send hello --to /project/default/service/forward_to_n3/service/uppercase
+HELLO
+```
+
 ## Portals
 
 ```
