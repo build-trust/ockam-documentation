@@ -34,13 +34,13 @@ In this example, we ran a sim
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 | Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| 96ca858eaa4962d9788b7f4e35872cc5 | TCP            | Remote connection | 127.0.0.1:7000 | 0#f3a318045e7b0420d02d5489ff75f126 |
+| 370229d91f735adffc928320bed3f2d1 | TCP            | Remote connection | 127.0.0.1:7000 | 0#1fb75f2e7234035461b261602a714b72 |
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 
 » ockam forwarder create n3 --at /node/n2 --to /node/n3
 /service/forward_to_n3
 
-» ockam message send hello --from /node/n1 --to /service/f3a318045e7b0420d02d5489ff75f126/service/forward_to_n3/service/uppercase
+» ockam message send hello --from /node/n1 --to /service/1fb75f2e7234035461b261602a714b72/service/forward_to_n3/service/uppercase
 HELLO
 ```
 
