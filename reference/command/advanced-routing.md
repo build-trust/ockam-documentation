@@ -81,8 +81,18 @@ HELLO
     --to /project/default/service/forward_to_n3/service/outlet
 ```
 
+#### Recap
+
+{% hint style="info" %}
+To cleanup and delete all nodes, run: `ockam node delete --all`
+{% endhint %}
+
 
 
 {% hint style="info" %}
-You can cleanup all the nodes with `ockam node delete --all`
+If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
 {% endhint %}
+
+#### Next
+
+Next,&#x20;
