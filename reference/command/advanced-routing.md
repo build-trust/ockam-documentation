@@ -72,7 +72,7 @@ HELLO
 ```
 » ockam tcp-outlet create --at /node/n3 --from /service/outlet --to 127.0.0.1:9000
 » ockam tcp-inlet create --at /node/n1 --from 127.0.0.1:6000 \
-    --to /project/default/forward_to_n3/service/outlet
+    --to /project/default/service/forward_to_n3/service/outlet
 ```
 
 
