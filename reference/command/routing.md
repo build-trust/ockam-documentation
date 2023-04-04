@@ -69,7 +69,7 @@ So far, we’ve routed messages between Workers on one Node. Next let's see how 
 
 ## Transports
 
-An Ockam Transport makes Ockam Routing work over a specific transport protocol - TCP, UDP, WebSockets, BLE etc.
+A Transport makes Routing work over a specific transport protocol like TCP, UDP, WebSockets, Bluetooth etc. There is a growing base of them in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam).
 
 To see this in action, let’s explore the TCP transport. Create two new nodes `n2` and `n3`  and explicitly specify that they should listen on the local TCP addresses `127.0.0.1:7000` and `127.0.0.1:8000` respectively:
 
