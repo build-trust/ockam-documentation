@@ -19,17 +19,10 @@ In this example, we ran a sim
 
 ```
 » ockam node create n1
-...
-
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
-...
-
 » ockam node create n3
-...
 
 » ockam tcp-connection create --from n1 --to 127.0.0.1:7000
-...
-
 » ockam tcp-connection list --node n1
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 | Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
@@ -54,8 +47,6 @@ HELLO
 
 ```
 » ockam tcp-outlet create --at /node/n3 --from /service/outlet --to 127.0.0.1:9000
-...
-
 » ockam tcp-inlet create --at /node/n1 --from 127.0.0.1:6000 \
     --to /service/f3a318045e7b0420d02d5489ff75f126/service/forward_to_n3/service/outlet
 ```
@@ -71,15 +62,9 @@ HTTP/1.0 200 OK
 » ockam node delete --all
 
 » ockam enroll
-...
-
 » ockam project information --output json > project.json
-
 » ockam node create n1 --project project.json
-...
-
 » ockam node create n3 --project project.json
-...
 
 » ockam forwarder create n3 --at /project/default --to /node/n3
 /service/forward_to_n3
