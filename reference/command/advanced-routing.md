@@ -1,8 +1,8 @@
 ---
 description: >-
-  Ockam Relays make is easy to traverse NATs and communicate with Ockam Nodes in
-  far away private networks. Ockam Portals make far away applications virtually
-  adjacent.
+  Ockam Relays make is easy to traverse NATs and run protocols with Ockam Nodes
+  in far away private networks. Ockam Portals make far away applications
+  virtually adjacent.
 ---
 
 # Relays and Portals
@@ -13,7 +13,7 @@ In the previous section, we learnt how Ockam [Routing](advanced-routing.md#routi
 
 The message in the above command took the following route:&#x20;
 
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
 
 In this example, we ran a sim
 
