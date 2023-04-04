@@ -65,9 +65,7 @@ hello
 
 <figure><img src="../../diagrams/plantuml/n-hops/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
-This seemingly simple protocol can transform how we build trust within modern distributed applications.
-
-So far, we’ve routed messages between Workers on one Node. Next let's see how we can route messages across nodes and machines using Routing add-ons called Ockam Transports.
+So far, we’ve routed messages between Workers on one Node. Next let's see how we can route messages across nodes and machines using Ockam Routing adapters called Transports.
 
 ## Transports
 
