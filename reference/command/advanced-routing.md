@@ -54,7 +54,9 @@ HELLO
 HTTP/1.0 200 OK
 ```
 
-#### Relays in Orchestrator
+## Orchestrator
+
+### Relays
 
 ```
 » ockam project information --output json > project.json
@@ -68,6 +70,8 @@ HTTP/1.0 200 OK
 » ockam message send hello --to /project/default/service/forward_to_n3/service/uppercase
 HELLO
 ```
+
+### Portals
 
 ```
 » ockam tcp-outlet create --at /node/n3 --from /service/outlet --to 127.0.0.1:9000
