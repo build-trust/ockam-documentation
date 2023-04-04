@@ -23,7 +23,7 @@ Traditional secure communication protocols are also unable to protect your appli
 
 Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing) is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange messages over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` or any other topology you can imagine.
 
-Ockam [<mark style="color:blue;">Transports</mark>](routing.md) adapt Ockam Routing to various transport protocols. By layering Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md) and other protocols over Ockam Routing, we can provide end-to-end guarantees over arbitrary transport topologies.
+Ockam [<mark style="color:blue;">Transports</mark>](routing.md) adapt Ockam Routing to various transport protocols. By layering Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md) and other protocols over Ockam Routing, we can provide end-to-end guarantees over arbitrary transport topologies that span many networks and clouds.
 
 ## Routing
 
@@ -56,7 +56,7 @@ hello
 
 <figure><img src="../../diagrams/plantuml/two-hops/two-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
-This very simple protocol now extends to any number of hops, try repeating `/service/hop` many times in the `--to` argument of the following command:
+This very simple protocol can extend to any number of hops, try repeating `/service/hop` many times in the `--to` argument of the following command:
 
 ```
 » ockam message send hello --to /node/n1/service/hop/service/hop/service/echo
@@ -65,9 +65,9 @@ hello
 
 <figure><img src="../../diagrams/plantuml/n-hops/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
-This seemingly simple protocol can transform how we build trust in modern distributed applications.
+This seemingly simple protocol can transform how we build trust within modern distributed applications.
 
-So far, we’ve routed messages within one Node. Next let's see how we can route messages across nodes and machines using Routing add-ons called Ockam Transports.
+So far, we’ve routed messages between Workers on one Node. Next let's see how we can route messages across nodes and machines using Routing add-ons called Ockam Transports.
 
 ## Transports
 
