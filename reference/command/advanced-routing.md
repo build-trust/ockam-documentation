@@ -41,13 +41,17 @@ HELLO
 
 In this example the direction of the second TCP connection is reversed in comparison to our first example that used a bridge. `n2` is the only node that has to listen for TCP connections.&#x20;
 
-`n2` starts a relay service. `n3` makes an outgoing TCP connection to `n2` and requests a forwarding address from the relay service and becomes reachable on `n2` at the address `/service/forward_to_n3`.
+Node `n2` is running a relay service. `n3` makes an outgoing TCP connection to `n2` and requests a forwarding address from the relay service. `n3` then becomes reachable via `n2` at the address `/service/forward_to_n3`.
+
+Node `n1` connects with `n2` and routes messages to `n3` via its forwarding relay.
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
 The message in the above example took the following route:&#x20;
 
 <img src="../../.gitbook/assets/file.excalidraw (2) (1).svg" alt="" class="gitbook-drawing">
+
+Using this simple topology rearrangement, Ockam [Routing](routing.md) makes is possible to establish end-to-end protocols between applications that are running in completely private networks. We can traverse NATs!
 
 ## Portal
 
