@@ -1,8 +1,8 @@
 ---
 description: >-
   Ockam Relays make is easy to traverse NATs and run end-to-end protocols 
-  between Ockam Nodes in far away private networks. Ockam Portals make far away
-  applications virtually adjacent.
+  between Ockam Nodes in far away private networks. Ockam Portals make existing
+  application protocols work over Ockam Routing.
 ---
 
 # Relays and Portals
@@ -87,6 +87,10 @@ The `hello` message from `n1` travelled to project node in the cloud and was rel
 
 ## Portal <a href="#orchestrator-portal" id="orchestrator-portal"></a>
 
+Ockam Portals make existing application protocols work over Ockam Routing. Without any code change to the existing applications.
+
+<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
+
 ```
 » python3 -m http.server --bind 127.0.0.1 9000
 ```
@@ -108,7 +112,13 @@ HTTP/1.0 200 OK
 To cleanup and delete all nodes, run: `ockam node delete --all`
 {% endhint %}
 
-Ockam [<mark style="color:blue;">Routing</mark>](advanced-routing.md#routing) is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange messages over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` or any other topology you can imagine. Ockam [<mark style="color:blue;">Transports</mark>](routing.md) adapt Ockam Routing to various transport protocols.
+Ockam [<mark style="color:blue;">Routing</mark>](advanced-routing.md#routing) and [Transports](routing.md#transport) combined with the ability to model Bridges, Relays, and Portals&#x20;
+
+
+
+
+
+is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange messages over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` or any other topology you can imagine. Ockam [<mark style="color:blue;">Transports</mark>](routing.md) adapt Ockam Routing to various transport protocols.
 
 Together they give us a simple, yet extremely flexible, foundation to describe end-to-end, application layer protocols that can operate in any communication topology.
 
