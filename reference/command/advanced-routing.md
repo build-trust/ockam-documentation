@@ -7,13 +7,13 @@ description: >-
 
 # Relays and Portals
 
-In the [<mark style="color:blue;">previous section</mark>](routing.md), we learnt how Ockam Routing and Ockam Transports give us a foundation to describe end-to-end, application layer protocols. When discussing [<mark style="color:blue;">Transports</mark>](routing.md#transport) we looked at a specific example topology.
+In the [<mark style="color:blue;">previous section</mark>](routing.md), we learnt how Ockam Routing and Ockam Transports give us a foundation to describe end-to-end, application layer protocols. When discussing [<mark style="color:blue;">Transports</mark>](routing.md#transport)<mark style="color:blue;">,</mark> we also create at a specific example communication topology.
 
 <img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
-Node `n1` wishes to access a service on node `n3`, but it can't directly connect to `n3`. This can happen for many reasons, maybe because `n3` is in a separate `IP` subnet or could be that the communication from `n1 to n2` uses UDP while from `n2 to n3` uses TCP. The above topology works great when `n2` can be a bridge or gateway between these two separate networks and `n3` is able to open a listening port that `n2` can connect with.
+Node `n1` wishes to access a service on node `n3`, but it can't directly connect to `n3`. This can happen for many reasons, maybe because `n3` is in a separate `IP` subnet or could be that the communication from `n1 to n2` uses UDP while from `n2 to n3` uses TCP or some other combination of such constraints. The topology makes `n2` a bridge or gateway between these two separate networks and enables end-to-end protocols between `n1` and `n3` even though they are not directly connected.
 
-However, it is common to encounter communication topologies where the machine that provides a service is unwilling or is not allowed to open a listening port or <mark style="color:orange;">expose</mark> a bridge node to other networks. This is a common security best practice in enterprise environments, home networks, OT networks, and VPCs across clouds.&#x20;
+It is common, however, to encounter communication topologies where the machine that provides a service is unwilling or is not allowed to open a listening port or <mark style="color:orange;">expose</mark> a bridge node to other networks. This is a common security best practice in enterprise environments, home networks, OT networks, and VPCs across clouds.&#x20;
 
 ## Relay
 
