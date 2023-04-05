@@ -53,7 +53,9 @@ The message in the above example took the following route. This is very similar 
 
 <img src="../../.gitbook/assets/file.excalidraw (2) (1).svg" alt="" class="gitbook-drawing">
 
-Using this simple topology rearrangement, Ockam [Routing](routing.md) makes is possible to establish end-to-end protocols between applications that are running in completely private networks. We can traverse NATs!
+Using this simple topology rearrangement, Ockam [Routing](routing.md) makes is possible to establish end-to-end protocols between applications that are running in completely private networks.
+
+We can traverse NATs and pierce through network boundaries. And since this is all built using a very simple [application layer routing](routing.md) protocol we can have any number of transport connection hops, in any transport protocol and we can mix-match bridges with relays to create <mark style="color:orange;">end-to-end protocols in</mark> <mark style="color:orange;"></mark><mark style="color:orange;">**any**</mark> <mark style="color:orange;"></mark><mark style="color:orange;">communication topology</mark>.
 
 ## Portal
 
