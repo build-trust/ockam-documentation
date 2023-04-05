@@ -37,7 +37,7 @@ Delete all your existing nodes and try this new example:
 | 370229d91f735adffc928320bed3f2d1 | TCP            | Remote connection | 127.0.0.1:7000 | 0#1fb75f2e7234035461b261602a714b72 |
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 
-» ockam message send hello --from /node/n1 --to /service/1fb75f2e7234035461b261602a714b72/service/forward_to_n3/service/uppercase
+» ockam message send hello --from n1 --to /service/1fb75f2e7234035461b261602a714b72/service/forward_to_n3/service/uppercase
 HELLO
 ```
 
@@ -59,9 +59,9 @@ We can traverse NATs and pierce through network boundaries. And since this is al
 
 ### Elastic Relays
 
-Ockam Orchestrator can create, manage, secure, and scale Relays for you. The Project that was created when you ran `ockam enroll` offers as Elastic Relay Service that is designed for high throughput and low latency.
+Ockam Orchestrator can create, manage, scale, and secure [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) for you. The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was created when you ran `ockam enroll` offers an Elastic Relay Service that is designed for high throughput and low latency.
 
-Delete all your existing nodes and try this new example. No need to enroll again, if you've already enrolled:
+Delete all your existing nodes and try this new example. If you've already enrolled, there's no need to enroll again:
 
 ```
 » ockam node delete --all
@@ -75,9 +75,15 @@ Delete all your existing nodes and try this new example. No need to enroll again
 » ockam forwarder create n3 --at /project/default --to /node/n3
 /service/forward_to_n3
 
-» ockam message send hello --to /project/default/service/forward_to_n3/service/uppercase
+» ockam message send hello --from n1 --to /project/default/service/forward_to_n3/service/uppercase
 HELLO
 ```
+
+In the example above we create two node `n1 and n3` and tell them about our Project. Unlike our [<mark style="color:blue;">first relay example</mark>](advanced-routing.md#relay), we don't create a local relay node `n2`. We instead use the Elastic Relay Service in our Orchestrator Project called `/project/default`.
+
+Everything worked exactly the same - except we now `n3` has a forwarding relay available to any project member that can reach the Internet. We can use this to run end-to-end protocols between other project members like `n1`.
+
+The `hello` message from `n1` travelled to project node in the cloud and was relayed back to `n3` via it's forwarding relay. The reply `HELLO` from `n3` took the same route back.
 
 ## Portal <a href="#orchestrator-portal" id="orchestrator-portal"></a>
 
