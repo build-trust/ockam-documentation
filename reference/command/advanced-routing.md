@@ -7,19 +7,19 @@ description: >-
 
 # Relays and Portals
 
-In the [previous section](routing.md), we learnt how Ockam Routing and Ockam Transports give us a foundation to describe end-to-end, application layer protocols. When discussing [Transports](routing.md#transport) we looked at a specific example topology.
+In the [<mark style="color:blue;">previous section</mark>](routing.md), we learnt how Ockam Routing and Ockam Transports give us a foundation to describe end-to-end, application layer protocols. When discussing [<mark style="color:blue;">Transports</mark>](routing.md#transport) we looked at a specific example topology.
 
 <img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
 Node `n1` wishes to access a service on node `n3`, but it can't directly connect to `n3`. This can happen for many reasons, maybe because `n3` is in a separate `IP` subnet or could be that the communication from `n1 to n2` uses UDP while from `n2 to n3` uses TCP. The above topology works great when `n2` can be a bridge or gateway between these two separate networks and `n3` is able to open a listening port that `n2` can connect with.
 
-However, it is common to encounter topologies where the machine that provides a service is unwilling or is not allowed to open a listening port or expose a bridge node to other networks. This is a common best practice in enterprise environments and home networks.
-
-This is where Relays can be very useful to create secure communication with a service operating in a private network:&#x20;
+However, it is common to encounter communication topologies where the machine that provides a service is unwilling or is not allowed to open a listening port or <mark style="color:orange;">expose</mark> a bridge node to other networks. This is a common security best practice in enterprise environments, home networks, OT networks, and VPCs across clouds.&#x20;
 
 ## Relay
 
-The message in the above command took the following route:&#x20;
+Relays make it possible to create end-to-end encrypted and mutually authenticated communication with services operating in remote private networks.
+
+Delete all your existing nodes and try this new example:
 
 ```
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
@@ -41,7 +41,11 @@ The message in the above command took the following route:&#x20;
 HELLO
 ```
 
+In this example the direction of the second TCP connection is reversed in comparison to our first bridge example:
+
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+
+The message in the above example took the following route:&#x20;
 
 <img src="../../.gitbook/assets/file.excalidraw (2) (1).svg" alt="" class="gitbook-drawing">
 
