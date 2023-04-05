@@ -7,19 +7,19 @@ description: >-
 
 # Relays and Portals
 
-In the previous section, we learnt how Ockam [Routing](routing.md#routing) and Ockam [Transports](routing.md#transport) give us a foundation to describe end-to-end, application layer protocols in any communication topology.
+In the [previous section](routing.md), we learnt how Ockam Routing and Ockam Transports give us a foundation to describe end-to-end, application layer protocols. When discussing [Transports](routing.md#transport) we looked at a specific example topology.
+
+<img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
+
+Node `n1` wishes to access a service on node `n3`, but it can't directly connect to `n3`. This can happen for many reasons, maybe because `n3` is in a separate `IP` subnet or could be that the communication from `n1 to n2` uses UDP while from `n2 to n3` uses TCP. The above topology works great when `n2` can be a bridge or gateway between these two separate networks and `n3` is able to open a listening port that `n2` can connect with.
+
+However, it is common to encounter topologies where the machine that provides a service is unwilling or is not allowed to open a listening port or expose a bridge node to other networks. This is a common best practice in enterprise environments and home networks.
+
+This is where Relays can be very useful to create secure communication with a service operating in a private network:&#x20;
 
 ## Relay
 
 The message in the above command took the following route:&#x20;
-
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
-
-<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
-
-
-
-<img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
 ```
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
@@ -36,9 +36,14 @@ The message in the above command took the following route:&#x20;
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 | 370229d91f735adffc928320bed3f2d1 | TCP            | Remote connection | 127.0.0.1:7000 | 0#1fb75f2e7234035461b261602a714b72 |
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
+
 » ockam message send hello --from /node/n1 --to /service/1fb75f2e7234035461b261602a714b72/service/forward_to_n3/service/uppercase
 HELLO
 ```
+
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+
+<img src="../../.gitbook/assets/file.excalidraw (2) (1).svg" alt="" class="gitbook-drawing">
 
 ## Portal
 

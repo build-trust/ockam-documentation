@@ -13,7 +13,7 @@ Ockam’s end-to-end secure channels guarantee authenticity, integrity, and conf
 
 In order to trust information or instructions, that are received over the network, applications must <mark style="color:orange;">authenticate</mark> all senders and <mark style="color:orange;">verify the integrity of data received</mark> to assert what was received is exactly what was sent — free from errors or en-route tampering.
 
-Application layer communication is also usually bi-directional since, at the very least, we have to acknowledge receipt of data to its senders. This means that authentication and the data integrity guarantee within applications must be <mark style="color:orange;">mutual</mark> **** between any two communicating parts.
+Application layer communication is also usually bi-directional since, at the very least, we have to acknowledge receipt of data to its senders. This means that authentication and the data integrity guarantee within applications must be <mark style="color:orange;">mutual</mark> between any two communicating parts.
 
 With Ockam, applications can, in a few lines of code, create mutually authenticated secure channels that guarantee end-to-end data integrity to senders and receivers of data.
 
@@ -27,7 +27,7 @@ Applications have moved out of enterprise data centers into multi-tenant cloud a
 
 Data, within our applications, routinely flows over complex, multi-hop, multi-protocol routes — across network boundaries, beyond data centers, through queues and caches, via gateways and brokers — before reaching its end destination. The vulnerability surfaces of all these dependencies get added to the vulnerability surface of our application data and make it _unmanageable_.
 
-Ockam end-to-end secure channels enable **application layer encryption** of all **data-in-motion**. The data integrity and confidentiality guarantee, of these channels, create a deny-by-default security posture that minimizes our vulnerability surface and gives our application true control over every data or service access decision. ****&#x20;
+Ockam end-to-end secure channels enable **application layer encryption** of all **data-in-motion**. The data integrity and confidentiality guarantee, of these channels, create a deny-by-default security posture that minimizes our vulnerability surface and gives our application true control over every data or service access decision.&#x20;
 
 ## Shift Security Left
 
