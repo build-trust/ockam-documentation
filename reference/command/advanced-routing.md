@@ -39,7 +39,9 @@ Relays make it possible to create end-to-end encrypted and mutually authenticate
 HELLO
 ```
 
-In this example the direction of the second TCP connection is reversed in comparison to our first bridge example. `n2` is the only node that has to listen for connections.&#x20;
+In this example the direction of the second TCP connection is reversed in comparison to our first example that used a bridge. `n2` is the only node that has to listen for TCP connections.&#x20;
+
+`n2` starts a relay service. `n3` makes an outgoing TCP connection to `n2` and requests a forwarding address from the relay service and becomes reachable on `n2` at the address `/service/forward_to_n3`.
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
