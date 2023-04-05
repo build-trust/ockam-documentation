@@ -17,13 +17,16 @@ The message in the above command took the following route:&#x20;
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
-In this example, we ran a sim
+<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
 
 ```
-» ockam node create n1
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
-» ockam node create n3
 
+» ockam node create n3
+» ockam forwarder create n3 --at /node/n2 --to /node/n3
+/service/forward_to_n3
+
+» ockam node create n1
 » ockam tcp-connection create --from n1 --to 127.0.0.1:7000
 » ockam tcp-connection list --node n1
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
@@ -31,10 +34,6 @@ In this example, we ran a sim
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 | 370229d91f735adffc928320bed3f2d1 | TCP            | Remote connection | 127.0.0.1:7000 | 0#1fb75f2e7234035461b261602a714b72 |
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
-
-» ockam forwarder create n3 --at /node/n2 --to /node/n3
-/service/forward_to_n3
-
 » ockam message send hello --from /node/n1 --to /service/1fb75f2e7234035461b261602a714b72/service/forward_to_n3/service/uppercase
 HELLO
 ```
