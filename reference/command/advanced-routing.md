@@ -61,9 +61,10 @@ We can traverse NATs and pierce through network boundaries. And since this is al
 
 Ockam Orchestrator can create, manage, secure, and scale Relays for you. The Project that was created when you ran `ockam enroll` offers as Elastic Relay Service that is designed for high throughput and low latency.
 
-Delete all your existing nodes and try this new example, after you've enrolled:
+Delete all your existing nodes and try this new example. No need to enroll again, if you've already enrolled:
 
 ```
+» ockam enroll
 » ockam project information --output json > project.json
 
 » ockam node create n1 --project project.json
