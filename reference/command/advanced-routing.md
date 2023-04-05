@@ -64,7 +64,9 @@ Ockam Orchestrator can create, manage, secure, and scale Relays for you. The Pro
 Delete all your existing nodes and try this new example. No need to enroll again, if you've already enrolled:
 
 ```
+» ockam node delete --all
 » ockam enroll
+
 » ockam project information --output json > project.json
 
 » ockam node create n1 --project project.json
