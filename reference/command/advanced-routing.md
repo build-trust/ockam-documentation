@@ -119,11 +119,11 @@ The TCP Inlet/Outlet work for all TCP based protocols like HTTP. There is also a
 To cleanup and delete all nodes, run: `ockam node delete --all`
 {% endhint %}
 
-Ockam [<mark style="color:blue;">Routing</mark>](advanced-routing.md#routing) and [<mark style="color:blue;">Transports</mark>](routing.md#transport) combined with the ability to model [<mark style="color:blue;">Bridges</mark>](advanced-routing.md) and [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to <mark style="color:orange;">create end-to-end, application layer protocols in</mark> <mark style="color:orange;"></mark><mark style="color:orange;">**any**</mark> <mark style="color:orange;"></mark><mark style="color:orange;">communication topology</mark>.
+Ockam [<mark style="color:blue;">Routing</mark>](advanced-routing.md#routing) and [<mark style="color:blue;">Transports</mark>](routing.md#transport) combined with the ability to model [<mark style="color:blue;">Bridges</mark>](advanced-routing.md) and [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to <mark style="color:orange;">create end-to-end, application layer protocols in</mark> <mark style="color:orange;"></mark><mark style="color:orange;">**any**</mark> <mark style="color:orange;"></mark><mark style="color:orange;">communication topology</mark> - across networks, clouds, and boundaries.
 
-[Portals](advanced-routing.md#orchestrator-portal) take this a huge step forward by making it possible to apply these end-to-end protocols to existing applications, <mark style="color:orange;">without changing any code!</mark>
+[Portals](advanced-routing.md#orchestrator-portal) take this powerful capability a huge step forward by making it possible to apply these end-to-end protocols and their guarantees to existing applications, <mark style="color:orange;">without changing any code!</mark>
 
-This lays the foundation to make <mark style="color:orange;">both new and existing</mark> applications end-to-end encrypted and secure by design.
+This lays the foundation to make <mark style="color:orange;">both new and existing</mark> applications end-to-end encrypted and secure-by-design.
 
 {% hint style="info" %}
 If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
