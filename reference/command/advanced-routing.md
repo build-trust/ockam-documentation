@@ -9,7 +9,7 @@ description: >-
 
 In the [<mark style="color:blue;">previous section</mark>](routing.md), we learnt how Ockam Routing and Ockam Transports give us a foundation to describe end-to-end, application layer protocols. When discussing [<mark style="color:blue;">Transports</mark>](routing.md#transport)<mark style="color:blue;">,</mark> we also create at a specific example communication topology.
 
-<img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (2) (2).svg" alt="" class="gitbook-drawing">
 
 Node `n1` wishes to access a service on node `n3`, but it can't directly connect to `n3`. This can happen for many reasons, maybe because `n3` is in a separate `IP` subnet or could be that the communication from `n1 to n2` uses UDP while from `n2 to n3` uses TCP or other similar constraints. The topology makes `n2` a bridge or gateway between these two separate networks to enables= end-to-end protocols between `n1` and `n3` even though they are not directly connected.
 
@@ -89,11 +89,17 @@ The `hello` message from `n1` travelled to project node in the cloud and was rel
 
 Ockam Portals make existing application protocols work over Ockam Routing. Without any code change to the existing applications.
 
-<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
+
+Continuing from our [<mark style="color:blue;">Elastic Relays</mark>](advanced-routing.md#elastic-relays) example, create a local python based web server to represent a sample web service. This web service is listening on `127.0.0.1:9000`.
 
 ```
 » python3 -m http.server --bind 127.0.0.1 9000
 ```
+
+Then create a TCP Portal Outlet that makes `127.0.0.1:9000` available on worker address `/service/outlet` on `n3`. We already have a forwarding relay for `n3` in our [Project](nodes.md#project) node.
+
+We then create a TCP Portal Inlet on `n1` that will listen for TCP connections to `127.0.0.1:6000`&#x20;
 
 ```
 » ockam tcp-outlet create --at /node/n3 --from /service/outlet --to 127.0.0.1:9000
