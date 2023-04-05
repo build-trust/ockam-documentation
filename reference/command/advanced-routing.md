@@ -111,7 +111,9 @@ We then create a TCP Portal Inlet on `n1` that will listen for TCP connections t
 
 The HTTP requests from curl, enter the inlet on `n1`, travel to your project node in the cloud and are relayed back to `n3` via it's forwarding relay to reach the outlet and onward to the the python based web service. HTTP Responses take the return route back to the curl.
 
-The TCP Inlet/Outlet work for all TCP based protocols like HTTP. There is also a growing base of Ockam Portal Add-Ons in our [<mark style="color:blue;">Github Repository</mark>](https://github.com/build-trust/ockam).
+The TCP Inlet/Outlet work for the large number of TCP based protocols like HTTP. It is also simple to implement portals for other transport protocols. There is a growing base of Ockam Portal Add-Ons in our [<mark style="color:blue;">Github Repository</mark>](https://github.com/build-trust/ockam).
+
+Ockam Portals make existing application protocols work over Ockam Routing. Without any code change to the existing applications.
 
 #### Recap
 
@@ -123,7 +125,7 @@ Ockam [<mark style="color:blue;">Routing</mark>](advanced-routing.md#routing) an
 
 [Portals](advanced-routing.md#orchestrator-portal) take this powerful capability a huge step forward by making it possible to apply these end-to-end protocols and their guarantees to existing applications, <mark style="color:orange;">without changing any code!</mark>
 
-This lays the foundation to make <mark style="color:orange;">both new and existing</mark> applications end-to-end encrypted and secure-by-design.
+This lays the foundation to make <mark style="color:orange;">both new and existing</mark> applications - end-to-end encrypted and secure-by-design.
 
 {% hint style="info" %}
 If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
