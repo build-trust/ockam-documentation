@@ -13,11 +13,13 @@ In the [<mark style="color:blue;">previous section</mark>](routing.md), we learn
 
 Node `n1` wishes to access a service on node `n3`, but it can't directly connect to `n3`. This can happen for many reasons, maybe because `n3` is in a separate `IP` subnet or could be that the communication from `n1 to n2` uses UDP while from `n2 to n3` uses TCP or other similar constraints. The topology makes `n2` a bridge or gateway between these two separate networks to enables= end-to-end protocols between `n1` and `n3` even though they are not directly connected.
 
-It is common, however, to encounter communication topologies where the machine that provides a service is unwilling or is not allowed to open a listening port or <mark style="color:orange;">expose</mark> a bridge node to other networks. This is a common security best practice in enterprise environments, home networks, OT networks, and VPCs across clouds.&#x20;
+It is common, however, to encounter communication topologies where the machine that provides a service is unwilling or is not allowed to open a listening port or <mark style="color:orange;">expose</mark> a bridge node to other networks. This is a common security best practice in enterprise environments, home networks, OT networks, and VPCs across clouds. Application developers typically have no control over these choices.
 
 ## Relay
 
-Relays make it possible to create end-to-end encrypted and mutually authenticated communication with services operating in remote private networks. Delete all your existing nodes and try this new example:
+Relays make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet.  &#x20;
+
+Delete all your existing nodes and try this new example:
 
 ```
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
