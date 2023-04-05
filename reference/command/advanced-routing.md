@@ -2,7 +2,7 @@
 description: >-
   Ockam Relays make is easy to traverse NATs and run end-to-end protocols 
   between Ockam Nodes in far away private networks. Ockam Portals make existing
-  application protocols work over Ockam Routing.
+  protocols work over Ockam Routing.
 ---
 
 # Relays and Portals
@@ -112,8 +112,6 @@ We then create a TCP Portal Inlet on `n1` that will listen for TCP connections t
 The HTTP requests from curl, enter the inlet on `n1`, travel to your project node in the cloud and are relayed back to `n3` via it's forwarding relay to reach the outlet and onward to the the python based web service. HTTP Responses take the return route back to the curl.
 
 The TCP Inlet/Outlet work for the large number of TCP based protocols like HTTP. It is also simple to implement portals for other transport protocols. There is a growing base of Ockam Portal Add-Ons in our [<mark style="color:blue;">Github Repository</mark>](https://github.com/build-trust/ockam).
-
-Ockam Portals make existing application protocols work over Ockam Routing. Without any code change to the existing applications.
 
 #### Recap
 
