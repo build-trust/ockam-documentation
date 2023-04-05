@@ -29,7 +29,7 @@
   * [Relays and Portals](reference/command/advanced-routing.md)
   * [Identities and Vaults](reference/command/identities.md)
   * [Secure Channels](reference/command/secure-channels.md)
-  * [Credentials and Authorities](reference/command/credentials-and-authorities.md)
+  * [Verifiable Credentials](reference/command/credentials-and-authorities.md)
   * [Enrollment and Identity Providers](reference/command/enrollment-and-identity-providers.md)
   * [Authorization and Policies](reference/command/access-control.md)
   * [Manual](https://command.ockam.io/manual/)
