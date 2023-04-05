@@ -7,6 +7,10 @@ description: >-
 
 # Identities and Vaults
 
+An Ockam Identity has an Identifier, Signed Change History, and private keys.
+
+ED25519 or NIST P-256 keys.
+
 ```shell-session
 » ockam vault create v1
 Vault created: v1
