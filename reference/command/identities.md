@@ -7,6 +7,8 @@ description: >-
 
 # Identities and Vaults
 
+In order to make decisions about trust, we must authenticate senders of messages.
+
 An Ockam Identity has an Identifier, Signed Change History, and private keys.
 
 ED25519 or NIST P-256 keys.
