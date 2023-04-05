@@ -7,11 +7,13 @@ description: >-
 
 # Relays and Portals
 
-In the previous section, we learnt how Ockam [Routing](advanced-routing.md#routing) and Ockam [Transports](advanced-routing.md#transports) give us a foundation to describe end-to-end, application layer protocols in any communication topology.
+In the previous section, we learnt how Ockam [Routing](routing.md#routing) and Ockam [Transports](routing.md#transport) give us a foundation to describe end-to-end, application layer protocols in any communication topology.
 
 ## Relay
 
 The message in the above command took the following route:&#x20;
+
+
 
 <img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
