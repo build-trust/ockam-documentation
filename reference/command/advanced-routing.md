@@ -47,7 +47,7 @@ Node `n2` is running a relay service. `n3` makes an outgoing TCP connection to `
 
 Node `n1` connects with `n2` and routes messages to `n3` via its forwarding relay.
 
-<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
 The message in the above example took the following route. This is very similar to our [<mark style="color:blue;">earlier example</mark>](routing.md#transport) except the direction of the second TCP connection. The relay worker remembers the route to back to `n3`. `n1` just has to get the message to the forwarding relay and everything just works.
 
@@ -89,7 +89,7 @@ The `hello` message from `n1` travelled to project node in the cloud and was rel
 
 Ockam Portals make existing application protocols work over Ockam Routing. Without any code change to the existing applications.
 
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
 
 Continuing from our [<mark style="color:blue;">Elastic Relays</mark>](advanced-routing.md#elastic-relays) example, create a local python based web server to represent a sample web service. This web service is listening on `127.0.0.1:9000`.
 
