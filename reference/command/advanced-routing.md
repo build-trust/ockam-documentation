@@ -9,7 +9,7 @@ description: >-
 
 In the [<mark style="color:blue;">previous section</mark>](routing.md), we learnt how Ockam Routing and Ockam Transports give us a foundation to describe end-to-end, application layer protocols. When discussing [<mark style="color:blue;">Transports</mark>](routing.md#transport)<mark style="color:blue;">,</mark> we also create at a specific example communication topology.
 
-<img src="../../.gitbook/assets/file.excalidraw (2) (2).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
 Node `n1` wishes to access a service on node `n3`, but it can't directly connect to `n3`. This can happen for many reasons, maybe because `n3` is in a separate `IP` subnet or could be that the communication from `n1 to n2` uses UDP while from `n2 to n3` uses TCP or other similar constraints. The topology makes `n2` a bridge or gateway between these two separate networks to enables= end-to-end protocols between `n1` and `n3` even though they are not directly connected.
 
@@ -47,7 +47,7 @@ Node `n2` is running a relay service. `n3` makes an outgoing TCP connection to `
 
 Node `n1` connects with `n2` and routes messages to `n3` via its forwarding relay.
 
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
 
 The message in the above example took the following route. This is very similar to our [<mark style="color:blue;">earlier example</mark>](routing.md#transport) except the direction of the second TCP connection. The relay worker remembers the route to back to `n3`. `n1` just has to get the message to the forwarding relay and everything just works.
 
@@ -83,34 +83,37 @@ In the example above we create two node `n1 and n3` and tell them about our Proj
 
 Everything worked exactly the same - except we now `n3` has a forwarding relay available to any project member that can reach the Internet. We can use this to run end-to-end protocols between other project members like `n1`.
 
-The `hello` message from `n1` travelled to project node in the cloud and was relayed back to `n3` via it's forwarding relay. The reply `HELLO` from `n3` took the same route back.
+The `hello` message from `n1` travelled to project node in the cloud and was relayed back to `n3` via it's forwarding relay. The reply `HELLO` from `n3` took the return route back.
 
 ## Portal <a href="#orchestrator-portal" id="orchestrator-portal"></a>
 
 Ockam Portals make existing application protocols work over Ockam Routing. Without any code change to the existing applications.
 
-<img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
 Continuing from our [<mark style="color:blue;">Elastic Relays</mark>](advanced-routing.md#elastic-relays) example, create a local python based web server to represent a sample web service. This web service is listening on `127.0.0.1:9000`.
 
 ```
 » python3 -m http.server --bind 127.0.0.1 9000
+
+» ockam tcp-outlet create --at /node/n3 --from /service/outlet --to 127.0.0.1:9000
+» ockam tcp-inlet create --at /node/n1 --from 127.0.0.1:6000 \
+    --to /project/default/service/forward_to_n3/service/outlet
+
+» curl --head 127.0.0.1:6000
+HTTP/1.0 200 OK
+...
 ```
 
 Then create a TCP Portal Outlet that makes `127.0.0.1:9000` available on worker address `/service/outlet` on `n3`. We already have a forwarding relay for `n3` in our [Project](nodes.md#project) node.
 
-We then create a TCP Portal Inlet on `n1` that will listen for TCP connections to `127.0.0.1:6000`&#x20;
+We then create a TCP Portal Inlet on `n1` that will listen for TCP connections to `127.0.0.1:6000`. For every new connection, the inlet creates a portal following the `--to` route all the way to the outlet. As it receives TCP data, it chunks and wraps them into Ockam Routing messages and sends them along the supplied route. The outlet receives Ockam Routing messages, unwraps them to extract TCP data and send that data along to the target web service on `127.0.0.1:9000`. It all just seamlessly works.
 
-```
-» ockam tcp-outlet create --at /node/n3 --from /service/outlet --to 127.0.0.1:9000
-» ockam tcp-inlet create --at /node/n1 --from 127.0.0.1:6000 \
-    --to /project/default/service/forward_to_n3/service/outlet
-```
+The HTTP requests from curl, enter the inlet on `n1`, travel to your project node in the cloud and are relayed back to `n3` via it's forwarding relay to reach the outlet and onward to the the python based web service. HTTP Responses take the return route back to the curl.
 
-```
-» curl --head 127.0.0.1:6000
-HTTP/1.0 200 OK
-```
+The TCP Inlet/Outlet work for all TCP based protocols like HTTP. There is a growing base of Ockam Portal Add-Ons in our [<mark style="color:blue;">Github Repository</mark>](https://github.com/build-trust/ockam).
+
+
 
 #### Recap
 
@@ -134,4 +137,4 @@ If you’re stuck or have questions at any point, [<mark style="color:blue;">ple
 
 #### Next
 
-Next,&#x20;
+Next, let's learn how we can mutually authenticate using cryptographic
