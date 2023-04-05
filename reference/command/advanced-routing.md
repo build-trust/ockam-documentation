@@ -13,13 +13,13 @@ In the previous section, we learnt how Ockam [Routing](routing.md#routing) and O
 
 The message in the above command took the following route:&#x20;
 
-
-
-<img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
-
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
 <img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
+
+
+
+<img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
 ```
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
