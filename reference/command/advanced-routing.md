@@ -17,9 +17,7 @@ However, it is common to encounter communication topologies where the machine th
 
 ## Relay
 
-Relays make it possible to create end-to-end encrypted and mutually authenticated communication with services operating in remote private networks.
-
-Delete all your existing nodes and try this new example:
+Relays make it possible to create end-to-end encrypted and mutually authenticated communication with services operating in remote private networks. Delete all your existing nodes and try this new example:
 
 ```
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
@@ -41,7 +39,7 @@ Delete all your existing nodes and try this new example:
 HELLO
 ```
 
-In this example the direction of the second TCP connection is reversed in comparison to our first bridge example:
+In this example the direction of the second TCP connection is reversed in comparison to our first bridge example. `n2` is the only node that has to listen for connections.&#x20;
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
@@ -66,7 +64,7 @@ The message in the above example took the following route:&#x20;
 HTTP/1.0 200 OK
 ```
 
-## Orchestrator
+## Managed Relays
 
 ### Relay <a href="#orchestrator-relay" id="orchestrator-relay"></a>
 
