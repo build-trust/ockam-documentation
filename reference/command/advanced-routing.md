@@ -101,7 +101,9 @@ HELLO
 To cleanup and delete all nodes, run: `ockam node delete --all`
 {% endhint %}
 
+Ockam [<mark style="color:blue;">Routing</mark>](advanced-routing.md#routing) is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange messages over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` or any other topology you can imagine. Ockam [<mark style="color:blue;">Transports</mark>](routing.md) adapt Ockam Routing to various transport protocols.
 
+Together they give us a simple, yet extremely flexible, foundation to describe end-to-end, application layer protocols that can operate in any communication topology.
 
 {% hint style="info" %}
 If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
