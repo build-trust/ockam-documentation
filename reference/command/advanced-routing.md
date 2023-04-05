@@ -57,26 +57,7 @@ Using this simple topology rearrangement, Ockam [Routing](routing.md) makes is p
 
 We can traverse NATs and pierce through network boundaries. And since this is all built using a very simple [application layer routing](routing.md) protocol we can have any number of transport connection hops, in any transport protocol and we can mix-match bridges with relays to create <mark style="color:orange;">end-to-end protocols in</mark> <mark style="color:orange;"></mark><mark style="color:orange;">**any**</mark> <mark style="color:orange;"></mark><mark style="color:orange;">communication topology</mark>.
 
-## Portal
-
-```
-» python3 -m http.server --bind 127.0.0.1 9000
-```
-
-```
-» ockam tcp-outlet create --at /node/n3 --from /service/outlet --to 127.0.0.1:9000
-» ockam tcp-inlet create --at /node/n1 --from 127.0.0.1:6000 \
-    --to /service/f3a318045e7b0420d02d5489ff75f126/service/forward_to_n3/service/outlet
-```
-
-```
-» curl --head 127.0.0.1:6000
-HTTP/1.0 200 OK
-```
-
-## Managed Relays
-
-### Relay <a href="#orchestrator-relay" id="orchestrator-relay"></a>
+### Managed Relays
 
 ```
 » ockam project information --output json > project.json
@@ -91,12 +72,21 @@ HTTP/1.0 200 OK
 HELLO
 ```
 
-### Portal <a href="#orchestrator-portal" id="orchestrator-portal"></a>
+## Portal <a href="#orchestrator-portal" id="orchestrator-portal"></a>
+
+```
+» python3 -m http.server --bind 127.0.0.1 9000
+```
 
 ```
 » ockam tcp-outlet create --at /node/n3 --from /service/outlet --to 127.0.0.1:9000
 » ockam tcp-inlet create --at /node/n1 --from 127.0.0.1:6000 \
     --to /project/default/service/forward_to_n3/service/outlet
+```
+
+```
+» curl --head 127.0.0.1:6000
+HTTP/1.0 200 OK
 ```
 
 #### Recap
