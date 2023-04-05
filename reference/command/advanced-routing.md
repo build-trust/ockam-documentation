@@ -111,9 +111,7 @@ We then create a TCP Portal Inlet on `n1` that will listen for TCP connections t
 
 The HTTP requests from curl, enter the inlet on `n1`, travel to your project node in the cloud and are relayed back to `n3` via it's forwarding relay to reach the outlet and onward to the the python based web service. HTTP Responses take the return route back to the curl.
 
-The TCP Inlet/Outlet work for all TCP based protocols like HTTP. There is a growing base of Ockam Portal Add-Ons in our [<mark style="color:blue;">Github Repository</mark>](https://github.com/build-trust/ockam).
-
-
+The TCP Inlet/Outlet work for all TCP based protocols like HTTP. There is also a growing base of Ockam Portal Add-Ons in our [<mark style="color:blue;">Github Repository</mark>](https://github.com/build-trust/ockam).
 
 #### Recap
 
@@ -121,15 +119,11 @@ The TCP Inlet/Outlet work for all TCP based protocols like HTTP. There is a grow
 To cleanup and delete all nodes, run: `ockam node delete --all`
 {% endhint %}
 
-Ockam [<mark style="color:blue;">Routing</mark>](advanced-routing.md#routing) and [Transports](routing.md#transport) combined with the ability to model Bridges, Relays, and Portals&#x20;
+Ockam [<mark style="color:blue;">Routing</mark>](advanced-routing.md#routing) and [<mark style="color:blue;">Transports</mark>](routing.md#transport) combined with the ability to model [<mark style="color:blue;">Bridges</mark>](advanced-routing.md) and [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to <mark style="color:orange;">create end-to-end, application layer protocols in</mark> <mark style="color:orange;"></mark><mark style="color:orange;">**any**</mark> <mark style="color:orange;"></mark><mark style="color:orange;">communication topology</mark>.
 
+[Portals](advanced-routing.md#orchestrator-portal) take this a huge step forward by making it possible to apply these end-to-end protocols to existing applications, <mark style="color:orange;">without changing any code!</mark>
 
-
-
-
-is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange messages over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` or any other topology you can imagine. Ockam [<mark style="color:blue;">Transports</mark>](routing.md) adapt Ockam Routing to various transport protocols.
-
-Together they give us a simple, yet extremely flexible, foundation to describe end-to-end, application layer protocols that can operate in any communication topology.
+This lays the foundation to make <mark style="color:orange;">both new and existing</mark> applications end-to-end encrypted and secure by design.
 
 {% hint style="info" %}
 If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
@@ -137,4 +131,4 @@ If you’re stuck or have questions at any point, [<mark style="color:blue;">ple
 
 #### Next
 
-Next, let's learn how we can mutually authenticate using cryptographic
+Next, let's learn how we can create cryptographic [<mark style="color:blue;">identities</mark>](identities.md) and store secret keys in safe [<mark style="color:blue;">vaults</mark>](identities.md).
