@@ -78,6 +78,10 @@ The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3` the address
 
 ## Through a Relay
 
+In the previous section, we saw how [Relays](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet. We also learnt that Ockam Orchestrator can create and manage [Elastic Relays](advanced-routing.md#elastic-relays) that are designed for high throughput and low latency.
+
+
+
 <img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
 
 ```
