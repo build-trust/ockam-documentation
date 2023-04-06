@@ -89,7 +89,7 @@ The `hello` message from `n1` travelled to project node in the cloud and was rel
 
 Ockam Portals make existing application protocols work over Ockam Routing. Without any code change to the existing applications.
 
-<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
 
 Continuing from our [<mark style="color:blue;">Elastic Relays</mark>](advanced-routing.md#elastic-relays) example, create a local python based web server to represent a sample web service. This web service is listening on `127.0.0.1:9000`.
 
