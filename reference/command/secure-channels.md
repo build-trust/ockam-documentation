@@ -88,9 +88,7 @@ These relays are only useful if their use can be tightly secured. Let's create a
 
 <img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
 
-The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was created when you ran `ockam enroll` offers an Elastic Relay Service that is designed for high throughput and low latency.
-
-Delete all your existing nodes and try this new example.
+The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was created when you ran `ockam enroll` offers an Elastic Relay Service. Delete all your existing nodes and try this new example.
 
 ```
 » ockam node delete --all
