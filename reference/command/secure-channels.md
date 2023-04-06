@@ -11,7 +11,7 @@ In previous sections we saw how Ockam [<mark style="color:blue;">Routing</mark>]
 
 Ockam [Secure Channels](secure-channels.md#secure-channel) is an end-to-end protocol build on top of Ockam Routing. This cryptographic protocol guarantees data authenticity, integrity, and confidentiality over any communication topology that can be traversed with Ockam Routing,
 
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
 
 In contrast, traditional secure communication implementations are typically tightly coupled with transport protocols in a way that all their security is limited to the length and duration of one underlying transport connection.
 
@@ -27,15 +27,17 @@ By layering Ockam Secure Channels over Ockam Routing we can provide end-to-end, 
 
 ## Secure Channel
 
-Establishing a secure channel requires establishing shared secret keys between the two entities that wish to communicate securely. This is achieved using a cryptographic [key agreement protocol](../protocols/secure-channels.md) to safely derive shared secrets without transporting these secrets on the wire.
-
-<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
-
-Once a channel is established, it provides the following <mark style="color:orange;">end-to-end guarantees</mark>:
+Ockam Secure Channels provides the following <mark style="color:orange;">end-to-end guarantees</mark>:
 
 1. **Authenticity:** Each end of the channel knows that messages received on the channel must have been sent by someone who possesses the secret keys of specific Ockam Identifier.
 2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tapered en-route and are exactly what was sent by the authenticated sender at the other end of the channel.
 3. **Confidentiality:**  Each end of the channel knows that the contents of messages received on the channel could not have been observed en-route between the sender and the receiver.
+
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+
+To establish the secure channel, the two ends run an [authenticated key establishment](../protocols/secure-channels.md) protocol and then [authenticate](identities.md#identifier-authentication) each other's [Ockam Identifier](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment protocol safely derives shared secrets without transporting these secrets on the wire.
+
+Let's create an secure channel through your elastic relay:
 
 ```
 » ockam project information --output json > project.json
