@@ -33,8 +33,6 @@ In this example `n1 knows i2` and `n2 know i1`:
 HELLO
 ```
 
-Using credentials:
-
 ```sh
 » ockam identity create authority
 » ockam identity show authority > authority.identifier
@@ -57,4 +55,21 @@ Using credentials:
 
 » ockam secure-channel create --from n1 --to /node/n2/service/api --credential c1 \
     | ockam message send hello --from n1 --to -/service/uppercase
+```
+
+## Managed Authorities
+
+```
+» ockam node delete --all
+» ockam project information --output json > project.json
+
+» ockam node create a --project project.json
+» ockam node create b --project project.json
+
+» ockam forwarder create b --at /project/default --to /node/a
+/service/forward_to_b
+
+» ockam secure-channel create --from a --to /project/default/service/forward_to_b/service/api \
+    | ockam message send hello --from a --to -/service/uppercase
+HELLO
 ```
