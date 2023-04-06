@@ -35,7 +35,7 @@ Ockam Secure Channels provides the following <mark style="color:orange;">end-to-
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
-To establish the secure channel, the two ends run an [authenticated key establishment](../protocols/secure-channels.md) protocol and then [authenticate](identities.md#identifier-authentication) each other's [Ockam Identifier](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment protocol safely derives shared secrets without transporting these secrets on the wire.
+To establish the secure channel, the two ends run an [authenticated key establishment](../protocols/secure-channels.md) protocol and then [authenticate](identities.md#identifier-authentication) each other's [Ockam Identifier](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment protocol safely derives shared secrets without transporting these secrets on the wire. Once&#x20;
 
 Let's create an secure channel through your elastic relay:
 
