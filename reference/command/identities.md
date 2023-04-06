@@ -7,7 +7,7 @@ description: >-
 
 # Identities and Vaults
 
-In order to make decisions about trust, we must authenticate senders of messages.&#x20;
+In order to make decisions about trust, we must authenticate senders of messages.
 
 ## Vault
 
@@ -18,7 +18,7 @@ Ockam [Identities](identities.md#identity) authenticate by cryptographically pro
 Vault created: v1
 ```
 
-This command will, by default create a file system based vault, where your secret keys are stored at a specific file path. There is a growing base of Ockam Vault implementations in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam) that store keys in specific HSMs, KMSs, Secure Enclaves etc.
+This command will, by default create a file system based vault, where your secret keys are stored at a specific file path. There is a growing base of Ockam Vault implementations in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam) that safely store secret keys in specific KMSs, HSMs, Secure Enclaves etc.
 
 ## Identity
 
@@ -51,3 +51,11 @@ Change History:
 Authentication, within Ockam, starts by proving control of a specific Ockam Identifier.
 
 ED25519 or NIST P-256 keys.
+
+#### Recap
+
+{% hint style="info" %}
+If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
+{% endhint %}
+
+Next, let's learn how to mutually authenticated and end-to-end encrypted [<mark style="color:blue;">secure channels</mark>](secure-channels.md) that guarantee data authenticity, integrity, and confidentiality.
