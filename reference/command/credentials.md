@@ -8,6 +8,26 @@ description: >-
 
 Trust and authorization decisions must be anchored in some pre-existing knowledge.
 
+## Credential
+
+An Ockam Credential is a signed attestation by an <mark style="color:orange;">Issuer</mark> about the <mark style="color:orange;">Attributes</mark> of <mark style="color:orange;">Subject</mark>. The Issuer and Subject are both Ockam [Identities](identities.md). Attributes is a list of name and value pairs. Any Ockam Identity can issue credentials about another Ockam Identity.
+
+```
+» ockam identity create a
+Identity created: P8b604a07640ecd944f379b5a1a5da0748f36f76327b00193067d1d8c6092dfae
+
+» ockam identity create b
+Identity created: P5c14d09f32dd27255913d748d276dcf6952b7be5d0be4023e5f40787b53274ae
+
+» ockam credential issue --as a --for $(ockam identity show b)
+Subject:    P5c14d09f32dd27255913d748d276dcf6952b7be5d0be4023e5f40787b53274ae
+Issuer:     P8b604a07640ecd944f379b5a1a5da0748f36f76327b00193067d1d8c6092dfae
+Created:    2023-04-06T17:05:36Z
+Expires:    2023-05-06T17:05:36Z
+Attributes: {}
+Signature:  6feeb038f0cdc28a16fbe3ed4f69feee5ccce3d2a6ac8be83e76180e7bbd3c6e0adbe37ed73c75bb3c283807ec63aeda42dd79afd3813d4658222078cad12705
+```
+
 In the previous section about Ockam [Secure Channels](secure-channels.md) we ran an example of [mutual authorization](secure-channels.md#mutual-authorization) using pre-existing knowledge of Ockam [Identifiers](identities.md#identifier).
 
 In this example `n1 knows i2` and `n2 know i1`:
