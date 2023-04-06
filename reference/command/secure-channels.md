@@ -15,29 +15,15 @@ Ockam Secure Channels is an end-to-end protocol build on top of Ockam Routing. O
 2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tapered en-route and are exactly what was sent by the authenticated sender at the other end of the channel.
 3. **Confidentiality:**  Each end of the channel knows that the contents of messages received on the channel could not have been observed en-route between the sender and the receiver.
 
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+
 Establishing a secure channel requires establishing shared secret keys between the two entities that wish to communicate securely. This is achieved using a cryptographic [key agreement protocol](../protocols/secure-channels.md) to safely derive shared secrets without transporting these secrets on the wire.
 
-<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
-
-
-
-Once the shared sec
-
-
-
-Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md) can provide end-to-end guarantees of data authenticity, integrity, and confidentiality in any of the above communication topologies. In contrast, traditional secure communication implementations are typically tightly coupled with transport protocols in a way that all their security is limited to the length and duration of the underlying transport connections.
-
-For example, most TLS implementations are tightly coupled with the underlying TCP connection. If your application’s data and requests travel over two TCP connection hops `TCP -> TCP` then all TLS guarantees break at the bridge between the two networks. This bridge, gateway or load balancer then becomes a point of weakness for application data.
-
-To make matters worse, if you don't setup another mutually authenticated TLS connection on the second hop between the gateway and your destination server then the entire second hop network – that may have thousands of applications and machines within it – becomes an attack vector to your application and its data. If any of these neighboring applications or machines are compromised then your application and its data can be easily compromised.
-
-Traditional secure communication protocols are also unable to protect your application’s data if it travels over multiple different transport protocols. They can’t guarantee data authenticity or data integrity if your application’s communication path is `UDP -> TCP` or `BLE -> TCP`.
 
 
 
 
-
-
+Once the shared secrets are established
 
 
 
