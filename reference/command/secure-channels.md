@@ -27,17 +27,15 @@ By layering Ockam Secure Channels over Ockam Routing
 
 ## Secure Channel
 
+Establishing a secure channel requires establishing shared secret keys between the two entities that wish to communicate securely. This is achieved using a cryptographic [key agreement protocol](../protocols/secure-channels.md) to safely derive shared secrets without transporting these secrets on the wire.
+
+<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
+
 Once a channel is established, it provides the following <mark style="color:orange;">end-to-end guarantees</mark>:
 
 1. **Authenticity:** Each end of the channel knows that messages received on the channel must have been sent by someone who possesses the secret keys of specific Ockam Identifier.
 2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tapered en-route and are exactly what was sent by the authenticated sender at the other end of the channel.
 3. **Confidentiality:**  Each end of the channel knows that the contents of messages received on the channel could not have been observed en-route between the sender and the receiver.
-
-Establishing a secure channel requires establishing shared secret keys between the two entities that wish to communicate securely. This is achieved using a cryptographic [key agreement protocol](../protocols/secure-channels.md) to safely derive shared secrets without transporting these secrets on the wire.
-
-<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
-
-
 
 ```
 » ockam project information --output json > project.json
