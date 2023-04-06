@@ -37,7 +37,7 @@ Ockam Secure Channels provides the following <mark style="color:orange;">end-to-
 2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tapered en-route and are exactly what was sent by the authenticated sender at the other end of the channel.
 3. **Confidentiality:**  Each end of the channel knows that the contents of messages received on the channel could not have been observed en-route between the sender and the receiver.
 
-<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
 To establish the secure channel, the two ends run an [authenticated key establishment](../protocols/secure-channels.md) protocol and then [authenticate](identities.md#identifier-authentication) each other's [Ockam Identifier](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment safely derives shared secrets without transporting these secrets on the wire.
 
@@ -76,16 +76,6 @@ Once the channel is created, note above how we used the service address of the c
 
 The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3` the address of a new secure channel on `n1` to standard output and the second command replaces the `-` in the `to` argument with this value from standard input. Everything else works the same.
 
-## The Routing Sandwich
-
-Ockam Secure Channels are built on top of Ockam Routing. But they also carry Ockam Routing messages.
-
-This means that we can run any Ockam Routing based protocol through Secure Channels. This also means that we can create Secure Channels that pass through other Secure Channels.
-
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
-
-Note how in  the [<mark style="color:blue;">Hello Secure Channels</mark>](secure-channels.md#hello) example, we routed a plain text message to the address of the channel using `ockam message send ...`. This message could have been routed over multiple hops before entering or after leaving the channel and everything would work as expected.
-
 ## Through a Relay
 
 In a previous section, we saw how [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet.
@@ -117,9 +107,15 @@ HELLO
 
 Nodes `a` and `b` (the two ends) are mutually authenticated and are cryptographically guaranteed data authenticity, integrity, and confidentiality - even though their messages are traveling over the public Internet over two different TCP connections.
 
-## &#x20;
+## &#x20;The Routing Sandwich
 
+Ockam Secure Channels are built on top of Ockam Routing. But they also carry Ockam Routing messages.
 
+This means that we can run any Ockam Routing based protocol through Secure Channels. This also means that we can create Secure Channels that pass through other Secure Channels.
+
+<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+
+Note how in  the [<mark style="color:blue;">Hello Secure Channels</mark>](secure-channels.md#hello) example, we routed a plain text message to the address of the channel using `ockam message send ...`. This message could have been routed over multiple hops before entering or after leaving the channel and everything would work as expected.
 
 ## Secure Portals
 
