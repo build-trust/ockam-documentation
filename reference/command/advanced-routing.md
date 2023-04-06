@@ -47,7 +47,7 @@ Node `n2` is running a relay service. `n3` makes an outgoing TCP connection to `
 
 Node `n1` connects with `n2` and routes messages to `n3` via its forwarding relay.
 
-<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1) (3).svg" alt="" class="gitbook-drawing">
 
 The message in the above example took the following route. This is very similar to our [<mark style="color:blue;">earlier example</mark>](routing.md#transport) except the direction of the second TCP connection. The relay worker remembers the route to back to `n3`. `n1` just has to get the message to the forwarding relay and everything just works.
 
