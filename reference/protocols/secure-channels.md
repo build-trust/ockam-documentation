@@ -5,6 +5,7 @@
 ## Primitives
 
 * Curve25519
+* ECDH
 * SHA256
 * HKDF
 * AEAD\_AES\_128\_GCM
