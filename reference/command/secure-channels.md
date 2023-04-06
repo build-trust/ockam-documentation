@@ -51,18 +51,19 @@ Now that you're familiar with ideas, let's create some secure channels. If you h
 
 In this example we'll create a secure channel from [Node](nodes.md) `n1` to node `n2`. Ever node created with Ockam Command starts a secure channel listener at address `/service/api`.
 
-<pre><code>» ockam node create n1
+```
+» ockam node create n1
 » ockam node create n2
 » ockam secure-channel create --from n1 --to /node/n2/service/api
-<strong>
-</strong><strong>  Created Secure Channel:
-</strong>  • From: /node/n1
+
+  Created Secure Channel:
+  • From: /node/n1
   •   To: /node/n2/service/api (/ip4/127.0.0.1/tcp/53483/service/api)
   •   At: /service/d92ef0aea946ec01cdbccc5b9d3f2e16
 
 » ockam message send hello --from n1 --to /service/d92ef0aea946ec01cdbccc5b9d3f2e16/service/uppercase
 HELLO
-</code></pre>
+```
 
 `n1` and `n2` mutually authenticate using the default [Ockam Identity](identities.md) that was generated when we create the first nodes. Both nodes, in this case, are using the same identity.
 
