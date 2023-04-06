@@ -22,14 +22,14 @@ This command will, by default create a file system based vault, where your secre
 
 ## Identity
 
-An Ockam Identity
-
-has an Identifier, Signed Change History, and private keys.
+Ockam Identities are lightweight, unique, cryptographically verifiable digital identities. You can create any number of identities, by typing: &#x20;
 
 ```
 » ockam identity create i1 --vault v1
 Identity created: Pf87c30a63cd56b4848ed0aa17d582db67fe143279b37e6af1eb460f020685f41
 ```
+
+
 
 ### Change History
 
@@ -50,7 +50,7 @@ Change History:
 
 Authentication, within Ockam, starts by proving control of a specific Ockam Identifier.
 
-ED25519 or NIST P-256 keys.
+
 
 #### Recap
 
