@@ -107,14 +107,14 @@ HELLO
 » ockam node delete --all
 » ockam project information --output json > project.json
 
-» ockam node create n1 --project project.json
-» ockam node create n3 --project project.json
+» ockam node create a --project project.json
+» ockam node create b --project project.json
 
-» ockam forwarder create n3 --at /project/default --to /node/n3
-/service/forward_to_n3
+» ockam forwarder create b --at /project/default --to /node/a
+/service/forward_to_b
 
-» ockam secure-channel create --from n1 --to /project/default/service/forward_to_n3/service/api \
-    | ockam message send hello --from n1 --to -/service/uppercase
+» ockam secure-channel create --from a --to /project/default/service/forward_to_b/service/api \
+    | ockam message send hello --from a --to -/service/uppercase
 HELLO
 ```
 
