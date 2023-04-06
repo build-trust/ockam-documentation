@@ -27,25 +27,25 @@ Traditional secure communication protocols are also unable to protect your appli
 
 Ockam [<mark style="color:blue;">Routing</mark>](routing.md) and [<mark style="color:blue;">Transports</mark>](routing.md#transport)<mark style="color:blue;">,</mark> when combined with the ability to model [<mark style="color:blue;">Bridges</mark>](advanced-routing.md) and [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to bidirectionally exchange messages over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` etc.
 
-By layering Ockam Secure Channels over Ockam Routing we can provide end-to-end, application layer guarantees of data authenticity, integrity, and confidentiality.&#x20;
+By layering Ockam Secure Channels over Ockam Routing its becomes simple to provide end-to-end, application layer guarantees of data authenticity, integrity, and confidentiality in any communication topology.
 
 ## Secure Channel
 
 Ockam Secure Channels provides the following <mark style="color:orange;">end-to-end guarantees</mark>:
 
-1. **Authenticity:** Each end of the channel knows that messages received on the channel must have been sent by someone who possesses the secret keys of specific Ockam Identifier.
+1. **Authenticity:** Each end of the channel knows that messages received on the channel must have been sent by someone who possesses the secret keys of a specific Ockam Identifier.
 2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tapered en-route and are exactly what was sent by the authenticated sender at the other end of the channel.
 3. **Confidentiality:**  Each end of the channel knows that the contents of messages received on the channel could not have been observed en-route between the sender and the receiver.
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
-To establish the secure channel, the two ends run an [authenticated key establishment](../protocols/secure-channels.md) protocol and then [authenticate](identities.md#identifier-authentication) each other's [Ockam Identifier](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment protocol safely derives shared secrets without transporting these secrets on the wire.
+To establish the secure channel, the two ends run an [authenticated key establishment](../protocols/secure-channels.md) protocol and then [authenticate](identities.md#identifier-authentication) each other's [Ockam Identifier](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment safely derives shared secrets without transporting these secrets on the wire.
 
 Once the shared secrets are established, they are used for authenticated encryption that ensures data integrity and confidentiality of application data.
 
-Our secure channel protocol is based on a handshake design pattern described the Noise Protocol Framework. Designs based on this framework are widely deployed and the described patterns have formal security proofs. The specific pattern that we use in Ockam Secure Channels provides sender and receiver authentication and is resistant to key compromise impersonation attacks. It also ensures integrity and secrecy of application data and provides strong forward secrecy.
+Our secure channel protocol is based on a handshake design pattern described in the Noise Protocol Framework. Designs based on this framework are widely deployed and the described patterns have formal security proofs. The specific pattern that we use in Ockam Secure Channels provides sender and receiver authentication and is resistant to key compromise impersonation attacks. It also ensures integrity and secrecy of application data and provides strong forward secrecy.
 
-Now that you're familiar with ideas, let's create some secure channels. If you haven't already, [<mark style="color:blue;">install ockam command</mark>](./#install)<mark style="color:blue;">,</mark> run `ockam enroll`, and delete any nodes from previous examples with `ockam node delete --all`.
+Now that you're familiar with the basics, let's create some secure channels. If you haven't already, [<mark style="color:blue;">install ockam command</mark>](./#install)<mark style="color:blue;">,</mark> run `ockam enroll`, and delete any nodes from previous examples with `ockam node delete --all`.
 
 ## Hello Secure Channels <a href="#hello" id="hello"></a>
 
@@ -65,16 +65,16 @@ In this example we'll create a secure channel from [Node](nodes.md) `n1` to node
 HELLO
 ```
 
-`n1` and `n2` mutually authenticate using the default [Ockam Identity](identities.md) that was generated when we create the first nodes. Both nodes, in this case, are using the same identity.
+In the above example `n1` and `n2` mutually authenticate using the default [Ockam Identity](identities.md) that was generated when we create the first node. Both nodes, in this case, are using the same identity.
 
-Once the channel is created, note how we used the service address of the channel on `n1` to send messages through the channel. This can be shortened to one step:
+Once the channel is created, note above how we used the service address of the channel on `n1` to send messages through the channel. This can be shortened to one step:
 
 ```
 » ockam secure-channel create --from n1 --to /node/n2/service/api \
     | ockam message send hello --from n1 --to -/service/uppercase
 ```
 
-The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3` the address of a new secure channel on `n1` to standard output and second command replaces the `-` in the `--to` argument with this value from standard input. Everything else works the same.
+The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3` the address of a new secure channel on `n1` to standard output and the second command replaces the `-` in the `to` argument with this value from standard input. Everything else works the same.
 
 ## Through a Relay
 
