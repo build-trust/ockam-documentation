@@ -11,14 +11,18 @@ In order to make decisions about trust, we must authenticate senders of messages
 
 ## Vault
 
-Ockam [Identities](identities.md#identity) authenticate by cryptographically proving possession of specific secret keys.  Ockam Vaults safely store these secret keys. You can create a vault as follows:&#x20;
+Ockam [Identities](identities.md#identity) authenticate by cryptographically proving possession of specific secret keys.  Ockam Vaults safely store these secret keys in cryptographic hardware and cloud key management systems.
+
+You can create a vault as follows:&#x20;
 
 ```
 » ockam vault create v1
 Vault created: v1
 ```
 
-This command will, by default create a file system based vault, where your secret keys are stored at a specific file path. There is a growing base of Ockam Vault implementations in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam) that safely store secret keys in specific KMSs, HSMs, Secure Enclaves etc.
+This command will, by default create a file system based vault, where your secret keys are stored at a specific file path.
+
+There is a growing base of Ockam Vault implementations in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam) that safely store secret keys in specific KMSs, HSMs, Secure Enclaves etc.
 
 ## Identity
 
