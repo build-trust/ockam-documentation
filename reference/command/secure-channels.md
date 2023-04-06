@@ -78,11 +78,19 @@ The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3` the address
 
 ## Through a Relay
 
-In the previous section, we saw how [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet. We also learnt that Ockam Orchestrator can create and manage [<mark style="color:blue;">Elastic Relays</mark>](advanced-routing.md#elastic-relays) that are designed for high throughput and low latency.
+In a previous section, we saw how [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet.
+
+We also learnt that Ockam Orchestrator can create and manage [<mark style="color:blue;">Elastic Relays</mark>](advanced-routing.md#elastic-relays) that are designed for high throughput and low latency.
+
+These relays are only useful if their use can be tightly secured. Let's create an end-to-end secure channel through an elastic relay in your Orchestrator [project](nodes.md#project).
 
 
 
 <img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
+
+The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was created when you ran `ockam enroll` offers an Elastic Relay Service that is designed for high throughput and low latency.
+
+Delete all your existing nodes and try this new example.
 
 ```
 » ockam node delete --all
