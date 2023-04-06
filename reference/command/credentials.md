@@ -10,6 +10,31 @@ Trust and authorization decisions must be anchored in some pre-existing knowledg
 
 In the previous section about Ockam [Secure Channels](secure-channels.md) we ran an example of [mutual authorization](secure-channels.md#mutual-authorization) using pre-existing knowledge of Ockam [Identifiers](identities.md#identifier).
 
+In this example `n1 knows i2` and `n2 know i1`:
+
+```
+» ockam node delete --all
+
+» ockam identity create i1
+» ockam identity show i1 > i1.identifier
+» ockam node create n1 --identity i1
+
+» ockam identity create i2
+» ockam identity show i2 > i2.identifier
+» ockam node create n2 --identity i2
+
+» ockam secure-channel-listener create l --at n2 \
+    --identity i2 --authorized $(cat i1.identifier)
+
+» ockam secure-channel create \
+    --from n1 --to /node/n2/service/l \
+    --identity i1 --authorized $(cat i2.identifier) \
+      | ockam message send hello --from n1 --to -/service/uppercase
+HELLO
+```
+
+Using credentials:
+
 ```sh
 » ockam identity create authority
 » ockam identity show authority > authority.identifier
