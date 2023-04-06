@@ -101,6 +101,8 @@ HELLO
 
 ## Through a Relay
 
+<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
+
 ```
 » ockam node delete --all
 » ockam project information --output json > project.json
@@ -114,6 +116,22 @@ HELLO
 » ockam secure-channel create --from n1 --to /project/default/service/forward_to_n3/service/api \
     | ockam message send hello --from n1 --to -/service/uppercase
 HELLO
+```
+
+## Secure Portals
+
+<img src="../../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
+
+```
+» python3 -m http.server --bind 127.0.0.1 9000
+
+» ockam tcp-outlet create --at /node/n3 --from /service/outlet --to 127.0.0.1:9000
+» ockam secure-channel create --from n1 --to /project/default/service/forward_to_n3/service/api \
+    | ockam tcp-inlet create --at /node/n1 --from 127.0.0.1:6000 --to -/service/outlet
+
+» curl --head 127.0.0.1:6000
+HTTP/1.0 200 OK
+...
 ```
 
 #### Recap
