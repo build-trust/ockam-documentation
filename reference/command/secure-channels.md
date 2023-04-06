@@ -35,7 +35,11 @@ Ockam Secure Channels provides the following <mark style="color:orange;">end-to-
 
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
-To establish the secure channel, the two ends run an [authenticated key establishment](../protocols/secure-channels.md) protocol and then [authenticate](identities.md#identifier-authentication) each other's [Ockam Identifier](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment protocol safely derives shared secrets without transporting these secrets on the wire. Once&#x20;
+To establish the secure channel, the two ends run an [authenticated key establishment](../protocols/secure-channels.md) protocol and then [authenticate](identities.md#identifier-authentication) each other's [Ockam Identifier](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment protocol safely derives shared secrets without transporting these secrets on the wire.
+
+Once the shared secrets are established, they are used for authenticated encryption that ensures data integrity and confidentiality of application data.
+
+Our secure channel protocol is based on a handshake design pattern described the Noise Protocol Framework. Designs based on this framework are widely deployed and the described patterns have formal security proofs. The specific pattern that we use in Ockam Secure Channels provides sender and receiver authentication and is resistant to key compromise impersonation attacks. It also ensures integrity and secrecy of application data and provides strong forward secrecy.
 
 Let's create an secure channel through your elastic relay:
 
@@ -52,3 +56,13 @@ Let's create an secure channel through your elastic relay:
     | ockam message send hello --from n1 --to -/service/uppercase
 HELLO
 ```
+
+#### Recap
+
+{% hint style="info" %}
+To cleanup and delete all nodes, run: `ockam node delete --all`
+{% endhint %}
+
+{% hint style="info" %}
+If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
+{% endhint %}
