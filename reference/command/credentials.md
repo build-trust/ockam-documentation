@@ -69,7 +69,7 @@ Signature:  b235429f8dc7be2e79bca0b8f59bdb6676b06f608408085097e7fb5a2029de0d27d6
 
 Trust and authorization decisions must be anchored in some pre-existing knowledge.
 
-### Anchoring Trust is Identifiers and Access Control Lists
+### Anchoring Trust in an Access Control List (ACL) of Identifiers
 
 In the previous section about Ockam [Secure Channels](secure-channels.md) we ran an example of [mutual authorization](secure-channels.md#mutual-authorization) using pre-existing knowledge of Ockam [Identifiers](identities.md#identifier). In this example `n1 knows i2` and `n2 know i1`:
 
@@ -94,7 +94,7 @@ In the previous section about Ockam [Secure Channels](secure-channels.md) we ran
 HELLO
 ```
 
-### Anchoring Trust in Credential Issuers
+### Anchoring Trust in a Credential Issuer
 
 ```sh
 » ockam identity create authority
