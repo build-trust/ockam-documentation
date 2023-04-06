@@ -45,7 +45,7 @@ Once the shared secrets are established, they are used for authenticated encrypt
 
 Our secure channel protocol is based on a handshake design pattern described the Noise Protocol Framework. Designs based on this framework are widely deployed and the described patterns have formal security proofs. The specific pattern that we use in Ockam Secure Channels provides sender and receiver authentication and is resistant to key compromise impersonation attacks. It also ensures integrity and secrecy of application data and provides strong forward secrecy.
 
-Let's create an secure channel through your elastic relay:
+Now that you're familiar with ideas, let's create some secure channels. If you haven't already, [install Ockam Command](./#install) and run `ockam enroll`. Delete any existing nodes with `ockam node delete --all`
 
 ```
 » ockam project information --output json > project.json
