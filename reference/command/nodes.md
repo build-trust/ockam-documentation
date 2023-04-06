@@ -239,6 +239,4 @@ One or more <mark style="color:blue;">Workers</mark> can work as a team to offer
 If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
 {% endhint %}
 
-#### Next
-
 Next, let’s dive into how Ockam’s [<mark style="color:blue;">Application Layer Routing</mark>](routing.md) enables protocols that provide end-to-end guarantees to messages traveling across many network connection hops and protocols boundaries.

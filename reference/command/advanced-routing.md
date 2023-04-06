@@ -85,7 +85,7 @@ Everything worked exactly the same - except we now `n3` has a forwarding relay a
 
 The `hello` message from `n1` travelled to project node in the cloud and was relayed back to `n3` via it's forwarding relay. The reply `HELLO` from `n3` took the return route back.
 
-## Portal <a href="#orchestrator-portal" id="orchestrator-portal"></a>
+## Portal <a href="#portal" id="portal"></a>
 
 Ockam Portals make existing application protocols work over Ockam Routing. Without any code change to the existing applications.
 
@@ -129,6 +129,4 @@ This lays the foundation to make <mark style="color:orange;">both new and existi
 If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
 {% endhint %}
 
-#### Next
-
-Next, let's learn how we can create cryptographic [<mark style="color:blue;">identities</mark>](identities.md) and store secret keys in safe [<mark style="color:blue;">vaults</mark>](identities.md).
+Next, let's learn how to create cryptographic [<mark style="color:blue;">identities</mark>](identities.md) and store secret keys in safe [<mark style="color:blue;">vaults</mark>](identities.md).
