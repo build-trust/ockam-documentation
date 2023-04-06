@@ -4,7 +4,7 @@ description: >-
   credentials.
 ---
 
-# Credentials and Authorities
+# Verifiable Credentials
 
 Ockam Secure Channels enable you to setup mutually authenticated and end-to-end encrypted communication. Once a channel is established, it has the following guarantees:
 
@@ -21,35 +21,25 @@ Another, and significantly more scalable, approach is to use Ockam <mark style="
 Let’s walk through a example of setting up ABAC using cryptographically verifiable credentials.
 
 ```sh
-# Create Two identities
-ockam identity create i1 
-ockam identity show i1 > i1.id
+» ockam identity create authority
+» ockam identity show authority > authority.identifier
+» ockam identity show authority --full --encoding hex > authority
 
-ockam identity create i2
-ockam identity show i2 > i2.id
+» ockam identity create i1 
+» ockam identity show i1 > i1.identifier
+» ockam credential issue --as authority --for $(cat i1.identifier) --attribute city="New York" --encoding hex > i1.credential
+» ockam credential store c1 --issuer $(cat authority.identifier) --credential-path i1.credential
 
-# Create an identity that both i1, and i2 can trust
-ockam identity create issuer
-ockam identity show issuer > ia.id
-ockam identity show issuer --full --encoding hex > authority
+» ockam identity create i2
+» ockam identity show i2 > i2.identifier
+» ockam credential issue --as authority \
+	--for $(cat i2.identifier) --attribute city="San Francisco" \
+	--encoding hex > i2.credential
+» ockam credential store c2 --issuer $(cat authority.identifier) --credential-path i2.credential
 
-# issue and store credentials for i1
-ockam credential issue --as issuer --for $(cat i1.id) --attribute city="New York" --encoding hex > i1.cred
-ockam credential store i1-cred --issuer $(cat ia.id) --credential-path i1.cred
+» ockam node create n1 --identity i1 --authority-identity $(cat authority)
+» ockam node create n2 --identity i2 --authority-identity $(cat authority) --credential c2
 
-# issue credential for i2
-ockam credential issue --as issuer --for $(cat i2.id) --attribute city="Dallas" --encoding hex > i2.cred
-ockam credential store i2-cred --issuer $(cat ia.id) --credential-path i2.cred
-
-# Create a node that trust issuer as a credential authority
-ockam node create n1 --authority-identity $(cat authority)
-
-# Create another node that trust and has a preset credential
-ockam node create n2 --authority-identity $(cat authority) --identity i2 --credential i2-cred
-
-# Create a secure channel between n1 and n2 
-# n1 will present the credential provided within this command
-# n2 will present the cerdential preset when created
-ockam secure-channel create --from /node/n1 --to /node/n2/service/api --credential i1-cred \
- | ockam message send hello --from /node/n1 --to -/service/uppercase
+» ockam secure-channel create --from n1 --to /node/n2/service/api --credential c1 \
+    | ockam message send hello --from n1 --to -/service/uppercase
 ```
