@@ -76,29 +76,6 @@ Once the channel is created, note how we used the service address of the channel
 
 The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3` the address of a new secure channel on `n1` to standard output and second command replaces the `-` in the `--to` argument with this value from standard input. Everything else works the same.
 
-## Mutual Authentication
-
-```
-» ockam node delete --all
-
-» ockam identity create i1
-» ockam identity show i1 > i1.identifier
-» ockam node create n1 --identity i1
-
-» ockam identity create i2
-» ockam identity show i2 > i2.identifier
-» ockam node create n2 --identity i2
-
-» ockam secure-channel-listener create l --at n2 \
-    --identity i2 --authorized $(cat i1.identifier)
-
-» ockam secure-channel create \
-    --from n1 --to /node/n2/service/l \
-    --identity i1 --authorized $(cat i2.identifier) \
-      | ockam message send hello --from n1 --to -/service/uppercase
-HELLO
-```
-
 ## Through a Relay
 
 <img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
@@ -132,6 +109,31 @@ HELLO
 » curl --head 127.0.0.1:6000
 HTTP/1.0 200 OK
 ...
+```
+
+## Mutual Authorization
+
+Trust and authorization decisions must be anchored in some pre-existing knowledge.
+
+```
+» ockam node delete --all
+
+» ockam identity create i1
+» ockam identity show i1 > i1.identifier
+» ockam node create n1 --identity i1
+
+» ockam identity create i2
+» ockam identity show i2 > i2.identifier
+» ockam node create n2 --identity i2
+
+» ockam secure-channel-listener create l --at n2 \
+    --identity i2 --authorized $(cat i1.identifier)
+
+» ockam secure-channel create \
+    --from n1 --to /node/n2/service/l \
+    --identity i1 --authorized $(cat i2.identifier) \
+      | ockam message send hello --from n1 --to -/service/uppercase
+HELLO
 ```
 
 #### Recap
