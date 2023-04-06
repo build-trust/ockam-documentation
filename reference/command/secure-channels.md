@@ -45,7 +45,35 @@ Once the shared secrets are established, they are used for authenticated encrypt
 
 Our secure channel protocol is based on a handshake design pattern described the Noise Protocol Framework. Designs based on this framework are widely deployed and the described patterns have formal security proofs. The specific pattern that we use in Ockam Secure Channels provides sender and receiver authentication and is resistant to key compromise impersonation attacks. It also ensures integrity and secrecy of application data and provides strong forward secrecy.
 
-Now that you're familiar with ideas, let's create some secure channels. If you haven't already, [install Ockam Command](./#install) and run `ockam enroll`. Delete any existing nodes with `ockam node delete --all`
+Now that you're familiar with ideas, let's create some secure channels. If you haven't already, [<mark style="color:blue;">install ockam command</mark>](./#install)<mark style="color:blue;">,</mark> run `ockam enroll`, and delete any nodes from previous examples with `ockam node delete --all`.
+
+## Hello Secure Channels <a href="#hello" id="hello"></a>
+
+In this example we'll create a secure channel from [Node](nodes.md) `n1` to node `n2`. Ever node created with Ockam Command starts a secure channel listener at address `/service/api`.
+
+<pre><code>» ockam node create n1
+» ockam node create n2
+» ockam secure-channel create --from n1 --to /node/n2/service/api
+<strong>
+</strong><strong>  Created Secure Channel:
+</strong>  • From: /node/n1
+  •   To: /node/n2/service/api (/ip4/127.0.0.1/tcp/53483/service/api)
+  •   At: /service/d92ef0aea946ec01cdbccc5b9d3f2e16
+
+» ockam message send hello --from n1 --to /service/d92ef0aea946ec01cdbccc5b9d3f2e16/service/uppercase
+HELLO
+</code></pre>
+
+`n1` and `n2` mutually authenticate using the default [Ockam Identity](identities.md) that was generated when we create the first nodes. Both nodes, in this case, are using the same identity.
+
+Once the channel is created, note how we used the service address of the channel on `n1` to send messages through the channel. This can be shortened to one step:
+
+```
+» ockam secure-channel create --from n1 --to /node/n2/service/api \
+    | ockam message send hello --from n1 --to -/service/uppercase
+```
+
+The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3` the address of a new secure channel on `n1` to standard output and second command replaces the `-` in the `--to` argument with this value from standard input. Everything else works the same.
 
 ```
 » ockam project information --output json > project.json
