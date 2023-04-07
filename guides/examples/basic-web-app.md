@@ -51,7 +51,7 @@ Lines 12 and 13 are where we establish out connection to the database, at this p
 
 ### Moving the database
 
-Now we can add Ockam into the mix. To prove we're not simply using the existing communication change we'd suggest either [changing the port that your local postgres is listening on](https://www.postgresql.org/docs/current/app-pg-ctl.html#R2-APP-PGCTL-3), or running a new postgres instance in a Docker container.
+Now we can add Ockam into the mix. To prove we're not simply using the existing communication channel we'd suggest either [changing the port that your local postgres is listening on](https://www.postgresql.org/docs/current/app-pg-ctl.html#R2-APP-PGCTL-3), or running a new postgres instance in a Docker container.
 
 Next we're going to output our Ockam project information to a JSON file so that we can load it into future commands more easily:
 
@@ -102,4 +102,3 @@ Take note of the `--from` and `--to` values above. The `--from` is telling the n
 Which means if you start your web app the counter will continue incrementing just as it did before, with zero code changes to your application
 
 You could also extend this example by moving the Postgres service into a Docker container or to an entirely different machine. Once the nodes are registered the demo will continue to work, with no application code changes and no need to expose the Postgres ports directly to the internet.
-
