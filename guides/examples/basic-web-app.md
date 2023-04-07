@@ -51,7 +51,7 @@ Lines 12 and 13 are where we establish out connection to the database, at this p
 
 ### Moving the database
 
-Now we can add Ockam into the mix. To prove we're not simply using the existing communication change we'd suggest either [changing the port that your local postgres is listening on](https://www.postgresql.org/docs/current/app-pg-ctl.html#R2-APP-PGCTL-3), or running a new postgres instance in a Docker container.
+Now we can add Ockam into the mix. To prove we're not simply using the existing communication channel we'd suggest either [changing the port that your local postgres is listening on](https://www.postgresql.org/docs/current/app-pg-ctl.html#R2-APP-PGCTL-3), or running a new postgres instance in a Docker container.
 
 Next we're going to output our Ockam project information to a JSON file so that we can load it into future commands more easily:
 
