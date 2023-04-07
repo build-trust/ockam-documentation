@@ -78,11 +78,9 @@ The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3` the address
 
 ## Through a Relay
 
-In a previous section, we saw how [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet.
+In a previous section, we saw how [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet. We also learnt that Ockam Orchestrator can create and manage [<mark style="color:blue;">Elastic Relays</mark>](advanced-routing.md#elastic-relays) that are designed for high throughput and low latency.
 
-We also learnt that Ockam Orchestrator can create and manage [<mark style="color:blue;">Elastic Relays</mark>](advanced-routing.md#elastic-relays) that are designed for high throughput and low latency.
-
-These relays are only useful if their use can be tightly secured. Let's create an end-to-end secure channel through an elastic relay in your Orchestrator [project](nodes.md#project).
+Relays are only useful if their use can be tightly secured. Let's create an end-to-end secure channel through an elastic relay in your Orchestrator [project](nodes.md#project).
 
 
 
@@ -107,7 +105,7 @@ HELLO
 
 Nodes `a` and `b` (the two ends) are mutually authenticated and are cryptographically guaranteed data authenticity, integrity, and confidentiality - even though their messages are traveling over the public Internet over two different TCP connections.
 
-## &#x20;The Routing Sandwich
+## The Routing Sandwich
 
 Ockam Secure Channels are built on top of Ockam Routing. But they also carry Ockam Routing messages.
 
@@ -118,6 +116,8 @@ This means that we can run any Ockam Routing based protocol through Secure Chann
 Note how in  the [<mark style="color:blue;">Hello Secure Channels</mark>](secure-channels.md#hello) example, we routed a plain text message to the address of the channel using `ockam message send ...`. This message could have been routed over multiple hops before entering or after leaving the channel and everything would work as expected.
 
 ## Secure Portals
+
+Ockam Portals make existing application protocols work over Ockam Routing. Without any code change to the existing applications.
 
 <img src="../../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
 
