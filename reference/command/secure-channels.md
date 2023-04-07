@@ -80,7 +80,7 @@ The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3` the address
 
 In a previous section, we saw how [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet. We also learnt that Ockam Orchestrator can create and manage [<mark style="color:blue;">Elastic Relays</mark>](advanced-routing.md#elastic-relays) that are designed for high throughput and low latency.
 
-Relays are only useful if their use can be tightly secured. Let's create an end-to-end secure channel through an elastic relay in your Orchestrator [project](nodes.md#project).
+Let's create an end-to-end secure channel through an elastic relay in your Orchestrator [project](nodes.md#project).
 
 
 
