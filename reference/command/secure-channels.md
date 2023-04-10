@@ -79,8 +79,42 @@ The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3`, the addres
 ## Over a Bridge
 
 ```
+» ockam node create n1
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
+» ockam node create n3 --tcp-listener-address=127.0.0.1:8000
+» ockam node create n4 --tcp-listener-address=127.0.0.1:9000
 
+» ockam tcp-connection create --from n1 --to 127.0.0.1:7000
+» ockam tcp-connection create --from n2 --to 127.0.0.1:8000
+» ockam tcp-connection create --from n3 --to 127.0.0.1:9000
+
+» ockam tcp-connection list --node n1
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| 1c36e194192103dff5c608c3e20eb645 | TCP            | Remote connection | 127.0.0.1:7000 | 0#db1ee3588f7ed446d6865302d9355bea |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+
+» ockam tcp-connection list --node n2
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| 31be23406793330ea69c68a097a324c1 | TCP            | Remote connection | 127.0.0.1:8000 | 0#c1ee24edfa7b0ea5c9fb74765f8978a1 |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+
+» ockam tcp-connection list --node n3
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| 5afb95792b0f964ee23a769aa4a92d6b | TCP            | Remote connection | 127.0.0.1:9000 | 0#80513c64098ac181d1f33b4ed4b34beb |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+
+» ockam message send hello --from n1 --to /worker/db1ee3588f7ed446d6865302d9355bea/worker/c1ee24edfa7b0ea5c9fb74765f8978a1/worker/80513c64098ac181d1f33b4ed4b34beb/service/uppercase
+HELLO
+
+» ockam secure-channel create --from n1 --to /worker/db1ee3588f7ed446d6865302d9355bea/worker/c1ee24edfa7b0ea5c9fb74765f8978a1/worker/80513c64098ac181d1f33b4ed4b34beb/service/api \
+    | ockam message send hello --from n1 --to -/service/uppercase
+HELLO
 ```
 
 ## Through a Relay
