@@ -76,7 +76,7 @@ Once the channel is created, note above how we used the service address of the c
 
 The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3`, the address of a new secure channel on `n1`, to standard output and the second command replaces the `-` in the `to` argument with the value from standard input. Everything else works the same.
 
-## Over a Bridge
+## Over Bridges <a href="#bridges" id="bridges"></a>
 
 ```
 » ockam node create n1
@@ -117,7 +117,7 @@ HELLO
 HELLO
 ```
 
-## Through a Relay
+## Through Relays <a href="#relays" id="relays"></a>
 
 ```
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
