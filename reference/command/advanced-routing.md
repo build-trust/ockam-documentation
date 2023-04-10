@@ -7,7 +7,7 @@ description: >-
 
 # Relays and Portals
 
-In the [<mark style="color:blue;">previous section</mark>](routing.md), we learnt how Ockam Routing and Transports create a foundation to describe end-to-end, application layer protocols. When discussing [<mark style="color:blue;">Transports</mark>](routing.md#transports)<mark style="color:blue;">,</mark> we put together a specific example communication topology – a transport <mark style="color:orange;">bridge</mark>.
+In the [<mark style="color:blue;">previous section</mark>](routing.md), we learnt how Ockam Routing and Transports create a foundation for end-to-end, application layer protocols. When discussing [<mark style="color:blue;">Transports</mark>](routing.md#transports)<mark style="color:blue;">,</mark> we put together a specific example communication topology – a transport <mark style="color:orange;">bridge</mark>.
 
 
 
