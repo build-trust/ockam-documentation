@@ -78,7 +78,33 @@ The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3`, the addres
 
 ## Over a Bridge
 
+```
+» ockam node create n2 --tcp-listener-address=127.0.0.1:7000
+
+```
+
 ## Through a Relay
+
+```
+» ockam node create n2 --tcp-listener-address=127.0.0.1:7000
+
+» ockam node create n3
+» ockam forwarder create n3 --at /node/n2 --to /node/n3
+/service/forward_to_n3
+
+» ockam node create n1
+» ockam tcp-connection create --from n1 --to 127.0.0.1:7000
+» ockam tcp-connection list --node n1
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+| 370229d91f735adffc928320bed3f2d1 | TCP            | Remote connection | 127.0.0.1:7000 | 0#1fb75f2e7234035461b261602a714b72 |
++----------------------------------+----------------+-------------------+----------------+------------------------------------+
+
+» ockam secure-channel create --from a --to /service/1fb75f2e7234035461b261602a714b72/service/forward_to_b/service/api \
+    | ockam message send hello --from a --to -/service/uppercase
+HELLO
+```
 
 ## The Routing Sandwich
 
