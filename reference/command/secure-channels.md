@@ -33,7 +33,7 @@ By layering Ockam Secure Channels over Ockam Routing its becomes simple to provi
 
 Ockam Secure Channels provides the following <mark style="color:orange;">end-to-end guarantees</mark>:
 
-1. **Authenticity:** Each end of the channel knows that messages received on the channel must have been sent by someone who possesses the secret keys of a specific Ockam Identifier.
+1. **Authenticity:** Each end of the channel knows that messages received on the channel must have been sent by someone who possesses the secret keys of a specific Ockam [<mark style="color:blue;">Identifier</mark>](identities.md#identifiers).
 2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tapered en-route and are exactly what was sent by the authenticated sender at the other end of the channel.
 3. **Confidentiality:**  Each end of the channel knows that the contents of messages received on the channel could not have been observed en-route between the sender and the receiver.
 
@@ -45,11 +45,11 @@ Once the shared secrets are established, they are used for authenticated encrypt
 
 Our secure channel protocol is based on a handshake design pattern described in the Noise Protocol Framework. Designs based on this framework are widely deployed and the described patterns have formal security proofs. The specific pattern that we use in Ockam Secure Channels provides sender and receiver authentication and is resistant to key compromise impersonation attacks. It also ensures integrity and secrecy of application data and provides strong forward secrecy.
 
-Now that you're familiar with the basics, let's create some secure channels. If you haven't already, [<mark style="color:blue;">install ockam command</mark>](./#install)<mark style="color:blue;">,</mark> run `ockam enroll`, and delete any nodes from previous examples with `ockam node delete --all`.
+Now that you're familiar with the basics, let's create some secure channels. If you haven't already, [<mark style="color:blue;">install ockam command</mark>](./#install)<mark style="color:blue;">,</mark> run `ockam enroll`, and [delete any nodes](nodes.md#nodes) from previous examples.
 
 ## Hello Secure Channels <a href="#hello" id="hello"></a>
 
-In this example we'll create a secure channel from [Node](nodes.md) `n1` to node `n2`. Ever node created with Ockam Command starts a secure channel listener at address `/service/api`.
+In this example we'll create a secure channel from [Node](nodes.md) `n1` to node `n2`. Every node, created with Ockam Command, starts a secure channel listener at address `/service/api`.
 
 ```
 » ockam node create n1
@@ -67,14 +67,14 @@ HELLO
 
 In the above example `n1` and `n2` mutually authenticate using the default [Ockam Identity](identities.md) that was generated when we create the first node. Both nodes, in this case, are using the same identity.
 
-Once the channel is created, note above how we used the service address of the channel on `n1` to send messages through the channel. This can be shortened to one step:
+Once the channel is created, note above how we used the service address of the channel on `n1` to send messages through the channel. This can be shortened to the one liner:
 
 ```
 » ockam secure-channel create --from n1 --to /node/n2/service/api \
     | ockam message send hello --from n1 --to -/service/uppercase
 ```
 
-The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3` the address of a new secure channel on `n1` to standard output and the second command replaces the `-` in the `to` argument with this value from standard input. Everything else works the same.
+The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3`, the address of a new secure channel on `n1`, to standard output and the second command replaces the `-` in the `to` argument with the value from standard input. Everything else works the same.
 
 ## Through a Relay
 
