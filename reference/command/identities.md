@@ -20,9 +20,9 @@ You can create a vault as follows:&#x20;
 Vault created: v1
 ```
 
-This command will, by default create a file system based vault, where your secret keys are stored at a specific file path.
+This command will, by default, create a file system based vault, where your secret keys are stored at a specific file path.
 
-Vaults are designed to be used in way that secret keys never have to leave vault. There is a growing base of Ockam Vault implementations in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam) that safely store secret keys in specific KMSs, HSMs, Secure Enclaves etc.
+Vaults are designed to be used in a way that secret keys never have to leave a vault. There is a growing base of Ockam Vault implementations in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam) that safely store secret keys in specific KMSs, HSMs, Secure Enclaves etc.
 
 ## Identities
 
