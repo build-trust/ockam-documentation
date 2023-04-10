@@ -85,7 +85,7 @@ Then create a TCP Portal Outlet that makes `127.0.0.1:9000` available on worker 
 
 We then create a TCP Portal Inlet on `n1` that will listen for TCP connections to `127.0.0.1:6000`. For every new connection, the inlet creates a portal following the `--to` route all the way to the outlet. As it receives TCP data, it chunks and wraps them into Ockam Routing messages and sends them along the supplied route. The outlet receives Ockam Routing messages, unwraps them to extract TCP data and send that data along to the target web service on `127.0.0.1:9000`. It all just seamlessly works.
 
-The HTTP requests from curl, enter the inlet on `n1`, travel to `n2` and are relayed back to `n3` via it's forwarding relay to reach the outlet and onward to the the python based web service. HTTP Responses take the same return route back to the curl client.
+The HTTP requests from curl, enter the inlet on `n1`, travel to `n2` and are relayed back to `n3` via it's forwarding relay to reach the outlet and onward to the the python based web service. Responses take the same return route back to the curl client.
 
 The TCP Inlet/Outlet work for the large number of TCP based protocols like HTTP. It is also simple to implement portals for other transport protocols. There is a growing base of Ockam Portal Add-Ons in our [<mark style="color:blue;">Github Repository</mark>](https://github.com/build-trust/ockam).
 
