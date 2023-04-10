@@ -63,7 +63,7 @@ We can traverse NATs and pierce through network boundaries. And since this is al
 
 ## Portals <a href="#portal" id="portal"></a>
 
-Portals make existing application protocols work over Ockam Routing. Without changing any code in the existing applications.
+Portals make existing protocols work over Ockam Routing. Without changing any code in the existing applications.
 
 <img src="../../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
 
