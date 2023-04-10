@@ -7,13 +7,13 @@ description: >-
 
 # Relays and Portals
 
-In the [<mark style="color:blue;">previous section</mark>](routing.md), we learnt how Ockam Routing and Ockam Transports give us a foundation to describe end-to-end, application layer protocols. When discussing [<mark style="color:blue;">Transports</mark>](routing.md#transports)<mark style="color:blue;">,</mark> we created a specific example communication topology – a transport bridge.
+In the [<mark style="color:blue;">previous section</mark>](routing.md), we learnt how Ockam Routing and Transports create a foundation to describe end-to-end, application layer protocols. When discussing [<mark style="color:blue;">Transports</mark>](routing.md#transports)<mark style="color:blue;">,</mark> we put together a specific example communication topology – a transport <mark style="color:orange;">bridge</mark>.
 
 
 
 <img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
-Node `n1` wishes to access a service on node `n3`, but it can't directly connect to `n3`. This can happen for many reasons, maybe because `n3` is in a separate `IP` subnet or could be that the communication from `n1 to n2` uses UDP while from `n2 to n3` uses TCP or other similar constraints. The topology makes `n2` a bridge or gateway between these two separate networks to enables= end-to-end protocols between `n1` and `n3` even though they are not directly connected.
+Node `n1` wishes to access a service on node `n3`, but it can't directly connect to `n3`. This can happen for many reasons, maybe because `n3` is in a separate `IP` subnet or could be that the communication from `n1 to n2` uses UDP while from `n2 to n3` uses TCP or other similar constraints. The topology makes `n2` a bridge or gateway between these two separate networks to enable end-to-end protocols between `n1` and `n3` even though they are not directly connected.
 
 It is common, however, to encounter communication topologies where the machine that provides a service is unwilling or is not allowed to open a listening port or <mark style="color:orange;">expose</mark> a bridge node to other networks. This is a common security best practice in enterprise environments, home networks, OT networks, and VPCs across clouds. Application developers typically have no control over these choices.
 
