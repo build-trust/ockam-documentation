@@ -19,7 +19,7 @@ It is common, however, to encounter communication topologies where the machine t
 
 ## Relays
 
-Relays make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet.  &#x20;
+Relays make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports to an outside hostile network like the Internet.  &#x20;
 
 Delete all your existing nodes and try this new example:
 
