@@ -39,13 +39,13 @@ Ockam Secure Channels provides the following <mark style="color:orange;">end-to-
 
 <img src="../../.gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">
 
-To establish the secure channel, the two ends run an [authenticated key establishment](../protocols/secure-channels.md) protocol and then [authenticate](identities.md#identifier-authentication) each other's [Ockam Identifier](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment safely derives shared secrets without transporting these secrets on the wire.
+To establish the secure channel, the two ends run an [<mark style="color:blue;">authenticated key establishment</mark>](../protocols/secure-channels.md) protocol and then [<mark style="color:blue;">authenticate</mark>](identities.md#identifier-authentication) each other's [<mark style="color:blue;">Ockam Identifier</mark>](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment safely derives shared secrets without transporting these secrets on the wire.
 
 Once the shared secrets are established, they are used for authenticated encryption that ensures data integrity and confidentiality of application data.
 
 Our secure channel protocol is based on a handshake design pattern described in the Noise Protocol Framework. Designs based on this framework are widely deployed and the described patterns have formal security proofs. The specific pattern that we use in Ockam Secure Channels provides sender and receiver authentication and is resistant to key compromise impersonation attacks. It also ensures integrity and secrecy of application data and provides strong forward secrecy.
 
-Now that you're familiar with the basics, let's create some secure channels. If you haven't already, [<mark style="color:blue;">install ockam command</mark>](./#install)<mark style="color:blue;">,</mark> run `ockam enroll`, and [delete any nodes](nodes.md#nodes) from previous examples.
+Now that you're familiar with the basics, let's create some secure channels. If you haven't already, [<mark style="color:blue;">install ockam command</mark>](./#install)<mark style="color:blue;">,</mark> run `ockam enroll`, and [<mark style="color:blue;">delete any nodes</mark>](nodes.md#nodes) from previous examples.
 
 ## Hello Secure Channels <a href="#hello" id="hello"></a>
 
