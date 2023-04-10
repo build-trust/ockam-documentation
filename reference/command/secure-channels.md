@@ -13,7 +13,7 @@ In previous sections we saw how Ockam [<mark style="color:blue;">Routing</mark>]
 
 Ockam [Secure Channels](secure-channels.md#secure-channel) is an end-to-end protocol built on top of Ockam Routing. This cryptographic protocol guarantees data authenticity, integrity, and confidentiality over any communication topology that can be traversed with Ockam Routing.
 
-<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (3) (1).svg" alt="" class="gitbook-drawing">
 
 Distributed applications that are connected in this way can communicate without the risk of spoofing, tampering, or eavesdropping attacks irrespective of transport protocols, communication topologies, and network configuration. As application data flows _across data centers, through queues and caches, via gateways and brokers -_ these intermediaries, like the relay in the above picture, can facilitate communication but cannot eavesdrop or tamper data.
 
@@ -29,7 +29,7 @@ Ockam [<mark style="color:blue;">Routing</mark>](routing.md) and [<mark style="c
 
 By layering Ockam Secure Channels over Ockam Routing its becomes simple to provide end-to-end, application layer guarantees of data authenticity, integrity, and confidentiality in any communication topology.
 
-## Secure Channel
+## Secure Channels
 
 Ockam Secure Channels provides the following <mark style="color:orange;">end-to-end guarantees</mark>:
 
@@ -37,7 +37,7 @@ Ockam Secure Channels provides the following <mark style="color:orange;">end-to-
 2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tapered en-route and are exactly what was sent by the authenticated sender at the other end of the channel.
 3. **Confidentiality:**  Each end of the channel knows that the contents of messages received on the channel could not have been observed en-route between the sender and the receiver.
 
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">
 
 To establish the secure channel, the two ends run an [authenticated key establishment](../protocols/secure-channels.md) protocol and then [authenticate](identities.md#identifier-authentication) each other's [Ockam Identifier](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment safely derives shared secrets without transporting these secrets on the wire.
 
@@ -84,7 +84,7 @@ Let's create an end-to-end secure channel through an elastic relay in your Orche
 
 
 
-<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (3) (1).svg" alt="" class="gitbook-drawing">
 
 The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was created when you ran `ockam enroll` offers an Elastic Relay Service. Delete all your existing nodes and try this new example.
 
@@ -111,7 +111,7 @@ Ockam Secure Channels are built on top of Ockam Routing. But they also carry Ock
 
 This means that we can run any Ockam Routing based protocol through Secure Channels. This also means that we can create Secure Channels that pass through other Secure Channels.
 
-<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1) (2).svg" alt="" class="gitbook-drawing">
 
 Note how in  the [<mark style="color:blue;">Hello Secure Channels</mark>](secure-channels.md#hello) example, we routed a plain text message to the address of the channel using `ockam message send ...`. This message could have been routed over multiple hops before entering or after leaving the channel and everything would work as expected.
 

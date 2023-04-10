@@ -1,7 +1,7 @@
 ---
 description: >-
   Ockam Nodes and Workers decouple applications from the host environment and
-  enable simple interfaces to complex, stateful, and asynchronous message-based
+  enable simple interfaces for stateful and asynchronous message-based
   protocols.
 ---
 
@@ -9,19 +9,19 @@ description: >-
 
 At Ockam’s core are a collection of cryptographic and messaging protocols. These protocols make it possible to create <mark style="color:orange;">private</mark> and <mark style="color:orange;">secure by design</mark> applications that provide end-to-end application layer trust it data.
 
-Our goal is to make these powerful protocols <mark style="color:orange;">easy</mark> and <mark style="color:orange;">safe</mark> to use in <mark style="color:orange;">any application environment</mark> – from highly scalable cloud services to tiny battery operated microcontroller based devices.
+Ockam is designed to make these powerful protocols <mark style="color:orange;">easy</mark> and <mark style="color:orange;">safe</mark> to use in <mark style="color:orange;">any application environment</mark> – from highly scalable cloud services to tiny battery operated microcontroller based devices.
 
 However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. It can be quite challenging to make them simple to use, secure, and platform independent.
 
-Ockam [Nodes](nodes.md#node) and [Workers](nodes.md#worker) help us decouple from the host environment and provide simple interfaces to our stateful and asynchronous message-based protocols.
+Ockam <mark style="color:blue;">Nodes</mark> and <mark style="color:blue;">Workers</mark> help hide this complexity and decouple from the host environment - to provide simple interfaces for stateful and asynchronous message-based protocols.
 
-## Node
+## Nodes
 
 An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam Protocols like Ockam [Routing](routing.md) and Ockam Secure Channels.
 
 Using the Ockam Rust crates, you can easily turn any application into a lightweight Ockam Node. This flexible approach allows your to build secure by design applications that can run efficiently on tiny microcontrollers or scale horizontally in cloud environments.
 
-Rust based Ockam Nodes run very lightweight, concurrent, stateful actors called Ockam [Workers](nodes.md#worker). Using Ockam Routing, a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
+Rust based Ockam Nodes run very lightweight, concurrent, stateful actors called Ockam [Workers](nodes.md#workers). Using Ockam Routing, a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
 
 A node requires an asynchronous runtime to concurrently execute workers. The default Ockam Node implementation uses `tokio`, a popular asynchronous runtime in the Rust ecosystem. We also support Ockam Node implementations for various `no_std` embedded targets.
 
@@ -62,7 +62,7 @@ cargo run --example 01-node
 
 This will download various dependencies, compile and then run our code. When it runs, you'll see log output that shows the node starting and then immediately shutting down.
 
-## Worker
+## Workers
 
 Ockam [Nodes](nodes.md#node) run very lightweight, concurrent, and stateful actors called Ockam Workers.
 
@@ -177,8 +177,6 @@ You'll see console output that shows `"Hello Ockam!"` received by the `"echoer"`
 
 The message flow looked like this:
 
-
-
-<figure><img src="../../../.gitbook/assets/diagrams.001.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/simple.001 (1).jpeg" alt=""><figcaption></figcaption></figure>
 
 Next, let’s explore how Ockam’s [Application Layer Routing](routing.md) enables us to create protocols that provide end-to-end security and privacy guarantees.

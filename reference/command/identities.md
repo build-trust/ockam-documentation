@@ -9,7 +9,7 @@ description: >-
 
 In order to make decisions about trust, we must authenticate senders of messages.
 
-## Vault
+## Vaults
 
 Ockam [Identities](identities.md#identity) authenticate by cryptographically proving possession of specific secret keys.  Ockam Vaults safely store these secret keys in cryptographic hardware and cloud key management systems.
 
@@ -24,7 +24,7 @@ This command will, by default create a file system based vault, where your secre
 
 Vaults are designed to be used in way that secret keys never have to leave vault. There is a growing base of Ockam Vault implementations in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam) that safely store secret keys in specific KMSs, HSMs, Secure Enclaves etc.
 
-## Identity
+## Identities
 
 Ockam Identities are unique, cryptographically verifiable digital identities.
 
@@ -45,7 +45,7 @@ Each Ockam Identity starts its life by generating a secret key and its correspon
 
 Ockam Identities support two types of Elliptic Curve secret keys that live in vaults - Curve25519 or NIST P-256.
 
-### Identifier
+### Identifiers
 
 Each Ockam Identity has a unique public identifier, called the <mark style="color:orange;">Ockam Identifier</mark> of this identity:
 

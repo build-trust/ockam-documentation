@@ -9,11 +9,11 @@ description: >-
 
 Data, within modern applications, routinely flows over complex, multi-hop, multi-protocol routes before reaching its end destination. It’s common for application layer requests and data to move across network boundaries, beyond data centers, via shared or public networks, through queues and caches, from gateways and brokers to reach remote services and other distributed parts of an application.
 
-<img src="../../.gitbook/assets/file.excalidraw (1) (2).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
 
 Ockam is designed to enable end-to-end application layer guarantees in any communication topology.
 
-For example Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md) can provide end-to-end guarantees of data authenticity, integrity, and confidentiality in any of the above communication topologies. In contrast, traditional secure communication implementations are typically tightly coupled with transport protocols in a way that all their security is limited to the length and duration of one underlying transport connection.
+For example Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md) provide end-to-end guarantees of data authenticity, integrity, and privacy in any of the above communication topologies. In contrast, traditional secure communication implementations are typically tightly coupled with transport protocols in a way that all their security is limited to the length and duration of one underlying transport connection.
 
 For example, most TLS implementations are tightly coupled with the underlying TCP connection. If your application’s data and requests travel over two TCP connection hops `TCP -> TCP` then all TLS guarantees break at the bridge between the two networks. This bridge, gateway or load balancer then becomes a point of weakness for application data.
 
@@ -27,7 +27,7 @@ Ockam [<mark style="color:blue;">Transports</mark>](routing.md) adapt Ockam Rout
 
 ## Routing
 
-Let’s start by creating a [<mark style="color:blue;">node</mark>](nodes.md#node) and sending a message to a [<mark style="color:blue;">service</mark>](nodes.md#service) on that node.
+Let’s start by creating a [<mark style="color:blue;">node</mark>](nodes.md#nodes) and sending a message to a [<mark style="color:blue;">service</mark>](nodes.md#services) on that node.
 
 ```
 » ockam node create n1
@@ -37,13 +37,13 @@ Hello Ockam!
 
 We get a reply back and the message flow looked like this.
 
-<figure><img src="../../diagrams/plantuml/simple/simple.001.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/simple.001 (1).jpeg" alt=""><figcaption></figcaption></figure>
 
 To achieve this, Ockam Routing Protocol messages carry, with them, two metadata fields: `onward_route` and `return_route`. A route is an ordered list of addresses describing the path that a message to travel.
 
 Pay very close attention to the Sender, Hop, and Replier rules in the below sequence diagrams. Note how `onward_route` and `return_route` are handled as the message travels.
 
-<figure><img src="../../diagrams/plantuml/one-hop/one-hop.001.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/one-hop.001.jpeg" alt=""><figcaption></figcaption></figure>
 
 The above was just one message hop, we can extend this for two hops:
 
@@ -52,7 +52,7 @@ The above was just one message hop, we can extend this for two hops:
 hello
 ```
 
-<figure><img src="../../diagrams/plantuml/two-hops/two-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/two-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
 This very simple protocol can extend to any number of hops, try repeating `/service/hop` many times in the `--to` argument of the following command:
 
@@ -61,11 +61,11 @@ This very simple protocol can extend to any number of hops, try repeating `/serv
 hello
 ```
 
-<figure><img src="../../diagrams/plantuml/n-hops/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
 So far, we’ve routed messages between Workers on one Node. Next let's see how we can route messages across nodes and machines using Ockam Routing adapters called Transports.
 
-## Transport
+## Transports
 
 Ockam Transports adapt Ockam [Routing](routing.md#routing) for specific transport protocol like TCP, UDP, WebSockets, Bluetooth etc. There is a growing base of Ockam Transport implementations in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam).
 
@@ -110,7 +110,7 @@ HELLO
 
 The message in the above command took the following route:&#x20;
 
-<img src="../../.gitbook/assets/file.excalidraw (1) (2).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
 
 In this example, we ran a simple `uppercase` request and response protocol between `n1` and `n3`, two nodes that weren't directly connected to each other. This simple combination of Ockam Routing and Transports the foundation of <mark style="color:orange;">end-to-end</mark> <mark style="color:orange;">protocols</mark> in Ockam.
 

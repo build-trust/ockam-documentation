@@ -11,19 +11,19 @@ At Ockam’s core are a collection of cryptographic and messaging protocols. The
 
 Ockam is designed to make these powerful protocols <mark style="color:orange;">easy</mark> and <mark style="color:orange;">safe</mark> to use in <mark style="color:orange;">any application environment</mark> – from highly scalable cloud services to tiny battery operated microcontroller based devices.
 
-<img src="../../.gitbook/assets/file.excalidraw (1) (1) (1).svg" alt="" class="gitbook-drawing">
-
 However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. It can be quite challenging to make them simple to use, secure, and platform independent.
 
-Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#node), [<mark style="color:blue;">Workers</mark>](nodes.md#worker), and [<mark style="color:blue;">Services</mark>](nodes.md#service) help hide this complexity and decouple from the host environment - to provide simple interfaces for our stateful and asynchronous message-based protocols.
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
-## Node
+Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#node), [<mark style="color:blue;">Workers</mark>](nodes.md#worker), and [<mark style="color:blue;">Services</mark>](nodes.md#service) help hide this complexity and decouple from the host environment - to provide simple interfaces for stateful and asynchronous message-based protocols.
+
+## Nodes
 
 An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam protocols like Ockam [<mark style="color:blue;">Routing</mark>](routing.md) and Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md).
 
-You can create a standalone Ockam node using Ockam [<mark style="color:blue;">Command</mark>](./) or embed one directly into your application using various Ockam [<mark style="color:blue;">programming libraries</mark>](../libraries/). Ockam Nodes are built to leverage the strengths of their operating environment. Our [<mark style="color:blue;">Rust</mark>](../libraries/rust/) implementation, for example, makes it easy to adapt to various architectures and processors. It can run efficiently on tiny microcontrollers or scale horizontally in cloud environments.&#x20;
+You can create a standalone node using Ockam [<mark style="color:blue;">Command</mark>](./) or embed one directly into your application using various Ockam [<mark style="color:blue;">programming libraries</mark>](../libraries/). Nodes are built to leverage the strengths of their operating environment. Our [<mark style="color:blue;">Rust</mark>](../libraries/rust/) implementation, for example, makes it easy to adapt to various architectures and processors. It can run efficiently on tiny microcontrollers or scale horizontally in cloud environments.&#x20;
 
-A typical Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#worker). Depending on the Using Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing), a node can deliver messages from one worker to another local worker. Using Ockam [<mark style="color:blue;">Transports</mark>](routing.md#transports), nodes can also route messages to workers on other remote nodes.
+A typical Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#workers). Using Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing), a node can deliver messages from one worker to another local worker. Using Ockam [<mark style="color:blue;">Transports</mark>](routing.md#transports), nodes can also route messages to workers on other remote nodes.
 
 Ockam Command makes is super easy to create and manage local or remote nodes. If you run `ockam node create`, it will create and start a node in the background and give it a random name:
 
@@ -36,7 +36,7 @@ Node:
 ...
 ```
 
-You can also create a node with a name of your choice:
+Similarly, you can also create a node with a name of your choice:
 
 ```
 » ockam node create n1
@@ -120,11 +120,13 @@ You can also delete all nodes with:
 » ockam node delete --all
 ```
 
-## Worker
+## Workers
 
-Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#node) run very lightweight, concurrent, and stateful actors called Ockam Workers.
+Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#nodes) run very lightweight, concurrent, and stateful actors called Ockam Workers. They are like processes on your operating system, except that they all live inside one node and are very lightweight so a node can have hundreds of thousands of them, depending on the capabilities of the machine hosting the node.
 
-When a worker is started on a node, it is given one or more addresses. The node maintains a mailbox for each address and whenever a message arrives for a specific address it delivers that message to the corresponding worker. In response to a message, an worker can: make local decisions, change internal state, create more workers, or send more messages.
+<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+
+When a worker is started on a node, it is given one or more addresses. The node maintains a mailbox for each address and whenever a message arrives for a specific address it delivers that message to the corresponding worker. In response to a message, a worker can: make local decisions, change internal state, create more workers, or send more messages.
 
 You can see the list of workers in a node by running:
 
@@ -142,13 +144,13 @@ Node: n1
 
 Note the workers in node `n1` with address `echo` and `uppercase`. We’ll send them some messages below as we look at services. A node can also deliver messages to workers on a different node using the [<mark style="color:blue;">Ockam Routing Protocol</mark>](routing.md) and its Transports. Later in this guide, when we [<mark style="color:blue;">dig into routing</mark>](routing.md), we’ll send some messages across nodes.
 
-From Ockam Command, we don’t usually create workers directly but instead start predefined [<mark style="color:blue;">services</mark>](nodes.md#service) like Transports and Secure Channels that in turn start one or more workers. Using the Ockam [<mark style="color:blue;">Rust Library</mark>](broken-reference) you can also build your own workers.
+From `ockam` command, we don’t usually create workers directly but instead start predefined [<mark style="color:blue;">services</mark>](nodes.md#service) like Transports and Secure Channels that in turn start one or more workers. Using our [libraries](../libraries/) you can also develop your own workers.
 
-Because workers are stateful and can asynchronously send and receive messages they are a  potent abstraction that can take over the responsibility of running multi-step, stateful, and asynchronous message-based protocols. This makes it possible for Ockam Command and Ockam [<mark style="color:blue;">Programming Libraries</mark>](broken-reference) to expose very simple and safe interfaces for powerful protocols.&#x20;
+Workers are stateful and can asynchronously send and receive messages. This makes them a  potent abstraction that can take over the responsibility of running multi-step, stateful, and asynchronous message-based protocols. This enables `ockam` command and Ockam [<mark style="color:blue;">Programming Libraries</mark>](../libraries/) to expose very simple and safe interfaces for powerful protocols.&#x20;
 
-## Service
+## Services
 
-One or more Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#worker) can work as a team to offer a Service. Services can also be attached to identities and authorization policies to enforce attribute based access control rules.
+One or more Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#workers) can work as a team to offer a Service. Services can also be attached to a trust context and authorization policies to enforce attribute based access control rules.
 
 For example, nodes that are created with Ockam Command come with some predefined services including an example service `/service/uppercase` that responds with an uppercased version of whatever message you send it:
 
@@ -157,9 +159,7 @@ For example, nodes that are created with Ockam Command come with some predefined
 HELLO
 ```
 
-Services have addresses represented by `/service/{ADDRESS}`.
-
-You can see a list of all services on a node by running:
+Services have addresses represented by `/service/{ADDRESS}`. You can see a list of all services on a node by running:
 
 ```
 » ockam service list --at n1
@@ -180,11 +180,11 @@ Node: n1
     ...
 ```
 
-Later in this guide, we’ll explore other commands that interact with other pre-defined services like `/service/api` – every node created with Ockam Command starts a secure channel listener at this address to allow other nodes to create mutually authenticated channels with it.
+Later in this guide, we’ll explore other commands that interact with pre-defined services. For example every node created with `ockam` command starts a secure channel listener at the address  `/service/api`, which allows other nodes to create mutually authenticated secure channels with it.
 
-## Space
+## Spaces
 
-An Ockam Space is an infinitely scalable Ockam [<mark style="color:blue;">Node</mark>](nodes.md#node) in the cloud. Ockam Orchestrator can create, manage, and scale spaces for you. Like other nodes, Spaces offer services. For example, you create projects within a space, invite team mates to it, or attach payment subscriptions.
+Ockam Spaces are an infinitely scalable Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#nodes) in the cloud. Ockam Orchestrator can create, manage, and scale spaces for you. Like other nodes, Spaces offer services. For example, you can create projects within a space, invite team mates to it, or attach payment subscriptions.
 
 When your run `ockam enroll` for the first time, we create a space for your to host your projects.
 
@@ -200,9 +200,9 @@ When your run `ockam enroll` for the first time, we create a space for your to h
 +--------------------------------------+----------+-------------------+
 ```
 
-## Project
+## Projects
 
-An Ockam Project is also an infinitely scalable Ockam [<mark style="color:blue;">Node</mark>](nodes.md#node) in the cloud. Ockam Orchestrator can create, manage, and scale projects for you. Projects are created within a [<mark style="color:blue;">Space</mark>](nodes.md#space) and can inherit permissions and subscriptions from their parent space. There can be many projects within one space.
+Ockam Projects are also infinitely scalable Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#nodes) in the cloud. Ockam Orchestrator can create, manage, and scale projects for you. Projects are created within a [<mark style="color:blue;">Space</mark>](nodes.md#spaces) and can inherit permissions and subscriptions from their parent space. There can be many projects within one space.
 
 When your run `ockam enroll` for the first time, we create a default project for you, within your default space.
 
@@ -218,7 +218,7 @@ When your run `ockam enroll` for the first time, we create a default project for
 +--------------------------------------+---------+-------+------------+
 ```
 
-Like other nodes, Projects offer services. For example, the default project has an `echo` service just like the local nodes we created above. We can send messages and get replies from this service. It replies with the same message we send it.
+Like other nodes, Projects offer services. For example, the default project has an `echo` service just like the local nodes we created above. We can send messages and get replies from it. The `echo` service replies with the same message we send it.
 
 ```
 » ockam message send hello --to /project/default/service/echo
@@ -231,12 +231,12 @@ hello
 To cleanup and delete all nodes, run: `ockam node delete --all`
 {% endhint %}
 
-An Ockam [<mark style="color:blue;">Node</mark>](nodes.md#node) is any program that can interact with other nodes using various Ockam protocols like Routing and Secure Channels. Nodes run very lightweight, concurrent, and stateful actors called [<mark style="color:blue;">Workers</mark>](nodes.md#worker). Nodes and Workers hide complexities to enable simple interfaces for stateful, asynchronous, message-based protocols.
+Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#nodes) are programs that interact with other nodes using one or more Ockam protocols like Routing and Secure Channels. Nodes run very lightweight, concurrent, and stateful actors called [<mark style="color:blue;">Workers</mark>](nodes.md#workers). Nodes and Workers hide complexities of environment and state to enable simple interfaces for stateful, asynchronous, message-based protocols.
 
-One or more <mark style="color:blue;">Workers</mark> can work as a team to offer a [<mark style="color:blue;">Service</mark>](nodes.md#service)<mark style="color:blue;">.</mark> Services can be attached to identities and authorization policies to enforce attribute based access control rules. Ockam Orchestrator can create and manage infinitely scalable nodes in the cloud called [<mark style="color:blue;">Spaces</mark>](nodes.md#space) and [<mark style="color:blue;">Projects</mark>](nodes.md#project).
+One or more [<mark style="color:blue;">Workers</mark>](nodes.md#workers) can work as a team to offer a [<mark style="color:blue;">Service</mark>](nodes.md#services)<mark style="color:blue;">.</mark> Services can be attached to trust contexts and authorization policies to enforce attribute based access control rules. Ockam Orchestrator can create and manage infinitely scalable nodes in the cloud called [<mark style="color:blue;">Spaces</mark>](nodes.md#services) and [<mark style="color:blue;">Projects</mark>](nodes.md#projects) that offer managed services that are designed for scale and reliability.
 
 {% hint style="info" %}
 If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
 {% endhint %}
 
-Next, let’s dive into how Ockam’s [<mark style="color:blue;">Application Layer Routing</mark>](routing.md) enables protocols that provide end-to-end guarantees to messages traveling across many network connection hops and protocols boundaries.
+Next, let’s learn about Ockam’s [<mark style="color:blue;">Application Layer Routing</mark>](routing.md) and how it enables protocols that provide end-to-end guarantees to messages traveling across many network connection hops and protocols boundaries.
