@@ -75,10 +75,10 @@ Change History:
 
 ### Identifier Authentication
 
-Authentication, within Ockam, starts by proving control of a specific Ockam Identifier. To prove control of specific Identifier the prover must present the identifier, the full signed change history of the identifier, and a signature on a challenge using the latest public key in the identifier's change history.
+Authentication, within Ockam, starts by proving control of a specific Ockam Identifier. To prove control of a specific Identifier, the prover must present the identifier, the full signed change history of the identifier, and a signature on a challenge using the secret key corresponding to the latest public key in the identifier's change history.
 
 {% hint style="info" %}
 If you’re stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
 {% endhint %}
 
-Next, let's learn how to create mutually authenticated and end-to-end encrypted [<mark style="color:blue;">secure channels</mark>](secure-channels.md) that guarantee data authenticity, integrity, and confidentiality.
+Next, let's we'll combine everything we've learnt so far to create mutually authenticated and end-to-end encrypted [<mark style="color:blue;">secure channels</mark>](secure-channels.md) that guarantee data authenticity, integrity, and confidentiality.
