@@ -190,7 +190,7 @@ Nodes `a` and `b` (the two ends) are mutually authenticated and are cryptographi
 
 ## Secure Portals
 
-In a previous section, we saw how [Portals](advanced-routing.md#portal) make existing application protocols work over Ockam Routing without changing any code in the existing applications. We can combine Secure Channels with Portals to create secure communication for existing applications.
+In a previous section, we saw how [<mark style="color:blue;">Portals</mark>](advanced-routing.md#portal) make existing application protocols work over Ockam Routing without changing any code in the existing applications. We can combine Secure Channels with Portals to create secure communication for existing applications.
 
 <img src="../../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
 
