@@ -126,8 +126,8 @@ HELLO
 » ockam node delete --all
 » ockam project information --output json > project.json
 
-» ockam node create a --project project.json
-» ockam node create b --project project.json
+» ockam node create a --project-path project.json
+» ockam node create b --project-path project.json
 
 » ockam forwarder create b --at /project/default --to /node/a
 /service/forward_to_b

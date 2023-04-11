@@ -78,7 +78,7 @@ python3 -m http.server --bind 127.0.0.1 5000
 # In a new terminal window, setup an ockam node, called `s`, as a sidecar next to the 
 # application service. Then create a tcp outlet, on the `s` node, to send raw tcp traffic
 # to the service. Finally create a forwarder in your default Orchestrator project.
-ockam node create s --project default-project.json
+ockam node create s --project-path default-project.json
 ockam tcp-outlet create --at s --from /service/outlet --to 127.0.0.1:5000
 ockam forwarder create s --at /project/default --to s
 
@@ -87,7 +87,7 @@ ockam forwarder create s --at /project/default --to s
 # Setup an ockam node, called `c`, as a sidecar next to our application client. Then create
 # an end-to-end encrypted secure channel with s, through the cloud relay. Finally, tunnel
 # traffic from a local tcp inlet through this end-to-end secure channel.
-ockam node create c --project default-project.json
+ockam node create c --project-path default-project.json
 ockam secure-channel create --from c --to /project/default/service/forward_to_s/service/api\
   | ockam tcp-inlet create --at c --from 127.0.0.1:7000 --to -/service/outlet
 

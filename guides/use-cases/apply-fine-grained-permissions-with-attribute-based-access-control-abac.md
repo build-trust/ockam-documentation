@@ -114,7 +114,7 @@ ockam identity create control_identity
 ockam project authenticate --token $cp1_token --identity control_identity
 
 # Create a node targeting the project as the control identity.
-ockam node create control_plane1 --project project.json --identity control_identity
+ockam node create control_plane1 --project-path project.json --identity control_identity
 
 # Set a policy, create the tcp-outlet and forwarder.
 ockam policy set --at control_plane1 --resource tcp-outlet --expression '(= subject.component "edge")'
@@ -130,7 +130,7 @@ ockam identity create edge_identity
 ockam project authenticate --token $ep1_token --identity edge_identity
 <strong>
 </strong><strong># Create a node targeting the project as the edge identity.
-</strong><strong>ockam node create edge_plane1 --project project.json --identity edge_identity
+</strong><strong>ockam node create edge_plane1 --project-path project.json --identity edge_identity
 </strong>
 # Set a policy, and create the tcp-inlet.
 ockam policy set --at edge_plane1 --resource tcp-inlet --expression '(= subject.component "control")'
@@ -158,7 +158,7 @@ ockam identity create x_identity
 ockam project authenticate --token $x_token --identity x_identity
 
 # Create a node targeting the project as the x identity.
-ockam node create x --project project.json --identity x_identity
+ockam node create x --project-path project.json --identity x_identity
 
 # Set a policy and create a new tcp-inlet for node x.
 ockam policy set --at x --resource tcp-inlet --expression '(= subject.component "control")'

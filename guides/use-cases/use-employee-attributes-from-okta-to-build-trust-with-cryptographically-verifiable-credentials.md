@@ -123,7 +123,7 @@ Next we transfer project configuration and one enrollment token to Machine 1 and
 ```bash
 ockam identity create m1
 ockam project authenticate --token $m1_token --identity m1 --project-path project.json
-ockam node create m1 --project project.json --identity m1
+ockam node create m1 --project-path project.json --identity m1
 ockam policy set --at m1 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))'
 ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
@@ -152,7 +152,7 @@ Next we transfer project configuration and one enrollment token to Machine 2 and
 ```bash
 ockam identity create m2
 ockam project authenticate --token $m2_token --identity m2 --project-path project.json
-ockam node create m2 --project project.json --identity m2
+ockam node create m2 --project-path project.json --identity m2
 ockam policy set --at m2 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "New York")))'
 ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
@@ -173,7 +173,7 @@ There is a problem in one of the micro-services in San Francisco and we need to 
 Since the Okta Add-On is enabled. Alice can simple start a node within the project and authenticate.
 
 ```bash
-ockam node create alice --project project.json
+ockam node create alice --project-path project.json
 ockam project authenticate --project-path project.json --okta
 ockam policy set --at alice --resource tcp-inlet --expression '(= subject.application "Smart Factory")'
 ```
