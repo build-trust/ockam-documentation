@@ -45,8 +45,8 @@ In a later guide, we'll explore how Ockam enables you to define various pluggabl
 use ockam::access_control::AllowAll;
 use ockam::access_control::IdentityIdAccessControl;
 use ockam::identity::credential_issuer::CredentialIssuer;
-use ockam::identity::TrustEveryonePolicy;
-use ockam::{Context, Result, TcpListenerTrustOptions, TcpTransport};
+use ockam::identity::SecureChannelListenerOptions;
+use ockam::{Context, Result, TcpListenerOptions, TcpTransport};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -80,8 +80,8 @@ async fn main(ctx: Context) -> Result<()> {
     // Start a secure channel listener that only allows channels where the identity
     // at the other end of the channel can authenticate with the latest private key
     // corresponding to one of the above known public identifiers.
-    let p = TrustEveryonePolicy;
-    issuer.identity().create_secure_channel_listener("secure", p).await?;
+    let options = SecureChannelListenerOptions::new();
+    issuer.identity().create_secure_channel_listener("secure", options).await?;
 
     // Start a credential issuer worker that will only accept incoming requests from
     // authenticated secure channels with our known public identifiers.
@@ -90,7 +90,7 @@ async fn main(ctx: Context) -> Result<()> {
 
     // Initialize TCP Transport, create a TCP listener, and wait for connections.
     let tcp = TcpTransport::create(&ctx).await?;
-    tcp.listen("127.0.0.1:5000", TcpListenerTrustOptions::new()).await?;
+    tcp.listen("127.0.0.1:5000", TcpListenerOptions::new()).await?;
 
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
@@ -119,8 +119,8 @@ use ockam::abac::AbacAccessControl;
 use ockam::access_control::AllowAll;
 use ockam::authenticated_storage::AuthenticatedAttributeStorage;
 use ockam::identity::credential_issuer::{CredentialIssuerApi, CredentialIssuerClient};
-use ockam::identity::{Identity, SecureChannelListenerTrustOptions, SecureChannelTrustOptions};
-use ockam::{route, vault::Vault, Context, Result, TcpConnectionTrustOptions, TcpListenerTrustOptions, TcpTransport};
+use ockam::identity::{Identity, SecureChannelListenerOptions, SecureChannelOptions};
+use ockam::{route, vault::Vault, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransport};
 use std::sync::Arc;
 
 #[ockam::node]
@@ -146,9 +146,9 @@ async fn main(ctx: Context) -> Result<()> {
     // The credential issuer already knows the public identifier of this identity
     // as a member of the production cluster so it returns a signed credential
     // attesting to that knowledge.
-    let issuer_connection = tcp.connect("127.0.0.1:5000", TcpConnectionTrustOptions::new()).await?;
+    let issuer_connection = tcp.connect("127.0.0.1:5000", TcpConnectionOptions::new()).await?;
     let issuer_channel = server
-        .create_secure_channel(route![issuer_connection, "secure"], SecureChannelTrustOptions::new())
+        .create_secure_channel(route![issuer_connection, "secure"], SecureChannelOptions::new())
         .await?;
     let issuer = CredentialIssuerClient::new(&ctx, route![issuer_channel]).await?;
     let credential = issuer.get_credential(server.identifier()).await?.unwrap();
@@ -171,10 +171,10 @@ async fn main(ctx: Context) -> Result<()> {
 
     // Start a secure channel listener that only allows channels with
     // authenticated identities.
-    server.create_secure_channel_listener("secure", SecureChannelListenerTrustOptions::new()).await?;
+    server.create_secure_channel_listener("secure", SecureChannelListenerOptions::new()).await?;
 
     // Create a TCP listener and wait for incoming connections
-    tcp.listen("127.0.0.1:4000", TcpListenerTrustOptions::new()).await?;
+    tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
 
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
@@ -196,8 +196,8 @@ touch examples/06-credential-exchange-client.rs
 ```rust
 use ockam::authenticated_storage::AuthenticatedAttributeStorage;
 use ockam::identity::credential_issuer::{CredentialIssuerApi, CredentialIssuerClient};
-use ockam::identity::{Identity, SecureChannelTrustOptions};
-use ockam::{route, vault::Vault, Context, Result, TcpConnectionTrustOptions, TcpTransport};
+use ockam::identity::{Identity, SecureChannelOptions};
+use ockam::{route, vault::Vault, Context, Result, TcpConnectionOptions, TcpTransport};
 use std::sync::Arc;
 
 #[ockam::node]
@@ -228,9 +228,9 @@ async fn main(mut ctx: Context) -> Result<()> {
     // The credential issuer already knows the public identifier of this identity
     // as a member of the production cluster so it returns a signed credential
     // attesting to that knowledge.
-    let issuer_connection = tcp.connect("127.0.0.1:5000", TcpConnectionTrustOptions::new()).await?;
+    let issuer_connection = tcp.connect("127.0.0.1:5000", TcpConnectionOptions::new()).await?;
     let issuer_channel = client
-        .create_secure_channel(route![issuer_connection, "secure"], SecureChannelTrustOptions::new())
+        .create_secure_channel(route![issuer_connection, "secure"], SecureChannelOptions::new())
         .await?;
     let issuer_client = CredentialIssuerClient::new(&ctx, route![issuer_channel]).await?;
     let credential = issuer_client.get_credential(client.identifier()).await?.unwrap();
@@ -238,9 +238,9 @@ async fn main(mut ctx: Context) -> Result<()> {
     client.set_credential(credential).await;
 
     // Create a secure channel to the node that is running the Echoer service.
-    let server_connection = tcp.connect("127.0.0.1:4000", TcpConnectionTrustOptions::new()).await?;
+    let server_connection = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
     let channel = client
-        .create_secure_channel(route![server_connection, "secure"], SecureChannelTrustOptions::new())
+        .create_secure_channel(route![server_connection, "secure"], SecureChannelOptions::new())
         .await?;
 
     // Present credentials over the secure channel
