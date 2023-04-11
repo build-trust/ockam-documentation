@@ -32,8 +32,8 @@ Add the following code to this file:
 
 use hello_ockam::Echoer;
 use ockam::access_control::AllowAll;
-use ockam::identity::{Identity, TrustEveryonePolicy};
-use ockam::{vault::Vault, Context, Result, TcpListenerTrustOptions, TcpTransport};
+use ockam::identity::{Identity, SecureChannelOptions};
+use ockam::{vault::Vault, Context, Result, TcpListenerOptions, TcpTransport};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -50,11 +50,11 @@ async fn main(ctx: Context) -> Result<()> {
 
     // Create a secure channel listener for Bob that will wait for requests to
     // initiate an Authenticated Key Exchange.
-    bob.create_secure_channel_listener("bob_listener", TrustEveryonePolicy)
+    bob.create_secure_channel_listener("bob_listener", SecureChannelOptions::new())
         .await?;
 
     // Create a TCP listener and wait for incoming connections.
-    tcp.listen("127.0.0.1:4000", TcpListenerTrustOptions::new()).await?;
+    tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
 
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
@@ -80,7 +80,7 @@ Add the following code to this file:
 
 use hello_ockam::Forwarder;
 use ockam::access_control::AllowAll;
-use ockam::{Context, Result, TcpConnectionTrustOptions, TcpListenerTrustOptions, TcpTransport};
+use ockam::{Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransport};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -88,14 +88,14 @@ async fn main(ctx: Context) -> Result<()> {
     let tcp = TcpTransport::create(&ctx).await?;
 
     // Create a TCP connection to Bob.
-    let connection_to_bob = tcp.connect("127.0.0.1:4000", TcpConnectionTrustOptions::new()).await?;
+    let connection_to_bob = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
     // Start a Forwarder to forward messages to Bob using the TCP connection.
     ctx.start_worker("forward_to_bob", Forwarder(connection_to_bob), AllowAll, AllowAll)
         .await?;
 
     // Create a TCP listener and wait for incoming connections.
-    tcp.listen("127.0.0.1:3000", TcpListenerTrustOptions::new()).await?;
+    tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
 
     // Don't call ctx.stop() here so this node runs forever.
     Ok(())
@@ -117,8 +117,8 @@ Add the following code to this file:
 // This node creates an end-to-end encrypted secure channel over two tcp transport hops.
 // It then routes a message, to a worker on a different node, through this encrypted channel.
 
-use ockam::identity::{Identity, TrustEveryonePolicy};
-use ockam::{route, vault::Vault, Context, Result, TcpConnectionTrustOptions, TcpTransport};
+use ockam::identity::{Identity, SecureChannelListenerOptions};
+use ockam::{route, vault::Vault, Context, Result, TcpConnectionOptions, TcpTransport};
 
 #[ockam::node]
 async fn main(mut ctx: Context) -> Result<()> {
@@ -132,7 +132,7 @@ async fn main(mut ctx: Context) -> Result<()> {
     let alice = Identity::create(&ctx, vault).await?;
 
     // Create a TCP connection to the middle node.
-    let connection_to_middle_node = tcp.connect("localhost:3000", TcpConnectionTrustOptions::new()).await?;
+    let connection_to_middle_node = tcp.connect("localhost:3000", TcpConnectionOptions::new()).await?;
 
     // Connect to a secure channel listener and perform a handshake.
     let r = route![connection_to_middle_node, "forward_to_bob", "bob_listener"];
