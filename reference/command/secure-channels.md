@@ -78,57 +78,64 @@ The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3`, the addres
 
 ## Over Bridges <a href="#bridges" id="bridges"></a>
 
+<img src="../../.gitbook/assets/file.excalidraw (5).svg" alt="" class="gitbook-drawing">
+
 ```
-» ockam node create n1
-» ockam node create n2 --tcp-listener-address=127.0.0.1:7000
-» ockam node create n3 --tcp-listener-address=127.0.0.1:8000
-» ockam node create n4 --tcp-listener-address=127.0.0.1:9000
+» ockam node delete --all
 
-» ockam tcp-connection create --from n1 --to 127.0.0.1:7000
-» ockam tcp-connection create --from n2 --to 127.0.0.1:8000
-» ockam tcp-connection create --from n3 --to 127.0.0.1:9000
+» ockam node create a
+» ockam node create bridge1 --tcp-listener-address=127.0.0.1:7000
+» ockam node create bridge2 --tcp-listener-address=127.0.0.1:8000
+» ockam node create b --tcp-listener-address=127.0.0.1:9000
 
-» ockam tcp-connection list --node n1
+» ockam tcp-connection create --from a --to 127.0.0.1:7000
+» ockam tcp-connection create --from bridge1 --to 127.0.0.1:8000
+» ockam tcp-connection create --from bridge2 --to 127.0.0.1:9000
+
+» ockam tcp-connection list --node a
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 | Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 | 1c36e194192103dff5c608c3e20eb645 | TCP            | Remote connection | 127.0.0.1:7000 | 0#db1ee3588f7ed446d6865302d9355bea |
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 
-» ockam tcp-connection list --node n2
+» ockam tcp-connection list --node bridge1
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 | Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 | 31be23406793330ea69c68a097a324c1 | TCP            | Remote connection | 127.0.0.1:8000 | 0#c1ee24edfa7b0ea5c9fb74765f8978a1 |
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 
-» ockam tcp-connection list --node n3
+» ockam tcp-connection list --node bridge2
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 | Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 | 5afb95792b0f964ee23a769aa4a92d6b | TCP            | Remote connection | 127.0.0.1:9000 | 0#80513c64098ac181d1f33b4ed4b34beb |
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 
-» ockam message send hello --from n1 --to /worker/db1ee3588f7ed446d6865302d9355bea/worker/c1ee24edfa7b0ea5c9fb74765f8978a1/worker/80513c64098ac181d1f33b4ed4b34beb/service/uppercase
+» ockam message send hello --from a --to /worker/db1ee3588f7ed446d6865302d9355bea/worker/c1ee24edfa7b0ea5c9fb74765f8978a1/worker/80513c64098ac181d1f33b4ed4b34beb/service/uppercase
 HELLO
 
-» ockam secure-channel create --from n1 --to /worker/db1ee3588f7ed446d6865302d9355bea/worker/c1ee24edfa7b0ea5c9fb74765f8978a1/worker/80513c64098ac181d1f33b4ed4b34beb/service/api \
-    | ockam message send hello --from n1 --to -/service/uppercase
+» ockam secure-channel create --from a --to /worker/db1ee3588f7ed446d6865302d9355bea/worker/c1ee24edfa7b0ea5c9fb74765f8978a1/worker/80513c64098ac181d1f33b4ed4b34beb/service/api \
+    | ockam message send hello --from a --to -/service/uppercase
 HELLO
 ```
 
 ## Through Relays <a href="#relays" id="relays"></a>
 
+<img src="../../.gitbook/assets/file.excalidraw (3) (1).svg" alt="" class="gitbook-drawing">
+
 ```
-» ockam node create n2 --tcp-listener-address=127.0.0.1:7000
+» ockam node delete --all
+» ockam node create relay --tcp-listener-address=127.0.0.1:7000
 
-» ockam node create n3
-» ockam forwarder create n3 --at /node/n2 --to /node/n3
-/service/forward_to_n3
+» ockam node create b
+» ockam forwarder create b --at relay --to b
+/service/forward_to_b
 
-» ockam node create n1
-» ockam tcp-connection create --from n1 --to 127.0.0.1:7000
-» ockam tcp-connection list --node n1
+» ockam node create a
+» ockam tcp-connection create --from a --to 127.0.0.1:7000
+» ockam tcp-connection list --node a
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
 | Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
 +----------------------------------+----------------+-------------------+----------------+------------------------------------+
@@ -152,7 +159,7 @@ Note how in  the [<mark style="color:blue;">Hello Secure Channels</mark>](secure
 
 ## Elastic Encrypted Relays
 
-In a previous section, we saw how [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet. We also learnt that Ockam Orchestrator can create and manage [<mark style="color:blue;">Elastic Relays</mark>](advanced-routing.md#elastic-relays) that are designed for high throughput and low latency.
+In a previous section, we saw how [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet. We also learnt that Ockam Orchestrator can create and manage Elastic Relays that are designed for high throughput and low latency.
 
 Let's create an end-to-end secure channel through an elastic relay in your Orchestrator [project](nodes.md#project).
 
