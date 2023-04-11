@@ -153,7 +153,15 @@ async fn main(ctx: Context) -> Result<()> {
     let issuer = CredentialIssuerClient::new(&ctx, route![issuer_channel]).await?;
     let credential = issuer.get_credential(server.identifier()).await?.unwrap();
     println!("Credential:\n{credential}");
-    server.set_credential(credential).await;
+
+    // Create a trust context that will be used to authenticate credential exchanges
+    let trust_context = TrustContext::new(
+        "trust_context_id".to_string(),
+        Some(AuthorityInfo::new(
+            server.to_public().await?,
+            Some(Arc::new(CredentialMemoryRetriever::new(credential))),
+        )),
+    );
 
     // Start an echoer worker that will only accept incoming requests from
     // identities that have authenticated credentials issued by the above credential
@@ -166,7 +174,7 @@ async fn main(ctx: Context) -> Result<()> {
     let issuer_identity = issuer.public_identity().await?;
     let storage = Arc::new(AuthenticatedAttributeStorage::new(store.clone()));
     server
-        .start_credential_exchange_worker(vec![issuer_identity], "credentials", true, storage)
+        .start_credential_exchange_worker(trust_context, vec![issuer_identity], "credentials", true, storage)
         .await?;
 
     // Start a secure channel listener that only allows channels with
@@ -235,7 +243,6 @@ async fn main(mut ctx: Context) -> Result<()> {
     let issuer_client = CredentialIssuerClient::new(&ctx, route![issuer_channel]).await?;
     let credential = issuer_client.get_credential(client.identifier()).await?.unwrap();
     println!("Credential:\n{credential}");
-    client.set_credential(credential).await;
 
     // Create a secure channel to the node that is running the Echoer service.
     let server_connection = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
@@ -247,7 +254,7 @@ async fn main(mut ctx: Context) -> Result<()> {
     let storage = Arc::new(AuthenticatedAttributeStorage::new(store.clone()));
     let issuer = issuer_client.public_identity().await?;
     let r = route![channel.clone(), "credentials"];
-    client.present_credential_mutual(r, &[issuer], storage, None).await?;
+    client.present_credential_mutual(r, &[issuer], storage, credential).await?;
 
     // Send a message to the worker at address "echoer".
     ctx.send(route![channel, "echoer"], "Hello Ockam!".to_string()).await?;
