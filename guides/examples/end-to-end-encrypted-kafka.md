@@ -83,7 +83,7 @@ ockam project authenticate --project-path project.json \
 An Ockam node is a way to connect securely connect different services to each other, so we'll create one here that we'll use to communicate through the Confluent Cloud cluster using the identity we just created:
 
 ```bash
-ockam node create consumer --project project.json --identity consumer
+ockam node create consumer --project-path project.json --identity consumer
 ```
 
 Once that completes we can now expose our Kafka bootstrap server. This is like the remote Kafka bootsrtap server and brokers have become virtually adjacent on `localhost:4000`:
@@ -128,7 +128,7 @@ ockam project authenticate --project-path project.json \
 Create a node and link it to both the project and identity we've created:
 
 ```bash
-ockam node create producer1 --project project.json --identity producer1
+ockam node create producer1 --project-path project.json --identity producer1
 ```
 
 And expose our Kafka bootstrap server on port `5000` so we can start sending messages through Confluent Cloud:
@@ -159,7 +159,7 @@ Connecting a second product is a matter of repeating the steps above with a new 
 ```
 ockam identity create producer2
 ockam project authenticate --project-path project.json --identity producer2 --token $(cat producer2.token)
-ockam node create producer2 --project project.json --identity producer2
+ockam node create producer2 --project-path project.json --identity producer2
 
 ockam service start kafka-producer --node producer2 --project-route /project/default --bootstrap-server-ip 127.0.0.1 --bootstrap-server-port 6000 --brokers-port-range 6001-6100
 
