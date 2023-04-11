@@ -78,6 +78,8 @@ The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3`, the addres
 
 ## Over Bridges <a href="#bridges" id="bridges"></a>
 
+
+
 <img src="../../.gitbook/assets/file.excalidraw (5).svg" alt="" class="gitbook-drawing">
 
 ```
@@ -123,10 +125,13 @@ HELLO
 
 ## Through Relays <a href="#relays" id="relays"></a>
 
+In a previous section, we saw how [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet. Since Ockam Secure Channels are built on top of Ockam Routing, we can establish end-to-end secure channels over a route that may include one or more relays.
+
 <img src="../../.gitbook/assets/file.excalidraw (3) (1).svg" alt="" class="gitbook-drawing">
 
+Delete all nodes and try the following example:
+
 ```
-» ockam node delete --all
 » ockam node create relay --tcp-listener-address=127.0.0.1:7000
 
 » ockam node create b
@@ -151,15 +156,13 @@ HELLO
 
 Ockam Secure Channels are built on top of Ockam Routing. But they also carry Ockam Routing messages.
 
-This means that we can run any Ockam Routing based protocol through Secure Channels. This also means that we can create Secure Channels that pass through other Secure Channels.
+This means that we can run any Ockam Routing based protocol through Secure Channels. This also means that we can create <mark style="color:orange;">Secure Channels that pass through other Secure Channels.</mark>
 
 <img src="../../.gitbook/assets/file.excalidraw (1) (2).svg" alt="" class="gitbook-drawing">
 
-Note how in  the [<mark style="color:blue;">Hello Secure Channels</mark>](secure-channels.md#hello) example, we routed a plain text message to the address of the channel using `ockam message send ...`. This message could have been routed over multiple hops before entering or after leaving the channel and everything would work as expected.
-
 ## Elastic Encrypted Relays
 
-In a previous section, we saw how [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet. We also learnt that Ockam Orchestrator can create and manage Elastic Relays that are designed for high throughput and low latency.
+Ockam Orchestrator can create and manage Elastic [Relays](secure-channels.md#relays) that are designed for high throughput and low latency.
 
 Let's create an end-to-end secure channel through an elastic relay in your Orchestrator [project](nodes.md#project).
 
@@ -170,7 +173,6 @@ Let's create an end-to-end secure channel through an elastic relay in your Orche
 The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was created when you ran `ockam enroll` offers an Elastic Relay Service. Delete all your existing nodes and try this new example.
 
 ```
-» ockam node delete --all
 » ockam project information --output json > project.json
 
 » ockam node create a --project project.json
@@ -188,7 +190,7 @@ Nodes `a` and `b` (the two ends) are mutually authenticated and are cryptographi
 
 ## Secure Portals
 
-Ockam Portals make existing application protocols work over Ockam Routing. Without any code change to the existing applications.
+In a previous section, we saw how [Portals](advanced-routing.md#portal) make existing application protocols work over Ockam Routing without changing any code in the existing applications. We can combine Secure Channels with Portals to create secure communication for existing applications.
 
 <img src="../../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
 
