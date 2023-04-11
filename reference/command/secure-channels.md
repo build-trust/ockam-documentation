@@ -49,7 +49,7 @@ Now that you're familiar with the basics, let's create some secure channels. If 
 
 ## Hello Secure Channels <a href="#hello" id="hello"></a>
 
-In this example we'll create a secure channel from [Node](nodes.md) `n1` to node `n2`. Every node, created with Ockam Command, starts a secure channel listener at address `/service/api`.
+In this example we'll create a secure channel from [Node](nodes.md) `a` to node `b`. Every node, created with Ockam Command, starts a secure channel listener at address `/service/api`.
 
 ```
 » ockam node create a
@@ -65,7 +65,7 @@ In this example we'll create a secure channel from [Node](nodes.md) `n1` to node
 HELLO
 ```
 
-In the above example `n1` and `n2` mutually authenticate using the default [Ockam Identity](identities.md) that was generated when we create the first node. Both nodes, in this case, are using the same identity.
+In the above example `a` and `b` mutually authenticate using the default [Ockam Identity](identities.md) that was generated when we create the first node. Both nodes, in this case, are using the same identity.
 
 Once the channel is created, note above how we used the service address of the channel on `n1` to send messages through the channel. This can be shortened to the one liner:
 
@@ -74,7 +74,7 @@ Once the channel is created, note above how we used the service address of the c
     | ockam message send hello --from a --to -/service/uppercase
 ```
 
-The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3`, the address of a new secure channel on `n1`, to standard output and the second command replaces the `-` in the `to` argument with the value from standard input. Everything else works the same.
+The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3`, the address of a new secure channel on `a`, to standard output and the second command replaces the `-` in the `to` argument with the value from standard input. Everything else works the same.
 
 ## Over Bridges <a href="#bridges" id="bridges"></a>
 
