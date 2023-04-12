@@ -46,7 +46,7 @@ To save you having to unpack all of that: it's an InfluxDB permission definition
 We can pull all this together with the following command:
 
 ```bash
-ockam project addon configure influx-db \
+ockam project addon configure influxdb \
   --endpoint-url $INFLUXDB_ENDPOINT_URL \
   --token $INFLUXDB_ADMIN_TOKEN \
   --org-id $INFLUXDB_ORG_ID \
