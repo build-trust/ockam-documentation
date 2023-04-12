@@ -37,7 +37,7 @@ Ockam Secure Channels provides the following <mark style="color:orange;">end-to-
 2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tapered en-route and are exactly what was sent by the authenticated sender at the other end of the channel.
 3. **Confidentiality:**  Each end of the channel knows that the contents of messages received on the channel could not have been observed en-route between the sender and the receiver.
 
-<img src="../../.gitbook/assets/file.excalidraw (4) (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">
 
 To establish the secure channel, the two ends run an [<mark style="color:blue;">authenticated key establishment</mark>](../protocols/secure-channels.md) protocol and then [<mark style="color:blue;">authenticate</mark>](identities.md#identifier-authentication) each other's [<mark style="color:blue;">Ockam Identifier</mark>](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment safely derives shared secrets without transporting these secrets on the wire.
 
@@ -80,7 +80,7 @@ The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3`, the addres
 
 In a previous section, we learnt that [Bridges](advanced-routing.md#bridges) enable end-to-end protocols between applications in separate networks in cases where we have a bridge node that is connected to both networks. Since Ockam Secure Channels are built on top of Ockam Routing, we can establish end-to-end secure channels over a route that may include one or more bridges.
 
-<img src="../../.gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (5).svg" alt="" class="gitbook-drawing">
 
 [<mark style="color:blue;">Delete any existing nodes</mark>](nodes.md#nodes) and then try this example:
 
@@ -166,7 +166,7 @@ The on-the-wire overhead of a new secure channel is only 20 bytes per messages. 
 
 ## Elastic Encrypted Relays
 
-Ockam Orchestrator can create and manage Elastic [Relays](secure-channels.md#relays) that are designed for high throughput and low latency.
+Ockam Orchestrator can create and manage Elastic Encrypted [Relays](secure-channels.md#relays) in the cloud, within your Orchestrator [project](nodes.md#project). These managed relays are designed for high availability, high throughput and low latency.
 
 Let's create an end-to-end secure channel through an elastic relay in your Orchestrator [project](nodes.md#project).
 
