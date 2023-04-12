@@ -117,7 +117,7 @@ ockam project authenticate --token $cp1_token --identity control_identity
 ockam node create control_plane1 --project-path project.json --identity control_identity
 
 # Set a policy, create the tcp-outlet and forwarder.
-ockam policy set --at control_plane1 --resource tcp-outlet --expression '(= subject.component "edge")'
+ockam policy create --at control_plane1 --resource tcp-outlet --expression '(= subject.component "edge")'
 ockam tcp-outlet create --at /node/control_plane1 --from /service/outlet --to 127.0.0.1:5000
 ockam forwarder create control_plane1 --at /project/default --to /node/control_plane1
 ```
@@ -133,7 +133,7 @@ ockam project authenticate --token $ep1_token --identity edge_identity
 </strong><strong>ockam node create edge_plane1 --project-path project.json --identity edge_identity
 </strong>
 # Set a policy, and create the tcp-inlet.
-ockam policy set --at edge_plane1 --resource tcp-inlet --expression '(= subject.component "control")'
+ockam policy create --at edge_plane1 --resource tcp-inlet --expression '(= subject.component "control")'
 ockam tcp-inlet create --at /node/edge_plane1 --from 127.0.0.1:7000 --to /project/default/service/forward_to_control_plane1/secure/api/service/outlet
 </code></pre>
 
@@ -161,7 +161,7 @@ ockam project authenticate --token $x_token --identity x_identity
 ockam node create x --project-path project.json --identity x_identity
 
 # Set a policy and create a new tcp-inlet for node x.
-ockam policy set --at x --resource tcp-inlet --expression '(= subject.component "control")'
+ockam policy create --at x --resource tcp-inlet --expression '(= subject.component "control")'
 ockam tcp-inlet create --at /node/x --from 127.0.0.1:8000 --to /project/default/service/forward_to_control_plane1/secure/api/service/outlet
 
 # Sends a request to our `x` tcp-inlet and will be denied (this will timeout)

@@ -124,7 +124,7 @@ Next we transfer project configuration and one enrollment token to Machine 1 and
 ockam identity create m1
 ockam project authenticate --token $m1_token --identity m1 --project-path project.json
 ockam node create m1 --project-path project.json --identity m1
-ockam policy set --at m1 --resource tcp-outlet \
+ockam policy create --at m1 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))'
 ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
 ockam forwarder create m1 --at /project/default --to /node/m1
@@ -153,7 +153,7 @@ Next we transfer project configuration and one enrollment token to Machine 2 and
 ockam identity create m2
 ockam project authenticate --token $m2_token --identity m2 --project-path project.json
 ockam node create m2 --project-path project.json --identity m2
-ockam policy set --at m2 --resource tcp-outlet \
+ockam policy create --at m2 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "New York")))'
 ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
 ockam forwarder create m2 --at /project/default --to /node/m2
@@ -175,7 +175,7 @@ Since the Okta Add-On is enabled. Alice can simple start a node within the proje
 ```bash
 ockam node create alice --project-path project.json
 ockam project authenticate --project-path project.json --okta
-ockam policy set --at alice --resource tcp-inlet --expression '(= subject.application "Smart Factory")'
+ockam policy create --at alice --resource tcp-inlet --expression '(= subject.application "Smart Factory")'
 ```
 
 The `project authenticate` command will launch Okta login and when it completes return a an Ockam cryptographic credential that includes the city and department attributes of Alice's profile in Okta Universal Directory. Only these two attributes are attested because the administrator specified those two attributes when enabling the Okta Add-On.
