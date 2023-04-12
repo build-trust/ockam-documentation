@@ -37,7 +37,7 @@ Ockam Secure Channels provides the following <mark style="color:orange;">end-to-
 2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tapered en-route and are exactly what was sent by the authenticated sender at the other end of the channel.
 3. **Confidentiality:**  Each end of the channel knows that the contents of messages received on the channel could not have been observed en-route between the sender and the receiver.
 
-<img src="../../.gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (4) (1).svg" alt="" class="gitbook-drawing">
 
 To establish the secure channel, the two ends run an [<mark style="color:blue;">authenticated key establishment</mark>](../protocols/secure-channels.md) protocol and then [<mark style="color:blue;">authenticate</mark>](identities.md#identifier-authentication) each other's [<mark style="color:blue;">Ockam Identifier</mark>](identities.md#identifier) by signing the transcript hash of the key establishment protocol. The cryptographic key establishment safely derives shared secrets without transporting these secrets on the wire.
 
@@ -65,9 +65,9 @@ In this example we'll create a secure channel from [Node](nodes.md) `a` to node 
 HELLO
 ```
 
-In the above example `a` and `b` mutually authenticate using the default [Ockam Identity](identities.md) that was generated when we create the first node. Both nodes, in this case, are using the same identity.
+In the above example `a` and `b` mutually authenticate using the default [Ockam Identity](identities.md) that is generated when we create the first node. Both nodes, in this case, are using the same identity.
 
-Once the channel is created, note above how we used the service address of the channel on `n1` to send messages through the channel. This can be shortened to the one liner:
+Once the channel is created, note above how we used the service address of the channel on `a` to send messages through the channel. This can be shortened to the one liner:
 
 ```
 » ockam secure-channel create --from a --to /node/b/service/api |
@@ -78,13 +78,13 @@ The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3`, the addres
 
 ## Over Bridges <a href="#bridges" id="bridges"></a>
 
-In a previous section, we learnt that [Bridges](advanced-routing.md#bridges) make enable end-to-end protocols between applications in separate networks. Since Ockam Secure Channels are built on top of Ockam Routing, we can establish end-to-end secure channels over a route that may include one or more bridges.
+In a previous section, we learnt that [Bridges](advanced-routing.md#bridges) enable end-to-end protocols between applications in separate networks in cases where we have a bridge node that is connected to both networks. Since Ockam Secure Channels are built on top of Ockam Routing, we can establish end-to-end secure channels over a route that may include one or more bridges.
 
-<img src="../../.gitbook/assets/file.excalidraw (5).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">
+
+[<mark style="color:blue;">Delete any existing nodes</mark>](nodes.md#nodes) and then try this example:
 
 ```
-» ockam node delete --all
-
 » ockam node create a
 » ockam node create bridge1 --tcp-listener-address=127.0.0.1:7000
 » ockam node create bridge2 --tcp-listener-address=127.0.0.1:8000
@@ -125,11 +125,13 @@ HELLO
 
 ## Through Relays <a href="#relays" id="relays"></a>
 
-In a previous section, we saw how [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet. Since Ockam Secure Channels are built on top of Ockam Routing, we can establish end-to-end secure channels over a route that may include one or more relays.
+In a previous section, we also saw how [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay) make it possible to establish end-to-end protocols with services operating in a remote private networks, without requiring a remote service to expose listening ports on an outside hostile network like the Internet.
+
+Since Ockam Secure Channels are built on top of Ockam Routing, we can establish end-to-end secure channels over a route that may include one or more relays.
 
 <img src="../../.gitbook/assets/file.excalidraw (3) (1).svg" alt="" class="gitbook-drawing">
 
-Delete all nodes and try the following example:
+[<mark style="color:blue;">Delete any existing nodes</mark>](nodes.md#nodes) and then try this example:
 
 ```
 » ockam node create relay --tcp-listener-address=127.0.0.1:7000
@@ -156,9 +158,11 @@ HELLO
 
 Ockam Secure Channels are built on top of Ockam Routing. But they also carry Ockam Routing messages.
 
-This means that we can run any Ockam Routing based protocol through Secure Channels. This also means that we can create <mark style="color:orange;">Secure Channels that pass through other Secure Channels.</mark>
-
 <img src="../../.gitbook/assets/file.excalidraw (1) (2).svg" alt="" class="gitbook-drawing">
+
+Any protocols that is implemented in this way melds with and becomes a seamless part of Ockam Routing. This means that we can run any Ockam Routing based protocol through Secure Channels. This also means that we can create <mark style="color:orange;">Secure Channels that pass through other Secure Channels.</mark>
+
+The on-the-wire overhead of a new secure channel is only 20 bytes per messages. This makes passing secure channels though other secure channels a powerful tool in many real world topologies.
 
 ## Elastic Encrypted Relays
 
