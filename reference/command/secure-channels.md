@@ -70,15 +70,15 @@ In the above example `a` and `b` mutually authenticate using the default [Ockam 
 Once the channel is created, note above how we used the service address of the channel on `n1` to send messages through the channel. This can be shortened to the one liner:
 
 ```
-» ockam secure-channel create --from a --to /node/b/service/api \
-    | ockam message send hello --from a --to -/service/uppercase
+» ockam secure-channel create --from a --to /node/b/service/api |
+    ockam message send hello --from a --to -/service/uppercase
 ```
 
 The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3`, the address of a new secure channel on `a`, to standard output and the second command replaces the `-` in the `to` argument with the value from standard input. Everything else works the same.
 
 ## Over Bridges <a href="#bridges" id="bridges"></a>
 
-
+In a previous section, we learnt that [Bridges](advanced-routing.md#bridges) make enable end-to-end protocols between applications in separate networks. Since Ockam Secure Channels are built on top of Ockam Routing, we can establish end-to-end secure channels over a route that may include one or more bridges.
 
 <img src="../../.gitbook/assets/file.excalidraw (5).svg" alt="" class="gitbook-drawing">
 
