@@ -174,7 +174,7 @@ Let's create an end-to-end secure channel through an elastic relay in your Orche
 
 <img src="../../.gitbook/assets/file.excalidraw (3) (1).svg" alt="" class="gitbook-drawing">
 
-The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was created when you ran `ockam enroll` offers an Elastic Relay Service. Delete all your existing nodes and try this new example.
+The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was created when you ran `ockam enroll` offers an Elastic Relay Service. [<mark style="color:blue;">Delete any existing nodes</mark>](nodes.md#nodes) and then try this new example:
 
 ```
 » ockam project information --output json > project.json
@@ -194,9 +194,13 @@ Nodes `a` and `b` (the two ends) are mutually authenticated and are cryptographi
 
 ## Secure Portals
 
-In a previous section, we saw how [<mark style="color:blue;">Portals</mark>](advanced-routing.md#portal) make existing application protocols work over Ockam Routing without changing any code in the existing applications. We can combine Secure Channels with Portals to create secure communication for existing applications.
+In a previous section, we saw how [<mark style="color:blue;">Portals</mark>](advanced-routing.md#portal) make existing application protocols work over Ockam Routing without changing any code in the existing applications.
+
+We can combine Secure Channels with Portals to create Secure Portals.&#x20;
 
 <img src="../../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
+
+Continuing from the above example on [<mark style="color:blue;">Elastic Encrypted Relays</mark>](secure-channels.md#elastic-encrypted-relays) create a python based web server to represent a sample web service. This web service is listening on `127.0.0.1:9000`.
 
 ```
 » python3 -m http.server --bind 127.0.0.1 9000
@@ -209,6 +213,14 @@ In a previous section, we saw how [<mark style="color:blue;">Portals</mark>](adv
 HTTP/1.0 200 OK
 ...
 ```
+
+Then create a TCP Portal Outlet that makes `127.0.0.1:9000` available on worker address `/service/outlet` on `b`. We already have a forwarding relay for `b` on orchestrator `/project/default` at `/service/forward_to_b`.
+
+We then create a TCP Portal Inlet on `a` that will listen for TCP connections to `127.0.0.1:6000`. For every new connection, the inlet creates a portal following the `--to` route all the way to the outlet. As it receives TCP data, it chunks and wraps them into Ockam Routing messages and sends them along the supplied route. The outlet receives Ockam Routing messages, unwraps them to extract TCP data and send that data along to the target web service on `127.0.0.1:9000`. It all just seamlessly works.
+
+The HTTP requests from curl, enter the inlet on `a`, travel to the orchestrator project node and are relayed back to `b` via it's forwarding relay to reach the outlet and onward to the the python based web service. Responses take the same return route back to curl.
+
+The TCP Inlet/Outlet work for the large number of TCP based protocols like HTTP. It is also simple to implement portals for other transport protocols. There is a growing base of Ockam Portal Add-Ons in our [<mark style="color:blue;">Github Repository</mark>](https://github.com/build-trust/ockam).
 
 ## Mutual Authorization
 
