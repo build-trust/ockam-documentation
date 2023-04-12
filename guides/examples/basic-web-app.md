@@ -74,7 +74,7 @@ export PG_PORT=5433
 ockam identity create db
 ockam project authenticate --identity db --token $DB_TOKEN --project-path project.json
 ockam node create db --project-path project.json --identity db
-ockam policy set --at db --resource tcp-outlet --expression '(= subject.component "web")'
+ockam policy create --at db --resource tcp-outlet --expression '(= subject.component "web")'
 ockam tcp-outlet create --at /node/db --from /service/outlet --to 127.0.0.1:$PG_PORT
 ockam forwarder create db --to /node/db --at /project/default
 ```
@@ -93,7 +93,7 @@ Next we'll create and enroll our node, set a policy to say it is only allowed to
 ockam identity create web
 ockam project authenticate --identity web --token $WEB_TOKEN --project-path project.json
 ockam node create web --project-path project.json --identity web
-ockam policy set --at web --resource tcp-inlet --expression '(= subject.component "db")'
+ockam policy create --at web --resource tcp-inlet --expression '(= subject.component "db")'
 ockam tcp-inlet create --at /node/web --from 127.0.0.1:5432 --to /project/default/service/forward_to_db/secure/api/service/outlet
 ```
 
