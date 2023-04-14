@@ -12,7 +12,7 @@ rm -rf book src "$version" "../../$version"
 # get the version
 git clone --depth 1 git@github.com:build-trust/ockam.git "$version"
 cd "$version"
-git checkout "$target_version"
+git checkout "ockam_$version"
 
 # generate markdown in src
 cargo run --release --bin ockam markdown
@@ -20,7 +20,6 @@ mv ockam_markdown_pages ../src
 cd ..
 
 # generate mdbook - using ./src, into ../../$version
-cp SUMMARY.md src/
 mdbook build
 mv book "../../$version"
 
