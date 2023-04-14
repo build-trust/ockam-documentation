@@ -137,7 +137,7 @@ Since Ockam Secure Channels are built on top of Ockam Routing, we can establish 
 » ockam node create relay --tcp-listener-address=127.0.0.1:7000
 
 » ockam node create b
-» ockam forwarder create b --at relay --to b
+» ockam forwarder create b --at /node/relay --to b
 /service/forward_to_b
 
 » ockam node create a
@@ -227,7 +227,7 @@ The TCP Inlet/Outlet work for the large number of TCP based protocols like HTTP.
 Trust and authorization decisions must be anchored in some pre-existing knowledge.
 
 ```
-» ockam node delete --all
+» ockam reset -y
 
 » ockam identity create i1
 » ockam identity show i1 > i1.identifier

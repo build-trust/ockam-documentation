@@ -30,6 +30,7 @@ Ockam [<mark style="color:blue;">Transports</mark>](routing.md) adapt Ockam Rout
 Let’s start by creating a [<mark style="color:blue;">node</mark>](nodes.md#nodes) and sending a message to a [<mark style="color:blue;">service</mark>](nodes.md#services) on that node.
 
 ```
+» ockam reset -y
 » ockam node create n1
 » ockam message send 'Hello Ockam!' --to /node/n1/service/echo
 Hello Ockam!
