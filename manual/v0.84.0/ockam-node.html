@@ -207,7 +207,7 @@ HELLO
 # Create a secure channel from node n1 to the api service on node n2
 # The /service/api is a secure channel listener that is started on every node
 # Send a message through this encrypted channel to the uppercase service
-$ ockam secure-channel create --from /node/n1 --to /node/n2/service/api \\
+$ ockam secure-channel create --from /node/n1 --to /node/n2/service/api \
     | ockam message send hello --from /node/n1 --to -/service/uppercase
 HELLO
 

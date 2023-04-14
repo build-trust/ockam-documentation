@@ -186,13 +186,13 @@ $ ockam node create n1 --tcp-listener-address 127.0.0.1:6001
 $ ockam node create n2 --tcp-listener-address 127.0.0.1:6002
 $ ockam node create n3 --tcp-listener-address 127.0.0.1:6003
 
-$ ockam secure-channel create --from /node/n1 \\
-    --to /ip4/127.0.0.1/tcp/6002/ip4/127.0.0.1/tcp/6003/service/api \\
+$ ockam secure-channel create --from /node/n1 \
+    --to /ip4/127.0.0.1/tcp/6002/ip4/127.0.0.1/tcp/6003/service/api \
       | ockam message send hello --from /node/n1 --to -/service/uppercase
 HELLO
 
 # Or the more concise:
-$ ockam secure-channel create --from /node/n1 --to /node/n2/node/n3/service/api \\
+$ ockam secure-channel create --from /node/n1 --to /node/n2/node/n3/service/api \
     | ockam message send hello --from /node/n1 --to -/service/uppercase
 HELLO
 </code></pre>
