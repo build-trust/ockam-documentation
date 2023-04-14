@@ -49,7 +49,7 @@ ockam node create db_sidecar
 
 ockam tcp-outlet create --at /node/db_sidecar --from /service/outlet --to 127.0.0.1:5432
 
-ockam forwarder create db_sidecar --at /node/relay --to /node/db_sidecar
+ockam relay create db_sidecar --at /node/relay --to /node/db_sidecar
 ```
 
 ### Create a client sidecar

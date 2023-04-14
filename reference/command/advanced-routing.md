@@ -29,7 +29,7 @@ Delete all your existing nodes and try this new example:
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
 
 » ockam node create n3
-» ockam forwarder create n3 --at /node/n2 --to /node/n3
+» ockam relay create n3 --at /node/n2 --to /node/n3
 /service/forward_to_n3
 
 » ockam node create n1

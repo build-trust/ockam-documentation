@@ -137,7 +137,7 @@ Since Ockam Secure Channels are built on top of Ockam Routing, we can establish 
 » ockam node create relay --tcp-listener-address=127.0.0.1:7000
 
 » ockam node create b
-» ockam forwarder create b --at /node/relay --to b
+» ockam relay create b --at /node/relay --to b
 /service/forward_to_b
 
 » ockam node create a
@@ -182,7 +182,7 @@ The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was create
 » ockam node create a --project-path project.json
 » ockam node create b --project-path project.json
 
-» ockam forwarder create b --at /project/default --to /node/a
+» ockam relay create b --at /project/default --to /node/a
 /service/forward_to_b
 
 » ockam secure-channel create --from a --to /project/default/service/forward_to_b/service/api \
