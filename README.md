@@ -69,10 +69,10 @@ python3 -m http.server --bind 127.0.0.1 5000
 
 # In a new terminal window, setup an ockam node, called `s`, as a sidecar next to the 
 # application service. Then create a tcp outlet, on the `s` node, to send raw tcp traffic
-# to the service. Finally create a forwarder in your default Orchestrator project.
+# to the service. Finally create a relay in your default Orchestrator project.
 ockam node create s --project-path default-project.json
 ockam tcp-outlet create --at s --from /service/outlet --to 127.0.0.1:5000
-ockam forwarder create s --at /project/default --to s
+ockam relay create s --at /project/default --to s
 
 # -- APPLICATION CLIENT --
 

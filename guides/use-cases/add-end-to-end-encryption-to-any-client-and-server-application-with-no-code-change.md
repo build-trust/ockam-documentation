@@ -21,7 +21,7 @@ python3 -m http.server --bind 127.0.0.1 5000
 
 ockam node create server_sidecar
 ockam tcp-outlet create --at /node/server_sidecar --from /service/outlet --to 127.0.0.1:5000
-ockam forwarder create server_sidecar --at /node/relay --to /node/server_sidecar
+ockam relay create server_sidecar --at /node/relay --to /node/server_sidecar
 
 # -- APPLICATION CLIENT --
 
@@ -38,7 +38,7 @@ We have an application http server in python and an application client in curl. 
 
 To make this happen, we create a relay node that runs a forwarding service exposed on the Internet. Ockam Orchestrator offers highly scalable, managed encrypted relays but for this first demo we create a local relay. We then create a sidecar node next to our application server and another sidecar node next to our application client. All three nodes generate unique cryptographic identities and file system vaults to store private keys. All three nodes are setup to trust each other’s public keys.
 
-We ask the server\_sidecar to create a TCP outlet to the application server and then ask the relay node to setup a forwarder for the server\_sidecar. We then ask the client\_sidecar to create an end-to-end encrypted and mutually authenticated secure channel with the server\_sidecar via the relay. Finally we open a TCP inlet and tunnel client requests and responses through our end-to-end secure channel.
+We ask the server\_sidecar to create a TCP outlet to the application server and then ask the relay node to setup a relay for the server\_sidecar. We then ask the client\_sidecar to create an end-to-end encrypted and mutually authenticated secure channel with the server\_sidecar via the relay. Finally we open a TCP inlet and tunnel client requests and responses through our end-to-end secure channel.
 
 Ockam gives you the tools to create many such end-to-end secure topologies. In this example topology, the application sidecar nodes create outgoing TCP connections to the relay which allows them to communicate from behind private NATs. The relay node routes encrypted data and cannot see or tamper it.
 

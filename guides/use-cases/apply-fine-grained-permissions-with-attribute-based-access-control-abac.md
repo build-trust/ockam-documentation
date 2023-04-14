@@ -119,7 +119,7 @@ ockam node create control_plane1 --project-path project.json --identity control_
 # Set a policy, create the tcp-outlet and forwarder.
 ockam policy create --at control_plane1 --resource tcp-outlet --expression '(= subject.component "edge")'
 ockam tcp-outlet create --at /node/control_plane1 --from /service/outlet --to 127.0.0.1:5000
-ockam forwarder create control_plane1 --at /project/default --to /node/control_plane1
+ockam relay create control_plane1 --at /project/default --to /node/control_plane1
 ```
 
 ### Edge Plane
