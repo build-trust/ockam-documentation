@@ -29,7 +29,7 @@ No more having to think about creating unique cryptographic keys and issuing cre
 * Define and enforce project-wide attribute based access control policies. Chose ABAC, RBAC or ACLs.
 * Integrate with enterprise identity providers and policy providers for seamless employee access.
 
-<figure><img src="../../../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM.png" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Screen Shot 2022-10-28 at 10.37.03 AM (1).png" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
 ## A step by step introduction <a href="#introduction" id="introduction"></a>
 

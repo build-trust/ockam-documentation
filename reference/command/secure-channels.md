@@ -9,7 +9,7 @@ description: >-
 
 To [<mark style="color:blue;">trust data-in-motion</mark>](../../#trust-for-data-in-motion), applications need end-to-end guarantees of data authenticity, integrity, and confidentiality.
 
-In previous sections we saw how Ockam [<mark style="color:blue;">Routing</mark>](routing.md) and [<mark style="color:blue;">Transports</mark>](routing.md#transport)<mark style="color:blue;">,</mark> when combined with the ability to model [<mark style="color:blue;">Bridges</mark>](advanced-routing.md) and [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay), make it possible to <mark style="color:orange;">create end-to-end, application layer protocols in</mark> <mark style="color:orange;"></mark><mark style="color:orange;">**any**</mark> <mark style="color:orange;"></mark><mark style="color:orange;">communication topology</mark> - across networks, clouds, and protocols over many transport layer hops.
+In previous sections we saw how Ockam [<mark style="color:blue;">Routing</mark>](routing.md) and [<mark style="color:blue;">Transports</mark>](routing.md#transport)<mark style="color:blue;">,</mark> when combined with the ability to model [<mark style="color:blue;">Bridges</mark>](advanced-routing.md) and [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay), make it possible to <mark style="color:orange;">create end-to-end, application layer protocols in</mark> <mark style="color:orange;">**any**</mark> <mark style="color:orange;">communication topology</mark> - across networks, clouds, and protocols over many transport layer hops.
 
 Ockam [Secure Channels](secure-channels.md#secure-channel) is an end-to-end protocol built on top of Ockam Routing. This cryptographic protocol guarantees data authenticity, integrity, and confidentiality over any communication topology that can be traversed with Ockam Routing.
 
@@ -35,7 +35,7 @@ Ockam Secure Channels provides the following <mark style="color:orange;">end-to-
 
 1. **Authenticity:** Each end of the channel knows that messages received on the channel must have been sent by someone who possesses the secret keys of a specific Ockam [<mark style="color:blue;">Identifier</mark>](identities.md#identifiers).
 2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tapered en-route and are exactly what was sent by the authenticated sender at the other end of the channel.
-3. **Confidentiality:**  Each end of the channel knows that the contents of messages received on the channel could not have been observed en-route between the sender and the receiver.
+3. **Confidentiality:** Each end of the channel knows that the contents of messages received on the channel could not have been observed en-route between the sender and the receiver.
 
 <img src="../../.gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">
 
@@ -170,8 +170,6 @@ Ockam Orchestrator can create and manage Elastic Encrypted [Relays](secure-chann
 
 Let's create an end-to-end secure channel through an elastic relay in your Orchestrator [project](nodes.md#project).
 
-
-
 <img src="../../.gitbook/assets/file.excalidraw (3) (1).svg" alt="" class="gitbook-drawing">
 
 The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was created when you ran `ockam enroll` offers an Elastic Relay Service. [<mark style="color:blue;">Delete any existing nodes</mark>](nodes.md#nodes) and then try this new example:
@@ -196,7 +194,7 @@ Nodes `a` and `b` (the two ends) are mutually authenticated and are cryptographi
 
 In a previous section, we saw how [<mark style="color:blue;">Portals</mark>](advanced-routing.md#portal) make existing application protocols work over Ockam Routing without changing any code in the existing applications.
 
-We can combine Secure Channels with Portals to create Secure Portals.&#x20;
+We can combine Secure Channels with Portals to create Secure Portals.
 
 <img src="../../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
 
@@ -226,9 +224,9 @@ The TCP Inlet/Outlet work for the large number of TCP based protocols like HTTP.
 
 Trust and authorization decisions must be anchored in some pre-existing knowledge.
 
-```
-» ockam reset -y
+[<mark style="color:blue;">Delete any existing nodes</mark>](nodes.md#nodes) and then try this new example:
 
+```
 » ockam identity create i1
 » ockam identity show i1 > i1.identifier
 » ockam node create n1 --identity i1
