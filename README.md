@@ -123,16 +123,16 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 
 #### End-to-end data authenticity, integrity, and privacy in any communication topology
 
-* Create end-to-end encrypted, authenticated [secure channels](reference/command/secure-channels.md) over any transport topology.
-* Create secure channels over [multi-hop, multi-protocol routes](reference/command/routing.md) - TCP, UDP, WebSockets, BLE, etc.
-* Provision [encrypted relays](reference/command/secure-channels.md#relays) for applications distributed across many edge, cloud and data-center private networks.
-* Make any protocol secure by tunneling it through mutually authenticated and encrypted [portals](reference/command/secure-channels.md#secure-portals).
+* Create end-to-end encrypted, authenticated [<mark style="color:blue;">secure channels</mark>](reference/command/secure-channels.md) over any transport topology.
+* Create secure channels over [<mark style="color:blue;">multi-hop, multi-protocol routes</mark>](reference/command/routing.md) - TCP, UDP, WebSockets, BLE, etc.
+* Provision [<mark style="color:blue;">encrypted relays</mark>](reference/command/secure-channels.md#relays) for applications distributed across many edge, cloud and data-center private networks.
+* Make any protocol secure by tunneling it through mutually authenticated and encrypted [<mark style="color:blue;">portals</mark>](reference/command/secure-channels.md#secure-portals).
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams - Kafka, Kinesis, RabbitMQ etc.
 
 #### Identity-based, policy driven, application layer trust – granular authentication and authorization
 
-* Generate cryptographically provable unique [identities](reference/command/identities.md).
-* Store private keys in safe [vaults](reference/command/identities.md) - hardware secure enclaves and cloud key management systems.
+* Generate cryptographically provable unique [<mark style="color:blue;">identities</mark>](reference/command/identities.md).
+* Store private keys in safe [<mark style="color:blue;">vaults</mark>](reference/command/identities.md) - hardware secure enclaves and cloud key management systems.
 * Operate scalable credential authorities to issue lightweight, short-lived, revokable, attribute-based credentials.
 * Onboard fleets of self-sovereign application identities using secure enrollment protocols.
 * Rotate and revoke keys and credentials – at scale, across fleets.
