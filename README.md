@@ -10,7 +10,7 @@ Modern applications are distributed and have an unwieldy number of interconnecti
 
 ### Use Cases
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong></strong><a href="guides/use-cases/#virtually-adjacent-databases"><strong>Virtually-adjacent databases</strong></a><strong></strong></td><td>Create secure communication with private databases, from anywhere. No longer do you need to expose your data to the public internet with service ports.</td><td></td><td></td><td><a href="guides/use-cases/">use-cases</a></td></tr><tr><td><strong></strong><a href="guides/use-cases/#secure-by-design-messaging"><strong>Secure-by-design messaging</strong></a><strong></strong></td><td>Guarantee data authenticity and integrity of events from producers all-the-way to end consumers. End-to-end encrypt data-in-motion through Kafka.</td><td></td><td></td><td><a href="guides/use-cases/">use-cases</a></td></tr><tr><td><strong></strong><a href="guides/use-cases/#developer-first-authorization"><strong>Developer-first authentication</strong></a></td><td>Authenticate and authorize every access decision. Easily add fine-grained, identity-driven controls to enforce enterprise policies everywhere.</td><td></td><td></td><td><a href="guides/use-cases/">use-cases</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="guides/use-cases/#virtually-adjacent-databases"><strong>Virtually-adjacent databases</strong></a></td><td>Create secure communication with private databases, from anywhere. No longer do you need to expose your data to the public internet with service ports.</td><td></td><td></td><td><a href="guides/use-cases/">use-cases</a></td></tr><tr><td><a href="guides/use-cases/#secure-by-design-messaging"><strong>Secure-by-design messaging</strong></a></td><td>Guarantee data authenticity and integrity of events from producers all-the-way to end consumers. End-to-end encrypt data-in-motion through Kafka.</td><td></td><td></td><td><a href="guides/use-cases/">use-cases</a></td></tr><tr><td><a href="guides/use-cases/#developer-first-authorization"><strong>Developer-first authentication</strong></a></td><td>Authenticate and authorize every access decision. Easily add fine-grained, identity-driven controls to enforce enterprise policies everywhere.</td><td></td><td></td><td><a href="guides/use-cases/">use-cases</a></td></tr></tbody></table>
 
 ### Quick Start
 
@@ -26,14 +26,10 @@ First, let’s install Ockam Command. Ockam Command is our Command Line Interfac
 {% tab title="Homebrew" %}
 If you use Homebrew, you can install Ockam using brew.
 
-
-
 ```sh
 # Tap and install Ockam Command
 brew install build-trust/ockam/ockam
 ```
-
-
 
 This will download a precompiled binary and add it to your path. If you don’t use Homebrew, you can also install on Linux and MacOS systems using curl. See instructions for other systems in the next tab.
 {% endtab %}
@@ -41,14 +37,10 @@ This will download a precompiled binary and add it to your path. If you don’t 
 {% tab title="Other Systems" %}
 On Linux and MacOS, you can download precompiled binaries for your architecture using curl.
 
-
-
 ```shell
 curl --proto '=https' --tlsv1.2 -sSf \
     https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | bash
 ```
-
-
 
 This will download a precompiled binary and add it to your path. If the above instructions don't work on your machine, please [post a question](https://github.com/build-trust/ockam/discussions), we’d love to help.
 {% endtab %}
@@ -131,10 +123,10 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 
 #### End-to-end data authenticity, integrity, and privacy in any communication topology
 
-* Create end-to-end encrypted, authenticated secure channels over any transport topology.
-* Create secure channels over multi-hop, multi-protocol routes - TCP, UDP, WebSockets, BLE, etc.
-* Provision encrypted relays for applications distributed across many edge, cloud and data-center private networks.
-* Make any protocol secure by tunneling it through mutually authenticated and encrypted portals.
+* Create end-to-end encrypted, authenticated [secure channels](reference/command/secure-channels.md) over any transport topology.
+* Create secure channels over [multi-hop, multi-protocol routes](reference/command/routing.md) - TCP, UDP, WebSockets, BLE, etc.
+* Provision [encrypted relays](reference/command/secure-channels.md#relays) for applications distributed across many edge, cloud and data-center private networks.
+* Make any protocol secure by tunneling it through mutually authenticated and encrypted [portals](reference/command/secure-channels.md#secure-portals).
 * Bring end-to-end encryption to enterprise messaging, pub/sub and event streams - Kafka, Kinesis, RabbitMQ etc.
 
 #### Identity-based, policy driven, application layer trust – granular authentication and authorization
@@ -149,7 +141,7 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 
 ### Deep Dives
 
-<mark style="color:blue;"></mark>[<mark style="color:blue;">Read more</mark>](guides/use-cases/) about how teams are using Ockam for many [<mark style="color:blue;">use cases</mark>](guides/use-cases/) across industries or dive into our step-by-step reference on our [<mark style="color:blue;">command line</mark>](reference/command/) and [<mark style="color:blue;">rust libraries</mark>](reference/libraries/).
+[<mark style="color:blue;">Read more</mark>](guides/use-cases/) about how teams are using Ockam for many [<mark style="color:blue;">use cases</mark>](guides/use-cases/) across industries or dive into our step-by-step reference on our [<mark style="color:blue;">command line</mark>](reference/command/) and [<mark style="color:blue;">rust libraries</mark>](reference/libraries/).
 
 <table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="reference/command/"><strong>Ockam Command</strong></a></td><td>Command line tools to build and orchestrate highly scalable and secure distributed applications. Orchestrate nodes, vaults, identities, credentials, secure channels, relays, portals and more.</td><td></td><td><a href="reference/command/">command</a></td></tr><tr><td><a href="reference/libraries/"><strong>Ockam Programming Libraries</strong></a></td><td>Rust crates to build secure by design applications for any environment – from highly scalable cloud infrastructure to tiny battery operated microcontroller based devices.</td><td></td><td><a href="reference/libraries/rust/">rust</a></td></tr></tbody></table>
 
