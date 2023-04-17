@@ -131,8 +131,8 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 
 #### Identity-based, policy driven, application layer trust – granular authentication and authorization
 
-* Generate cryptographically provable unique identities.
-* Store private keys in safe vaults - hardware secure enclaves and cloud key management systems.
+* Generate cryptographically provable unique [identities](reference/command/identities.md).
+* Store private keys in safe [vaults](reference/command/identities.md) - hardware secure enclaves and cloud key management systems.
 * Operate scalable credential authorities to issue lightweight, short-lived, revokable, attribute-based credentials.
 * Onboard fleets of self-sovereign application identities using secure enrollment protocols.
 * Rotate and revoke keys and credentials – at scale, across fleets.
