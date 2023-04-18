@@ -41,12 +41,14 @@ Add the following code to this file:
 // examples/01-node.rs
 // This program creates and then immediately stops a node.
 
-use ockam::{Context, Result};
+use ockam::{node, Context, Result};
 
 #[ockam::node]
-async fn main(mut ctx: Context) -> Result<()> {
+async fn main(ctx: Context) -> Result<()> {
+    let mut node = node(ctx);
+    
     // Stop the node as soon as it starts.
-    ctx.stop().await
+    node.stop().await
 }
 ```
 
@@ -146,22 +148,25 @@ Add the following code to this file:
 
 use hello_ockam::Echoer;
 use ockam::access_control::AllowAll;
-use ockam::{Context, Result};
+use ockam::{node, Context, Result};
 
 #[ockam::node]
-async fn main(mut ctx: Context) -> Result<()> {
-    // Start a worker, of type Echoer, at address "echoer"
-    ctx.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
+async fn main(ctx: Context) -> Result<()> {
+  // Create a node with default implementations
+  let mut node = node(ctx);
 
-    // Send a message to the worker at address "echoer".
-    ctx.send("echoer", "Hello Ockam!".to_string()).await?;
+  // Start a worker, of type Echoer, at address "echoer"
+  node.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
 
-    // Wait to receive a reply and print it.
-    let reply = ctx.receive::<String>().await?;
-    println!("App Received: {}", reply); // should print "Hello Ockam!"
+  // Send a message to the worker at address "echoer".
+  node.send("echoer", "Hello Ockam!".to_string()).await?;
 
-    // Stop all workers, stop the node, cleanup and return.
-    ctx.stop().await
+  // Wait to receive a reply and print it.
+  let reply = node.receive::<String>().await?;
+  println!("App Received: {}", reply); // should print "Hello Ockam!"
+
+  // Stop all workers, stop the node, cleanup and return.
+  node.stop().await
 }
 ```
 
