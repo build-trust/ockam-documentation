@@ -42,5 +42,5 @@
       * [Nodes and Workers](reference/libraries/rust/internals/nodes.md)
     * [docs.rs/ockam](https://docs.rs/ockam/)
 * [Protocols](reference/protocols/README.md)
-  * [Routing and Transports](reference/protocols/routing-and-transports.md)
+  * [Application Layer Routing](reference/protocols/routing.md)
   * [Secure Channels](reference/protocols/secure-channels.md)
