@@ -32,25 +32,24 @@ Add the following code to this file:
 
 use hello_ockam::Echoer;
 use ockam::access_control::AllowAll;
-use ockam::identity::{Identity, SecureChannelOptions};
-use ockam::{vault::Vault, Context, Result, TcpListenerOptions, TcpTransport};
+use ockam::identity::SecureChannelOptions;
+use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    ctx.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
+    // Create a node with default implementations
+    let node = node(ctx);
+    // Initialize the TCP Transport
+    let tcp = node::create_tcp_transport().await?;
 
-    // Initialize the TCP Transport.
-    let tcp = TcpTransport::create(&ctx).await?;
+    node.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
 
-    // Create a Vault to safely store secret keys for Bob.
-    let vault = Vault::create();
-
-    // Create an Identity to represent Bob.
-    let bob = Identity::create(&ctx, vault).await?;
+    // Create an Identity to represent Bob
+    let bob = node.create_identity().await?;
 
     // Create a secure channel listener for Bob that will wait for requests to
     // initiate an Authenticated Key Exchange.
-    bob.create_secure_channel_listener("bob_listener", SecureChannelOptions::new())
+    node.create_secure_channel_listener(&bob, "bob_listener", SecureChannelOptions::new())
         .await?;
 
     // Create a TCP listener and wait for incoming connections.
@@ -80,18 +79,20 @@ Add the following code to this file:
 
 use hello_ockam::Forwarder;
 use ockam::access_control::AllowAll;
-use ockam::{Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransport};
+use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    // Initialize the TCP Transport.
-    let tcp = TcpTransport::create(&ctx).await?;
+    // Create a node with default implementations
+    let node = node(ctx);
+    // Initialize the TCP Transport
+    let tcp = node.create_tcp_transport().await?;
 
     // Create a TCP connection to Bob.
     let connection_to_bob = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
     // Start a Forwarder to forward messages to Bob using the TCP connection.
-    ctx.start_worker("forward_to_bob", Forwarder(connection_to_bob), AllowAll, AllowAll)
+    node.start_worker("forward_to_bob", Forwarder(connection_to_bob), AllowAll, AllowAll)
         .await?;
 
     // Create a TCP listener and wait for incoming connections.
@@ -118,35 +119,34 @@ Add the following code to this file:
 // It then routes a message, to a worker on a different node, through this encrypted channel.
 
 use ockam::identity::{Identity, SecureChannelListenerOptions};
-use ockam::{route, vault::Vault, Context, Result, TcpConnectionOptions, TcpTransport};
+use ockam::{route, node, Context, Result, TcpConnectionOptions, TcpTransportExtension};
 
 #[ockam::node]
-async fn main(mut ctx: Context) -> Result<()> {
-    // Initialize the TCP Transport.
-    let tcp = TcpTransport::create(&ctx).await?;
+async fn main(ctx: Context) -> Result<()> {
+    // Create a node with default implementations
+    let node = node(ctx);
+    // Initialize the TCP Transport
+    let tcp = node.create_tcp_transport().await?;
 
-    // Create a Vault to safely store secret keys for Alice.
-    let vault = Vault::create();
-
-    // Create an Identity to represent Alice.
-    let alice = Identity::create(&ctx, vault).await?;
+    // Create an Identity to represent Alice
+    let alice = node.create_identity().await?;
 
     // Create a TCP connection to the middle node.
     let connection_to_middle_node = tcp.connect("localhost:3000", TcpConnectionOptions::new()).await?;
 
     // Connect to a secure channel listener and perform a handshake.
     let r = route![connection_to_middle_node, "forward_to_bob", "bob_listener"];
-    let channel = alice.create_secure_channel(r, TrustEveryonePolicy).await?;
+    let channel = node.create_secure_channel(&alice, r, TrustEveryonePolicy).await?;
 
     // Send a message to the echoer worker via the channel.
-    ctx.send(route![channel, "echoer"], "Hello Ockam!".to_string()).await?;
+    node.send(route![channel, "echoer"], "Hello Ockam!".to_string()).await?;
 
     // Wait to receive a reply and print it.
-    let reply = ctx.receive::<String>().await?;
+    let reply = node.receive::<String>().await?;
     println!("App Received: {}", reply); // should print "Hello Ockam!"
 
     // Stop all workers, stop the node, cleanup and return.
-    ctx.stop().await
+    node.stop().await
 }
 ```
 

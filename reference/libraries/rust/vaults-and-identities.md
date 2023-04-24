@@ -9,17 +9,17 @@ description: >-
 ```rust
 use ockam::{Context, Result};
 use ockam::identity::Identity;
-use ockam::vault::Vault;
+use ockam::node;
 
 #[ockam::node]
-async fn main(mut ctx: Context) -> Result<()> {
-    // Create a Vault to safely store secret keys for Alice.
-    let vault = Vault::create();
+async fn main(ctx: Context) -> Result<()> {
+    // Create default node to safely store secret keys for Alice
+    let mut node = node(ctx);
 
     // Create an Identity to represent Alice.
-    let alice = Identity::create(&ctx, vault).await?;
+    let alice = node.create_identity().await?;
 
     // Stop the node.
-    ctx.stop().await
+    node.stop().await
 }
 ```
