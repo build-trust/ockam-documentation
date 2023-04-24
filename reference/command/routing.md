@@ -38,13 +38,13 @@ Hello Ockam!
 
 We get a reply back and the message flow looked like this.
 
-<figure><img src="../../.gitbook/assets/simple.001 (1).jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../diagrams/plantuml/simple/simple.001.jpeg" alt=""><figcaption></figcaption></figure>
 
 To achieve this, Ockam Routing Protocol messages carry, with them, two metadata fields: `onward_route` and `return_route`. A route is an ordered list of addresses describing the path that a message to travel. All of this information is carried in a really <mark style="color:orange;">compact binary</mark> format.
 
 Pay very close attention to the Sender, Hop, and Replier rules in the below sequence diagrams. Note how `onward_route` and `return_route` are handled as the message travels.
 
-<figure><img src="../../.gitbook/assets/one-hop.001.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../diagrams/plantuml/one-hop/one-hop.001.jpeg" alt=""><figcaption></figcaption></figure>
 
 The above was just one message hop, we can extend this for two hops:
 
@@ -53,7 +53,7 @@ The above was just one message hop, we can extend this for two hops:
 hello
 ```
 
-<figure><img src="../../.gitbook/assets/two-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../diagrams/plantuml/two-hops/two-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
 This very simple protocol can extend to any number of hops, try repeating `/service/hop` many times in the `--to` argument of the following command:
 
@@ -62,7 +62,7 @@ This very simple protocol can extend to any number of hops, try repeating `/serv
 hello
 ```
 
-<figure><img src="../../.gitbook/assets/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../diagrams/plantuml/n-hops/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
 So far, we’ve routed messages between Workers on one Node. Next let's see how we can route messages across nodes and machines using Ockam Routing adapters called Transports.
 
@@ -70,7 +70,7 @@ So far, we’ve routed messages between Workers on one Node. Next let's see how 
 
 Ockam Transports adapt Ockam [Routing](routing.md#routing) for specific transport protocol like TCP, UDP, WebSockets, Bluetooth etc. There is a growing base of Ockam Transport implementations in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam).
 
-Let’s start by exploring the TCP transport. Create two new nodes `n2` and `n3`  and explicitly specify that they should listen on the local TCP addresses `127.0.0.1:7000` and `127.0.0.1:8000` respectively:
+Let’s start by exploring the TCP transport. Create two new nodes `n2` and `n3` and explicitly specify that they should listen on the local TCP addresses `127.0.0.1:7000` and `127.0.0.1:8000` respectively:
 
 ```
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
@@ -109,7 +109,7 @@ Note, from the above output, that the TCP connection from `n1 to n2` on `n1` has
 HELLO
 ```
 
-The message in the above command took the following route:&#x20;
+The message in the above command took the following route:
 
 <img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
 
@@ -132,4 +132,3 @@ If you’re stuck or have questions at any point, [<mark style="color:blue;">ple
 {% endhint %}
 
 Next, let's explore how Ockam [<mark style="color:blue;">Relays and Portals</mark>](advanced-routing.md) make it simple to connect existing applications across networks.
-

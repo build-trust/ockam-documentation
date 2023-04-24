@@ -4,7 +4,7 @@ description: Build secure-by-design applications that can trust all data-in-moti
 
 # Introduction to Ockam
 
-Ockam is a suite of open source programming libraries, command line tools, and managed cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.
+Ockam is a suite of programming libraries, command line tools, and managed cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.
 
 Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To [<mark style="color:blue;">trust data-in-motion</mark>](./#trust-for-data-in-motion), applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be [<mark style="color:blue;">private</mark>](./#private-and-secure-by-design) and [<mark style="color:blue;">secure-by-design</mark>](./#private-and-secure-by-design), applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
 
