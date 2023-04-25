@@ -13,7 +13,7 @@ Ockam is designed to make these powerful protocols <mark style="color:orange;">e
 
 However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. It can be quite challenging to make them simple to use, secure, and platform independent.
 
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (6).svg" alt="" class="gitbook-drawing">
 
 Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#node), [<mark style="color:blue;">Workers</mark>](nodes.md#worker), and [<mark style="color:blue;">Services</mark>](nodes.md#service) help hide this complexity and decouple from the host environment - to provide simple interfaces for stateful and asynchronous message-based protocols.
 
@@ -21,7 +21,7 @@ Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#node), [<mark style="col
 
 An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam protocols like Ockam [<mark style="color:blue;">Routing</mark>](routing.md) and Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md).
 
-You can create a standalone node using Ockam [<mark style="color:blue;">Command</mark>](./) or embed one directly into your application using various Ockam [<mark style="color:blue;">programming libraries</mark>](../libraries/). Nodes are built to leverage the strengths of their operating environment. Our [<mark style="color:blue;">Rust</mark>](../libraries/rust/) implementation, for example, makes it easy to adapt to various architectures and processors. It can run efficiently on tiny microcontrollers or scale horizontally in cloud environments.&#x20;
+You can create a standalone node using Ockam [<mark style="color:blue;">Command</mark>](./) or embed one directly into your application using various Ockam [<mark style="color:blue;">programming libraries</mark>](../libraries/). Nodes are built to leverage the strengths of their operating environment. Our [<mark style="color:blue;">Rust</mark>](../libraries/rust/) implementation, for example, makes it easy to adapt to various architectures and processors. It can run efficiently on tiny microcontrollers or scale horizontally in cloud environments.
 
 A typical Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#workers). Using Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing), a node can deliver messages from one worker to another local worker. Using Ockam [<mark style="color:blue;">Transports</mark>](routing.md#transports), nodes can also route messages to workers on other remote nodes.
 
@@ -146,7 +146,7 @@ Note the workers in node `n1` with address `echo` and `uppercase`. We’ll send 
 
 From `ockam` command, we don’t usually create workers directly but instead start predefined [<mark style="color:blue;">services</mark>](nodes.md#service) like Transports and Secure Channels that in turn start one or more workers. Using our [libraries](../libraries/) you can also develop your own workers.
 
-Workers are stateful and can asynchronously send and receive messages. This makes them a  potent abstraction that can take over the responsibility of running multi-step, stateful, and asynchronous message-based protocols. This enables `ockam` command and Ockam [<mark style="color:blue;">Programming Libraries</mark>](../libraries/) to expose very simple and safe interfaces for powerful protocols.&#x20;
+Workers are stateful and can asynchronously send and receive messages. This makes them a potent abstraction that can take over the responsibility of running multi-step, stateful, and asynchronous message-based protocols. This enables `ockam` command and Ockam [<mark style="color:blue;">Programming Libraries</mark>](../libraries/) to expose very simple and safe interfaces for powerful protocols.
 
 ## Services
 
@@ -180,7 +180,7 @@ Node: n1
     ...
 ```
 
-Later in this guide, we’ll explore other commands that interact with pre-defined services. For example every node created with `ockam` command starts a secure channel listener at the address  `/service/api`, which allows other nodes to create mutually authenticated secure channels with it.
+Later in this guide, we’ll explore other commands that interact with pre-defined services. For example every node created with `ockam` command starts a secure channel listener at the address `/service/api`, which allows other nodes to create mutually authenticated secure channels with it.
 
 ## Spaces
 

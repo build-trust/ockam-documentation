@@ -13,7 +13,7 @@ In the [<mark style="color:blue;">previous section</mark>](routing.md), we learn
 
 
 
-<img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (2) (2).svg" alt="" class="gitbook-drawing">
 
 Node `n1` wishes to access a service on node `n3`, but it can't directly connect to `n3`. This can happen for many reasons, maybe because `n3` is in a separate `IP` subnet or could be that the communication from `n1 to n2` uses UDP while from `n2 to n3` uses TCP or other similar constraints. The topology makes `n2` a bridge or gateway between these two separate networks to enable end-to-end protocols between `n1` and `n3` even though they are not directly connected.
 

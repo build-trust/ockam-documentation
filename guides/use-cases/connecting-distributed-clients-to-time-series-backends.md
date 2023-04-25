@@ -16,6 +16,8 @@ For many of these use cases the data needs to be sent from a remote network to t
 
 ### How Ockam simplifies it
 
+<img src="../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
+
 To start, your time series backend is able to register itself as a service that some authorized subset of your Ockam nodes can connect to. Whether your backend is running on a public cloud provider or on a private network in a warehouse, successfully authenticated producer nodes will be able to establish a connection direct to you backend without exposing any ports directly to the public internet.
 
 Ockam's enrollment protocol means that each producer is able to be registered separately as unique node. Each producer node is then able to setup an end-to-end encrypted and authenticated channel to your time series backend. Given no ports on the backend were opened to the public internet, these secure channels are the only way to connect remotely to the backend.

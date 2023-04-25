@@ -14,6 +14,8 @@ Managing client access credentials for thousands of discrete clients can be a ch
 
 ### How Ockam simplifies it
 
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+
 The InfluxDB add-on for Ockam automates token management for InfluxDB Cloud. By leveraging the existing enrollment and identity capabilities built-in to Ockam, customers can have each client request a set of unique credentials. Ockam Orchestrator will then generate a fine-grained set of access permissions, alongside a predetermined time-to-live (TTL) for the token. At the end of the TTL the credentials will be automatically revoked and the client can repeat the process to retrieve a new set of credentials.&#x20;
 
 By integrating directly with InfluxDB, Ockam is able to provide a solution that works seamlessly with any other InfluxDB sources (e.g., Telegraf, language SDKs, HTTP) and reduces security risks without increasing operational complexity.
