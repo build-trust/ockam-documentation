@@ -135,7 +135,7 @@ HELLO
 » ockam node create a --project-path project.json
 » ockam node create b --project-path project.json
 
-» ockam forwarder create b --at /project/default --to /node/a/service/forward_to_b
+» ockam relay create b --at /project/default --to /node/a/service/forward_to_b
 
 » ockam secure-channel create --from a --to /project/default/service/forward_to_b/service/api \
     | ockam message send hello --from a --to -/service/uppercase

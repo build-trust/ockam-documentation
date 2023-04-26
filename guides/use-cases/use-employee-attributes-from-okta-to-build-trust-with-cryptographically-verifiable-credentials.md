@@ -127,7 +127,7 @@ ockam node create m1 --project-path project.json --identity m1
 ockam policy create --at m1 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))'
 ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
-ockam forwarder create m1 --at /project/default --to /node/m1
+ockam relay create m1 --at /project/default --to /node/m1
 ```
 
 We then set an attribute based policy on the the tcp-outlet that delivers traffic to our application service. This policy says to allow requests if the subject (the entity requesting access) is part of the same application or if the subject is a Field Engineer based in San Francisco.
@@ -156,7 +156,7 @@ ockam node create m2 --project-path project.json --identity m2
 ockam policy create --at m2 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "New York")))'
 ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
-ockam forwarder create m2 --at /project/default --to /node/m2
+ockam relay create m2 --at /project/default --to /node/m2
 ```
 
 Same as before, we then set an attribute based policy on the the tcp-outlet that delivers traffic to our application service. This policy says to allow requests if the subject (the entity requesting access) is part of the same application or if the subject is a Field Engineer based in New York.

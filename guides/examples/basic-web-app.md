@@ -76,7 +76,7 @@ ockam project authenticate --identity db --token $DB_TOKEN --project-path projec
 ockam node create db --project-path project.json --identity db
 ockam policy create --at db --resource tcp-outlet --expression '(= subject.component "web")'
 ockam tcp-outlet create --at /node/db --from /service/outlet --to 127.0.0.1:$PG_PORT
-ockam forwarder create db --to /node/db --at /project/default
+ockam relay create db --to /node/db --at /project/default
 ```
 
 ### Connecting the web app
