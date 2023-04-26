@@ -133,7 +133,7 @@ ockam project authenticate --identity influxdb $OCKAM_INFLUXDB_TOKEN
 ockam node create influxdb --project-path project.json --identity influxdb
 ockam policy create --at influxdb --resource tcp-outlet --expression '(= subject.component "telegraf")'
 ockam tcp-outlet create --at /node/influxdb --from /service/outlet --to 127.0.0.1:8086
-ockam forwarder create influxdb --at /project/default --to /node/influxdb
+ockam relay create influxdb --at /project/default --to /node/influxdb
 ```
 
 There's a few things that have happened in those commands, so let's quickly unpack them:
