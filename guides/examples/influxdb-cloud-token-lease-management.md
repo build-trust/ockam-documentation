@@ -29,12 +29,6 @@ We'll start by enrolling with the Orchestrator and ensuring the default project 
 ockam enroll
 ```
 
-Next we'll save project information to a JSON file so that we can use it later when registering our client nodes:
-
-```bash
-ockam project information --output json default > project.json
-```
-
 Now it's time to integrate Ockam and InfluxDB Cloud! We'll do that by configuring the add-on to use the configuration settings we exported early, in addition to defining a default set of permissions each future lease request should be granted. We'll come back and adjust this later, so to make it easier we'll export it to an environment variable too:
 
 ```bash
@@ -68,21 +62,16 @@ Next we need to create a new identity for our client, as it's to this identity t
 ockam identity create iot-sensor
 ```
 
-Identity created, we can authenticate to our project (using the JSON configuration file we created earlier) and the enrolment token `SENSOR_TOKEN` we saved at the start of this section:
+Identity created, we can authenticate to our project using the enrollment token `SENSOR_TOKEN` we saved at the start of this section:
 
 ```bash
-ockam project authenticate \
-  --identity iot-sensor \
-  --project-path project.json \
-  --token $SENSOR_TOKEN
+ockam project authenticate --identity iot-sensor $SENSOR_TOKEN
 ```
 
 We've arrived at the big moment, time to request a new lease:
 
 ```
-ockam lease create \
-  --identity iot-sensor \
-  --project-path project.json 
+ockam lease create --identity iot-sensor
 ```
 
 In the output you'll see not just the token you created but when it expires, which should be 5 minutes from the time it was created (we set the max TTL to 900 seconds in the original `ockam addon configure` command).&#x20;
