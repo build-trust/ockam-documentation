@@ -65,7 +65,7 @@ ockam identity create iot-sensor
 Identity created, we can authenticate to our project using the enrollment token `SENSOR_TOKEN` we saved at the start of this section:
 
 ```bash
-ockam project authenticate --identity iot-sensor $SENSOR_TOKEN
+ockam project authenticate $SENSOR_TOKEN --identity iot-sensor
 ```
 
 We've arrived at the big moment, time to request a new lease:

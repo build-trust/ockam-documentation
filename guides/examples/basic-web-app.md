@@ -53,15 +53,9 @@ Lines 12 and 13 are where we establish out connection to the database, at this p
 
 Now we can add Ockam into the mix. To prove we're not simply using the existing communication channel we'd suggest either [changing the port that your local postgres is listening on](https://www.postgresql.org/docs/current/app-pg-ctl.html#R2-APP-PGCTL-3), or running a new postgres instance in a Docker container.
 
-Next we're going to output our Ockam project information to a JSON file so that we can load it into future commands more easily:
-
-```bash
-ockam project information --output=json > project.json
-```
-
 To allow the database to enroll itself as a node with Ockam we first need to generate a token for that node:
 
-```
+```bash
 export DB_TOKEN=$(ockam project enroll --attribute component=db)
 ```
 
@@ -72,8 +66,8 @@ Next we're going to create and enroll a new Ockam node on our project, we'll add
 ```bash
 export PG_PORT=5433
 ockam identity create db
-ockam project authenticate --identity db --token $DB_TOKEN --project-path project.json
-ockam node create db --project-path project.json --identity db
+ockam project authenticate $DB_TOKEN --identity db
+ockam node create db --identity db
 ockam policy create --at db --resource tcp-outlet --expression '(= subject.component "web")'
 ockam tcp-outlet create --at /node/db --from /service/outlet --to 127.0.0.1:$PG_PORT
 ockam relay create db --to /node/db --at /project/default
@@ -91,8 +85,8 @@ Next we'll create and enroll our node, set a policy to say it is only allowed to
 
 ```bash
 ockam identity create web
-ockam project authenticate --identity web --token $WEB_TOKEN --project-path project.json
-ockam node create web --project-path project.json --identity web
+ockam project authenticate $WEB_TOKEN --identity web
+ockam node create web --identity web
 ockam policy create --at web --resource tcp-inlet --expression '(= subject.component "db")'
 ockam tcp-inlet create --at /node/web --from 127.0.0.1:5432 --to /project/default/service/forward_to_db/secure/api/service/outlet
 ```
