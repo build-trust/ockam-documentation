@@ -32,32 +32,33 @@ Add the following code to this file:
 
 use hello_ockam::Echoer;
 use ockam::access_control::AllowAll;
-use ockam::identity::SecureChannelOptions;
-use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
+use ockam::identity::SecureChannelListenerOptions;
+use ockam::{node, Context, Result, TcpListenerOptions};
+use ockam_transport_tcp::TcpTransportExtension;
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
     let node = node(ctx);
-    // Initialize the TCP Transport
-    let tcp = node::create_tcp_transport().await?;
+
+    // Initialize the TCP Transport.
+    let tcp = node.create_tcp_transport().await?;
 
     node.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
 
-    // Create an Identity to represent Bob
     let bob = node.create_identity().await?;
 
     // Create a secure channel listener for Bob that will wait for requests to
     // initiate an Authenticated Key Exchange.
-    node.create_secure_channel_listener(&bob, "bob_listener", SecureChannelOptions::new())
+    node.create_secure_channel_listener(&bob, "bob_listener", SecureChannelListenerOptions::new())
         .await?;
 
     // Create a TCP listener and wait for incoming connections.
     tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
 
-    // Don't call ctx.stop() here so this node runs forever.
+    // Don't call node.stop() here so this node runs forever.
     Ok(())
-}
+}   
 ```
 
 ### Middle node
@@ -79,12 +80,14 @@ Add the following code to this file:
 
 use hello_ockam::Forwarder;
 use ockam::access_control::AllowAll;
-use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
+use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions};
+use ockam_transport_tcp::TcpTransportExtension;
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
     let node = node(ctx);
+
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;
 
@@ -98,7 +101,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Create a TCP listener and wait for incoming connections.
     tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
 
-    // Don't call ctx.stop() here so this node runs forever.
+    // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
 ```
@@ -118,25 +121,27 @@ Add the following code to this file:
 // This node creates an end-to-end encrypted secure channel over two tcp transport hops.
 // It then routes a message, to a worker on a different node, through this encrypted channel.
 
-use ockam::identity::{Identity, SecureChannelListenerOptions};
-use ockam::{route, node, Context, Result, TcpConnectionOptions, TcpTransportExtension};
+use ockam::identity::SecureChannelOptions;
+use ockam::{node, route, Context, Result, TcpConnectionOptions};
+use ockam_transport_tcp::TcpTransportExtension;
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let node = node(ctx);
-    // Initialize the TCP Transport
-    let tcp = node.create_tcp_transport().await?;
+    let mut node = node(ctx);
 
-    // Create an Identity to represent Alice
+    // Create an Identity to represent Alice.
     let alice = node.create_identity().await?;
 
     // Create a TCP connection to the middle node.
+    let tcp = node.create_tcp_transport().await?;
     let connection_to_middle_node = tcp.connect("localhost:3000", TcpConnectionOptions::new()).await?;
 
     // Connect to a secure channel listener and perform a handshake.
     let r = route![connection_to_middle_node, "forward_to_bob", "bob_listener"];
-    let channel = node.create_secure_channel(&alice, r, TrustEveryonePolicy).await?;
+    let channel = node
+        .create_secure_channel(&alice, r, SecureChannelOptions::new())
+        .await?;
 
     // Send a message to the echoer worker via the channel.
     node.send(route![channel, "echoer"], "Hello Ockam!".to_string()).await?;
