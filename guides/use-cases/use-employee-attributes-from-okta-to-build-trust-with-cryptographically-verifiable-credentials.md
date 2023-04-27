@@ -90,7 +90,7 @@ After the binary downloads, please move it to a location in your shell's `$PATH`
 
 ### Administrator
 
-Next we provision our system. We enroll with Ockam Orchestrator, enable the Okta Add-On and export the project configuration to share with our application machines Machine 1 and 2.
+Next we provision our system. We enroll with Ockam Orchestrator, enable the Okta Add-On and export the project configuration to share with Alice.
 
 ```bash
 ockam enroll
