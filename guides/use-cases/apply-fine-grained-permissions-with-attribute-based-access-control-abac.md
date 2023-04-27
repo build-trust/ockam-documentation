@@ -82,11 +82,6 @@ After the binary downloads, please move it to a location in your shell's `$PATH`
 # This will provision an End-to-End Encrypted Cloud Relay service for you in
 # your `default` project at `/project/default`. 
 ockam enroll
-
-# This will output the newly provisioned project information.
-# This project info file can be used on seperate machines
-# to target a specific project.
-ockam project information --output json > project.json
 ```
 
 ```bash
@@ -111,10 +106,10 @@ python3 -m http.server --bind 127.0.0.1 5000
 # Create an identity and authenticate the identity for this control plane
 # with the Orchestator project.
 ockam identity create control_identity
-ockam project authenticate --token $cp1_token --identity control_identity
+ockam project authenticate $cp1_token --identity control_identity
 
 # Create a node targeting the project as the control identity.
-ockam node create control_plane1 --project-path project.json --identity control_identity
+ockam node create control_plane1 --identity control_identity
 
 # Set a policy, create the tcp-outlet and forwarder.
 ockam policy create --at control_plane1 --resource tcp-outlet --expression '(= subject.component "edge")'
@@ -127,10 +122,10 @@ ockam relay create control_plane1 --at /project/default --to /node/control_plane
 <pre class="language-bash"><code class="lang-bash"># Create an identity and authenticate the identity for this edge plane
 # with the Orchestator project.
 ockam identity create edge_identity
-ockam project authenticate --token $ep1_token --identity edge_identity
+ockam project authenticate $ep1_token --identity edge_identity
 <strong>
 </strong><strong># Create a node targeting the project as the edge identity.
-</strong><strong>ockam node create edge_plane1 --project-path project.json --identity edge_identity
+</strong><strong>ockam node create edge_plane1 --identity edge_identity
 </strong>
 # Set a policy, and create the tcp-inlet.
 ockam policy create --at edge_plane1 --resource tcp-inlet --expression '(= subject.component "control")'
@@ -155,10 +150,10 @@ The following is denied:
 # This identity will use the enrollment token that has the attribute of
 # `component=x` attached
 ockam identity create x_identity
-ockam project authenticate --token $x_token --identity x_identity
+ockam project authenticate $x_token --identity x_identity
 
 # Create a node targeting the project as the x identity.
-ockam node create x --project-path project.json --identity x_identity
+ockam node create x --identity x_identity
 
 # Set a policy and create a new tcp-inlet for node x.
 ockam policy create --at x --resource tcp-inlet --expression '(= subject.component "control")'

@@ -117,10 +117,9 @@ In this section we'll show you how both of these problems can be solved with ver
 
 #### Creating and enrolling your nodes
 
-The first step is to enroll yourself with Ockam, save your project information, and create enrollment tokens for your InfluxDB and Telegraf nodes:
+The first step is to enroll yourself with Ockam, and create enrollment tokens for your InfluxDB and Telegraf nodes:
 
 <pre class="language-bash"><code class="lang-bash"><strong>ockam enroll
-</strong><strong>ockam project information --output json > project.json
 </strong>export OCKAM_INFLUXDB_TOKEN=$(ockam project enroll --attribute component=influxdb)
 export OCKAM_TELEGRAF_TOKEN=$(ockam project enroll --attribute component=telegraf)
 </code></pre>
@@ -129,8 +128,8 @@ Now we can create a node for our InfluxDB service:
 
 ```bash
 ockam identity create influxdb
-ockam project authenticate --identity influxdb --token $OCKAM_INFLUXDB_TOKEN --project-path project.json
-ockam node create influxdb --project-path project.json --identity influxdb
+ockam project authenticate $OCKAM_INFLUXDB_TOKEN --identity influxdb
+ockam node create influxdb --identity influxdb
 ockam policy create --at influxdb --resource tcp-outlet --expression '(= subject.component "telegraf")'
 ockam tcp-outlet create --at /node/influxdb --from /service/outlet --to 127.0.0.1:8086
 ockam relay create influxdb --at /project/default --to /node/influxdb
@@ -147,8 +146,8 @@ It's now time to establish the other side of this connection by creating the cor
 
 ```bash
 ockam identity create telegraf
-ockam project authenticate --identity telegraf --token $OCKAM_TELEGRAF_TOKEN --project-path project.json
-ockam node create telegraf --project-path project.json --identity telegraf
+ockam project authenticate $OCKAM_TELEGRAF_TOKEN --identity telegraf
+ockam node create telegraf --identity telegraf
 ockam policy create --at telegraf --resource tcp-inlet --expression '(= subject.component "influxdb")'
 ockam tcp-inlet create --at /node/telegraf --from 127.0.0.1:8087 --to /project/default/service/forward_to_influxdb/secure/api/service/outlet
 ```
