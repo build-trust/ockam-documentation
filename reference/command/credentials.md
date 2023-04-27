@@ -120,7 +120,7 @@ HELLO
 » ockam node create n1 --identity i1 --authority-identity $(cat authority)
 » ockam node create n2 --identity i2 --authority-identity $(cat authority) --credential c2
 
-» ockam secure-channel create --from n1 --to /node/n2/service/api --credential c1 \
+» ockam secure-channel create --from n1 --to /node/n2/service/api --credential c1 --identity i1 \
     | ockam message send hello --from n1 --to -/service/uppercase
 ```
 
