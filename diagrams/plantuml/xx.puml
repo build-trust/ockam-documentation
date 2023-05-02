@@ -1,0 +1,183 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName Courier
+skinparam roundcorner 0
+skinparam wrapWidth 300
+skinparam sequenceMessageAlign direction
+
+hide footbox
+
+participant Initiator as I
+participant Responder as R
+
+== Key Establishment Phase ==
+
+note left of I
+Initialize Initiator
+
+s = Initiator's static keypair
+e = Initiator's ephemeral keypair
+
+k = 0
+n = 0
+h = 'Noise_XX_25519_AESGCM_SHA256'
+ck = h
+prologue = empty string
+
+h = sha256(concat(h, prologue))
+end note
+
+/ note right of R
+Initialize Responder
+
+s = Responder's static keypair
+e = Responder's ephemeral keypair
+
+k = 0
+n = 0
+h = 'Noise_XX_25519_AESGCM_SHA256'
+ck = h
+prologue = empty string
+
+h = SHA256(concat(h, prologue))
+end note
+
+||100||
+
+note left of I
+Message A - Send
+
+h = SHA256(concat(h, e.pubKey))
+writeToMessage(bigendian(e.pubKey))
+
+payload = empty string
+h = SHA256(concat(h, payload))
+
+end note
+
+I -> R: Message A \n\n-> e\n
+
+|||
+
+note right of R
+Message A - Receive
+
+re = readFromMessage(32bytes)
+h = SHA256(concat(h, re))
+
+payload = read remaining message
+payload must be empty
+h = SHA256(concat(h, payload))
+end note
+
+||100||
+
+note right of R
+Message B - Send
+
+h = SHA256(concat(h, e.pubKey))
+writeToMessage(bigendian(e.pubKey))
+
+ck, k = HKDF(ck, DH(e, re), 2)
+n = 0
+
+c = ENCRYPT(k, n++, h, s.pubKey)
+h = SHA256(concat(h, c))
+writeToMessage(bigendian(c))
+
+ck, k = HKDF(ck, DH(s, re), 2)
+n = 0
+
+payload = empty string
+c = ENCRYPT(k, n++, h, payload)
+h = SHA256(concat(h, c))
+writeToMessage(bigendian(c))
+end note
+
+R -> I: Message B \n\n<- e, ee, s, es\n
+
+note left of I
+Message B - Receive
+
+re = readFromMessage(32bytes)
+h = SHA256(concat(h, re))
+
+ck, k = HKDF(ck, DH(e, re), 2)
+n = 0
+
+c = readFromMessage(48bytes)
+h = SHA256(concat(h, c))
+rs = DECRYPT(k, n++, h, c)
+
+ck, k = HKDF(ck, DH(e, rs), 2)
+n = 0
+
+c = read remaining message
+h = SHA256(concat(h, c))
+payload = DECRYPT(k, n++, h, c)
+payload must be empty
+end note
+
+||100||
+
+note left of I
+Message C - Send
+
+c = ENCRYPT(k, n++, h, s.pubKey)
+h = SHA256(concat(h, c))
+writeToMessage(bigendian(c))
+
+ck, k = HKDF(ck, DH(s, re), 2)
+n = 0
+
+payload = empty string
+c = ENCRYPT(k, n++, h, payload)
+h = SHA256(concat(h, c))
+writeToMessage(bigendian(c))
+end note
+
+|||
+
+I -> R: Message C \n\n-> s, se\n
+
+note right of R
+Message C - Receive
+
+c = readFromMessage(48bytes)
+h = SHA256(concat(h, c))
+rs = DECRYPT(k, n++, h, c)
+
+ck, k = HKDF(ck, DH(e, rs), 2)
+n = 0
+
+c = read remaining message
+h = SHA256(concat(h, c))
+payload = DECRYPT(k, n++, h, c)
+payload must be empty
+end note
+
+||100||
+
+
+note left of I
+k1, k2 = HKDF(ck, zerolen, 2)
+n1 = 0, n2 = 0
+
+Use (k1, n1) to decrypt incoming
+Use (k2, n2) to encrypt outgoing
+end note
+
+/ note right of R
+k1, k2 = HKDF(ck, zerolen, 2)
+n1 = 0, n2 = 0
+
+Use (k1, n1) to encrypt outgoing
+Use (k2, n2) to decrypt incoming
+end note
+
+
+== Encrypted Transport Phase ==
+
+|||
+
+@enduml
