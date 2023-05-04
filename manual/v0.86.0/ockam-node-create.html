@@ -148,6 +148,13 @@
 <hr />
 <p><code>ockam node create [OPTIONS] [NODE_NAME]</code></p>
 <p>This command will create a new node. It will create a vault and identity if none exist and will be assigned as the default for the system.</p>
+<p>When creating a node, a pre-defined set of default services will be started, including:</p>
+<ul>
+<li>An uppercase service at <code>/service/uppercase</code></li>
+<li>A secure channel listener at <code>/service/api</code></li>
+<li>A tcp listener listening at some TCP port picked by the operating system. After creating a node, you can use the <code>ockam node show</code> command to see the port that was assigned to it.</li>
+</ul>
+<p>Services are one or more Ockam Workers identified by addresses of the form <code>/service/{ADDRESS}</code>. Services can be attached to identities and authorization policies to enforce attribute based access control (ABAC) rules.</p>
 <h3 id="arguments"><a class="header" href="#arguments">Arguments</a></h3>
 <ul>
 <li><code>&lt;NODE_NAME&gt;</code><br/>

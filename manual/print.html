@@ -464,10 +464,6 @@ Trust Context config file</p>
 <p><code>--project &lt;PROJECT&gt;</code></p>
 </li>
 <li>
-<p><code>-n</code>, <code>--node &lt;NODE&gt;</code><br/>
-Override the default API node</p>
-</li>
-<li>
 <p><code>-m</code>, <code>--member &lt;MEMBER&gt;</code></p>
 </li>
 <li>
@@ -650,34 +646,8 @@ Trust Context config file</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="node"><a class="header" href="#node">node</a></h2>
 <hr />
 <p><code>ockam node &lt;COMMAND&gt;</code></p>
-<p>An Ockam node is any running application that can communicate with other applications
-using various Ockam protocols like Routing, Secure Channels, Forwarding etc.</p>
-<p>We can create Ockam nodes using this command line or using various Ockam programming
-libraries like our Rust and Elixir libraries.</p>
-<h3 id="workers"><a class="header" href="#workers">Workers</a></h3>
-<p>Ockam nodes run very lightweight, concurrent, stateful actors called Ockam Workers.
-Workers have addresses and a node can deliver messages to workers on the same node or
-on a different node using the Ockam Routing Protocol and its Transports.</p>
-<h3 id="routing"><a class="header" href="#routing">Routing</a></h3>
-<p>The Ockam Routing Protocol is a very simple application layer protocol that allows
-the sender of a message to describe the <code>onward_route</code> and <code>return_route</code> of message.</p>
-<p>The routing layer in a node can then be used to route these messages between workers within
-a node or across nodes using transports. Messages can be sent over multiple hops, within
-one node or across many nodes.</p>
-<h3 id="transports"><a class="header" href="#transports">Transports</a></h3>
-<p>Transports are plugins to the Ockam Routing layer that allow Ockam Routing messages
-to travel across nodes over transport layer protocols like TCP, UDP, BLUETOOTH etc.</p>
-<h3 id="services"><a class="header" href="#services">Services</a></h3>
-<p>One or more Ockam Workers can work as a team to offer a Service. Services have
-addresses represented by /service/{ADDRESS}. Services can be attached to identities and
-authorization policies to enforce attribute based access control rules.</p>
-<p>Nodes created using <code>ockam</code> command usually start a pre-defined set of default services.</p>
-<p>This includes:</p>
-<ul>
-<li>An uppercase service at /service/uppercase</li>
-<li>A secure channel listener at /service/api</li>
-<li>A tcp listener listening at some TCP port</li>
-</ul>
+<p>An Ockam node is any running application that can communicate with other applications using various Ockam protocols like Routing, Secure Channels, Relays etc.</p>
+<p>We can create Ockam nodes using the Ockam CLI or using various Ockam programming libraries like our Rust and Elixir libraries.</p>
 <h3 id="subcommands-5"><a class="header" href="#subcommands-5">Subcommands</a></h3>
 <ul>
 <li><a href="ockam-node-create.html">create</a></li>
@@ -739,6 +709,13 @@ $ ockam node delete --all --force
 <hr />
 <p><code>ockam node create [OPTIONS] [NODE_NAME]</code></p>
 <p>This command will create a new node. It will create a vault and identity if none exist and will be assigned as the default for the system.</p>
+<p>When creating a node, a pre-defined set of default services will be started, including:</p>
+<ul>
+<li>An uppercase service at <code>/service/uppercase</code></li>
+<li>A secure channel listener at <code>/service/api</code></li>
+<li>A tcp listener listening at some TCP port picked by the operating system. After creating a node, you can use the <code>ockam node show</code> command to see the port that was assigned to it.</li>
+</ul>
+<p>Services are one or more Ockam Workers identified by addresses of the form <code>/service/{ADDRESS}</code>. Services can be attached to identities and authorization policies to enforce attribute based access control (ABAC) rules.</p>
 <h3 id="arguments-8"><a class="header" href="#arguments-8">Arguments</a></h3>
 <ul>
 <li><code>&lt;NODE_NAME&gt;</code><br/>
@@ -945,20 +922,27 @@ $ ockam node default n2
 <div style="break-before: page; page-break-before: always;"></div><h2 id="worker"><a class="header" href="#worker">worker</a></h2>
 <hr />
 <p><code>ockam worker &lt;COMMAND&gt;</code></p>
+<p>Ockam nodes run very lightweight, concurrent, stateful actors called Ockam Workers. Workers have addresses and a node can deliver messages to workers on the same node or on a different node using the Ockam Routing Protocol and its Transports. One or more workers can work as a team to offer a service.</p>
 <h3 id="subcommands-6"><a class="header" href="#subcommands-6">Subcommands</a></h3>
 <ul>
 <li><a href="ockam-worker-list.html">list</a></li>
 </ul>
-<h3 id="examples-18"><a class="header" href="#examples-18">Examples</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="worker--list"><a class="header" href="#worker--list">worker  list</a></h2>
 <hr />
 <p><code>ockam worker list [OPTIONS]</code></p>
+<p>When creating a new node, a set of default services are started. This command lists all the available workers on a given node, which can be helpful to check if all the services are running, or to check the workers' addresses associated to secure channels or relays created by the node.</p>
 <h3 id="options-24"><a class="header" href="#options-24">Options</a></h3>
 <ul>
 <li><code>--at &lt;NODE&gt;</code><br/>
 Node at which to lookup workers (required)</li>
 </ul>
-<h3 id="examples-19"><a class="header" href="#examples-19">Examples</a></h3>
+<h3 id="examples-18"><a class="header" href="#examples-18">Examples</a></h3>
+<pre><code class="language-sh"># Create a node
+$ ockam node create n1
+
+# List the workers available in the node
+$ ockam worker list --at n1
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="message"><a class="header" href="#message">message</a></h2>
 <hr />
 <p><code>ockam message &lt;COMMAND&gt;</code></p>
@@ -969,34 +953,7 @@ Node at which to lookup workers (required)</li>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="message--send"><a class="header" href="#message--send">message  send</a></h2>
 <hr />
 <p><code>ockam message send [OPTIONS] --to &lt;ROUTE&gt; &lt;MESSAGE&gt;</code></p>
-<p>An Ockam node is any running application that can communicate with other applications
-using various Ockam protocols like Routing, Secure Channels, Forwarding etc.</p>
-<p>We can create Ockam nodes using this command line or using various Ockam programming
-libraries like our Rust and Elixir libraries.</p>
-<h3 id="workers-1"><a class="header" href="#workers-1">Workers</a></h3>
-<p>Ockam nodes run very lightweight, concurrent, stateful actors called Ockam Workers.
-Workers have addresses and a node can deliver messages to workers on the same node or
-on a different node using the Ockam Routing Protocol and its Transports.</p>
-<h3 id="routing-1"><a class="header" href="#routing-1">Routing</a></h3>
-<p>The Ockam Routing Protocol is a very simple application layer protocol that allows
-the sender of a message to describe the <code>onward_route</code> and <code>return_route</code> of message.</p>
-<p>The routing layer in a node can then be used route these messages between workers within
-a node or across nodes using transports. Messages can be sent over multiple hops, within
-one node or across many nodes.</p>
-<h3 id="transports-1"><a class="header" href="#transports-1">Transports</a></h3>
-<p>Transports are plugins to the Ockam Routing layer that allow Ockam Routing messages
-to travel across nodes over transport layer protocols like TCP, UDP, BLUETOOTH etc.</p>
-<h3 id="services-1"><a class="header" href="#services-1">Services</a></h3>
-<p>One or more Ockam Workers can work as a team to offer a Service. Services have
-addressed represented by /service/{ADDRESS}. Services can be attached to identities and
-authorization policies to enforce attribute based access control rules.</p>
-<p>Nodes created using <code>ockam</code> command usually start a pre-defined set of default services.</p>
-<p>This includes:</p>
-<ul>
-<li>A uppercase service at /service/uppercase</li>
-<li>A secure channel listener at /service/api</li>
-<li>A tcp listener listening at some TCP port</li>
-</ul>
+<p>This command is used to send messages between Ockam nodes. In order to use this command, you need to specify at least the recipient of the message, which is an address to a service of an Ockam node. Optionally, you can specify the sender node. If not provided, a temporary node will be created for the duration of the command to perform the operation.</p>
 <h3 id="arguments-15"><a class="header" href="#arguments-15">Arguments</a></h3>
 <ul>
 <li><code>&lt;MESSAGE&gt;</code></li>
@@ -1030,7 +987,7 @@ Trust Context config file</p>
 <p><code>--project &lt;PROJECT&gt;</code></p>
 </li>
 </ul>
-<h3 id="examples-20"><a class="header" href="#examples-20">Examples</a></h3>
+<h3 id="examples-19"><a class="header" href="#examples-19">Examples</a></h3>
 <pre><code class="language-sh"># Create two nodes
 $ ockam node create n1
 $ ockam node create n2
@@ -1091,7 +1048,7 @@ Route to the node at which to create the relay (optional)</p>
 Authorized identity for secure channel connection (optional)</p>
 </li>
 </ul>
-<h3 id="examples-21"><a class="header" href="#examples-21">Examples</a></h3>
+<h3 id="examples-20"><a class="header" href="#examples-20">Examples</a></h3>
 <pre><code class="language-sh"># Create two nodes blue and green
 $ ockam node create blue
 $ ockam node create green
@@ -1278,7 +1235,7 @@ Override the default API node</li>
 <li><a href="ockam-tcp-outlet-list.html">list</a></li>
 <li><a href="ockam-tcp-outlet-show.html">show</a></li>
 </ul>
-<h3 id="examples-22"><a class="header" href="#examples-22">Examples</a></h3>
+<h3 id="examples-21"><a class="header" href="#examples-21">Examples</a></h3>
 <pre><code class="language-sh"># Create a target service, we'll use a simple http server for this example
 $ python3 -m http.server --bind 127.0.0.1 5000
 
@@ -1361,7 +1318,7 @@ Override the default API node</li>
 <li><a href="ockam-tcp-inlet-list.html">list</a></li>
 <li><a href="ockam-tcp-inlet-show.html">show</a></li>
 </ul>
-<h3 id="examples-23"><a class="header" href="#examples-23">Examples</a></h3>
+<h3 id="examples-22"><a class="header" href="#examples-22">Examples</a></h3>
 <pre><code class="language-sh"># Create a target service, we'll use a simple http server for this example
 $ python3 -m http.server --bind 127.0.0.1 5000
 
@@ -1402,6 +1359,14 @@ Authorized identity for secure channel connection</p>
 <li>
 <p><code>--alias &lt;ALIAS&gt;</code><br/>
 Assign a name to this inlet</p>
+</li>
+<li>
+<p><code>--connection-wait-ms &lt;WAIT&gt;</code><br/>
+Time to wait for the outlet to be available (ms)</p>
+</li>
+<li>
+<p><code>--retry-wait-ms &lt;RETRY&gt;</code><br/>
+Time to wait before retrying to connect to outlet (ms)</p>
 </li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="tcp-inlet--delete"><a class="header" href="#tcp-inlet--delete">tcp-inlet  delete</a></h2>
@@ -1573,7 +1538,7 @@ Address of the channel listener</li>
 <li><code>--at &lt;NODE&gt;</code><br/>
 Node</li>
 </ul>
-<h3 id="examples-24"><a class="header" href="#examples-24">Examples</a></h3>
+<h3 id="examples-23"><a class="header" href="#examples-23">Examples</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="secure-channel"><a class="header" href="#secure-channel">secure-channel</a></h2>
 <hr />
 <p><code>ockam secure-channel &lt;COMMAND&gt;</code></p>
@@ -1586,7 +1551,7 @@ that is safe against eavesdropping, tampering, and forgery of messages en-route.
 <li><a href="ockam-secure-channel-list.html">list</a></li>
 <li><a href="ockam-secure-channel-show.html">show</a></li>
 </ul>
-<h3 id="examples-25"><a class="header" href="#examples-25">Examples</a></h3>
+<h3 id="examples-24"><a class="header" href="#examples-24">Examples</a></h3>
 <p>To create a secure channel, we first need a secure channel listener. Every node that
 is started with ockam command, by convention, starts a secure channel listener at the
 address /service/api.</p>
@@ -1807,7 +1772,7 @@ Name of the vault to be set as default</li>
 <li><a href="ockam-identity-default.html">default</a></li>
 <li><a href="ockam-identity-delete.html">delete</a></li>
 </ul>
-<h3 id="examples-26"><a class="header" href="#examples-26">Examples</a></h3>
+<h3 id="examples-25"><a class="header" href="#examples-25">Examples</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="identity--create"><a class="header" href="#identity--create">identity  create</a></h2>
 <hr />
 <p><code>ockam identity create [OPTIONS] [NAME]</code></p>
@@ -1821,7 +1786,7 @@ Name of the vault to be set as default</li>
 <li><code>--vault &lt;VAULT&gt;</code><br/>
 Vault name to store the identity key</li>
 </ul>
-<h3 id="examples-27"><a class="header" href="#examples-27">Examples</a></h3>
+<h3 id="examples-26"><a class="header" href="#examples-26">Examples</a></h3>
 <pre><code class="language-sh"># To create a new identity with a random name
 $ ockam identity create
 
@@ -1844,7 +1809,7 @@ $ ockam identity create --vault v
 <li><code>-f</code>, <code>--full</code></li>
 <li><code>--encoding &lt;ENCODING&gt;</code></li>
 </ul>
-<h3 id="examples-28"><a class="header" href="#examples-28">Examples</a></h3>
+<h3 id="examples-27"><a class="header" href="#examples-27">Examples</a></h3>
 <pre><code class="language-sh"># To show the default identity
 $ ockam identity show
 
@@ -1862,7 +1827,7 @@ $ ockam identity show --full
 <ul>
 <li><code>-f</code>, <code>--full</code></li>
 </ul>
-<h3 id="examples-29"><a class="header" href="#examples-29">Examples</a></h3>
+<h3 id="examples-28"><a class="header" href="#examples-28">Examples</a></h3>
 <pre><code class="language-sh">$ ockam identity list
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="identity--default"><a class="header" href="#identity--default">identity  default</a></h2>
@@ -1874,7 +1839,7 @@ $ ockam identity show --full
 <li><code>&lt;NAME&gt;</code><br/>
 Name of the identity to be set as default</li>
 </ul>
-<h3 id="examples-30"><a class="header" href="#examples-30">Examples</a></h3>
+<h3 id="examples-29"><a class="header" href="#examples-29">Examples</a></h3>
 <pre><code class="language-sh"># The first created identity will be set as the default identity
 $ ockam identity create i1
 
@@ -1891,7 +1856,7 @@ $ ockam identity default i2
 <li><code>&lt;NAME&gt;</code><br/>
 Name of the identity to be deleted</li>
 </ul>
-<h3 id="examples-31"><a class="header" href="#examples-31">Examples</a></h3>
+<h3 id="examples-30"><a class="header" href="#examples-30">Examples</a></h3>
 <pre><code class="language-sh"># To delete an identity given its name
 $ ockam identity delete i
 </code></pre>
@@ -1908,7 +1873,7 @@ $ ockam identity delete i
 <li><a href="ockam-credential-store.html">store</a></li>
 <li><a href="ockam-credential-verify.html">verify</a></li>
 </ul>
-<h3 id="examples-32"><a class="header" href="#examples-32">Examples</a></h3>
+<h3 id="examples-31"><a class="header" href="#examples-31">Examples</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="credential--get"><a class="header" href="#credential--get">credential  get</a></h2>
 <hr />
 <p><code>ockam credential get [OPTIONS]</code></p>
@@ -2014,7 +1979,7 @@ Override the default API node</p>
 <ul>
 <li><a href="ockam-authority-create.html">create</a></li>
 </ul>
-<h3 id="examples-33"><a class="header" href="#examples-33">Examples</a></h3>
+<h3 id="examples-32"><a class="header" href="#examples-32">Examples</a></h3>
 <p>About:
 An Ockam Authority node is an Ockam node running a limited set of services used by other nodes to:
 - issue credentials
@@ -2100,7 +2065,7 @@ Vault that authority will use</p>
 Authority Identity</p>
 </li>
 </ul>
-<h3 id="examples-34"><a class="header" href="#examples-34">Examples</a></h3>
+<h3 id="examples-33"><a class="header" href="#examples-33">Examples</a></h3>
 <p>About:
 An Ockam Authority node is an Ockam node running a limited set of services used by other nodes to:
 - issue credentials
@@ -2287,7 +2252,7 @@ to restart your shell before testing whether completions are working.</p>
 <li><code>-s</code>, <code>--shell &lt;SHELL&gt;</code><br/>
 The type of shell (bash, zsh, fish)</li>
 </ul>
-<h3 id="examples-35"><a class="header" href="#examples-35">Examples</a></h3>
+<h3 id="examples-34"><a class="header" href="#examples-34">Examples</a></h3>
 <pre><code class="language-sh"># BASH
 $ ockam completion --shell bash &gt; /usr/share/bash-completion/completions/ockam.bash
 

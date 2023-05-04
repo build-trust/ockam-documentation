@@ -147,12 +147,19 @@
                         <h2 id="worker--list"><a class="header" href="#worker--list">worker  list</a></h2>
 <hr />
 <p><code>ockam worker list [OPTIONS]</code></p>
+<p>When creating a new node, a set of default services are started. This command lists all the available workers on a given node, which can be helpful to check if all the services are running, or to check the workers' addresses associated to secure channels or relays created by the node.</p>
 <h3 id="options"><a class="header" href="#options">Options</a></h3>
 <ul>
 <li><code>--at &lt;NODE&gt;</code><br/>
 Node at which to lookup workers (required)</li>
 </ul>
 <h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
+<pre><code class="language-sh"># Create a node
+$ ockam node create n1
+
+# List the workers available in the node
+$ ockam worker list --at n1
+</code></pre>
 
                     </main>
 
