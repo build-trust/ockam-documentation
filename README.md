@@ -164,7 +164,7 @@ if [[ -z $ENROLLED_HOME ]]; then
   exit 1
 fi
 
-OCKAM_HOME=$ENROLLED_HOME
+export OCKAM_HOME=$ENROLLED_HOME
 
 setup() {
   load "$BATS_LIB/bats-support/load.bash"
@@ -181,14 +181,13 @@ setup() {
 }
 
 teardown() {
+  $OCKAM node delete --all
+
   python_pid_file="${ENROLLED_HOME}/python.pid"
-  echo "==> ${ENROLLED_HOME} <=="
 
   pid=$(cat "$python_pid_file")
   kill -9 "$pid"
   wait "$pid" 2>/dev/null || true
-
-  $OCKAM node delete --all
 
   rm -rf default-project.json
   rm -rf $ENROLLED_HOME
