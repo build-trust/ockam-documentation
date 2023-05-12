@@ -164,3 +164,127 @@ In just a few minutes the producers and consumers are seamlessly connected. The 
 * **Tamper-proof data transfer**: by pushing control of keys to the edges of the system, where authenticated encryption and decryption occurs, no other parties in the supply-chain are able to modify the data in transit. You can be assured that the data you receive at the consumer is exactly what was sent by your producers. You can also be assured that only authorized producers can write to a topic ensuring that the data in your topic is highly trustworthy. If you have even more stringent requirements you can take control of your credential authority and enforce granular authorization policies.
 * **Reduced exposure window**: Ockam secure channels regularly rotate authentication keys and session secrets. This approach means that if one of those session secrets was exposed your total data exposure window is limited to the small duration that secret was in use. Rotating authentication keys means that even when the identity keys of a producer are compromised - no historical data is compromised. You can selectively remove the compromised producer and its data. With centralized shared key distribution approaches there is the risk that all current and historical data can’t be trusted after a breach because it may have been tampered with or stolen. Ockam's approach eliminates the risk of compromised historical data and minimizes the risk to future data using automatically rotating keys.
 
+
+<!-- bats start ENROLLED_HOME -->
+<!--
+# Ockam binary to use
+if [[ -z $OCKAM ]]; then
+  OCKAM=ockam
+fi
+
+if [[ -z $BATS_LIB ]]; then
+  BATS_LIB=$(brew --prefix)/lib # macos
+fi
+
+if [[ -z $ENROLLED_HOME ]]; then
+  exit 1
+fi
+
+if [[ -z $CONFLUENT_BOOTSTRAP_SERVER || -z $CONFLUENT_API_SECRET || -z $CONFLUENT_API_KEY ]]; then
+  exit 1
+fi
+
+export OCKAM_HOME_CONSUMER=$(mktemp -d)
+export OCKAM_HOME_PRODUCER_1=$(mktemp -d)
+export OCKAM_HOME_PRODUCER_2=$(mktemp -d)
+
+setup() {
+  load "$BATS_LIB/bats-support/load.bash"
+  load "$BATS_LIB/bats-assert/load.bash"
+
+  OCKAM_HOME=$ENROLLED_HOME $OCKAM project addon configure confluent \
+    --bootstrap-server $CONFLUENT_BOOTSTRAP_SERVER
+
+  OCKAM_HOME=$ENROLLED_HOME $OCKAM project enroll --attribute role=member > consumer.token
+  OCKAM_HOME=$ENROLLED_HOME $OCKAM project enroll --attribute role=member > producer1.token
+  OCKAM_HOME=$ENROLLED_HOME $OCKAM project enroll --attribute role=member > producer2.token
+
+
+cat > kafka.config <<EOF
+request.timeout.ms=30000
+security.protocol=SASL_PLAINTEXT
+sasl.mechanism=PLAIN
+sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
+        username="$CONFLUENT_API_KEY" \
+        password="$CONFLUENT_API_SECRET";
+EOF
+}
+
+teardown() {
+  kafka-topics.sh --bootstrap-server localhost:4000 --command-config kafka.config --delete --topic demo-topic
+  rm consumer.token producer1.token producer2.token kafka.config consumer.out
+
+  if consumer_pid=$(cat consumer.pid); then
+    kill $consumer_pid
+    rm consumer.pid
+  fi
+
+  OCKAM_HOME="$ENROLLED_HOME" $OCKAM node delete --all
+  OCKAM_HOME="$OCKAM_HOME_CONSUMER" $OCKAM node delete --all
+  OCKAM_HOME="$OCKAM_HOME_PRODUCER_1" $OCKAM node delete --all
+  OCKAM_HOME="$OCKAM_HOME_PRODUCER_2" $OCKAM node delete --all
+}
+
+start_consumer_listener() {
+  kafka-console-consumer.sh --topic demo-topic \
+    --bootstrap-server localhost:4000 --consumer.config kafka.config > consumer.out 2>&1 &
+
+  consumer_pid="$!"
+  echo "$consumer_pid" > consumer.pid
+}
+
+
+@test "test end-to-end encryption with kafka" {
+  # Consumer
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM identity create consumer"
+  assert_success
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM project authenticate consumer.token --identity consumer"
+  assert_success
+
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM node create consumer --identity consumer"
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM kafka-consumer create --node consumer"
+  assert_success
+
+  run kafka-topics.sh --bootstrap-server localhost:4000 --command-config kafka.config \
+    --create --topic demo-topic --partitions 3
+  assert_success
+
+  start_consumer_listener
+  assert_success
+
+
+  # Producer 1
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM identity create producer1"
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM project authenticate producer1.token --identity producer1"
+  assert_success
+
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM node create producer1 --identity producer1"
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM kafka-producer create --node producer1"
+  assert_success
+
+  run bash -c "echo 'Hello from producer 1' | kafka-console-producer.sh --topic demo-topic\
+    --bootstrap-server localhost:5000 --producer.config kafka.config"
+  assert_success
+
+  run cat consumer.out
+  assert_output "Hello from producer 1"
+
+
+  # Producer 2
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM identity create producer2"
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM project authenticate producer2.token --identity producer2"
+  assert_success
+
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM node create producer2 --identity producer2"
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM kafka-producer create --node producer2 --bootstrap-server 127.0.0.1:6000 --brokers-port-range 6001-6100"
+  assert_success
+
+  run bash -c "echo 'Hello from producer 2' | kafka-console-producer.sh --topic demo-topic\
+   --bootstrap-server localhost:6000 --producer.config kafka.config"
+  assert_success
+
+  run cat consumer.out
+  assert_output --partial "Hello from producer 2"
+}
+-->
+<!-- bats end -->
