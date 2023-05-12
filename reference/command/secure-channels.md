@@ -138,7 +138,8 @@ Since Ockam Secure Channels are built on top of Ockam Routing, we can establish 
 
 » ockam node create b
 » ockam relay create b --at /node/relay --to b
-/service/forward_to_b
+      Creating Relay
+    ✔︎ Now relaying messages from /node/relay/service/34df708509a28abf3b4c1616e0b37056 → /node/b/service/forward_to_b
 
 » ockam node create a
 » ockam tcp-connection create --from a --to 127.0.0.1:7000
@@ -181,7 +182,8 @@ The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was create
 » ockam node create b --project-path project.json
 
 » ockam relay create b --at /project/default --to /node/a
-/service/forward_to_b
+       Creating Relay
+     ✔︎ Now relaying messages from /project/default/service/70c63af6590869c9bf9aa5cad45d1539 → /node/a/service/forward_to_b
 
 » ockam secure-channel create --from a --to /project/default/service/forward_to_b/service/api \
     | ockam message send hello --from a --to -/service/uppercase
