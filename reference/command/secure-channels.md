@@ -74,7 +74,7 @@ Once the channel is created, note above how we used the service address of the c
     ockam message send hello --from a --to -/service/uppercase
 ```
 
-The first command writes `/service/a1a2cc8a5a89e07cde1c0683c130f6c3`, the address of a new secure channel on `a`, to standard output and the second command replaces the `-` in the `to` argument with the value from standard input. Everything else works the same.
+The first command writes `/service/d92ef0aea946ec01cdbccc5b9d3f2e16`, the address of a new secure channel on `a`, to standard output and the second command replaces the `-` in the `to` argument with the value from standard input. Everything else works the same.
 
 ## Over Bridges <a href="#bridges" id="bridges"></a>
 
@@ -87,38 +87,19 @@ In a previous section, we learned that [Bridges](advanced-routing.md#bridges) en
 ```
 » ockam node create a
 » ockam node create bridge1 --tcp-listener-address=127.0.0.1:7000
+» ockam service start --node bridge1 hop
 » ockam node create bridge2 --tcp-listener-address=127.0.0.1:8000
+» ockam service start --node bridge2 hop
 » ockam node create b --tcp-listener-address=127.0.0.1:9000
 
 » ockam tcp-connection create --from a --to 127.0.0.1:7000
 » ockam tcp-connection create --from bridge1 --to 127.0.0.1:8000
 » ockam tcp-connection create --from bridge2 --to 127.0.0.1:9000
 
-» ockam tcp-connection list --node a
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| 1c36e194192103dff5c608c3e20eb645 | TCP            | Remote connection | 127.0.0.1:7000 | 0#db1ee3588f7ed446d6865302d9355bea |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-
-» ockam tcp-connection list --node bridge1
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| 31be23406793330ea69c68a097a324c1 | TCP            | Remote connection | 127.0.0.1:8000 | 0#c1ee24edfa7b0ea5c9fb74765f8978a1 |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-
-» ockam tcp-connection list --node bridge2
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| 5afb95792b0f964ee23a769aa4a92d6b | TCP            | Remote connection | 127.0.0.1:9000 | 0#80513c64098ac181d1f33b4ed4b34beb |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-
-» ockam message send hello --from a --to /worker/db1ee3588f7ed446d6865302d9355bea/worker/c1ee24edfa7b0ea5c9fb74765f8978a1/worker/80513c64098ac181d1f33b4ed4b34beb/service/uppercase
+» ockam message send hello --from a --to /worker/ec8d523a2b9261c7fff5d0c66abc45c9/service/hop/worker/f0ea25511025c3a262b5dbd7b357f686/worker/dd2306d6b98e7ca57ce660750bc84a53/service/uppercase
 HELLO
 
-» ockam secure-channel create --from a --to /worker/db1ee3588f7ed446d6865302d9355bea/worker/c1ee24edfa7b0ea5c9fb74765f8978a1/worker/80513c64098ac181d1f33b4ed4b34beb/service/api \
+» ockam secure-channel create --from a --to /worker/ec8d523a2b9261c7fff5d0c66abc45c9/service/hop/worker/f0ea25511025c3a262b5dbd7b357f686/service/hop/worker/dd2306d6b98e7ca57ce660750bc84a53/service/api \
     | ockam message send hello --from a --to -/service/uppercase
 HELLO
 ```
@@ -143,14 +124,8 @@ Since Ockam Secure Channels are built on top of Ockam Routing, we can establish 
 
 » ockam node create a
 » ockam tcp-connection create --from a --to 127.0.0.1:7000
-» ockam tcp-connection list --node a
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| 370229d91f735adffc928320bed3f2d1 | TCP            | Remote connection | 127.0.0.1:7000 | 0#1fb75f2e7234035461b261602a714b72 |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
 
-» ockam secure-channel create --from a --to /service/1fb75f2e7234035461b261602a714b72/service/forward_to_b/service/api \
+» ockam secure-channel create --from a --to /worker/1fb75f2e7234035461b261602a714b72/service/forward_to_b/service/api \
     | ockam message send hello --from a --to -/service/uppercase
 HELLO
 ```

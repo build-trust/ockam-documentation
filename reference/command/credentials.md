@@ -64,7 +64,7 @@ Signature:  b235429f8dc7be2e79bca0b8f59bdb6676b06f608408085097e7fb5a2029de0d27d6
 ```
 » ockam credential store c1 --issuer $(ockam identity show a --full --encoding hex) \
     --credential-path b.credential
-✔︎ Credential c1 was verified and stored
+Credential c1 stored
 ```
 
 ## Trust Anchors

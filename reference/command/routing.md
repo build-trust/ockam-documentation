@@ -49,16 +49,18 @@ Pay very close attention to the Sender, Hop, and Replier rules in the sequence d
 The above was just one message hop. We can extend this to two hops:
 
 ```
-» ockam message send hello --to /node/n1/service/hop/service/echo
+» ockam service start hop h1
+» ockam message send hello --to /node/n1/service/h1/service/echo
 hello
 ```
 
 <figure><img src="../../diagrams/plantuml/two-hops/two-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
 
-This very simple protocol can extend to any number of hops, try repeating `/service/hop` many times in the `--to` argument of the following command:
+This very simple protocol can extend to any number of hops, try following command:
 
 ```
-» ockam message send hello --to /node/n1/service/hop/service/hop/service/echo
+» ockam service start hop h2
+» ockam message send hello --to /node/n1/service/h1/service/h2/service/echo
 hello
 ```
 
@@ -77,35 +79,18 @@ Let's start by exploring TCP transport. Create two new nodes: `n2` and `n3` and 
 » ockam node create n3 --tcp-listener-address=127.0.0.1:8000
 ```
 
-Next, let's create two TCP connections, one from `n1 to n2` and the other from `n2 to n3`:
+Next, let's create two TCP connections, one from `n1 to n2` and the other from `n2 to n3`. Let's also add a hop for routing purposes:
 
 ```
+» ockam service start --node n2 hop
 » ockam tcp-connection create --from n1 --to 127.0.0.1:7000
 » ockam tcp-connection create --from n2 --to 127.0.0.1:8000
 ```
 
-Next, list the TCP connections on n1 and n2 to get their worker addresses:
+Note, from the output, that the TCP connection from `n1 to n2` on `n1` has worker address `ac40f7edbf7aca346b5d44acf82d43ba` and the TCP connection from `n2 to n3` on `n2` has the worker address `7d2f9587d725311311668075598e291e`. We can combine this information to send a message over two TCP hops.
 
 ```
-» ockam tcp-connection list --node n1
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| 012dd419f165b7db47f4556948c76d42 | TCP            | Remote connection | 127.0.0.1:7000 | 0#f3a2e2814b0ae3ca446aa43aba2ee33d |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-
-» ockam tcp-connection list --node n2
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| c1cf9616e6c89cae6a098a7177b58a2e | TCP            | Remote connection | 127.0.0.1:8000 | 0#6af0e5768b510d14835154bd10060ed0 |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-```
-
-Note, from the above output, that the TCP connection from `n1 to n2` on `n1` has worker address `f3a2e2814b0ae3ca446aa43aba2ee33d` and the TCP connection from `n2 to n3` on `n2` has the worker address `6af0e5768b510d14835154bd10060ed0`. We can combine this information to send a message over two TCP hops.
-
-```
-» ockam message send hello --from n1 --to /worker/f3a2e2814b0ae3ca446aa43aba2ee33d/worker/6af0e5768b510d14835154bd10060ed0/service/uppercase
+» ockam message send hello --from n1 --to /worker/ac40f7edbf7aca346b5d44acf82d43ba/service/hop/worker/7d2f9587d725311311668075598e291e/service/uppercase
 HELLO
 ```
 
