@@ -51,21 +51,21 @@ You could also start a node in the foreground and optionally tell it display ver
 
 ```
 » ockam node create n2 --foreground --verbose
-2023-01-26T15:23:53.624263Z  INFO ockam_node::node: Initializing ockam node
-2023-01-26T15:23:53.626823Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#79758210d86b8efc7a2603dcd000efd3' with access control in:LocalSourceOnly out:LocalOnwardOnly
-2023-01-26T15:23:53.627107Z  INFO ockam_node::processor_builder: Initializing ockam processor '0#3960258e7c4208499876c12c96b21314' with access control in:DenyAll out:DenyAll
-2023-01-26T15:23:53.631477Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#echo' with access control in:AllowAll out:AllowAll
-2023-01-26T15:23:53.631519Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#_internal.nodemanager' with access control in:AllowAll out:AllowAll
-2023-01-26T15:23:53.631543Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#vault_service' with access control in:AllowAll out:AllowAll
-2023-01-26T15:23:53.631587Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#ockam.ping.collector' with access control in:AllowAll out:DenyAll
-2023-01-26T15:23:53.631692Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#identity_service' with access control in:AllowAll out:AllowAll
-2023-01-26T15:23:53.631725Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#authenticated' with access control in:AllowAll out:AllowAll
-2023-01-26T15:23:53.631749Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#uppercase' with access control in:AllowAll out:AllowAll
-2023-01-26T15:23:53.631763Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#hop' with access control in:AllowAll out:AllowAll
-2023-01-26T15:23:53.631786Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#forwarding_service' with access control in:AllowAll out:DenyAll
-2023-01-26T15:23:53.631828Z  INFO ockam_api::nodes::service::secure_channel: Handling request to create a new secure channel listener: 0#api
-2023-01-26T15:23:53.631932Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#api' with access control in:AllowAll out:DenyAll
-2023-01-26T15:23:53.632008Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#credentials' with access control in:AllowAll out:AllowAll
+2023-05-18T09:54:24.281248Z  INFO ockam_node::node: Initializing ockam node
+2023-05-18T09:54:24.298089Z  INFO ockam_command::node::util: node state initialized name=n2
+2023-05-18T09:54:24.298906Z  INFO ockam_node::processor_builder: Initializing ockam processor '0#c20e2e4aeb9fbae2b5be1529c83af54d' with access control in:DenyAll out:DenyAll
+2023-05-18T09:54:24.299627Z  INFO ockam_api::cli_state::nodes: setup config updated name=n2
+2023-05-18T09:54:24.302206Z  INFO ockam_api::nodes::service: NodeManager::create: n2
+2023-05-18T09:54:24.302218Z  INFO ockam_api::nodes::service: NodeManager::create: starting default services
+2023-05-18T09:54:24.302286Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#_internal.nodemanager' with access control in:AllowAll out:AllowAll
+2023-05-18T09:54:24.302719Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#ockam.ping.collector' with access control in:AllowAll out:DenyAll
+2023-05-18T09:54:24.302728Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#identity_service' with access control in:AllowAll out:AllowAll
+2023-05-18T09:54:24.303179Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#authenticated' with access control in:AllowAll out:AllowAll
+2023-05-18T09:54:24.303364Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#uppercase' with access control in:AllowAll out:AllowAll
+2023-05-18T09:54:24.303527Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#forwarding_service' with access control in:AllowAll out:DenyAll
+2023-05-18T09:54:24.303851Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#api' with access control in:AllowAll out:DenyAll
+2023-05-18T09:54:24.304009Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#echo' with access control in:AllowAll out:AllowAll
+2023-05-18T09:54:24.304056Z  INFO ockam_node::worker_builder: Initializing ockam worker '0#rpc_proxy_service' with access control in:AllowAll out:AllowAll
 ...
 ```
 
@@ -171,9 +171,6 @@ Node: n1
     Service:
       Type: Echoer
       Address: /service/echo
-    Service:
-      Type: Hop
-      Address: /service/hop
     Service:
       Type: SecureChannelListener
       Address: /service/api
