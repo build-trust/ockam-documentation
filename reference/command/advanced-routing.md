@@ -29,20 +29,14 @@ Delete all your existing nodes and try this new example:
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
 
 » ockam node create n3
+» ockam service start --node n3 hop
 » ockam relay create n3 --at /node/n2 --to /node/n3
        Creating Relay
      ✔︎ Now relaying messages from /node/n2/service/25716d6f86340c3f594e99dede6232df → /node/n3/service/forward_to_n3
 
 » ockam node create n1
 » ockam tcp-connection create --from n1 --to 127.0.0.1:7000
-» ockam tcp-connection list --node n1
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| 370229d91f735adffc928320bed3f2d1 | TCP            | Remote connection | 127.0.0.1:7000 | 0#1fb75f2e7234035461b261602a714b72 |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-
-» ockam message send hello --from n1 --to /service/1fb75f2e7234035461b261602a714b72/service/forward_to_n3/service/uppercase
+» ockam message send hello --from n1 --to /worker/603b62d245c9119d584ba3d874eb8108/service/forward_to_n3/service/uppercase
 HELLO
 ```
 
@@ -75,7 +69,7 @@ Continuing from our [<mark style="color:blue;">Relays</mark>](advanced-routing.m
 
 » ockam tcp-outlet create --at n3 --from /service/outlet --to 127.0.0.1:9000
 » ockam tcp-inlet create --at n1 --from 127.0.0.1:6000 \
-    --to /service/1fb75f2e7234035461b261602a714b72/service/forward_to_n3/service/outlet
+    --to /worker/603b62d245c9119d584ba3d874eb8108/service/forward_to_n3/service/hop/service/outlet
 
 » curl --head 127.0.0.1:6000
 HTTP/1.0 200 OK
