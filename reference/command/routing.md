@@ -46,26 +46,6 @@ Pay very close attention to the Sender, Hop, and Replier rules in the below sequ
 
 <figure><img src="../../diagrams/plantuml/one-hop/one-hop.001.jpeg" alt=""><figcaption></figcaption></figure>
 
-The above was just one message hop, we can extend this for two hops:
-
-```
-» ockam message send hello --to /node/n1/service/hop/service/echo
-hello
-```
-
-<figure><img src="../../diagrams/plantuml/two-hops/two-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
-
-This very simple protocol can extend to any number of hops, try repeating `/service/hop` many times in the `--to` argument of the following command:
-
-```
-» ockam message send hello --to /node/n1/service/hop/service/hop/service/echo
-hello
-```
-
-<figure><img src="../../diagrams/plantuml/n-hops/n-hops.001.jpeg" alt=""><figcaption></figcaption></figure>
-
-So far, we’ve routed messages between Workers on one Node. Next let's see how we can route messages across nodes and machines using Ockam Routing adapters called Transports.
-
 ## Transports
 
 Ockam Transports adapt Ockam [Routing](routing.md#routing) for specific transport protocol like TCP, UDP, WebSockets, Bluetooth etc. There is a growing base of Ockam Transport implementations in the [<mark style="color:blue;">Ockam Github Repository</mark>](https://github.com/build-trust/ockam).
@@ -88,24 +68,33 @@ Next list the TCP connections on n1 and n2 to get their worker addresses:
 
 ```
 » ockam tcp-connection list --node n1
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| 012dd419f165b7db47f4556948c76d42 | TCP            | Remote connection | 127.0.0.1:7000 | 0#f3a2e2814b0ae3ca446aa43aba2ee33d |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| Type | Mode     | Socket address  | Worker address                     | Processor address                  | Flow Control Id                  |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| TCP  | Outgoing | 127.0.0.1:7000  | 0#ac40f7edbf7aca346b5d44acf82d43ba | 0#b5beb5aa7dd8142b169005bfadbee0ce | 8f84e5e01f315a66ddf8b647149afa3f |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| TCP  | Incoming | 127.0.0.1:51824 | 0#dcdd313885e6be12ec737738d0d3af50 | 0#8bf2d0a72fae97009152dfdb29b89718 | ab38e85bd048703d9924e71785127f1c |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
 
 » ockam tcp-connection list --node n2
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| c1cf9616e6c89cae6a098a7177b58a2e | TCP            | Remote connection | 127.0.0.1:8000 | 0#6af0e5768b510d14835154bd10060ed0 |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| Type | Mode     | Socket address  | Worker address                     | Processor address                  | Flow Control Id                  |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| TCP  | Incoming | 127.0.0.1:51819 | 0#95dfbd2b4f237a24561abf2e32000ba0 | 0#840b31a7b03b7ae1516e0525bde66301 | a51fcb88605fd5c70202d8145dda55ae |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| TCP  | Outgoing | 127.0.0.1:8000  | 0#7d2f9587d725311311668075598e291e | 0#4f335356057656680aff5d00675129c1 | 8114c61aa7e54dcac30b3c3854f3e555 |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| TCP  | Incoming | 127.0.0.1:51826 | 0#ec898598701164aa5b981c01fe377ac8 | 0#09ae73dc57982fbdb43e04b76ad3e707 | 5b563b790b3048e5cfec7846c9061f3b |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+
+» ockam flow-control add-consumer --node n2 a51fcb88605fd5c70202d8145dda55ae /worker/7d2f9587d725311311668075598e291e producer
+» ockam flow-control add-consumer --node n2 8114c61aa7e54dcac30b3c3854f3e555 /worker/95dfbd2b4f237a24561abf2e32000ba0 producer
 ```
 
-Note, from the above output, that the TCP connection from `n1 to n2` on `n1` has worker address `f3a2e2814b0ae3ca446aa43aba2ee33d` and the TCP connection from `n2 to n3` on `n2` has the worker address `6af0e5768b510d14835154bd10060ed0`. We can combine this information to send a message over two TCP hops.
+Note, from the above output, that the TCP connection from `n1 to n2` on `n1` has worker address `ac40f7edbf7aca346b5d44acf82d43ba` and the TCP connection from `n2 to n3` on `n2` has the worker address `7d2f9587d725311311668075598e291e`. We can combine this information to send a message over two TCP hops.
 
 ```
-» ockam message send hello --from n1 --to /worker/f3a2e2814b0ae3ca446aa43aba2ee33d/worker/6af0e5768b510d14835154bd10060ed0/service/uppercase
+» ockam message send hello --from n1 --to /worker/ac40f7edbf7aca346b5d44acf82d43ba/worker/7d2f9587d725311311668075598e291e/service/uppercase
 HELLO
 ```
 

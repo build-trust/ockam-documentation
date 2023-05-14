@@ -36,13 +36,15 @@ Delete all your existing nodes and try this new example:
 » ockam node create n1
 » ockam tcp-connection create --from n1 --to 127.0.0.1:7000
 » ockam tcp-connection list --node n1
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| Transport ID                     | Transport Type | Mode              | Socket address | Worker address                     |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
-| 370229d91f735adffc928320bed3f2d1 | TCP            | Remote connection | 127.0.0.1:7000 | 0#1fb75f2e7234035461b261602a714b72 |
-+----------------------------------+----------------+-------------------+----------------+------------------------------------+
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| Type | Mode     | Socket address  | Worker address                     | Processor address                  | Flow Control Id                  |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| TCP  | Outgoing | 127.0.0.1:7000  | 0#603b62d245c9119d584ba3d874eb8108 | 0#85b045504b091d302dc45f715ff02169 | da820fd3fa545dde8501aa70082d6875 |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| TCP  | Incoming | 127.0.0.1:51879 | 0#fbafced8d6268ee523148cb30ca4e6e0 | 0#a7418295c00b769ad7a1cf6dacd01c36 | 370482b70af9f34332f1ea6adb1d7d3b |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
 
-» ockam message send hello --from n1 --to /service/1fb75f2e7234035461b261602a714b72/service/forward_to_n3/service/uppercase
+» ockam message send hello --from n1 --to /service/603b62d245c9119d584ba3d874eb8108/service/forward_to_n3/service/uppercase
 HELLO
 ```
 
@@ -74,6 +76,17 @@ Continuing from our [<mark style="color:blue;">Relays</mark>](advanced-routing.m
 » python3 -m http.server --bind 127.0.0.1 9000
 
 » ockam tcp-outlet create --at n3 --from /service/outlet --to 127.0.0.1:9000
+» ockam tcp-connection list --node n3
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| Type | Mode     | Socket address  | Worker address                     | Processor address                  | Flow Control Id                  |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| TCP  | Outgoing | 127.0.0.1:7000  | 0#25a5f0f55c6489e02780fc6df3a0f7ad | 0#d25519be3e2eb9873a73218cd76573ca | 4022a7dc0487866158bd2c69c87d8c30 |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+| TCP  | Incoming | 127.0.0.1:51892 | 0#fcf04d9e899a115cb8ef76f20538c9a4 | 0#87a7f51e417ad2687974072a5d83f8c1 | e05b33706ba3529ce725a51614dc365e |
++------+----------+-----------------+------------------------------------+------------------------------------+----------------------------------+
+
+» ockam flow-controls add-consumer --node n3 4022a7dc0487866158bd2c69c87d8c30 /worker/outlet producer
+
 » ockam tcp-inlet create --at n1 --from 127.0.0.1:6000 \
     --to /service/1fb75f2e7234035461b261602a714b72/service/forward_to_n3/service/outlet
 
@@ -82,7 +95,7 @@ HTTP/1.0 200 OK
 ...
 ```
 
-Then create a TCP Portal Outlet that makes `127.0.0.1:9000` available on worker address `/service/outlet` on `n3`. We already have a forwarding relay for `n3` on `n2` at `service/forward_to_n3`.
+Then create a TCP Portal Outlet that makes `127.0.0.1:9000` available on worker address `/service/outlet` on `n3`. The `ockam flow-controls add-consumer` command is responsible for making the outlet reachable from the outgoing TCP connection we created from `n3` to `n2`. By default, most node's resources are not reachable from other nodes for security reasons. We already have a forwarding relay for `n3` on `n2` at `service/forward_to_n3`.
 
 We then create a TCP Portal Inlet on `n1` that will listen for TCP connections to `127.0.0.1:6000`. For every new connection, the inlet creates a portal following the `--to` route all the way to the outlet. As it receives TCP data, it chunks and wraps them into Ockam Routing messages and sends them along the supplied route. The outlet receives Ockam Routing messages, unwraps them to extract TCP data and send that data along to the target web service on `127.0.0.1:9000`. It all just seamlessly works.
 

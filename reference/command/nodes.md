@@ -172,9 +172,6 @@ Node: n1
       Type: Echoer
       Address: /service/echo
     Service:
-      Type: Hop
-      Address: /service/hop
-    Service:
       Type: SecureChannelListener
       Address: /service/api
     ...
