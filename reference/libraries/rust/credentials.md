@@ -76,7 +76,8 @@ async fn main(ctx: Context) -> Result<()> {
     //
     // For a different application this attested attribute set can be different and
     // distinct for each identifier, but for this example we'll keep things simple.
-    let credential_issuer = CredentialsIssuer::new(node.identities(), issuer.clone(), "trust_context".into()).await?;
+    let credential_issuer = 
+        CredentialsIssuer::new(node.identities(), issuer.identifier(), "trust_context".into()).await?;
     for identifier in known_identifiers.iter() {
         node.identities()
             .repository()
@@ -87,7 +88,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Start a secure channel listener that only allows channels where the identity
     // at the other end of the channel can authenticate with the latest private key
     // corresponding to one of the above known public identifiers.
-    node.create_secure_channel_listener(&issuer, "secure", SecureChannelListenerOptions::new())
+    node.create_secure_channel_listener(&issuer.identifier(), "secure", SecureChannelListenerOptions::new())
         .await?;
 
     // Start a credential issuer worker that will only accept incoming requests from
@@ -158,7 +159,7 @@ async fn main(ctx: Context) -> Result<()> {
     let issuer_connection = tcp.connect("127.0.0.1:5000", TcpConnectionOptions::new()).await?;
     let issuer_channel = node
         .create_secure_channel(
-            &server,
+            &server.identifier(),
             route![issuer_connection, "secure"],
             SecureChannelOptions::new(),
         )
@@ -182,7 +183,7 @@ async fn main(ctx: Context) -> Result<()> {
         "trust_context_id".to_string(),
         Some(AuthorityService::new(
             node.credentials(),
-            issuer.clone(),
+            issuer.identifier(),
             Some(Arc::new(CredentialsMemoryRetriever::new(credential))),
         )),
     );
@@ -199,7 +200,7 @@ async fn main(ctx: Context) -> Result<()> {
         .start(
             node.context(),
             trust_context,
-            server.clone(),
+            server.identifier(),
             "credentials".into(),
             true,
         )
@@ -207,7 +208,7 @@ async fn main(ctx: Context) -> Result<()> {
 
     // Start a secure channel listener that only allows channels with
     // authenticated identities.
-    node.create_secure_channel_listener(&server, "secure", SecureChannelListenerOptions::new())
+    node.create_secure_channel_listener(&server.identifier(), "secure", SecureChannelListenerOptions::new())
         .await?;
 
     // Create a TCP listener and wait for incoming connections
@@ -262,7 +263,7 @@ async fn main(ctx: Context) -> Result<()> {
     let issuer_connection = tcp.connect("127.0.0.1:5000", TcpConnectionOptions::new()).await?;
     let issuer_channel = node
         .create_secure_channel(
-            &client,
+            &client.identifier(),
             route![issuer_connection, "secure"],
             SecureChannelOptions::new(),
         )
@@ -285,7 +286,7 @@ async fn main(ctx: Context) -> Result<()> {
     let server_connection = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
     let channel = node
         .create_secure_channel(
-            &client,
+            &client.identifier(),
             route![server_connection, "secure"],
             SecureChannelOptions::new(),
         )
