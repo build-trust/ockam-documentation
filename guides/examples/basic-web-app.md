@@ -97,3 +97,122 @@ Which means if you start your web app the counter will continue incrementing jus
 
 You could also extend this example by moving the Postgres service into a Docker container or to an entirely different machine. Once the nodes are registered the demo will continue to work, with no application code changes and no need to expose the Postgres ports directly to the internet.
 
+<!-- bats start ENROLLED_HOME -->
+<!--
+# Ockam binary to use
+if [[ -z $OCKAM ]]; then
+  OCKAM=ockam
+fi
+
+if [[ -z $BATS_LIB ]]; then
+  BATS_LIB=$(brew --prefix)/lib # macos
+fi
+
+if [[ -z $ENROLLED_HOME ]]; then
+  exit 1
+fi
+
+if [[ -z $PG_HOST ]]; then
+  export PG_HOST='127.0.0.1'
+fi
+
+export OCKAM_HOME="$ENROLLED_HOME"
+export DB_TOKEN=$(ockam project enroll --attribute component=db)
+export WEB_TOKEN=$(ockam project enroll --attribute component=web)
+export PG_PORT=5432
+export OCKAM_PG_PORT=5433
+
+export FLASK_PID_FILE="${ENROLLED_HOME}/python.pid"
+export FLASK_SERVER="${ENROLLED_HOME}/server.py"
+
+teardown() {
+  $OCKAM node delete --all
+
+  pid=$(cat "$FLASK_PID_FILE")
+  kill -9 "$pid"
+  wait "$pid" 2>/dev/null || true
+
+  rm -rf $ENROLLED_HOME
+}
+
+setup() {
+  load "$BATS_LIB/bats-support/load.bash"
+  load "$BATS_LIB/bats-assert/load.bash"
+
+  $OCKAM node delete --all
+
+  cat > $FLASK_SERVER <<- EOM
+import os
+import psycopg2
+from flask import Flask
+
+CREATE_TABLE = (
+  "CREATE TABLE IF NOT EXISTS events (id SERIAL PRIMARY KEY, name TEXT);"
+)
+
+INSERT_RETURN_ID = "INSERT INTO events (name) VALUES (%s) RETURNING id;"
+
+app = Flask(__name__)
+url = "postgres://postgres:password@localhost/"
+connection = psycopg2.connect(port=$OCKAM_PG_PORT, database="postgres", host="localhost", user="postgres", password="password")
+
+@app.route("/")
+def hello_world():
+  with connection:
+    with connection.cursor() as cursor:
+        cursor.execute(CREATE_TABLE)
+        cursor.execute(INSERT_RETURN_ID, ("",))
+        id = cursor.fetchone()[0]
+  return "I've been visited {} times".format(id), 201
+
+
+if __name__ == "__main__":
+  app.run(port=6000)
+
+
+EOM
+}
+
+start_python_server() {
+  python3 $FLASK_SERVER &>/dev/null  &
+  pid="$!"
+  echo $pid > $FLASK_PID_FILE
+
+  sleep 5
+}
+
+@test "test database relay" {
+  run $OCKAM identity create db
+  run $OCKAM project authenticate $DB_TOKEN --identity db
+  run $OCKAM node create db --identity db
+  run $OCKAM policy create --at db --resource tcp-outlet --expression '(= subject.component "web")'
+  run $OCKAM tcp-outlet create --at /node/db --from /service/outlet --to $PG_HOST:$PG_PORT
+  assert_success
+
+  run $OCKAM relay create db --to /node/db --at /project/default
+  assert_success
+
+  run $OCKAM identity create web
+  run $OCKAM project authenticate $WEB_TOKEN --identity web
+  run $OCKAM node create web --identity web
+  run $OCKAM policy create --at web --resource tcp-inlet --expression '(= subject.component "db")'
+  run $OCKAM tcp-inlet create --at /node/web --from 127.0.0.1:$OCKAM_PG_PORT --to /project/default/service/forward_to_db/secure/api/service/outlet
+  assert_success
+
+  # Kickstart webserver
+  run touch $FLASK_PID_FILE
+  run start_python_server
+  assert_success
+
+  # Visit website
+  run curl http://127.0.0.1:6000
+  assert_output --partial "I've been visited 1 times"
+
+  # Visit website second time
+  run curl http://127.0.0.1:6000
+  assert_output --partial "I've been visited 2 times"
+
+  assert_success
+}
+-->
+<!-- bats end -->
