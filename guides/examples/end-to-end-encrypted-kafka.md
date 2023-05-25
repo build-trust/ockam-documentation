@@ -70,7 +70,7 @@ ockam identity create consumer
 Copy the `consumer.token` file from the previous section, and then use them to authenticate and enroll this identity into your Ockam project:
 
 ```bash
-ockam project authenticate consumer.token --identity consumer
+ockam project enroll consumer.token --identity consumer
 ```
 
 An Ockam node is a way to connect securely connect different services to each other, so we'll create one here that we'll use to communicate through the Confluent Cloud cluster using the identity we just created:
@@ -112,7 +112,7 @@ ockam identity create producer1
 Copy `producer1.token` file from the earlier section and use it to authenticate and enroll into our Ockam project:
 
 ```bash
-ockam project authenticate producer1.token --identity producer1
+ockam project enroll producer1.token --identity producer1
 ```
 
 Create a node and link it to both the project and identity we've created:
@@ -146,7 +146,7 @@ Connecting a second product is a matter of repeating the steps above with a new 
 
 ```
 ockam identity create producer2
-ockam project authenticate producer2.token --identity producer2
+ockam project enroll producer2.token --identity producer2
 ockam node create producer2 --identity producer2
 
 ockam kafka-producer create --node producer2 --bootstrap-server 127.0.0.1:6000 --brokers-port-range 6001-6100
@@ -238,7 +238,7 @@ start_consumer_listener() {
   # Consumer
   run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM identity create consumer"
   assert_success
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM project authenticate consumer.token --identity consumer"
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM project enroll consumer.token --identity consumer"
   assert_success
 
   run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM node create consumer --identity consumer"
@@ -255,7 +255,7 @@ start_consumer_listener() {
 
   # Producer 1
   run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM identity create producer1"
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM project authenticate producer1.token --identity producer1"
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM project enroll producer1.token --identity producer1"
   assert_success
 
   run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM node create producer1 --identity producer1"
@@ -272,7 +272,7 @@ start_consumer_listener() {
 
   # Producer 2
   run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM identity create producer2"
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM project authenticate producer2.token --identity producer2"
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM project enroll producer2.token --identity producer2"
   assert_success
 
   run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM node create producer2 --identity producer2"

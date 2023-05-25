@@ -66,7 +66,7 @@ Next we're going to create and enroll a new Ockam node on our project, we'll add
 ```bash
 export PG_PORT=5433
 ockam identity create db
-ockam project authenticate $DB_TOKEN --identity db
+ockam project enroll $DB_TOKEN --identity db
 ockam node create db --identity db
 ockam policy create --at db --resource tcp-outlet --expression '(= subject.component "web")'
 ockam tcp-outlet create --at /node/db --from /service/outlet --to 127.0.0.1:$PG_PORT
@@ -85,7 +85,7 @@ Next we'll create and enroll our node, set a policy to say it is only allowed to
 
 ```bash
 ockam identity create web
-ockam project authenticate $WEB_TOKEN --identity web
+ockam project enroll $WEB_TOKEN --identity web
 ockam node create web --identity web
 ockam policy create --at web --resource tcp-inlet --expression '(= subject.component "db")'
 ockam tcp-inlet create --at /node/web --from 127.0.0.1:5432 --to /project/default/service/forward_to_db/secure/api/service/outlet
@@ -183,7 +183,7 @@ start_python_server() {
 
 @test "test database relay" {
   run $OCKAM identity create db
-  run $OCKAM project authenticate $DB_TOKEN --identity db
+  run $OCKAM project enroll $DB_TOKEN --identity db
   run $OCKAM node create db --identity db
   run $OCKAM policy create --at db --resource tcp-outlet --expression '(= subject.component "web")'
   run $OCKAM tcp-outlet create --at /node/db --from /service/outlet --to $PG_HOST:$PG_PORT
@@ -193,7 +193,7 @@ start_python_server() {
   assert_success
 
   run $OCKAM identity create web
-  run $OCKAM project authenticate $WEB_TOKEN --identity web
+  run $OCKAM project enroll $WEB_TOKEN --identity web
   run $OCKAM node create web --identity web
   run $OCKAM policy create --at web --resource tcp-inlet --expression '(= subject.component "db")'
   run $OCKAM tcp-inlet create --at /node/web --from 127.0.0.1:$OCKAM_PG_PORT --to /project/default/service/forward_to_db/secure/api/service/outlet
