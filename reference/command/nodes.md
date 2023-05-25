@@ -111,7 +111,7 @@ You can permanently delete a node by running:
 
 ```
 » ockam node delete n1
-Deleted node 'n1'
+✔︎ Node with name 'n1' has been deleted.
 ```
 
 You can also delete all nodes with:
@@ -163,18 +163,13 @@ Services have addresses represented by `/service/{ADDRESS}`. You can see a list 
 
 ```
 » ockam service list --node n1
-Node: n1
-  Services:
-    Service:
-      Type: Uppercase
-      Address: /service/uppercase
-    Service:
-      Type: Echoer
-      Address: /service/echo
-    Service:
-      Type: SecureChannelListener
-      Address: /service/api
-    ...
+Services:
+  Service:
+    Type: uppercase
+    Address: /service/uppercase
+  Service:
+    Type: echo
+    Address: /service/echo
 ```
 
 Later in this guide, we'll explore other commands that interact with pre-defined services. For example every node created with `ockam` command starts a secure channel listener at the address `/service/api`, which allows other nodes to create mutually authenticated secure channels with it.
