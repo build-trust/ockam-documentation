@@ -53,7 +53,7 @@ ockam project addon configure influxdb \
 Before a client can connect to a project, an enrollment token must be generated for it by an authorized entity:
 
 ```bash
-SENSOR_TOKEN=$(ockam project enroll --attribute service=iot-sensor)
+SENSOR_TOKEN=$(ockam project ticket --attribute service=iot-sensor)
 ```
 
 Next we need to create a new identity for our client, as it's to this identity that the leased InfluxDB token will be issued:
@@ -77,4 +77,3 @@ ockam lease create --identity iot-sensor
 In the output you'll see not just the token you created but when it expires, which should be 5 minutes from the time it was created (we set the max TTL to 900 seconds in the original `ockam addon configure` command).&#x20;
 
 Log into your InfluxDB Cloud dashboard and you'll see this new token listed with the rest of your API keys. It's a real token that will work like any other InfluxDB token you might use, just with the added security of not being permanently issues. You can use it directly or via an Ockam secure channel as outlined in our [Connect distributed clients to InfluxDB](../use-cases/connecting-distributed-clients-to-time-series-backends.md) use case.
-

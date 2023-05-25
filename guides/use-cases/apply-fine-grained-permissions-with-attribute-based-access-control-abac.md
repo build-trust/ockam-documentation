@@ -87,9 +87,9 @@ ockam enroll
 ```bash
 # Creates enrollment tokens for the three types of identities that 
 # will be created and used within this example
-cp1_token=$(ockam project enroll --attribute component=control)
-ep1_token=$(ockam project enroll --attribute component=edge)
-x_token=$(ockam project enroll --attribute component=x)
+cp1_token=$(ockam project ticket --attribute component=control)
+ep1_token=$(ockam project ticket --attribute component=edge)
+x_token=$(ockam project ticket --attribute component=x)
 ```
 
 ### Control Plane
@@ -162,4 +162,3 @@ ockam tcp-inlet create --at /node/x --from 127.0.0.1:8000 --to /project/default/
 # Sends a request to our `x` tcp-inlet and will be denied (this will timeout)
 curl --fail --head --max-time 10 127.0.0.1:8000
 ```
-
