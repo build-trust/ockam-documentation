@@ -29,7 +29,7 @@ A node requires an asynchronous runtime to concurrently execute workers. The def
 
 The first thing any Ockam rust program must do is initialize and start an Ockam node. This setup can be done manually but the most convenient way is to use the `#[ockam::node]` attribute that injects the initialization code. It creates the asynchronous environment, initializes worker management, sets up routing and initializes the node context.
 
-For your new node, create a new file at `examples/01-node.rs` in your [hello\_ockam](broken-reference) project:
+For your new node, create a new file at `examples/01-node.rs` in your [hello\_ockam](README.md) project:
 
 ```
 touch examples/01-node.rs

@@ -23,6 +23,6 @@ By integrating directly with InfluxDB, Ockam is able to provide a solution that 
 ### Next steps
 
 * See an example of this in our [InfluxDB Cloud token lease management](../examples/influxdb-cloud-token-lease-management.md) demo.
-* Follow our [getting started guide to install Ockam](broken-reference) and start using it in just a few minutes.
+* Follow our [getting started guide to install Ockam](../../reference/command/README.md#install) and start using it in just a few minutes.
 * [Reach out to the team](https://www.ockam.io/contact/form), we'd love to talk to you in more detail about your potential use cases.
 * Join the growing community of developers who want to build trust by making applications that are secure-by-design, in the [Build Trust Discord server](https://discord.gg/RAbjRr3kds).
