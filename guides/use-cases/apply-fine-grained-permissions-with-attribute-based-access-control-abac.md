@@ -106,7 +106,7 @@ python3 -m http.server --bind 127.0.0.1 5000
 # Create an identity and authenticate the identity for this control plane
 # with the Orchestator project.
 ockam identity create control_identity
-ockam project authenticate $cp1_token --identity control_identity
+ockam project enroll $cp1_token --identity control_identity
 
 # Create a node targeting the project as the control identity.
 ockam node create control_plane1 --identity control_identity
@@ -122,7 +122,7 @@ ockam relay create control_plane1 --at /project/default --to /node/control_plane
 <pre class="language-bash"><code class="lang-bash"># Create an identity and authenticate the identity for this edge plane
 # with the Orchestator project.
 ockam identity create edge_identity
-ockam project authenticate $ep1_token --identity edge_identity
+ockam project enroll $ep1_token --identity edge_identity
 <strong>
 </strong><strong># Create a node targeting the project as the edge identity.
 </strong><strong>ockam node create edge_plane1 --identity edge_identity
@@ -150,7 +150,7 @@ The following is denied:
 # This identity will use the enrollment token that has the attribute of
 # `component=x` attached
 ockam identity create x_identity
-ockam project authenticate $x_token --identity x_identity
+ockam project enroll $x_token --identity x_identity
 
 # Create a node targeting the project as the x identity.
 ockam node create x --identity x_identity

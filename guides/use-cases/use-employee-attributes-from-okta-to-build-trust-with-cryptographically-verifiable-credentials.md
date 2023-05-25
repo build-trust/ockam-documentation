@@ -122,7 +122,7 @@ Next we transfer project configuration and one enrollment token to Machine 1 and
 
 ```bash
 ockam identity create m1
-ockam project authenticate $m1_token --identity m1
+ockam project enroll $m1_token --identity m1
 ockam node create m1 --identity m1
 ockam policy create --at m1 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))'
@@ -151,7 +151,7 @@ Next we transfer project configuration and one enrollment token to Machine 2 and
 
 ```bash
 ockam identity create m2
-ockam project authenticate $m2_token --identity m2
+ockam project enroll $m2_token --identity m2
 ockam node create m2 --identity m2
 ockam policy create --at m2 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "New York")))'
@@ -173,12 +173,12 @@ There is a problem in one of the micro-services in San Francisco and we need to 
 Since the Okta Add-On is enabled. Alice can simple start a node within the project and authenticate.
 
 ```bash
-ockam project authenticate --project-path project.json --okta
+ockam project enroll --project-path project.json --okta
 ockam node create alice
 ockam policy create --at alice --resource tcp-inlet --expression '(= subject.application "Smart Factory")'
 ```
 
-The `project authenticate` command will launch Okta login and when it completes return a an Ockam cryptographic credential that includes the city and department attributes of Alice's profile in Okta Universal Directory. Only these two attributes are attested because the administrator specified those two attributes when enabling the Okta Add-On.
+The `project enroll` command will launch Okta login and when it completes return a an Ockam cryptographic credential that includes the city and department attributes of Alice's profile in Okta Universal Directory. Only these two attributes are attested because the administrator specified those two attributes when enabling the Okta Add-On.
 
 <figure><img src="../../.gitbook/assets/200395627-827d672a-2140-4752-a8d5-526ec5f0be68.png" alt=""><figcaption><p>User Profile in Okta</p></figcaption></figure>
 
