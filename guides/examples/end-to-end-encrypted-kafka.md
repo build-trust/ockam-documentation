@@ -41,9 +41,9 @@ ockam project addon configure confluent \
 As the administrator of the Ockam project, you're able to control what other identities are allowed to enroll themselves into your project by issuing unique one-time use enrollment tokens. We'll start by creating three separate tokens, one each for two separate producers and one for a single consumer, and we'll save each token to a file so we can move it to another host easily:​
 
 ```bash
-ockam project enroll --attribute role=member > consumer.token
-ockam project enroll --attribute role=member > producer1.token
-ockam project enroll --attribute role=member > producer2.token
+ockam project ticket --attribute role=member > consumer.token
+ockam project ticket --attribute role=member > producer1.token
+ockam project ticket --attribute role=member > producer2.token
 ```
 
 The last configuration file we need to generate is `kafka.config`, which will be where you store the username and password you use to access your cluster on Confluent Cloud:
@@ -163,4 +163,3 @@ In just a few minutes the producers and consumers are seamlessly connected. The 
 * **Unique keys per identity**: each consumer and producer generates its own cryptographic keys, and is issued its own unique credentials. They then use these to establish a mutually trusted secure channel between each other. By removing the dependency on a third-party service to store or distribute keys you're able to reduce your vulnerability surface area and eliminate single points of failure.
 * **Tamper-proof data transfer**: by pushing control of keys to the edges of the system, where authenticated encryption and decryption occurs, no other parties in the supply-chain are able to modify the data in transit. You can be assured that the data you receive at the consumer is exactly what was sent by your producers. You can also be assured that only authorized producers can write to a topic ensuring that the data in your topic is highly trustworthy. If you have even more stringent requirements you can take control of your credential authority and enforce granular authorization policies.
 * **Reduced exposure window**: Ockam secure channels regularly rotate authentication keys and session secrets. This approach means that if one of those session secrets was exposed your total data exposure window is limited to the small duration that secret was in use. Rotating authentication keys means that even when the identity keys of a producer are compromised - no historical data is compromised. You can selectively remove the compromised producer and its data. With centralized shared key distribution approaches there is the risk that all current and historical data can’t be trusted after a breach because it may have been tampered with or stolen. Ockam's approach eliminates the risk of compromised historical data and minimizes the risk to future data using automatically rotating keys.
-

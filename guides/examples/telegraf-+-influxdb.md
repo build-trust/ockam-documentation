@@ -120,8 +120,8 @@ In this section we'll show you how both of these problems can be solved with ver
 The first step is to enroll yourself with Ockam, and create enrollment tokens for your InfluxDB and Telegraf nodes:
 
 <pre class="language-bash"><code class="lang-bash"><strong>ockam enroll
-</strong>export OCKAM_INFLUXDB_TOKEN=$(ockam project enroll --attribute component=influxdb)
-export OCKAM_TELEGRAF_TOKEN=$(ockam project enroll --attribute component=telegraf)
+</strong>export OCKAM_INFLUXDB_TOKEN=$(ockam project ticket --attribute component=influxdb)
+export OCKAM_TELEGRAF_TOKEN=$(ockam project ticket --attribute component=telegraf)
 </code></pre>
 
 Now we can create a node for our InfluxDB service:
@@ -176,4 +176,3 @@ Restart the Telegraf service, and we can then check that it's still storing data
 {% hint style="info" %}
 This example created the TCP inlet on port `8087` primarily because the `influxd` service was running on the same host and already bound to port `8086`. In a production deployment where Telegraf and InfluxDB are on separate hosts the TCP inlet could listen on port `8086` and this default configuration would not need to change.
 {% endhint %}
-

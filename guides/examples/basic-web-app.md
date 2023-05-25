@@ -56,7 +56,7 @@ Now we can add Ockam into the mix. To prove we're not simply using the existing 
 To allow the database to enroll itself as a node with Ockam we first need to generate a token for that node:
 
 ```bash
-export DB_TOKEN=$(ockam project enroll --attribute component=db)
+export DB_TOKEN=$(ockam project ticket --attribute component=db)
 ```
 
 We've specified a custom attribute here called `component` and given it a value of `db`, which we can use later to identify this node. We've also stored the output of the command to an environment variable, though you could also copy it to your clipboard or output it to a file depending on your needs.
@@ -78,7 +78,7 @@ ockam relay create db --to /node/db --at /project/default
 With our database node now running, we need to connect a corresponding node on the web side. We'll start by creating another enrollment token, this time for a `component` labelled `web`:
 
 ```bash
-export WEB_TOKEN=$(ockam project enroll --attribute component=web)
+export WEB_TOKEN=$(ockam project ticket --attribute component=web)
 ```
 
 Next we'll create and enroll our node, set a policy to say it is only allowed to create inlet connections to the `db` component, and then finally we create that inlet:
@@ -96,4 +96,3 @@ Take note of the `--from` and `--to` values above. The `--from` is telling the n
 Which means if you start your web app the counter will continue incrementing just as it did before, with zero code changes to your application
 
 You could also extend this example by moving the Postgres service into a Docker container or to an entirely different machine. Once the nodes are registered the demo will continue to work, with no application code changes and no need to expose the Postgres ports directly to the internet.
-
