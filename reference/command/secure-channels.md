@@ -72,6 +72,7 @@ Once the channel is created, note above how we used the service address of the c
 ```
 » ockam secure-channel create --from a --to /node/b/service/api |
     ockam message send hello --from a --to -/service/uppercase
+HELLO
 ```
 
 The first command writes `/service/d92ef0aea946ec01cdbccc5b9d3f2e16`, the address of a new secure channel on `a`, to standard output and the second command replaces the `-` in the `to` argument with the value from standard input. Everything else works the same.
@@ -96,7 +97,7 @@ In a previous section, we learned that [Bridges](advanced-routing.md#bridges) en
 » ockam tcp-connection create --from bridge1 --to 127.0.0.1:8000
 » ockam tcp-connection create --from bridge2 --to 127.0.0.1:9000
 
-» ockam message send hello --from a --to /worker/ec8d523a2b9261c7fff5d0c66abc45c9/service/hop/worker/f0ea25511025c3a262b5dbd7b357f686/worker/dd2306d6b98e7ca57ce660750bc84a53/service/uppercase
+» ockam message send hello --from a --to /worker/ec8d523a2b9261c7fff5d0c66abc45c9/service/hop/worker/f0ea25511025c3a262b5dbd7b357f686/service/hop/worker/dd2306d6b98e7ca57ce660750bc84a53/service/uppercase
 HELLO
 
 » ockam secure-channel create --from a --to /worker/ec8d523a2b9261c7fff5d0c66abc45c9/service/hop/worker/f0ea25511025c3a262b5dbd7b357f686/service/hop/worker/dd2306d6b98e7ca57ce660750bc84a53/service/api \
