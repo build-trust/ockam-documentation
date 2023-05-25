@@ -17,7 +17,7 @@ You can create a vault as follows:&#x20;
 
 ```
 » ockam vault create v1
-Vault created: v1
+     ✔︎ Vault created with name 'v1'!
 ```
 
 This command will, by default, create a file system based vault, where your secret keys are stored at a specific file path.
