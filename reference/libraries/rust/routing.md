@@ -116,7 +116,7 @@ pub use hop::*;
 
 #### Echoer worker
 
-We'll also use the `Echoer` worker that we created in the [previous example](broken-reference/). So make sure that it stays exported from `src/lib.rs`.
+We'll also use the `Echoer` worker that we created in the [previous example](./nodes.md#echoer-worker). So make sure that it stays exported from `src/lib.rs`.
 
 #### App worker
 
@@ -135,6 +135,7 @@ Add the following code to this file:
 ```rust
 // examples/03-routing.rs
 // This node routes a message.
+
 use hello_ockam::{Echoer, Hop};
 use ockam::access_control::AllowAll;
 use ockam::{node, route, Context, Result};

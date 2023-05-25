@@ -58,7 +58,7 @@ async fn main(ctx: Context) -> Result<()> {
 
     // Don't call node.stop() here so this node runs forever.
     Ok(())
-}   
+}
 ```
 
 ### Middle node

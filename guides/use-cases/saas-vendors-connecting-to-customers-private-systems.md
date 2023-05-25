@@ -29,6 +29,6 @@ Within your SaaS platform you can use the Ockam programming libraries (or altern
 
 ### Next steps
 
-* Follow our [getting started guide to install Ockam](broken-reference) and start using it in just a few minutes.
+* Follow our [getting started guide to install Ockam](../../reference/command/README.md#install) and start using it in just a few minutes.
 * [Reach out to the team](https://www.ockam.io/contact/form), we'd love to talk to you in more detail about your potential use cases.
 * Join the growing community of developers who want to build trust by making applications that are secure-by-design, in the [Build Trust Discord server](https://discord.gg/RAbjRr3kds).
