@@ -128,7 +128,7 @@ Now we can create a node for our InfluxDB service:
 
 ```bash
 ockam identity create influxdb
-ockam project authenticate $OCKAM_INFLUXDB_TOKEN --identity influxdb
+ockam project enroll $OCKAM_INFLUXDB_TOKEN --identity influxdb
 ockam node create influxdb --identity influxdb
 ockam policy create --at influxdb --resource tcp-outlet --expression '(= subject.component "telegraf")'
 ockam tcp-outlet create --at /node/influxdb --from /service/outlet --to 127.0.0.1:8086
@@ -146,7 +146,7 @@ It's now time to establish the other side of this connection by creating the cor
 
 ```bash
 ockam identity create telegraf
-ockam project authenticate $OCKAM_TELEGRAF_TOKEN --identity telegraf
+ockam project enroll $OCKAM_TELEGRAF_TOKEN --identity telegraf
 ockam node create telegraf --identity telegraf
 ockam policy create --at telegraf --resource tcp-inlet --expression '(= subject.component "influxdb")'
 ockam tcp-inlet create --at /node/telegraf --from 127.0.0.1:8087 --to /project/default/service/forward_to_influxdb/secure/api/service/outlet
