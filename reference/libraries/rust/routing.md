@@ -142,25 +142,27 @@ use ockam::{node, route, Context, Result};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-  // Create a node with default implementations
-  let mut node = node(ctx);
+    // Create a node with default implementations
+    let mut node = node(ctx);
 
-  // Start a worker, of type Echoer, at address "echoer"
-  node.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
+    // Start a worker, of type Echoer, at address "echoer"
+    node.start_worker("echoer", Echoer, AllowAll, AllowAll)
+        .await?;
 
-  // Start a worker, of type Hop, at address "h1"
-  node.start_worker("h1", Hop, AllowAll, AllowAll).await?;
+    // Start a worker, of type Hop, at address "h1"
+    node.start_worker("h1", Hop, AllowAll, AllowAll).await?;
 
-  // Send a message to the worker at address "echoer",
-  // via the worker at address "h1"
-  node.send(route!["h1", "echoer"], "Hello Ockam!".to_string()).await?;
+    // Send a message to the worker at address "echoer",
+    // via the worker at address "h1"
+    node.send(route!["h1", "echoer"], "Hello Ockam!".to_string())
+        .await?;
 
-  // Wait to receive a reply and print it.
-  let reply = node.receive::<String>().await?;
-  println!("App Received: {}", reply); // should print "Hello Ockam!"
+    // Wait to receive a reply and print it.
+    let reply = node.receive::<String>().await?;
+    println!("App Received: {}", reply); // should print "Hello Ockam!"
 
-  // Stop all workers, stop the node, cleanup and return.
-  node.stop().await
+    // Stop all workers, stop the node, cleanup and return.
+    node.stop().await
 }
 ```
 
@@ -200,7 +202,8 @@ async fn main(ctx: Context) -> Result<()> {
     let mut node = node(ctx);
 
     // Start an Echoer worker at address "echoer"
-    node.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
+    node.start_worker("echoer", Echoer, AllowAll, AllowAll)
+        .await?;
 
     // Start 3 hop workers at addresses "h1", "h2" and "h3".
     node.start_worker("h1", Hop, AllowAll, AllowAll).await?;
@@ -251,8 +254,8 @@ Add the following code to this file:
 
 use hello_ockam::Echoer;
 use ockam::access_control::AllowAll;
-use ockam::{node, Context, Result, TcpListenerOptions};
-use ockam_transport_tcp::TcpTransportExtension;
+use ockam::flow_control::FlowControlPolicy;
+use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -266,7 +269,14 @@ async fn main(ctx: Context) -> Result<()> {
     node.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
 
     // Create a TCP listener and wait for incoming connections.
-    tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
+    let listener = tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
+
+    // Allow access to the Echoer via TCP connections from the TCP listener
+    node.flow_controls().add_consumer(
+        "echoer",
+        listener.flow_control_id(),
+        FlowControlPolicy::SpawnerAllowMultipleMessages,
+    );
 
     // Don't call node.stop() here so this node runs forever.
     Ok(())
@@ -285,28 +295,26 @@ Add the following code to this file:
 
 ```rust
 // examples/04-routing-over-transport-initiator.rs
-// This node routes a message, to a worker on a different node, over two tcp transport hops.
+// This node routes a message, to a worker on a different node, over the tcp transport.
 
-use ockam::{node, route, Context, Result, TcpConnectionOptions};
-use ockam_transport_tcp::TcpTransportExtension;
+use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpTransportExtension};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
     let mut node = node(ctx);
 
-    // Initialize the TCP Transport
+    // Initialize the TCP Transport.
     let tcp = node.create_tcp_transport().await?;
 
-    // Create a TCP connection to the middle node.
-    let connection_to_middle_node = tcp.connect("localhost:3000", TcpConnectionOptions::new()).await?;
+    // Create a TCP connection to a different node.
+    let connection_to_responder = tcp.connect("localhost:4000", TcpConnectionOptions::new()).await?;
 
-    // Send a message to the "echoer" worker, on a different node, over two tcp hops.
-    let r = route![connection_to_middle_node, "forward_to_responder", "echoer"];
-    node.send(r, "Hello Ockam!".to_string()).await?;
-
+    // Send a message to the "echoer" worker on a different node, over a tcp transport.
     // Wait to receive a reply and print it.
-    let reply = node.receive::<String>().await?;
+    let r = route![connection_to_responder, "echoer"];
+    let reply = node.send_and_receive::<String>(r, "Hello Ockam!".to_string()).await?;
+
     println!("App Received: {}", reply); // should print "Hello Ockam!"
 
     // Stop all workers, stop the node, cleanup and return.
@@ -356,6 +364,7 @@ Add the following code to this file:
 // src/forwarder.rs
 
 use ockam::{Address, Any, Context, LocalMessage, Result, Routed, Worker};
+use ockam::flow_control::FlowControlPolicy;
 
 pub struct Forwarder(pub Address);
 
@@ -378,8 +387,26 @@ impl Worker for Forwarder {
             .pop_front() // Remove my address from the onward_route
             .prepend(self.0.clone()); // Prepend predefined address to the onward_route
 
+        let prev_hop = transport_message.return_route.next()?.clone();
+
         // Wipe all local info (e.g. transport types)
         let message = LocalMessage::new(transport_message, vec![]);
+
+        if let Some(info) = ctx.flow_controls().find_flow_control_with_producer_address(&self.0) {
+            ctx.flow_controls().add_consumer(
+                prev_hop.clone(),
+                info.flow_control_id(),
+                FlowControlPolicy::ProducerAllowMultiple,
+            );
+        }
+
+        if let Some(info) = ctx.flow_controls().find_flow_control_with_producer_address(&prev_hop) {
+            ctx.flow_controls().add_consumer(
+                self.0.clone(),
+                info.flow_control_id(),
+                FlowControlPolicy::ProducerAllowMultiple,
+            );
+        }
 
         // Send the message on its onward_route
         ctx.forward(message).await
@@ -411,25 +438,32 @@ Add the following code to this file:
 
 use hello_ockam::Echoer;
 use ockam::access_control::AllowAll;
-use ockam::{node, Context, Result, TcpListenerOptions};
-use ockam_transport_tcp::TcpTransportExtension;
+use ockam::flow_control::FlowControlPolicy;
+use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-  // Create a node with default implementations
-  let node = node(ctx);
+    // Create a node with default implementations
+    let node = node(ctx);
 
-  // Initialize the TCP Transport
-  let tcp = node.create_tcp_transport().await?;
+    // Initialize the TCP Transport
+    let tcp = node.create_tcp_transport().await?;
 
-  // Create an echoer worker
-  node.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
+    // Create an echoer worker
+    node.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
 
-  // Create a TCP listener and wait for incoming connections.
-  tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
+    // Create a TCP listener and wait for incoming connections.
+    let listener = tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
 
-  // Don't call node.stop() here so this node runs forever.
-  Ok(())
+    // Allow access to the Echoer via TCP connections from the TCP listener
+    node.flow_controls().add_consumer(
+        "echoer",
+        listener.flow_control_id(),
+        FlowControlPolicy::SpawnerAllowMultipleMessages,
+    );
+
+    // Don't call node.stop() here so this node runs forever.
+    Ok(())
 }
 ```
 
@@ -452,34 +486,41 @@ Add the following code to this file:
 
 use hello_ockam::Forwarder;
 use ockam::access_control::AllowAll;
-use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions};
-use ockam_transport_tcp::TcpTransportExtension;
+use ockam::flow_control::FlowControlPolicy;
+use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-  // Create a node with default implementations
-  let node = node(ctx);
+    // Create a node with default implementations
+    let node = node(ctx);
 
-  // Initialize the TCP Transport
-  let tcp = node.create_tcp_transport().await?;
+    // Initialize the TCP Transport
+    let tcp = node.create_tcp_transport().await?;
 
-  // Create a TCP connection to the responder node.
-  let connection_to_responder = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
+    // Create a TCP connection to the responder node.
+    let connection_to_responder = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
-  // Create a Forwarder worker
-  node.start_worker(
-    "forward_to_responder",
-    Forwarder(connection_to_responder),
-    AllowAll,
-    AllowAll,
-  )
-          .await?;
+    // Create a Forwarder worker
+    node.start_worker(
+        "forward_to_responder",
+        Forwarder(connection_to_responder.into()),
+        AllowAll,
+        AllowAll,
+    )
+    .await?;
 
-  // Create a TCP listener and wait for incoming connections.
-  tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
+    // Create a TCP listener and wait for incoming connections.
+    let listener = tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
 
-  // Don't call node.stop() here so this node runs forever.
-  Ok(())
+    // Allow access to the Forwarder via TCP connections from the TCP listener
+    node.flow_controls().add_consumer(
+        "forward_to_responder",
+        listener.flow_control_id(),
+        FlowControlPolicy::SpawnerAllowMultipleMessages,
+    );
+
+    // Don't call node.stop() here so this node runs forever.
+    Ok(())
 }
 ```
 
@@ -497,30 +538,27 @@ Add the following code to this file:
 // examples/04-routing-over-transport-two-hops-initiator.rs
 // This node routes a message, to a worker on a different node, over two tcp transport hops.
 
-use ockam::{node, route, Context, Result, TcpConnectionOptions};
-use ockam_transport_tcp::TcpTransportExtension;
+use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpTransportExtension};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-  // Create a node with default implementations
-  let mut node = node(ctx);
+    // Create a node with default implementations
+    let mut node = node(ctx);
 
-  // Initialize the TCP Transport
-  let tcp = node.create_tcp_transport().await?;
+    // Initialize the TCP Transport
+    let tcp = node.create_tcp_transport().await?;
 
-  // Create a TCP connection to the middle node.
-  let connection_to_middle_node = tcp.connect("localhost:3000", TcpConnectionOptions::new()).await?;
+    // Create a TCP connection to the middle node.
+    let connection_to_middle_node = tcp.connect("localhost:3000", TcpConnectionOptions::new()).await?;
 
-  // Send a message to the "echoer" worker, on a different node, over two tcp hops.
-  let r = route![connection_to_middle_node, "forward_to_responder", "echoer"];
-  node.send(r, "Hello Ockam!".to_string()).await?;
+    // Send a message to the "echoer" worker, on a different node, over two tcp hops.
+    // Wait to receive a reply and print it.
+    let r = route![connection_to_middle_node, "forward_to_responder", "echoer"];
+    let reply = node.send_and_receive::<String>(r, "Hello Ockam!".to_string()).await?;
+    println!("App Received: {}", reply); // should print "Hello Ockam!"
 
-  // Wait to receive a reply and print it.
-  let reply = node.receive::<String>().await?;
-  println!("App Received: {}", reply); // should print "Hello Ockam!"
-
-  // Stop all workers, stop the node, cleanup and return.
-  node.stop().await
+    // Stop all workers, stop the node, cleanup and return.
+    node.stop().await
 }
 ```
 

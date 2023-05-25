@@ -32,9 +32,9 @@ Add the following code to this file:
 
 use hello_ockam::Echoer;
 use ockam::access_control::AllowAll;
+use ockam::flow_control::FlowControlPolicy;
 use ockam::identity::SecureChannelListenerOptions;
-use ockam::{node, Context, Result, TcpListenerOptions};
-use ockam_transport_tcp::TcpTransportExtension;
+use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -48,13 +48,28 @@ async fn main(ctx: Context) -> Result<()> {
 
     let bob = node.create_identity().await?;
 
+    // Create a TCP listener and wait for incoming connections.
+    let listener = tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
+
     // Create a secure channel listener for Bob that will wait for requests to
     // initiate an Authenticated Key Exchange.
-    node.create_secure_channel_listener(&bob, "bob_listener", SecureChannelListenerOptions::new())
+    let secure_channel_listener = node
+        .create_secure_channel_listener(
+            &bob,
+            "bob_listener",
+            SecureChannelListenerOptions::new().as_consumer(
+                listener.flow_control_id(),
+                FlowControlPolicy::SpawnerAllowOnlyOneMessage,
+            ),
+        )
         .await?;
 
-    // Create a TCP listener and wait for incoming connections.
-    tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
+    // Allow access to the Echoer via Secure Channels
+    node.flow_controls().add_consumer(
+        "echoer",
+        secure_channel_listener.flow_control_id(),
+        FlowControlPolicy::SpawnerAllowMultipleMessages,
+    );
 
     // Don't call node.stop() here so this node runs forever.
     Ok(())
@@ -80,8 +95,8 @@ Add the following code to this file:
 
 use hello_ockam::Forwarder;
 use ockam::access_control::AllowAll;
-use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions};
-use ockam_transport_tcp::TcpTransportExtension;
+use ockam::flow_control::FlowControlPolicy;
+use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -95,11 +110,22 @@ async fn main(ctx: Context) -> Result<()> {
     let connection_to_bob = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
     // Start a Forwarder to forward messages to Bob using the TCP connection.
-    node.start_worker("forward_to_bob", Forwarder(connection_to_bob), AllowAll, AllowAll)
-        .await?;
+    node.start_worker(
+        "forward_to_bob",
+        Forwarder(connection_to_bob.into()),
+        AllowAll,
+        AllowAll,
+    )
+    .await?;
 
     // Create a TCP listener and wait for incoming connections.
-    tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
+    let listener = tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
+
+    node.flow_controls().add_consumer(
+        "forward_to_bob",
+        listener.flow_control_id(),
+        FlowControlPolicy::SpawnerAllowMultipleMessages,
+    );
 
     // Don't call node.stop() here so this node runs forever.
     Ok(())
@@ -122,8 +148,7 @@ Add the following code to this file:
 // It then routes a message, to a worker on a different node, through this encrypted channel.
 
 use ockam::identity::SecureChannelOptions;
-use ockam::{node, route, Context, Result, TcpConnectionOptions};
-use ockam_transport_tcp::TcpTransportExtension;
+use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpTransportExtension};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -144,10 +169,10 @@ async fn main(ctx: Context) -> Result<()> {
         .await?;
 
     // Send a message to the echoer worker via the channel.
-    node.send(route![channel, "echoer"], "Hello Ockam!".to_string()).await?;
-
     // Wait to receive a reply and print it.
-    let reply = node.receive::<String>().await?;
+    let reply = node
+        .send_and_receive::<String>(route![channel, "echoer"], "Hello Ockam!".to_string())
+        .await?;
     println!("App Received: {}", reply); // should print "Hello Ockam!"
 
     // Stop all workers, stop the node, cleanup and return.
