@@ -23,7 +23,7 @@ A VPN based approach instead creates a secure connection from the network where 
 
 <img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
-Your customer is able to run an Ockam process alongside the service they want to make available, either by using the Ockam Command directly or embedded into a custom agent you provide as part of your solution. The Ockam process enrolls with Orchestator and defines what other components are permitted to access it. No ports or networks are exposed to the internet at any point.
+Your customer is able to run an Ockam process alongside the service they want to make available, either by using the Ockam Command directly or embedded into a custom agent you provide as part of your solution. The Ockam process enrolls with Orchestrator and defines what other components are permitted to access it. No ports or networks are exposed to the internet at any point.
 
 Within your SaaS platform you can use the Ockam programming libraries (or alternatively use Ockam Command) to integrate Ockam directly into your application. When required your service can initiate a connection to Ockam Orchestrator that, if authentication is successful and meets the customer's policy controls, establishes a secure channel to the Ockam process running on the customer's private infrastructure. Each process will generate its own credentials, and they will exchange those credentials directly with each other. This ensures that not only is all traffic between these systems guaranteed to be encrypted, but that only those authenticated nodes are able to communicate with each other. No other services on either network can communicate over this secure channel.
 
