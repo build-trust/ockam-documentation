@@ -95,7 +95,7 @@ x_token=$(ockam project ticket --attribute component=x)
 ### Control Plane
 
 ```bash
-# In a seperate terminal window:
+# In a separate terminal window:
 # Start an application service, listening on a local ip and port, that clients
 # would access through the cloud encrypted relay. We'll use a simple http server
 # for this first example but this could be any other application service.
@@ -104,7 +104,7 @@ python3 -m http.server --bind 127.0.0.1 5000
 
 ```bash
 # Create an identity and authenticate the identity for this control plane
-# with the Orchestator project.
+# with the Orchestrator project.
 ockam identity create control_identity
 ockam project enroll $cp1_token --identity control_identity
 
@@ -119,18 +119,19 @@ ockam relay create control_plane1 --at /project/default --to /node/control_plane
 
 ### Edge Plane
 
-<pre class="language-bash"><code class="lang-bash"># Create an identity and authenticate the identity for this edge plane
-# with the Orchestator project.
+```bash
+# Create an identity and authenticate the identity for this edge plane
+# with the Orchestrator project.
 ockam identity create edge_identity
 ockam project enroll $ep1_token --identity edge_identity
-<strong>
-</strong><strong># Create a node targeting the project as the edge identity.
-</strong><strong>ockam node create edge_plane1 --identity edge_identity
-</strong>
+
+# Create a node targeting the project as the edge identity.
+ockam node create edge_plane1 --identity edge_identity
+
 # Set a policy, and create the tcp-inlet.
 ockam policy create --at edge_plane1 --resource tcp-inlet --expression '(= subject.component "control")'
 ockam tcp-inlet create --at /node/edge_plane1 --from 127.0.0.1:7000 --to /project/default/service/forward_to_control_plane1/secure/api/service/outlet
-</code></pre>
+```
 
 ```bash
 # Send a request to our tcp-inlet at the `edge_plane1` node.
@@ -145,7 +146,7 @@ The following is denied:
 
 ```bash
 # Create an identity and authenticate the identity for this x node
-# with the Orchestator project.
+# with the Orchestrator project.
 #
 # This identity will use the enrollment token that has the attribute of
 # `component=x` attached
@@ -160,5 +161,5 @@ ockam policy create --at x --resource tcp-inlet --expression '(= subject.compone
 ockam tcp-inlet create --at /node/x --from 127.0.0.1:8000 --to /project/default/service/forward_to_control_plane1/secure/api/service/outlet
 
 # Sends a request to our `x` tcp-inlet and will be denied (this will timeout)
-curl --fail --head --max-time 10 127.0.0.1:8000
+curl --fail --head --max-time 5 127.0.0.1:8000
 ```
