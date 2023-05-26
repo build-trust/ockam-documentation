@@ -47,6 +47,7 @@ use ockam::access_control::IdentityIdAccessControl;
 use ockam::identity::CredentialsIssuer;
 use ockam::identity::SecureChannelListenerOptions;
 use ockam::{node, Context, Result, TcpListenerOptions};
+use ockam_core::flow_control::FlowControlPolicy;
 use ockam_transport_tcp::TcpTransportExtension;
 
 #[ockam::node]
@@ -76,7 +77,7 @@ async fn main(ctx: Context) -> Result<()> {
     //
     // For a different application this attested attribute set can be different and
     // distinct for each identifier, but for this example we'll keep things simple.
-    let credential_issuer = 
+    let credential_issuer =
         CredentialsIssuer::new(node.identities(), issuer.identifier(), "trust_context".into()).await?;
     for identifier in known_identifiers.iter() {
         node.identities()
@@ -85,21 +86,33 @@ async fn main(ctx: Context) -> Result<()> {
             .await?;
     }
 
+    let tcp_listener_options = TcpListenerOptions::new();
+    let sc_listener_options = SecureChannelListenerOptions::new().as_consumer(
+        &tcp_listener_options.spawner_flow_control_id(),
+        FlowControlPolicy::SpawnerAllowOnlyOneMessage,
+    );
+    let sc_listener_flow_control_id = sc_listener_options.spawner_flow_control_id();
+
     // Start a secure channel listener that only allows channels where the identity
     // at the other end of the channel can authenticate with the latest private key
     // corresponding to one of the above known public identifiers.
-    node.create_secure_channel_listener(&issuer.identifier(), "secure", SecureChannelListenerOptions::new())
+    node.create_secure_channel_listener(&issuer.identifier(), "secure", sc_listener_options)
         .await?;
 
     // Start a credential issuer worker that will only accept incoming requests from
     // authenticated secure channels with our known public identifiers.
     let allow_known = IdentityIdAccessControl::new(known_identifiers);
+    node.flow_controls().add_consumer(
+        "issuer",
+        &sc_listener_flow_control_id,
+        FlowControlPolicy::SpawnerAllowMultipleMessages,
+    );
     node.start_worker("issuer", credential_issuer, allow_known, AllowAll)
         .await?;
 
     // Initialize TCP Transport, create a TCP listener, and wait for connections.
     let tcp = node.create_tcp_transport().await?;
-    tcp.listen("127.0.0.1:5000", TcpListenerOptions::new()).await?;
+    tcp.listen("127.0.0.1:5000", tcp_listener_options).await?;
 
     // Don't call node.stop() here so this node runs forever.
     println!("issuer started");
@@ -125,13 +138,12 @@ touch examples/06-credential-exchange-server.rs
 use hello_ockam::Echoer;
 use ockam::abac::AbacAccessControl;
 use ockam::access_control::AllowAll;
+use ockam::flow_control::FlowControlPolicy;
 use ockam::identity::{
-    AuthorityService, CredentialsIssuerClient, CredentialsMemoryRetriever, SecureChannelListenerOptions,
-    SecureChannelOptions, TrustContext,
+    AuthorityService, CredentialsIssuerClient, SecureChannelListenerOptions, SecureChannelOptions, TrustContext,
 };
 use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpListenerOptions};
 use ockam_transport_tcp::TcpTransportExtension;
-use std::sync::Arc;
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -182,9 +194,10 @@ async fn main(ctx: Context) -> Result<()> {
     let trust_context = TrustContext::new(
         "trust_context_id".to_string(),
         Some(AuthorityService::new(
+            node.identities().identities_reader(),
             node.credentials(),
             issuer.identifier(),
-            Some(Arc::new(CredentialsMemoryRetriever::new(credential))),
+            None,
         )),
     );
 
@@ -192,27 +205,30 @@ async fn main(ctx: Context) -> Result<()> {
     // identities that have authenticated credentials issued by the above credential
     // issuer. These credentials must also attest that requesting identity is
     // a member of the production cluster.
+    let tcp_listener_options = TcpListenerOptions::new();
+    let sc_listener_options = SecureChannelListenerOptions::new()
+        .with_trust_context(trust_context)
+        .with_credential(credential)
+        .as_consumer(
+            &tcp_listener_options.spawner_flow_control_id(),
+            FlowControlPolicy::SpawnerAllowOnlyOneMessage,
+        );
+
+    node.flow_controls().add_consumer(
+        "echoer",
+        &sc_listener_options.spawner_flow_control_id(),
+        FlowControlPolicy::SpawnerAllowMultipleMessages,
+    );
     let allow_production = AbacAccessControl::create(node.repository(), "cluster", "production");
     node.start_worker("echoer", Echoer, allow_production, AllowAll).await?;
 
-    // Start a worker which will receive credentials sent by the client and issued by the issuer node
-    node.credentials_server()
-        .start(
-            node.context(),
-            trust_context,
-            server.identifier(),
-            "credentials".into(),
-            true,
-        )
-        .await?;
-
     // Start a secure channel listener that only allows channels with
     // authenticated identities.
-    node.create_secure_channel_listener(&server.identifier(), "secure", SecureChannelListenerOptions::new())
+    node.create_secure_channel_listener(&server.identifier(), "secure", sc_listener_options)
         .await?;
 
     // Create a TCP listener and wait for incoming connections
-    tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
+    tcp.listen("127.0.0.1:4000", tcp_listener_options).await?;
 
     // Don't call node.stop() here so this node runs forever.
     println!("server started");
@@ -233,8 +249,8 @@ touch examples/06-credential-exchange-client.rs
 
 {% code lineNumbers="true" %}
 ```rust
-use ockam::identity::{CredentialsIssuerClient, SecureChannelOptions};
-use ockam::{node, route, Context, MessageSendReceiveOptions, Result, TcpConnectionOptions};
+use ockam::identity::{AuthorityService, CredentialsIssuerClient, SecureChannelOptions, TrustContext};
+use ockam::{node, route, Context, Result, TcpConnectionOptions};
 use ockam_transport_tcp::TcpTransportExtension;
 
 #[ockam::node]
@@ -282,25 +298,26 @@ async fn main(ctx: Context) -> Result<()> {
         .verify_credential(&client.identifier(), &[issuer.clone()], credential.clone())
         .await?;
 
+    // Create a trust context that will be used to authenticate credential exchanges
+    let trust_context = TrustContext::new(
+        "trust_context_id".to_string(),
+        Some(AuthorityService::new(
+            node.identities().identities_reader(),
+            node.credentials(),
+            issuer.identifier(),
+            None,
+        )),
+    );
+
     // Create a secure channel to the node that is running the Echoer service.
     let server_connection = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
     let channel = node
         .create_secure_channel(
             &client.identifier(),
             route![server_connection, "secure"],
-            SecureChannelOptions::new(),
-        )
-        .await?;
-
-    // Present credentials over the secure channel
-    let r = route![channel.clone(), "credentials"];
-    node.credentials_server()
-        .present_credential_mutual(
-            node.context(),
-            r,
-            &[issuer],
-            credential,
-            MessageSendReceiveOptions::new(),
+            SecureChannelOptions::new()
+                .with_trust_context(trust_context)
+                .with_credential(credential),
         )
         .await?;
 
