@@ -178,7 +178,7 @@ Later in this guide, we'll explore other commands that interact with pre-defined
 
 Ockam Spaces are an infinitely scalable Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#nodes) in the cloud. Ockam Orchestrator can create, manage, and scale spaces for you. Like other nodes, Spaces offer services. For example, you can create projects within a space, invite teammates to it, or attach payment subscriptions.
 
-When your run `ockam enroll` for the first time, we create a space for you to host your projects.
+When you run `ockam enroll` for the first time, we create a space for you to host your projects.
 
 ```
 » ockam enroll
@@ -196,7 +196,7 @@ When your run `ockam enroll` for the first time, we create a space for you to ho
 
 Ockam Projects are also infinitely scalable Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#nodes) in the cloud. Ockam Orchestrator can create, manage, and scale projects for you. Projects are created within a [<mark style="color:blue;">Space</mark>](nodes.md#spaces) and can inherit permissions and subscriptions from their parent space. There can be many projects within one space.
 
-When your run `ockam enroll` for the first time, we create a default project for you, within your default space.
+When you run `ockam enroll` for the first time, we create a default project for you, within your default space.
 
 ```
 » ockam enroll
