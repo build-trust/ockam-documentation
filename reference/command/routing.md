@@ -82,7 +82,7 @@ Let's start by exploring TCP transport. Create two new nodes: `n2` and `n3` and 
 Next, let's create two TCP connections, one from `n1 to n2` and the other from `n2 to n3`. Let's also add a hop for routing purposes:
 
 ```
-» ockam service start --node n2 hop
+» ockam service start --at n2 hop
 » ockam tcp-connection create --from n1 --to 127.0.0.1:7000
 » ockam tcp-connection create --from n2 --to 127.0.0.1:8000
 ```

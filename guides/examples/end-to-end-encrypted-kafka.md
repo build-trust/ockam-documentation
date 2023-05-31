@@ -82,7 +82,7 @@ ockam node create consumer --identity consumer
 Once that completes we can now expose our Kafka bootstrap server. This is like the remote Kafka bootsrtap server and brokers have become virtually adjacent on `localhost:4000` by default:
 
 ```bash
-ockam kafka-consumer create --node consumer
+ockam kafka-consumer create --at consumer
 ```
 
 Copy the `kafka.config` file across, and use it to create a new topic that we'll use for sending messages between the producer and consumer in this demo (in this case we've called the topic `demo-topic`)
@@ -124,7 +124,7 @@ ockam node create producer1 --identity producer1
 And expose our Kafka bootstrap server on default port `5000` so we can start sending messages through Confluent Cloud:
 
 ```bash
-ockam kafka-producer create --node producer1
+ockam kafka-producer create --at producer1
 ```
 
 Make sure to copy the `kafka.config` file across, and start your producer:
@@ -149,7 +149,7 @@ ockam identity create producer2
 ockam project enroll producer2.token --identity producer2
 ockam node create producer2 --identity producer2
 
-ockam kafka-producer create --node producer2 --bootstrap-server 127.0.0.1:6000 --brokers-port-range 6001-6100
+ockam kafka-producer create --at producer2 --bootstrap-server 127.0.0.1:6000 --brokers-port-range 6001-6100
 
 kafka-console-producer.sh --topic demo-topic --bootstrap-server localhost:6000 --producer.config kafka.config
 ```
@@ -242,7 +242,7 @@ start_consumer_listener() {
   assert_success
 
   run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM node create consumer --identity consumer"
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM kafka-consumer create --node consumer"
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM kafka-consumer create --at consumer"
   assert_success
 
   run kafka-topics.sh --bootstrap-server localhost:4000 --command-config kafka.config \
@@ -259,7 +259,7 @@ start_consumer_listener() {
   assert_success
 
   run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM node create producer1 --identity producer1"
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM kafka-producer create --node producer1"
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM kafka-producer create --at producer1"
   assert_success
 
   run bash -c "echo 'Hello from producer 1' | kafka-console-producer.sh --topic demo-topic\
@@ -276,7 +276,7 @@ start_consumer_listener() {
   assert_success
 
   run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM node create producer2 --identity producer2"
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM kafka-producer create --node producer2 --bootstrap-server 127.0.0.1:6000 --brokers-port-range 6001-6100"
+  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM kafka-producer create --at producer2 --bootstrap-server 127.0.0.1:6000 --brokers-port-range 6001-6100"
   assert_success
 
   run bash -c "echo 'Hello from producer 2' | kafka-console-producer.sh --topic demo-topic\

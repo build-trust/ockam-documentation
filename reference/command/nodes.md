@@ -162,7 +162,7 @@ HELLO
 Services have addresses represented by `/service/{ADDRESS}`. You can see a list of all services on a node by running:
 
 ```
-» ockam service list --node n1
+» ockam service list --at n1
 Services:
   Service:
     Type: uppercase
