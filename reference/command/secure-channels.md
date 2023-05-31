@@ -88,9 +88,9 @@ In a previous section, we learned that [Bridges](advanced-routing.md#bridges) en
 ```
 » ockam node create a
 » ockam node create bridge1 --tcp-listener-address=127.0.0.1:7000
-» ockam service start --at bridge1 hop
+» ockam service start hop --at bridge1
 » ockam node create bridge2 --tcp-listener-address=127.0.0.1:8000
-» ockam service start --at bridge2 hop
+» ockam service start hop --at bridge2
 » ockam node create b --tcp-listener-address=127.0.0.1:9000
 
 » ockam tcp-connection create --from a --to 127.0.0.1:7000

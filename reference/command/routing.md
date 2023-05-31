@@ -49,7 +49,7 @@ Pay very close attention to the Sender, Hop, and Replier rules in the sequence d
 The above was just one message hop. We can extend this to two hops:
 
 ```
-» ockam service start hop h1
+» ockam service start hop --addr h1
 » ockam message send hello --to /node/n1/service/h1/service/echo
 hello
 ```
@@ -59,7 +59,7 @@ hello
 This very simple protocol can extend to any number of hops, try following command:
 
 ```
-» ockam service start hop h2
+» ockam service start hop --addr h2
 » ockam message send hello --to /node/n1/service/h1/service/h2/service/echo
 hello
 ```
@@ -82,7 +82,7 @@ Let's start by exploring TCP transport. Create two new nodes: `n2` and `n3` and 
 Next, let's create two TCP connections, one from `n1 to n2` and the other from `n2 to n3`. Let's also add a hop for routing purposes:
 
 ```
-» ockam service start --at n2 hop
+» ockam service start hop --at n2
 » ockam tcp-connection create --from n1 --to 127.0.0.1:7000
 » ockam tcp-connection create --from n2 --to 127.0.0.1:8000
 ```
