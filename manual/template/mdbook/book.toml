@@ -8,6 +8,7 @@ title = "Ockam Command Manual"
 [output.html]
 default-theme = "rust"
 preferred-dark-theme = "navy"
+additional-css = ["custom.css"]
 
 [output.html.fold]
 enable = true
