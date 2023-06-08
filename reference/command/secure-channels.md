@@ -55,11 +55,8 @@ In this example, we'll create a secure channel from [Node](nodes.md) `a` to node
 » ockam node create a
 » ockam node create b
 » ockam secure-channel create --from a --to /node/b/service/api
-
-  Created Secure Channel:
-  • From: /node/a
-  •   To: /node/b/service/api (/ip4/127.0.0.1/tcp/53483/service/api)
-  •   At: /service/d92ef0aea946ec01cdbccc5b9d3f2e16
+     ✔︎ Secure Channel at /service/d92ef0aea946ec01cdbccc5b9d3f2e16 created successfully
+       From /node/a to /node/b/service/api
 
 » ockam message send hello --from a --to /service/d92ef0aea946ec01cdbccc5b9d3f2e16/service/uppercase
 HELLO
@@ -120,7 +117,6 @@ Since Ockam Secure Channels are built on top of Ockam Routing, we can establish 
 
 » ockam node create b
 » ockam relay create b --at /node/relay --to b
-      Creating Relay
     ✔︎ Now relaying messages from /node/relay/service/34df708509a28abf3b4c1616e0b37056 → /node/b/service/forward_to_b
 
 » ockam node create a
@@ -158,7 +154,6 @@ The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was create
 » ockam node create b --project-path project.json
 
 » ockam relay create b --at /project/default --to /node/a
-       Creating Relay
      ✔︎ Now relaying messages from /project/default/service/70c63af6590869c9bf9aa5cad45d1539 → /node/a/service/forward_to_b
 
 » ockam secure-channel create --from a --to /project/default/service/forward_to_b/service/api \
