@@ -16,10 +16,12 @@ Any Ockam Identity can issue credentials about another Ockam Identity.
 
 ```
 » ockam identity create a
-Identity created: P8b604a07640ecd944f379b5a1a5da0748f36f76327b00193067d1d8c6092dfae
+     ✔︎ Identity P8b604a07640ecd944f379b5a1a5da0748f36f76327b00193067d1d8c6092dfae
+       created successfully as a
 
 » ockam identity create b
-Identity created: P5c14d09f32dd27255913d748d276dcf6952b7be5d0be4023e5f40787b53274ae
+     ✔︎ Identity P5c14d09f32dd27255913d748d276dcf6952b7be5d0be4023e5f40787b53274ae
+       created successfully as b
 
 » ockam credential issue --as a --for $(ockam identity show b --full --encoding hex)
 Subject:    P5c14d09f32dd27255913d748d276dcf6952b7be5d0be4023e5f40787b53274ae
