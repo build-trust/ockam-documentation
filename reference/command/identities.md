@@ -32,7 +32,8 @@ You can create new identities, by typing: &#x20;
 
 ```
 » ockam identity create i1 --vault v1
-Identity created: Pef7f2a20c186b5adb03c0d7160879134135574663cc930d9b1cd664d63a45fb0
+     ✔︎ Identity Pef7f2a20c186b5adb03c0d7160879134135574663cc930d9b1cd664d63a45fb0
+       created successfully as i1
 ```
 
 The secret keys belonging to this identity are stored in the specified vault. This can be any type of vault - File Vault, AWS KMS, Azure KeyVault, YubiKey etc. If no vault is specified, the default vault is used. If a default vault doesn't exist yet, a new file systems based vault is created, set as default, and then used to generate secret keys.
