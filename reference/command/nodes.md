@@ -29,22 +29,15 @@ Ockam Command makes is super easy to create and manage local or remote nodes. If
 
 ```
 » ockam node create
-
-Node:
-  Name: e1c233de
-  Status: UP
 ...
+✔︎ Node f8eb8df9 created successfully
 ```
 
 Similarly, you can also create a node with a name of your choice:
 
 ```
 » ockam node create n1
-
-Node:
-  Name: n1
-  Status: UP
-...
+✔︎ Node n1 created successfully
 ```
 
 You could also start a node in the foreground and optionally tell it display verbose logs:
@@ -100,11 +93,6 @@ You can start a stopped node with `ockam node start`.
 
 ```
 » ockam node start n1
-
-Node:
-  Name: n1
-  Status: UP
-...
 ```
 
 You can permanently delete a node by running:
@@ -132,14 +120,18 @@ You can see the list of workers in a node by running:
 
 ```
 » ockam worker list --at n1
-Node: n1
-  Workers:
-    0bd13aa25990fcf84d69868ea62cb67e
-    1305ca7d55d9694ff30f04906ff5396f
-    222e361a13756be8eadac6dab91f99e4
-    echo
-    uppercase
-    ...
+       ┌───────────────────────────┐
+       │       Workers on n1       │
+       └───────────────────────────┘
+
+     │ Worker 0c240525017e2273fa58fc0d5497b62a
+
+     │ Worker 31482d2647246b47667cf12428626723
+
+     │ Worker 4248c83401c77176967715caca9d82dd
+
+     │ Worker _internal.nodemanager
+...
 ```
 
 Note the workers in node `n1` with address `echo` and `uppercase`. We'll send them some messages below as we look at services. A node can also deliver messages to workers on a different node using the [<mark style="color:blue;">Ockam Routing Protocol</mark>](routing.md) and its Transports. Later in this guide, when we [<mark style="color:blue;">dig into routing</mark>](routing.md), we'll send some messages across nodes.
@@ -163,13 +155,18 @@ Services have addresses represented by `/service/{ADDRESS}`. You can see a list 
 
 ```
 » ockam service list --at n1
-Services:
-  Service:
-    Type: uppercase
-    Address: /service/uppercase
-  Service:
-    Type: echo
-    Address: /service/echo
+       ┌────────────────────────────┐
+       │       Services on n1       │
+       └────────────────────────────┘
+
+     │ Service uppercase
+     │ Address /service/uppercase
+
+     │ Service echo
+     │ Address /service/echo
+
+     │ Service credentials
+     │ Address /service/credentials
 ```
 
 Later in this guide, we'll explore other commands that interact with pre-defined services. For example every node created with `ockam` command starts a secure channel listener at the address `/service/api`, which allows other nodes to create mutually authenticated secure channels with it.
@@ -185,11 +182,13 @@ When you run `ockam enroll` for the first time, we create a space for you to hos
 ...
 
 » ockam space list
-+--------------------------------------+----------+-------------------+
-| Id                                   | Name     | Users             |
-+--------------------------------------+----------+-------------------+
-| 877c7a4d-b1be-4f36-8da6-be045ab64b60 | f27d39e1 | alice@example.com |
-+--------------------------------------+----------+-------------------+
+       ┌────────────────────┐
+       │       Spaces       │
+       └────────────────────┘
+
+     │ Space f27d39e1
+     │ Id 877c7a4d-b1be-4f36-8da6-be045ab64b60
+     │ alice@example.com
 ```
 
 ## Projects
@@ -203,11 +202,12 @@ When you run `ockam enroll` for the first time, we create a default project for 
 ...
 
 » ockam project list
-+--------------------------------------+---------+-------+------------+
-| Id                                   | Name    | Users | Space Name |
-+--------------------------------------+---------+-------+------------+
-| 91c57e59-ad52-4b4e-9c4a-dd03113da939 | default |       | f27d39e1   |
-+--------------------------------------+---------+-------+------------+
+       ┌──────────────────────┐
+       │       Projects       │
+       └──────────────────────┘
+
+     │ Project default
+     │ Space f27d39e1
 ```
 
 Like other nodes, Projects offer services. For example, the default project has an `echo` service just like the local nodes we created above. We can send messages and get replies from it. The `echo` service replies with the same message we send it.
