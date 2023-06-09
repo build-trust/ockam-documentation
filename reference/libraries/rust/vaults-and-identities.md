@@ -7,9 +7,8 @@ description: >-
 # Vaults and Identities
 
 ```rust
-use ockam::{Context, Result};
-use ockam::identity::Identity;
 use ockam::node;
+use ockam::{Context, Result};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
