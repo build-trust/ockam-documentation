@@ -31,7 +31,6 @@ Add the following code to this file:
 // It then runs forever waiting for messages.
 
 use hello_ockam::Echoer;
-use ockam::access_control::AllowAll;
 use ockam::flow_control::FlowControlPolicy;
 use ockam::identity::SecureChannelListenerOptions;
 use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
@@ -44,7 +43,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Initialize the TCP Transport.
     let tcp = node.create_tcp_transport().await?;
 
-    node.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
+    node.start_worker("echoer", Echoer).await?;
 
     let bob = node.create_identity().await?;
 
@@ -94,7 +93,6 @@ Add the following code to this file:
 // It then runs forever waiting to route messages.
 
 use hello_ockam::Forwarder;
-use ockam::access_control::AllowAll;
 use ockam::flow_control::FlowControlPolicy;
 use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
 
@@ -110,13 +108,8 @@ async fn main(ctx: Context) -> Result<()> {
     let connection_to_bob = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
     // Start a Forwarder to forward messages to Bob using the TCP connection.
-    node.start_worker(
-        "forward_to_bob",
-        Forwarder(connection_to_bob.into()),
-        AllowAll,
-        AllowAll,
-    )
-    .await?;
+    node.start_worker("forward_to_bob", Forwarder(connection_to_bob.into()))
+        .await?;
 
     // Create a TCP listener and wait for incoming connections.
     let listener = tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;

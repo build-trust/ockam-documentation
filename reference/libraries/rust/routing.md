@@ -137,7 +137,6 @@ Add the following code to this file:
 // This node routes a message.
 
 use hello_ockam::{Echoer, Hop};
-use ockam::access_control::AllowAll;
 use ockam::{node, route, Context, Result};
 
 #[ockam::node]
@@ -146,16 +145,14 @@ async fn main(ctx: Context) -> Result<()> {
     let mut node = node(ctx);
 
     // Start a worker, of type Echoer, at address "echoer"
-    node.start_worker("echoer", Echoer, AllowAll, AllowAll)
-        .await?;
+    node.start_worker("echoer", Echoer).await?;
 
     // Start a worker, of type Hop, at address "h1"
-    node.start_worker("h1", Hop, AllowAll, AllowAll).await?;
+    node.start_worker("h1", Hop).await?;
 
     // Send a message to the worker at address "echoer",
     // via the worker at address "h1"
-    node.send(route!["h1", "echoer"], "Hello Ockam!".to_string())
-        .await?;
+    node.send(route!["h1", "echoer"], "Hello Ockam!".to_string()).await?;
 
     // Wait to receive a reply and print it.
     let reply = node.receive::<String>().await?;
@@ -193,7 +190,6 @@ Add the following code to this file:
 // This node routes a message through many hops.
 
 use hello_ockam::{Echoer, Hop};
-use ockam::access_control::AllowAll;
 use ockam::{node, route, Context, Result};
 
 #[ockam::node]
@@ -202,13 +198,12 @@ async fn main(ctx: Context) -> Result<()> {
     let mut node = node(ctx);
 
     // Start an Echoer worker at address "echoer"
-    node.start_worker("echoer", Echoer, AllowAll, AllowAll)
-        .await?;
+    node.start_worker("echoer", Echoer).await?;
 
     // Start 3 hop workers at addresses "h1", "h2" and "h3".
-    node.start_worker("h1", Hop, AllowAll, AllowAll).await?;
-    node.start_worker("h2", Hop, AllowAll, AllowAll).await?;
-    node.start_worker("h3", Hop, AllowAll, AllowAll).await?;
+    node.start_worker("h1", Hop).await?;
+    node.start_worker("h2", Hop).await?;
+    node.start_worker("h3", Hop).await?;
 
     // Send a message to the echoer worker via the "h1", "h2", and "h3" workers
     let r = route!["h1", "h2", "h3", "echoer"];
@@ -253,7 +248,6 @@ Add the following code to this file:
 // It then runs forever waiting for messages.
 
 use hello_ockam::Echoer;
-use ockam::access_control::AllowAll;
 use ockam::flow_control::FlowControlPolicy;
 use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 
@@ -266,7 +260,7 @@ async fn main(ctx: Context) -> Result<()> {
     let tcp = node.create_tcp_transport().await?;
 
     // Create an echoer worker
-    node.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
+    node.start_worker("echoer", Echoer).await?;
 
     // Create a TCP listener and wait for incoming connections.
     let listener = tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
@@ -363,8 +357,8 @@ Add the following code to this file:
 ```rust
 // src/forwarder.rs
 
-use ockam::{Address, Any, Context, LocalMessage, Result, Routed, Worker};
 use ockam::flow_control::FlowControlPolicy;
+use ockam::{Address, Any, Context, LocalMessage, Result, Routed, Worker};
 
 pub struct Forwarder(pub Address);
 
@@ -437,7 +431,6 @@ Add the following code to this file:
 // It then runs forever waiting for messages.
 
 use hello_ockam::Echoer;
-use ockam::access_control::AllowAll;
 use ockam::flow_control::FlowControlPolicy;
 use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 
@@ -450,7 +443,7 @@ async fn main(ctx: Context) -> Result<()> {
     let tcp = node.create_tcp_transport().await?;
 
     // Create an echoer worker
-    node.start_worker("echoer", Echoer, AllowAll, AllowAll).await?;
+    node.start_worker("echoer", Echoer).await?;
 
     // Create a TCP listener and wait for incoming connections.
     let listener = tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
@@ -485,7 +478,6 @@ Add the following code to this file:
 // It then runs forever waiting to route messages.
 
 use hello_ockam::Forwarder;
-use ockam::access_control::AllowAll;
 use ockam::flow_control::FlowControlPolicy;
 use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
 
@@ -501,13 +493,8 @@ async fn main(ctx: Context) -> Result<()> {
     let connection_to_responder = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
     // Create a Forwarder worker
-    node.start_worker(
-        "forward_to_responder",
-        Forwarder(connection_to_responder.into()),
-        AllowAll,
-        AllowAll,
-    )
-    .await?;
+    node.start_worker("forward_to_responder", Forwarder(connection_to_responder.into()))
+        .await?;
 
     // Create a TCP listener and wait for incoming connections.
     let listener = tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
