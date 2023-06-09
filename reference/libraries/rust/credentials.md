@@ -47,8 +47,8 @@ use ockam::access_control::IdentityIdAccessControl;
 use ockam::identity::CredentialsIssuer;
 use ockam::identity::SecureChannelListenerOptions;
 use ockam::{node, Context, Result, TcpListenerOptions};
-use ockam_core::flow_control::FlowControlPolicy;
-use ockam_transport_tcp::TcpTransportExtension;
+use ockam::flow_control::FlowControlPolicy;
+use ockam::TcpTransportExtension;
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -107,7 +107,7 @@ async fn main(ctx: Context) -> Result<()> {
         &sc_listener_flow_control_id,
         FlowControlPolicy::SpawnerAllowMultipleMessages,
     );
-    node.start_worker("issuer", credential_issuer, allow_known, AllowAll)
+    node.start_worker_with_access_control("issuer", credential_issuer, allow_known, AllowAll)
         .await?;
 
     // Initialize TCP Transport, create a TCP listener, and wait for connections.
@@ -142,8 +142,8 @@ use ockam::flow_control::FlowControlPolicy;
 use ockam::identity::{
     AuthorityService, CredentialsIssuerClient, SecureChannelListenerOptions, SecureChannelOptions, TrustContext,
 };
+use ockam::TcpTransportExtension;
 use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpListenerOptions};
-use ockam_transport_tcp::TcpTransportExtension;
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -220,7 +220,8 @@ async fn main(ctx: Context) -> Result<()> {
         FlowControlPolicy::SpawnerAllowMultipleMessages,
     );
     let allow_production = AbacAccessControl::create(node.repository(), "cluster", "production");
-    node.start_worker("echoer", Echoer, allow_production, AllowAll).await?;
+    node.start_worker_with_access_control("echoer", Echoer, allow_production, AllowAll)
+        .await?;
 
     // Start a secure channel listener that only allows channels with
     // authenticated identities.
@@ -250,8 +251,8 @@ touch examples/06-credential-exchange-client.rs
 {% code lineNumbers="true" %}
 ```rust
 use ockam::identity::{AuthorityService, CredentialsIssuerClient, SecureChannelOptions, TrustContext};
+use ockam::TcpTransportExtension;
 use ockam::{node, route, Context, Result, TcpConnectionOptions};
-use ockam_transport_tcp::TcpTransportExtension;
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
