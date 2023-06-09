@@ -4,13 +4,15 @@ description: Connecting a web app and database
 
 # Basic Web App
 
-This is a demo that shows how to use Ockam sidecars to connect a traditional web app to a postgres database, with minimal/no code changes.
+This is a demo that shows how to use Ockam
+[sidecars](https://docs.ockam.io/guides/examples/create-secure-communication-with-a-private-database-from-anywhere)
+to connect a traditional web app to a postgres database, with minimal/no code changes.
 
 ### Prerequisites
 
 * [Ockam Command](../../#install)
-* Python
-* Postgresql
+* [Python](https://www.python.org/downloads/), [Flask](https://github.com/pallets/flask/), [psycopg2](https://github.com/psycopg/psycopg2)
+* [Postgresql](https://www.postgresql.org/)
 
 ### The App
 
@@ -18,7 +20,8 @@ In this demo we're going to take a very basic Python Flask app that simply incre
 
 #### Python Code
 
-We've put everything into a single file here for the sake of readability for this demo:
+We've put everything into a single file (called `main.py`) here for the sake of
+readability for this demo:
 
 {% code lineNumbers="true" %}
 ```python
@@ -48,6 +51,12 @@ def hello_world():
 {% endcode %}
 
 Lines 12 and 13 are where we establish out connection to the database, at this point it's simply pointing to localhost. If you're running a local postgres instance then starting this Flask app will now show you how many times you've visited it, storing each new visit in the database.
+
+Notes to run the example:
+1. You also need to add following Python dependencies by running:
+  - Flask: `pip3 install flask`
+  - psycopg2: `pip3 install psycopg2-binary`
+2. To run this Flask app (`main.py`) use: `flask --app main run`
 
 ### Moving the database
 
