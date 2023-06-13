@@ -10,13 +10,33 @@ to connect a traditional web app to a postgres database, with minimal/no code ch
 
 ### Prerequisites
 
-* [Ockam Command](../../#install)
-* [Python](https://www.python.org/downloads/), [Flask](https://github.com/pallets/flask/), [psycopg2](https://github.com/psycopg/psycopg2)
-* [Postgresql](https://www.postgresql.org/)
+- [Ockam Command](../../#install)
+  - After successfully installing this prerequisite, you will be able to run the `ockam`
+    CLI app in your terminal.
+- [Python](https://www.python.org/downloads/), and libraries: [Flask](https://github.com/pallets/flask/),
+  [psycopg2](https://github.com/psycopg/psycopg2)
+  1. After successfully installing Python, you will be able to run `python3` command in
+     your terminal.
+  2. Instructions on how to get the dependencies (`Flask`, `psycopg2`) are provided in the
+     [Python Code](#python-code) section below.
+- [Postgresql](https://www.postgresql.org/)
+  1. After successfully installing this prerequisite, you will be able to run the
+     Postgres database server on your machine on the default port of `5432`.
+  2. Make sure to set a new password for the database user `postgres`. Set this password
+     to be `password` (the Python Code below uses `postgres:password@localhost` as the
+     connection string for the db driver). The following directions can help you set this
+     up on Linux or macOS:
+     - In a terminal, login to the database locally as the `postgres` user:
+       `sudo -u postgres psql --username postgres --password --dbname template1`
+     - Then type the following in the REPL: `ALTER USER postgres PASSWORD 'password';`, and
+       finally type `exit`.
+     - You can learn more about this [here](https://stackoverflow.com/a/12721095/2085356).
 
-### The App
+### The Web App
 
-In this demo we're going to take a very basic Python Flask app that simply increments a counter in a Postgres database, and move the connection between the application and database to be through an Ockam secure channel.
+In this demo we're going to take a very basic Python Flask app that simply increments a
+counter in a Postgres database, and move the connection between the application and
+database to be through an Ockam secure channel.
 
 #### Python Code
 
@@ -50,19 +70,63 @@ def hello_world():
 ```
 {% endcode %}
 
-Lines 12 and 13 are where we establish out connection to the database, at this point it's simply pointing to localhost. If you're running a local postgres instance then starting this Flask app will now show you how many times you've visited it, storing each new visit in the database.
+Lines 12 and 13 are where we establish out connection to the database, at this point it's
+simply pointing to localhost. If you're running a local postgres instance then starting
+this Flask app will now show you how many times you've visited it, storing each new visit
+in the database.
 
 Notes to run the example:
-1. You also need to add following Python dependencies by running:
+- You also need to add following Python dependencies by running:
   - Flask: `pip3 install flask`
   - psycopg2: `pip3 install psycopg2-binary`
-2. To run this Flask app (`main.py`) use: `flask --app main run`
+- To run this Flask app (`main.py`) use: `flask --app main run`
 
 ### Moving the database
 
-Now we can add Ockam into the mix. To prove we're not simply using the existing communication channel we'd suggest either [changing the port that your local postgres is listening on](https://www.postgresql.org/docs/current/app-pg-ctl.html#R2-APP-PGCTL-3), or running a new postgres instance in a Docker container.
+Now we can add Ockam into the mix 🎉. Lets change the port that the database server is
+listening on to `5433` (_the default port is `5432`_). This will ensure that we're not
+simply using the existing communication channel.
 
-To allow the database to enroll itself as a node with Ockam we first need to generate a token for that node:
+There are two approaches to doing this:
+1. running a new postgres instance in a Docker container with a different port, or
+2. changing the port that your local postgres server.
+
+The following are directions on changing the port that your local postgres server is
+listening on to `5433`.
+
+{% tabs %}
+{% tab title="Linux & macOS" %}
+You can either:
+1. Use [`pg_ctl`](https://www.postgresql.org/docs/current/app-pg-ctl.html#R2-APP-PGCTL-3)
+   that is included in the binaries for your postgres installation.
+2. Or you can change it
+   [directly](https://stackoverflow.com/questions/187438/change-pgsql-port).
+  - Edit the `/etc/postgresql/<VERSION>/main/postgresql.conf` file, where `<VERSION>` is
+    the version of the database server that you have installed.
+  - Find the line where the `port` is listed and change it to `port = 5433`.
+  - Save the file.
+  - Restart the postgres server.
+    - On Linux run `sudo systemctl restart postgresql.service` to let the new port take
+      effect.
+    - On macOS, you can find the instructions
+      [here](https://databasefaqs.com/restart-postgres/) on how to restart it.
+{% endtab %}
+
+{% tab title="Other Systems" %}
+Please read this
+[tutorial](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/)
+on how to configure Postgres server on Windows.
+{% endtab %}
+{% endtabs %}
+
+Optional:
+- If you want `main.py` to connect directly (without Ockam) to your database, you have to
+  specify this port in the connection string:
+  `url = "postgres://postgres:password@localhost:5433/"`.
+  You can use this to test if the new port is up and running.
+
+To allow the database to enroll itself as a node with Ockam we first need to generate a
+token for that node:
 
 ```bash
 export DB_TOKEN=$(ockam project ticket --attribute component=db)
