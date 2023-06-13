@@ -101,15 +101,15 @@ You can either:
    that is included in the binaries for your postgres installation.
 2. Or you can change it
    [directly](https://stackoverflow.com/questions/187438/change-pgsql-port).
-  - Edit the `/etc/postgresql/<VERSION>/main/postgresql.conf` file, where `<VERSION>` is
-    the version of the database server that you have installed.
-  - Find the line where the `port` is listed and change it to `port = 5433`.
-  - Save the file.
-  - Restart the postgres server.
-    - On Linux run `sudo systemctl restart postgresql.service` to let the new port take
-      effect.
-    - On macOS, you can find the instructions
-      [here](https://databasefaqs.com/restart-postgres/) on how to restart it.
+    - Edit the `/etc/postgresql/<VERSION>/main/postgresql.conf` file, where `<VERSION>` is
+      the version of the database server that you have installed.
+    - Find the line where the `port` is listed and change it to `port = 5433`.
+    - Save the file.
+    - Restart the postgres server.
+      - On Linux run `sudo systemctl restart postgresql.service` to let the new port take
+        effect.
+      - On macOS, you can find the instructions
+        [here](https://databasefaqs.com/restart-postgres/) on how to restart it.
 {% endtab %}
 
 {% tab title="Other Systems" %}
