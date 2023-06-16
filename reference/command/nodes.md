@@ -25,7 +25,7 @@ You can create a standalone node using Ockam [<mark style="color:blue;">Command<
 
 A typical Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#workers). Using Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing), a node can deliver messages from one worker to another local worker. Using Ockam [<mark style="color:blue;">Transports</mark>](routing.md#transports), nodes can also route messages to workers on other remote nodes.
 
-Ockam Command makes is super easy to create and manage local or remote nodes. If you run `ockam node create`, it will create and start a node in the background and give it a random name:
+Ockam Command makes it super easy to create and manage local or remote nodes. If you run `ockam node create`, it will create and start a node in the background and give it a random name:
 
 ```
 » ockam node create
@@ -173,7 +173,7 @@ Later in this guide, we'll explore other commands that interact with pre-defined
 
 ## Spaces
 
-Ockam Spaces are an infinitely scalable Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#nodes) in the cloud. Ockam Orchestrator can create, manage, and scale spaces for you. Like other nodes, Spaces offer services. For example, you can create projects within a space, invite teammates to it, or attach payment subscriptions.
+Ockam Spaces are infinitely scalable Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#nodes) in the cloud. Ockam Orchestrator can create, manage, and scale spaces for you. Like other nodes, Spaces offer services. For example, you can create projects within a space, invite teammates to it, or attach payment subscriptions.
 
 When you run `ockam enroll` for the first time, we create a space for you to host your projects.
 
