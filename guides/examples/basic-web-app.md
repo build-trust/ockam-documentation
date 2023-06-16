@@ -5,8 +5,11 @@ description: Connecting a web app and database
 # Basic Web App
 
 This is a demo that shows how to use Ockam
-[sidecars](https://docs.ockam.io/guides/examples/create-secure-communication-with-a-private-database-from-anywhere)
-to connect a traditional web app to a postgres database, with minimal/no code changes.
+[sidecars](https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar) to
+connect a traditional web app to a postgres database, with minimal/no code changes.
+
+In order to follow along, please first make sure that all the prerequisites listed below
+have been installed on the machine where you will be carrying out these steps.
 
 ### Prerequisites
 
@@ -38,10 +41,41 @@ In this demo we're going to take a very basic Python Flask app that simply incre
 counter in a Postgres database, and move the connection between the application and
 database to be through an Ockam secure channel.
 
+Before we get started, let's imagine a company where this going to be rolled out, where we
+find 3 team members who will be involved in this journey:
+
+- 🧑‍🦲 Toby is the admin for all the Ockam "things".
+    - They are responsible for installing Ockam Command (using `ockam enroll` which is in
+      the first prerequisite).
+    - And then generating two
+      [one-time enrollment tickets](https://command.ockam.io/manual/ockam-project-ticket.html)
+      and sharing them w/ the rest of the team:
+        1. One for the web app,
+        2. Another for the database server.
+- 🧑‍🦱 Akira is the database admin.
+  - They use their one-time enrollment ticket to perform
+    some configuration steps and setup an
+    ["outlet"](https://docs.ockam.io/reference/command/advanced-routing).
+  - We will learn more
+    about this in the ["Moving the database"](#moving-the-database) section below.
+- 🧑‍🦳 Zora is the web app (Python Flask) developer.
+  - They use their one-time enrollment
+    ticket to perform some configuration steps and setup an
+    ["inlet"](https://docs.ockam.io/reference/command/advanced-routing).
+  - We will learn more
+    about this in the ["Connecting the web app"](#connecting-the-web-app) section below.
+
+<img src="../../.gitbook/assets/web-app-ex-1.svg" alt="" class="gitbook-drawing">
+
+In the rest of the instructions we will walk you through which of the team members might
+be performing these steps. But as you are following along, you can do them all yourself
+😃. The story and these people and roles are just to help in understanding the context
+around what is happening as we go through the steps.
+
 #### Python Code
 
-We've put everything into a single file (called `main.py`) here for the sake of
-readability for this demo:
+To get started, we've put everything into a single file (called `main.py`) here for the
+sake of readability for this demo:
 
 {% code lineNumbers="true" %}
 ```python
@@ -71,20 +105,27 @@ def hello_world():
 {% endcode %}
 
 Lines 12 and 13 are where we establish out connection to the database, at this point it's
-simply pointing to localhost. If you're running a local postgres instance then starting
+simply pointing to `localhost`. If you're running a local postgres instance then starting
 this Flask app will now show you how many times you've visited it, storing each new visit
 in the database.
 
-Notes to run the example:
-- You also need to add following Python dependencies by running:
-  - Flask: `pip3 install flask`
-  - psycopg2: `pip3 install psycopg2-binary`
-- To run this Flask app (`main.py`) use: `flask --app main run`
+Before doing any Ockam related tasks, feel free to run the Python script now by following
+the instructions below:
+1. You also need to add following Python dependencies by running:
+    - `Flask`: `pip3 install flask`
+    - `psycopg2`: `pip3 install psycopg2-binary`
+2. To run this `Flask` app (`main.py`) type:
+    - `flask --app main run`
+3. To see it running in a web browser open this URL: `http://127.0.0.1:5000/`
 
 ### Moving the database
 
-Now we can add Ockam into the mix 🎉. Lets change the port that the database server is
-listening on to `5433` (_the default port is `5432`_). This will ensure that we're not
+> In our story about our imaginary company and team of three, the following steps would
+> have been performed by Akira, our database admin. You can simply follow these steps on
+> your machine.
+
+Before we can add Ockam into the mix, first lets change the port that the database server
+is listening on to `5433` (_the default port is `5432`_). This will ensure that we're not
 simply using the existing communication channel.
 
 There are two approaches to doing this:
@@ -125,16 +166,57 @@ Optional:
   `url = "postgres://postgres:password@localhost:5433/"`.
   You can use this to test if the new port is up and running.
 
+> In our story about our imaginary company and team of three, the following steps would
+> have been performed by Toby, our Ockam admin. Toby would have already installed `ockam`
+> command, and would have completed `ockam enroll`. Toby would then generate this
+> [one-time enrollment ticket](https://command.ockam.io/manual/ockam-project-ticket.html)
+> (just plain text) and then send that over to Akira. You can simply follow these steps on
+> your machine.
+
+{% hint style="info" %}
+Before starting with the steps below, please read
+[this article](https://docs.ockam.io/guides/use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change)
+to get familiar with what steps we are going to take to configured Ockam. They will give
+you a sense of things like "node", "inlet", "outlet", and "relay" that you will see
+mentioned below.
+{% endhint %}
+
 To allow the database to enroll itself as a node with Ockam we first need to generate a
-token for that node:
+one-time enrollment ticket for that node:
 
 ```bash
 export DB_TOKEN=$(ockam project ticket --attribute component=db)
 ```
 
-We've specified a custom attribute here called `component` and given it a value of `db`, which we can use later to identify this node. We've also stored the output of the command to an environment variable, though you could also copy it to your clipboard or output it to a file depending on your needs.
+Here's a diagram describing what we will do next. Note how the database connection string
+used by the Python Flask app connects to port `5432` and Ockam "magically" secures &
+relays the connection to port `5433` where Postgres is now running, all without writing
+any code 🎉.
 
-Next we're going to create and enroll a new Ockam node on our project, we'll add a policy that ensures only a component with the value `web` will be authorized to establish a new connection, we'll connect our node to our changed Postgres port (note the `PG_PORT` value), and finally we'll setup a forwarder that will allow traffic to this node to flow through to our TCP outlet:
+<img src="../../.gitbook/assets/web-app-ex-2.svg" alt="" class="gitbook-drawing">
+
+We've specified a custom attribute here called `component` and given it a value of `db`,
+which we can use later to identify this node. We've also stored the output of the command
+to an environment variable, though you could also copy it to your clipboard or
+output it to a file depending on your needs.
+
+> In our story about our imaginary company and team of three, the following steps would
+> have been performed by Akira, our database admin. Akira would use the one-time
+> enrollment ticket data (plain text) to create a node called 'db' and create a
+> [relay](https://docs.ockam.io/reference/command/advanced-routing) and a
+> [tcp-outlet](https://command.ockam.io/manual/ockam-tcp-outlet.html). You can simply
+> follow these steps on your machine.
+
+In the code snippet below, we're going to:
+1. Create and enroll a new Ockam [node](https://docs.ockam.io/reference/command/nodes) on
+   our project, we'll add a [policy](https://command.ockam.io/manual/ockam-policy.html)
+   that ensures only a component with the value `web` will be authorized to establish a
+   new connection.
+2. We'll connect our node to our changed Postgres port (note the `PG_PORT` value).
+3. Finally we'll setup a forwarder (we will use the End-to-End Encrypted Cloud Relay
+   service, which was provisioned when `ockam enroll` was run, in the `default` project at
+   `/project/default`) that will allow traffic to this node to flow through to our TCP
+   outlet.
 
 ```bash
 export PG_PORT=5433
@@ -148,13 +230,27 @@ ockam relay create db --to /node/db --at /project/default
 
 ### Connecting the web app
 
-With our database node now running, we need to connect a corresponding node on the web side. We'll start by creating another enrollment token, this time for a `component` labelled `web`:
+> In our story about our imaginary company and team of three, the following steps would
+> have been performed by Toby, our Ockam admin. Toby would then generate this one-time
+> enrollment ticket (just plain text) and then send that over to Zora. You can simply
+> follow these steps on your machine.
+
+With our database node now running, we need to connect a corresponding node on the web
+side. We'll start by creating another enrollment token, this time for a `component`
+labelled `web`:
 
 ```bash
 export WEB_TOKEN=$(ockam project ticket --attribute component=web)
 ```
 
-Next we'll create and enroll our node, set a policy to say it is only allowed to create inlet connections to the `db` component, and then finally we create that inlet:
+> In our story about our imaginary company and team of three, the following steps would
+> have been performed by Zora, our web app developer. Zora would use the one-time
+> enrollment ticket data (plain text) to create a node called 'web' and create a
+> [tcp-inlet](https://command.ockam.io/manual/ockam-tcp-inlet.html). You can simply follow
+> these steps on your machine.
+
+Next we'll create and enroll our node, set a policy to say it is only allowed to create
+inlet connections to the `db` component, and then finally we create that inlet:
 
 ```bash
 ockam identity create web
@@ -164,11 +260,38 @@ ockam policy create --at web --resource tcp-inlet --expression '(= subject.compo
 ockam tcp-inlet create --at /node/web --from 127.0.0.1:5432 --to /project/default/service/forward_to_db/secure/api/service/outlet
 ```
 
-Take note of the `--from` and `--to` values above. The `--from` is telling the node to listen on port 5432, the default postgres port, and to forward it `--to` the forwarder service to the database that we created in the previous section. This means requests to localhost:5432 will be forwarded to whatever node has registered as `db`, wherever it is!
+Take note of the `--from` and `--to` values above. The `--from` is telling the node to
+listen on port `5432`, the default postgres port, and to forward it `--to` the forwarder
+service to the database that we created in the previous section. This means requests to
+`localhost:5432` will be forwarded to whatever node has registered as `db`, wherever it is!
 
-Which means if you start your web app the counter will continue incrementing just as it did before, with zero code changes to your application
+Which means if you start your web app the counter will continue incrementing just as it
+did before, with zero code changes to your application
 
-You could also extend this example by moving the Postgres service into a Docker container or to an entirely different machine. Once the nodes are registered the demo will continue to work, with no application code changes and no need to expose the Postgres ports directly to the internet.
+You could also extend this example by moving the Postgres service into a Docker container
+or to an entirely different machine. Once the nodes are registered the demo will continue
+to work, with no application code changes and no need to expose the Postgres ports
+directly to the internet.
+
+Here's a diagram w/ some architecture details of what we have done in this exercise.
+
+<figure><img src="../../.gitbook/assets/infrastructure.webp" alt=""><figcaption></figcaption></figure>
+
+### Other commands to explore
+
+Now that you've completed this example, here are some commands for you to try and see what
+they do. You can always look up the details on what they do in the
+[manual](https://command.ockam.io/manual/). As you try each of these, keep an eye out for
+things you may have created in this exercise.
+
+- Try `ockam node list`. Do you see the nodes that you created in this exercise?
+- Try `ockam node --help`. These are shorter examples for you to get familiar with
+  commands.
+- Try `ockam node show web`. Do you see the `tcp-inlet` that you created in this
+  exercise?
+- Try `ockam node show db`. Do you see the `tcp-outlet` that you created in this
+  exercise?
+- Try `ockam identity list`. Do you see the identities you created in this exercise?
 
 <!-- bats start ENROLLED_HOME -->
 <!--
