@@ -266,12 +266,8 @@ async fn main(ctx: Context) -> Result<()> {
     let listener = tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
 
     // Allow access to the Echoer via TCP connections from the TCP listener
-    node.flow_controls().add_consumer(
-        "echoer",
-        listener.flow_control_id(),
-        FlowControlPolicy::SpawnerAllowMultipleMessages,
-    );
-
+    node.flow_controls().add_consumer("echoer", listener.flow_control_id());
+    
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
@@ -357,7 +353,6 @@ Add the following code to this file:
 ```rust
 // src/forwarder.rs
 
-use ockam::flow_control::FlowControlPolicy;
 use ockam::{Address, Any, Context, LocalMessage, Result, Routed, Worker};
 
 pub struct Forwarder(pub Address);
@@ -387,19 +382,12 @@ impl Worker for Forwarder {
         let message = LocalMessage::new(transport_message, vec![]);
 
         if let Some(info) = ctx.flow_controls().find_flow_control_with_producer_address(&self.0) {
-            ctx.flow_controls().add_consumer(
-                prev_hop.clone(),
-                info.flow_control_id(),
-                FlowControlPolicy::ProducerAllowMultiple,
-            );
+            ctx.flow_controls()
+                .add_consumer(prev_hop.clone(), info.flow_control_id());
         }
 
         if let Some(info) = ctx.flow_controls().find_flow_control_with_producer_address(&prev_hop) {
-            ctx.flow_controls().add_consumer(
-                self.0.clone(),
-                info.flow_control_id(),
-                FlowControlPolicy::ProducerAllowMultiple,
-            );
+            ctx.flow_controls().add_consumer(self.0.clone(), info.flow_control_id());
         }
 
         // Send the message on its onward_route
@@ -449,11 +437,7 @@ async fn main(ctx: Context) -> Result<()> {
     let listener = tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
 
     // Allow access to the Echoer via TCP connections from the TCP listener
-    node.flow_controls().add_consumer(
-        "echoer",
-        listener.flow_control_id(),
-        FlowControlPolicy::SpawnerAllowMultipleMessages,
-    );
+    node.flow_controls().add_consumer("echoer", listener.flow_control_id());
 
     // Don't call node.stop() here so this node runs forever.
     Ok(())
@@ -478,7 +462,6 @@ Add the following code to this file:
 // It then runs forever waiting to route messages.
 
 use hello_ockam::Forwarder;
-use ockam::flow_control::FlowControlPolicy;
 use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
 
 #[ockam::node]
@@ -500,11 +483,8 @@ async fn main(ctx: Context) -> Result<()> {
     let listener = tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
 
     // Allow access to the Forwarder via TCP connections from the TCP listener
-    node.flow_controls().add_consumer(
-        "forward_to_responder",
-        listener.flow_control_id(),
-        FlowControlPolicy::SpawnerAllowMultipleMessages,
-    );
+    node.flow_controls()
+        .add_consumer("forward_to_responder", listener.flow_control_id());
 
     // Don't call node.stop() here so this node runs forever.
     Ok(())
