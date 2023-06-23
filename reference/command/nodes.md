@@ -29,7 +29,6 @@ Ockam Command makes it super easy to create and manage local or remote nodes. If
 
 ```
 » ockam node create
-...
 ✔︎ Node f8eb8df9 created successfully
 ```
 
@@ -62,28 +61,29 @@ You could also start a node in the foreground and optionally tell it display ver
 ...
 ```
 
+To stop the foreground node, you can press `Ctrl-C`. This will stop the node but won't delete its state.
+
 You can see all running nodes with `ockam node list`
 
 ```
 » ockam node list
 
-Node:
-  Name: e1c233de
-  Status: UP
-...
+       ┌───────────────────┐
+       │       Nodes       │
+       └───────────────────┘
 
-Node:
-  Name: n1
-  Status: UP
-...
+     │ Node n1  UP
+     │ Process id 42218
 
-Node:
-  Name: n2
-  Status: UP
+     │ Node f8eb8df9 (default) UP
+     │ Process id 42083
+
+     │ Node n2  DOWN
+     │ No process running
 ...
 ```
 
-You can stop a running node with `ockam node stop`. This will stop the node but won't delete its state
+You can stop a running node with `ockam node stop`.
 
 ```
 » ockam node stop n1
@@ -99,7 +99,7 @@ You can permanently delete a node by running:
 
 ```
 » ockam node delete n1
-✔︎ Node with name 'n1' has been deleted.
+✔︎ The node named 'n1' has been deleted.
 ```
 
 You can also delete all nodes with:
@@ -119,6 +119,7 @@ When a worker is started on a node, it is given one or more addresses. The node 
 You can see the list of workers in a node by running:
 
 ```
+» ockam node create n1
 » ockam worker list --at n1
        ┌───────────────────────────┐
        │       Workers on n1       │
