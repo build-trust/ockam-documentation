@@ -31,7 +31,6 @@ Add the following code to this file:
 // It then runs forever waiting for messages.
 
 use hello_ockam::Echoer;
-use ockam::flow_control::FlowControlPolicy;
 use ockam::identity::SecureChannelListenerOptions;
 use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 
@@ -56,19 +55,13 @@ async fn main(ctx: Context) -> Result<()> {
         .create_secure_channel_listener(
             &bob,
             "bob_listener",
-            SecureChannelListenerOptions::new().as_consumer(
-                listener.flow_control_id(),
-                FlowControlPolicy::SpawnerAllowOnlyOneMessage,
-            ),
+            SecureChannelListenerOptions::new().as_consumer(listener.flow_control_id()),
         )
         .await?;
 
     // Allow access to the Echoer via Secure Channels
-    node.flow_controls().add_consumer(
-        "echoer",
-        secure_channel_listener.flow_control_id(),
-        FlowControlPolicy::SpawnerAllowMultipleMessages,
-    );
+    node.flow_controls()
+        .add_consumer("echoer", secure_channel_listener.flow_control_id());
 
     // Don't call node.stop() here so this node runs forever.
     Ok(())
@@ -93,7 +86,6 @@ Add the following code to this file:
 // It then runs forever waiting to route messages.
 
 use hello_ockam::Forwarder;
-use ockam::flow_control::FlowControlPolicy;
 use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
 
 #[ockam::node]
@@ -114,11 +106,8 @@ async fn main(ctx: Context) -> Result<()> {
     // Create a TCP listener and wait for incoming connections.
     let listener = tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
 
-    node.flow_controls().add_consumer(
-        "forward_to_bob",
-        listener.flow_control_id(),
-        FlowControlPolicy::SpawnerAllowMultipleMessages,
-    );
+    node.flow_controls()
+        .add_consumer("forward_to_bob", listener.flow_control_id());
 
     // Don't call node.stop() here so this node runs forever.
     Ok(())
