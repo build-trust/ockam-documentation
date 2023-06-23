@@ -46,9 +46,8 @@ use ockam::access_control::AllowAll;
 use ockam::access_control::IdentityIdAccessControl;
 use ockam::identity::CredentialsIssuer;
 use ockam::identity::SecureChannelListenerOptions;
-use ockam::{node, Context, Result, TcpListenerOptions};
-use ockam::flow_control::FlowControlPolicy;
 use ockam::TcpTransportExtension;
+use ockam::{node, Context, Result, TcpListenerOptions};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -87,10 +86,8 @@ async fn main(ctx: Context) -> Result<()> {
     }
 
     let tcp_listener_options = TcpListenerOptions::new();
-    let sc_listener_options = SecureChannelListenerOptions::new().as_consumer(
-        &tcp_listener_options.spawner_flow_control_id(),
-        FlowControlPolicy::SpawnerAllowOnlyOneMessage,
-    );
+    let sc_listener_options =
+        SecureChannelListenerOptions::new().as_consumer(&tcp_listener_options.spawner_flow_control_id());
     let sc_listener_flow_control_id = sc_listener_options.spawner_flow_control_id();
 
     // Start a secure channel listener that only allows channels where the identity
@@ -102,11 +99,8 @@ async fn main(ctx: Context) -> Result<()> {
     // Start a credential issuer worker that will only accept incoming requests from
     // authenticated secure channels with our known public identifiers.
     let allow_known = IdentityIdAccessControl::new(known_identifiers);
-    node.flow_controls().add_consumer(
-        "issuer",
-        &sc_listener_flow_control_id,
-        FlowControlPolicy::SpawnerAllowMultipleMessages,
-    );
+    node.flow_controls()
+        .add_consumer("issuer", &sc_listener_flow_control_id);
     node.start_worker_with_access_control("issuer", credential_issuer, allow_known, AllowAll)
         .await?;
 
@@ -138,7 +132,6 @@ touch examples/06-credential-exchange-server.rs
 use hello_ockam::Echoer;
 use ockam::abac::AbacAccessControl;
 use ockam::access_control::AllowAll;
-use ockam::flow_control::FlowControlPolicy;
 use ockam::identity::{
     AuthorityService, CredentialsIssuerClient, SecureChannelListenerOptions, SecureChannelOptions, TrustContext,
 };
@@ -209,16 +202,10 @@ async fn main(ctx: Context) -> Result<()> {
     let sc_listener_options = SecureChannelListenerOptions::new()
         .with_trust_context(trust_context)
         .with_credential(credential)
-        .as_consumer(
-            &tcp_listener_options.spawner_flow_control_id(),
-            FlowControlPolicy::SpawnerAllowOnlyOneMessage,
-        );
+        .as_consumer(&tcp_listener_options.spawner_flow_control_id());
 
-    node.flow_controls().add_consumer(
-        "echoer",
-        &sc_listener_options.spawner_flow_control_id(),
-        FlowControlPolicy::SpawnerAllowMultipleMessages,
-    );
+    node.flow_controls()
+        .add_consumer("echoer", &sc_listener_options.spawner_flow_control_id());
     let allow_production = AbacAccessControl::create(node.repository(), "cluster", "production");
     node.start_worker_with_access_control("echoer", Echoer, allow_production, AllowAll)
         .await?;
