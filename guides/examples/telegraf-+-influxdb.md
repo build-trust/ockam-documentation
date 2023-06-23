@@ -106,7 +106,7 @@ curl \
     --header "Accept: application/csv" \
     --header 'Content-type: application/vnd.flux' \
     --data "from(bucket:\"$INFLUX_BUCKET\") |> range(start:-1m)" \
-    http://localhost:$INFLUX_PORT/api/v2/query?org=$INFLUX_ORG
+    "http://localhost:$INFLUX_PORT/api/v2/query?org=$INFLUX_ORG"
 ```
 
 ### Securely connect Telegraf + InfluxDB with Ockam
