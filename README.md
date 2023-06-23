@@ -58,7 +58,6 @@ Next, step through the following commands to setup secure and private communicat
 # This will create a Space and Project for you in Ockam Orchestrator and provision an
 # End-to-End Encrypted Cloud Relay service in your `default` project at `/project/default`.
 ockam enroll
-ockam project information --output json > default-project.json
 
 # -- APPLICATION SERVICE --
 
@@ -67,21 +66,21 @@ ockam project information --output json > default-project.json
 # but this could be any other application service.
 python3 -m http.server --bind 127.0.0.1 5000
 
-# In a new terminal window, setup an ockam node, called `s`, as a sidecar next to the 
-# application service. Then create a tcp outlet, on the `s` node, to send raw tcp traffic
+# In a new terminal window, setup an ockam node, called `server_node`, as a sidecar next to the
+# application service. Then create a tcp outlet, on the `server_node` node, to send raw tcp traffic
 # to the service. Finally create a relay in your default Orchestrator project.
-ockam node create s --project-path default-project.json
-ockam tcp-outlet create --at s --from /service/outlet --to 127.0.0.1:5000
-ockam relay create s --at /project/default --to s
+ockam node create server_node
+ockam tcp-outlet create --at server_node --from /service/outlet --to 127.0.0.1:5000
+ockam relay create server_node --at /project/default --to server_node
 
 # -- APPLICATION CLIENT --
 
-# Setup an ockam node, called `c`, as a sidecar next to our application client. Then create
+# Setup an ockam node, called `client_node`, as a sidecar next to our application client. Then create
 # an end-to-end encrypted secure channel with s, through the cloud relay. Finally, tunnel
 # traffic from a local tcp inlet through this end-to-end secure channel.
-ockam node create c --project-path default-project.json
-ockam secure-channel create --from c --to /project/default/service/forward_to_s/service/api\
-  | ockam tcp-inlet create --at c --from 127.0.0.1:7000 --to -/service/outlet
+ockam node create client_node
+ockam secure-channel create --from client_node --to /project/default/service/forward_to_server_node/service/api\
+  | ockam tcp-inlet create --at client_node --from 127.0.0.1:7000 --to -/service/outlet
 
 # Access the application service, that may be in a remote private network though
 # the end-to-end encrypted secure channel, via your private and encrypted cloud relay.
