@@ -72,6 +72,14 @@ There is a problem in one of the microservices in San Francisco and we need to g
 
 First we'll create our application components and then see how to give access to Alice.
 
+
+### Required Dependencies
+
+Through this example `https://trial-9434859.okta.com/oauth2/default`  refers to an existing okta endpoint where workforce identities are defined.  The okta user profile is expected to contain `email`, `city` and `department` attributes.  These attributes will be included on the generated okcam credentials.
+
+If you don't have an okta install already, you can create a [trial one](https://www.okta.com/free-trial/) to follow this example use case.
+
+
 ### Setup
 
 If you use Homebrew, you can install Ockam using `brew`.
