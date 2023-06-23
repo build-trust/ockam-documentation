@@ -6,7 +6,7 @@ description: Connecting a web app and database
 
 This is a demo that shows how to use Ockam
 [<mark style="color:blue;">sidecars</mark>](https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar) to
-connect a traditional web app to a postgres database, with minimal/no code changes.
+connect a traditional web app to a Postgres database, with minimal/no code changes.
 
 In order to follow along, please first make sure that all the prerequisites listed below
 have been installed on the machine where you will be carrying out these steps.
