@@ -21,7 +21,7 @@ It is common, however, to encounter communication topologies where the machine t
 
 Relays make it possible to establish end-to-end protocols with services operating in a remote private network, without requiring a remote service to expose listening ports to an outside hostile network like the Internet.
 
-Delete all your existing nodes and try this new example:
+[<mark style="color:blue;">Delete any existing nodes</mark>](nodes.md#nodes) and then try this new example:
 
 ```
 » ockam node create n2 --tcp-listener-address=127.0.0.1:7000
@@ -29,7 +29,6 @@ Delete all your existing nodes and try this new example:
 » ockam node create n3
 » ockam service start hop --at n3
 » ockam relay create n3 --at /node/n2 --to /node/n3
-       Creating Relay
      ✔︎ Now relaying messages from /node/n2/service/25716d6f86340c3f594e99dede6232df → /node/n3/service/forward_to_n3
 
 » ockam node create n1
