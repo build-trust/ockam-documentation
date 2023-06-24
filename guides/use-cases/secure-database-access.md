@@ -14,9 +14,9 @@ Following the best practice of placing your database inside a private subnet doe
 
 ### How Ockam simplifies it
 
-<img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (2) (1).svg" alt="" class="gitbook-drawing">
 
-Through the use of authenticated secure channels your database is able to register itself as a service that some authorized subset of your Ockam nodes can connect to. By not requiring changes to network access control lists or security groups, no ports at all on your database are exposed to the public internet - an even higher security posture than the previous best practice.&#x20;
+Through the use of authenticated secure channels your database is able to register itself as a service that some authorized subset of your Ockam nodes can connect to. By not requiring changes to network access control lists or security groups, no ports at all on your database are exposed to the public internet - an even higher security posture than the previous best practice.
 
 As a result, the only way to establish a connection to the database is via an Ockam secure channel: an end-to-end encrypted and authenticated connection between the two nodes. These connections are established and authenticated on-demand. The just-in-time nature of this means no long-lived assumptions about what other networks or ports should be open and permanently allowed access to your database.
 
@@ -25,6 +25,6 @@ Service-to-database use cases can have more fine-grained control applied on top 
 ### Next steps
 
 * See an end-to-end example of this in our [basic web app demo](../examples/basic-web-app.md).
-* Follow our [getting started guide to install Ockam](../../reference/command/README.md#install) and start using it in just a few minutes.
+* Follow our [getting started guide to install Ockam](../../reference/command/#install) and start using it in just a few minutes.
 * [Reach out to the team](https://www.ockam.io/contact/form), we'd love to talk to you in more detail about your potential use cases.
 * Join the growing community of developers who want to build trust by making applications that are secure-by-design, in the [Build Trust Discord server](https://discord.gg/RAbjRr3kds).

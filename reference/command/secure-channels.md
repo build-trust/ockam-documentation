@@ -169,7 +169,7 @@ In a previous section, we saw how [<mark style="color:blue;">Portals</mark>](adv
 
 We can combine Secure Channels with Portals to create Secure Portals.
 
-<img src="../../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1) (1) (1).svg" alt="" class="gitbook-drawing">
 
 Continuing from the above example on [<mark style="color:blue;">Elastic Encrypted Relays</mark>](secure-channels.md#elastic-encrypted-relays) create a Python-based web server to represent a sample web service. This web service is listening on `127.0.0.1:9000`.
 

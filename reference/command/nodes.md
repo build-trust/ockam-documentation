@@ -112,7 +112,7 @@ You can also delete all nodes with:
 
 Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#nodes) run very lightweight, concurrent, and stateful actors called Ockam Workers. They are like processes on your operating system, except that they all live inside one node and are very lightweight so a node can have hundreds of thousands of them, depending on the capabilities of the machine hosting the node.
 
-<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
 
 When a worker is started on a node, it is given one or more addresses. The node maintains a mailbox for each address and whenever a message arrives for a specific address it delivers that message to the corresponding worker. In response to a message, a worker can: make local decisions, change internal state, create more workers, or send more messages.
 
