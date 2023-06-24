@@ -66,7 +66,7 @@ find 3 team members who will be involved in this journey:
   - We will learn more
     about this in the [<mark style="color:blue;">"Connecting the web app"</mark>](#connecting-the-web-app) section below.
 
-<img src="../../.gitbook/assets/web-app-ex-1.svg" alt="" class="gitbook-drawing">
+TK: insert image here web-app-ex-1.svg
 
 In the rest of the instructions we will walk you through which of the team members might
 be performing these steps. But as you are following along, you can do them all yourself
@@ -176,7 +176,7 @@ used by the Python Flask app connects to port `5433` and Ockam "magically" secur
 relays the connection to port `5432` where Postgres is running, all without writing any
 code 🎉.
 
-<img src="../../.gitbook/assets/web-app-ex-2.svg" alt="" class="gitbook-drawing">
+TK: insert image here web-app-ex-2.svg
 
 > In our story about our imaginary company and team of three, the following steps would
 > have been performed by Akira, our database admin. Akira would use the one-time
