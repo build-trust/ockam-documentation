@@ -11,8 +11,6 @@ In the [<mark style="color:blue;">previous section</mark>](routing.md), we learn
 
 ## Bridges
 
-
-
 <img src="../../.gitbook/assets/file.excalidraw (2) (2).svg" alt="" class="gitbook-drawing">
 
 Node `n1` wishes to access a service on node `n3`, but it can't directly connect to `n3`. This can happen for many reasons, maybe because `n3` is in a separate `IP` subnet, or it could be that the communication from `n1 to n2` uses UDP while from `n2 to n3` uses TCP or other similar constraints. The topology makes `n2` a bridge or gateway between these two separate networks to enable end-to-end protocols between `n1` and `n3` even though they are not directly connected.
@@ -21,7 +19,7 @@ Node `n1` wishes to access a service on node `n3`, but it can't directly connect
 
 It is common, however, to encounter communication topologies where the machine that provides a service is unwilling or is not allowed to open a listening port or <mark style="color:orange;">expose</mark> a bridge node to other networks. This is a common security best practice in enterprise environments, home networks, OT networks, and VPCs across clouds. Application developers may not have control over these choices from the infrastructure / operations layer. This is where [<mark style="color:blue;">relays</mark>](advanced-routing.md#relays) are useful.
 
-Relays make it possible to establish end-to-end protocols with services operating in a remote private network, without requiring a remote service to expose listening ports to an outside hostile network like the Internet.  &#x20;
+Relays make it possible to establish end-to-end protocols with services operating in a remote private network, without requiring a remote service to expose listening ports to an outside hostile network like the Internet.
 
 Delete all your existing nodes and try this new example:
 
@@ -40,7 +38,7 @@ Delete all your existing nodes and try this new example:
 HELLO
 ```
 
-In this example, the direction of the second TCP connection is reversed in comparison to our first example that used a bridge. `n2` is the only node that has to listen for TCP connections.&#x20;
+In this example, the direction of the second TCP connection is reversed in comparison to our first example that used a bridge. `n2` is the only node that has to listen for TCP connections.
 
 Node `n2` is running a relay service. `n3` makes an outgoing TCP connection to `n2` and requests a forwarding address from the relay service. `n3` then becomes reachable via `n2` at the address `/service/forward_to_n3`.
 
@@ -50,17 +48,17 @@ Node `n1` connects with `n2` and routes messages to `n3` via its forwarding rela
 
 The message in the above example took the following route. This is very similar to our [<mark style="color:blue;">earlier example</mark>](routing.md#transport) except for the direction of the second TCP connection. The relay worker remembers the route to back to `n3`. `n1` just has to get the message to the forwarding relay and everything just works.
 
-<img src="../../.gitbook/assets/file.excalidraw (2) (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (2) (1) (1).svg" alt="" class="gitbook-drawing">
 
 Using this simple topology rearrangement, Ockam [Routing](routing.md) makes it possible to establish end-to-end protocols between applications that are running in completely private networks.
 
-We can traverse NATs and pierce through network boundaries. And since this is all built using a very simple [application layer routing](routing.md) protocol, we can have any number of transport connection hops in any transport protocol, and we can mix-match bridges with relays to create <mark style="color:orange;">end-to-end protocols in</mark> <mark style="color:orange;"></mark><mark style="color:orange;">**any**</mark> <mark style="color:orange;"></mark><mark style="color:orange;">communication topology</mark>.
+We can traverse NATs and pierce through network boundaries. And since this is all built using a very simple [application layer routing](routing.md) protocol, we can have any number of transport connection hops in any transport protocol, and we can mix-match bridges with relays to create <mark style="color:orange;">end-to-end protocols in</mark> <mark style="color:orange;">**any**</mark> <mark style="color:orange;">communication topology</mark>.
 
 ## Portals <a href="#portal" id="portal"></a>
 
 Portals make existing protocols work over Ockam Routing without changing any code in the existing applications.
 
-<img src="../../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1) (1) (1).svg" alt="" class="gitbook-drawing">
 
 Continuing from our [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relays) example, create a Python-based web server to represent a sample web service. This web service is listening on `127.0.0.1:9000`.
 
@@ -90,7 +88,7 @@ The TCP Inlet/Outlet work for a large number of TCP-based protocols like HTTP. I
 To clean up and delete all nodes, run: `ockam node delete --all`
 {% endhint %}
 
-Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing) and [<mark style="color:blue;">Transports</mark>](routing.md#transports) combined with the ability to model [<mark style="color:blue;">Bridges</mark>](advanced-routing.md) and [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relays) make it possible to <mark style="color:orange;">create end-to-end, application layer protocols in</mark> <mark style="color:orange;"></mark><mark style="color:orange;">**any**</mark> <mark style="color:orange;"></mark><mark style="color:orange;">communication topology</mark> - across networks, clouds, and boundaries.
+Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing) and [<mark style="color:blue;">Transports</mark>](routing.md#transports) combined with the ability to model [<mark style="color:blue;">Bridges</mark>](advanced-routing.md) and [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relays) make it possible to <mark style="color:orange;">create end-to-end, application layer protocols in</mark> <mark style="color:orange;">**any**</mark> <mark style="color:orange;">communication topology</mark> - across networks, clouds, and boundaries.
 
 [<mark style="color:blue;">Portals</mark>](advanced-routing.md#portal) take this powerful capability a huge step forward by making it possible to apply these end-to-end protocols and their guarantees to existing applications, <mark style="color:orange;">without changing any code!</mark>
 
