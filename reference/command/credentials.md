@@ -8,7 +8,7 @@ description: >-
 
 ## Credentials
 
-An Ockam Credential is a signed attestation by an <mark style="color:orange;">Issuer</mark> about the <mark style="color:orange;">Attributes</mark> of <mark style="color:orange;">Subject</mark>. The Issuer and Subject are both Ockam [Identities](identities.md). Attributes is a list of name and value pairs.
+An Ockam Credential is a signed attestation by an <mark style="color:orange;">Issuer</mark> about the <mark style="color:orange;">Attributes</mark> of <mark style="color:orange;">Subject</mark>. The Issuer and Subject are both Ockam [<mark style="color:blue;">Identities</mark>](identities.md). Attributes is a list of name and value pairs.
 
 ### Issuing Credentials
 
@@ -75,7 +75,7 @@ Trust and authorization decisions must be anchored in some pre-existing knowledg
 
 ### Anchoring Trust in an Access Control List (ACL) of Identifiers
 
-In the previous section about Ockam [Secure Channels](secure-channels.md) we ran an example of [mutual authorization](secure-channels.md#mutual-authorization) using pre-existing knowledge of Ockam [Identifiers](identities.md#identifier). In this example `n1 knows i2` and `n2 know i1`:
+In the previous section about Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md) we ran an example of [<mark style="color:blue;">mutual authorization</mark>](secure-channels.md#mutual-authorization) using pre-existing knowledge of Ockam [Identifiers](identities.md#identifier). In this example `n1 knows i2` and `n2 know i1`:
 
 ```
 » ockam reset -y
@@ -107,7 +107,7 @@ HELLO
 » ockam identity show authority > authority.identifier
 » ockam identity show authority --full --encoding hex > authority
 
-» ockam identity create i1 
+» ockam identity create i1
 » ockam identity show i1 --full --encoding hex > i1
 » ockam credential issue --as authority --for $(cat i1) --attribute city="New York" --encoding hex > i1.credential
 » ockam credential store c1 --issuer $(cat authority) --credential-path i1.credential

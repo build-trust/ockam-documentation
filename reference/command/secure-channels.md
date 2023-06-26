@@ -11,7 +11,7 @@ To [<mark style="color:blue;">trust data-in-motion</mark>](../../#trust-for-data
 
 In previous sections, we saw how Ockam [<mark style="color:blue;">Routing</mark>](routing.md) and [<mark style="color:blue;">Transports</mark>](routing.md#transport)<mark style="color:blue;">,</mark> when combined with the ability to model [<mark style="color:blue;">Bridges</mark>](advanced-routing.md) and [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay), make it possible to <mark style="color:orange;">create end-to-end, application layer protocols in</mark> <mark style="color:orange;">**any**</mark> <mark style="color:orange;">communication topology</mark> - across networks, clouds, and protocols over many transport layer hops.
 
-Ockam [Secure Channels](secure-channels.md#secure-channel) is an end-to-end protocol built on top of Ockam Routing. This cryptographic protocol guarantees data authenticity, integrity, and confidentiality over any communication topology that can be traversed with Ockam Routing.
+Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md#secure-channel) is an end-to-end protocol built on top of Ockam Routing. This cryptographic protocol guarantees data authenticity, integrity, and confidentiality over any communication topology that can be traversed with Ockam Routing.
 
 <img src="../../.gitbook/assets/file.excalidraw (3) (1).svg" alt="" class="gitbook-drawing">
 
@@ -43,13 +43,13 @@ To establish the secure channel, the two ends run an [<mark style="color:blue;">
 
 Once the shared secrets are established, they are used for authenticated encryption that ensures data integrity and confidentiality of application data.
 
-Our secure channel protocol is based on a handshake design pattern described in the Noise Protocol Framework. Designs based on this framework are widely deployed and the described patterns have formal security proofs. The specific pattern that we use in Ockam Secure Channels provides sender and receiver authentication and is resistant to key compromise impersonation attacks. It also ensures the integrity and secrecy of application data and provides strong forward secrecy.
+Our secure channel protocol is based on a handshake design pattern described in the [<mark style="color:blue;">Noise Protocol Framework</mark>Noise Protocol Framework](https://noiseprotocol.org/noise.html). Designs based on this framework are widely deployed and the described patterns have formal security proofs. The specific pattern that we use in Ockam Secure Channels provides sender and receiver authentication and is resistant to key compromise impersonation attacks. It also ensures the integrity and secrecy of application data and provides strong forward secrecy.
 
-Now that you're familiar with the basics let's create some secure channels. If you haven't already, [<mark style="color:blue;">install ockam command</mark>](./#install)<mark style="color:blue;">,</mark> run `ockam enroll`, and [<mark style="color:blue;">delete any nodes</mark>](nodes.md#nodes) from previous examples.
+Now that you're familiar with the basics let's create some secure channels. If you haven't already, [<mark  style="color:blue;">install ockam command</mark>](./#install)<mark style="color:blue;">,</mark> run `ockam enroll`, and [<mark style="color:blue;">delete any nodes</mark>](nodes.md#nodes) from previous examples.
 
 ## Hello Secure Channels <a href="#hello" id="hello"></a>
 
-In this example, we'll create a secure channel from [Node](nodes.md) `a` to node `b`. Every node, created with Ockam Command, starts a secure channel listener at address `/service/api`.
+In this example, we'll create a secure channel from [<mark style="color:blue;">Node</mark>](nodes.md) `a` to node `b`. Every node, created with Ockam Command, starts a secure channel listener at address `/service/api`.
 
 ```
 » ockam node create a
@@ -62,7 +62,7 @@ In this example, we'll create a secure channel from [Node](nodes.md) `a` to node
 HELLO
 ```
 
-In the above example, `a` and `b` mutually authenticate using the default [Ockam Identity](identities.md) that is generated when we create the first node. Both nodes, in this case, are using the same identity.
+In the above example, `a` and `b` mutually authenticate using the default [<mark style="color:blue;">Ockam Identity</mark>](identities.md) that is generated when we create the first node. Both nodes, in this case, are using the same identity.
 
 Once the channel is created, note above how we used the service address of the channel on `a` to send messages through the channel. This can be shortened to the one-liner:
 
@@ -76,7 +76,7 @@ The first command writes `/service/d92ef0aea946ec01cdbccc5b9d3f2e16`, the addres
 
 ## Over Bridges <a href="#bridges" id="bridges"></a>
 
-In a previous section, we learned that [Bridges](advanced-routing.md#bridges) enable end-to-end protocols between applications in separate networks in cases where we have a bridge node that is connected to both networks. Since Ockam Secure Channels are built on top of Ockam Routing, we can establish end-to-end secure channels over a route that may include one or more bridges.
+In a previous section, we learned that [<mark style="color:blue;">Bridges</mark>](advanced-routing.md#bridges) enable end-to-end protocols between applications in separate networks in cases where we have a bridge node that is connected to both networks. Since Ockam Secure Channels are built on top of Ockam Routing, we can establish end-to-end secure channels over a route that may include one or more bridges.
 
 <img src="../../.gitbook/assets/file.excalidraw (5).svg" alt="" class="gitbook-drawing">
 
@@ -139,9 +139,9 @@ The on-the-wire overhead of a new secure channel is only 20 bytes per message. T
 
 ## Elastic Encrypted Relays
 
-Ockam Orchestrator can create and manage Elastic Encrypted [Relays](secure-channels.md#relays) in the cloud within your Orchestrator [project](nodes.md#project). These managed relays are designed for high availability, high throughput, and low latency.
+Ockam Orchestrator can create and manage Elastic Encrypted [<mark style="color:blue;">Relays</mark>](secure-channels.md#relays) in the cloud within your Orchestrator [<mark style="color:blue;">project</mark>](nodes.md#project). These managed relays are designed for high availability, high throughput, and low latency.
 
-Let's create an end-to-end secure channel through an elastic relay in your Orchestrator [project](nodes.md#project).
+Let's create an end-to-end secure channel through an elastic relay in your Orchestrator [<mark style="color:blue;">project</mark>](nodes.md#project).
 
 <img src="../../.gitbook/assets/file.excalidraw (3) (1).svg" alt="" class="gitbook-drawing">
 
@@ -191,7 +191,7 @@ We then create a TCP Portal Inlet on `a` that will listen for TCP connections to
 
 The HTTP requests from curl, enter the inlet on `a`, travel to the orchestrator project node and are relayed back to `b` via it's forwarding relay to reach the outlet and onward to the Python-based web service. Responses take the same return route back to curl.
 
-The TCP Inlet/Outlet work for a large number of TCP based protocols like HTTP. It is also simple to implement portals for other transport protocols. There is a growing base of Ockam Portal Add-Ons in our [<mark style="color:blue;">GitHub Repository</mark>](https://github.com/build-trust/ockam).
+The TCP Inlet/Outlet works for a large number of TCP based protocols like HTTP. It is also simple to implement portals for other transport protocols. There is a growing base of Ockam Portal Add-Ons in our [<mark style="color:blue;">GitHub Repository</mark>](https://github.com/build-trust/ockam).
 
 ## Mutual Authorization
 
@@ -224,10 +224,10 @@ HELLO
 To clean up and delete all nodes, run: `ockam node delete --all`
 {% endhint %}
 
-Ockam [Secure Channels](secure-channels.md#secure-channel) is an end-to-end protocol built on top of Ockam Routing. This cryptographic protocol guarantees data authenticity, integrity, and confidentiality over any communication topology that can be traversed with Ockam Routing.
+Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md#secure-channel) is an end-to-end protocol built on top of Ockam Routing. This cryptographic protocol guarantees data authenticity, integrity, and confidentiality over any communication topology that can be traversed with Ockam Routing.
 
 {% hint style="info" %}
 If you're stuck or have questions at any point, [<mark style="color:blue;">please reach out to us</mark>](https://www.ockam.io/contact)<mark style="color:blue;">**.**</mark>
 {% endhint %}
 
-Next, let's explore how we can scale mutual authentication with Ockam [Credentials](credentials.md).
+Next, let's explore how we can scale mutual authentication with Ockam [<mark style="color:blue;">Credentials</mark>](credentials.md).
