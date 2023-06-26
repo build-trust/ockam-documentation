@@ -11,7 +11,7 @@ In order to make decisions about trust, we must authenticate senders of messages
 
 ## Vaults
 
-Ockam [Identities](identities.md#identity) authenticate by cryptographically proving possession of specific secret keys.  Ockam Vaults safely store these secret keys in cryptographic hardware and cloud key management systems.
+Ockam [<mark style="color:blue;">Identities</mark>](identities.md#identity) authenticate by cryptographically proving possession of specific secret keys.  Ockam Vaults safely store these secret keys in cryptographic hardware and cloud key management systems.
 
 You can create a vault as follows:&#x20;
 
