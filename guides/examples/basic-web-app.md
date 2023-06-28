@@ -220,14 +220,8 @@ Please take note of the `--from` and `--to` values above.
 * And to forward it `--to` the relay service to the database that we created in the previous section.
 * This means requests to `localhost:5433` will be forwarded to whatever node has registered as `db`, wherever it is!
 
-One more change needs to be made to `main.py`. We have to update it to use the new `$OCKAM_PORT` inlet (line 12).
-
-{% hint style="info" %}
-In production environments you would typically get this from an environment variable which
-wouldn't require code changes. You would have to change the machine configuration running
-the web app to have the new value of `$OCKAM_PORT`. However, in this example we will just
-update line 12 in the `main.py` itself to store the new value.
-{% endhint %}
+One more change needs to be made to `main.py`. Let's update line 12 in the `main.py` to
+set the value of `pg_port` from the environment variable `$OCKAM_PORT`.
 
 ```py
 import os
@@ -241,7 +235,7 @@ CREATE_TABLE = (
 INSERT_RETURN_ID = "INSERT INTO events (name) VALUES (%s) RETURNING id;"
 
 app = Flask(__name__)
-pg_port = "5433" # 5433 is the $OCKAM_PORT inlet
+pg_port = os.environ['OCKAM_PORT'] # 5433 is the $OCKAM_PORT inlet
 url = "postgres://postgres:password@localhost:%s/"%pg_port
 connection = psycopg2.connect(url)
 
