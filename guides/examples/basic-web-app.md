@@ -70,7 +70,7 @@ CREATE_TABLE = (
 INSERT_RETURN_ID = "INSERT INTO events (name) VALUES (%s) RETURNING id;"
 
 app = Flask(__name__)
-pg_port = "5432" # 5432 is the default port
+pg_port = os.environ['APP_PG_PORT'] # 5432 is the default port
 url = "postgres://postgres:password@localhost:%s/"%pg_port
 connection = psycopg2.connect(url)
 
@@ -88,7 +88,10 @@ def hello_world():
 Lines 12 to 14 are where we establish out connection to the database, at this point it's simply pointing to `localhost` on port `5432`. If you're running a local Postgres instance then starting this Flask app will now show you how many times you've visited it, storing each new visit in the database.
 
 {% hint style="info" %}
-Make a note of the `pg_port` variable. In production the port is typically loaded from an environment variable and not hardcoded into the source. But for this exercise we are setting the value in the script itself. We will change this value in the next steps when we bring Ockam into the mix.
+Make a note of the `pg_port` variable. In production the port is typically loaded from an
+environment variable and not hardcoded into the source. But for this exercise we are
+setting the value in the script itself. We will change this value in the next steps when
+we bring Ockam into the mix.
 {% endhint %}
 
 Before doing any Ockam related tasks, feel free to run the Python script now by following the instructions below:
@@ -96,7 +99,8 @@ Before doing any Ockam related tasks, feel free to run the Python script now by 
 1. You also need to add following Python dependencies by running:
    * `Flask`: `pip3 install flask`
    * `psycopg2`: `pip3 install psycopg2-binary`
-2. To run this `Flask` app (`main.py`) type:
+2. To run this `Flask` app (`main.py`):
+   * `export APP_PG_PORT=5432`
    * `flask --app main run`
 3. To see it running in a web browser open this URL: `http://127.0.0.1:5000/`
 
@@ -207,6 +211,7 @@ inlet connections to the `db` component, and then finally we create that inlet:
 
 ```bash
 export OCKAM_PORT=5433
+export APP_PG_PORT=$OCKAM_PORT
 ockam identity create web
 ockam project enroll $WEB_TOKEN --identity web
 ockam node create web --identity web
@@ -220,34 +225,7 @@ Please take note of the `--from` and `--to` values above.
 * And to forward it `--to` the relay service to the database that we created in the previous section.
 * This means requests to `localhost:5433` will be forwarded to whatever node has registered as `db`, wherever it is!
 
-One more change needs to be made to `main.py`. Let's update line 12 in the `main.py` to
-set the value of `pg_port` from the environment variable `$OCKAM_PORT`.
-
-```py
-import os
-import psycopg2
-from flask import Flask
-
-CREATE_TABLE = (
-    "CREATE TABLE IF NOT EXISTS events (id SERIAL PRIMARY KEY, name TEXT);"
-)
-
-INSERT_RETURN_ID = "INSERT INTO events (name) VALUES (%s) RETURNING id;"
-
-app = Flask(__name__)
-pg_port = os.environ['OCKAM_PORT'] # 5433 is the $OCKAM_PORT inlet
-url = "postgres://postgres:password@localhost:%s/"%pg_port
-connection = psycopg2.connect(url)
-
-@app.route("/")
-def hello_world():
-    with connection:
-        with connection.cursor() as cursor:
-            cursor.execute(CREATE_TABLE)
-            cursor.execute(INSERT_RETURN_ID, ("",))
-            id = cursor.fetchone()[0]
-    return "I've been visited {} times".format(id), 201
-```
+Note that we have changed the `$APP_PG_PORT` to the same value as `$OCKAM_PORT`.
 
 Now when you start your web app (using `flask --app main run`) the counter will continue
 incrementing just as it did before, with zero code changes to your application.
