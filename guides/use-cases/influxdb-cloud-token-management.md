@@ -10,7 +10,7 @@ InfluxDB is used as a time-series database that hundreds, if not thousands, of c
 
 ### The problem
 
-Managing client access credentials for thousands of discrete clients can be a challenge for customers at scale. Creating unique credentials, and then providing those credentials to each unique client, is both an operational and engineering burden. Best practice recommends regularly auditing and rotating credentials to reduce the risk to the business in the event of credential exposure. However, this practice can lead to ongoing operational complexity, which further increases as the number of clients grows. Some companies may instead opt to have a single credential that is shared across all clients to reduce the operational complexity though that comes with an increase in risk and remediation complexity if that credential is ever exposed.
+Managing client access credentials for thousands of discrete clients can be a challenge for customers at scale. Creating unique credentials, and then providing those credentials to each unique client, is both an operational and engineering burden. Best practice recommends regularly auditing and rotating credentials to reduce the risk to the business in the event of credential exposure. However, this practice can lead to ongoing operational complexity, which further increases as the number of clients grows. Some companies may instead opt to have a single credential that is shared across all clients to reduce the operational complexity, though that comes with an increase in risk and remediation complexity if that credential is ever exposed.
 
 ### How Ockam simplifies it
 
