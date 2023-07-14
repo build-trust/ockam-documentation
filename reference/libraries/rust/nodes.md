@@ -13,15 +13,15 @@ Ockam is designed to make these powerful protocols <mark style="color:orange;">e
 
 However, many of these protocols require multiple steps and have complicated internal state that must be managed with care. It can be quite challenging to make them simple to use, secure, and platform independent.
 
-Ockam <mark style="color:blue;">Nodes</mark> and <mark style="color:blue;">Workers</mark> help hide this complexity and decouple from the host environment - to provide simple interfaces for stateful and asynchronous message-based protocols.
+Ockam [<mark style="color:blue;">Nodes and Workers</mark>](https://docs.ockam.io/reference/command/nodes) help hide this complexity and decouple from the host environment - to provide simple interfaces for stateful and asynchronous message-based protocols.
 
 ## Nodes
 
-An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam Protocols like Ockam [Routing](routing.md) and Ockam Secure Channels.
+An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam Protocols like Ockam [<mark style="color:blue;">Routing</mark>](routing.md) and Ockam Secure Channels.
 
 Using the Ockam Rust crates, you can easily turn any application into a lightweight Ockam Node. This flexible approach allows your to build secure by design applications that can run efficiently on tiny microcontrollers or scale horizontally in cloud environments.
 
-Rust based Ockam Nodes run very lightweight, concurrent, stateful actors called Ockam [Workers](nodes.md#workers). Using Ockam Routing, a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
+Rust based Ockam Nodes run very lightweight, concurrent, stateful actors called Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#workers). Using Ockam Routing, a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
 
 A node requires an asynchronous runtime to concurrently execute workers. The default Ockam Node implementation uses `tokio`, a popular asynchronous runtime in the Rust ecosystem. We also support Ockam Node implementations for various `no_std` embedded targets.
 
@@ -67,13 +67,13 @@ This will download various dependencies, compile and then run our code. When it 
 
 ## Workers
 
-Ockam [Nodes](nodes.md#node) run very lightweight, concurrent, and stateful actors called Ockam Workers.
+Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#node) run very lightweight, concurrent, and stateful actors called Ockam Workers.
 
 When a worker is started on a node, it is given one or more addresses. The node maintains a mailbox for each address and whenever a message arrives for a specific address it delivers that message to the corresponding registered worker.
 
 Workers can handle messages from other workers running on the same or a different node. In response to a message, an worker can: make local decisions, change its internal state, create more workers, or send more messages to other workers running on the same or a different node.
 
-Above we've [created our first node](nodes.md#create-a-node), now let's create a new worker, send it a message, and receive a reply.
+Above we've [<mark style="color:blue;">created our first node</mark>](nodes.md#create-a-node), now let's create a new worker, send it a message, and receive a reply.
 
 #### **Echoer worker**
 
@@ -87,7 +87,7 @@ This struct:
   * The `Context` type is usually set to `ockam::Context` which is provided by the node implementation.
   * The `Message` type must be set to the type of message the worker wishes to handle.
 
-For a new `Echoer` worker, create a new file at `src/echoer.rs` in your [hello\_ockam](https://github.com/build-trust/ockam/blob/develop/documentation/guides/rust/#setup) project. We're creating this inside the `src` directory so we can easily reuse the `Echoer` in other examples that we'll write later in this guide:
+For a new `Echoer` worker, create a new file at `src/echoer.rs` in your [<mark style="color:blue;">hello_ockam</mark>](https://github.com/build-trust/ockam/blob/develop/documentation/guides/rust/#setup) project. We're creating this inside the `src` directory so we can easily reuse the `Echoer` in other examples that we'll write later in this guide:
 
 ```
 touch src/echoer.rs
@@ -184,4 +184,4 @@ The message flow looked like this:
 
 <figure><img src="../../../diagrams/plantuml/simple/simple.001.jpeg" alt=""><figcaption></figcaption></figure>
 
-Next, let’s explore how Ockam’s [Application Layer Routing](routing.md) enables us to create protocols that provide end-to-end security and privacy guarantees.
+Next, let’s explore how Ockam’s [<mark style="color:blue;">Application Layer Routing</mark>](routing.md) enables us to create protocols that provide end-to-end security and privacy guarantees.

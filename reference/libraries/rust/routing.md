@@ -9,7 +9,10 @@ description: >-
 
 Data, within modern applications, routinely flows over complex, multi-hop, multi-protocol routes before reaching its end destination. It’s common for application layer requests and data to move across network boundaries, beyond data centers, via shared or public networks, through queues and caches, from gateways and brokers to reach remote services and other distributed parts of an application.
 
-Our goal is to enable end-to-end application layer guarantees in any communication topology. For example Ockam [Secure Channels](secure-channels.md) can provide end-to-end guarantees of data authenticity, integrity, and confidentiality in any of the above communication topologies.
+Our goal is to enable end-to-end application layer guarantees in any communication
+topology. For example Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md)
+can provide end-to-end guarantees of data authenticity, integrity, and confidentiality in
+any of the above communication topologies.
 
 In contrast, traditional secure communication protocol implementations are typically tightly coupled with transport protocols in a way that all their security is limited to the length and duration of the underlying transport connections.
 
@@ -17,13 +20,13 @@ For example, most TLS[^1] implementations are coupled the underlying TCP connect
 
 Traditional secure communication protocols are also unable to protect your application’s data if it travels over multiple different transport protocols. They can’t guarantee data authenticity or data integrity if your application’s communication path is `UDP -> TCP` or `BLE -> TCP`.
 
-Ockam [Routing](routing.md#routing) is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange message over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` and more.
+Ockam [<mark style="color:blue;">Routing</mark>](routing.md#routing) is a simple and lightweight message based protocol that makes it possible to bidirectionally exchange message over a large variety of communication topologies: `TCP -> TCP` or `TCP -> TCP -> TCP` or `BLE -> UDP -> TCP` or `BLE -> TCP -> TCP` or `TCP -> Kafka -> TCP` and more.
 
-By layering Ockam [Secure Channels](secure-channels.md) and other protocols over Ockam Routing, we can provide end-to-end guarantees over arbitrary transport topologies.
+By layering Ockam [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md) and other protocols over Ockam Routing, we can provide end-to-end guarantees over arbitrary transport topologies.
 
 ## Routing
 
-So far, we've created an [`"echoer"` worker](nodes.md#echoer-worker) in our node, sent it a message, and received a reply. This worker was a simple one hop away from our [`"app"` worker.](nodes.md#app-worker)
+So far, we've created an [<mark style="color:blue;">`"echoer"` worker</mark>](nodes.md#echoer-worker) in our node, sent it a message, and received a reply. This worker was a simple one hop away from our [<mark style="color:blue;">`"app"` worker</mark>.](nodes.md#app-worker)
 
 To achieve this, messages carry with them two metadata fields: `onward_route` and `return_route`, where a route is a list of addresses.
 
@@ -116,7 +119,7 @@ pub use hop::*;
 
 #### Echoer worker
 
-We'll also use the `Echoer` worker that we created in the [previous example](./nodes.md#echoer-worker). So make sure that it stays exported from `src/lib.rs`.
+We'll also use the `Echoer` worker that we created in the [<mark style="color:blue;">previous example</mark>](./nodes.md#echoer-worker). So make sure that it stays exported from `src/lib.rs`.
 
 #### App worker
 
@@ -173,7 +176,9 @@ Note the message flow and how routing information is manipulated as the message 
 
 #### Routing over many hops
 
-Routing is not limited to [one](https://github.com/build-trust/ockam/blob/develop/documentation/guides/rust/get-started/02-worker#readme) or [two hops](https://github.com/build-trust/ockam/blob/develop/documentation/guides/rust/get-started/03-routing/README.md#app-worker), we can easily create routes with many hops. Let's try that in a quick example:
+Routing is not limited to [<mark style="color:blue;">one</mark>](https://github.com/build-trust/ockam/blob/develop/documentation/guides/rust/get-started/02-worker#readme)
+or [<mark style="color:blue;">two hops</mark>](https://github.com/build-trust/ockam/blob/develop/documentation/guides/rust/get-started/03-routing/README.md#app-worker),
+we can easily create routes with many hops. Let's try that in a quick example:
 
 This time we'll create multiple hop workers between the `"app"` and the `"echoer"` and route our message through them.
 
@@ -232,7 +237,7 @@ An Ockam Transport is a plugin for Ockam Routing. It moves Ockam Routing message
 
 In previous examples, we routed messages locally within one node. Routing messages over transport layer connections looks very similar.
 
-Let's try the TcpTransport, we'll need to create two nodes: a [responder](https://github.com/build-trust/ockam/tree/develop/documentation/guides/rust/get-started/04-transport#responder-node) and an [initiator](https://github.com/build-trust/ockam/tree/develop/documentation/guides/rust/get-started/04-transport#initiator-node).
+Let's try the TcpTransport, we'll need to create two nodes: a [<mark style="color:blue;">responder</mark>](https://github.com/build-trust/ockam/tree/develop/documentation/guides/rust/get-started/04-transport#responder-node) and an [<mark style="color:blue;">initiator</mark>](https://github.com/build-trust/ockam/tree/develop/documentation/guides/rust/get-started/04-transport#initiator-node).
 
 Create a new file at:
 
@@ -267,7 +272,7 @@ async fn main(ctx: Context) -> Result<()> {
 
     // Allow access to the Echoer via TCP connections from the TCP listener
     node.flow_controls().add_consumer("echoer", listener.flow_control_id());
-    
+
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
