@@ -219,10 +219,10 @@ teardown() {
     rm consumer.pid
   fi
 
-  OCKAM_HOME="$ENROLLED_HOME" $OCKAM node delete --all
-  OCKAM_HOME="$OCKAM_HOME_CONSUMER" $OCKAM node delete --all
-  OCKAM_HOME="$OCKAM_HOME_PRODUCER_1" $OCKAM node delete --all
-  OCKAM_HOME="$OCKAM_HOME_PRODUCER_2" $OCKAM node delete --all
+  OCKAM_HOME="$ENROLLED_HOME" $OCKAM node delete --all --yes
+  OCKAM_HOME="$OCKAM_HOME_CONSUMER" $OCKAM node delete --all --yes
+  OCKAM_HOME="$OCKAM_HOME_PRODUCER_1" $OCKAM node delete --all --yes
+  OCKAM_HOME="$OCKAM_HOME_PRODUCER_2" $OCKAM node delete --all --yes
 }
 
 start_consumer_listener() {
