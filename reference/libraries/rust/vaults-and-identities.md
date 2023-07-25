@@ -7,6 +7,7 @@ description: >-
 # Vaults and Identities
 
 ```rust
+// examples/vault-and-identities.rs
 use ockam::node;
 use ockam::{Context, Result};
 
@@ -16,9 +17,10 @@ async fn main(ctx: Context) -> Result<()> {
     let mut node = node(ctx);
 
     // Create an Identity to represent Alice.
-    let alice = node.create_identity().await?;
+    let _alice = node.create_identity().await?;
 
     // Stop the node.
     node.stop().await
 }
+
 ```

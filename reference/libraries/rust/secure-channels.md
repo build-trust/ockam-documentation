@@ -66,6 +66,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 
 ### Middle node
@@ -112,6 +113,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 
 ### Initiator node
@@ -160,6 +162,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 
 ### Run
