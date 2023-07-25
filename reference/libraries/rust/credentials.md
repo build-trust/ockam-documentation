@@ -42,6 +42,7 @@ In a later guide, we'll explore how Ockam enables you to define various pluggabl
 
 {% code lineNumbers="true" %}
 ```rust
+// examples/06-credentials-exchange-issuer.rs
 use ockam::access_control::AllowAll;
 use ockam::access_control::IdentityIdAccessControl;
 use ockam::identity::CredentialsIssuer;
@@ -112,6 +113,7 @@ async fn main(ctx: Context) -> Result<()> {
     println!("issuer started");
     Ok(())
 }
+
 ```
 {% endcode %}
 
@@ -127,6 +129,7 @@ touch examples/06-credential-exchange-server.rs
 
 {% code lineNumbers="true" %}
 ```rust
+// examples/06-credentials-exchange-server.rs
 // This node starts a tcp listener, a secure channel listener, and an echoer worker.
 // It then runs forever waiting for messages.
 use hello_ockam::Echoer;
@@ -222,6 +225,7 @@ async fn main(ctx: Context) -> Result<()> {
     println!("server started");
     Ok(())
 }
+
 ```
 {% endcode %}
 
@@ -237,6 +241,7 @@ touch examples/06-credential-exchange-client.rs
 
 {% code lineNumbers="true" %}
 ```rust
+// examples/06-credentials-exchange-client.rs
 use ockam::identity::{AuthorityService, CredentialsIssuerClient, SecureChannelOptions, TrustContext};
 use ockam::TcpTransportExtension;
 use ockam::{node, route, Context, Result, TcpConnectionOptions};
@@ -318,6 +323,7 @@ async fn main(ctx: Context) -> Result<()> {
 
     node.stop().await
 }
+
 ```
 {% endcode %}
 

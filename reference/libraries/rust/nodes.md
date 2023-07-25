@@ -137,7 +137,6 @@ Add the following code to this file:
 
 ```rust
 // src/echoer.rs
-
 use ockam::{Context, Result, Routed, Worker};
 
 pub struct Echoer;
@@ -154,6 +153,7 @@ impl Worker for Echoer {
         ctx.send(msg.return_route(), msg.body()).await
     }
 }
+
 ```
 
 Note that we define the `Message` associated type of the worker as `String`, which specifies that this worker expects to handle `String` messages. We then go on to define a `handle_message(..)` function that will be called whenever a new message arrives for this worker.
@@ -163,10 +163,10 @@ In the Echoer's `handle_message(..)`, we print any incoming message, along with 
 To make this Echoer type accessible to our main program, export it from `src/lib.rs` file by adding the following to it:
 
 ```rust
-// src/lib.rs
-
 mod echoer;
+
 pub use echoer::*;
+
 ```
 
 #### App worker
@@ -208,6 +208,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 
 To run this new node program:
