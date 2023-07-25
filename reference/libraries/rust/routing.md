@@ -76,8 +76,7 @@ Add the following code to this file:
 
 ```rust
 // src/hop.rs
-
-use ockam::{Any, Context, Result, Routed, Worker};
+use ockam::{Any, Context, LocalMessage, Result, Routed, Worker};
 
 pub struct Hop;
 
@@ -92,8 +91,7 @@ impl Worker for Hop {
         println!("Address: {}, Received: {}", ctx.address(), msg);
 
         // Some type conversion
-        let mut message = msg.into_local_message();
-        let transport_message = message.transport_mut();
+        let mut transport_message = msg.into_local_message().into_transport_message();
 
         // Remove my address from the onward_route
         transport_message.onward_route.step()?;
@@ -101,10 +99,14 @@ impl Worker for Hop {
         // Insert my address at the beginning return_route
         transport_message.return_route.modify().prepend(ctx.address());
 
+        // Wipe all local info (e.g. transport types)
+        let message = LocalMessage::new(transport_message, vec![]);
+
         // Send the message on its onward_route
         ctx.forward(message).await
     }
 }
+
 ```
 
 To make this `Hop` type accessible to our main program, export it from `src/lib.rs` by adding the following to it:
@@ -161,6 +163,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 
 To run this new node program:
@@ -216,6 +219,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 
 To run this new node program:
@@ -270,6 +274,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 
 #### Initiator node
@@ -309,6 +314,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 
 #### Run
@@ -351,7 +357,6 @@ Add the following code to this file:
 
 ```rust
 // src/forwarder.rs
-
 use ockam::{Address, Any, Context, LocalMessage, Result, Routed, Worker};
 
 pub struct Forwarder(pub Address);
@@ -393,6 +398,7 @@ impl Worker for Forwarder {
         ctx.forward(message).await
     }
 }
+
 ```
 
 To make this `Forwarder` type accessible to our main program, export it from `src/lib.rs` by adding the following to it:
@@ -440,6 +446,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 
 #### Middle node
@@ -487,6 +494,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 
 #### Initiator node
@@ -525,6 +533,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 
 #### Run
