@@ -4,7 +4,7 @@ Attribute-Based Access Control (ABAC) is an authorization strategy that grants o
 
 A subject’s request to perform an operation on a resource is granted or denied based on attributes of the **subject**, attributes of the **operation**, attributes of the **resource**, and attributes of the **environment**. Access is controlled using **policies** that are defined in terms of those attributes.
 
-In this guide we’ll walk through a step-by-step [demo](apply-fine-grained-permissions-with-attribute-based-access-control-abac.md#step-by-step-walkthrough) of using Ockam to add policy driven, attribute-based access control to any application using cryptographically verifiable credentials.&#x20;
+In this guide we’ll walk through a step-by-step [<mark style="color:blue;">demo</mark>](apply-fine-grained-permissions-with-attribute-based-access-control-abac.md#step-by-step-walkthrough) of using Ockam to add policy driven, attribute-based access control to any application using cryptographically verifiable credentials.
 
 ## Background
 
@@ -80,12 +80,12 @@ After the binary downloads, please move it to a location in your shell's `$PATH`
 # Check that everything was installed by enrolling with Ockam Orchestrator.
 #
 # This will provision an End-to-End Encrypted Cloud Relay service for you in
-# your `default` project at `/project/default`. 
+# your `default` project at `/project/default`.
 ockam enroll
 ```
 
 ```bash
-# Creates enrollment tokens for the three types of identities that 
+# Creates enrollment tokens for the three types of identities that
 # will be created and used within this example
 cp1_token=$(ockam project ticket --attribute component=control)
 ep1_token=$(ockam project ticket --attribute component=edge)
