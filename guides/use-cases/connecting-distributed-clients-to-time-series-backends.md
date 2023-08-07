@@ -10,7 +10,7 @@ Time series databases (e.g., InfluxDB, TimescaleDB, Graphite, Prometheus, etc.) 
 
 ### The problem
 
-The producer of this data could be a microservice cluster operating in a public cloud, an IoT device in someone's home, an industrial device running within a warehouse, an environmental monitor in a smart city installation, or anything inbetween. This presents a series of challenges that vary based on how much control you have over the device in question, how much you need to ensure the integrity of the information you receive, and the network topolgy between the producer and time series backend.
+The producer of this data could be a microservice cluster operating in a public cloud, an IoT device in someone's home, an industrial device running within a warehouse, an environmental monitor in a smart city installation, or anything in between. This presents a series of challenges that vary based on how much control you have over the device in question, how much you need to ensure the integrity of the information you receive, and the network topology between the producer and time series backend.
 
 For many of these use cases the data needs to be sent from a remote network to time series backend, which involves exposing the time series backend directly to the public internet. These backends also typically do not support the access controls essential to support hundreds or thousands of discrete devices connection resulting in coarsed grained credentials being shared across numerous producers. This in turn creates an opportunity for an exposed credential to allow a third-party to generate erroneous data that can not be easily removed from the aggregated results. Or possibly even worse: a privilege escalation.
 
@@ -26,7 +26,7 @@ These connections are established and authenticated on-demand and, for supported
 
 ### Next steps
 
-* See an end-to-end example of this in our [Telegraf + InfluxDB code ](../examples/telegraf-+-influxdb.md)demo.
-* Follow our [getting started guide to install Ockam](../../reference/command/README.md#install) and start using it in just a few minutes.
-* [Reach out to the team](https://www.ockam.io/contact/form), we'd love to talk to you in more detail about your potential use cases.
-* Join the growing community of developers who want to build trust by making applications that are secure-by-design, in the [Build Trust Discord server](https://discord.gg/RAbjRr3kds).
+* See an end-to-end example of this in our [<mark style="color:blue;">Telegraf + InfluxDB code</mark>](../examples/telegraf-+-influxdb.md)demo.
+* Follow our [<mark style="color:blue;">getting started guide to install Ockam</mark>](../../reference/command/README.md#install) and start using it in just a few minutes.
+* [<mark style="color:blue;">Reach out to the team</mark>](https://www.ockam.io/contact/form), we'd love to talk to you in more detail about your potential use cases.
+* Join the growing community of developers who want to build trust by making applications that are secure-by-design, in the [<mark style="color:blue;">Build Trust Discord server</mark>](https://discord.gg/RAbjRr3kds).
