@@ -21,6 +21,8 @@
   * [Telegraf + InfluxDB](guides/examples/telegraf-+-influxdb.md)
   * [InfluxDB Cloud token lease management](guides/examples/influxdb-cloud-token-lease-management.md)
   * [End-to-end encryption through Kafka](guides/examples/end-to-end-encrypted-kafka.md)
+  * [Attribute-Based Access Control (ABAC)](guides/examples/abac.md)
+  * [Use employee attributes from Okta](guides/examples/okta.md)
 
 ## Reference
 
