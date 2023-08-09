@@ -343,7 +343,7 @@ For demonstration, we'll create another worker, called `Forwarder`, that takes e
 Just before forwarding the message, `Forwarder`'s handle message function will:
 
 1. Print the message
-2. Remove its own address (first address) from the `onward_route`, by calling `step()`
+2. Remove its own address (first address) from the `onward_route`, by calling `pop_front()`
 3. Insert predefined address as the first address in the `onward_route` by calling `prepend()`
 
 Create a new file at:
@@ -409,43 +409,7 @@ pub use forwarder::*;
 
 #### Responder node
 
-Create a new file at:
-
-```
-touch examples/04-routing-over-transport-two-hops-responder.rs
-```
-
-Add the following code to this file:
-
-```rust
-// examples/04-routing-over-transport-two-hops-responder.rs
-// This node starts a tcp listener and an echoer worker.
-// It then runs forever waiting for messages.
-
-use hello_ockam::Echoer;
-use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
-
-#[ockam::node]
-async fn main(ctx: Context) -> Result<()> {
-    // Create a node with default implementations
-    let node = node(ctx);
-
-    // Initialize the TCP Transport
-    let tcp = node.create_tcp_transport().await?;
-
-    // Create an echoer worker
-    node.start_worker("echoer", Echoer).await?;
-
-    // Create a TCP listener and wait for incoming connections.
-    let listener = tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
-
-    // Allow access to the Echoer via TCP connections from the TCP listener
-    node.flow_controls().add_consumer("echoer", listener.flow_control_id());
-
-    // Don't call node.stop() here so this node runs forever.
-    Ok(())
-}
-```
+We can reuse our responder node from earlier (created in `examples/04-routing-over-transport-responder.rs`).
 
 #### Middle node
 
@@ -537,7 +501,7 @@ async fn main(ctx: Context) -> Result<()> {
 Run the responder in a separate terminal tab and keep it running:
 
 ```
-cargo run --example 04-routing-over-transport-two-hops-responder
+cargo run --example 04-routing-over-transport-responder
 ```
 
 Run the middle node in a separate terminal tab and keep it running:
