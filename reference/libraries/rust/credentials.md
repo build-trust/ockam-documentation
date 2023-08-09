@@ -22,7 +22,7 @@ Let’s walk through an example of setting up ABAC using cryptographically verif
 
 ### Setup
 
-To get started please create the initial [<mark style="color:blue;">`hello_ockam` project</mark>](./#get-started) and define an [<mark style="color:blue;">`echoer` worker</mark>](nodes.md#echoer-worker). We'll also need the `hex` crate for this example so add that to your `Cargo.toml` using `cargo add` :
+To get started please create the initial [<mark style="color:blue;">`hello_ockam`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">project</mark>](./#get-started) and define an [<mark style="color:blue;">`echoer`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">worker</mark>](nodes.md#echoer-worker). We'll also need the `hex` crate for this example so add that to your `Cargo.toml` using `cargo add` :
 
 ```
 cargo add hex
