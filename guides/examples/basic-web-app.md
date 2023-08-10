@@ -119,7 +119,7 @@ We are going to leave the database running on the default port and then we will:
 
 {% hint style="info" %}
 Before starting with the steps below, please read
-[<mark style="color:blue;">this article</mark>](https://docs.ockam.io/guides/use-casesadd-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change)
+[<mark style="color:blue;">this article</mark>](https://docs.ockam.io/guides/use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change)
 to get familiar with what steps we are going to take to configure Ockam. They will give
 you a sense of things like "node", "inlet", "outlet", and "relay" that you will see
 mentioned below.
