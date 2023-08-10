@@ -70,10 +70,13 @@ First we'll create our application components and then see how to give access to
 
 ### Required Dependencies
 
-Through this example `https://trial-9434859.okta.com/oauth2/default`  refers to an existing okta endpoint where workforce identities are defined.  The okta user profile is expected to contain `email`, `city` and `department` attributes.  These attributes will be included on the generated okcam credentials.
+Through this example `https://trial-9434859.okta.com/oauth2/default` refers to an existing
+Okta endpoint where workforce identities are defined. The Okta user profile is expected to
+contain `email`, `city` and `department` attributes. These attributes will be included on
+the generated Ockam credentials.
 
-If you don't have an okta install already, you can create a [trial one](https://www.okta.com/free-trial/) to follow this example use case.
-
+If you don't have an Okta install already, you can create a [trial
+account](https://www.okta.com/free-trial/) to follow this example use case.
 
 ### Setup
 
@@ -144,7 +147,7 @@ The first part of the policy allows various application component services to co
 
 ### Machine 2 in San Francisco
 
-We'll represent the application service on Machine 2 with a simple http server listening on port 6`000` but this could be any application service:
+We'll represent the application service on Machine 2 with a simple http server listening on port `6000` but this could be any application service:
 
 ```
 python3 -m http.server --bind 127.0.0.1 6000
