@@ -59,8 +59,6 @@ lived, fine-grained revocable credentials to only the application components tha
 need to access.** It eliminates long lived static keys and credentials from being stored
 on work machines.
 
-<figure><img src="../../.gitbook/assets/diagrams.003 (1).jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
-
 ### Next steps
 
 - See an end-to-end example of this in our
