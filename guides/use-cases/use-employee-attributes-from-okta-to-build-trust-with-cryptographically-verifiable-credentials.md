@@ -16,7 +16,7 @@ attempting to do.
 
 ### The problem
 
-In order to trust information or instructions, that are received over the network, applications must
+In order to trust information or instructions that are received over the network, applications must
 **authenticate** all senders and **verify the integrity of data** **received** to assert what was
 received is exactly what was sent — free from errors or en-route tampering.
 
@@ -26,9 +26,9 @@ action or view the requested data.
 In scenarios where human users are authenticating with cloud services, we have some mature protocols
 like OAuth 2.0 and OpenID Connect (OIDC) that help tackle parts of the problem.
 
-However, majority of data that flows within modern applications doesn’t involve humans.
+However, the majority of data that flows within modern applications doesn’t involve humans.
 Microservices interact with other microservices, devices interact with other devices and cloud
-services, internal services interact with partner systems and infrastructure services etc.
+services, internal services interact with partner systems and infrastructure services, etc.
 
 **Secure** **by-design** applications must ensure that all machine-to-machine application layer
 communication is authenticated and authorized. For this, **applications must prove identifiers and
@@ -51,7 +51,7 @@ For most enterprises, workforce identities are already defined in enterprise ide
 Okta. Ockam Orchestrator offers an Okta Add-On that uses OIDC to allow enterprise employees to get
 Ockam credentials using their regular corporate login.
 
-Their user profile information like department, city, team etc. is included in the credential and
+Their user profile information like department, city, team, etc. is included in the credential and
 securely attested by the Credential Authority.
 
 This combination is incredibly powerful. It allows **employees to get just-in-time, short
