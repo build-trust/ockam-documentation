@@ -40,7 +40,7 @@ We get a reply back and the message flow looked like this.
 
 <figure><img src="../../.gitbook/assets/simple.001 (1).jpeg" alt=""><figcaption></figcaption></figure>
 
-To achieve this, Ockam Routing Protocol messages carry, with them, two metadata fields: `onward_route` and `return_route`. A route is an ordered list of addresses describing a message's path travel. All of this information is carried in a really <mark style="color:orange;">compact binary</mark> format.
+To achieve this, Ockam Routing Protocol messages carry with them two metadata fields: `onward_route` and `return_route`. A route is an ordered list of addresses describing a message's path travel. All of this information is carried in a really <mark style="color:orange;">compact binary</mark> format.
 
 Pay very close attention to the Sender, Hop, and Replier rules in the sequence diagrams below. Note how `onward_route` and `return_route` are handled as the message travels.
 

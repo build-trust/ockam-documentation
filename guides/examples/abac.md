@@ -67,7 +67,7 @@ A credential **Verifier** trusts the public identifier of a credential **Authori
 that wishes to authenticate an attribute to this verifier gets a cryptographically signed credential
 from this same credential authority. By issuing a credential, the authority attests to one or more
 attributes of the prover. For example the authority may attest that a particular identifier has the
-attributes `service-type=inventory, location="New York".
+attributes `service-type=inventory, location="New York"`.
 
 Credentials are issued over mutually authenticated, end-to-end secure channels and carry a
 cryptographic signature over an authenticated identifier and its attributes. This then allows a
