@@ -29,7 +29,7 @@ A node requires an asynchronous runtime to concurrently execute workers. The def
 
 The first thing any Ockam rust program must do is initialize and start an Ockam node. This setup can be done manually but the most convenient way is to use the `#[ockam::node]` attribute that injects the initialization code. It creates the asynchronous environment, initializes worker management, sets up routing and initializes the node context.
 
-For your new node, create a new file at `examples/01-node.rs` in your [hello\_ockam](README.md) project:
+For your new node, create a new file at `examples/01-node.rs` in your [<mark style="color:blue;">`hello_ockam`</mark>](README.md) project:
 
 ```
 touch examples/01-node.rs
@@ -42,14 +42,49 @@ Add the following code to this file:
 // This program creates and then immediately stops a node.
 
 use ockam::{node, Context, Result};
+use r3bl_ansi_color::{AnsiStyledText, Color, Style};
 
+#[rustfmt::skip]
+const HELP_TEXT: &str =r#"
+┌───────────────────────┐
+│  Node 1               │
+├───────────────────────┤
+│  ┌─────────────────┐  │
+│  │ Worker Address: │  │
+│  │ 'app'           │  │
+│  └─────────────────┘  │
+└───────────────────────┘
+"#;
+
+/// Create and then immediately stop a node.
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    // Create a node with default implementations
+    AnsiStyledText {
+        text: HELP_TEXT,
+        style: &[Style::Foreground(Color::Rgb(100, 200, 0))],
+    }
+    .println();
+
+    print_title(vec!["Run a node & stop it right away"]);
+
+    // Create a node.
     let mut node = node(ctx);
 
     // Stop the node as soon as it starts.
     node.stop().await
+}
+
+fn print_title(title: Vec<&str>) {
+    let msg = format!("🚀 {}", title.join("\n  → "));
+    AnsiStyledText {
+        text: msg.as_str(),
+        style: &[
+            Style::Bold,
+            Style::Foreground(Color::Rgb(70, 70, 70)),
+            Style::Background(Color::Rgb(100, 200, 0)),
+        ],
+    }
+    .println();
 }
 ```
 
@@ -60,10 +95,18 @@ As soon as the main function starts, we use `ctx.stop()` to immediately stop the
 To run the node program:
 
 ```
-cargo run --example 01-node
+clear; OCKAM_LOG=none cargo run --example 01-node
 ```
 
-This will download various dependencies, compile and then run our code. When it runs, you'll see log output that shows the node starting and then immediately shutting down.
+{% hint style="info" %}
+The `clear` command is used to clear the terminal before running the program. The
+`OCKAM_LOG=none` environment variable is used to disable logging. You can remove this to
+see the logs.
+{% endhint %}
+
+This will download various dependencies, compile and then run our code. When it runs,
+you'll see colorized output showing that the node starts up and then shuts down
+immediately 🎉.
 
 ## Workers
 
