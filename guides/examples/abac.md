@@ -120,7 +120,7 @@ After the binary downloads, please move it to a location in your shell's `$PATH`
 ```bash
 # Check that everything was installed by enrolling with Ockam Orchestrator.
 #
-# This will provision an End-to-End Encrypted Cloud Relay service for you in
+# This will provision an End-to-End Encrypted Relay for you in
 # your `default` project at `/project/default`.
 ockam enroll
 ```
