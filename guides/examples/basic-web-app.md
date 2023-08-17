@@ -12,12 +12,12 @@ where you plan on carrying out the steps below.
 ### Prerequisites
 
 * [<mark style="color:blue;">Ockam Command</mark>](../../#install)
-  * After successfully installing this prerequisite, you will be able to run the `ockam` CLI app in your terminal.
+  * After successfully installing this prerequisite (using [`brew`](https://brew.sh/) and `brew install build-trust/ockam/ockam`), you will be able to run the `ockam` CLI app in your terminal.
 * [<mark style="color:blue;">Python</mark>](https://www.python.org/downloads/), and libraries: [<mark style="color:blue;">Flash</mark>](https://github.com/pallets/flask/), [<mark style="color:blue;">psycopg2</mark>](https://github.com/psycopg/psycopg2)
-  1. After successfully installing Python, you will be able to run the `python3` command in your terminal.
+  1. After successfully installing Python (using [`brew`](https://brew.sh/) and `brew install python`), you will be able to run the `python3` command in your terminal.
   2. Instructions on how to get the dependencies (`Flask`, `psycopg2`) are provided in the [<mark style="color:blue;">Python Code</mark>](basic-web-app.md#python-code) section below.
 * [<mark style="color:blue;">Postgresql</mark>](https://www.postgresql.org/)
-  1. After successfully installing this prerequisite, you will be able to run the Postgres database server on your machine on the default port of `5432`.
+  1. After successfully installing this prerequisite (using [`brew`](https://brew.sh/) and `brew install postgresql@15`), you will be able to run the Postgres database server on your machine on the default port of `5432`.  Please make sure to follow `brew`'s instructions on adding PostgreSQL to your path.
   2. Make sure to set a new password for the database user `postgres`. Set this password to be `password` (the Python Code below uses `postgres:password@localhost` as the connection string for the db driver). The following directions can help you set this up on Linux or macOS:
      * In a terminal, login to the database locally as the `postgres` user: `sudo -u postgres psql --username postgres --password --dbname template1`
      * Then type the following in the REPL: `ALTER USER postgres PASSWORD 'password';`, and finally type `exit`.
@@ -119,7 +119,7 @@ We are going to leave the database running on the default port and then we will:
 
 {% hint style="info" %}
 Before starting with the steps below, please read
-[<mark style="color:blue;">this article</mark>](https://docs.ockam.io/guides/use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change) 
+[<mark style="color:blue;">this article</mark>](https://docs.ockam.io/guides/use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change)
 to get familiar with what steps we are going to take to configure Ockam. They will give
 you a sense of things like "node", "inlet", "outlet", and "relay" that you will see
 mentioned below.
@@ -171,7 +171,7 @@ In the code snippet below, we're going to:
    that ensures only a component with the value `web` will be authorized to establish a
    new connection. This policy can be associated to several resources on the node.
 3. Connect our node to our default Postgres port (note the `PG_PORT` value).
-4. Finally setup a relay (we will use the End-to-End Encrypted Cloud Relay service,
+4. Finally setup a relay (we will use the End-to-End Encrypted Relay,
    which was provisioned when `ockam enroll` was run, in the
    `default` project at `/project/default`) that will allow traffic to this node to flow through to our TCP outlet.
 

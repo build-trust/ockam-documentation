@@ -56,7 +56,7 @@ Next, step through the following commands to setup secure and private communicat
 # Check that everything was installed correctly by enrolling with Ockam Orchestrator.
 #
 # This will create a Space and Project for you in Ockam Orchestrator and provision an
-# End-to-End Encrypted Cloud Relay service in your `default` project at `/project/default`.
+# End-to-End Encrypted Relay in your `default` project at `/project/default`.
 ockam enroll
 
 # -- APPLICATION SERVICE --
