@@ -53,7 +53,7 @@ Next, create a new cargo project to get started:
 
 ```bash
 cargo new --lib hello_ockam && cd hello_ockam && mkdir examples \
-  && cargo add ockam && cargo build
+  && cargo add ockam r3bl_ansi_color && cargo build
 ```
 
 If the above instructions don't work on your machine, please [post a question](https://github.com/build-trust/ockam/discussions), we’d love to help.
