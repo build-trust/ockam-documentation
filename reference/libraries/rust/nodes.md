@@ -86,6 +86,7 @@ fn print_title(title: Vec<&str>) {
     }
     .println();
 }
+
 ```
 
 Here we add the `#[ockam::node]` attribute to an `async` main function that receives the node execution context as a parameter and returns `ockam::Result` which helps make our error reporting better.
