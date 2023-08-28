@@ -45,7 +45,7 @@ Once the shared secrets are established, they are used for authenticated encrypt
 
 Our secure channel protocol is based on a handshake design pattern described in the [<mark style="color:blue;">Noise Protocol Framework</mark>Noise Protocol Framework](https://noiseprotocol.org/noise.html). Designs based on this framework are widely deployed and the described patterns have formal security proofs. The specific pattern that we use in Ockam Secure Channels provides sender and receiver authentication and is resistant to key compromise impersonation attacks. It also ensures the integrity and secrecy of application data and provides strong forward secrecy.
 
-Now that you're familiar with the basics let's create some secure channels. If you haven't already, [<mark  style="color:blue;">install ockam command</mark>](./#install)<mark style="color:blue;">,</mark> run `ockam enroll`, and [<mark style="color:blue;">delete any nodes</mark>](nodes.md#nodes) from previous examples.
+Now that you're familiar with the basics let's create some secure channels. If you haven't already, [<mark style="color:blue;">install ockam command</mark>](./#install)<mark style="color:blue;">,</mark> run `ockam enroll`, and [<mark style="color:blue;">delete any nodes</mark>](nodes.md#nodes) from previous examples.
 
 ## Hello Secure Channels <a href="#hello" id="hello"></a>
 
@@ -169,7 +169,7 @@ In a previous section, we saw how [<mark style="color:blue;">Portals</mark>](adv
 
 We can combine Secure Channels with Portals to create Secure Portals.
 
-<img src="../../.gitbook/assets/file.excalidraw (1) (1) (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1) (1) (1) (1).svg" alt="" class="gitbook-drawing">
 
 Continuing from the above example on [<mark style="color:blue;">Elastic Encrypted Relays</mark>](secure-channels.md#elastic-encrypted-relays) create a Python-based web server to represent a sample web service. This web service is listening on `127.0.0.1:9000`.
 

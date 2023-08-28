@@ -14,7 +14,7 @@ Following the best practice of placing your database inside a private subnet doe
 
 ### How Ockam simplifies it
 
-<img src="../../.gitbook/assets/file.excalidraw (2) (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (2) (1) (2).svg" alt="" class="gitbook-drawing">
 
 Through the use of authenticated secure channels your database is able to register itself as a service that some authorized subset of your Ockam nodes can connect to. By not requiring changes to network access control lists or security groups, no ports at all on your database are exposed to the public internet - an even higher security posture than the previous best practice.
 

@@ -57,7 +57,7 @@ We can traverse NATs and pierce through network boundaries. And since this is al
 
 Portals make existing protocols work over Ockam Routing without changing any code in the existing applications.
 
-<img src="../../.gitbook/assets/file.excalidraw (1) (1) (1).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1) (1) (1) (1).svg" alt="" class="gitbook-drawing">
 
 Continuing from our [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relays) example, create a Python-based web server to represent a sample web service. This web service is listening on `127.0.0.1:9000`.
 
