@@ -1,8 +1,8 @@
 ---
 description: >-
-  Cryptographic and Messaging Protocols that make it possible to create
-  secure-by-design applications that provide end-to-end application layer trust
-  it data.
+  Cryptographic and Messaging Protocols that make it possible to create private
+  and secure-by-design applications that provide end-to-end application layer
+  trust it data.
 ---
 
 # Protocols
