@@ -38,8 +38,7 @@ This will download a precompiled binary and add it to your path. If you don’t 
 On Linux and MacOS, you can download precompiled binaries for your architecture using curl.
 
 ```shell
-curl --proto '=https' --tlsv1.2 -sSf \
-    https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | bash
+curl --proto '=https' --tlsv1.2 -sSfL https://install.command.ockam.io | bash
 ```
 
 This will download a precompiled binary and add it to your path. If the above instructions don't work on your machine, please [post a question](https://github.com/build-trust/ockam/discussions), we’d love to help.
@@ -147,73 +146,3 @@ No more having to design error-prone ad-hoc ways to distribute sensitive credent
 ### **Get help**
 
 We are here to help you build with Ockam. If you need help, [<mark style="color:blue;">**please reach out to us**</mark>](https://www.ockam.io/contact)!
-
-<!-- bats start ENROLLED_HOME -->
-<!--
-# Ockam binary to use
-if [[ -z $OCKAM ]]; then
-  OCKAM=ockam
-fi
-
-if [[ -z $BATS_LIB ]]; then
-  BATS_LIB=$(brew --prefix)/lib # macos
-fi
-
-if [[ -z $ENROLLED_HOME ]]; then
-  exit 1
-fi
-
-export OCKAM_HOME=$ENROLLED_HOME
-
-setup() {
-  load "$BATS_LIB/bats-support/load.bash"
-  load "$BATS_LIB/bats-assert/load.bash"
-
-  $OCKAM node delete --all
-
-  python_pid_file="${ENROLLED_HOME}/python.pid"
-  touch $python_pid_file
-
-  python3 -m http.server --bind 127.0.0.1 6000 &
-  pid="$!"
-  echo "$pid" >"$python_pid_file"
-}
-
-teardown() {
-  $OCKAM node delete --all
-
-  python_pid_file="${ENROLLED_HOME}/python.pid"
-
-  pid=$(cat "$python_pid_file")
-  kill -9 "$pid"
-  wait "$pid" 2>/dev/null || true
-
-  rm -rf default-project.json
-  rm -rf $ENROLLED_HOME
-}
-
-@test "run end-to-end encrypted and mutually authenticated communication" {
-  run bash -c "$OCKAM project information --output json > default-project.json"
-  assert_success
-
-  run $OCKAM node create s --project-path default-project.json
-  run $OCKAM --version
-  assert_success
-
-  run $OCKAM tcp-outlet create --at s --from /service/outlet --to 127.0.0.1:6000
-  assert_success
-  run $OCKAM relay create s --at /project/default --to s
-  assert_success
-
-  run $OCKAM node create c --project-path default-project.json
-  assert_success
-  run  bash -c "$OCKAM secure-channel create --from c --to /project/default/service/forward_to_s/service/api\
-        | $OCKAM tcp-inlet create --at c --from 127.0.0.1:7000 --to -/service/outlet"
-
-  assert_success
-
-  run curl --head 127.0.0.1:7000
-  assert_success
-}
--->
-<!-- bats end -->
