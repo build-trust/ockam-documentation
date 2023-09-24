@@ -23,13 +23,13 @@ Using the Ockam Rust crates, you can easily turn any application into a lightwei
 
 Rust based Ockam Nodes run very lightweight, concurrent, stateful actors called Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#workers). Using Ockam Routing, a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
 
-A node requires an asynchronous runtime to concurrently execute workers. The default Ockam Node implementation uses `tokio`, a popular asynchronous runtime in the Rust ecosystem. We also support Ockam Node implementations for various `no_std` embedded targets.
+A node requires an asynchronous runtime to concurrently execute workers. The default Ockam Node implementation in Rust uses `tokio`, a popular asynchronous runtime in the Rust ecosystem. We also support Ockam Node implementations for various `no_std` embedded targets.
 
 #### Create a node
 
 The first thing any Ockam rust program must do is initialize and start an Ockam node. This setup can be done manually but the most convenient way is to use the `#[ockam::node]` attribute that injects the initialization code. It creates the asynchronous environment, initializes worker management, sets up routing and initializes the node context.
 
-For your new node, create a new file at `examples/01-node.rs` in your [<mark style="color:blue;">`hello_ockam`</mark>](README.md) project:
+For your new node, create a new file at `examples/01-node.rs` in your [<mark style="color:blue;">`hello_ockam`</mark>](./) project:
 
 ```
 touch examples/01-node.rs
@@ -100,14 +100,10 @@ clear; OCKAM_LOG=none cargo run --example 01-node
 ```
 
 {% hint style="info" %}
-The `clear` command is used to clear the terminal before running the program. The
-`OCKAM_LOG=none` environment variable is used to disable logging. You can remove this to
-see the logs.
+The `clear` command is used to clear the terminal before running the program. The `OCKAM_LOG=none` environment variable is used to disable logging. You can remove this to see the logs.
 {% endhint %}
 
-This will download various dependencies, compile and then run our code. When it runs,
-you'll see colorized output showing that the node starts up and then shuts down
-immediately 🎉.
+This will download various dependencies, compile and then run our code. When it runs, you'll see colorized output showing that the node starts up and then shuts down immediately 🎉.
 
 ## Workers
 
@@ -131,7 +127,7 @@ This struct:
   * The `Context` type is usually set to `ockam::Context` which is provided by the node implementation.
   * The `Message` type must be set to the type of message the worker wishes to handle.
 
-For a new `Echoer` worker, create a new file at `src/echoer.rs` in your [<mark style="color:blue;">hello_ockam</mark>](https://github.com/build-trust/ockam/blob/develop/documentation/guides/rust/#setup) project. We're creating this inside the `src` directory so we can easily reuse the `Echoer` in other examples that we'll write later in this guide:
+For a new `Echoer` worker, create a new file at `src/echoer.rs` in your [<mark style="color:blue;">hello\_ockam</mark>](https://github.com/build-trust/ockam/blob/develop/documentation/guides/rust/#setup) project. We're creating this inside the `src` directory so we can easily reuse the `Echoer` in other examples that we'll write later in this guide:
 
 ```
 touch src/echoer.rs
