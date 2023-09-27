@@ -116,7 +116,7 @@ async fn main(ctx: Context) -> Result<()> {
         DefaultAddress::SECURE_CHANNEL_LISTENER,
         sc_listener_options,
     )
-    .await?;
+        .await?;
 
     // Start a credential issuer worker that will only accept incoming requests from
     // authenticated secure channels with our known public identifiers.
@@ -129,7 +129,7 @@ async fn main(ctx: Context) -> Result<()> {
         allow_known,
         AllowAll,
     )
-    .await?;
+        .await?;
 
     // Initialize TCP Transport, create a TCP listener, and wait for connections.
     let tcp = node.create_tcp_transport().await?;
@@ -215,7 +215,7 @@ async fn main(ctx: Context) -> Result<()> {
         &MultiAddr::try_from("/dnsaddr/localhost/tcp/5000/secure/api").unwrap(),
         server.identifier(),
     )
-    .await?;
+        .await?;
     let credential = authority_node.issue_credential(node.context()).await.unwrap();
 
     // Verify that the received credential has indeed be signed by the issuer.
@@ -261,7 +261,7 @@ async fn main(ctx: Context) -> Result<()> {
         DefaultAddress::SECURE_CHANNEL_LISTENER,
         sc_listener_options,
     )
-    .await?;
+        .await?;
 
     // Create a TCP listener and wait for incoming connections
     tcp.listen("127.0.0.1:4000", tcp_listener_options).await?;
@@ -341,7 +341,7 @@ async fn main(ctx: Context) -> Result<()> {
         &MultiAddr::try_from("/dnsaddr/localhost/tcp/5000/secure/api")?,
         client.identifier(),
     )
-    .await?;
+        .await?;
     let credential = authority_node.issue_credential(node.context()).await.unwrap();
 
     // Verify that the received credential has indeed be signed by the issuer.
