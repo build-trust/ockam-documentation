@@ -43,7 +43,7 @@ To establish the secure channel, the two ends run an [<mark style="color:blue;">
 
 Once the shared secrets are established, they are used for authenticated encryption that ensures data integrity and confidentiality of application data.
 
-Our secure channel protocol is based on a handshake design pattern described in the [<mark style="color:blue;">Noise Protocol Framework</mark>Noise Protocol Framework](https://noiseprotocol.org/noise.html). Designs based on this framework are widely deployed and the described patterns have formal security proofs. The specific pattern that we use in Ockam Secure Channels provides sender and receiver authentication and is resistant to key compromise impersonation attacks. It also ensures the integrity and secrecy of application data and provides strong forward secrecy.
+Our secure channel protocol is based on a handshake design pattern described in the [<mark style="color:blue;">Noise Protocol Framework</mark>](https://noiseprotocol.org/noise.html). Designs based on this framework are widely deployed and the described patterns have formal security proofs. The specific pattern that we use in Ockam Secure Channels provides sender and receiver authentication and is resistant to key compromise impersonation attacks. It also ensures the integrity and secrecy of application data and provides strong forward secrecy.
 
 Now that you're familiar with the basics let's create some secure channels. If you haven't already, [<mark style="color:blue;">install ockam command</mark>](./#install)<mark style="color:blue;">,</mark> run `ockam enroll`, and [<mark style="color:blue;">delete any nodes</mark>](nodes.md#nodes) from previous examples.
 
