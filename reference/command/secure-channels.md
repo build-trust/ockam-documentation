@@ -34,7 +34,7 @@ By layering Ockam Secure Channels over Ockam Routing, it becomes simple to provi
 Ockam Secure Channels provides the following <mark style="color:orange;">end-to-end guarantees</mark>:
 
 1. **Authenticity:** Each end of the channel knows that messages received on the channel must have been sent by someone who possesses the secret keys of a specific Ockam [<mark style="color:blue;">Identifier</mark>](identities.md#identifiers).
-2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tapered en route and are exactly what was sent by the authenticated sender at the other end of the channel.
+2. **Integrity:** Each end of the channel knows that the messages received on the channel could not have been tampered en route and are exactly what was sent by the authenticated sender at the other end of the channel.
 3. **Confidentiality:** Each end of the channel knows that the contents of messages received on the channel could not have been observed en route between the sender and the receiver.
 
 <img src="../../.gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">
