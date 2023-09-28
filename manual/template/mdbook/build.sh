@@ -10,7 +10,7 @@ version=${target_version/#$prefix}
 rm -rf book src "$version" "../../$version"
 
 # get the version
-git clone --depth 1 git@github.com:build-trust/ockam.git "$version"
+git clone git@github.com:build-trust/ockam.git "$version"
 cd "$version"
 git checkout "ockam_$version"
 
