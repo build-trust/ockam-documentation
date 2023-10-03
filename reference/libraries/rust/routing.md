@@ -356,13 +356,13 @@ touch src/forwarder.rs
 Add the following code to this file:
 
 ```rust
-// src/forwarder.rs
+// src/relay.rs
 use ockam::{Address, Any, Context, LocalMessage, Result, Routed, Worker};
 
-pub struct Forwarder(pub Address);
+pub struct Relay(pub Address);
 
 #[ockam::worker]
-impl Worker for Forwarder {
+impl Worker for Relay {
     type Context = Context;
     type Message = Any;
 
@@ -401,11 +401,11 @@ impl Worker for Forwarder {
 
 ```
 
-To make this `Forwarder` type accessible to our main program, export it from `src/lib.rs` by adding the following to it:
+To make this `Relay` type accessible to our main program, export it from `src/lib.rs` by adding the following to it:
 
 ```rust
-mod forwarder;
-pub use forwarder::*;
+mod relay;
+pub use relay::*;
 ```
 
 #### Responder node
