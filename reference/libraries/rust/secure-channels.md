@@ -101,7 +101,7 @@ async fn main(ctx: Context) -> Result<()> {
     let connection_to_bob = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
     // Start a Relay to forward messages to Bob using the TCP connection.
-    node.start_worker("forward_to_bob", Forwarder(connection_to_bob.into()))
+    node.start_worker("forward_to_bob", Relay(connection_to_bob.into()))
         .await?;
 
     // Create a TCP listener and wait for incoming connections.
