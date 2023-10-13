@@ -38,7 +38,7 @@ ockam project addon configure confluent \
     --bootstrap-server YOUR_CONFLUENT_CLOUD_BOOTSTRAP_SERVER_ADDRESS
 ```
 
-As the administrator of the Ockam project, you're able to control what other identities are allowed to enroll themselves into your project by issuing unique one-time use enrollment tokens. We'll start by creating three separate tokens, one each for two separate producers and one for a single consumer, and we'll save each token to a file so we can move it to another host easily:​
+As the administrator of the Ockam project, you're able to control what other identities are allowed to enroll themselves into your project by issuing unique one-time use enrollment tickets. We'll start by creating three separate tickets, one each for two separate producers and one for a single consumer, and we'll save each ticket to a file so we can move it to another host easily:​
 
 ```bash
 ockam project ticket --attribute role=member > consumer.ticket
@@ -142,7 +142,7 @@ If you look at the encrypted messages inside Confluent Cloud, they will render a
 
 #### Producer2
 
-Connecting a second product is a matter of repeating the steps above with a new identity and the `producer2.token`. Copy over `kafka.config`, and `producer2.ticket` files and run the following commands:
+Connecting a second product is a matter of repeating the steps above with a new identity and the `producer2.ticket`. Copy over `kafka.config`, and `producer2.ticket` files and run the following commands:
 
 ```
 ockam identity create producer2
