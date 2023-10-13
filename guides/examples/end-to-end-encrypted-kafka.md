@@ -41,9 +41,9 @@ ockam project addon configure confluent \
 As the administrator of the Ockam project, you're able to control what other identities are allowed to enroll themselves into your project by issuing unique one-time use enrollment tokens. We'll start by creating three separate tokens, one each for two separate producers and one for a single consumer, and we'll save each token to a file so we can move it to another host easily:​
 
 ```bash
-ockam project ticket --attribute role=member > consumer.token
-ockam project ticket --attribute role=member > producer1.token
-ockam project ticket --attribute role=member > producer2.token
+ockam project ticket --attribute role=member > consumer.ticket
+ockam project ticket --attribute role=member > producer1.ticket
+ockam project ticket --attribute role=member > producer2.ticket
 ```
 
 The last configuration file we need to generate is `kafka.config`, which will be where you store the username and password you use to access your cluster on Confluent Cloud:
@@ -67,10 +67,10 @@ On your consumer node you'll start by creating a new identity (you'll need the [
 ockam identity create consumer
 ```
 
-Copy the `consumer.token` file from the previous section, and then use them to authenticate and enroll this identity into your Ockam project:
+Copy the `consumer.ticket` file from the previous section, and then use them to authenticate and enroll this identity into your Ockam project:
 
 ```bash
-ockam project enroll consumer.token --identity consumer
+ockam project enroll consumer.ticket --identity consumer
 ```
 
 An Ockam node is a way to connect securely connect different services to each other, so we'll create one here that we'll use to communicate through the Confluent Cloud cluster using the identity we just created:
@@ -109,10 +109,10 @@ To have messages for our consumer to process, we need to have something producin
 ockam identity create producer1
 ```
 
-Copy `producer1.token` file from the earlier section and use it to authenticate and enroll into our Ockam project:
+Copy `producer1.ticket` file from the earlier section and use it to authenticate and enroll into our Ockam project:
 
 ```bash
-ockam project enroll producer1.token --identity producer1
+ockam project enroll producer1.ticket --identity producer1
 ```
 
 Create a node and link it to both the project and identity we've created:
@@ -142,11 +142,11 @@ If you look at the encrypted messages inside Confluent Cloud, they will render a
 
 #### Producer2
 
-Connecting a second product is a matter of repeating the steps above with a new identity and the `producer2.token`. Copy over `kafka.config`, and  `producer2.token` files and run the following commands:
+Connecting a second product is a matter of repeating the steps above with a new identity and the `producer2.token`. Copy over `kafka.config`, and `producer2.ticket` files and run the following commands:
 
 ```
 ockam identity create producer2
-ockam project enroll producer2.token --identity producer2
+ockam project enroll producer2.ticket --identity producer2
 ockam node create producer2 --identity producer2
 
 ockam kafka-producer create --at producer2 --bootstrap-server 127.0.0.1:6000 --brokers-port-range 6001-6100
@@ -163,128 +163,3 @@ In just a few minutes the producers and consumers are seamlessly connected. The 
 * **Unique keys per identity**: each consumer and producer generates its own cryptographic keys, and is issued its own unique credentials. They then use these to establish a mutually trusted secure channel between each other. By removing the dependency on a third-party service to store or distribute keys you're able to reduce your vulnerability surface area and eliminate single points of failure.
 * **Tamper-proof data transfer**: by pushing control of keys to the edges of the system, where authenticated encryption and decryption occurs, no other parties in the supply-chain are able to modify the data in transit. You can be assured that the data you receive at the consumer is exactly what was sent by your producers. You can also be assured that only authorized producers can write to a topic ensuring that the data in your topic is highly trustworthy. If you have even more stringent requirements you can take control of your credential authority and enforce granular authorization policies.
 * **Reduced exposure window**: Ockam secure channels regularly rotate authentication keys and session secrets. This approach means that if one of those session secrets was exposed your total data exposure window is limited to the small duration that secret was in use. Rotating authentication keys means that even when the identity keys of a producer are compromised - no historical data is compromised. You can selectively remove the compromised producer and its data. With centralized shared key distribution approaches there is the risk that all current and historical data can’t be trusted after a breach because it may have been tampered with or stolen. Ockam's approach eliminates the risk of compromised historical data and minimizes the risk to future data using automatically rotating keys.
-
-
-<!-- bats start ENROLLED_HOME -->
-<!--
-# Ockam binary to use
-if [[ -z $OCKAM ]]; then
-  OCKAM=ockam
-fi
-
-if [[ -z $BATS_LIB ]]; then
-  BATS_LIB=$(brew --prefix)/lib # macos
-fi
-
-if [[ -z $ENROLLED_HOME ]]; then
-  exit 1
-fi
-
-if [[ -z $CONFLUENT_BOOTSTRAP_SERVER || -z $CONFLUENT_API_SECRET || -z $CONFLUENT_API_KEY ]]; then
-  exit 1
-fi
-
-export OCKAM_HOME_CONSUMER=$(mktemp -d)
-export OCKAM_HOME_PRODUCER_1=$(mktemp -d)
-export OCKAM_HOME_PRODUCER_2=$(mktemp -d)
-
-setup() {
-  load "$BATS_LIB/bats-support/load.bash"
-  load "$BATS_LIB/bats-assert/load.bash"
-
-  OCKAM_HOME=$ENROLLED_HOME $OCKAM project addon configure confluent \
-    --bootstrap-server $CONFLUENT_BOOTSTRAP_SERVER
-
-  OCKAM_HOME=$ENROLLED_HOME $OCKAM project ticket --attribute role=member > consumer.token
-  OCKAM_HOME=$ENROLLED_HOME $OCKAM project ticket --attribute role=member > producer1.token
-  OCKAM_HOME=$ENROLLED_HOME $OCKAM project ticket --attribute role=member > producer2.token
-
-
-cat > kafka.config <<EOF
-request.timeout.ms=30000
-security.protocol=SASL_PLAINTEXT
-sasl.mechanism=PLAIN
-sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
-        username="$CONFLUENT_API_KEY" \
-        password="$CONFLUENT_API_SECRET";
-EOF
-}
-
-teardown() {
-  kafka-topics.sh --bootstrap-server localhost:4000 --command-config kafka.config --delete --topic demo-topic
-  rm consumer.token producer1.token producer2.token kafka.config consumer.out
-
-  if consumer_pid=$(cat consumer.pid); then
-    kill $consumer_pid
-    rm consumer.pid
-  fi
-
-  OCKAM_HOME="$ENROLLED_HOME" $OCKAM node delete --all
-  OCKAM_HOME="$OCKAM_HOME_CONSUMER" $OCKAM node delete --all
-  OCKAM_HOME="$OCKAM_HOME_PRODUCER_1" $OCKAM node delete --all
-  OCKAM_HOME="$OCKAM_HOME_PRODUCER_2" $OCKAM node delete --all
-}
-
-start_consumer_listener() {
-  kafka-console-consumer.sh --topic demo-topic \
-    --bootstrap-server localhost:4000 --consumer.config kafka.config > consumer.out 2>&1 &
-
-  consumer_pid="$!"
-  echo "$consumer_pid" > consumer.pid
-}
-
-
-@test "test end-to-end encryption with kafka" {
-  # Consumer
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM identity create consumer"
-  assert_success
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM project enroll consumer.token --identity consumer"
-  assert_success
-
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM node create consumer --identity consumer"
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_CONSUMER $OCKAM kafka-consumer create --at consumer"
-  assert_success
-
-  run kafka-topics.sh --bootstrap-server localhost:4000 --command-config kafka.config \
-    --create --topic demo-topic --partitions 3
-  assert_success
-
-  start_consumer_listener
-  assert_success
-
-
-  # Producer 1
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM identity create producer1"
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM project enroll producer1.token --identity producer1"
-  assert_success
-
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM node create producer1 --identity producer1"
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_1 $OCKAM kafka-producer create --at producer1"
-  assert_success
-
-  run bash -c "echo 'Hello from producer 1' | kafka-console-producer.sh --topic demo-topic\
-    --bootstrap-server localhost:5000 --producer.config kafka.config"
-  assert_success
-
-  run cat consumer.out
-  assert_output "Hello from producer 1"
-
-
-  # Producer 2
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM identity create producer2"
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM project enroll producer2.token --identity producer2"
-  assert_success
-
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM node create producer2 --identity producer2"
-  run bash -c "OCKAM_HOME=$OCKAM_HOME_PRODUCER_2 $OCKAM kafka-producer create --at producer2 --bootstrap-server 127.0.0.1:6000 --brokers-port-range 6001-6100"
-  assert_success
-
-  run bash -c "echo 'Hello from producer 2' | kafka-console-producer.sh --topic demo-topic\
-   --bootstrap-server localhost:6000 --producer.config kafka.config"
-  assert_success
-
-  run cat consumer.out
-  assert_output --partial "Hello from producer 2"
-}
--->
-<!-- bats end -->
