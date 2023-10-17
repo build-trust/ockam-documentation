@@ -17,37 +17,23 @@ By layering Ockam Secure Channels and other higher level protocols over Ockam Ro
 
 Let's dive into how the routing protocol works. So far, in the section on Nodes and Workers, we've come across this simple message exchange:
 
-<div align="left" data-full-width="false">
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
 
-</div>
+<figure><img src="../../.gitbook/assets/spaces_B6iKP7pf6tEttefAJJtl_uploads_git-blob-11b9e2fb5dead6936895bce7fc88eaa86e30c3ef_simple.001 (1) (1).jpeg" alt=""><figcaption></figcaption></figure>
 
 Ockam Routing Protocol messages carry with them two metadata fields: an `onward_route` and a `return_route`. A route is an ordered list of addresses describing the path a message should  travel. This information is carried with the message in compact binary form.
 
 Pay close attention to the Sender, Hop, and Replier rules in the sequence diagrams below. Note how `onward_route` and `return_route` are handled as the message travels.
 
-<div align="left" data-full-width="false">
-
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
-
-</div>
+<figure><img src="../../.gitbook/assets/spaces_B6iKP7pf6tEttefAJJtl_uploads_git-blob-c4e3111cde80f2de87732ba816be7bfeef8dcf8b_one-hop.001 (1).jpeg" alt=""><figcaption></figcaption></figure>
 
 The above was one message hop. We may extend this to two hops:
 
-<div align="left" data-full-width="false">
-
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
-
-</div>
+<figure><img src="../../.gitbook/assets/spaces_B6iKP7pf6tEttefAJJtl_uploads_git-blob-b9b3e886aa1c902ef2233555087e5dc2bbc67dd6_two-hops.001 (1).jpeg" alt=""><figcaption></figcaption></figure>
 
 This very simple protocol extends to any number of hops:
 
-<div align="left" data-full-width="false">
-
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
-
-</div>
+<figure><img src="../../.gitbook/assets/spaces_B6iKP7pf6tEttefAJJtl_uploads_git-blob-1ee1507fd0288c583c645bb32588414316806d03_n-hops.001 (1).jpeg" alt=""><figcaption></figcaption></figure>
 
 #### Routing over two hops
 
@@ -286,7 +272,7 @@ A common real world topology is a transport bridge.
 
 Node `n1` wishes to access a service on node `n3`, but it can't directly connect to `n3`. This can happen for many reasons, maybe because `n3` is in a separate `IP` subnet, or it could be that the communication from `n1 to n2` uses UDP while from `n2 to n3` uses TCP or other similar constraints. The topology makes `n2` a bridge or gateway between these two separate networks.
 
-<img src="broken-reference" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (8).svg" alt="" class="gitbook-drawing">
 
 We can setup this topology with Ockam Routing as follows:
 
@@ -471,11 +457,11 @@ cargo run --example 04-routing-over-transport-two-hops-initiator
 
 It is common, however, to encounter communication topologies where the machine that provides a service is unwilling or is not allowed to open a listening port or <mark style="color:orange;">expose</mark> a bridge node to other networks. This is a common security best practice in enterprise environments, home networks, OT networks, and VPCs across clouds. Application developers may not have control over these choices from the infrastructure / operations layer. This is where relays are useful.
 
-<img src="broken-reference" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (9).svg" alt="" class="gitbook-drawing">
 
 Relays make it possible to establish end-to-end protocols with services operating in a remote private network, without requiring a remote service to expose listening ports to an outside hostile network like the Internet.
 
-<img src="broken-reference" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (10).svg" alt="" class="gitbook-drawing">
 
 ## Serialization
 
