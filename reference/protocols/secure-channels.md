@@ -11,7 +11,9 @@ Ockam Routing and Transports, combined with the ability to model Bridges and Rel
 
 Ockam Secure Channels is an end-to-end protocol built on top of Ockam Routing. This cryptographic protocol guarantees data authenticity, integrity, and confidentiality over any communication topology that can be traversed with Ockam Routing.
 
-<img src="broken-reference" alt="" class="gitbook-drawing">
+
+
+<img src="../../.gitbook/assets/file.excalidraw (11).svg" alt="" class="gitbook-drawing">
 
 ## Secure Channel
 
