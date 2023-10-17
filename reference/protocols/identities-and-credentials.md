@@ -21,7 +21,7 @@ Whenever the identity wishes to rotate to a new primary public key and revoke al
 
 <div data-full-width="true">
 
-<figure><img src="broken-reference" alt=""><figcaption><p>Note the green lines that indicate which signature is verified by which public key.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/1.png" alt=""><figcaption><p>Note the green lines that indicate which signature is verified by which public key.</p></figcaption></figure>
 
 </div>
 
@@ -113,7 +113,7 @@ Each attestation includes an `expires_at` timestamp to indicate when the include
 
 <div data-full-width="true">
 
-<figure><img src="broken-reference" alt=""><figcaption><p>Note the green lines that indicate which signature is verified by which public key.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/2.png" alt=""><figcaption><p>Note the green lines that indicate which signature is verified by which public key.</p></figcaption></figure>
 
 </div>
 
@@ -177,7 +177,7 @@ Each signed credential includes an `expires_at` field to indicate a timestamp be
 
 <div data-full-width="true">
 
-<figure><img src="broken-reference" alt=""><figcaption><p>Note the green lines that indicate which signature is verified by which public key.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/3.png" alt=""><figcaption><p>Note the green lines that indicate which signature is verified by which public key.</p></figcaption></figure>
 
 </div>
 
