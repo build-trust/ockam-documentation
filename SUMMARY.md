@@ -48,7 +48,7 @@
   * [Nodes and Workers](reference/protocols/nodes.md)
   * [Routing and Transports](reference/protocols/routing.md)
   * [Keys and Vaults](reference/protocols/keys.md)
-  * [Identities and Credentials](reference/protocols/identities-and-credentials.md)
+  * [Identities and Credentials](reference/protocols/identities.md)
   * [Secure Channels](reference/protocols/secure-channels.md)
   * [Trust Contests and Authorities](reference/protocols/authorities.md)
   * [Access Controls and Policies](reference/protocols/access-controls.md)

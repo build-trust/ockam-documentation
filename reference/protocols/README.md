@@ -11,7 +11,7 @@ At Ockam’s core are a collection of cryptographic and messaging protocols. The
 * [Nodes and Workers](nodes.md)
 * [Routing and Transports](routing.md)
 * [Keys and Vaults](keys.md)
-* [Identities and Credentials](identities-and-credentials.md)
+* [Identities and Credentials](identities.md)
 * [Secure Channels](secure-channels.md)
 * [Trust Contexts and Authorities](authorities.md)
 * [Access Controls and Policies](access-controls.md)
