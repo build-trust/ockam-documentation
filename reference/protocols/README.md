@@ -8,10 +8,10 @@ description: >-
 
 At Ockam’s core are a collection of cryptographic and messaging protocols. These protocols make it possible to create **private** and **secure by design** applications that provide end-to-end application layer trust it data.
 
-#### [<mark style="color:blue;">Application Layer Routing</mark>](routing.md)
-
-Ockam Routing and Transports enable protocols that provide end-to-end guarantees to messages traveling across many network connection hops and protocols boundaries.
-
-#### [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md)
-
-Ockam Secure Channels are mutually authenticated and end-to-end encrypted messaging channels that guarantee data authenticity, integrity, and confidentiality.
+* [Nodes and Workers](nodes.md)
+* [Routing and Transports](routing.md)
+* [Keys and Vaults](keys.md)
+* [Identities and Credentials](identities-and-credentials.md)
+* [Secure Channels](secure-channels.md)
+* [Trust Contexts and Authorities](authorities.md)
+* [Access Controls and Policies](access-controls.md)
