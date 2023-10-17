@@ -17,9 +17,9 @@ Ockam [<mark style="color:blue;">Nodes</mark>](nodes.md#node), [<mark style="col
 
 ## Nodes
 
-An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam protocols like Ockam <mark style="color:blue;">Routing</mark> and Ockam <mark style="color:blue;">Secure Channels</mark>.
+An Ockam Node is any program that can interact with other Ockam Nodes using various Ockam protocols like Ockam Routing and Ockam Secure Channels.
 
-A typical Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#workers). Using Ockam [<mark style="color:blue;">Routing</mark>](broken-reference), a node can deliver messages from one worker to another local worker. Using Ockam [<mark style="color:blue;">Transports</mark>](broken-reference), nodes can also route messages to workers on other remote nodes.
+A typical Ockam Node is implemented as an asynchronous execution environment that can run very lightweight, concurrent, stateful actors called Ockam [<mark style="color:blue;">Workers</mark>](nodes.md#workers). Using Ockam [<mark style="color:blue;">Routing</mark>](broken-reference), a node can deliver messages from one worker to another local worker. Using Ockam Transports, nodes can also route messages to workers on other remote nodes.
 
 In the following code snippet we create a node in Rust and then immediately stop it:
 
@@ -146,5 +146,5 @@ The message flow looked like this:
 
 <figure><img src="../../.gitbook/assets/spaces_B6iKP7pf6tEttefAJJtl_uploads_git-blob-11b9e2fb5dead6936895bce7fc88eaa86e30c3ef_simple.001 (2).jpeg" alt=""><figcaption></figcaption></figure>
 
-Next, let’s explore how Ockam’s [<mark style="color:blue;">Application Layer Routing</mark>](broken-reference) enables us to create protocols that provide end-to-end guarantees.
+Next, let’s explore how Ockam’s Application Layer Routing enables us to create protocols that provide end-to-end guarantees.
 

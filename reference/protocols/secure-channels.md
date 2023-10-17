@@ -245,7 +245,7 @@ As described in the section on `VaultForSecureChannels`, we rely on compile time
 
 This is a completely compile time choice for the purpose of studying performance of the various options in different runtime environments. We intentionally have no negotiation of primitives in the handshake. All participants in a live systems are deployed with the same compile time choice of secure channels primitives.
 
-The **s** variable is initialized with SecureChannelStatic of this participant and the functions described in [VaultForSecureChannels](broken-reference) and [VaultForVerifyingSignatures](broken-reference) are used to run the handshake as follows:
+The **s** variable is initialized with SecureChannelStatic of this participant and the functions described in VaultForSecureChannels and VaultForVerifyingSignatures are used to run the handshake as follows:
 
 
 
@@ -287,7 +287,7 @@ After performing the the XX handshake, peers have agreed on a pair of symmetric 
 
 Rekeying is the process of periodically updating the symmetric key in use (refer to the [Noise specification for a complete description and rationale](http://www.noiseprotocol.org/noise.html#rekey)).
 
-With each direction direction of the secure channel, we associate a _nonce_ variable. It holds a 64 bit unsigned integer. That integer is prepended to each ciphertext and the nonce variable is increased by 1 when the message is sent.
+With each direction of the secure channel, we associate a _nonce_ variable. It holds a 64 bit unsigned integer. That integer is prepended to each ciphertext and the nonce variable is increased by 1 when the message is sent.
 
 This nonce allows us to count the number of sent messages and define a series of contiguous _buckets_ of messages where each bucket is of size **N**. **N** is a constant value known by both the initiator and the responder. We can then associate an encryption key to each bucket, and decide to create a new symmetric key once we need to send a message corresponding to the next bucket.
 
