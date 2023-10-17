@@ -43,17 +43,6 @@ async fn main(ctx: Context) -> Result<()> {
 
 A node requires an asynchronous runtime to concurrently execute workers. The default Ockam Node implementation in Rust uses `tokio`, a popular asynchronous runtime in the Rust ecosystem. There are also Ockam Node implementations that support various `no_std` embedded targets.
 
-{% hint style="info" %}
-To read and run the code examples included on this page:
-
-```sh
-git clone git@github.com:build-trust/ockam-design-review.git
-cd ockam-design-review/code
-
-cargo run --example 01-node
-```
-{% endhint %}
-
 Nodes can be implemented in any language. The only requirement is that understand various Ockam protocols like Routing, Secure Channels, Identities etc.
 
 ## Workers <a href="#worker" id="worker"></a>
