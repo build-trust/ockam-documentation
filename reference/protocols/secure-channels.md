@@ -249,11 +249,9 @@ The **s** variable is initialized with SecureChannelStatic of this participant a
 
 
 
-
-
 <div data-full-width="false">
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/spaces_pO5FblkZ0o5SR0BHF2gK_uploads_SYX1rL07VUDDbL1KKTiu_secure-channel.webp" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -295,7 +293,7 @@ This nonce allows us to count the number of sent messages and define a series of
 
 This approach implies that we don't need to communicate a "Rekey" operation between the secure channel parties. They both know that they need to perform rekeying every **N** messages.
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/a.png" alt=""><figcaption></figcaption></figure>
 
 In the previous figure:
 
@@ -305,7 +303,7 @@ In the previous figure:
 
 In the most simple scenario, the encryptor keeps track of the last nonce it generated, and increments it by one each time it generates a new message. While the decryptor keeps track of the nonce it is expecting to receive next, and increments it every time it receives a valid message:
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/b.png" alt=""><figcaption></figcaption></figure>
 
 However this simple approach doesn't work at the level of Ockam Secure Channels, since there is no message delivery guarantees offered. For example, this can happen when using a transport protocol like UDP. This means that:
 
@@ -319,11 +317,11 @@ In order to allow for out-of-order delivery each secure channel message _include
 
 Then the decryptor extracts this nonce from the message and uses it as part of the decryption operation.
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/c.png" alt=""><figcaption></figcaption></figure>
 
 With the nonce being part of the transmitted message, the synchronization problem is solved. Even if messages are lost or arrive out-of-order, the decryptor can still process them.
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/d.png" alt=""><figcaption></figcaption></figure>
 
 But other _important_ difficulties arise:
 
@@ -343,11 +341,11 @@ In the following example:
 * Given that the largest nonce it has accepted so far is _13_, the decryptor can accept packets with nonces between 8 and 18.
 * Nonces outside of that interval will be discarded without any further processing.
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/e.png" alt=""><figcaption></figcaption></figure>
 
 When the decryptor receives a message with `nonce = 14` (an allowed value), we try to decrypt the message. If the decryption succeeds, we accept the nonce and advance the window:
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/f.png" alt=""><figcaption></figcaption></figure>
 
 Note that the set of already-seen nonces is bounded in size. This size is (at most) half the valid window size.
 
@@ -357,7 +355,7 @@ On the flip side, if at this point, the missing message with nonce _8_ was recei
 
 Now suppose the next message received has nonce _12_. It will be accepted, but the window won't move forward as it is less than the current maximum nonce accepted:
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/g.png" alt=""><figcaption></figcaption></figure>
 
 Here's another caveat. What happens if, let's say, messages 15 to 20 where _lost_? Then the channel is effectively stuck: no matter if it receives the next messages `(21, 22, ...)` , the decryptor will reject them all because they will also be out of the valid window. At this point, the secure channel will need to be re-established.
 
@@ -373,10 +371,3 @@ However, the concept of _valid window_ is entirely up to the decryptor to implem
 In our Elixir implementation of secure channels, the valid window is tied to the choice of how often to rekey. If the current _k_ in use is _**k**n_ (the k that corresponds to the maximum nonce accepted so far) the valid window is defined as nonces falling into the _**k**n-1_ , _**k**n_ or _**k**n+1_ buckets.
 
 Our Rust version is similar but defines a window of 32 positions around the expected nonce.
-
-
-
-
-
-
-
