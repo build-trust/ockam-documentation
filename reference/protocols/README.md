@@ -13,5 +13,5 @@ At Ockam’s core are a collection of cryptographic and messaging protocols. The
 * [<mark style="color:blue;">Keys and Vaults</mark>](keys.md)
 * [<mark style="color:blue;">Identities and Credentials</mark>](identities.md)
 * [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md)
-* [<mark style="color:blue;">Trust Contexts and Authorities</mark>](authorities.md)
+* Trust Contexts and Authorities
 * [<mark style="color:blue;">Access Controls and Policies</mark>](access-controls.md)
