@@ -1142,17 +1142,12 @@ $ ockam node delete --all
 <div style="break-before: page; page-break-before: always;"></div><h2 id="node-logs"><a class="header" href="#node-logs">node logs</a></h2>
 <hr />
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
-<p><code>ockam node logs [OPTIONS] [NODE_NAME] </code></p>
+<p><code>ockam node logs [NODE_NAME] </code></p>
 <p>This command will return the path to the node's log file. The user can select whether to return the stdout or the stderr log file. The default is to return the stdout log file.</p>
 <h3 id="arguments-16"><a class="header" href="#arguments-16">Arguments</a></h3>
 <ul>
 <li><code>[NODE_NAME]</code> (optional)<br/>
 Name of the node to retrieve the logs from</li>
-</ul>
-<h3 id="options-27"><a class="header" href="#options-27">Options</a></h3>
-<ul>
-<li><code>--err</code> (optional)<br/>
-Show the standard error log file</li>
 </ul>
 <h3 id="examples-21"><a class="header" href="#examples-21">Examples</a></h3>
 <pre><code class="language-sh"># Return the path to the stdout log file of the default node
@@ -1191,7 +1186,7 @@ $ ockam node show n
 <li><code>[NODE_NAME]</code> (optional)<br/>
 Name of the node to be started</li>
 </ul>
-<h3 id="options-28"><a class="header" href="#options-28">Options</a></h3>
+<h3 id="options-27"><a class="header" href="#options-27">Options</a></h3>
 <ul>
 <li><code>--aws-kms</code> (optional)</li>
 </ul>
@@ -1212,7 +1207,7 @@ $ ockam node start n
 <li><code>[NODE_NAME]</code> (optional)<br/>
 Name of the node</li>
 </ul>
-<h3 id="options-29"><a class="header" href="#options-29">Options</a></h3>
+<h3 id="options-28"><a class="header" href="#options-28">Options</a></h3>
 <ul>
 <li><code>-f</code>, <code>--force</code> (optional)<br/>
 Whether to use the SIGTERM or SIGKILL signal to stop the node</li>
@@ -1254,7 +1249,7 @@ $ ockam node default n2
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
 <p><code>ockam worker list [OPTIONS] </code></p>
 <p>When creating a new node, a set of default services are started. This command lists all the available workers on a given node, which can be helpful to check if all the services are running, or to check the workers' addresses associated to secure channels or relays created by the node.</p>
-<h3 id="options-30"><a class="header" href="#options-30">Options</a></h3>
+<h3 id="options-29"><a class="header" href="#options-29">Options</a></h3>
 <ul>
 <li><code>--at [NODE]</code> (optional)<br/>
 Node at which to lookup workers</li>
@@ -1282,7 +1277,7 @@ $ ockam worker list --at n1
 <ul>
 <li><code>&lt;MESSAGE&gt;</code></li>
 </ul>
-<h3 id="options-31"><a class="header" href="#options-31">Options</a></h3>
+<h3 id="options-30"><a class="header" href="#options-30">Options</a></h3>
 <ul>
 <li>
 <p><code>-f</code>, <code>--from [NODE]</code> (optional)<br/>
@@ -1389,7 +1384,7 @@ $ ockam secure-channel create --from /node/yellow --to /node/green/service/forwa
 <li><code>[RELAY_NAME]</code> (optional)<br/>
 Name of the relay</li>
 </ul>
-<h3 id="options-32"><a class="header" href="#options-32">Options</a></h3>
+<h3 id="options-31"><a class="header" href="#options-31">Options</a></h3>
 <ul>
 <li>
 <p><code>--to [NODE]</code> (optional)<br/>
@@ -1412,7 +1407,7 @@ Authorized identity for secure channel connection</p>
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
 <p><code>ockam relay list [OPTIONS] </code></p>
 <p>List Relays on your default node. If you pass '--to <NODE>' then it lists the Relays at the given node.</p>
-<h3 id="options-33"><a class="header" href="#options-33">Options</a></h3>
+<h3 id="options-32"><a class="header" href="#options-32">Options</a></h3>
 <ul>
 <li><code>--to [NODE]</code> (optional)<br/>
 Get the list of Relays at the given node</li>
@@ -1430,7 +1425,7 @@ Get the list of Relays at the given node</li>
 <li><code>&lt;REMOTE_ADDRESS&gt;</code><br/>
 Name assigned to relay that will be shown (prefixed with forward_to_<name>)</li>
 </ul>
-<h3 id="options-34"><a class="header" href="#options-34">Options</a></h3>
+<h3 id="options-33"><a class="header" href="#options-33">Options</a></h3>
 <ul>
 <li><code>--at [NODE]</code> (optional)<br/>
 Node which relay belongs to</li>
@@ -1447,7 +1442,7 @@ Node which relay belongs to</li>
 <li><code>&lt;RELAY_NAME&gt;</code><br/>
 Name assigned to Relay that will be deleted</li>
 </ul>
-<h3 id="options-35"><a class="header" href="#options-35">Options</a></h3>
+<h3 id="options-34"><a class="header" href="#options-34">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE]</code> (optional)<br/>
@@ -1481,7 +1476,7 @@ Confirm the deletion without prompting</p>
 <li><code>&lt;ADDRESS&gt;</code><br/>
 Address for this listener (eg. 127.0.0.1:7000)</li>
 </ul>
-<h3 id="options-36"><a class="header" href="#options-36">Options</a></h3>
+<h3 id="options-35"><a class="header" href="#options-35">Options</a></h3>
 <ul>
 <li><code>--at [NODE]</code> (optional)<br/>
 Node at which to create the listener</li>
@@ -1502,7 +1497,7 @@ $ ockam tcp-listener create 127.0.0.1:5000 --at n1
 <li><code>&lt;ADDRESS&gt;</code><br/>
 Tcp Listener ID</li>
 </ul>
-<h3 id="options-37"><a class="header" href="#options-37">Options</a></h3>
+<h3 id="options-36"><a class="header" href="#options-36">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE_NAME]</code> (optional)<br/>
@@ -1525,7 +1520,7 @@ $ ockam tcp-listener delete d59c01ab8d9683f8c454df746e627b43 --at n1
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
 <p><code>ockam tcp-listener list [OPTIONS] </code></p>
 <p>List tcp listeners registered on the selected node</p>
-<h3 id="options-38"><a class="header" href="#options-38">Options</a></h3>
+<h3 id="options-37"><a class="header" href="#options-37">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -1547,7 +1542,7 @@ $ ockam tcp-listener list --at n1
 <li><code>&lt;ADDRESS&gt;</code><br/>
 TCP listener Worker Address or Tcp Address</li>
 </ul>
-<h3 id="options-39"><a class="header" href="#options-39">Options</a></h3>
+<h3 id="options-38"><a class="header" href="#options-38">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -1571,7 +1566,7 @@ $ ockam tcp-listener show d59c01ab8d9683f8c454df746e627b43
 <hr />
 <p><code>ockam tcp-connection create [OPTIONS] --to &lt;ADDRESS&gt; </code></p>
 <p>Create a TCP connection</p>
-<h3 id="options-40"><a class="header" href="#options-40">Options</a></h3>
+<h3 id="options-39"><a class="header" href="#options-39">Options</a></h3>
 <ul>
 <li>
 <p><code>-f</code>, <code>--from [NODE]</code> (optional)<br/>
@@ -1598,7 +1593,7 @@ $ ockam tcp-connection create --from n1 --to 127.0.0.1:5000
 <li><code>&lt;ADDRESS&gt;</code><br/>
 TCP connection ID</li>
 </ul>
-<h3 id="options-41"><a class="header" href="#options-41">Options</a></h3>
+<h3 id="options-40"><a class="header" href="#options-40">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE_NAME]</code> (optional)<br/>
@@ -1621,7 +1616,7 @@ $ ockam tcp-connection delete d59c01ab8d9683f8c454df746e627b43 --at n1
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
 <p><code>ockam tcp-connection list [OPTIONS] </code></p>
 <p>List TCP connections</p>
-<h3 id="options-42"><a class="header" href="#options-42">Options</a></h3>
+<h3 id="options-41"><a class="header" href="#options-41">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -1643,7 +1638,7 @@ $ ockam tcp-connection list --at n1
 <li><code>&lt;ADDRESS&gt;</code><br/>
 TCP connection Worker Address or Tcp Address</li>
 </ul>
-<h3 id="options-43"><a class="header" href="#options-43">Options</a></h3>
+<h3 id="options-42"><a class="header" href="#options-42">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -1683,8 +1678,8 @@ $ curl 127.0.0.1:6000
 <div style="break-before: page; page-break-before: always;"></div><h2 id="tcp-outlet-create"><a class="header" href="#tcp-outlet-create">tcp-outlet create</a></h2>
 <hr />
 <p><code>ockam tcp-outlet create [OPTIONS] --to &lt;SOCKET_ADDRESS&gt; </code></p>
-<p>Create TCP Outlets</p>
-<h3 id="options-44"><a class="header" href="#options-44">Options</a></h3>
+<p>Create a TCP Outlet</p>
+<h3 id="options-43"><a class="header" href="#options-43">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE]</code> (optional)<br/>
@@ -1719,7 +1714,7 @@ $ ockam tcp-outlet create --at n1 --to 127.0.0.1:5000
 <li><code>&lt;ALIAS&gt;</code><br/>
 Delete the outlet with this alias</li>
 </ul>
-<h3 id="options-45"><a class="header" href="#options-45">Options</a></h3>
+<h3 id="options-44"><a class="header" href="#options-44">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE_NAME]</code> (optional)<br/>
@@ -1742,7 +1737,7 @@ $ ockam tcp-outlet delete myoutlet --at n1
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
 <p><code>ockam tcp-outlet list [OPTIONS] </code></p>
 <p>List TCP Outlets on the default node</p>
-<h3 id="options-46"><a class="header" href="#options-46">Options</a></h3>
+<h3 id="options-45"><a class="header" href="#options-45">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -1764,7 +1759,7 @@ $ ockam tcp-outlet list --at n1
 <li><code>&lt;ALIAS&gt;</code><br/>
 Name assigned to outlet that will be shown</li>
 </ul>
-<h3 id="options-47"><a class="header" href="#options-47">Options</a></h3>
+<h3 id="options-46"><a class="header" href="#options-46">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -1805,7 +1800,7 @@ $ curl 127.0.0.1:6000
 <hr />
 <p><code>ockam tcp-inlet create [OPTIONS] </code></p>
 <p>Create TCP Inlets</p>
-<h3 id="options-48"><a class="header" href="#options-48">Options</a></h3>
+<h3 id="options-47"><a class="header" href="#options-47">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE]</code> (optional)<br/>
@@ -1835,6 +1830,10 @@ Time to wait for the outlet to be available</p>
 <p><code>--retry-wait [RETRY]</code> (optional)<br/>
 Time to wait before retrying to connect to outlet</p>
 </li>
+<li>
+<p><code>--timeout [TIMEOUT]</code> (optional)<br/>
+Override default timeout</p>
+</li>
 </ul>
 <h3 id="examples-47"><a class="header" href="#examples-47">Examples</a></h3>
 <pre><code class="language-sh"># To create a new TCP inlet at the given address using the default node
@@ -1852,7 +1851,7 @@ $ ockam tcp-inlet create --at n2 --from 127.0.0.1:5000 --to /node/n1/service/out
 <li><code>&lt;ALIAS&gt;</code><br/>
 Delete the inlet with this alias</li>
 </ul>
-<h3 id="options-49"><a class="header" href="#options-49">Options</a></h3>
+<h3 id="options-48"><a class="header" href="#options-48">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE_NAME]</code> (optional)<br/>
@@ -1874,8 +1873,8 @@ $ ockam tcp-inlet delete myinlet --at n1
 <hr />
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
 <p><code>ockam tcp-inlet list [OPTIONS] </code></p>
-<p>List TCP Inlets</p>
-<h3 id="options-50"><a class="header" href="#options-50">Options</a></h3>
+<p>List TCP Inlets on the default node</p>
+<h3 id="options-49"><a class="header" href="#options-49">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -1897,7 +1896,7 @@ $ ockam tcp-inlet list --at n1
 <li><code>&lt;ALIAS&gt;</code><br/>
 Name of the inlet</li>
 </ul>
-<h3 id="options-51"><a class="header" href="#options-51">Options</a></h3>
+<h3 id="options-50"><a class="header" href="#options-50">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -1918,7 +1917,7 @@ $ ockam tcp-inlet show myinlet
 <hr />
 <p><code>ockam kafka-outlet create [OPTIONS] </code></p>
 <p>Create a new Kafka Outlet</p>
-<h3 id="options-52"><a class="header" href="#options-52">Options</a></h3>
+<h3 id="options-51"><a class="header" href="#options-51">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE_NAME]</code> (optional)<br/>
@@ -1947,7 +1946,7 @@ The address of the kafka bootstrap broker</p>
 <hr />
 <p><code>ockam kafka-consumer create [OPTIONS] </code></p>
 <p>Create a new Kafka Consumer</p>
-<h3 id="options-53"><a class="header" href="#options-53">Options</a></h3>
+<h3 id="options-52"><a class="header" href="#options-52">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE_NAME]</code> (optional)<br/>
@@ -1979,7 +1978,7 @@ The route to the project in ockam orchestrator, expected something like /project
 <li><code>&lt;ADDRESS&gt;</code><br/>
 Kafka consumer service address</li>
 </ul>
-<h3 id="options-54"><a class="header" href="#options-54">Options</a></h3>
+<h3 id="options-53"><a class="header" href="#options-53">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -1996,7 +1995,7 @@ $ ockam kafka-consumer delete kcaddr --at n
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
 <p><code>ockam kafka-consumer list [OPTIONS] </code></p>
 <p>List Kafka Consumers</p>
-<h3 id="options-55"><a class="header" href="#options-55">Options</a></h3>
+<h3 id="options-54"><a class="header" href="#options-54">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -2022,7 +2021,7 @@ $ ockam kafka-consumer list --at n
 <hr />
 <p><code>ockam kafka-direct create [OPTIONS] </code></p>
 <p>Create a new Kafka Direct Consumer</p>
-<h3 id="options-56"><a class="header" href="#options-56">Options</a></h3>
+<h3 id="options-55"><a class="header" href="#options-55">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE_NAME]</code> (optional)<br/>
@@ -2058,7 +2057,7 @@ The route to another kafka consumer node</p>
 <li><code>&lt;ADDRESS&gt;</code><br/>
 Kafka consumer service address</li>
 </ul>
-<h3 id="options-57"><a class="header" href="#options-57">Options</a></h3>
+<h3 id="options-56"><a class="header" href="#options-56">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -2075,7 +2074,7 @@ $ ockam kafka-consumer delete kcaddr --at n
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
 <p><code>ockam kafka-direct list [OPTIONS] </code></p>
 <p>List Kafka Consumers</p>
-<h3 id="options-58"><a class="header" href="#options-58">Options</a></h3>
+<h3 id="options-57"><a class="header" href="#options-57">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -2101,7 +2100,7 @@ $ ockam kafka-consumer list --at n
 <hr />
 <p><code>ockam kafka-producer create [OPTIONS] </code></p>
 <p>Create a new Kafka Producer</p>
-<h3 id="options-59"><a class="header" href="#options-59">Options</a></h3>
+<h3 id="options-58"><a class="header" href="#options-58">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE_NAME]</code> (optional)<br/>
@@ -2133,7 +2132,7 @@ The route to the project in ockam orchestrator, expected something like /project
 <li><code>&lt;ADDRESS&gt;</code><br/>
 Kafka producer service address</li>
 </ul>
-<h3 id="options-60"><a class="header" href="#options-60">Options</a></h3>
+<h3 id="options-59"><a class="header" href="#options-59">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -2150,7 +2149,7 @@ $ ockam kafka-producer delete kcaddr --at n
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
 <p><code>ockam kafka-producer list [OPTIONS] </code></p>
 <p>List Kafka Producers</p>
-<h3 id="options-61"><a class="header" href="#options-61">Options</a></h3>
+<h3 id="options-60"><a class="header" href="#options-60">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -2183,7 +2182,7 @@ $ ockam kafka-producer list --at n
 <li><code>&lt;ADDRESS&gt;</code><br/>
 Address for this listener</li>
 </ul>
-<h3 id="options-62"><a class="header" href="#options-62">Options</a></h3>
+<h3 id="options-61"><a class="header" href="#options-61">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE_NAME]</code> (optional)<br/>
@@ -2194,7 +2193,8 @@ Perform the command on the given NODE_NAME</p>
 Authorized Identifiers of secure channel initiators</p>
 </li>
 <li>
-<p><code>--vault [VAULT]</code> (optional)</p>
+<p><code>--vault [VAULT_NAME]</code> (optional)<br/>
+Name of the Vault that the secure-channel listener will use</p>
 </li>
 <li>
 <p><code>--identity [IDENTITY_NAME]</code> (optional)<br/>
@@ -2220,7 +2220,7 @@ $ ockam secure-channel create --from /node/n1 --to /node/n2/service/test
 <li><code>&lt;ADDRESS&gt;</code><br/>
 Address at which the channel listener to be deleted is running</li>
 </ul>
-<h3 id="options-63"><a class="header" href="#options-63">Options</a></h3>
+<h3 id="options-62"><a class="header" href="#options-62">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -2233,7 +2233,7 @@ Perform the command on the given NODE_NAME</li>
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
 <p><code>ockam secure-channel-listener list [OPTIONS] </code></p>
 <p>This command will list all the secure channel listeners available in a node. If the node is not provided, the default node will be used.</p>
-<h3 id="options-64"><a class="header" href="#options-64">Options</a></h3>
+<h3 id="options-63"><a class="header" href="#options-63">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -2251,7 +2251,7 @@ Perform the command on the given NODE_NAME</li>
 <li><code>&lt;ADDRESS&gt;</code><br/>
 Address of the channel listener</li>
 </ul>
-<h3 id="options-65"><a class="header" href="#options-65">Options</a></h3>
+<h3 id="options-64"><a class="header" href="#options-64">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>
@@ -2279,7 +2279,7 @@ Perform the command on the given NODE_NAME</li>
 <hr />
 <p><code>ockam secure-channel create [OPTIONS] --from &lt;NODE&gt; --to &lt;ROUTE&gt; </code></p>
 <p>When a secure channel is created between two nodes they mutually authenticate each other using their Ockam Identity. Once the channel is created, you can send messages through through it using the returned address.</p>
-<h3 id="options-66"><a class="header" href="#options-66">Options</a></h3>
+<h3 id="options-65"><a class="header" href="#options-65">Options</a></h3>
 <ul>
 <li>
 <p><code>--from &lt;NODE&gt;</code><br/>
@@ -2325,7 +2325,7 @@ HELLO
 <li><code>&lt;ADDRESS&gt;</code><br/>
 Address at which the channel to be deleted is running</li>
 </ul>
-<h3 id="options-67"><a class="header" href="#options-67">Options</a></h3>
+<h3 id="options-66"><a class="header" href="#options-66">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE]</code> (optional)<br/>
@@ -2344,7 +2344,7 @@ Confirm the deletion without prompting</p>
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
 <p><code>ockam secure-channel list [OPTIONS] </code></p>
 <p>This command will list all the secure channels available in a node. If the node is not provided, the default node will be used.</p>
-<h3 id="options-68"><a class="header" href="#options-68">Options</a></h3>
+<h3 id="options-67"><a class="header" href="#options-67">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Node at which the returned secure channels were initiated</li>
@@ -2362,7 +2362,7 @@ Node at which the returned secure channels were initiated</li>
 <li><code>&lt;ADDRESS&gt;</code><br/>
 Channel address</li>
 </ul>
-<h3 id="options-69"><a class="header" href="#options-69">Options</a></h3>
+<h3 id="options-68"><a class="header" href="#options-68">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Node at which the secure channel was initiated</li>
@@ -2391,7 +2391,7 @@ Node at which the secure channel was initiated</li>
 <ul>
 <li><code>[NAME]</code> (optional)</li>
 </ul>
-<h3 id="options-70"><a class="header" href="#options-70">Options</a></h3>
+<h3 id="options-69"><a class="header" href="#options-69">Options</a></h3>
 <ul>
 <li><code>--aws-kms</code> (optional)</li>
 </ul>
@@ -2428,7 +2428,7 @@ $ ockam vault show v1
 <li><code>&lt;NAME&gt;</code><br/>
 Name of the vault</li>
 </ul>
-<h3 id="options-71"><a class="header" href="#options-71">Options</a></h3>
+<h3 id="options-70"><a class="header" href="#options-70">Options</a></h3>
 <ul>
 <li><code>-y</code>, <code>--yes</code> (optional)<br/>
 Confirm the deletion without prompting</li>
@@ -2482,7 +2482,7 @@ $ ockam vault default v2
 <ul>
 <li><code>[NAME]</code> (optional)</li>
 </ul>
-<h3 id="options-72"><a class="header" href="#options-72">Options</a></h3>
+<h3 id="options-71"><a class="header" href="#options-71">Options</a></h3>
 <ul>
 <li>
 <p><code>--vault [VAULT_NAME]</code> (optional)<br/>
@@ -2512,7 +2512,7 @@ $ ockam identity create --vault v
 <ul>
 <li><code>[NAME]</code> (optional)</li>
 </ul>
-<h3 id="options-73"><a class="header" href="#options-73">Options</a></h3>
+<h3 id="options-72"><a class="header" href="#options-72">Options</a></h3>
 <ul>
 <li>
 <p><code>-f</code>, <code>--full</code> (optional)<br/>
@@ -2566,7 +2566,7 @@ $ ockam identity default i2
 <li><code>&lt;NAME&gt;</code><br/>
 Name of the identity to be deleted</li>
 </ul>
-<h3 id="options-74"><a class="header" href="#options-74">Options</a></h3>
+<h3 id="options-73"><a class="header" href="#options-73">Options</a></h3>
 <ul>
 <li><code>-y</code>, <code>--yes</code> (optional)<br/>
 Confirm the deletion without prompting</li>
@@ -2592,7 +2592,7 @@ $ ockam identity delete i
 <div style="break-before: page; page-break-before: always;"></div><h2 id="credential-get"><a class="header" href="#credential-get">credential get</a></h2>
 <hr />
 <p><code>ockam credential get [OPTIONS] </code></p>
-<h3 id="options-75"><a class="header" href="#options-75">Options</a></h3>
+<h3 id="options-74"><a class="header" href="#options-74">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE_NAME]</code> (optional)<br/>
@@ -2614,7 +2614,7 @@ Name of the Identity for which the credential was issued</p>
 <li><code>[VAULT_NAME]</code> (optional)<br/>
 Name of the Vault that will be used to issue the credential</li>
 </ul>
-<h3 id="options-76"><a class="header" href="#options-76">Options</a></h3>
+<h3 id="options-75"><a class="header" href="#options-75">Options</a></h3>
 <ul>
 <li>
 <p><code>--as [IDENTITY_NAME]</code> (optional)<br/>
@@ -2643,7 +2643,7 @@ Name of the Vault from which to retrieve the credentials</li>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="credential-present"><a class="header" href="#credential-present">credential present</a></h2>
 <hr />
 <p><code>ockam credential present [OPTIONS] --to &lt;ROUTE&gt; </code></p>
-<h3 id="options-77"><a class="header" href="#options-77">Options</a></h3>
+<h3 id="options-76"><a class="header" href="#options-76">Options</a></h3>
 <ul>
 <li>
 <p><code>--at [NODE_NAME]</code> (optional)<br/>
@@ -2674,7 +2674,7 @@ Name of the Vault from which to retrieve the credential</li>
 <li><code>[VAULT_NAME]</code> (optional)<br/>
 Name of the Vault that was used to issue the credential</li>
 </ul>
-<h3 id="options-78"><a class="header" href="#options-78">Options</a></h3>
+<h3 id="options-77"><a class="header" href="#options-77">Options</a></h3>
 <ul>
 <li>
 <p><code>--issuer &lt;HEX_ENCODED_FULL_IDENTITY&gt;</code><br/>
@@ -2695,7 +2695,7 @@ The full hex-encoded Identity that was used to issue the credential</p>
 <li><code>[VAULT_NAME]</code> (optional)<br/>
 Name of the Vault that was used to issue the credential</li>
 </ul>
-<h3 id="options-79"><a class="header" href="#options-79">Options</a></h3>
+<h3 id="options-78"><a class="header" href="#options-78">Options</a></h3>
 <ul>
 <li><code>--issuer &lt;IDENTIFIER&gt;</code></li>
 <li><code>--credential [CREDENTIAL_STRING]</code> (optional)</li>
@@ -2726,7 +2726,7 @@ Name of the Vault that was used to issue the credential</li>
 <li><code>[NODE_NAME]</code> (optional)<br/>
 Name of the node</li>
 </ul>
-<h3 id="options-80"><a class="header" href="#options-80">Options</a></h3>
+<h3 id="options-79"><a class="header" href="#options-79">Options</a></h3>
 <ul>
 <li>
 <p><code>--project-identifier &lt;PROJECT_IDENTIFIER&gt;</code><br/>
@@ -2812,7 +2812,7 @@ $ ockam node delete authority
 <div style="break-before: page; page-break-before: always;"></div><h2 id="policy-create"><a class="header" href="#policy-create">policy create</a></h2>
 <hr />
 <p><code>ockam policy create [OPTIONS] --resource &lt;RESOURCE&gt; --expression &lt;EXPRESSION&gt; </code></p>
-<h3 id="options-81"><a class="header" href="#options-81">Options</a></h3>
+<h3 id="options-80"><a class="header" href="#options-80">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)</li>
 <li><code>-r</code>, <code>--resource &lt;RESOURCE&gt;</code></li>
@@ -2822,7 +2822,7 @@ $ ockam node delete authority
 <div style="break-before: page; page-break-before: always;"></div><h2 id="policy-show"><a class="header" href="#policy-show">policy show</a></h2>
 <hr />
 <p><code>ockam policy show --at &lt;NODE_NAME&gt; --resource &lt;RESOURCE&gt; --action &lt;ACTION&gt; </code></p>
-<h3 id="options-82"><a class="header" href="#options-82">Options</a></h3>
+<h3 id="options-81"><a class="header" href="#options-81">Options</a></h3>
 <ul>
 <li><code>--at &lt;NODE_NAME&gt;</code></li>
 <li><code>-r</code>, <code>--resource &lt;RESOURCE&gt;</code></li>
@@ -2831,7 +2831,7 @@ $ ockam node delete authority
 <div style="break-before: page; page-break-before: always;"></div><h2 id="policy-delete"><a class="header" href="#policy-delete">policy delete</a></h2>
 <hr />
 <p><code>ockam policy delete [OPTIONS] --resource &lt;RESOURCE&gt; --action &lt;ACTION&gt; </code></p>
-<h3 id="options-83"><a class="header" href="#options-83">Options</a></h3>
+<h3 id="options-82"><a class="header" href="#options-82">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)</li>
 <li><code>-r</code>, <code>--resource &lt;RESOURCE&gt;</code></li>
@@ -2842,7 +2842,7 @@ Confirm the deletion without prompting</li>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="policy-list"><a class="header" href="#policy-list">policy list</a></h2>
 <hr />
 <p><code>ockam policy list [OPTIONS] --resource &lt;RESOURCE&gt; </code></p>
-<h3 id="options-84"><a class="header" href="#options-84">Options</a></h3>
+<h3 id="options-83"><a class="header" href="#options-83">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)</li>
 <li><code>-r</code>, <code>--resource &lt;RESOURCE&gt;</code></li>
@@ -2869,7 +2869,7 @@ Confirm the deletion without prompting</li>
 <hr />
 <p><code>ockam lease show --token-id &lt;TOKEN_ID&gt; </code></p>
 <p>Show detailed token information within the lease token manager</p>
-<h3 id="options-85"><a class="header" href="#options-85">Options</a></h3>
+<h3 id="options-84"><a class="header" href="#options-84">Options</a></h3>
 <ul>
 <li><code>-t</code>, <code>--token-id &lt;TOKEN_ID&gt;</code><br/>
 ID of the token to retrieve</li>
@@ -2878,7 +2878,7 @@ ID of the token to retrieve</li>
 <hr />
 <p><code>ockam lease revoke --token-id &lt;TOKEN_ID&gt; </code></p>
 <p>Revoke a token within the lease token manager</p>
-<h3 id="options-86"><a class="header" href="#options-86">Options</a></h3>
+<h3 id="options-85"><a class="header" href="#options-85">Options</a></h3>
 <ul>
 <li><code>-t</code>, <code>--token-id &lt;TOKEN_ID&gt;</code><br/>
 ID of the token to revoke</li>
@@ -2887,7 +2887,7 @@ ID of the token to revoke</li>
 <hr />
 <p><code>ockam status [OPTIONS] </code></p>
 <p>Display information about the system's status</p>
-<h3 id="options-87"><a class="header" href="#options-87">Options</a></h3>
+<h3 id="options-86"><a class="header" href="#options-86">Options</a></h3>
 <ul>
 <li>
 <p><code>-a</code>, <code>--all</code> (optional)<br/>
@@ -2902,10 +2902,16 @@ Override default timeout (in seconds)</p>
 <hr />
 <p><code>ockam reset [OPTIONS] </code></p>
 <p>Removes the local Ockam configuration including all Identities and Nodes</p>
-<h3 id="options-88"><a class="header" href="#options-88">Options</a></h3>
+<h3 id="options-87"><a class="header" href="#options-87">Options</a></h3>
 <ul>
-<li><code>-y</code>, <code>--yes</code> (optional)<br/>
-Confirm the reset without prompting</li>
+<li>
+<p><code>-y</code>, <code>--yes</code> (optional)<br/>
+Confirm the reset without prompting</p>
+</li>
+<li>
+<p><code>--with-orchestrator</code> (optional)<br/>
+Remove your spaces from the Orchestrator</p>
+</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="ockam-completion"><a class="header" href="#ockam-completion">ockam completion</a></h2>
 <hr />
@@ -2917,7 +2923,7 @@ don't need to do any additional shell configuration to gain completion support.<
 <p>If you need to set up completions manually, follow the instructions below.
 The exact configuration file locations might vary based on your system. Remember
 to restart your shell before testing whether completions are working.</p>
-<h3 id="options-89"><a class="header" href="#options-89">Options</a></h3>
+<h3 id="options-88"><a class="header" href="#options-88">Options</a></h3>
 <ul>
 <li><code>-s</code>, <code>--shell &lt;SHELL&gt;</code><br/>
 The type of shell</li>
@@ -2978,7 +2984,7 @@ $ ockam completion --shell fish &gt; ~/.config/fish/completions/ockam.fish
 <li><code>[NAME]</code> (optional)<br/>
 The name of the trust context to create</li>
 </ul>
-<h3 id="options-90"><a class="header" href="#options-90">Options</a></h3>
+<h3 id="options-89"><a class="header" href="#options-89">Options</a></h3>
 <ul>
 <li>
 <p><code>--credential [CREDENTIAL]</code> (optional)<br/>
@@ -3032,7 +3038,7 @@ $ ockam trust-context show t1
 <li><code>&lt;NAME&gt;</code><br/>
 Name of the trust context</li>
 </ul>
-<h3 id="options-91"><a class="header" href="#options-91">Options</a></h3>
+<h3 id="options-90"><a class="header" href="#options-90">Options</a></h3>
 <ul>
 <li><code>-y</code>, <code>--yes</code> (optional)<br/>
 Confirm the deletion without prompting</li>
@@ -3091,7 +3097,7 @@ Corresponding FlowControlId value</p>
 Address of the Consumer</p>
 </li>
 </ul>
-<h3 id="options-92"><a class="header" href="#options-92">Options</a></h3>
+<h3 id="options-91"><a class="header" href="#options-91">Options</a></h3>
 <ul>
 <li><code>--at [NODE_NAME]</code> (optional)<br/>
 Perform the command on the given NODE_NAME</li>

@@ -170,17 +170,12 @@
                         <h2 id="node-logs"><a class="header" href="#node-logs">node logs</a></h2>
 <hr />
 <div class="chip t"><b>Preview</b><div class="tt"><p>Preview features are available for use, but are still under rapid development.</p><p></p><p>There may be some minor gaps in functionality or documentation.</p><p></p><p>Your feedback on the enhancements you'd like to see on this feature are especially valuable, please send them through at https://github.com/build-trust/ockam/discussions/new</p></div></div>
-<p><code>ockam node logs [OPTIONS] [NODE_NAME] </code></p>
+<p><code>ockam node logs [NODE_NAME] </code></p>
 <p>This command will return the path to the node's log file. The user can select whether to return the stdout or the stderr log file. The default is to return the stdout log file.</p>
 <h3 id="arguments"><a class="header" href="#arguments">Arguments</a></h3>
 <ul>
 <li><code>[NODE_NAME]</code> (optional)<br/>
 Name of the node to retrieve the logs from</li>
-</ul>
-<h3 id="options"><a class="header" href="#options">Options</a></h3>
-<ul>
-<li><code>--err</code> (optional)<br/>
-Show the standard error log file</li>
 </ul>
 <h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
 <pre><code class="language-sh"># Return the path to the stdout log file of the default node
