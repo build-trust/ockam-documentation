@@ -4,13 +4,13 @@ description: Connecting a web app and database
 
 # Basic Web App
 
-In this example we will explore the Ockam command line interface, [`ockam`](https://docs.ockam.io/#install) and see how we can connect a traditional web app to a PostgreSQL database, with minimal / no code changes. We will create a very basic Python Flask app that simply increments a counter in a PostgreSQL database. Then we will move the connection between the application and database through an Ockam secure channel.
+In this example we will explore the Ockam command line interface, [<mark style="color:blue;">`ockam`</mark>](https://docs.ockam.io/#install) and see how we can connect a traditional web app to a PostgreSQL database, with minimal / no code changes. We will create a very basic Python Flask app that simply increments a counter in a PostgreSQL database. Then we will move the connection between the application and database through an Ockam secure channel.
 
 ### Background
 
 If you store your data in a relational database, NoSQL, graph database, or something similar, that data is probably private. And you probably don't want to expose it to the Internet. So you can resolve this issue by placing it inside a private subnet. However, now you have to manage network access control lists, security groups, or route tables to allow other machines to open a connection to the database. That is a lot of overhead.
 
-With Ockam, network administrators don't have to update network access control lists, security groups, or route tables. Ockam applies fine grained control to your services via [Attribute-Based Access Control](https://docs.ockam.io/guides/examples/abac). And you can even [integrate with an external identity provider](https://docs.ockam.io/guides/use-cases/use-employee-attributes-from-okta-to-build-trust-with-cryptographically-verifiable-credentials) like [Okta](https://www.okta.com/) to restrict who can access your services.
+With Ockam, network administrators don't have to update network access control lists, security groups, or route tables. Ockam applies fine grained control to your services via [<mark style="color:blue;">Attribute-Based Access Control</mark>](https://docs.ockam.io/guides/examples/abac). And you can even [<mark style="color:blue;">integrate with an external identity provider</mark>](https://docs.ockam.io/guides/use-cases/use-employee-attributes-from-okta-to-build-trust-with-cryptographically-verifiable-credentials) like [<mark style="color:blue;">Okta</mark>](https://www.okta.com/) to restrict who can access your services.
 
 ### Our journey
 
@@ -19,25 +19,25 @@ Before we get started, let's take a look at the steps we'll perform in this exam
 <img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
 1. Use `ockam enroll` to install the Ockam application and create an Ockam project. This is the first prerequisite.
-2. Set up the PostgreSQL database. This is the second prerequisite. Then configure an Ockam ["outlet"](https://docs.ockam.io/reference/command/advanced-routing) to the database server. We will learn more about this in the "[connect the database](basic-web-app.md#connect-the-database)" section below.
-3. Set up the web app (Python Flask). This is the third prerequisite. Then configure an Ockam ["inlet"](https://docs.ockam.io/reference/command/advanced-routing) from the Python app. We will learn more about this in the "[connect the web app](basic-web-app.md#connect-the-web-app)" section below.
+2. Set up the PostgreSQL database. This is the second prerequisite. Then configure an Ockam [<mark style="color:blue;">"outlet"</mark>](https://docs.ockam.io/reference/command/advanced-routing) to the database server. We will learn more about this in the "[<mark style="color:blue;">connect the database</mark>](basic-web-app.md#connect-the-database)" section below.
+3. Set up the web app (Python Flask). This is the third prerequisite. Then configure an Ockam [<mark style="color:blue;">"inlet"</mark>](https://docs.ockam.io/reference/command/advanced-routing) from the Python app. We will learn more about this in the "[<mark style="color:blue;">connect the web app</mark>](basic-web-app.md#connect-the-web-app)" section below.
 
 ### Prerequisites
 
 In order to follow along, please make sure to install all the prerequisites on the machine where you plan on carrying out the steps below.
 
-1. [Ockam Command](https://www.ockam.io/#install)
-   * Run `brew install build-trust/ockam/ockam` to install this via [`brew`](https://brew.sh/). You'll then be able to run the `ockam` CLI app in your terminal.
-2. [Python](https://www.python.org/downloads/), and libraries: [Flash](https://github.com/pallets/flask/), [psycopg2](https://github.com/psycopg/psycopg2)
-   * Run `brew install python` to install this via [`brew`](https://brew.sh/). You'll then be able to run the `python3` command in your terminal.
-   * Instructions on how to get the dependencies (`Flask`, `psycopg2`) are in the [Python Code](https://www.ockam.io/blog/basic-web-app.md#python-code) section below.
-3. [Postgresql](https://www.postgresql.org/)
-   * Run `brew install postgresql@15` via [`brew`](https://brew.sh/). You'll then be able to run the PostgreSQL database server on your machine on the default port of `5432`. Please make sure to follow `brew`'s instructions and add PostgreSQL to your path.
+1. [<mark style="color:blue;">Ockam Command</mark>](https://www.ockam.io/#install)
+   * Run `brew install build-trust/ockam/ockam` to install this via [<mark style="color:blue;">`brew`</mark>](https://brew.sh/). You'll then be able to run the `ockam` CLI app in your terminal.
+2. [<mark style="color:blue;">Python</mark>](https://www.python.org/downloads/), and libraries: [<mark style="color:blue;">Flash</mark>](https://github.com/pallets/flask/), [<mark style="color:blue;">psycopg2</mark>](https://github.com/psycopg/psycopg2)
+   * Run `brew install python` to install this via [<mark style="color:blue;">`brew`</mark>](https://brew.sh/). You'll then be able to run the `python3` command in your terminal.
+   * Instructions on how to get the dependencies (`Flask`, `psycopg2`) are in the [<mark style="color:blue;">Python Code</mark>](https://www.ockam.io/blog/basic-web-app.md#python-code) section below.
+3. [<mark style="color:blue;">Postgresql</mark>](https://www.postgresql.org/)
+   * Run `brew install postgresql@15` via [<mark style="color:blue;">`brew`</mark>](https://brew.sh/). You'll then be able to run the PostgreSQL database server on your machine on the default port of `5432`. Please make sure to follow `brew`'s instructions and add PostgreSQL to your path.
    * Run `brew services start postgresql@15` to start the PostgreSQL server.
    * Then you can set a new password for the database user `postgres`. Set this password to `password`. The Python Code below uses `postgres:password@localhost` as the connection string for the db driver. These instructions below allow you to do this on Linux and macOS.
      * In a terminal run `sudo -u postgres psql --username postgres --password --dbname template1` to login to the database locally as the `postgres` user.
      * Then type this into REPL: `ALTER USER postgres PASSWORD 'password';`, and finally type `exit`.
-     * You can learn more about this [here](https://stackoverflow.com/a/12721095/2085356).
+     * You can learn more about this [<mark style="color:blue;">here</mark>](https://stackoverflow.com/a/12721095/2085356).
 
 ### The Web App - Python Code
 
@@ -99,7 +99,7 @@ export APP_PG_PORT=5432
 flask --app main run
 ```
 
-3. Finally, in a web browser open this URL: [`http://localhost:5000/`](http://localhost:5000/).
+3. Finally, in a web browser open this URL: [<mark style="color:blue;">`http://localhost:5000/`</mark>](http://localhost:5000/).
 
 This Flask app will show you how many times you visited it, and store each new visit in the PostgreSQL database 🎉.
 
@@ -176,12 +176,66 @@ Finally, connect to this URL again from your web browser `http://localhost:5000/
 
 ### Multiple machines <a href="#multiple-machines" id="multiple-machines"></a>
 
-You can also extend this example and move the PostgreSQL service into a Docker container or to an entirely different machine. Once the nodes are registered (after `ockam enroll` runs), this demo will continue to work, with no application code changes and no need to expose the PostgreSQL ports directly to the Internet.
+You can also extend this example and move the PostgreSQL service into a Docker container or to an entirely different machine. Once the nodes are registered (after ockam enroll runs), this demo will continue to work, with no application code changes and no need to expose the PostgreSQL ports directly to the Internet.
 
-Also, you can run the web app and the database on different machines. To do this:
+To run the web app and the database on different machines, let’s say we have 3 machines: Machines A, B, and C.&#x20;
 
-1. Change `localhost` in the `main.py` script to the IP address of the machine that hosts the database.
-2. Run `ockam enroll` on both machines (the web app machine and the database server machine).
+* Machine A: You run `ockam enroll` in this machine and generate 2 enrollment tickets (as plain text files).&#x20;
+* Machine B: This machine is for the database. You will use one enrollment ticket in this machine.
+* Machine C: This machine is for the web app. You will use another enrollment ticket in this machine.
+
+1\) Change `localhost` in the `main.py` script to the IP address of the machine that hosts the database (which is Machine B).
+
+2\) On Machine A, run `ockam enroll` on a machine and then generate enrollment tokens for the database and the web app from here.
+
+We have to generate an enrollment ticket, save it a file, and share this file w/ the database server machine. To generate an enrollment ticket for the database, please run:
+
+`ockam project ticket --attribute component=db > db.ticket`
+
+> Here is a detailed look at what happens when we run the command above:
+>
+> `ockam project ticket` creates a token (which is not a credential). Anyone who has this token can redeem it. Once redeemed, from that perspective of the Identity that redeemed it, they are able to get their credential from the Project's Authority.
+
+We have to generate another enrollment ticket, save it a file, and share this file w/ the web app server machine. To generate an enrollment ticket for the web app, please run:
+
+`ockam project ticket --attribute component=web > webapp.ticket`
+
+3\) On Machine B, the database server machine, run the following additional commands:
+
+```
+ockam identity create db
+ockam project enroll db.ticket --identity db
+ockam node create db --identity db
+ockam policy create --at db \
+  --resource tcp-outlet \
+  --expression '(= subject.component "web")'
+```
+
+And then run the commands from the example above:
+
+```
+export PG_PORT=5432
+ockam tcp-outlet create --to $PG_PORT
+ockam relay create
+```
+
+4\) On Machine C, the web app machine, run the following additional commands:
+
+```
+ockam identity create web
+ockam project enroll webapp.ticket --identity web
+ockam node create web --identity web
+ockam policy create --at web \
+  --resource tcp-inlet \
+  --expression '(= subject.component "db")'
+```
+
+And then run the commands from the example above:
+
+```
+export OCKAM_PORT=5433
+ockam tcp-inlet create --from $OCKAM_PORT
+```
 
 ### Other commands to explore
 
