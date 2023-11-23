@@ -37,7 +37,7 @@ use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let node = node(ctx);
+    let node = node(ctx).await?;
 
     // Initialize the TCP Transport.
     let tcp = node.create_tcp_transport().await?;
@@ -91,7 +91,7 @@ use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, Tcp
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let node = node(ctx);
+    let node = node(ctx).await?;
 
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;
@@ -135,7 +135,7 @@ use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpTransportExte
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Create an Identity to represent Alice.
     let alice = node.create_identity().await?;
