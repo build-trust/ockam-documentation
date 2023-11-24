@@ -50,10 +50,10 @@ ockam project addon configure influxdb \
 
 ### Connecting a client
 
-Before a client can connect to a project, an enrollment token must be generated for it by an authorized entity:
+Before a client can connect to a project, an enrollment ticket must be generated for it by an authorized entity:
 
 ```bash
-SENSOR_TOKEN=$(ockam project ticket --attribute service=iot-sensor)
+ockam project ticket --attribute service=iot-sensor > sensor.ticket
 ```
 
 Next we need to create a new identity for our client, as it's to this identity that the leased InfluxDB token will be issued:
@@ -62,10 +62,10 @@ Next we need to create a new identity for our client, as it's to this identity t
 ockam identity create iot-sensor
 ```
 
-Identity created, we can authenticate to our project using the enrollment token `SENSOR_TOKEN` we saved at the start of this section:
+Identity created, we can authenticate to our project using the enrollment ticket `sensor.ticket` we saved at the start of this section:
 
 ```bash
-ockam project enroll $SENSOR_TOKEN --identity iot-sensor
+ockam project enroll sensor.ticket --identity iot-sensor
 ```
 
 We've arrived at the big moment, time to request a new lease:

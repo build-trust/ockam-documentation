@@ -44,7 +44,7 @@ Once we have authenticated attributes, a resource owner can make trust decisions
 
 Any Ockam Identifier can issue credentials about another Identifier, however some credential authorities are central to the success and scale of a distributed application. For such authorities Ockam Orchestrator offers highly scalable and secure managed credential authorities as a cloud service.
 
-We also have to consider how credentials are issued to a large number of application entities. Ockam offers several pluggable enrollment protocols. Once simple option is to use one-time-use enrollment tokens. This is a great option to enroll large fleets of applications, services, or devices. It is also easy to use with automated provisioning scripts and tools.
+We also have to consider how credentials are issued to a large number of application entities. Ockam offers several pluggable enrollment protocols. Once simple option is to use one-time-use enrollment tickets. This is a great option to enroll large fleets of applications, services, or devices. It is also easy to use with automated provisioning scripts and tools.
 
 <figure><img src="../../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
 
@@ -109,11 +109,11 @@ ockam project information --output json > project.json
 
 This will create a managed Credential Authority for our project.
 
-Next we generate two one-time-use enrollment tokens to enable Machine 1 and 2 to enroll and get credentials. Notice how we specify the attributes to attest for these two machines - `city` and `application`
+Next we generate two one-time-use enrollment tickets to enable Machine 1 and 2 to enroll and get credentials. Notice how we specify the attributes to attest for these two machines - `city` and `application`
 
 ```
-m1_token=$(ockam project ticket --attribute application="Smart Factory" --attribute city="San Francisco")
-m2_token=$(ockam project ticket --attribute application="Smart Factory" --attribute city="New York")
+ockam project ticket --attribute application="Smart Factory" --attribute city="San Francisco" --relay m1 > m1.ticket
+ockam project ticket --attribute application="Smart Factory" --attribute city="New York" --relay m2 > m2.ticket
 ```
 
 ### Machine 1 in New York
@@ -124,11 +124,11 @@ We'll represent the application service on Machine 1 with a simple http server l
 python3 -m http.server --bind 127.0.0.1 5000
 ```
 
-Next we transfer project configuration and one enrollment token to Machine 1 and use that to create an Ockam node that will run as a sidecar process next to our application service.
+Next we transfer project configuration and one enrollment ticket to Machine 1 and use that to create an Ockam node that will run as a sidecar process next to our application service.
 
 ```bash
 ockam identity create m1
-ockam project enroll $m1_token --identity m1
+ockam project enroll m1.ticket --identity m1
 ockam node create m1 --identity m1
 ockam policy create --at m1 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))'
@@ -153,11 +153,11 @@ We'll represent the application service on Machine 2 with a simple http server l
 python3 -m http.server --bind 127.0.0.1 6000
 ```
 
-Next we transfer project configuration and one enrollment token to Machine 2 and use that to create and Ockam node that will run as a sidecar process next to our application service.
+Next we transfer project configuration and one enrollment ticket to Machine 2 and use that to create and Ockam node that will run as a sidecar process next to our application service.
 
 ```bash
 ockam identity create m2
-ockam project enroll $m2_token --identity m2
+ockam project enroll m2.ticket --identity m2
 ockam node create m2 --identity m2
 ockam policy create --at m2 --resource tcp-outlet \
   --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "New York")))'
@@ -165,7 +165,7 @@ ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
 ockam relay create m2 --at /project/default --to /node/m2
 ```
 
-Same as before, we then set an attribute based policy on the the tcp-outlet that delivers traffic to our application service. This policy says to allow requests if the subject (the entity requesting access) is part of the same application or if the subject is a Field Engineer based in New York.
+Same as before, we then set an attribute based policy on the tcp-outlet that delivers traffic to our application service. This policy says to allow requests if the subject (the entity requesting access) is part of the same application or if the subject is a Field Engineer based in New York.
 
 ```
 (or (= subject.application "Smart Factory")
@@ -179,7 +179,8 @@ There is a problem in one of the microservices in San Francisco and we need to g
 Since the Okta Add-On is enabled. Alice can simply start a node within the project and authenticate.
 
 ```bash
-ockam project enroll --project-path project.json --okta
+ockam project import project.json
+ockam project enroll --okta
 ockam node create alice
 ockam policy create --at alice --resource tcp-inlet --expression '(= subject.application "Smart Factory")'
 ```
@@ -191,16 +192,14 @@ The `project enroll` command will launch Okta login and when it completes return
 Alice's `city` in Okta is "San Francisco". Her request to access Machine 1 in San Francisco is allowed
 
 ```
-ockam tcp-inlet create --at /node/alice --from 127.0.0.1:8000 \
-  --to /project/default/service/forward_to_m1/secure/api/service/outlet
+ockam tcp-inlet create --at /node/alice --from 127.0.0.1:8000 --to m1
 curl --head 127.0.0.1:8000
 ```
 
 Her request to access Machine 2 in New York is denied.
 
 ```
-ockam tcp-inlet create --at /node/alice --from 127.0.0.1:9000 \
-  --to /project/default/service/forward_to_m2/secure/api/service/outlet
+ockam tcp-inlet create --at /node/alice --from 127.0.0.1:9000 --to m2
 curl --head 127.0.0.1:9000
 
 # this will do nothing and eventually timeout

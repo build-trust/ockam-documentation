@@ -29,7 +29,7 @@ Ockam Command makes it super easy to create and manage local or remote nodes. If
 
 ```
 » ockam node create
-✔︎ Node f8eb8df9 created successfully
+✔︎ Node sharp-falconet created successfully
 ```
 
 Similarly, you can also create a node with a name of your choice:
@@ -75,7 +75,7 @@ You can see all running nodes with `ockam node list`
      │ Node n1  UP
      │ Process id 42218
 
-     │ Node f8eb8df9 (default) UP
+     │ Node sharp-falconet (default) UP
      │ Process id 42083
 
      │ Node n2  DOWN

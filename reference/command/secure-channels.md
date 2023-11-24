@@ -148,10 +148,10 @@ Let's create an end-to-end secure channel through an elastic relay in your Orche
 The [<mark style="color:blue;">Project</mark>](nodes.md#project) that was created when you ran `ockam enroll` offers an Elastic Relay Service. [<mark style="color:blue;">Delete any existing nodes</mark>](nodes.md#nodes) and then try this new example:
 
 ```
-» ockam project information --output json > project.json
+» ockam enroll
 
-» ockam node create a --project-path project.json
-» ockam node create b --project-path project.json
+» ockam node create a
+» ockam node create b
 
 » ockam relay create b --at /project/default --to /node/a
      ✔︎ Now relaying messages from /project/default/service/70c63af6590869c9bf9aa5cad45d1539 → /node/a/service/forward_to_b

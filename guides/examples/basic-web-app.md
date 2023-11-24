@@ -186,17 +186,17 @@ To run the web app and the database on different machines, let’s say we have 3
 
 1\) Change `localhost` in the `main.py` script to the IP address of the machine that hosts the database (which is Machine B).
 
-2\) On Machine A, run `ockam enroll` on a machine and then generate enrollment tokens for the database and the web app from here.
+2\) On Machine A, run `ockam enroll` on a machine and then generate enrollment tickets for the database and the web app from here.
 
 We have to generate an enrollment ticket, save it a file, and share this file w/ the database server machine. To generate an enrollment ticket for the database, please run:
 
-`ockam project ticket --attribute component=db > db.ticket`
+`ockam project ticket --attribute component=db --relay db > db.ticket`
 
 > Here is a detailed look at what happens when we run the command above:
 >
-> `ockam project ticket` creates a token (which is not a credential). Anyone who has this token can redeem it. Once redeemed, from that perspective of the Identity that redeemed it, they are able to get their credential from the Project's Authority.
+> `ockam project ticket` creates a ticket (which is not a credential). Anyone who has this ticket can redeem it. Once redeemed, from that perspective of the Identity that redeemed it, they are able to get their credential from the Project's Authority.
 
-We have to generate another enrollment ticket, save it a file, and share this file w/ the web app server machine. To generate an enrollment ticket for the web app, please run:
+We have to generate another enrollment ticket, save it in a file, and share this file w/ the web app server machine. To generate an enrollment ticket for the web app, please run:
 
 `ockam project ticket --attribute component=web > webapp.ticket`
 
@@ -216,7 +216,7 @@ And then run the commands from the example above:
 ```
 export PG_PORT=5432
 ockam tcp-outlet create --to $PG_PORT
-ockam relay create
+ockam relay create db
 ```
 
 4\) On Machine C, the web app machine, run the following additional commands:
@@ -234,7 +234,7 @@ And then run the commands from the example above:
 
 ```
 export OCKAM_PORT=5433
-ockam tcp-inlet create --from $OCKAM_PORT
+ockam tcp-inlet create --from $OCKAM_PORT --to db
 ```
 
 ### Other commands to explore
