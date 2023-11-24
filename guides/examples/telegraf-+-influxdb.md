@@ -117,18 +117,19 @@ In this section we'll show you how both of these problems can be solved with ver
 
 #### Creating and enrolling your nodes
 
-The first step is to enroll yourself with Ockam, and create enrollment tokens for your InfluxDB and Telegraf nodes:
+The first step is to enroll yourself with Ockam, and create enrollment tickets for your InfluxDB and Telegraf nodes:
 
-<pre class="language-bash"><code class="lang-bash"><strong>ockam enroll
-</strong>export OCKAM_INFLUXDB_TOKEN=$(ockam project ticket --attribute component=influxdb)
-export OCKAM_TELEGRAF_TOKEN=$(ockam project ticket --attribute component=telegraf)
-</code></pre>
+```bash
+ockam enroll
+ockam project ticket --attribute component=influxdb --relay influxdb > influxdb.ticket
+ockam project ticket --attribute component=telegraf > telegraf.ticket
+```
 
 Now we can create a node for our InfluxDB service:
 
 ```bash
 ockam identity create influxdb
-ockam project enroll $OCKAM_INFLUXDB_TOKEN --identity influxdb
+ockam project enroll influxdb.ticket --identity influxdb
 ockam node create influxdb --identity influxdb
 ockam policy create --at influxdb --resource tcp-outlet --expression '(= subject.component "telegraf")'
 ockam tcp-outlet create --at /node/influxdb --from /service/outlet --to 127.0.0.1:8086
@@ -137,7 +138,7 @@ ockam relay create influxdb --at /project/default --to /node/influxdb
 
 There's a few things that have happened in those commands, so let's quickly unpack them:
 
-* We've created a new node called `influxdb`, and enrolled it with Ockam using the token we'd generated earlier. If you look back at the command that generated the token you'll see we also tagged this token with an attribute of `component=influxdb`.&#x20;
+* We've created a new node called `influxdb`, and enrolled it with Ockam using the ticket we'd generated earlier. If you look back at the command that generated the ticket you'll see we also tagged this ticket with an attribute of `component=influxdb`.&#x20;
 * We than added a policy to the `influxdb` node, which states that only nodes that have a `component` attribute with a value of `telegraf` will be able to connect to a TCP outlet.
 * Next we create a TCP outlet. This is like a pipe from the `influxdb` node we've just created to the TCP port of `127.0.0.1:8086` (i.e., the port our InfluxDB database is listening on). This Ockam node will now pipe any data it receives from other nodes through to that destination. However the only nodes that will be able to establish that connection are those that pass the policy defined in the previous step.
 * Finally we create a relay on our project, which now allows other nodes in our project to discover the `influxdb` and route traffic to it.
@@ -146,15 +147,15 @@ It's now time to establish the other side of this connection by creating the cor
 
 ```bash
 ockam identity create telegraf
-ockam project enroll $OCKAM_TELEGRAF_TOKEN --identity telegraf
+ockam project enroll telegraf.ticket --identity telegraf
 ockam node create telegraf --identity telegraf
 ockam policy create --at telegraf --resource tcp-inlet --expression '(= subject.component "influxdb")'
-ockam tcp-inlet create --at /node/telegraf --from 127.0.0.1:8087 --to /project/default/service/forward_to_influxdb/secure/api/service/outlet
+ockam tcp-inlet create --at /node/telegraf --from 127.0.0.1:8087 --to influxdb
 ```
 
 Now we can unpack these three commands and what they've done:
 
-* As before, we've used the enrollment token we generated to create a new node and registered it with our project. This time it's the `telegraf` node.
+* As before, we've used the enrollment ticket we generated to create a new node and registered it with our project. This time it's the `telegraf` node.
 * We've again applied a policy to improve our security posture. This policy allows a TCP inlet to be created, but only if the node at the other end has the attribute `component` with a value of `influxdb`.
 * Finally we create the TCP inlet. This is a way of defining where the node should be listening for connections (in this case on TCP port `8087`), and where it should forward that traffic to. This node will forward data through to the forwader we created earlier, which will in turn pass it to our `influxdb` node, which then sends it to the InfluxDB database.
 

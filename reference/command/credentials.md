@@ -132,10 +132,8 @@ HELLO
 » ockam reset -y
 » ockam enroll
 
-» ockam project information --output json > project.json
-
-» ockam node create a --project-path project.json
-» ockam node create b --project-path project.json
+» ockam node create a
+» ockam node create b
 
 » ockam relay create b --at /project/default --to /node/a/service/forward_to_b
 

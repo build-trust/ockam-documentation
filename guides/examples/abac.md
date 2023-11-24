@@ -87,7 +87,7 @@ service.
 
 We also have to consider how credentials are issued to a large number of application entities. Ockam
 offers several pluggable enrollment protocols. Once simple option is to use one-time-use enrollment
-tokens. This is a great option to enroll large fleets of applications, service, or devices. It is
+tickets. This is a great option to enroll large fleets of applications, service, or devices. It is
 also easy to use with automated provisioning scripts and tools.
 
 <figure><img src="../../.gitbook/assets/diagrams.003.jpeg" alt=""><figcaption><p>Please click the diagram to see a bigger version.</p></figcaption></figure>
@@ -126,11 +126,11 @@ ockam enroll
 ```
 
 ```bash
-# Creates enrollment tokens for the three types of identities that
+# Creates enrollment tickets for the three types of identities that
 # will be created and used within this example
-cp1_token=$(ockam project ticket --attribute component=control)
-ep1_token=$(ockam project ticket --attribute component=edge)
-x_token=$(ockam project ticket --attribute component=x)
+ockam project ticket --attribute component=control --relay control_plane1 > control.ticket
+ockam project ticket --attribute component=edge > edge.ticket
+ockam project ticket --attribute component=x > x.ticket
 ```
 
 ### Control Plane
@@ -147,12 +147,12 @@ python3 -m http.server --bind 127.0.0.1 5000
 # Create an identity and authenticate the identity for this control plane
 # with the Orchestrator project.
 ockam identity create control_identity
-ockam project enroll $cp1_token --identity control_identity
+ockam project enroll control.ticket --identity control_identity
 
 # Create a node targeting the project as the control identity.
 ockam node create control_plane1 --identity control_identity
 
-# Set a policy, create the tcp-outlet and forwarder.
+# Set a policy, create the tcp-outlet and relay.
 ockam policy create --at control_plane1 --resource tcp-outlet --expression '(= subject.component "edge")'
 ockam tcp-outlet create --at /node/control_plane1 --from /service/outlet --to 127.0.0.1:5000
 ockam relay create control_plane1 --at /project/default --to /node/control_plane1
@@ -164,14 +164,14 @@ ockam relay create control_plane1 --at /project/default --to /node/control_plane
 # Create an identity and authenticate the identity for this edge plane
 # with the Orchestrator project.
 ockam identity create edge_identity
-ockam project enroll $ep1_token --identity edge_identity
+ockam project enroll edge.ticket --identity edge_identity
 
 # Create a node targeting the project as the edge identity.
 ockam node create edge_plane1 --identity edge_identity
 
 # Set a policy, and create the tcp-inlet.
 ockam policy create --at edge_plane1 --resource tcp-inlet --expression '(= subject.component "control")'
-ockam tcp-inlet create --at /node/edge_plane1 --from 127.0.0.1:7000 --to /project/default/service/forward_to_control_plane1/secure/api/service/outlet
+ockam tcp-inlet create --at /node/edge_plane1 --from 127.0.0.1:7000 --to control_plane1
 ```
 
 ```bash
@@ -189,17 +189,17 @@ The following is denied:
 # Create an identity and authenticate the identity for this x node
 # with the Orchestrator project.
 #
-# This identity will use the enrollment token that has the attribute of
+# This identity will use the enrollment ticket that has the attribute of
 # `component=x` attached
 ockam identity create x_identity
-ockam project enroll $x_token --identity x_identity
+ockam project enroll x.ticket --identity x_identity
 
 # Create a node targeting the project as the x identity.
 ockam node create x --identity x_identity
 
 # Set a policy and create a new tcp-inlet for node x.
 ockam policy create --at x --resource tcp-inlet --expression '(= subject.component "control")'
-ockam tcp-inlet create --at /node/x --from 127.0.0.1:8000 --to /project/default/service/forward_to_control_plane1/secure/api/service/outlet
+ockam tcp-inlet create --at /node/x --from 127.0.0.1:8000 --to control_plane1
 
 # Sends a request to our `x` tcp-inlet and will be denied (this will timeout)
 curl --fail --head --max-time 5 127.0.0.1:8000
