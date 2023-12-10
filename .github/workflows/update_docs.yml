@@ -1,0 +1,57 @@
+name: Release Ockam Examples
+
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+    inputs:
+      ockam_ref:
+        description: Ockam branch to update repository
+        required: true
+      branch_name:
+        description: Branch name to create pull request
+        required: true
+
+jobs:
+  release_examples:
+    name: Release - examples
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Docs Repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          fetch-depth: 0
+          path: docs
+
+      - name: Checkout Ockam Repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          path: examples
+          repository: build-trust/ockam
+          ref: ${{ github.event.inputs.ockam_ref }}
+
+      - name: Import GPG key
+        uses: build-trust/.github/actions/import_gpg@a6377d3c2dac878b92a0da26cdf3da2856c64840
+        with:
+          gpg_private_key: '${{ secrets.GPG_PRIVATE_KEY }}'
+          gpg_password: '${{ secrets.GPG_PASSPHRASE }}'
+          gpg_name: '${{ secrets.GPG_USER_NAME }}'
+          gpg_email: '${{ secrets.GPG_EMAIL }}'
+
+      - name: Update Examples
+        working-directory: docs
+        run: |
+          git branch
+          git checkout -B ${{ github.event.inputs.branch_name }}
+          DOCS_HOME="${GITHUB_WORKSPACE}/docs" OCKAM_HOME="${GITHUB_WORKSPACE}/examples" ${GITHUB_WORKSPACE}/examples/tools/docs/update_md.sh
+
+      - name: Push Changes
+        working-directory: docs
+        run: |
+          # Check if there are updated files
+          if ! git diff --exit-code; then
+            git add .
+            git commit -S -m "Update docs on release"
+            git push --set-upstream origin ${{ github.event.inputs.branch_name }}
+          fi
