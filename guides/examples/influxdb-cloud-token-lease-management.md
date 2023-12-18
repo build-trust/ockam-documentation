@@ -18,7 +18,7 @@ Log in to your [InfluxDB Cloud Dashboard](https://cloud2.influxdata.com/) and ge
 ```bash
 export INFLUXDB_ADMIN_TOKEN="infludb-cloud-token-here"
 export INFLUXDB_ORG_ID="influxdb-org-id-here"
-export INFLUXDB_ENDPOINT_URL="https://your-cluser-url-here"
+export INFLUXDB_ENDPOINT_URL="https://your-cluster-url-here"
 ```
 
 #### Configure your Ockam project
