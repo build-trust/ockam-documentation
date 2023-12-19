@@ -47,7 +47,7 @@ This will download a precompiled binary and add it to your path. If the above in
 
 #### End-to-end encrypted and mutually authenticated communication
 
-Next, step through the following commands to setup secure and private communication between our application service and an application client.
+Next, step through the following commands to set up secure and private communication between an application service and an application client.
 
 {% tabs %}
 {% tab title="Run on your machine" %}
@@ -109,7 +109,7 @@ Your applications can make granular access control decisions at every request be
 
 Underlying all of this is a variety of cryptographic and messaging protocols. We’ve made these protocols safe and easy to use in any application.
 
-No more having to design error-prone ad-hoc ways to distribute sensitive credentials and roots of trust. Ockam’s integrated approach takes away this complexity and gives you simple tools for:
+No more having to design error-prone ad-hoc ways to distribute sensitive credentials and roots of trust. Ockam’s integrated approach takes away this complexity and gives you simple tools.
 
 ### Features of Ockam
 
