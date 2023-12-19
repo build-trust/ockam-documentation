@@ -1,0 +1,43 @@
+name: Update Command Manual
+
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Ockam release tag, e.g. v0.112.0"
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  update_manual:
+    name: Release - update command manual
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@3ebd1aebb47f95493b62de6eec0cac3cd74e50a9
+
+      - name: Checkout To The Ockam Documentation Repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          path: ockam-documentation
+          fetch-depth: 0
+        
+      - name: Checkout To The Ockam Repository So That We Can Have Access To The Nix Files
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          repository: build-trust/ockam
+          path: ockam
+
+      - name: Update Ockam Command Manual
+        working-directory: ockam-documentation
+        run: |
+          git checkout command
+          cd manual/template/mdbook
+          nix shell nixpkgs#mdbook ${{ github.workspace }}/ockam/tools/nix#devShells.aarch64-darwin.rust --command sh -c "./build.sh ${{ github.event.inputs.release_tag }}"
+          git status
