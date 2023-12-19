@@ -6,7 +6,7 @@ description: >-
 
 # Use Cases
 
-Modern applications are distributed and have a huge number of interconnections that must trustfully exchange data. To [trust data-in-motion](../../#trust-for-data-in-motion), applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be [private](../../#private-and-secure-by-design) and [secure-by-design](../../#private-and-secure-by-design), applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
+Modern applications are distributed and have a huge number of interconnections that must trustfully exchange data. To [<mark style="color:blue;">trust data-in-motion</mark>](../../#trust-for-data-in-motion), applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be [<mark style="color:blue;">private</mark>](../../#private-and-secure-by-design) and [<mark style="color:blue;">secure-by-design</mark>](../../#private-and-secure-by-design), applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.
 
 ## Virtually-adjacent databases
 
