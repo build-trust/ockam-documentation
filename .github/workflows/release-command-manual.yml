@@ -21,6 +21,8 @@ jobs:
   update_manual:
     name: Release - update command manual
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
 
     steps:
       - name: Install Nix
@@ -46,4 +48,15 @@ jobs:
 
           cd manual/template/mdbook
           nix shell nixpkgs#mdbook ${{ github.workspace }}/ockam/tools/nix#devShells.x86_64-linux.rust --command sh -c "./build.sh ${{ github.event.inputs.release_tag }}"
-          git status
+
+
+      - name: Push Upstream
+        working-directory: ockam-documentation
+        run: |
+          # Squash commits
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "update command manual to ${{ github.event.inputs.release_tag }}"
+
+          git push --set-upstream origin ${{ github.event.inputs.release_branch }}
