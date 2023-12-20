@@ -8,6 +8,10 @@ on:
     inputs:
       release_tag:
         description: "Ockam release tag, e.g. v0.112.0"
+        required: true
+      release_branch:
+        description: "New branch to update manuals"
+        required: true
 
 defaults:
   run:
@@ -38,6 +42,8 @@ jobs:
         working-directory: ockam-documentation
         run: |
           git checkout command
+          git checkout -B ${{ github.event.inputs.release_branch }}
+
           cd manual/template/mdbook
-          nix shell nixpkgs#mdbook ${{ github.workspace }}/ockam/tools/nix#devShells.aarch64-darwin.rust --command sh -c "./build.sh ${{ github.event.inputs.release_tag }}"
+          nix shell nixpkgs#mdbook ${{ github.workspace }}/ockam/tools/nix#devShells.x86_64-linux.rust --command sh -c "./build.sh ${{ github.event.inputs.release_tag }}"
           git status
