@@ -18,8 +18,8 @@ Ockam solves these problems, while providing additional risk mitigating benefits
 ### Prerequisites
 
 * [Ockam Command](../../#install)
-* [Apache Kafka and Kafka Command Line tools](https://kafka.apache.org/quickstart)
-* A Confluent Cloud account
+* [Apache Kafka and Kafka Command Line tools for version 3.4.x](https://kafka.apache.org/downloads#3.4.1)
+* [A Confluent Cloud account](https://confluent.cloud)
 
 ### The setup
 
@@ -85,10 +85,19 @@ Once that completes we can now expose our Kafka bootstrap server. This is like t
 ockam kafka-consumer create --at consumer
 ```
 
+**note**: if port `4000` is already taken on your machine you can specify another port
+
+```bash
+ockam kafka-consumer create --at consumer \
+  --bootstrap-server 127.0.0.1:3000
+```
+
+
 Copy the `kafka.config` file across, and use it to create a new topic that we'll use for sending messages between the producer and consumer in this demo (in this case we've called the topic `demo-topic`)
 
 ```bash
-kafka-topics.sh --bootstrap-server localhost:4000 --command-config kafka.config \
+kafka-topics.sh --bootstrap-server localhost:4000 \
+  --command-config kafka.config \
   --create --topic demo-topic --partitions 3
 ```
 
@@ -96,7 +105,8 @@ The final step is to start our consumer script, pointing it to `localhost:4000` 
 
 ```bash
 kafka-console-consumer.sh --topic demo-topic \
-  --bootstrap-server localhost:4000 --consumer.config kafka.config
+  --bootstrap-server localhost:4000 \
+  --consumer.config kafka.config
 ```
 
 The consumer code will push all communication into the Ockam node process that is running on the local host. That local Ockam process will automatically manage the generation of cryptographic keys, establishing a secure channel for communication with any producer nodes, and then subsequently receiving, decrypting, and forwarding on any messages that are received from the broker running on our Confluent Cloud cluster.
@@ -131,7 +141,8 @@ Make sure to copy the `kafka.config` file across, and start your producer:
 
 ```bash
 kafka-console-producer.sh --topic demo-topic \
-  --bootstrap-server localhost:5000 --producer.config kafka.config
+  --bootstrap-server localhost:5000 \
+  --producer.config kafka.config
 ```
 
 Your existing producer code will now be running, communicating with the broker via the secure portal we've created that has exposed the Kafka bootstrap server and Kafka brokers on local ports, and sending messages through to the consumer that was setup in the previous step. However all message payloads will be transparently encrypted as they enter the node on the producer, and not decrypted until they exit the consumer node. At no point in transit can the broker see the plaintext message payload that was initially sent by the producer.
@@ -149,9 +160,12 @@ ockam identity create producer2
 ockam project enroll producer2.ticket --identity producer2
 ockam node create producer2 --identity producer2
 
-ockam kafka-producer create --at producer2 --bootstrap-server 127.0.0.1:6000 --brokers-port-range 6001-6100
+ockam kafka-producer create --at producer2 \
+  --bootstrap-server 127.0.0.1:6000
 
-kafka-console-producer.sh --topic demo-topic --bootstrap-server localhost:6000 --producer.config kafka.config
+kafka-console-producer.sh --topic demo-topic \
+  --bootstrap-server localhost:6000 \ 
+  --producer.config kafka.config
 ```
 
 Your second producer will now have generated its own unique set of cryptographic keys, and will be using them to send data through the Kafka brokers in Confluent Cloud and on to your consumer which will then be able to decrypt it.
