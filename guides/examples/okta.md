@@ -179,7 +179,7 @@ There is a problem in one of the microservices in San Francisco and we need to g
 Since the Okta Add-On is enabled. Alice can simply start a node within the project and authenticate.
 
 ```bash
-ockam project import project.json
+ockam project import --project-file project.json
 ockam project enroll --okta
 ockam node create alice
 ockam policy create --at alice --resource tcp-inlet --expression '(= subject.application "Smart Factory")'
