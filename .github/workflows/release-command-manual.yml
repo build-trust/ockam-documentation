@@ -47,13 +47,12 @@ jobs:
           git checkout -B ${{ github.event.inputs.release_branch }}
 
           cd manual/template/mdbook
-          nix shell nixpkgs#mdbook ${{ github.workspace }}/ockam/tools/nix#devShells.x86_64-linux.rust --command sh -c "./build.sh ${{ github.event.inputs.release_tag }}"
+          nix shell nixpkgs/nixos-23.11#mdbook ${{ github.workspace }}/ockam/tools/nix#devShells.x86_64-linux.rust --command sh -c "./build.sh ${{ github.event.inputs.release_tag }}"
 
 
       - name: Push Upstream
         working-directory: ockam-documentation
         run: |
-          # Squash commits
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
