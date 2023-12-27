@@ -68,7 +68,7 @@ async fn main(ctx: Context) -> Result<()> {
     print_title(vec!["Run a node & stop it right away"]);
 
     // Create a node.
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Stop the node as soon as it starts.
     node.stop().await
@@ -193,7 +193,7 @@ use ockam::{node, Context, Result};
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Start a worker, of type Echoer, at address "echoer"
     node.start_worker("echoer", Echoer).await?;
