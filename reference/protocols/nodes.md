@@ -33,7 +33,7 @@ use ockam::{node, Context, Result};
 /// Create and then immediately stop a node.
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Stop the node as soon as it starts.
     node.stop().await
@@ -84,6 +84,7 @@ impl Worker for Echoer {
         ctx.send(msg.return_route(), msg.body()).await
     }
 }
+
 ```
 {% endcode %}
 
@@ -103,7 +104,8 @@ use ockam::{node, Context, Result};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    let mut node = node(ctx);
+    // Create a node with default implementations
+    let mut node = node(ctx).await?;
 
     // Start a worker, of type Echoer, at address "echoer"
     node.start_worker("echoer", Echoer).await?;
@@ -118,6 +120,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 {% endcode %}
 
