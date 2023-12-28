@@ -1,0 +1,62 @@
+name: Release Update Ockam Docs
+
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+    inputs:
+      ockam_ref:
+        description: Ockam branch to update repository
+        required: true
+      branch_name:
+        description: Branch name to create pull request
+        required: true
+
+jobs:
+  release_update_docs:
+    name: Release - update documentation
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Docs Repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          fetch-depth: 0
+          path: docs
+
+      - name: Checkout Ockam Repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          path: examples
+          repository: build-trust/ockam
+          ref: ${{ github.event.inputs.ockam_ref }}
+
+      - name: Update Examples
+        working-directory: docs
+        run: |
+          branch_name="${{ github.event.inputs.branch_name }}"
+          if git ls-remote --heads origin "$branch_name" | grep -q "$branch_name"; then
+            echo "Branch $branch_name exists, switching to it..."
+            git branch
+            git checkout "$branch_name"
+          else
+            echo "Branch $branch_name doesn't exist, creating a new branch..."
+            git checkout -b "$branch_name"
+          fi
+
+          DOCS_HOME="${GITHUB_WORKSPACE}/docs" OCKAM_HOME="${GITHUB_WORKSPACE}/examples" ${GITHUB_WORKSPACE}/examples/tools/docs/update_md.sh
+
+      - name: Push Changes
+        working-directory: docs
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          # Check if there are updated files
+          if ! git diff --exit-code; then
+            git add .
+            git commit -m "update docs on release to ockam ref ${{ github.event.inputs.ockam_ref }}"
+            git push --set-upstream origin ${{ github.event.inputs.branch_name }}
+          fi
