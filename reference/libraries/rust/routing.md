@@ -76,8 +76,7 @@ Add the following code to this file:
 
 ```rust
 // src/hop.rs
-
-use ockam::{Any, Context, Result, Routed, Worker};
+use ockam::{Any, Context, LocalMessage, Result, Routed, Worker};
 
 pub struct Hop;
 
@@ -92,8 +91,7 @@ impl Worker for Hop {
         println!("Address: {}, Received: {}", ctx.address(), msg);
 
         // Some type conversion
-        let mut message = msg.into_local_message();
-        let transport_message = message.transport_mut();
+        let mut transport_message = msg.into_local_message().into_transport_message();
 
         // Remove my address from the onward_route
         transport_message.onward_route.step()?;
@@ -101,10 +99,14 @@ impl Worker for Hop {
         // Insert my address at the beginning return_route
         transport_message.return_route.modify().prepend(ctx.address());
 
+        // Wipe all local info (e.g. transport types)
+        let message = LocalMessage::new(transport_message, vec![]);
+
         // Send the message on its onward_route
         ctx.forward(message).await
     }
 }
+
 ```
 
 To make this `Hop` type accessible to our main program, export it from `src/lib.rs` by adding the following to it:
@@ -161,6 +163,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 
 To run this new node program:
@@ -216,6 +219,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 
 To run this new node program:
@@ -270,6 +274,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 
 #### Initiator node
@@ -309,6 +314,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 
 #### Run
@@ -331,11 +337,11 @@ Note the message flow.
 
 #### Routing over two transport hops
 
-#### Forwarder worker
+#### Relay worker
 
-For demonstration, we'll create another worker, called `Forwarder`, that takes every incoming message and forwards it to the predefined address.
+For demonstration, we'll create another worker, called `Relay`, that takes every incoming message and forwards it to the predefined address.
 
-Just before forwarding the message, `Forwarder`'s handle message function will:
+Just before forwarding the message, `Relay`'s handle message function will:
 
 1. Print the message
 2. Remove its own address (first address) from the `onward_route`, by calling `step()`
@@ -344,20 +350,19 @@ Just before forwarding the message, `Forwarder`'s handle message function will:
 Create a new file at:
 
 ```
-touch src/forwarder.rs
+touch src/relay.rs
 ```
 
 Add the following code to this file:
 
 ```rust
-// src/forwarder.rs
-
+// src/relay.rs
 use ockam::{Address, Any, Context, LocalMessage, Result, Routed, Worker};
 
-pub struct Forwarder(pub Address);
+pub struct Relay(pub Address);
 
 #[ockam::worker]
-impl Worker for Forwarder {
+impl Worker for Relay {
     type Context = Context;
     type Message = Any;
 
@@ -393,13 +398,14 @@ impl Worker for Forwarder {
         ctx.forward(message).await
     }
 }
+
 ```
 
-To make this `Forwarder` type accessible to our main program, export it from `src/lib.rs` by adding the following to it:
+To make this `Relay` type accessible to our main program, export it from `src/lib.rs` by adding the following to it:
 
 ```rust
-mod forwarder;
-pub use forwarder::*;
+mod relay;
+pub use relay::*;
 ```
 
 #### Responder node
@@ -440,6 +446,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 
 #### Middle node
@@ -455,11 +462,11 @@ Add the following code to this file:
 ```rust
 // examples/04-routing-over-transport-two-hops-middle.rs
 // This node creates a tcp connection to a node at 127.0.0.1:4000
-// Starts a forwarder worker to forward messages to 127.0.0.1:4000
+// Starts a relay worker to forward messages to 127.0.0.1:4000
 // Starts a tcp listener at 127.0.0.1:3000
 // It then runs forever waiting to route messages.
 
-use hello_ockam::Forwarder;
+use hello_ockam::Relay;
 use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
 
 #[ockam::node]
@@ -473,20 +480,21 @@ async fn main(ctx: Context) -> Result<()> {
     // Create a TCP connection to the responder node.
     let connection_to_responder = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
-    // Create a Forwarder worker
-    node.start_worker("forward_to_responder", Forwarder(connection_to_responder.into()))
+    // Create a Relay worker
+    node.start_worker("forward_to_responder", Relay(connection_to_responder.into()))
         .await?;
 
     // Create a TCP listener and wait for incoming connections.
     let listener = tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
 
-    // Allow access to the Forwarder via TCP connections from the TCP listener
+    // Allow access to the Relay via TCP connections from the TCP listener
     node.flow_controls()
         .add_consumer("forward_to_responder", listener.flow_control_id());
 
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 
 #### Initiator node
@@ -525,6 +533,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 
 #### Run

@@ -312,13 +312,13 @@ async fn main(ctx: Context) -> Result<()> {
 
 #### Middle node
 
-Forwarder worker
+Relay worker
 
-We'll create a worker, called `Forwarder`, that takes every incoming message and forwards it to the predefined address.
+We'll create a worker, called `Relay`, that takes every incoming message and forwards it to the predefined address.
 
 {% code lineNumbers="true" fullWidth="true" %}
 ```rust
-// src/forwarder.rs
+// src/relay.rs
 
 use ockam::{Address, Any, Context, LocalMessage, Result, Routed, Worker};
 

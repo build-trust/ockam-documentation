@@ -7,6 +7,7 @@ description: >-
 # Vaults and Identities
 
 ```rust
+// examples/vault-and-identities.rs
 use ockam::node;
 use ockam::{Context, Result};
 
