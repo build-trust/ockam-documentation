@@ -58,7 +58,7 @@ use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let node = node(ctx);
+    let node = node(ctx).await?;
 
     // Initialize the TCP Transport.
     let tcp = node.create_tcp_transport().await?;
@@ -87,6 +87,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 {% endcode %}
 
@@ -96,17 +97,17 @@ async fn main(ctx: Context) -> Result<()> {
 ```rust
 // examples/05-secure-channel-over-two-transport-hops-middle.rs
 // This node creates a tcp connection to a node at 127.0.0.1:4000
-// Starts a forwarder worker to forward messages to 127.0.0.1:4000
+// Starts a relay worker to forward messages to 127.0.0.1:4000
 // Starts a tcp listener at 127.0.0.1:3000
 // It then runs forever waiting to route messages.
 
-use hello_ockam::Forwarder;
+use hello_ockam::Relay;
 use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let node = node(ctx);
+    let node = node(ctx).await?;
 
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;
@@ -114,8 +115,8 @@ async fn main(ctx: Context) -> Result<()> {
     // Create a TCP connection to Bob.
     let connection_to_bob = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
-    // Start a Forwarder to forward messages to Bob using the TCP connection.
-    node.start_worker("forward_to_bob", Forwarder(connection_to_bob.into()))
+    // Start a Relay to forward messages to Bob using the TCP connection.
+    node.start_worker("forward_to_bob", Relay(connection_to_bob.into()))
         .await?;
 
     // Create a TCP listener and wait for incoming connections.
@@ -127,6 +128,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 {% endcode %}
 
@@ -144,7 +146,7 @@ use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpTransportExte
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Create an Identity to represent Alice.
     let alice = node.create_identity().await?;
@@ -153,7 +155,7 @@ async fn main(ctx: Context) -> Result<()> {
     let tcp = node.create_tcp_transport().await?;
     let connection_to_middle_node = tcp.connect("localhost:3000", TcpConnectionOptions::new()).await?;
 
-    // Create a secure channel.
+    // Connect to a secure channel listener and perform a handshake.
     let r = route![connection_to_middle_node, "forward_to_bob", "bob_listener"];
     let channel = node
         .create_secure_channel(&alice, r, SecureChannelOptions::new())
@@ -169,6 +171,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 {% endcode %}
 

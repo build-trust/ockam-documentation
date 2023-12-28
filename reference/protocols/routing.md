@@ -56,8 +56,7 @@ Just before forwarding the message, `Hop`'s handle message function will:
 {% code lineNumbers="true" fullWidth="true" %}
 ```rust
 // src/hop.rs
-
-use ockam::{Any, Context, Result, Routed, Worker};
+use ockam::{Any, Context, LocalMessage, Result, Routed, Worker};
 
 pub struct Hop;
 
@@ -72,8 +71,7 @@ impl Worker for Hop {
         println!("Address: {}, Received: {}", ctx.address(), msg);
 
         // Some type conversion
-        let mut message = msg.into_local_message();
-        let transport_message = message.transport_mut();
+        let mut transport_message = msg.into_local_message().into_transport_message();
 
         // Remove my address from the onward_route
         transport_message.onward_route.step()?;
@@ -81,10 +79,14 @@ impl Worker for Hop {
         // Insert my address at the beginning return_route
         transport_message.return_route.modify().prepend(ctx.address());
 
+        // Wipe all local info (e.g. transport types)
+        let message = LocalMessage::new(transport_message, vec![]);
+
         // Send the message on its onward_route
         ctx.forward(message).await
     }
 }
+
 ```
 {% endcode %}
 
@@ -97,6 +99,7 @@ In the code below we start an `Echoer` worker at address `"echoer"` and a `Hop` 
 {% code lineNumbers="true" fullWidth="true" %}
 ```rust
 // examples/03-routing.rs
+// This node routes a message.
 
 use hello_ockam::{Echoer, Hop};
 use ockam::{node, route, Context, Result};
@@ -104,7 +107,7 @@ use ockam::{node, route, Context, Result};
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Start a worker, of type Echoer, at address "echoer"
     node.start_worker("echoer", Echoer).await?;
@@ -123,6 +126,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 {% endcode %}
 
@@ -147,7 +151,7 @@ use ockam::{node, route, Context, Result};
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Start an Echoer worker at address "echoer"
     node.start_worker("echoer", Echoer).await?;
@@ -168,6 +172,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 {% endcode %}
 
@@ -199,7 +204,7 @@ use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let node = node(ctx);
+    let node = node(ctx).await?;
 
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;
@@ -216,6 +221,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 {% endcode %}
 
@@ -231,7 +237,7 @@ use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpTransportExte
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Initialize the TCP Transport.
     let tcp = node.create_tcp_transport().await?;
@@ -249,6 +255,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 {% endcode %}
 
@@ -290,7 +297,7 @@ use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let node = node(ctx);
+    let node = node(ctx).await?;
 
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;
@@ -307,6 +314,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 {% endcode %}
 
@@ -319,16 +327,17 @@ We'll create a worker, called `Relay`, that takes every incoming message and for
 {% code lineNumbers="true" fullWidth="true" %}
 ```rust
 // src/relay.rs
-
 use ockam::{Address, Any, Context, LocalMessage, Result, Routed, Worker};
 
-pub struct Forwarder(pub Address);
+pub struct Relay(pub Address);
 
 #[ockam::worker]
-impl Worker for Forwarder {
+impl Worker for Relay {
     type Context = Context;
     type Message = Any;
 
+    /// This handle function takes any incoming message and forwards
+    /// it to the next hop in it's onward route
     async fn handle_message(&mut self, ctx: &mut Context, msg: Routed<Any>) -> Result<()> {
         println!("Address: {}, Received: {}", ctx.address(), msg);
 
@@ -359,6 +368,7 @@ impl Worker for Forwarder {
         ctx.forward(message).await
     }
 }
+
 ```
 {% endcode %}
 
@@ -366,17 +376,17 @@ impl Worker for Forwarder {
 ```rust
 // examples/04-routing-over-transport-two-hops-middle.rs
 // This node creates a tcp connection to a node at 127.0.0.1:4000
-// Starts a forwarder worker to forward messages to 127.0.0.1:4000
+// Starts a relay worker to forward messages to 127.0.0.1:4000
 // Starts a tcp listener at 127.0.0.1:3000
 // It then runs forever waiting to route messages.
 
-use hello_ockam::Forwarder;
+use hello_ockam::Relay;
 use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let node = node(ctx);
+    let node = node(ctx).await?;
 
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;
@@ -384,20 +394,21 @@ async fn main(ctx: Context) -> Result<()> {
     // Create a TCP connection to the responder node.
     let connection_to_responder = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
-    // Create a Forwarder worker
-    node.start_worker("forward_to_responder", Forwarder(connection_to_responder.into()))
+    // Create a Relay worker
+    node.start_worker("forward_to_responder", Relay(connection_to_responder.into()))
         .await?;
 
     // Create a TCP listener and wait for incoming connections.
     let listener = tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
 
-    // Allow access to the Forwarder via TCP connections from the TCP listener
+    // Allow access to the Relay via TCP connections from the TCP listener
     node.flow_controls()
         .add_consumer("forward_to_responder", listener.flow_control_id());
 
     // Don't call node.stop() here so this node runs forever.
     Ok(())
 }
+
 ```
 {% endcode %}
 
@@ -413,7 +424,7 @@ use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpTransportExte
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;
@@ -430,6 +441,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 {% endcode %}
 

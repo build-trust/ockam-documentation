@@ -144,7 +144,7 @@ use ockam::{node, route, Context, Result};
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Start a worker, of type Echoer, at address "echoer"
     node.start_worker("echoer", Echoer).await?;
@@ -198,7 +198,7 @@ use ockam::{node, route, Context, Result};
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Start an Echoer worker at address "echoer"
     node.start_worker("echoer", Echoer).await?;
@@ -257,7 +257,7 @@ use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let node = node(ctx);
+    let node = node(ctx).await?;
 
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;
@@ -296,7 +296,7 @@ use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpTransportExte
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Initialize the TCP Transport.
     let tcp = node.create_tcp_transport().await?;
@@ -429,7 +429,7 @@ use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let node = node(ctx);
+    let node = node(ctx).await?;
 
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;
@@ -472,7 +472,7 @@ use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, Tcp
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let node = node(ctx);
+    let node = node(ctx).await?;
 
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;
@@ -516,7 +516,7 @@ use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpTransportExte
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;

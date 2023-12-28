@@ -45,26 +45,41 @@ In a later guide, we'll explore how Ockam enables you to define various pluggabl
 // examples/06-credentials-exchange-issuer.rs
 use ockam::access_control::AllowAll;
 use ockam::access_control::IdentityIdAccessControl;
-use ockam::identity::CredentialsIssuer;
-use ockam::identity::SecureChannelListenerOptions;
-use ockam::TcpTransportExtension;
-use ockam::{node, Context, Result, TcpListenerOptions};
+use ockam::identity::{AttributesEntry, SecureChannelListenerOptions};
+use ockam::identity::{CredentialsIssuer, Vault};
+use ockam::{Context, Result, TcpListenerOptions};
+use ockam::{Node, TcpTransportExtension};
+use ockam_api::DefaultAddress;
+use ockam_vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    // Create a node with default implementations
-    let node = node(ctx);
+    let identity_vault = SoftwareVaultForSigning::create().await?;
+    // Import the signing secret key to the Vault
+    let secret = identity_vault
+        .import_key(SigningSecret::EdDSACurve25519(EdDSACurve25519SecretKey::new(
+            hex::decode("0127359911708ef4de9adaaf27c357501473c4a10a5326a69c1f7f874a0cd82e")
+                .unwrap()
+                .try_into()
+                .unwrap(),
+        )))
+        .await?;
 
-    let issuer_identity = "0180370b91c5d0aa4af34580a9ab4b8fb2a28351bed061525c96b4f07e75c0ee18000547c93239ba3d818ec26c9cdadd2a35cbdf1fa3b6d1a731e06164b1079fb7b8084f434b414d5f524b03012000000020236f79490d3f683e0c3bf458a7381c366c99a8f2b2ac406db1ef8c130111f12703010140b23fddceb11cea25602aa681b6ef6abda036722c27a6dee291f1d6b2234a127af21cc79de2252201f27e7e34e0bf5064adbf3d01eb355aff4bf5c90b8f1fd80a";
-    let secret = "9278735d525efceef16bfd9143d3534759f3d388e460e6002134b9541e06489f";
-    let issuer = node.import_private_identity(issuer_identity, secret).await?;
-    println!("issuer identifier {}", issuer.identifier());
+    // Create a default Vault but use the signing vault with our secret in it
+    let mut vault = Vault::create().await?;
+    vault.identity_vault = identity_vault;
+
+    let node = Node::builder().await?.with_vault(vault).build(&ctx).await?;
+
+    let issuer_identity = hex::decode("81825837830101583285f68200815820afbca9cf5d440147450f9f0d0a038a337b3fe5c17086163f2c54509558b62ef4f41a654cf97d1a7818fc7d8200815840650c4c939b96142546559aed99c52b64aa8a2f7b242b46534f7f8d0c5cc083d2c97210b93e9bca990e9cb9301acc2b634ffb80be314025f9adc870713e6fde0d").unwrap();
+    let issuer = node.import_private_identity(None, &issuer_identity, &secret).await?;
+    println!("issuer identifier {}", issuer);
 
     // Tell the credential issuer about a set of public identifiers that are
     // known, in advance, to be members of the production cluster.
     let known_identifiers = vec![
-        "Pe92f183eb4c324804ef4d62962dea94cf095a265d4d28500c34e1a4e0d5ef638".try_into()?,
-        "Pada09e0f96e56580f6a0cb54f55ecbde6c973db6732e30dfb39b178760aed041".try_into()?,
+        "Ie70dc5545d64724880257acb32b8851e7dd1dd57076838991bc343165df71bfe".try_into()?, // Client Identifier
+        "Ife42b412ecdb7fda4421bd5046e33c1017671ce7a320c3342814f0b99df9ab60".try_into()?, // Server Identifier
     ];
 
     // Tell this credential issuer about the attributes to include in credentials
@@ -77,12 +92,18 @@ async fn main(ctx: Context) -> Result<()> {
     //
     // For a different application this attested attribute set can be different and
     // distinct for each identifier, but for this example we'll keep things simple.
-    let credential_issuer =
-        CredentialsIssuer::new(node.identities(), issuer.identifier(), "trust_context".into()).await?;
+    let credential_issuer = CredentialsIssuer::new(
+        node.identities().identity_attributes_repository(),
+        node.credentials(),
+        &issuer,
+        "trust_context".into(),
+    );
+
+    let attributes = AttributesEntry::single(b"cluster".to_vec(), b"production".to_vec(), None, None)?;
     for identifier in known_identifiers.iter() {
         node.identities()
-            .repository()
-            .put_attribute_value(identifier, "cluster", "production")
+            .identity_attributes_repository()
+            .put_attributes(identifier, attributes.clone())
             .await?;
     }
 
@@ -94,16 +115,21 @@ async fn main(ctx: Context) -> Result<()> {
     // Start a secure channel listener that only allows channels where the identity
     // at the other end of the channel can authenticate with the latest private key
     // corresponding to one of the above known public identifiers.
-    node.create_secure_channel_listener(&issuer.identifier(), "secure", sc_listener_options)
+    node.create_secure_channel_listener(&issuer, DefaultAddress::SECURE_CHANNEL_LISTENER, sc_listener_options)
         .await?;
 
     // Start a credential issuer worker that will only accept incoming requests from
     // authenticated secure channels with our known public identifiers.
     let allow_known = IdentityIdAccessControl::new(known_identifiers);
     node.flow_controls()
-        .add_consumer("issuer", &sc_listener_flow_control_id);
-    node.start_worker_with_access_control("issuer", credential_issuer, allow_known, AllowAll)
-        .await?;
+        .add_consumer(DefaultAddress::CREDENTIAL_ISSUER, &sc_listener_flow_control_id);
+    node.start_worker_with_access_control(
+        DefaultAddress::CREDENTIAL_ISSUER,
+        credential_issuer,
+        allow_known,
+        AllowAll,
+    )
+    .await?;
 
     // Initialize TCP Transport, create a TCP listener, and wait for connections.
     let tcp = node.create_tcp_transport().await?;
@@ -113,6 +139,7 @@ async fn main(ctx: Context) -> Result<()> {
     println!("issuer started");
     Ok(())
 }
+
 ```
 {% endcode %}
 
@@ -134,28 +161,48 @@ touch examples/06-credential-exchange-server.rs
 use hello_ockam::Echoer;
 use ockam::abac::AbacAccessControl;
 use ockam::access_control::AllowAll;
-use ockam::identity::{
-    AuthorityService, CredentialsIssuerClient, SecureChannelListenerOptions, SecureChannelOptions, TrustContext,
-};
-use ockam::TcpTransportExtension;
-use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpListenerOptions};
+use ockam::identity::{AuthorityService, SecureChannelListenerOptions, TrustContext, Vault};
+use ockam::{Context, Result, TcpListenerOptions};
+use ockam::{Node, TcpTransportExtension};
+use ockam_api::enroll::enrollment::Enrollment;
+use ockam_api::nodes::NodeManager;
+use ockam_api::DefaultAddress;
+use ockam_multiaddr::MultiAddr;
+use ockam_vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    // Create a node with default implementations
-    let node = node(ctx);
+    let identity_vault = SoftwareVaultForSigning::create().await?;
+    // Import the signing secret key to the Vault
+    let secret = identity_vault
+        .import_key(SigningSecret::EdDSACurve25519(EdDSACurve25519SecretKey::new(
+            hex::decode("5FB3663DF8405379981462BABED7507E3D53A8D061188105E3ADBD70E0A74B8A")
+                .unwrap()
+                .try_into()
+                .unwrap(),
+        )))
+        .await?;
+
+    // Create a default Vault but use the signing vault with our secret in it
+    let mut vault = Vault::create().await?;
+    vault.identity_vault = identity_vault;
+
+    let node = Node::builder().await?.with_vault(vault).build(&ctx).await?;
+
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;
 
     // Create an Identity representing the server
     // Load an identity corresponding to the following public identifier
-    // Pe92f183eb4c324804ef4d62962dea94cf095a265d4d28500c34e1a4e0d5ef638
+    // Ife42b412ecdb7fda4421bd5046e33c1017671ce7a320c3342814f0b99df9ab60
     //
     // We're hard coding this specific identity because its public identifier is known
     // to the credential issuer as a member of the production cluster.
-    let change_history = "01ed8a5b1303f975c1296c990d1bd3c1946cfef328de20531e3511ec5604ce0dd9000547c93239ba3d818ec26c9cdadd2a35cbdf1fa3b6d1a731e06164b1079fb7b8084f434b414d5f524b03012000000020e8c328bc0cc07a374762091d037e69c36fdd4d2e1a651abd4d43a1362d3f800503010140a349968063d7337d0c965969fa9c640824c01a6d37fe130d4ab963b0271b9d5bbf0923faa5e27f15359554f94f08676df01b99d997944e4feaf0caaa1189480e";
-    let secret = "5b2b3f2abbd1787704d8f8b363529f8e2d8f423b6dd4b96a2c462e4f0e04ee18";
-    let server = node.import_private_identity(change_history, secret).await?;
+    let change_history = hex::decode("81825837830101583285f682008158201d387ce453816d91159740a55e9a62ad3b58be9ecf7ef08760c42c0d885b6c2ef41a654cf9681a7818fc688200815840dc10ba498655dac0ebab81c6e1af45f465408ddd612842f10a6ced53c06d4562117e14d656be85685aa5bfbd5e5ede6f0ecf5eb41c19a5594e7a25b7a42c5c07").unwrap();
+    let server = node.import_private_identity(None, &change_history, &secret).await?;
+
+    let issuer_identity = "81825837830101583285f68200815820afbca9cf5d440147450f9f0d0a038a337b3fe5c17086163f2c54509558b62ef4f41a654cf97d1a7818fc7d8200815840650c4c939b96142546559aed99c52b64aa8a2f7b242b46534f7f8d0c5cc083d2c97210b93e9bca990e9cb9301acc2b634ffb80be314025f9adc870713e6fde0d";
+    let issuer = node.import_identity_hex(None, issuer_identity).await?;
 
     // Connect with the credential issuer and authenticate using the latest private
     // key of this program's hardcoded identity.
@@ -163,37 +210,28 @@ async fn main(ctx: Context) -> Result<()> {
     // The credential issuer already knows the public identifier of this identity
     // as a member of the production cluster so it returns a signed credential
     // attesting to that knowledge.
-    let issuer_connection = tcp.connect("127.0.0.1:5000", TcpConnectionOptions::new()).await?;
-    let issuer_channel = node
-        .create_secure_channel(
-            &server.identifier(),
-            route![issuer_connection, "secure"],
-            SecureChannelOptions::new(),
-        )
-        .await?;
-
-    let issuer_client = CredentialsIssuerClient::new(route![issuer_channel, "issuer"], node.context()).await?;
-    let credential = issuer_client.credential().await?;
-    println!("Credential:\n{credential}");
+    let authority_node = NodeManager::authority_node_client(
+        &tcp,
+        node.secure_channels().clone(),
+        &issuer,
+        &MultiAddr::try_from("/dnsaddr/localhost/tcp/5000/secure/api").unwrap(),
+        &server,
+    )
+    .await?;
+    let credential = authority_node.issue_credential(node.context()).await.unwrap();
 
     // Verify that the received credential has indeed be signed by the issuer.
     // The issuer identity must be provided out-of-band from a trusted source
     // and match the identity used to start the issuer node
-    let issuer_identity = "0180370b91c5d0aa4af34580a9ab4b8fb2a28351bed061525c96b4f07e75c0ee18000547c93239ba3d818ec26c9cdadd2a35cbdf1fa3b6d1a731e06164b1079fb7b8084f434b414d5f524b03012000000020236f79490d3f683e0c3bf458a7381c366c99a8f2b2ac406db1ef8c130111f12703010140b23fddceb11cea25602aa681b6ef6abda036722c27a6dee291f1d6b2234a127af21cc79de2252201f27e7e34e0bf5064adbf3d01eb355aff4bf5c90b8f1fd80a";
-    let issuer = node.import_identity_hex(issuer_identity).await?;
     node.credentials()
-        .verify_credential(&server.identifier(), &[issuer.clone()], credential.clone())
+        .credentials_verification()
+        .verify_credential(Some(&server), &[issuer.clone()], &credential)
         .await?;
 
     // Create a trust context that will be used to authenticate credential exchanges
     let trust_context = TrustContext::new(
         "trust_context_id".to_string(),
-        Some(AuthorityService::new(
-            node.identities().identities_reader(),
-            node.credentials(),
-            issuer.identifier(),
-            None,
-        )),
+        Some(AuthorityService::new(node.credentials(), issuer.clone(), None)),
     );
 
     // Start an echoer worker that will only accept incoming requests from
@@ -206,15 +244,17 @@ async fn main(ctx: Context) -> Result<()> {
         .with_credential(credential)
         .as_consumer(&tcp_listener_options.spawner_flow_control_id());
 
-    node.flow_controls()
-        .add_consumer("echoer", &sc_listener_options.spawner_flow_control_id());
-    let allow_production = AbacAccessControl::create(node.repository(), "cluster", "production");
-    node.start_worker_with_access_control("echoer", Echoer, allow_production, AllowAll)
+    node.flow_controls().add_consumer(
+        DefaultAddress::ECHO_SERVICE,
+        &sc_listener_options.spawner_flow_control_id(),
+    );
+    let allow_production = AbacAccessControl::create(node.identity_attributes_repository(), "cluster", "production");
+    node.start_worker_with_access_control(DefaultAddress::ECHO_SERVICE, Echoer, allow_production, AllowAll)
         .await?;
 
     // Start a secure channel listener that only allows channels with
     // authenticated identities.
-    node.create_secure_channel_listener(&server.identifier(), "secure", sc_listener_options)
+    node.create_secure_channel_listener(&server, DefaultAddress::SECURE_CHANNEL_LISTENER, sc_listener_options)
         .await?;
 
     // Create a TCP listener and wait for incoming connections
@@ -224,6 +264,7 @@ async fn main(ctx: Context) -> Result<()> {
     println!("server started");
     Ok(())
 }
+
 ```
 {% endcode %}
 
@@ -240,72 +281,85 @@ touch examples/06-credential-exchange-client.rs
 {% code lineNumbers="true" %}
 ```rust
 // examples/06-credentials-exchange-client.rs
-use ockam::identity::{AuthorityService, CredentialsIssuerClient, SecureChannelOptions, TrustContext};
-use ockam::TcpTransportExtension;
-use ockam::{node, route, Context, Result, TcpConnectionOptions};
+use ockam::identity::{AuthorityService, SecureChannelOptions, TrustContext, Vault};
+use ockam::{route, Context, Result, TcpConnectionOptions};
+use ockam::{Node, TcpTransportExtension};
+use ockam_api::enroll::enrollment::Enrollment;
+use ockam_api::nodes::NodeManager;
+use ockam_api::DefaultAddress;
+use ockam_multiaddr::MultiAddr;
+use ockam_vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    // Create a node with default implementations
-    let mut node = node(ctx);
+    let identity_vault = SoftwareVaultForSigning::create().await?;
+    // Import the signing secret key to the Vault
+    let secret = identity_vault
+        .import_key(SigningSecret::EdDSACurve25519(EdDSACurve25519SecretKey::new(
+            hex::decode("31FF4E1CD55F17735A633FBAB4B838CF88D1252D164735CB3185A6E315438C2C")
+                .unwrap()
+                .try_into()
+                .unwrap(),
+        )))
+        .await?;
+
+    // Create a default Vault but use the signing vault with our secret in it
+    let mut vault = Vault::create().await?;
+    vault.identity_vault = identity_vault;
+
+    let mut node = Node::builder().await?.with_vault(vault).build(&ctx).await?;
     // Initialize the TCP Transport
     let tcp = node.create_tcp_transport().await?;
 
     // Create an Identity representing the client
     // We preload the client vault with a change history and secret key corresponding to the identity identifier
-    // Pe92f183eb4c324804ef4d62962dea94cf095a265d4d28500c34e1a4e0d5ef638
+    // Ie70dc5545d64724880257acb32b8851e7dd1dd57076838991bc343165df71bfe
     // which is an identifier known to the credential issuer, with some preset attributes
+    //
     // We're hard coding this specific identity because its public identifier is known
     // to the credential issuer as a member of the production cluster.
-    let change_history = "01dcf392551f796ef1bcb368177e53f9a5875a962f67279259207d24a01e690721000547c93239ba3d818ec26c9cdadd2a35cbdf1fa3b6d1a731e06164b1079fb7b8084f434b414d5f524b03012000000020a0d205f09cab9a9467591fcee560429aab1215d8136e5c985a6b7dc729e6f08203010140b098463a727454c0e5292390d8f4cbd4dd0cae5db95606832f3d0a138936487e1da1489c40d8a0995fce71cc1948c6bcfd67186467cdd78eab7e95c080141505";
-    let secret = "41b6873b20d95567bf958e6bab2808e9157720040882630b1bb37a72f4015cd2";
-    let client = node.import_private_identity(change_history, secret).await?;
+    let change_history = hex::decode("81825837830101583285f68200815820530d1c2e9822433b679a66a60b9c2ed47c370cd0ce51cbe1a7ad847b5835a963f41a654cf98e1a7818fc8e820081584085054457d079a67778f235a90fa1b926d676bad4b1063cec3c1b869950beb01d22f930591897f761c2247938ce1d8871119488db35fb362727748407885a1608").unwrap();
+    let client = node.import_private_identity(None, &change_history, &secret).await?;
+    println!("issuer identifier {}", client);
 
-    // Connect with the credential issuer and authenticate using the latest private
-    // key of this program's hardcoded identity.
-    //
-    // The credential issuer already knows the public identifier of this identity
+    // Connect to the authority node and ask that node to create a
+    // credential for the client.
+    let issuer_identity = "81825837830101583285f68200815820afbca9cf5d440147450f9f0d0a038a337b3fe5c17086163f2c54509558b62ef4f41a654cf97d1a7818fc7d8200815840650c4c939b96142546559aed99c52b64aa8a2f7b242b46534f7f8d0c5cc083d2c97210b93e9bca990e9cb9301acc2b634ffb80be314025f9adc870713e6fde0d";
+    let issuer = node.import_identity_hex(None, issuer_identity).await?;
+
+    // The authority node already knows the public identifier of the client
     // as a member of the production cluster so it returns a signed credential
     // attesting to that knowledge.
-    let issuer_connection = tcp.connect("127.0.0.1:5000", TcpConnectionOptions::new()).await?;
-    let issuer_channel = node
-        .create_secure_channel(
-            &client.identifier(),
-            route![issuer_connection, "secure"],
-            SecureChannelOptions::new(),
-        )
-        .await?;
-
-    let issuer_client = CredentialsIssuerClient::new(route![issuer_channel, "issuer"], node.context()).await?;
-    let credential = issuer_client.credential().await?;
-    println!("Credential:\n{credential}");
+    let authority_node = NodeManager::authority_node_client(
+        &tcp,
+        node.secure_channels().clone(),
+        &issuer,
+        &MultiAddr::try_from("/dnsaddr/localhost/tcp/5000/secure/api")?,
+        &client,
+    )
+    .await?;
+    let credential = authority_node.issue_credential(node.context()).await.unwrap();
 
     // Verify that the received credential has indeed be signed by the issuer.
     // The issuer identity must be provided out-of-band from a trusted source
     // and match the identity used to start the issuer node
-    let issuer_identity = "0180370b91c5d0aa4af34580a9ab4b8fb2a28351bed061525c96b4f07e75c0ee18000547c93239ba3d818ec26c9cdadd2a35cbdf1fa3b6d1a731e06164b1079fb7b8084f434b414d5f524b03012000000020236f79490d3f683e0c3bf458a7381c366c99a8f2b2ac406db1ef8c130111f12703010140b23fddceb11cea25602aa681b6ef6abda036722c27a6dee291f1d6b2234a127af21cc79de2252201f27e7e34e0bf5064adbf3d01eb355aff4bf5c90b8f1fd80a";
-    let issuer = node.import_identity_hex(issuer_identity).await?;
     node.credentials()
-        .verify_credential(&client.identifier(), &[issuer.clone()], credential.clone())
+        .credentials_verification()
+        .verify_credential(Some(&client), &[issuer.clone()], &credential)
         .await?;
 
     // Create a trust context that will be used to authenticate credential exchanges
     let trust_context = TrustContext::new(
         "trust_context_id".to_string(),
-        Some(AuthorityService::new(
-            node.identities().identities_reader(),
-            node.credentials(),
-            issuer.identifier(),
-            None,
-        )),
+        Some(AuthorityService::new(node.credentials(), issuer.clone(), None)),
     );
 
     // Create a secure channel to the node that is running the Echoer service.
     let server_connection = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
     let channel = node
         .create_secure_channel(
-            &client.identifier(),
-            route![server_connection, "secure"],
+            &client,
+            route![server_connection, DefaultAddress::SECURE_CHANNEL_LISTENER],
             SecureChannelOptions::new()
                 .with_trust_context(trust_context)
                 .with_credential(credential),
@@ -315,12 +369,16 @@ async fn main(ctx: Context) -> Result<()> {
     // Send a message to the worker at address "echoer".
     // Wait to receive a reply and print it.
     let reply = node
-        .send_and_receive::<String>(route![channel, "echoer"], "Hello Ockam!".to_string())
+        .send_and_receive::<String>(
+            route![channel, DefaultAddress::ECHO_SERVICE],
+            "Hello Ockam!".to_string(),
+        )
         .await?;
     println!("Received: {}", reply); // should print "Hello Ockam!"
 
     node.stop().await
 }
+
 ```
 {% endcode %}
 

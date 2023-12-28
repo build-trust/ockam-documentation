@@ -68,7 +68,7 @@ async fn main(ctx: Context) -> Result<()> {
     print_title(vec!["Run a node & stop it right away"]);
 
     // Create a node.
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Stop the node as soon as it starts.
     node.stop().await
@@ -137,7 +137,6 @@ Add the following code to this file:
 
 ```rust
 // src/echoer.rs
-
 use ockam::{Context, Result, Routed, Worker};
 
 pub struct Echoer;
@@ -154,6 +153,7 @@ impl Worker for Echoer {
         ctx.send(msg.return_route(), msg.body()).await
     }
 }
+
 ```
 
 Note that we define the `Message` associated type of the worker as `String`, which specifies that this worker expects to handle `String` messages. We then go on to define a `handle_message(..)` function that will be called whenever a new message arrives for this worker.
@@ -164,9 +164,24 @@ To make this Echoer type accessible to our main program, export it from `src/lib
 
 ```rust
 // src/lib.rs
-
 mod echoer;
+
 pub use echoer::*;
+
+mod hop;
+mod relay;
+
+pub use hop::*;
+pub use relay::*;
+
+mod logger;
+mod project;
+mod token;
+
+pub use logger::*;
+pub use project::*;
+pub use token::*;
+
 ```
 
 #### App worker
@@ -193,7 +208,7 @@ use ockam::{node, Context, Result};
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
     // Create a node with default implementations
-    let mut node = node(ctx);
+    let mut node = node(ctx).await?;
 
     // Start a worker, of type Echoer, at address "echoer"
     node.start_worker("echoer", Echoer).await?;
@@ -208,6 +223,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 
 To run this new node program:

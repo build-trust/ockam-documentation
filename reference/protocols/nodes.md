@@ -29,15 +29,51 @@ In the following code snippet we create a node in Rust and then immediately stop
 // This program creates and then immediately stops a node.
 
 use ockam::{node, Context, Result};
+use r3bl_ansi_color::{AnsiStyledText, Color, Style};
+
+#[rustfmt::skip]
+const HELP_TEXT: &str =r#"
+┌───────────────────────┐
+│  Node 1               │
+├───────────────────────┤
+│  ┌─────────────────┐  │
+│  │ Worker Address: │  │
+│  │ 'app'           │  │
+│  └─────────────────┘  │
+└───────────────────────┘
+"#;
 
 /// Create and then immediately stop a node.
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    let mut node = node(ctx);
+    AnsiStyledText {
+        text: HELP_TEXT,
+        style: &[Style::Foreground(Color::Rgb(100, 200, 0))],
+    }
+    .println();
+
+    print_title(vec!["Run a node & stop it right away"]);
+
+    // Create a node.
+    let mut node = node(ctx).await?;
 
     // Stop the node as soon as it starts.
     node.stop().await
 }
+
+fn print_title(title: Vec<&str>) {
+    let msg = format!("🚀 {}", title.join("\n  → "));
+    AnsiStyledText {
+        text: msg.as_str(),
+        style: &[
+            Style::Bold,
+            Style::Foreground(Color::Rgb(70, 70, 70)),
+            Style::Background(Color::Rgb(100, 200, 0)),
+        ],
+    }
+    .println();
+}
+
 ```
 {% endcode %}
 
@@ -84,6 +120,7 @@ impl Worker for Echoer {
         ctx.send(msg.return_route(), msg.body()).await
     }
 }
+
 ```
 {% endcode %}
 
@@ -103,7 +140,8 @@ use ockam::{node, Context, Result};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
-    let mut node = node(ctx);
+    // Create a node with default implementations
+    let mut node = node(ctx).await?;
 
     // Start a worker, of type Echoer, at address "echoer"
     node.start_worker("echoer", Echoer).await?;
@@ -118,6 +156,7 @@ async fn main(ctx: Context) -> Result<()> {
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
 }
+
 ```
 {% endcode %}
 
