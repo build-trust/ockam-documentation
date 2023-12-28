@@ -56,7 +56,6 @@ Just before forwarding the message, `Hop`'s handle message function will:
 {% code lineNumbers="true" fullWidth="true" %}
 ```rust
 // src/hop.rs
-
 use ockam::{Any, Context, LocalMessage, Result, Routed, Worker};
 
 pub struct Hop;
@@ -328,7 +327,6 @@ We'll create a worker, called `Relay`, that takes every incoming message and for
 {% code lineNumbers="true" fullWidth="true" %}
 ```rust
 // src/relay.rs
-
 use ockam::{Address, Any, Context, LocalMessage, Result, Routed, Worker};
 
 pub struct Relay(pub Address);
