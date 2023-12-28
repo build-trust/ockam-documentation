@@ -36,6 +36,7 @@ jobs:
       - name: Update Examples
         working-directory: docs
         run: |
+          set -ex
           branch_name="${{ github.event.inputs.branch_name }}"
           if git ls-remote --heads origin "$branch_name" | grep -q "$branch_name"; then
             echo "Branch $branch_name exists, switching to it..."
@@ -45,6 +46,8 @@ jobs:
             echo "Branch $branch_name doesn't exist, creating a new branch..."
             git checkout -b "$branch_name"
           fi
+
+          git log -5
 
           DOCS_HOME="${GITHUB_WORKSPACE}/docs" OCKAM_HOME="${GITHUB_WORKSPACE}/examples" ${GITHUB_WORKSPACE}/examples/tools/docs/update_md.sh
 
