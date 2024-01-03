@@ -23,7 +23,7 @@ Any Ockam Identity can issue credentials about another Ockam Identity.
      ✔︎ Identity P5c14d09f32dd27255913d748d276dcf6952b7be5d0be4023e5f40787b53274ae
        created successfully as b
 
-» ockam credential issue --as a --for $(ockam identity show b --full --encoding hex)
+» ockam credential issue --as a --for $(ockam identity show b)
 Subject:    P5c14d09f32dd27255913d748d276dcf6952b7be5d0be4023e5f40787b53274ae
 Issuer:     P8b604a07640ecd944f379b5a1a5da0748f36f76327b00193067d1d8c6092dfae
 Created:    2023-04-06T17:05:36Z
@@ -35,7 +35,7 @@ Signature:  6feeb038f0cdc28a16fbe3ed4f69feee5ccce3d2a6ac8be83e76180e7bbd3c6e0adb
 The Issuer can include specific attributes in the attestation:
 
 ```
-» ockam credential issue --as a --for $(ockam identity show b --full --encoding hex) \
+» ockam credential issue --as a --for $(ockam identity show b) \
     --attribute location=Chicago --attribute department=Operations
 Subject:    P5c14d09f32dd27255913d748d276dcf6952b7be5d0be4023e5f40787b53274ae
 Issuer:     P8b604a07640ecd944f379b5a1a5da0748f36f76327b00193067d1d8c6092dfae (OCKAM_RK)
@@ -53,12 +53,12 @@ Signature:  b235429f8dc7be2e79bca0b8f59bdb6676b06f608408085097e7fb5a2029de0d27d6
 » ockam identity create a
 » ockam identity create b
 
-» ockam credential issue --as a --for $(ockam identity show b --full --encoding hex) \
+» ockam credential issue --as a --for $(ockam identity show b) \
     --encoding hex > b.credential
 
-» ockam credential verify --issuer $(ockam identity show a --full --encoding hex) \
+» ockam credential verify --issuer $(ockam identity show a) \
     --credential-path b.credential
-✔︎ Verified Credential
+✔︎ Credential is valid
 ```
 
 ### Storing Credentials
@@ -66,7 +66,7 @@ Signature:  b235429f8dc7be2e79bca0b8f59bdb6676b06f608408085097e7fb5a2029de0d27d6
 ```
 » ockam credential store c1 --issuer $(ockam identity show a --full --encoding hex) \
     --credential-path b.credential
-Credential c1 stored
+✔︎ Credential c1 stored
 ```
 
 ## Trust Anchors
@@ -108,18 +108,21 @@ HELLO
 » ockam identity show authority --full --encoding hex > authority
 
 » ockam identity create i1
-» ockam identity show i1 --full --encoding hex > i1
-» ockam credential issue --as authority --for $(cat i1) --attribute city="New York" --encoding hex > i1.credential
+» ockam identity show i1 > i1
+» ockam credential issue --as authority \
+    --for $(cat i1) --attribute city="New York" \
+    --encoding hex > i1.credential
 » ockam credential store c1 --issuer $(cat authority) --credential-path i1.credential
+» ockam trust-context create tc --credential c1 --authority-identity $(cat authority)
 
 » ockam identity create i2
-» ockam identity show i2 --full --encoding hex > i2
+» ockam identity show i2 > i2
 » ockam credential issue --as authority \
 	--for $(cat i2) --attribute city="San Francisco" \
 	--encoding hex > i2.credential
 » ockam credential store c2 --issuer $(cat authority) --credential-path i2.credential
 
-» ockam node create n1 --identity i1 --authority-identity $(cat authority)
+» ockam node create n1 --identity i1 --authority-identity $(cat authority) --trust-context tc
 » ockam node create n2 --identity i2 --authority-identity $(cat authority) --credential c2
 
 » ockam secure-channel create --from n1 --to /node/n2/service/api --credential c1 --identity i1 \
