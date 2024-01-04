@@ -38,6 +38,10 @@ ockam project addon configure confluent \
     --bootstrap-server YOUR_CONFLUENT_CLOUD_BOOTSTRAP_SERVER_ADDRESS
 ```
 
+{% hint style="info" %}
+In order to get the bootstrap address and cluster API Key and Secret, you'll need to create a cluster on Confluent Cloud. Then navigate to the Clients sub menu on the left, and choose Java. You can generate an API key here and make note of the information generated.
+{% endhint %}
+
 As the administrator of the Ockam project, you're able to control what other identities are allowed to enroll themselves into your project by issuing unique one-time use enrollment tickets. We'll start by creating three separate tickets, one each for two separate producers and one for a single consumer, and we'll save each ticket to a file so we can move it to another host easily:​
 
 ```bash
@@ -79,19 +83,22 @@ An Ockam node is a way to connect securely connect different services to each ot
 ockam node create consumer --identity consumer
 ```
 
-Once that completes we can now expose our Kafka bootstrap server. This is like the remote Kafka bootsrtap server and brokers have become virtually adjacent on `localhost:4000` by default:
+Once that completes we can now expose our Kafka bootstrap server. This is like the remote Kafka bootstrap server and brokers have become virtually adjacent on `localhost:4000` by default:
 
 ```bash
 ockam kafka-consumer create --at consumer
 ```
 
-**note**: if port `4000` is already taken on your machine you can specify another port
+{% hint style="info" %}
+
+If your machine already has port `4000` taken, you can specify a different one using the `--bootstrap-server` flag. Let's illustrate this with an example of using port `3000` instead:
 
 ```bash
 ockam kafka-consumer create --at consumer \
   --bootstrap-server 127.0.0.1:3000
 ```
 
+{% endhint %}
 
 Copy the `kafka.config` file across, and use it to create a new topic that we'll use for sending messages between the producer and consumer in this demo (in this case we've called the topic `demo-topic`)
 
@@ -113,7 +120,7 @@ The consumer code will push all communication into the Ockam node process that i
 
 #### Producer1
 
-To have messages for our consumer to process, we need to have something producing them. We'll go through a very similar process now but instead create the parts necessary for a producer. We start once again by creating an identity on the producer's host (again, install the Ockam Command on that host if required):
+To have messages for our consumer to process, we need to have something producing them. Now, we'll go through a very similar process but instead, create the parts necessary for a producer. We start once again by creating an identity on the producer's host (again, install the Ockam Command on that host if required):
 
 ```bash
 ockam identity create producer1
@@ -145,15 +152,15 @@ kafka-console-producer.sh --topic demo-topic \
   --producer.config kafka.config
 ```
 
-Your existing producer code will now be running, communicating with the broker via the secure portal we've created that has exposed the Kafka bootstrap server and Kafka brokers on local ports, and sending messages through to the consumer that was setup in the previous step. However all message payloads will be transparently encrypted as they enter the node on the producer, and not decrypted until they exit the consumer node. At no point in transit can the broker see the plaintext message payload that was initially sent by the producer.
+Your existing producer code will now run, communicate with the broker via the secure portal we've created (which has exposed the Kafka bootstrap server and Kafka brokers on local ports), and send messages through to the consumer set up in the previous step. However, as the message payloads enter the producer node, it will transparently encrypt them and will not decrypt them until they exit the consumer node. At any point in transit, the broker cannot see the plaintext message payload initially sent by the producer.
 
-If you look at the encrypted messages inside Confluent Cloud, they will render as unrecognizable characters like in the following screen capture:
+When you inspect the encrypted messages inside Confluent Cloud, you will observe them rendering as unrecognizable characters, as depicted in the following screen capture.
 
 <figure><img src="../../.gitbook/assets/ockam-end-to-end-encryption-kafka-confluent.gif" alt=""><figcaption><p>End-to-end Encrypted Messages bing written to demo-topic in Kafka in Confluent Cloud</p></figcaption></figure>
 
 #### Producer2
 
-Connecting a second product is a matter of repeating the steps above with a new identity and the `producer2.ticket`. Copy over `kafka.config`, and `producer2.ticket` files and run the following commands:
+Connecting a second producer is a matter of repeating the steps above with a new identity and the `producer2.ticket`. Copy over `kafka.config`, and `producer2.ticket` files and run the following commands:
 
 ```
 ockam identity create producer2
@@ -164,7 +171,7 @@ ockam kafka-producer create --at producer2 \
   --bootstrap-server 127.0.0.1:6000
 
 kafka-console-producer.sh --topic demo-topic \
-  --bootstrap-server localhost:6000 \ 
+  --bootstrap-server localhost:6000 \
   --producer.config kafka.config
 ```
 
