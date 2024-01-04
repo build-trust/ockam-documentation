@@ -16,7 +16,7 @@ With Ockam, network administrators don't have to update network access control l
 
 Before we get started, let's take a look at the steps we'll perform in this example.
 
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
 
 1. Use `ockam enroll` to install the Ockam application and create an Ockam project. This is the first prerequisite.
 2. Set up the PostgreSQL database. This is the second prerequisite. Then configure an Ockam [<mark style="color:blue;">"outlet"</mark>](https://docs.ockam.io/reference/command/advanced-routing) to the database server. We will learn more about this in the "[<mark style="color:blue;">connect the database</mark>](basic-web-app.md#connect-the-database)" section below.
@@ -167,7 +167,7 @@ export APP_PG_PORT=$OCKAM_PORT
 flask --app main run
 ```
 
-<img src="../../.gitbook/assets/file.excalidraw (1).svg" alt="The web app now has a secure channel connection with the database" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (1) (4).svg" alt="The web app now has a secure channel connection with the database" class="gitbook-drawing">
 
 Finally, connect to this URL again from your web browser `http://localhost:5000/`.
 
@@ -178,9 +178,9 @@ Finally, connect to this URL again from your web browser `http://localhost:5000/
 
 You can also extend this example and move the PostgreSQL service into a Docker container or to an entirely different machine. Once the nodes are registered (after ockam enroll runs), this demo will continue to work, with no application code changes and no need to expose the PostgreSQL ports directly to the Internet.
 
-To run the web app and the database on different machines, let’s say we have 3 machines: Machines A, B, and C.&#x20;
+To run the web app and the database on different machines, let’s say we have 3 machines: Machines A, B, and C.
 
-* Machine A: You run `ockam enroll` in this machine and generate 2 enrollment tickets (as plain text files).&#x20;
+* Machine A: You run `ockam enroll` in this machine and generate 2 enrollment tickets (as plain text files).
 * Machine B: This machine is for the database. You will use one enrollment ticket in this machine.
 * Machine C: This machine is for the web app. You will use another enrollment ticket in this machine.
 

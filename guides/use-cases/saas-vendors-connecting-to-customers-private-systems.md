@@ -21,7 +21,7 @@ A VPN based approach instead creates a secure connection from the network where 
 
 ### How Ockam simplifies it
 
-<img src="../../.gitbook/assets/file.excalidraw (2) (1) (2).svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
 Your customer is able to run an Ockam process alongside the service they want to make available, either by using the Ockam Command directly or embedded into a custom agent you provide as part of your solution. The Ockam process enrolls with Orchestrator and defines what other components are permitted to access it. No ports or networks are exposed to the internet at any point.
 
