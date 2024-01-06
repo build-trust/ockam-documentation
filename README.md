@@ -1,3 +1,47 @@
+<!-- bats start ENROLLED_HOME -->
+<!--
+# Ockam binary to use
+if [[ -z $OCKAM ]]; then
+  OCKAM=ockam
+fi
+if [[ -z $ENROLLED_HOME ]]; then
+  exit 1
+fi
+export OCKAM_HOME=$ENROLLED_HOME
+setup() {
+  load "$BATS_LIB/bats-support/load.bash"
+  load "$BATS_LIB/bats-assert/load.bash"
+  $OCKAM node delete --all --yes
+  python_pid_file="${ENROLLED_HOME}/python.pid"
+  touch $python_pid_file
+  python3 -m http.server --bind 127.0.0.1 6000 &
+  pid="$!"
+  echo "$pid" >"$python_pid_file"
+}
+teardown() {
+  $OCKAM node delete --all --yes
+  python_pid_file="${ENROLLED_HOME}/python.pid"
+  pid=$(cat "$python_pid_file")
+  kill -9 "$pid"
+  wait "$pid" 2>/dev/null || true
+  rm -rf default-project.json
+  rm -rf $ENROLLED_HOME
+}
+@test "run end-to-end encrypted and mutually authenticated communication" {
+  run $OCKAM tcp-outlet create --to 6000
+  assert_success
+  run $OCKAM relay create
+  assert_success
+
+  run $OCKAM tcp-inlet create --from 7000
+  assert_success
+
+  run curl --head 127.0.0.1:7000
+  assert_success
+}
+-->
+<!-- bats end -->
+
 ---
 description: Build secure-by-design applications that can trust all data-in-motion.
 ---
