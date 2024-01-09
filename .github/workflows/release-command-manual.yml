@@ -42,12 +42,13 @@ jobs:
 
       - name: Update Ockam Command Manual
         working-directory: ockam-documentation
+        shell: nix develop ./../ockam/tools/nix#rust --command bash {0}
         run: |
           git checkout command
           git checkout -B ${{ github.event.inputs.release_branch }}
 
           cd manual/template/mdbook
-          nix shell nixpkgs/nixos-23.11#mdbook ${{ github.workspace }}/ockam/tools/nix#devShells.x86_64-linux.rust --command sh -c "./build.sh ${{ github.event.inputs.release_tag }}"
+          nix shell nixpkgs/nixos-23.11#mdbook --command sh -c "./build.sh ${{ github.event.inputs.release_tag }}"
 
 
       - name: Push Upstream
