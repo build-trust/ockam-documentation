@@ -1,3 +1,44 @@
+<!-- bats start ENROLLED_HOME -->
+<!--
+# Ockam binary to use
+if [[ -z $OCKAM ]]; then
+  OCKAM=ockam
+fi
+if [[ -z $PG_HOST ]]; then
+  PG_HOST="127.0.0.1"
+fi
+if [[ -z $ENROLLED_HOME ]]; then
+  exit 1
+fi
+export OCKAM_HOME=$ENROLLED_HOME
+export PGPASSWORD="password"
+export PGHOST="$PG_HOST"
+setup() {
+  load "$BATS_LIB/bats-support/load.bash"
+  load "$BATS_LIB/bats-assert/load.bash"
+  $OCKAM node delete --all --yes
+  createdb -U postgres app_db
+}
+teardown() {
+  $OCKAM node delete --all --yes
+  dropdb -U postgres app_db
+  rm -rf $ENROLLED_HOME
+}
+
+@test "run create-secure-communication-with-a-private-database-from-anywhere" {
+  run $OCKAM tcp-outlet create --to "$PG_HOST:5432"
+  assert_success
+  run $OCKAM relay create
+  assert_success
+
+  run $OCKAM tcp-inlet create --from 7777
+  assert_success
+  # Call the list database -l
+  run psql --host="127.0.0.1" --port=7777 -U postgres app_db -l
+  assert_success
+}
+-->
+<!-- bats end -->
 # Create secure communication with a private database, from anywhere
 
 In this example we are going to install a PostgreSQL database on our local machine
