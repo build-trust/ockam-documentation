@@ -25,6 +25,7 @@ teardown() {
   kill -9 "$pid"
   wait "$pid" 2>/dev/null || true
   rm -rf default-project.json
+  $OCKAM reset -y
   rm -rf $ENROLLED_HOME
 }
 @test "run end-to-end encrypted and mutually authenticated communication" {
