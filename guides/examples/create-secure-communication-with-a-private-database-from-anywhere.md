@@ -22,6 +22,7 @@ setup() {
 teardown() {
   $OCKAM node delete --all --yes
   dropdb -U postgres app_db
+  $OCKAM reset -y
   rm -rf $ENROLLED_HOME
 }
 
