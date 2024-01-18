@@ -1,4 +1,4 @@
-# Use employee attributes from Okta to Build Trust with Cryptographically Verifiable Credentials
+# Use employee attributes from Okta
 
 In this guide, we’ll step through a demo of how workforce identities in Okta can be combined with application identities in Ockam to bring policy driven, attribute-based access control of distributed applications – using cryptographically verifiable credentials.
 
@@ -70,13 +70,9 @@ First we'll create our application components and then see how to give access to
 
 ### Required Dependencies
 
-Through this example `https://trial-9434859.okta.com/oauth2/default` refers to an existing
-Okta endpoint where workforce identities are defined. The Okta user profile is expected to
-contain `email`, `city` and `department` attributes. These attributes will be included on
-the generated Ockam credentials.
+Through this example `$YOUR_OKTA_TENANT_OATH2_ADDRESS` refers to an existing Okta endpoint where workforce identities are defined. You also need your `$YOUR_OKTA_CLIENT_ID`.  You can get these from your existing Okta account. The Okta user profile is expected to contain `email`, `city` and `department` attributes. These attributes will be included on the generated Ockam credentials.
 
-If you don't have an Okta install already, you can create a [trial
-account](https://www.okta.com/free-trial/) to follow this example use case.
+> If you don't have an Okta account already, you can create a [trial account](https://www.okta.com/free-trial/) to follow this example use case. After you create your trial account, make sure to create a new app integration for this example. Then choose "OIDC - OpenID connect" for the Sign-in method and "Native Application" for the Application type, in Okta's website. You can get your Client ID and your URL from there as well. You can also select all the Grant types in your new app integration, for the purposes of this example.
 
 ### Setup
 
@@ -101,7 +97,7 @@ Next we provision our system. We enroll with Ockam Orchestrator, enable the Okta
 ```bash
 ockam enroll
 ockam project addon configure okta \
-  --tenant https://trial-9434859.okta.com/oauth2/default --client-id 0oa2pi8no6Kb04frP697 \
+  --tenant $YOUR_OKTA_TENANT_OATH2_ADDRESS --client-id $YOUR_OKTA_CLIENT_ID \
   --attribute email --attribute city --attribute department
 
 ockam project information --output json > project.json
@@ -179,7 +175,7 @@ There is a problem in one of the microservices in San Francisco and we need to g
 Since the Okta Add-On is enabled. Alice can simply start a node within the project and authenticate.
 
 ```bash
-ockam project import project.json
+ockam project import --project-file project.json
 ockam project enroll --okta
 ockam node create alice
 ockam policy create --at alice --resource tcp-inlet --expression '(= subject.application "Smart Factory")'
