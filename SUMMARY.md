@@ -23,6 +23,7 @@
   * [End-to-end encryption through Kafka](guides/examples/end-to-end-encrypted-kafka.md)
   * [Attribute-Based Access Control (ABAC)](guides/examples/abac.md)
   * [Use employee attributes from Okta](guides/examples/okta.md)
+  * [AWS Marketplace TCP Outlet/Inlet](guides/examples/aws-marketplace-tcp-inlet-outlet.md)
 
 ## Reference
 
