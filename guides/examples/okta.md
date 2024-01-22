@@ -70,7 +70,7 @@ First we'll create our application components and then see how to give access to
 
 ### Required Dependencies
 
-Through this example `$YOUR_OKTA_TENANT_OATH2_ADDRESS` refers to an existing Okta endpoint where workforce identities are defined. You also need your `$YOUR_OKTA_CLIENT_ID`.  You can get these from your existing Okta account. The Okta user profile is expected to contain `email`, `city` and `department` attributes. These attributes will be included on the generated Ockam credentials.
+Through this example `$YOUR_OKTA_TENANT_OAUTH2_ADDRESS` refers to an existing Okta endpoint where workforce identities are defined. You also need your `$YOUR_OKTA_CLIENT_ID`.  You can get these from your existing Okta account. The Okta user profile is expected to contain `email`, `city` and `department` attributes. These attributes will be included on the generated Ockam credentials.
 
 > If you don't have an Okta account already, you can create a [trial account](https://www.okta.com/free-trial/) to follow this example use case. After you create your trial account, make sure to create a new app integration for this example. Then choose "OIDC - OpenID connect" for the Sign-in method and "Native Application" for the Application type, in Okta's website. You can get your Client ID and your URL from there as well. You can also select all the Grant types in your new app integration, for the purposes of this example.
 
@@ -97,7 +97,7 @@ Next we provision our system. We enroll with Ockam Orchestrator, enable the Okta
 ```bash
 ockam enroll
 ockam project addon configure okta \
-  --tenant $YOUR_OKTA_TENANT_OATH2_ADDRESS --client-id $YOUR_OKTA_CLIENT_ID \
+  --tenant $YOUR_OKTA_TENANT_OAUTH2_ADDRESS --client-id $YOUR_OKTA_CLIENT_ID \
   --attribute email --attribute city --attribute department
 
 ockam project information --output json > project.json
