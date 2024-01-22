@@ -1,15 +1,17 @@
 ---
-description: Create TCP Inlet/Outlet from AWS Marketplace 
+description: Create TCP Inlet/Outlet from AWS Marketplace
 ---
-In this example we will create an Ockam portal with a tcp inlet and a tcp outlet by lauching cloudformation template from AWS Marketplace
+In this example we will create an Ockam Portal with a TCP Inlet and a TCP Outlet by launching CloudFormation template from AWS Marketplace.
 
 # Overview:
 
 <img src="../../.gitbook/assets/aws_marketplace.svg" alt="" class="gitbook-drawing">
 
-1. Install ockam and create enrollment tokens for outlet and inlet
-2. Use the enrollment token for outlet and launch Cloudformation template from AWS Marketplace
-3. Use the enrollment token for inlet and launch Cloudformation template from AWS Marketplace
+1. Install Ockam Command and create enrollment tickets for the Outlet and Inlet.
+2. Use the enrollment ticket for the Outlet and launch CloudFormation template from AWS Marketplace.
+3. Use the enrollment ticket for the Inlet and launch CloudFormation template from AWS Marketplace.
+
+> Note that the Inlet and Outlet can be on two different EC2 machines on different AWS accounts.
 
 ## Architecture:
 
@@ -17,7 +19,7 @@ In this example we will create an Ockam portal with a tcp inlet and a tcp outlet
 
 ## Steps:
 
-### 1. Install Ockam
+### 1. Install Ockam Command
 
 Install the [<mark style="color:blue;">Ockam
 command</mark>](https://docs.ockam.io/#quick-start), if you haven't already, by following
@@ -58,26 +60,27 @@ question](https://github.com/build-trust/ockam/discussions), we’d love to help
 
 ### 2. Generate enrollment tickets
 
-- Start by enrolling with the Orchestrator and ensuring the default project is setup to use:
+- As the administrator of Ockam project, start by enrolling with the Orchestrator. Run the following command to ensure the default project is setup and ready to use.
 
 ```shell
 ockam enroll
 ```
 
-- As the administrator of the Ockam project, you're able to control what other identities are allowed to enroll themselves into your project by issuing unique one-time use enrollment tickets. Generate enrollment tickets, one for outlet and one for inlet
+- You are able to control what other identities are allowed to enroll themselves into your project by issuing unique one-time use enrollment tickets. Generate two enrollment tickets, one for the Outlet and one for the Inlet.
 
 ```shell
 
-# Choose a name that identifies your resource. Below is a sample you can use for this demo
+# Choose a name that identifies your resource.
+# Below is a sample you can use for this demo.
 RESOURCE_IDENTIFIER="aws:cft:demo"
 
-# Enrollment ticket for outlet
+# Enrollment ticket for Outlet.
 ockam project ticket --expires-in 24h --usage-count 1 \
   --attribute component=${RESOURCE_IDENTIFIER}:outlet \
   --relay ${RESOURCE_IDENTIFIER}:outlet \
     > "${RESOURCE_IDENTIFIER}:outlet.enrollment.ticket"
 
-# Enrollment ticket for inlet
+# Enrollment ticket for Inlet.
 ockam project ticket --expires-in 24h --usage-count 1 \
   --attribute component=${RESOURCE_IDENTIFIER}:inlet \
     > "${RESOURCE_IDENTIFIER}:inlet.enrollment.ticket"
@@ -86,26 +89,26 @@ ockam project ticket --expires-in 24h --usage-count 1 \
 
 ### 3. Setup TCP Outlet
 
-- Open Cloudformation template from marketplace. Choose the `AWS Region` you would like to deploy to
+- Open the Ockam CloudFormation template from AWS Marketplace. Choose the `AWS Region` you would like to deploy to.
 
-- Stack name: `ockam-ec2-instance-outlet` or any appropriate value.
+- Stack name: `ockam-ec2-instance-outlet` or any name you prefer.
 
-- Network Configuration
-  - Select suitable values.
+- Network Configuration:
+  - Select suitable values for your topology.
 
-- Ockam Configuration
-  - `Ockam TCP Outlet or Inlet`: Choose `outlet`
-  - `Enrollment ticket`: Copy paste the content of `outlet` ticket generated above
-  - `Resource Identifier`: Enter the value of resource identifier (RESOURCE_IDENTIFIER) used to generate enrollment tickets. If you are following this example, use `aws:cft:demo`
-  - `Resource Address`: Enter `127.0.0.1:7777`. In the upcoming steps, you will setup a webhook on the same ec2 listening on port `7777`. _This could be any resource in the AWS account that the EC2 machine can access_
+- Ockam Configuration:
+  - `Ockam TCP Outlet or Inlet`: Choose `outlet`.
+  - `Enrollment ticket`: Copy and paste the content of the `outlet` ticket generated above.
+  - `Resource Identifier`: Enter the value of resource identifier (`${RESOURCE_IDENTIFIER}`) used to generate enrollment tickets. If you are following this example, use `aws:cft:demo`.
+  - `Resource Address`: Enter `127.0.0.1:7777`. In the upcoming steps, you will setup a webhook on the same EC2 machine listening on port `7777`. _This could be any resource in the AWS account that the EC2 machine can access_.
 
-- Launch cloudformation template. 
+- Click Next to launch the CloudFormation run.
 
-- Upon successful cloudformation stack run, ockam outlet is configured on an ec2 machine.
+- Upon successful CloudFormation stack run, the Ockam outlet will be configured on an EC2 machine.
 
-- Connect to EC2 machine via AWS Session Manager. To view the log file, connect to the instance and open `/var/log/cloud-init-output.log`
+- Connect to the EC2 machine via AWS Session Manager. To view the log file, run `sudo cat /var/log/cloud-init-output.log`.
 
-- Connect to EC2 machine via AWS Session Manager to run a webhook. Copy below contents to file `/opt/webhook_receiver.py`
+- Let's set up a webhook. Copy the code below to this file: `/opt/webhook_receiver.py`.
 
 ```py
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -141,45 +144,46 @@ if __name__ == '__main__':
     run()
 
 ```
-- Execute `python3 /opt/webhook_receiver.py` to start the webhook that will listen on port `7777`. Note that the outlet is created to send traffic to this webhook, so keep the window open as you setup inlet to test portal
+
+- Run `python3 /opt/webhook_receiver.py` to start the webhook that will listen on port `7777`. Note that the Outlet will send traffic to this webhook, so keep the window open as you setup the Inlet to test the Portal.
 
 ### 4. Setup TCP Inlet
 
-- Open Cloudformation template from marketplace. Choose the `AWS Region` you would like to deploy to.
+- Open the Ockam CloudFormation template from AWS Marketplace. Choose the `AWS Region` you would like to deploy to.
 
-- Stack name: `ockam-ec2-instance-inlet` or any appropriate value.
+- Stack name: `ockam-ec2-instance-inlet` or name of your choice.
 
-- Network Configuration
+- Network Configuration:
   - Select suitable values.
 
-- Ockam Configuration
+- Ockam Configuration:
   - `Ockam TCP Outlet or Inlet`: Choose `inlet`
   - `Enrollment ticket`: Copy paste the `inlet` ticket generated above
-  - `Resource Identifier`: Enter the value of resource identifier (RESOURCE_IDENTIFIER) used to generate enrollment tickets. If you are following this example, use `aws:cft:demo`
-  - `Resource Address`: Enter `127.0.0.1:7775`. This is the address you would want the inlet to listen to. 
+  - `Resource Identifier`: Enter the value of resource identifier (`${RESOURCE_IDENTIFIER}`) used to generate enrollment tickets. If you are following this example, use `aws:cft:demo`.
+  - `Resource Address`: Enter `127.0.0.1:7775`. The Inlet will listen at this address.
 
-- Launch cloudformation template. 
+- Click Next to launch the CloudFormation run.
 
-- Upon successful cloudformation run, ockam inlet is configured on an ec2 machine.
+- Upon successful CloudFormation run, the Ockam Inlet is configured on an EC2 machine.
 
-- Connect to EC2 machine via AWS Session Manager. To view the log file, connect to the instance and open `/var/log/cloud-init-output.log`
+- Connect to the EC2 machine via AWS Session Manager. To view the log file, run `sudo cat /var/log/cloud-init-output.log`.
 
-- Run below command that post a request to the inlet address. You much receive a response. Verify request reaches the webhook running on the outlet machine.
+- Run the command below to post a request to the Inlet address. You must receive a response. Verify that the request reaches the webhook running on the Outlet machine.
 
 ```shell
 curl -X POST http://localhost:7775/webhook -H "Content-Type: application/json" -d "{\"date\": \"$(date +%Y-%m-%d)\"}"
 ```
 
-You have now successfully created an ockam portal and verified secure communication.
+You have now successfully created an Ockam Portal and verified secure communication 🎉.
 
 ### 4. Cleanup
 
-- Delete cloudformation stack that created tcp outlet in AWS Account
+- Delete the Outlet CloudFormation stack from the AWS Account.
 
-- Delete cloudformation stack that created tcp inlet in AWS Account
+- Delete the Inlet CloudFormation stack from the AWS Account.
 
-- Delete ockam project from the machine that was used to enroll and generate enrollment tickets
+- Delete the Ockam Project from the machine that the administrator used to generate enrollment tickets.
 
-```
-ockam reset --all
+```shell
+ockam reset --all --yes
 ```
