@@ -1,8 +1,6 @@
 # Table of contents
 
-* [Introduction to Ockam](README.md)
-  * [Build to be Secure by Design](introduction/secure-by-design.md)
-  * [Make distributed parts of your application Virtually Adjacent](introduction/virtually-adjacent.md)
+* [What is Ockam?](README.md)
 
 ## Guides
 
