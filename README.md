@@ -2,7 +2,7 @@
 
 Ockam empowers you to build secure-by-design apps that can trust data-in-motion.
 
-You can use Ockam to create end-to-end encrypted and mutually authenticated channels over multi-hop, multi-protocol routes. Ockam secure channels authenticate using cryptographic identities and credentials. They give your apps granular control over all trust and access decisions. You can enforce attribute-based authorization policies – at scale.
+You can use Ockam to create end-to-end encrypted and mutually authenticated channels. Ockam secure channels authenticate using cryptographic identities and credentials. They give your apps granular control over all trust and access decisions. You can enforce attribute-based authorization policies – at scale.
 
 These core capabilities unlock private and secure communication in a wide variety of application architectures. For example, with one simple command an app in your cloud can create an encrypted portal to a micro-service in another cloud. The service doesn’t need to be exposed to the Internet. You don’t have to change anything about the networks or firewalls.
 
@@ -17,7 +17,11 @@ psql --host localhost --port 5432
 ```
 {% endcode %}
 
-<img src=".gitbook/assets/file.excalidraw (12).svg" alt="" class="gitbook-drawing">
+<div data-full-width="false">
+
+<figure><img src=".gitbook/assets/postgres (2).png" alt=""><figcaption></figcaption></figure>
+
+</div>
 
 Similarly, using another simple command a Kafka producer can publish end-to-end encrypted messages for a specific Kafka consumer. Kafka brokers in the middle can’t see, manipulate, or accidentally leak sensitive enterprise data. This minimizes risk and makes compliance to data governance policies easy.
 
