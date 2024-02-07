@@ -17,7 +17,7 @@ psql --host localhost --port 15432
 ```
 {% endcode %}
 
-<figure><img src=".gitbook/assets/postgres.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/postgres (1).png" alt=""><figcaption></figcaption></figure>
 
 Similarly, using another simple command a kafka producer can publish end-to-end encrypted messages for a specific kafka consumer. Kafka brokers in the middle can’t see, manipulate, or accidentally leak sensitive enterprise data. This minimizes risk and makes compliance to data governance policies easy.
 

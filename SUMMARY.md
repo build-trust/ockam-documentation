@@ -1,6 +1,7 @@
 # Table of contents
 
 * [What is Ockam?](README.md)
+* [How does Ockam work?](how-does-ockam-work.md)
 
 ## Guides
 
