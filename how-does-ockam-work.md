@@ -2,7 +2,7 @@
 
 Ockam is a stack of [<mark style="color:blue;">protocols</mark>](reference/protocols/) to build secure-by-design apps that can trust data-in-motion. We provide a collection of programming libraries, command line tools, deployable components, and cloud services that make it simple for you to use these protocols within your apps.
 
-To understand how these protocols work together, let’s create an encrypted portal to a micro-service in another cloud. In that process, we’ll discuss questions that naturally arise from the following picture: How is end-to-end trust established? How does it work even though the service is not exposed to the Internet?
+To understand how these protocols work together, let’s create an encrypted portal to a micro-service in another cloud. In that process, we’ll discuss questions that naturally arise: How is end-to-end trust established? How does it work even though the service is not exposed to the Internet?
 
 <figure><img src=".gitbook/assets/postgres.png" alt=""><figcaption></figcaption></figure>
 
@@ -72,7 +72,7 @@ The default [access control](reference/protocols/access-controls.md) on the outl
 ockam tcp-inlet create --from 15432 --to postgres
 ```
 
-In Analysis Corp.’s Azure VNet, on the machine where you want to query postgres, create a tcp portal inlet.
+In Analysis Corp.’s Azure VNet, on the machine that has the postgres client, create a tcp portal inlet.
 
 The inlet first creates a tcp listener on localhost port _15432_. It then creates an outgoing tcp connection from inside Analysis Corp. to your project. Next, it creates a [secure channel](reference/protocols/secure-channels.md) to your project over this tcp connection. Finally, it creates an end-to-end secure channel to the outlet node in Bank Corp. through the relay in your project at address: _postgres._
 
