@@ -6,7 +6,7 @@ To understand how these protocols work together, let’s create an encrypted por
 
 <figure><img src=".gitbook/assets/postgres.png" alt=""><figcaption></figcaption></figure>
 
-### Install and Enroll
+## Install and Enroll
 
 {% tabs %}
 {% tab title="homebrew" %}
@@ -39,7 +39,7 @@ The enroll command then asks this project’s membership authority to sign and i
 
 </div>
 
-### Create an Outlet and a Relay
+## Create an Outlet and a Relay
 
 {% code fullWidth="false" %}
 ```sh
@@ -66,7 +66,7 @@ The default [access control](reference/protocols/access-controls.md) on the outl
 
 </div>
 
-### Create an Inlet
+## Create an Inlet
 
 ```sh
 ockam tcp-inlet create --from 15432 --to postgres
@@ -86,7 +86,7 @@ All secure channels are mutually authenticated and all messages are checked for 
 
 </div>
 
-### Connect
+## Connect
 
 ```bash
 psql --host localhost --port 15432
