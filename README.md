@@ -21,6 +21,6 @@ psql --host localhost --port 15432
 
 Similarly, using another simple command a kafka producer can publish end-to-end encrypted messages for a specific kafka consumer. Kafka brokers in the middle can’t see, manipulate, or accidentally leak sensitive enterprise data. This minimizes risk and makes compliance to data governance policies easy.
 
-The underlying [<mark style="color:blue;">protocols</mark>](reference/protocols/) handle all the hard parts — NATs are traversed; Keys are stored in vaults; Credentials are short-lived; Messages are authenticated; Data-integrity is guaranteed; Senders are protected from key compromise impersonation; Encryption keys are ratcheted; Nonces are never reused; Strong forward secrecy is ensured; Sessions safely recover from network failures; and a lot more.
+The underlying [<mark style="color:blue;">protocols</mark>](reference/protocols/) handle the hard parts — NATs are traversed; Keys are stored in vaults; Credentials are short-lived; Messages are authenticated; Data-integrity is guaranteed; Senders are protected from key compromise impersonation; Encryption keys are ratcheted; Nonces are never reused; Strong forward secrecy is ensured; Sessions recover from network failures; and a lot more.
 
 The above examples are two of many ways in which your apps can leverage Ockam to ensure security, privacy, and trust in data. You can deploy Ockam as a companion next to existing apps or use our programming libraries to build trust in ways that are tailored to your business.
