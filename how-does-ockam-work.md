@@ -50,7 +50,7 @@ ockam relay create postgres
 
 In Bank Corp’s AWS VPC, on the machine where postgres is running, create a tcp portal outlet.&#x20;
 
-When this outlet receives messages from corresponding inlets, it unwraps all [<mark style="color:blue;">routing</mark>](reference/protocols/routing.md) information and sends raw tcp connections and segments to the postgres server on localhost port _5432_. Response segments from the tcp server are wrapped with the appropriate [<mark style="color:blue;">routing</mark>](reference/protocols/routing.md) information and sent to corresponding inlets.
+When this outlet receives messages from corresponding inlets, it unwraps all [<mark style="color:blue;">routing</mark>](reference/protocols/routing.md) information and sends raw tcp connections and segments to the postgres server on localhost port _5432_. Response segments from the tcp server are wrapped in [<mark style="color:blue;">routing</mark>](reference/protocols/routing.md) information and sent to corresponding inlets.
 
 Next, create a relay in your project at address: _postgres_.
 
