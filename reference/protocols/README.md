@@ -15,6 +15,10 @@ At Ockam’s core are a collection of cryptographic and messaging protocols. The
 * [<mark style="color:blue;">Secure Channels</mark>](secure-channels.md)
 * [<mark style="color:blue;">Access Controls and Policies</mark>](access-controls.md)
 
+<figure><img src="../../.gitbook/assets/ockam-protocols-1 (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/ockam-protocols-2 (2).png" alt=""><figcaption></figcaption></figure>
+
 ## Verified by experts
 
 In October of 2023, a team of security and cryptography experts, from Trail of Bits, conducted an extensive review of Ockam’s protocols. Trail of Bits is renowned for their comprehensive third-party audits of the security of many other critical projects, including Kubernetes and the Linux kernel.
