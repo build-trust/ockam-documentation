@@ -152,9 +152,8 @@ ockam project enroll control.ticket --identity control_identity
 # Create a node targeting the project as the control identity.
 ockam node create control_plane1 --identity control_identity
 
-# Set a policy, create the tcp-outlet and relay.
-ockam policy create --at control_plane1 --resource tcp-outlet --expression '(= subject.component "edge")'
-ockam tcp-outlet create --at /node/control_plane1 --from /service/outlet --to 127.0.0.1:5000
+# Create the tcp-outlet and relay.
+ockam tcp-outlet create --at /node/control_plane1 --from /service/outlet --to 127.0.0.1:5000 --allow '(= subject.component "edge")'
 ockam relay create control_plane1 --at /project/default --to /node/control_plane1
 ```
 
@@ -169,9 +168,8 @@ ockam project enroll edge.ticket --identity edge_identity
 # Create a node targeting the project as the edge identity.
 ockam node create edge_plane1 --identity edge_identity
 
-# Set a policy, and create the tcp-inlet.
-ockam policy create --at edge_plane1 --resource tcp-inlet --expression '(= subject.component "control")'
-ockam tcp-inlet create --at /node/edge_plane1 --from 127.0.0.1:7000 --to control_plane1
+# Create the tcp-inlet.
+ockam tcp-inlet create --at /node/edge_plane1 --from 127.0.0.1:7000 --to control_plane1 --allow '(= subject.component "control")'
 ```
 
 ```bash
@@ -198,8 +196,7 @@ ockam project enroll x.ticket --identity x_identity
 ockam node create x --identity x_identity
 
 # Set a policy and create a new tcp-inlet for node x.
-ockam policy create --at x --resource tcp-inlet --expression '(= subject.component "control")'
-ockam tcp-inlet create --at /node/x --from 127.0.0.1:8000 --to control_plane1
+ockam tcp-inlet create --at /node/x --from 127.0.0.1:8000 --to control_plane1 --allow '(= subject.component "control")'
 
 # Sends a request to our `x` tcp-inlet and will be denied (this will timeout)
 curl --fail --head --max-time 5 127.0.0.1:8000

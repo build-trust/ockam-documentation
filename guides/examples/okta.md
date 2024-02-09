@@ -126,9 +126,8 @@ Next we transfer project configuration and one enrollment ticket to Machine 1 an
 ockam identity create m1
 ockam project enroll m1.ticket --identity m1
 ockam node create m1 --identity m1
-ockam policy create --at m1 --resource tcp-outlet \
-  --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))'
-ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000
+ockam tcp-outlet create --at /node/m1 --from /service/outlet --to 127.0.0.1:5000 \
+  --allow '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))'
 ockam relay create m1 --at /project/default --to /node/m1
 ```
 
@@ -155,9 +154,8 @@ Next we transfer project configuration and one enrollment ticket to Machine 2 an
 ockam identity create m2
 ockam project enroll m2.ticket --identity m2
 ockam node create m2 --identity m2
-ockam policy create --at m2 --resource tcp-outlet \
-  --expression '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "New York")))'
-ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000
+ockam tcp-outlet create --at /node/m2 --from /service/outlet --to 127.0.0.1:6000 \
+  --allow '(or (= subject.application "Smart Factory") (and (= subject.department "Field Engineering") (= subject.city "New York")))'
 ockam relay create m2 --at /project/default --to /node/m2
 ```
 
@@ -178,7 +176,6 @@ Since the Okta Add-On is enabled. Alice can simply start a node within the proje
 ockam project import --project-file project.json
 ockam project enroll --okta
 ockam node create alice
-ockam policy create --at alice --resource tcp-inlet --expression '(= subject.application "Smart Factory")'
 ```
 
 The `project enroll` command will launch Okta login and when it completes return an Ockam cryptographic credential that includes the city and department attributes of Alice's profile in Okta Universal Directory. Only these two attributes are attested because the administrator specified those two attributes when enabling the Okta Add-On.
@@ -188,14 +185,14 @@ The `project enroll` command will launch Okta login and when it completes return
 Alice's `city` in Okta is "San Francisco". Her request to access Machine 1 in San Francisco is allowed
 
 ```
-ockam tcp-inlet create --at /node/alice --from 127.0.0.1:8000 --to m1
+ockam tcp-inlet create --at /node/alice --from 127.0.0.1:8000 --to m1 --allow '(= subject.application "Smart Factory")'
 curl --head 127.0.0.1:8000
 ```
 
 Her request to access Machine 2 in New York is denied.
 
 ```
-ockam tcp-inlet create --at /node/alice --from 127.0.0.1:9000 --to m2
+ockam tcp-inlet create --at /node/alice --from 127.0.0.1:9000 --to m2 --allow '(= subject.application "Smart Factory")'
 curl --head 127.0.0.1:9000
 
 # this will do nothing and eventually timeout

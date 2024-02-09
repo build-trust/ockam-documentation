@@ -206,16 +206,13 @@ We have to generate another enrollment ticket, save it in a file, and share this
 ockam identity create db
 ockam project enroll db.ticket --identity db
 ockam node create db --identity db
-ockam policy create --at db \
-  --resource tcp-outlet \
-  --expression '(= subject.component "web")'
 ```
 
 And then run the commands from the example above:
 
 ```
 export PG_PORT=5432
-ockam tcp-outlet create --to $PG_PORT
+ockam tcp-outlet create --to $PG_PORT --allow '(= subject.component "web")'
 ockam relay create db
 ```
 
@@ -225,16 +222,13 @@ ockam relay create db
 ockam identity create web
 ockam project enroll webapp.ticket --identity web
 ockam node create web --identity web
-ockam policy create --at web \
-  --resource tcp-inlet \
-  --expression '(= subject.component "db")'
 ```
 
 And then run the commands from the example above:
 
 ```
 export OCKAM_PORT=5433
-ockam tcp-inlet create --from $OCKAM_PORT --to db
+ockam tcp-inlet create --from $OCKAM_PORT --to db --allow '(= subject.component "db")'
 ```
 
 ### Other commands to explore
