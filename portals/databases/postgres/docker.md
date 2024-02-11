@@ -85,6 +85,8 @@ networks:
 
 ## Recap
 
+<figure><img src="../../../.gitbook/assets/Screenshot 2024-02-09 at 8.51.05 AM (2).png" alt=""><figcaption></figcaption></figure>
+
 We connected a nodejs app in one virtual private network with a postgres database in another virtual private network over an end-to-end encrypted portal.
 
 Sensitive business data in the postgres database is only accessible to Bank Corp. and  Analysis Corp. All data is [encrypted](../../../reference/protocols/secure-channels.md) with strong forward secrecy as it moves through the Internet. The communication channel is [<mark style="color:blue;">mutually authenticated</mark>](../../../reference/protocols/secure-channels.md) and [<mark style="color:blue;">authorized</mark>](../../../reference/protocols/access-controls.md). Keys and credentials are automatically rotated. Access to connect with postgres can be easily revoked.
@@ -95,8 +97,4 @@ All [<mark style="color:blue;">access controls</mark>](../../../reference/protoc
 
 ## Cleanup
 
-To delete all containers and images:
-
-```
-./run.sh cleanup
-```
+To delete all containers and images: <mark style="background-color:yellow;">./run.sh cleanup</mark>
