@@ -16,7 +16,7 @@ layout:
 
 This section contains hands-on examples that use [Ockam](../../) to create an **encrypted portals** to various databases running in various environments.
 
-We connect a nodejs app in one virtual private network with a database in another virtual private network. The database doesn’t need to be exposed to the Internet.
+In each of the following examples, we connect a nodejs app in one private network with a database in another private network. The database doesn’t need to be exposed to the Internet.
 
 <figure><img src="../../.gitbook/assets/Screenshot 2024-02-11 at 1.32.40 PM.png" alt=""><figcaption></figcaption></figure>
 
