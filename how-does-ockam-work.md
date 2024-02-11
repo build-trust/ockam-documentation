@@ -1,3 +1,17 @@
+---
+layout:
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # How does Ockam work?
 
 Ockam is a stack of [<mark style="color:blue;">protocols</mark>](reference/protocols/) to build secure-by-design apps that can trust data-in-motion. We provide a collection of programming libraries, command line tools, deployable components, and cloud services that make it simple for you to use these protocols within your apps.
