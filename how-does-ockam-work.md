@@ -39,7 +39,7 @@ ockam enroll
 {% endtab %}
 {% endtabs %}
 
-The first step is to install Ockam Command and enroll. The commands below can be run in a real setup with two machines in two different networks or in a dev environment on a single machine. If you’re doing this on two machines, install and enroll on both machines.
+The first step is to install Ockam Command and enroll. The commands below can be run in a production setup with two machines in two different networks or in a dev environment on a single machine. If you’re doing this on two machines, install and enroll on both machines.
 
 The enroll command creates a new [vault](reference/protocols/keys.md) and generates a cryptographic [<mark style="color:blue;">identity</mark>](reference/protocols/identities.md) with private keys stored in that vault. It then guides you to sign in to Ockam Orchestrator.
 
@@ -120,7 +120,7 @@ The outlet sends response segments from the tcp server back through the portal. 
 
 ## Recap
 
-We ran a few simple commands to securely connect with a micro-service in another cloud.
+We ran a few simple commands to [<mark style="color:blue;">securely connect</mark>](how-does-ockam-work.md) with a micro-service in another cloud. The postgres server in Bank Corp. became **virtually adjacent** to the postgres client in Analysis Corp.
 
 In this example, we used a postgres server and client. However, the same commands work for any tcp server and client, such as an http server serving an api built with express or django. We have to adjust some port numbers, but other than that, the tcp server and client remain unchanged. Ockam runs as a companion next to the server and its clients.
 
@@ -132,4 +132,4 @@ All [<mark style="color:blue;">access controls</mark>](reference/protocols/acces
 
 NAT’s are traversed using a relay and outgoing tcp connections. Bank Corp. or Analysis Corp. don’t expose any listening endpoints on the Internet. Their networks are completely closed and protected from any attacks from the Internet. Ockam’s [<mark style="color:blue;">routing</mark>](reference/protocols/routing.md) protocol enables multiple ways of traversing NAT’s with various tradeoffs, the relay approach is highly secure and always works.
 
-The above example gave us peek at how Ockam’s stack of [<mark style="color:blue;">protocols</mark>](reference/protocols/) work together to ensure security, privacy, and trust in data. In this case we deployed Ockam as a companion next to a server and its clients. This approach can support a very large variety of use cases. Our programming libraries take this further and empower your to build trust in ways that are tailored to your business.
+The [<mark style="color:blue;">above example</mark>](how-does-ockam-work.md) gave us peek at how Ockam’s stack of [<mark style="color:blue;">protocols</mark>](reference/protocols/) work together to ensure security, privacy, and trust in data. In this case we deployed Ockam as a companion next to a server and its clients. This approach can support a very large variety of use cases. Our programming libraries take this further and empower your to build trust in ways that are tailored to your business.
