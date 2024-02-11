@@ -97,4 +97,4 @@ All [<mark style="color:blue;">access controls</mark>](../../../reference/protoc
 
 ## Cleanup
 
-To delete all containers and images: <mark style="background-color:yellow;">./run.sh cleanup</mark>
+To delete all containers and images: `./run.sh cleanup`.
