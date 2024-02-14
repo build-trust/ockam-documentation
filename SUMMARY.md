@@ -8,6 +8,7 @@
 * [Databases](portals/databases/README.md)
   * [PostgreSQL](portals/databases/postgres/README.md)
     * [Docker](portals/databases/postgres/docker.md)
+    * [Kubernetes](portals/databases/postgres/kubernetes.md)
 
 ## Reference
 
