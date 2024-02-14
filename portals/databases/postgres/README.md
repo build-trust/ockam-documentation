@@ -18,7 +18,7 @@ This section contains hands-on examples that use [<mark style="color:blue;">Ocka
 
 In each example, we connect a nodejs app in one private network with a postgres database in another private network.  To understand how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
 
-<figure><img src="../../../.gitbook/assets/Screenshot 2024-02-09 at 8.51.05 AM (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Screenshot 2024-02-11 at 1.32.40 PM.png" alt=""><figcaption></figcaption></figure>
 
 Please select an example to dig in:
 
