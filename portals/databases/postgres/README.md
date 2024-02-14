@@ -14,7 +14,7 @@ layout:
 
 # PostgreSQL
 
-This section contains hands-on examples that use [<mark style="color:blue;">Ockam</mark>](../../../) to create **encrypted portals** to postgres database running in various environments.
+This section contains hands-on examples that use [<mark style="color:blue;">Ockam</mark>](../../../) to create **encrypted portals** to postgres databases running in various environments.
 
 In each example, we connect a nodejs app in one private network with a postgres database in another private network.  To understand how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
 
