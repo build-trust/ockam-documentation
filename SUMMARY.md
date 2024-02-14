@@ -9,9 +9,6 @@
   * [PostgreSQL](portals/databases/postgres/README.md)
     * [Docker](portals/databases/postgres/docker.md)
     * [Kubernetes](portals/databases/postgres/kubernetes.md)
-* [APIs](portals/apis/README.md)
-  * [Node.js](portals/apis/nodejs/README.md)
-    * [Docker](portals/apis/nodejs/docker.md)
 
 ## Reference
 
