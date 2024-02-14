@@ -1,4 +1,0 @@
-root: ./
-
-redirects:
-  guides/use-cases/secure-database-access: https://www.ockam.io/for/private-connectivity
