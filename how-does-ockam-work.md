@@ -20,26 +20,9 @@ To understand how these protocols work together, let’s create an encrypted por
 
 <figure><img src=".gitbook/assets/postgres.png" alt=""><figcaption></figcaption></figure>
 
-## Install and Enroll
+## Sign up, Install and Enroll
 
-{% tabs %}
-{% tab title="homebrew" %}
-```sh
-brew install build-trust/ockam/ockam
-ockam enroll
-```
-{% endtab %}
-
-{% tab title="curl | bash" %}
-```sh
-curl --proto '=https' --tlsv1.2 -sSfL https://install.command.ockam.io | bash
-source ~/.ockam/env
-ockam enroll
-```
-{% endtab %}
-{% endtabs %}
-
-The first step is to install Ockam Command and enroll. The commands below can be run in a production setup with two machines in two different networks or in a dev environment on a single machine. If you’re doing this on two machines, install and enroll on both machines.
+The first step is to [Sign up for Ockam](https://www.ockam.io/download), that process will guide you through installing Ockam Command and enrolling your identity with Ockam Orchestrator. The commands below can be run in a production setup with two machines in two different networks or in a dev environment on a single machine. If you’re doing this on two machines, install and enroll on both machines.
 
 The enroll command creates a new [<mark style="color:blue;">vault</mark>](reference/protocols/keys.md) and generates a cryptographic [<mark style="color:blue;">identity</mark>](reference/protocols/identities.md) with private keys stored in that vault. It then guides you to sign in to Ockam Orchestrator.
 
