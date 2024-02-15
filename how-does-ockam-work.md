@@ -22,7 +22,7 @@ To understand how these protocols work together, let’s create an encrypted por
 
 ## Sign up, Install and Enroll
 
-The first step is to [Sign up for Ockam](https://www.ockam.io/download), that process will guide you through installing Ockam Command and enrolling your identity with Ockam Orchestrator. The commands below can be run in a production setup with two machines in two different networks or in a dev environment on a single machine. If you’re doing this on two machines, install and enroll on both machines.
+The first step is to [<mark style="color:blue;">Sign up for Ockam</mark>](https://www.ockam.io/download), that process will guide you through installing Ockam Command and enrolling your identity with Ockam Orchestrator. The commands below can be run in a production setup with two machines in two different networks or in a dev environment on a single machine. If you’re doing this on two machines, install and enroll on both machines.
 
 The enroll command creates a new [<mark style="color:blue;">vault</mark>](reference/protocols/keys.md) and generates a cryptographic [<mark style="color:blue;">identity</mark>](reference/protocols/identities.md) with private keys stored in that vault. It then guides you to sign in to Ockam Orchestrator.
 
