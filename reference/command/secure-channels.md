@@ -176,7 +176,7 @@ Continuing from the above example on [<mark style="color:blue;">Elastic Encrypte
 ```
 » python3 -m http.server --bind 127.0.0.1 9000
 
-» ockam tcp-outlet create --at a --from /service/outlet --to 127.0.0.1:9000
+» ockam tcp-outlet create --at a --from outlet --to 127.0.0.1:9000
 » ockam secure-channel create --from a --to /project/default/service/forward_to_b/service/api \
     | ockam tcp-inlet create --at a --from 127.0.0.1:6000 --to -/service/outlet
 

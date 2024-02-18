@@ -64,7 +64,7 @@ Continuing from our [<mark style="color:blue;">Relays</mark>](advanced-routing.m
 ```
 » python3 -m http.server --bind 127.0.0.1 9000
 
-» ockam tcp-outlet create --at n3 --from /service/outlet --to 127.0.0.1:9000
+» ockam tcp-outlet create --at n3 --from outlet --to 127.0.0.1:9000
 » ockam tcp-inlet create --at n1 --from 127.0.0.1:6000 \
     --to /worker/603b62d245c9119d584ba3d874eb8108/service/forward_to_n3/service/hop/service/outlet
 
