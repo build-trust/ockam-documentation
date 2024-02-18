@@ -41,7 +41,7 @@ Portals carry various application protocols over end-to-end encrypted Ockam secu
 
 For example: a TCP Portal carries TCP over Ockam, a Kafka Portal carries Kafka Protocol over Ockam, etc. Since portals work with existing application protocols you can use them through companion Ockam Nodes, that run adjacent to your application, without changing any of your application’s code.&#x20;
 
-A tcp portal makes a remote tcp server **virtually adjacent** to the server’s clients. It has two parts: an inlet and an outlet. The outlet runs adjacent to the tcp server and inlets run adjacent to tcp clients. An inlet and the outlet work together to create a portal that makes a the remote tcp server appear <mark style="background-color:yellow;">on localhost</mark> adjacent to a client. This client can then interact with this localhost server exactly like it would with the remote server. All communication between inlets and outlets is end-to-end encrypted.
+A tcp portal makes a remote tcp server **virtually adjacent** to the server’s clients. It has two parts: an inlet and an outlet. The outlet runs adjacent to the tcp server and inlets run adjacent to tcp clients. An inlet and the outlet work together to create a portal that makes the remote tcp server appear <mark style="background-color:yellow;">on localhost</mark> adjacent to a client. This client can then interact with this localhost server exactly like it would with the remote server. All communication between inlets and outlets is end-to-end encrypted.
 
 <figure><img src=".gitbook/assets/Screenshot 2024-02-18 at 7.11.15 AM.png" alt=""><figcaption></figcaption></figure>
 
