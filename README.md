@@ -39,10 +39,10 @@ Similarly, using another simple command a kafka producer can publish end-to-end 
 
 Portals carry various application protocols over end-to-end encrypted Ockam secure channels.
 
-For example: a TCP Portal carries TCP over Ockam, a Kafka Portal carries Kafka Protocol over Ockam, etc. Since portals work with existing application protocols you can use them through companion Ockam Nodes, that run next to your application, without changing any of your application’s code.&#x20;
+For example: a TCP Portal carries TCP over Ockam, a Kafka Portal carries Kafka Protocol over Ockam, etc. Since portals work with existing application protocols you can use them through companion Ockam Nodes, that run adjacent to your application, without changing any of your application’s code.&#x20;
 
-A tcp portal makes a remote tcp server virtually adjacent to the server’s clients. It has two parts: an inlet and an outlet. The outlet runs next to the tcp server and inlets run next to tcp clients. You can use Ockam Command to start nodes with one or more inlets or outlets.
+A tcp portal makes a remote tcp server **virtually adjacent** to the server’s clients. It has two parts: an inlet and an outlet. The outlet runs adjacent to the tcp server and inlets run adjacent to tcp clients. An inlet and the outlet work together to create a portal that makes a the remote tcp server appear <mark style="background-color:yellow;">on localhost</mark> adjacent to a client. This client can then interact with this localhost server exactly like it would with the remote server. All communication between inlets and outlets is end-to-end encrypted.
 
 <figure><img src=".gitbook/assets/Screenshot 2024-02-18 at 7.11.15 AM.png" alt=""><figcaption></figcaption></figure>
 
-The underlying [<mark style="color:blue;">protocols</mark>](reference/protocols/) handle the hard parts — NATs are traversed; Keys are stored in vaults; Credentials are short-lived; Messages are authenticated; Data-integrity is guaranteed; Senders are protected from key compromise impersonation; Encryption keys are ratcheted; Nonces are never reused; Strong forward secrecy is ensured; Sessions recover from network failures; and a lot more.
+You can use Ockam Command to start nodes with one or more inlets or outlets. The underlying [<mark style="color:blue;">protocols</mark>](reference/protocols/) handle the hard parts — NATs are traversed; Keys are stored in vaults; Credentials are short-lived; Messages are authenticated; Data-integrity is guaranteed; Senders are protected from key compromise impersonation; Encryption keys are ratcheted; Nonces are never reused; Strong forward secrecy is ensured; Sessions recover from network failures; and a lot more.
