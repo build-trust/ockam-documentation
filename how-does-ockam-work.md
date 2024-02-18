@@ -16,7 +16,7 @@ layout:
 
 Ockam is a stack of [<mark style="color:blue;">protocols</mark>](reference/protocols/) to build secure-by-design apps that can trust data-in-motion. We provide a collection of programming libraries, command line tools, deployable components, and cloud services that make it simple for you to use these protocols within your apps.
 
-To understand how these protocols work together, let’s create an encrypted portal to a micro-service in another cloud. In that process, we’ll discuss questions that naturally arise: How is end-to-end trust established? How does it work even though the service is not exposed to the Internet?
+To understand how these protocols work together, let’s create an encrypted [portal](./#portals) to a micro-service in another cloud. In that process, we’ll discuss questions that naturally arise: How is end-to-end trust established? How does it work even though the service is not exposed to the Internet?
 
 <figure><img src=".gitbook/assets/postgres.png" alt=""><figcaption></figcaption></figure>
 

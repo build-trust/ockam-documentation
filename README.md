@@ -18,7 +18,7 @@ Ockam empowers you to build secure-by-design apps that can trust data-in-motion.
 
 You can use Ockam to create end-to-end encrypted and mutually authenticated channels. Ockam secure channels authenticate using cryptographic identities and credentials. They give your apps granular control over all trust and access decisions. This control makes it easy to enforce fine-grained, attribute-based authorization policies – at scale.
 
-These core capabilities enable private and secure communication in a wide variety of application architectures. For example, with one simple command an app in your cloud can create an encrypted [portal](./#portals) to a micro-service in another cloud. The service doesn’t need to be exposed to the Internet. You don’t have to change anything about networks or firewalls.
+These core capabilities are composed to enable private and secure communication in a wide variety of application architectures. For example, with one simple command an app in your cloud can create an [encrypted portal](./#portals) to a micro-service in another cloud. The service doesn’t need to be exposed to the Internet. You don’t have to change anything about networks or firewalls.
 
 {% code fullWidth="false" %}
 ```sh
@@ -39,12 +39,10 @@ Similarly, using another simple command a kafka producer can publish end-to-end 
 
 Portals carry various application protocols over end-to-end encrypted Ockam secure channels.
 
-For example: a TCP Portal carries TCP over Ockam, a Kafka Portal carries Kafka Protocol over Ockam, etc. Since portals work with existing application protocols you can use them through companion Ockam Nodes that run next to your application without changing any of your application’s code.&#x20;
+For example: a TCP Portal carries TCP over Ockam, a Kafka Portal carries Kafka Protocol over Ockam, etc. Since portals work with existing application protocols you can use them through companion Ockam Nodes, that run next to your application, without changing any of your application’s code.&#x20;
 
-A tcp portal has two parts: an inlet and an outlet. The outlet runs next to a tcp server and inlets run next to tcp clients. You can use Ockam Command to start nodes with one or more inlets or outlets.&#x20;
+A tcp portal makes a remote tcp server virtually adjacent to the server’s clients. It has two parts: an inlet and an outlet. The outlet runs next to the tcp server and inlets run next to tcp clients. You can use Ockam Command to start nodes with one or more inlets or outlets.
 
 <figure><img src=".gitbook/assets/Screenshot 2024-02-18 at 7.11.15 AM.png" alt=""><figcaption></figcaption></figure>
 
 The underlying [<mark style="color:blue;">protocols</mark>](reference/protocols/) handle the hard parts — NATs are traversed; Keys are stored in vaults; Credentials are short-lived; Messages are authenticated; Data-integrity is guaranteed; Senders are protected from key compromise impersonation; Encryption keys are ratcheted; Nonces are never reused; Strong forward secrecy is ensured; Sessions recover from network failures; and a lot more.
-
-The above examples are two of many ways in which your apps can leverage Ockam to ensure security, privacy, and trust in data. You can deploy Ockam as a companion next to existing apps or use our programming libraries to build trust in ways that are tailored to your business.
