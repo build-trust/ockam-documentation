@@ -35,7 +35,7 @@ psql --host localhost --port 15432
 
 Similarly, using another simple command a kafka producer can publish end-to-end encrypted messages for a specific kafka consumer. Kafka brokers in the middle can’t see, manipulate, or accidentally leak sensitive enterprise data. This minimizes risk to sensitive business data and makes it easy to comply with data governance policies.
 
-## Portals
+## Encrypted Portals <a href="#portals" id="portals"></a>
 
 Portals carry various application protocols over end-to-end encrypted Ockam secure channels.
 
