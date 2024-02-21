@@ -76,7 +76,7 @@ Add the following code to this file:
 
 ```rust
 // src/hop.rs
-use ockam::{Any, Context, LocalMessage, Result, Routed, Worker};
+use ockam::{Any, Context, Result, Routed, Worker};
 
 pub struct Hop;
 
@@ -90,20 +90,9 @@ impl Worker for Hop {
     async fn handle_message(&mut self, ctx: &mut Context, msg: Routed<Any>) -> Result<()> {
         println!("Address: {}, Received: {}", ctx.address(), msg);
 
-        // Some type conversion
-        let mut transport_message = msg.into_local_message().into_transport_message();
-
-        // Remove my address from the onward_route
-        transport_message.onward_route.step()?;
-
-        // Insert my address at the beginning return_route
-        transport_message.return_route.modify().prepend(ctx.address());
-
-        // Wipe all local info (e.g. transport types)
-        let message = LocalMessage::new(transport_message, vec![]);
-
-        // Send the message on its onward_route
-        ctx.forward(message).await
+        // Send the message to the next worker on its onward_route
+        ctx.forward(msg.into_local_message().step_forward(&ctx.address())?)
+            .await
     }
 }
 
@@ -357,7 +346,7 @@ Add the following code to this file:
 
 ```rust
 // src/relay.rs
-use ockam::{Address, Any, Context, LocalMessage, Result, Routed, Worker};
+use ockam::{Address, Any, Context, Result, Routed, Worker};
 
 pub struct Relay(pub Address);
 
@@ -372,18 +361,11 @@ impl Worker for Relay {
         println!("Address: {}, Received: {}", ctx.address(), msg);
 
         // Some type conversion
-        let mut transport_message = msg.into_local_message().into_transport_message();
+        let mut local_message = msg.into_local_message();
 
-        transport_message
-            .onward_route
-            .modify()
-            .pop_front() // Remove my address from the onward_route
-            .prepend(self.0.clone()); // Prepend predefined address to the onward_route
+        local_message = local_message.replace_front_onward_route(&self.0)?; // Prepend predefined address to the ownward_route
 
-        let prev_hop = transport_message.return_route.next()?.clone();
-
-        // Wipe all local info (e.g. transport types)
-        let message = LocalMessage::new(transport_message, vec![]);
+        let prev_hop = local_message.return_route_ref().next()?.clone();
 
         if let Some(info) = ctx.flow_controls().find_flow_control_with_producer_address(&self.0) {
             ctx.flow_controls()
@@ -395,7 +377,7 @@ impl Worker for Relay {
         }
 
         // Send the message on its onward_route
-        ctx.forward(message).await
+        ctx.forward(local_message).await
     }
 }
 
