@@ -36,7 +36,7 @@ jobs:
       - name: Update Examples
         working-directory: docs
         run: |
-          branch_name="${{ github.event.inputs.branch_name }}"
+          branch_name="docs_${{ github.event.inputs.branch_name }}"
           if git ls-remote --heads origin "$branch_name" | grep -q "$branch_name"; then
             echo "Branch $branch_name exists, switching to it..."
             git branch
@@ -58,5 +58,5 @@ jobs:
           if ! git diff --exit-code; then
             git add .
             git commit -m "update docs on release to ockam ref ${{ github.event.inputs.ockam_ref }}"
-            git push --set-upstream origin ${{ github.event.inputs.branch_name }}
+            git push --set-upstream origin "docs_${{ github.event.inputs.branch_name }}"
           fi
