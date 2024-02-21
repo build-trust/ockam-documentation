@@ -45,7 +45,7 @@ jobs:
         shell: nix develop ./../ockam/tools/nix#rust --command bash {0}
         run: |
           git checkout command
-          git checkout -B ${{ github.event.inputs.release_branch }}
+          git checkout -B "manual_${{ github.event.inputs.release_branch }}"
 
           cd manual/template/mdbook
           nix shell nixpkgs/nixos-23.11#mdbook --command sh -c "./build.sh ${{ github.event.inputs.release_tag }}"
@@ -59,4 +59,4 @@ jobs:
           git add .
           git commit -m "update command manual to ${{ github.event.inputs.release_tag }}"
 
-          git push --set-upstream origin ${{ github.event.inputs.release_branch }}
+          git push --set-upstream origin "manual_${{ github.event.inputs.release_branch }}"
