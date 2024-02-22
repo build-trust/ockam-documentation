@@ -3,7 +3,7 @@
 * [What is Ockam?](README.md)
 * [How does Ockam work?](how-does-ockam-work.md)
 
-## ENCRYPTED PORTALS <a href="#portals" id="portals"></a>
+## ENCRYPTED PORTALS TO ... <a href="#portals" id="portals"></a>
 
 * [Databases](portals/databases/README.md)
   * [PostgreSQL](portals/databases/postgres/README.md)
