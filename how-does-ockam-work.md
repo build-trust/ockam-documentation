@@ -24,7 +24,7 @@ To understand how these protocols work together, let’s create an encrypted [po
 
 The first step is to [<mark style="color:blue;">Sign up for Ockam</mark>](https://www.ockam.io/download)<mark style="color:blue;">.</mark> After you've signed up, run the following commands to install Ockam Command and enroll your identity with Ockam Orchestrator.
 
-```
+```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://install.command.ockam.io | bash
 source "$HOME/.ockam/env"
 
