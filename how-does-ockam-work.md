@@ -27,6 +27,7 @@ The first step is to [<mark style="color:blue;">Sign up for Ockam</mark>](https:
 ```
 curl --proto '=https' --tlsv1.2 -sSfL https://install.command.ockam.io | bash
 source "$HOME/.ockam/env"
+
 ockam enroll
 ```
 
