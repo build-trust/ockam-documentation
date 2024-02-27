@@ -45,12 +45,17 @@ In a later guide, we'll explore how Ockam enables you to define various pluggabl
 // examples/06-credentials-exchange-issuer.rs
 use ockam::access_control::AllowAll;
 use ockam::access_control::IdentityIdAccessControl;
-use ockam::identity::{AttributesEntry, SecureChannelListenerOptions};
-use ockam::identity::{CredentialsIssuer, Vault};
+use ockam::compat::collections::BTreeMap;
+use ockam::compat::sync::Arc;
+use ockam::identity::utils::now;
+use ockam::identity::SecureChannelListenerOptions;
+use ockam::identity::{Identifier, Vault};
+use ockam::vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
 use ockam::{Context, Result, TcpListenerOptions};
 use ockam::{Node, TcpTransportExtension};
+use ockam_api::authenticator::credential_issuer::CredentialIssuerWorker;
+use ockam_api::authenticator::{AuthorityMembersRepository, AuthorityMembersSqlxDatabase, PreTrustedIdentity};
 use ockam_api::DefaultAddress;
-use ockam_vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -78,9 +83,11 @@ async fn main(ctx: Context) -> Result<()> {
     // Tell the credential issuer about a set of public identifiers that are
     // known, in advance, to be members of the production cluster.
     let known_identifiers = vec![
-        "Ie70dc5545d64724880257acb32b8851e7dd1dd57076838991bc343165df71bfe".try_into()?, // Client Identifier
-        "Ife42b412ecdb7fda4421bd5046e33c1017671ce7a320c3342814f0b99df9ab60".try_into()?, // Server Identifier
+        Identifier::try_from("Ie70dc5545d64724880257acb32b8851e7dd1dd57076838991bc343165df71bfe")?, // Client Identifier
+        Identifier::try_from("Ife42b412ecdb7fda4421bd5046e33c1017671ce7a320c3342814f0b99df9ab60")?, // Server Identifier
     ];
+
+    let members = Arc::new(AuthorityMembersSqlxDatabase::create().await?);
 
     // Tell this credential issuer about the attributes to include in credentials
     // that will be issued to each of the above known_identifiers, after and only
@@ -92,21 +99,21 @@ async fn main(ctx: Context) -> Result<()> {
     //
     // For a different application this attested attribute set can be different and
     // distinct for each identifier, but for this example we'll keep things simple.
-    let credential_issuer = CredentialsIssuer::new(
-        node.identities().identity_attributes_repository(),
-        node.credentials(),
-        &issuer,
-        "trust_context".into(),
-        None,
-    );
+    let credential_issuer = CredentialIssuerWorker::new(members.clone(), node.credentials(), &issuer, None, None);
 
-    let attributes = AttributesEntry::single(b"cluster".to_vec(), b"production".to_vec(), None, None)?;
-    for identifier in known_identifiers.iter() {
-        node.identities()
-            .identity_attributes_repository()
-            .put_attributes(identifier, attributes.clone())
-            .await?;
+    let mut pre_trusted_identities = BTreeMap::<Identifier, PreTrustedIdentity>::new();
+    let attributes = PreTrustedIdentity::new(
+        [(b"cluster".to_vec(), b"production".to_vec())].into(),
+        now()?,
+        None,
+        issuer.clone(),
+    );
+    for identifier in &known_identifiers {
+        pre_trusted_identities.insert(identifier.clone(), attributes.clone());
     }
+    members
+        .bootstrap_pre_trusted_members(&pre_trusted_identities.into())
+        .await?;
 
     let tcp_listener_options = TcpListenerOptions::new();
     let sc_listener_options =
@@ -162,14 +169,14 @@ touch examples/06-credential-exchange-server.rs
 use hello_ockam::Echoer;
 use ockam::abac::AbacAccessControl;
 use ockam::access_control::AllowAll;
-use ockam::identity::{AuthorityService, SecureChannelListenerOptions, TrustContext, Vault};
+use ockam::identity::{SecureChannelListenerOptions, Vault};
+use ockam::vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
 use ockam::{Context, Result, TcpListenerOptions};
 use ockam::{Node, TcpTransportExtension};
 use ockam_api::enroll::enrollment::Enrollment;
 use ockam_api::nodes::NodeManager;
 use ockam_api::DefaultAddress;
 use ockam_multiaddr::MultiAddr;
-use ockam_vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -229,27 +236,21 @@ async fn main(ctx: Context) -> Result<()> {
         .verify_credential(Some(&server), &[issuer.clone()], &credential)
         .await?;
 
-    // Create a trust context that will be used to authenticate credential exchanges
-    let trust_context = TrustContext::new(
-        "trust_context_id".to_string(),
-        Some(AuthorityService::new(node.credentials(), issuer.clone(), None)),
-    );
-
     // Start an echoer worker that will only accept incoming requests from
     // identities that have authenticated credentials issued by the above credential
     // issuer. These credentials must also attest that requesting identity is
     // a member of the production cluster.
     let tcp_listener_options = TcpListenerOptions::new();
     let sc_listener_options = SecureChannelListenerOptions::new()
-        .with_trust_context(trust_context)
-        .with_credential(credential)
+        .with_authority(issuer.clone())
+        .with_credential(credential)?
         .as_consumer(&tcp_listener_options.spawner_flow_control_id());
 
     node.flow_controls().add_consumer(
         DefaultAddress::ECHO_SERVICE,
         &sc_listener_options.spawner_flow_control_id(),
     );
-    let allow_production = AbacAccessControl::create(node.identity_attributes_repository(), "cluster", "production");
+    let allow_production = AbacAccessControl::create(node.identities_attributes(), issuer, "cluster", "production");
     node.start_worker_with_access_control(DefaultAddress::ECHO_SERVICE, Echoer, allow_production, AllowAll)
         .await?;
 
@@ -282,14 +283,14 @@ touch examples/06-credential-exchange-client.rs
 {% code lineNumbers="true" %}
 ```rust
 // examples/06-credentials-exchange-client.rs
-use ockam::identity::{AuthorityService, SecureChannelOptions, TrustContext, Vault};
+use ockam::identity::{SecureChannelOptions, Vault};
+use ockam::vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
 use ockam::{route, Context, Result, TcpConnectionOptions};
 use ockam::{Node, TcpTransportExtension};
 use ockam_api::enroll::enrollment::Enrollment;
 use ockam_api::nodes::NodeManager;
 use ockam_api::DefaultAddress;
 use ockam_multiaddr::MultiAddr;
-use ockam_vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -349,12 +350,6 @@ async fn main(ctx: Context) -> Result<()> {
         .verify_credential(Some(&client), &[issuer.clone()], &credential)
         .await?;
 
-    // Create a trust context that will be used to authenticate credential exchanges
-    let trust_context = TrustContext::new(
-        "trust_context_id".to_string(),
-        Some(AuthorityService::new(node.credentials(), issuer.clone(), None)),
-    );
-
     // Create a secure channel to the node that is running the Echoer service.
     let server_connection = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
     let channel = node
@@ -362,8 +357,8 @@ async fn main(ctx: Context) -> Result<()> {
             &client,
             route![server_connection, DefaultAddress::SECURE_CHANNEL_LISTENER],
             SecureChannelOptions::new()
-                .with_trust_context(trust_context)
-                .with_credential(credential),
+                .with_authority(issuer.clone())
+                .with_credential(credential)?,
         )
         .await?;
 
