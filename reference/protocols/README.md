@@ -29,6 +29,6 @@ The auditors from Trail of Bits conducted in-depth manual analyses and formal mo
 >
 > _— Trail of Bits_
 
-Here is the full report from Trail of Bits’ design review of Ockam’s protocols:
+**Download the full report from Trail of Bits’ design review of Ockam’s protocols:**
 
 {% file src="../../.gitbook/assets/Ockam - Design Review - Comprehensive Report.pdf" %}
