@@ -24,7 +24,7 @@ These core capabilities are composed to enable private and secure communication 
 ```sh
 # Create a TCP Portal Inlet to a Postgres server that is running in
 # a remote private VPC in another cloud.
-ockam tcp-inlet create --from 15432 --to postgres
+ockam tcp-inlet create --from 15432 --via postgres
 
 # Access the Postgres server on localhost.
 psql --host localhost --port 15432

@@ -73,7 +73,7 @@ The default [<mark style="color:blue;">access control</mark>](reference/protocol
 ## Create an Inlet
 
 ```sh
-ockam tcp-inlet create --from 15432 --to postgres
+ockam tcp-inlet create --from 15432 --via postgres
 ```
 
 In Analysis Corp.’s Azure VNet, on the machine that has the postgres client, create a tcp portal inlet.
