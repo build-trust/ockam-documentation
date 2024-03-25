@@ -68,7 +68,7 @@ impl Worker for Hop {
     /// This handle function takes any incoming message and forwards
     /// it to the next hop in it's onward route
     async fn handle_message(&mut self, ctx: &mut Context, msg: Routed<Any>) -> Result<()> {
-        println!("Address: {}, Received: {}", ctx.address(), msg);
+        println!("Address: {}, Received: {:?}", ctx.address(), msg);
 
         // Send the message to the next worker on its onward_route
         ctx.forward(msg.into_local_message().step_forward(&ctx.address())?)
@@ -110,7 +110,7 @@ async fn main(ctx: Context) -> Result<()> {
 
     // Wait to receive a reply and print it.
     let reply = node.receive::<String>().await?;
-    println!("App Received: {}", reply); // should print "Hello Ockam!"
+    println!("App Received: {}", reply.into_body()?); // should print "Hello Ockam!"
 
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
@@ -156,7 +156,7 @@ async fn main(ctx: Context) -> Result<()> {
 
     // Wait to receive a reply and print it.
     let reply = node.receive::<String>().await?;
-    println!("App Received: {}", reply); // should print "Hello Ockam!"
+    println!("App Received: {}", reply.into_body()?); // should print "Hello Ockam!"
 
     // Stop all workers, stop the node, cleanup and return.
     node.stop().await
@@ -328,7 +328,7 @@ impl Worker for Relay {
     /// This handle function takes any incoming message and forwards
     /// it to the next hop in it's onward route
     async fn handle_message(&mut self, ctx: &mut Context, msg: Routed<Any>) -> Result<()> {
-        println!("Address: {}, Received: {}", ctx.address(), msg);
+        println!("Address: {}, Received: {:?}", ctx.address(), msg);
 
         // Some type conversion
         let mut local_message = msg.into_local_message();
