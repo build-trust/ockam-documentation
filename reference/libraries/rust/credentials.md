@@ -99,7 +99,7 @@ async fn main(ctx: Context) -> Result<()> {
     //
     // For a different application this attested attribute set can be different and
     // distinct for each identifier, but for this example we'll keep things simple.
-    let credential_issuer = CredentialIssuerWorker::new(members.clone(), node.credentials(), &issuer, None, None);
+    let credential_issuer = CredentialIssuerWorker::new(members.clone(), node.credentials(), &issuer, None, None, None);
 
     let mut pre_trusted_identities = BTreeMap::<Identifier, PreTrustedIdentity>::new();
     let attributes = PreTrustedIdentity::new(
@@ -224,6 +224,7 @@ async fn main(ctx: Context) -> Result<()> {
         &issuer,
         &MultiAddr::try_from("/dnsaddr/localhost/tcp/5000/secure/api").unwrap(),
         &server,
+        None,
     )
     .await?;
     let credential = authority_node.issue_credential(node.context()).await.unwrap();
@@ -338,6 +339,7 @@ async fn main(ctx: Context) -> Result<()> {
         &issuer,
         &MultiAddr::try_from("/dnsaddr/localhost/tcp/5000/secure/api")?,
         &client,
+        None,
     )
     .await?;
     let credential = authority_node.issue_credential(node.context()).await.unwrap();
