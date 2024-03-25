@@ -28,7 +28,7 @@ When you get done with this page you will understand
 
 ## Create an Orchestrator Project
 
-[Sign up for Ockam](https://www.ockam.io/download) and to pick a subscription plan through the guided workflow on Ockam.io.\
+[Sign up for Ockam](https://www.ockam.io/download) and pick a subscription plan through the guided workflow on Ockam.io.\
 \
 After you complete this step you will have a Project in Ockam Orchestrator. A Project offers two services: a Membership[ Authority](https://docs.ockam.io/reference/protocols/identities#credentials) and a[ Relay](https://docs.ockam.io/reference/protocols/routing#relay) service. More on both of those later.
 
@@ -53,7 +53,7 @@ The \`enroll\` command does a lot!  All at once it...
 2. generates a private key [Identifier](https://docs.ockam.io/reference/protocols/identities#identities) as your local Node’s cryptographic[ Identity](https://docs.ockam.io/reference/protocols/identities).&#x20;
 3. creates a local [Vault to store keys.](https://docs.ockam.io/reference/protocols/keys)
 4. guides you to sign in to your new Ockam Orchestrator Project.&#x20;
-5. asks your Project’s Membership Authority to issue and sign a[ membership Credential](https://docs.ockam.io/reference/protocols/identities#credentials) for this Node[. ](https://docs.ockam.io/reference/protocols/identities#credentials)
+5. asks your Project’s Membership Authority to issue and sign a[ membership Credential](https://docs.ockam.io/reference/protocols/identities#credentials) for this Node.
 6. makes you the administrator of your Project.
 7. creates a Secure Channel between your local Ockam Node and your Project in Orchestrator.
 
@@ -100,7 +100,7 @@ ockam relay create postgres
 This command&#x20;
 
 1. initiates an outgoing tcp connection from the Ockam Node in AWS to your Project in Ockam Orchestrator.&#x20;
-2. creates a[ Secure Channel](https://docs.ockam.io/reference/protocols/secure-channels) over the tcp connection.&#x20;
+2. creates a [Secure Channel](https://docs.ockam.io/reference/protocols/secure-channels) over the tcp connection.&#x20;
 3. creates a Relay in your Project at the address: `postgres`
 
 Notice that we didn’t have to change anything in the AWS network settings. It’s possible because Bank Corp’s network allows outgoing tcp connections to the Internet. We use this port to create the Secure Channel.
