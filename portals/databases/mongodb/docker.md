@@ -20,7 +20,7 @@ We connect a nodejs app in one virtual private network with a MongoDB database i
 
 To understand the details of how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
 
-<figure><img src="../../../.gitbook/assets/Screenshot 2024-02-09 at 8.51.05 AM (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/mongodb-portal.png" alt=""><figcaption></figcaption></figure>
 
 ## Run
 
@@ -85,7 +85,7 @@ networks:
 
 ## Recap
 
-<figure><img src="../../../.gitbook/assets/Screenshot 2024-02-09 at 8.51.05 AM (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/mongodb-portal.png" alt=""><figcaption></figcaption></figure>
 
 We connected a nodejs app in one virtual private network with a MongoDB database in another virtual private network over an end-to-end encrypted portal.
 
