@@ -23,6 +23,8 @@ To understand the details of how end-to-end trust is established, and how the po
 
 <figure><img src="../../../.gitbook/assets/Screenshot 2024-02-09 at 8.51.05 AM (1).png" alt=""><figcaption></figcaption></figure>
 
+![img.png](img.png)
+
 ## Run
 
 This example requires Bash, Git, and AWS CLI. Please set up these tools for your operating system.
@@ -51,7 +53,7 @@ are full of comments and meant to be read. The example setup is only a few simpl
 ### Administrator
 
 * The [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/run.sh) calls the [<mark style="color:blue;">run function</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/run.sh#L14) 
-  which invokes the [<mark style="color:blue;">enroll command</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/kubernetes/run.sh#L16-L29) to create an new identity, sign into Ockam Orchestrator, 
+  which invokes the [<mark style="color:blue;">enroll command</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/run.sh#L27) to create an new identity, sign into Ockam Orchestrator, 
   set up a new Ockam project, make you the administrator of this project, and get a project membership [<mark style="color:blue;">credential</mark>](../../../reference/protocols/identities.md#credentials).
 * The run function then [<mark style="color:blue;">generates two new enrollment tickets</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/run.sh#L36-L45).
   The tickets are valid for 10 minutes. Each ticket can be redeemed only once and assigns [<mark style="color:blue;">attributes</mark>](../../../reference/protocols/identities.md#credentials) to its redeemer. 
@@ -125,11 +127,11 @@ The instance is started and the `run_ockam.sh` script is executed:
 
 We finally wait for the instance to be ready and install the nodejs application:
 
-  * The [<mark style="color:blue;">app.js file</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/analysis_corp/app.js) and the previously created `key.pem` file are [<mark style="color:blue;">copied to the instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/analysis_corp/run.sh#L56).
+  * The [<mark style="color:blue;">app.js file</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/analysis_corp/app.js) is [<mark style="color:blue;">copied to the instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/analysis_corp/run.sh#L56) (this uses the previously created `key.pem` file to identify).
   * We can then [<mark style="color:blue;">SSH to the instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/analysis_corp/run.sh#L57) and:
     * [<mark style="color:blue;">Install nodejs</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/analysis_corp/run.sh#L59).
     * [<mark style="color:blue;">Install the Postgres client library</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/analysis_corp/run.sh#L60).
-    * [<mark style="color:blue;">Start the nodejs application</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/analysis_corp/run.sh#L1).
+    * [<mark style="color:blue;">Start the nodejs application</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/analysis_corp/run.sh#L61).
 
 Once the nodejs application is started:
   * It will [<mark style="color:blue;">connect to the Ockam inlet at port 12345</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon_aurora/aws_cli/analysis_corp/app.js#L9).
