@@ -9,6 +9,8 @@
   * [PostgreSQL](portals/databases/postgres/README.md)
     * [Docker](portals/databases/postgres/docker.md)
     * [Kubernetes](portals/databases/postgres/kubernetes.md)
+    * [Amazon RDS](portals/databases/postgres/rds.md)
+    * [Amazon Aurora](portals/databases/postgres/aurora.md)
   * [MongoDB](portals/databases/mongodb/README.md)
     * [Docker](portals/databases/mongodb/docker.md)
 
