@@ -13,8 +13,8 @@
     * [Amazon Aurora](portals/databases/postgres/aurora.md)
   * [MongoDB](portals/databases/mongodb/README.md)
     * [Docker](portals/databases/mongodb/docker.md)
-* [APIs](portals/databases-1/README.md)
-  * [nodejs](portals/databases-1/docker.md)
+* [APIs](portals/apis/README.md)
+  * [Nodejs](portals/apis/nodejs.md)
 
 ## Reference
 
