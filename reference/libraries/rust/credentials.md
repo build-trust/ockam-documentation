@@ -99,7 +99,16 @@ async fn main(ctx: Context) -> Result<()> {
     //
     // For a different application this attested attribute set can be different and
     // distinct for each identifier, but for this example we'll keep things simple.
-    let credential_issuer = CredentialIssuerWorker::new(members.clone(), node.credentials(), &issuer, None, None, None);
+    let credential_issuer = CredentialIssuerWorker::new(
+        members.clone(),
+        node.identities_attributes(),
+        node.credentials(),
+        &issuer,
+        "test".to_string(),
+        None,
+        None,
+        true,
+    );
 
     let mut pre_trusted_identities = BTreeMap::<Identifier, PreTrustedIdentity>::new();
     let attributes = PreTrustedIdentity::new(
