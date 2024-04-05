@@ -29,5 +29,5 @@ The examples below use a LLaMA API, however, the same setup works for any other 
 {% endhint %}
 
 <table data-card-size="large" data-view="cards"><thead>
-<tr><th></th><th></th></tr></thead><tbody><tr><td><a href="llama.md"><mark style="color:blue;"><strong>LLaMA</strong></mark></a></td><td>We connect a nodejs app in one virtual private network with a LLaMA API in another virtual private network. The example uses the AWS CLI to instantiate AWS resources.</td></tr>
+<tr><th></th><th></th></tr></thead><tbody><tr><td><a href="amazon_ec2/llama.md"><mark style="color:blue;"><strong>LLaMA</strong></mark></a></td><td>We connect a nodejs app in an AwS virtual private network with a LLaMA API in another AWS virtual private network. The example uses the AWS CLI to instantiate AWS resources.</td></tr>
 </tbody></table>

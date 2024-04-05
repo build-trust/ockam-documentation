@@ -14,14 +14,14 @@ layout:
 
 # LLaMA
 
-This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../../) to create an end-to-end **encrypted portal** to a LLaMA model.
+This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../../../) to create an end-to-end **encrypted portal** to a LLaMA model.
 
 We connect a nodejs app in one virtual private network with an application serving a LLaMa model in another virtual private network. 
 The example uses the AWS CLI to create these virtual networks.
 
 To understand the details of how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
 
-<figure><img src="../../.gitbook/assets/portals-ai-llama.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/portals-ai-llama.png" alt=""><figcaption></figcaption></figure>
 
 ## Run
 
@@ -139,7 +139,7 @@ Once the `client.js` application is started:
 
 ## Recap
 
-<figure><img src="../../.gitbook/assets/portals-ai-llama.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/portals-ai-llama.png" alt=""><figcaption></figcaption></figure>
 
 We connected a nodejs application in one virtual private network with an application serving a LLaMA model in another virtual private network over an end-to-end encrypted portal.
 
