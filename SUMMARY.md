@@ -5,6 +5,10 @@
 
 ## ENCRYPTED PORTALS TO ... <a href="#portals" id="portals"></a>
 
+* [AI](portals/ai/README.md)
+  * [Amazon EC2](portals/ai/ec2.md)
+* [APIs](portals/apis/README.md)
+  * [Nodejs](portals/apis/nodejs.md)
 * [Databases](portals/databases/README.md)
   * [PostgreSQL](portals/databases/postgres/README.md)
     * [Docker](portals/databases/postgres/docker.md)
@@ -14,10 +18,6 @@
   * [MongoDB](portals/databases/mongodb/README.md)
     * [Docker](portals/databases/mongodb/docker.md)
     * [Amazon EC2](portals/databases/mongodb/ec2.md)
-* [APIs](portals/apis/README.md)
-  * [Nodejs](portals/apis/nodejs.md)
-* [AI / LLMs](portals/ai/README.md)
-  * [Amazon EC2](portals/ai/ec2.md)
 
 ## Reference
 
