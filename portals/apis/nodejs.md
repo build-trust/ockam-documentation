@@ -108,7 +108,7 @@ Then, we create an EC2 instance where the Ockam inlet node will run:
 
 Next, the instance is started and the `run_ockam.sh` script is executed:
 
-* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#10).
+* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L10).
 * The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L26).
 * We then create an Ockam node:
   * With [a TCP inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L37).
