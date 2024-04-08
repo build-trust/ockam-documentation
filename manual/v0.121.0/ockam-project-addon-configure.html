@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html lang="en" class="rust" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>configure - Ockam Command Manual</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="custom.css">
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="ockam.html"><strong aria-hidden="true">1.</strong> ockam</a></li><li class="chapter-item "><a href="ockam-enroll.html"><strong aria-hidden="true">2.</strong> enroll</a></li><li class="chapter-item "><a href="ockam-space.html"><strong aria-hidden="true">3.</strong> space</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-space-create.html"><strong aria-hidden="true">3.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-space-delete.html"><strong aria-hidden="true">3.2.</strong> delete</a></li><li class="chapter-item "><a href="ockam-space-list.html"><strong aria-hidden="true">3.3.</strong> list</a></li><li class="chapter-item "><a href="ockam-space-show.html"><strong aria-hidden="true">3.4.</strong> show</a></li></ol></li><li class="chapter-item expanded "><a href="ockam-project.html"><strong aria-hidden="true">4.</strong> project</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-project-create.html"><strong aria-hidden="true">4.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-project-import.html"><strong aria-hidden="true">4.2.</strong> import</a></li><li class="chapter-item "><a href="ockam-project-delete.html"><strong aria-hidden="true">4.3.</strong> delete</a></li><li class="chapter-item "><a href="ockam-project-list.html"><strong aria-hidden="true">4.4.</strong> list</a></li><li class="chapter-item "><a href="ockam-project-show.html"><strong aria-hidden="true">4.5.</strong> show</a></li><li class="chapter-item "><a href="ockam-project-version.html"><strong aria-hidden="true">4.6.</strong> version</a></li><li class="chapter-item "><a href="ockam-project-ticket.html"><strong aria-hidden="true">4.7.</strong> ticket</a></li><li class="chapter-item expanded "><a href="ockam-project-addon.html"><strong aria-hidden="true">4.8.</strong> addon</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-project-addon-list.html"><strong aria-hidden="true">4.8.1.</strong> list</a></li><li class="chapter-item "><a href="ockam-project-addon-disable.html"><strong aria-hidden="true">4.8.2.</strong> disable</a></li><li class="chapter-item expanded "><a href="ockam-project-addon-configure.html" class="active"><strong aria-hidden="true">4.8.3.</strong> configure</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-project-addon-configure-okta.html"><strong aria-hidden="true">4.8.3.1.</strong> okta</a></li><li class="chapter-item "><a href="ockam-project-addon-configure-influxdb.html"><strong aria-hidden="true">4.8.3.2.</strong> influxdb</a></li><li class="chapter-item "><a href="ockam-project-addon-configure-confluent.html"><strong aria-hidden="true">4.8.3.3.</strong> confluent</a></li><li class="chapter-item "><a href="ockam-project-addon-configure-instaclustr-kafka.html"><strong aria-hidden="true">4.8.3.4.</strong> instaclustr-kafka</a></li><li class="chapter-item "><a href="ockam-project-addon-configure-aiven-kafka.html"><strong aria-hidden="true">4.8.3.5.</strong> aiven-kafka</a></li><li class="chapter-item "><a href="ockam-project-addon-configure-redpanda.html"><strong aria-hidden="true">4.8.3.6.</strong> redpanda</a></li><li class="chapter-item "><a href="ockam-project-addon-configure-warpstream.html"><strong aria-hidden="true">4.8.3.7.</strong> warpstream</a></li><li class="chapter-item "><a href="ockam-project-addon-configure-kafka.html"><strong aria-hidden="true">4.8.3.8.</strong> kafka</a></li></ol></li></ol></li><li class="chapter-item "><a href="ockam-project-enroll.html"><strong aria-hidden="true">4.9.</strong> enroll</a></li></ol></li><li class="chapter-item "><a href="ockam-sidecar.html"><strong aria-hidden="true">5.</strong> sidecar</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-sidecar-secure-relay-inlet.html"><strong aria-hidden="true">5.1.</strong> secure-relay-inlet</a></li><li class="chapter-item "><a href="ockam-sidecar-secure-relay-outlet.html"><strong aria-hidden="true">5.2.</strong> secure-relay-outlet</a></li></ol></li><li class="chapter-item "><a href="ockam-share.html"><strong aria-hidden="true">6.</strong> share</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-share-accept.html"><strong aria-hidden="true">6.1.</strong> accept</a></li><li class="chapter-item "><a href="ockam-share-create.html"><strong aria-hidden="true">6.2.</strong> create</a></li><li class="chapter-item "><a href="ockam-share-list.html"><strong aria-hidden="true">6.3.</strong> list</a></li><li class="chapter-item "><a href="ockam-share-revoke.html"><strong aria-hidden="true">6.4.</strong> revoke</a></li><li class="chapter-item "><a href="ockam-share-service.html"><strong aria-hidden="true">6.5.</strong> service</a></li><li class="chapter-item "><a href="ockam-share-show.html"><strong aria-hidden="true">6.6.</strong> show</a></li></ol></li><li class="chapter-item "><a href="ockam-node.html"><strong aria-hidden="true">7.</strong> node</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-node-create.html"><strong aria-hidden="true">7.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-node-delete.html"><strong aria-hidden="true">7.2.</strong> delete</a></li><li class="chapter-item "><a href="ockam-node-list.html"><strong aria-hidden="true">7.3.</strong> list</a></li><li class="chapter-item "><a href="ockam-node-logs.html"><strong aria-hidden="true">7.4.</strong> logs</a></li><li class="chapter-item "><a href="ockam-node-show.html"><strong aria-hidden="true">7.5.</strong> show</a></li><li class="chapter-item "><a href="ockam-node-start.html"><strong aria-hidden="true">7.6.</strong> start</a></li><li class="chapter-item "><a href="ockam-node-stop.html"><strong aria-hidden="true">7.7.</strong> stop</a></li><li class="chapter-item "><a href="ockam-node-default.html"><strong aria-hidden="true">7.8.</strong> default</a></li></ol></li><li class="chapter-item "><a href="ockam-worker.html"><strong aria-hidden="true">8.</strong> worker</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-worker-list.html"><strong aria-hidden="true">8.1.</strong> list</a></li></ol></li><li class="chapter-item "><a href="ockam-message.html"><strong aria-hidden="true">9.</strong> message</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-message-send.html"><strong aria-hidden="true">9.1.</strong> send</a></li></ol></li><li class="chapter-item "><a href="ockam-relay.html"><strong aria-hidden="true">10.</strong> relay</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-relay-create.html"><strong aria-hidden="true">10.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-relay-list.html"><strong aria-hidden="true">10.2.</strong> list</a></li><li class="chapter-item "><a href="ockam-relay-show.html"><strong aria-hidden="true">10.3.</strong> show</a></li><li class="chapter-item "><a href="ockam-relay-delete.html"><strong aria-hidden="true">10.4.</strong> delete</a></li></ol></li><li class="chapter-item "><a href="ockam-tcp-listener.html"><strong aria-hidden="true">11.</strong> tcp-listener</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-tcp-listener-create.html"><strong aria-hidden="true">11.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-tcp-listener-delete.html"><strong aria-hidden="true">11.2.</strong> delete</a></li><li class="chapter-item "><a href="ockam-tcp-listener-list.html"><strong aria-hidden="true">11.3.</strong> list</a></li><li class="chapter-item "><a href="ockam-tcp-listener-show.html"><strong aria-hidden="true">11.4.</strong> show</a></li></ol></li><li class="chapter-item "><a href="ockam-tcp-connection.html"><strong aria-hidden="true">12.</strong> tcp-connection</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-tcp-connection-create.html"><strong aria-hidden="true">12.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-tcp-connection-delete.html"><strong aria-hidden="true">12.2.</strong> delete</a></li><li class="chapter-item "><a href="ockam-tcp-connection-list.html"><strong aria-hidden="true">12.3.</strong> list</a></li><li class="chapter-item "><a href="ockam-tcp-connection-show.html"><strong aria-hidden="true">12.4.</strong> show</a></li></ol></li><li class="chapter-item "><a href="ockam-tcp-outlet.html"><strong aria-hidden="true">13.</strong> tcp-outlet</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-tcp-outlet-create.html"><strong aria-hidden="true">13.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-tcp-outlet-delete.html"><strong aria-hidden="true">13.2.</strong> delete</a></li><li class="chapter-item "><a href="ockam-tcp-outlet-list.html"><strong aria-hidden="true">13.3.</strong> list</a></li><li class="chapter-item "><a href="ockam-tcp-outlet-show.html"><strong aria-hidden="true">13.4.</strong> show</a></li></ol></li><li class="chapter-item "><a href="ockam-tcp-inlet.html"><strong aria-hidden="true">14.</strong> tcp-inlet</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-tcp-inlet-create.html"><strong aria-hidden="true">14.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-tcp-inlet-delete.html"><strong aria-hidden="true">14.2.</strong> delete</a></li><li class="chapter-item "><a href="ockam-tcp-inlet-list.html"><strong aria-hidden="true">14.3.</strong> list</a></li><li class="chapter-item "><a href="ockam-tcp-inlet-show.html"><strong aria-hidden="true">14.4.</strong> show</a></li></ol></li><li class="chapter-item "><a href="ockam-kafka-outlet.html"><strong aria-hidden="true">15.</strong> kafka-outlet</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-kafka-outlet-create.html"><strong aria-hidden="true">15.1.</strong> create</a></li></ol></li><li class="chapter-item "><a href="ockam-kafka-consumer.html"><strong aria-hidden="true">16.</strong> kafka-consumer</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-kafka-consumer-create.html"><strong aria-hidden="true">16.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-kafka-consumer-delete.html"><strong aria-hidden="true">16.2.</strong> delete</a></li><li class="chapter-item "><a href="ockam-kafka-consumer-list.html"><strong aria-hidden="true">16.3.</strong> list</a></li></ol></li><li class="chapter-item "><a href="ockam-kafka-direct.html"><strong aria-hidden="true">17.</strong> kafka-direct</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-kafka-direct-create.html"><strong aria-hidden="true">17.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-kafka-direct-delete.html"><strong aria-hidden="true">17.2.</strong> delete</a></li><li class="chapter-item "><a href="ockam-kafka-direct-list.html"><strong aria-hidden="true">17.3.</strong> list</a></li></ol></li><li class="chapter-item "><a href="ockam-kafka-producer.html"><strong aria-hidden="true">18.</strong> kafka-producer</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-kafka-producer-create.html"><strong aria-hidden="true">18.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-kafka-producer-delete.html"><strong aria-hidden="true">18.2.</strong> delete</a></li><li class="chapter-item "><a href="ockam-kafka-producer-list.html"><strong aria-hidden="true">18.3.</strong> list</a></li></ol></li><li class="chapter-item "><a href="ockam-secure-channel-listener.html"><strong aria-hidden="true">19.</strong> secure-channel-listener</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-secure-channel-listener-create.html"><strong aria-hidden="true">19.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-secure-channel-listener-delete.html"><strong aria-hidden="true">19.2.</strong> delete</a></li><li class="chapter-item "><a href="ockam-secure-channel-listener-list.html"><strong aria-hidden="true">19.3.</strong> list</a></li><li class="chapter-item "><a href="ockam-secure-channel-listener-show.html"><strong aria-hidden="true">19.4.</strong> show</a></li></ol></li><li class="chapter-item "><a href="ockam-secure-channel.html"><strong aria-hidden="true">20.</strong> secure-channel</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-secure-channel-create.html"><strong aria-hidden="true">20.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-secure-channel-delete.html"><strong aria-hidden="true">20.2.</strong> delete</a></li><li class="chapter-item "><a href="ockam-secure-channel-list.html"><strong aria-hidden="true">20.3.</strong> list</a></li><li class="chapter-item "><a href="ockam-secure-channel-show.html"><strong aria-hidden="true">20.4.</strong> show</a></li></ol></li><li class="chapter-item "><a href="ockam-vault.html"><strong aria-hidden="true">21.</strong> vault</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-vault-create.html"><strong aria-hidden="true">21.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-vault-move.html"><strong aria-hidden="true">21.2.</strong> move</a></li><li class="chapter-item "><a href="ockam-vault-show.html"><strong aria-hidden="true">21.3.</strong> show</a></li><li class="chapter-item "><a href="ockam-vault-delete.html"><strong aria-hidden="true">21.4.</strong> delete</a></li><li class="chapter-item "><a href="ockam-vault-list.html"><strong aria-hidden="true">21.5.</strong> list</a></li></ol></li><li class="chapter-item "><a href="ockam-identity.html"><strong aria-hidden="true">22.</strong> identity</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-identity-create.html"><strong aria-hidden="true">22.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-identity-show.html"><strong aria-hidden="true">22.2.</strong> show</a></li><li class="chapter-item "><a href="ockam-identity-list.html"><strong aria-hidden="true">22.3.</strong> list</a></li><li class="chapter-item "><a href="ockam-identity-default.html"><strong aria-hidden="true">22.4.</strong> default</a></li><li class="chapter-item "><a href="ockam-identity-delete.html"><strong aria-hidden="true">22.5.</strong> delete</a></li></ol></li><li class="chapter-item "><a href="ockam-credential.html"><strong aria-hidden="true">23.</strong> credential</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-credential-list.html"><strong aria-hidden="true">23.1.</strong> list</a></li><li class="chapter-item "><a href="ockam-credential-issue.html"><strong aria-hidden="true">23.2.</strong> issue</a></li><li class="chapter-item "><a href="ockam-credential-store.html"><strong aria-hidden="true">23.3.</strong> store</a></li><li class="chapter-item "><a href="ockam-credential-verify.html"><strong aria-hidden="true">23.4.</strong> verify</a></li></ol></li><li class="chapter-item "><a href="ockam-authority.html"><strong aria-hidden="true">24.</strong> authority</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-authority-create.html"><strong aria-hidden="true">24.1.</strong> create</a></li></ol></li><li class="chapter-item "><a href="ockam-policy.html"><strong aria-hidden="true">25.</strong> policy</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-policy-create.html"><strong aria-hidden="true">25.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-policy-show.html"><strong aria-hidden="true">25.2.</strong> show</a></li><li class="chapter-item "><a href="ockam-policy-delete.html"><strong aria-hidden="true">25.3.</strong> delete</a></li><li class="chapter-item "><a href="ockam-policy-list.html"><strong aria-hidden="true">25.4.</strong> list</a></li></ol></li><li class="chapter-item "><a href="ockam-lease.html"><strong aria-hidden="true">26.</strong> lease</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-lease-create.html"><strong aria-hidden="true">26.1.</strong> create</a></li><li class="chapter-item "><a href="ockam-lease-list.html"><strong aria-hidden="true">26.2.</strong> list</a></li><li class="chapter-item "><a href="ockam-lease-show.html"><strong aria-hidden="true">26.3.</strong> show</a></li><li class="chapter-item "><a href="ockam-lease-revoke.html"><strong aria-hidden="true">26.4.</strong> revoke</a></li></ol></li><li class="chapter-item "><a href="ockam-status.html"><strong aria-hidden="true">27.</strong> status</a></li><li class="chapter-item "><a href="ockam-reset.html"><strong aria-hidden="true">28.</strong> reset</a></li><li class="chapter-item "><a href="ockam-completion.html"><strong aria-hidden="true">29.</strong> completion</a></li><li class="chapter-item "><a href="ockam-environment.html"><strong aria-hidden="true">30.</strong> environment</a></li><li class="chapter-item "><a href="ockam-flow-control.html"><strong aria-hidden="true">31.</strong> flow-control</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-flow-control-add-consumer.html"><strong aria-hidden="true">31.1.</strong> add-consumer</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ockam Command Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="project-addon-configure"><a class="header" href="#project-addon-configure">project addon configure</a></h2>
+<hr />
+<p><code>ockam project addon configure &lt;COMMAND&gt; </code></p>
+<p>Configure an addon for a project</p>
+<h3 id="subcommands"><a class="header" href="#subcommands">Subcommands</a></h3>
+<ul>
+<li><a href="ockam-project-addon-configure-okta.html">okta</a></li>
+<li><a href="ockam-project-addon-configure-influxdb.html">influxdb</a></li>
+<li><a href="ockam-project-addon-configure-confluent.html">confluent</a></li>
+<li><a href="ockam-project-addon-configure-instaclustr-kafka.html">instaclustr-kafka</a></li>
+<li><a href="ockam-project-addon-configure-aiven-kafka.html">aiven-kafka</a></li>
+<li><a href="ockam-project-addon-configure-redpanda.html">redpanda</a></li>
+<li><a href="ockam-project-addon-configure-warpstream.html">warpstream</a></li>
+<li><a href="ockam-project-addon-configure-kafka.html">kafka</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ockam-project-addon-disable.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ockam-project-addon-configure-okta.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ockam-project-addon-disable.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ockam-project-addon-configure-okta.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
