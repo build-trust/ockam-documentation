@@ -23,7 +23,9 @@ In each example, we connect a nodejs app in one private network with a database 
 Please select an example to dig in:
 
 {% hint style="info" %}
-The examples below use PostgreSQL and MongoDB, however, the same setup works for any database: _MySQL, ClickHouse, Cassandra, InfluxDB, SQL Server, etc._
+The examples below use PostgreSQL, MongoDB and InfluxDB. However, the same setup works for any database: _MySQL, ClickHouse, Cassandra, SQL Server, etc._
 {% endhint %}
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="postgres/"><mark style="color:blue;"><strong>PostgreSQL</strong></mark></a></td><td>We connect a nodejs app in one private network with a PostgreSQL database in another private network.</td><td><a href="postgres/">postgres</a></td></tr><tr><td><a href="mongodb/"><mark style="color:blue;"><strong>MongoDB</strong></mark></a></td><td>We connect a nodejs app in one private network with a MongoDB database in another private network.</td><td><a href="mongodb/">mongodb</a></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="postgres/"><mark style="color:blue;"><strong>PostgreSQL</strong></mark></a></td><td>We connect a nodejs app in one private network with a PostgreSQL database in another private network.</td><td><a href="postgres/">postgres</a></td></tr><tr><td><a href="mongodb/"><mark style="color:blue;"><strong>MongoDB</strong></mark></a></td><td>We connect a nodejs app in one private network with a MongoDB database in another private network.</td><td><a href="mongodb/">mongodb</a></td></tr><tr><td><a href="influxdb/"><mark style="color:blue;"><strong>InfluxDB</strong></mark></a></td><td>We connect a nodejs app in one private network with a InfluxDB database in another private network.</td><td><a href="influxdb/">influxDB</a></td></tr></tbody></table>
+
+
