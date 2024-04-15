@@ -20,7 +20,9 @@
   * [Python](portals/apis/python.md)
 * [AI](portals/ai/README.md)
   * [Amazon EC2](portals/ai/ec2.md)
-
+* [Code Repos](portals/coderepos/README.md)
+  * [Gitlab Enterprise](portals/coderepos/gitlab/amazon_ec2.md)
+  
 ## Reference
 
 * [Command](reference/command/README.md)
