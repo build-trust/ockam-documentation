@@ -19,7 +19,7 @@
   * [Nodejs](portals/apis/nodejs.md)
   * [Python](portals/apis/python.md)
 * [AI](portals/ai/README.md)
-  * [Amazon EC2](portals/ai/ec2.md)
+  * [Amazon EC2](portals/ai/amazon_ec2)
 * [Code Repos](portals/coderepos/README.md)
   * [Gitlab Enterprise](portals/coderepos/gitlab/amazon_ec2.md)
   
