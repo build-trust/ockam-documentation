@@ -14,9 +14,9 @@ layout:
 
 # Amazon EC2
 
-This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../) to create an end-to-end **encrypted portal** to a LLaMA model.
+This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../) to create an end-to-end **encrypted portal** to an Amazon Bedrock model.
 
-We connect a nodejs app in one virtual private network with an application serving a LLaMa model in another virtual private network.
+We connect a nodejs app in one virtual private network with an application serving an Amazon Bedrock model in another virtual private network.
 The example uses the AWS CLI to create these virtual networks.
 
 To understand the details of how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../how-does-ockam-work.md)”
