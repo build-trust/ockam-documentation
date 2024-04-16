@@ -19,11 +19,14 @@
   * [Nodejs](portals/apis/nodejs.md)
   * [Python](portals/apis/python.md)
 * [AI](portals/ai/README.md)
-  * [Amazon Bedrock](portals/ai/amazon_bedrock.md)
-  * [Amazon EC2](portals/ai/amazon_ec2.md)
+  * [Amazon Bedrock](portals/ai/amazon\_bedrock.md)
+  * [Amazon EC2](portals/ai/amazon\_ec2.md)
 * [Code Repos](portals/coderepos/README.md)
-  * [Gitlab Enterprise](portals/coderepos/gitlab/amazon_ec2.md)
-  
+  * [Gitlab Enterprise](portals/coderepos/gitlab/amazon\_ec2.md)
+* [Kafka](portals/kafka/README.md)
+  * [Redpanda](portals/kafka/redpanda/README.md)
+    * [Docker](portals/kafka/redpanda/docker.md)
+
 ## Reference
 
 * [Command](reference/command/README.md)
