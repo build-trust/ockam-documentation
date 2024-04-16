@@ -14,9 +14,9 @@ layout:
 
 # MongoDB
 
-This section contains hands-on examples that use [<mark style="color:blue;">Ockam</mark>](../../../) to create **encrypted portals** to MongoDB databases running in various environments.
+In each example, we connect a nodejs app in one private network with a MongoDB database in another private network.&#x20;
 
-In each example, we connect a nodejs app in one private network with a MongoDB database in another private network.  To understand how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
+Each company’s network is private, isolated, and doesn't expose ports. To learn how end-to-end trust is established, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
 
 <figure><img src="../../../.gitbook/assets/mongodb-portal.png" alt=""><figcaption></figcaption></figure>
 

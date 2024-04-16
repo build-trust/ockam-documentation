@@ -14,11 +14,9 @@ layout:
 
 # Amazon Aurora
 
-This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../../) to create an end-to-end **encrypted portal** to postgres.
+Let's connect a nodejs app in one Amazon VPC with an Amazon RDS managed Postgres database in another Amazon VPC.&#x20;
 
-We connect a nodejs app in one Amazon VPC with a Amazon Aurora managed Postgres database in another Amazon VPC. The example uses AWS CLI to create these VPCs.
-
-To understand the details of how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
+Each company’s network is private, isolated, and doesn't expose ports. To learn how end-to-end trust is established, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
 
 <figure><img src="../../../.gitbook/assets/Screenshot 2024-02-09 at 8.51.05 AM (1).png" alt=""><figcaption></figcaption></figure>
 

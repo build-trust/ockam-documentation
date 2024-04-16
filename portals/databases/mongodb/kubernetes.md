@@ -1,10 +1,22 @@
+---
+layout:
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # Kubernetes
 
-This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../../) to create an end-to-end **encrypted portal** to mongodb.
+Let's connect a nodejs app in one one private kubernetes cluster with a mongodb database in another private kubernetes cluster. The example uses docker and docker compose to create these virtual networks.&#x20;
 
-We connect a nodejs app in one private kubernetes cluster with a mongodb database in another private kubernetes cluster. The example uses docker and kind to create these kubernetes clusters.
-
-To understand the details of how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
+Each company’s network is private, isolated, and doesn't expose ports. To learn how end-to-end trust is established, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
 
 <figure><img src="../../../.gitbook/assets/Screenshot 2024-02-13 at 8.50.52 PM.png" alt=""><figcaption></figcaption></figure>
 

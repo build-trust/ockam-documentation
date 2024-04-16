@@ -14,11 +14,9 @@ layout:
 
 # Docker
 
-This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../../) to create an end-to-end **encrypted portal** to MongoDB.
+Let's connect a nodejs app in one virtual private network with a MongoDB database in another virtual private network. The example uses docker and docker compose to create these virtual networks.&#x20;
 
-We connect a nodejs app in one virtual private network with a MongoDB database in another virtual private network. The example uses docker and docker compose to create these virtual networks.
-
-To understand the details of how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
+Each company’s network is private, isolated, and doesn't expose ports. To learn how end-to-end trust is established, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
 
 <figure><img src="../../../.gitbook/assets/mongodb-portal.png" alt=""><figcaption></figcaption></figure>
 

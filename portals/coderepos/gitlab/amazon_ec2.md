@@ -12,13 +12,11 @@ layout:
     visible: true
 ---
 
-# Gitlab CodeRepository
+# Gitlab Enterprise
 
-This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../../) to create an end-to-end **encrypted portal** to Gitlab CodeRepository.
+Let's connect a nodejs app in one company's Amazon VPC with a CodeRepository hosted on a Gitlab Server in another company's Amazon VPC. The example uses AWS CLI to create these VPCs.
 
-We connect a nodejs app in one Amazon VPC with a CodeRepository hosted on a Gitlab Server in another Amazon VPC. The example uses AWS CLI to create these VPCs.
-
-To understand the details of how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
+Each company’s network is private, isolated, and doesn't expose ports. To learn how end-to-end trust is established, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
 
 <figure><img src="../../../.gitbook/assets/portals-gitlabcodebase.png" alt=""><figcaption></figcaption></figure>
 
@@ -64,14 +62,9 @@ First, the `bank_corp/run.sh` script creates a network to host the database:
   * [<mark style="color:blue;">one TCP egress to the Internet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L41),
   * [<mark style="color:blue;">one ingress to EC2 running Gitlab</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L42-L43) from the local machine running the example, to access Gitlab on port 22 and 80.
 
-
 Then, the `bank_corp/run.sh` script creates a Gitlab server:
 
-
-
-
-* We run [<mark style="color:blue;">a script to create and update auth token and org id </mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L79) in [<mark style="color:blue;">app.mjs </mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/analysis\_corp/app.mjs#L10-L11).
-
+* We run [<mark style="color:blue;">a script to create and update auth token and org id</mark> ](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L79)in [<mark style="color:blue;">app.mjs</mark> ](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/analysis\_corp/app.mjs#L10-L11).
 
 We are now ready to create an EC2 instance where the Gitlab server and Ockam outlet node will run:
 
@@ -79,9 +72,8 @@ We are now ready to create an EC2 instance where the Gitlab server and Ockam out
 * We [<mark style="color:blue;">select an AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L51-L53).
 * We [<mark style="color:blue;">create an ec2 keypair</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L54-L55) to access EC2 and to obtain gitlab password to be able to login to gitlab console.
 * We [<mark style="color:blue;">start an instance using the AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L61-L63) above and a start script based on `run_ockam.sh` and `run_gitlab.sh` where:
-  * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L57) created by the administrator and given as a parameter to `run.sh`.
-  * [<mark style="color:blue;">SSH_PUBLIC_KEY</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L59) in `run_gitlab.sh` script
-
+  * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L57) created by the administrator and given as a parameter to `run.sh`.
+  * [<mark style="color:blue;">SSH\_PUBLIC\_KEY</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L59) in `run_gitlab.sh` script
 * We [<mark style="color:blue;">tag the created instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L64) and [<mark style="color:blue;">wait for it to be available</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L65).
 * We wait for 3 minutes for gitlab to be setup and [<mark style="color:blue;">check it's availability</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L68)
 
@@ -92,13 +84,12 @@ When the instance is started, the `run_gitlab.sh` script is executed:
 * [<mark style="color:blue;">Obtain gitlab root password to create access token</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run\_gitlab.sh#L74).
   * Password can be used to access the gitlab console from local machine
 * [<mark style="color:blue;">Disable public signups</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run\_gitlab.sh#L81).
-* [<mark style="color:blue;">Create demo_project</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run\_gitlab.sh#L86-L89).
+* [<mark style="color:blue;">Create demo\_project</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run\_gitlab.sh#L86-L89).
 * [<mark style="color:blue;">Configure access via created SSH Key</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run\_gitlab.sh#L93-L97).
-
 
 When the instance is started, the `run_ockam.sh` script is executed:
 
-* The [<mark style="color:blue;">`ockam`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">executable is installed</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run\_ockam.sh#L10-L11).
+* The [<mark style="color:blue;">`ockam`</mark> <mark style="color:blue;">executable is installed</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run\_ockam.sh#L10-L11).
 * The [<mark style="color:blue;">enrollment ticket is used to create a default identity and make it a project member</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run\_ockam.sh#L26).
 * We then create an Ockam node:
   * With [<mark style="color:blue;">a TCP outlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run\_ockam.sh#L38-L42).
@@ -121,7 +112,7 @@ We are now ready to create an EC2 instance where the Ockam inlet node will run:
 
 * We [<mark style="color:blue;">select an AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/analysis\_corp/run.sh#L41).
 * We [<mark style="color:blue;">start an instance using the AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/analysis\_corp/run.sh#L45-L52) above and a start script based on `run_ockam.sh` where:
-  * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/analysis\_corp/run.sh#L48) created by the administrator and given as a parameter to `run.sh`.
+  * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/analysis\_corp/run.sh#L48) created by the administrator and given as a parameter to `run.sh`.
 
 The instance is started and the `run_repoaccess.sh` script is executed:
 
@@ -129,7 +120,7 @@ The instance is started and the `run_repoaccess.sh` script is executed:
 
 The instance is started and the `run_ockam.sh` script is executed:
 
-* The [<mark style="color:blue;">`ockam`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">executable is installed</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/analysis\_corp/run\_ockam.sh#L10-L11).
+* The [<mark style="color:blue;">`ockam`</mark> <mark style="color:blue;">executable is installed</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/analysis\_corp/run\_ockam.sh#L10-L11).
 * The [<mark style="color:blue;">enrollment ticket is used to create a default identity and make it a project member</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/analysis\_corp/run\_ockam.sh#L26).
 * We then create an Ockam node:
   * With [<mark style="color:blue;">a TCP inlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/analysis\_corp/run\_ockam.sh#L36).

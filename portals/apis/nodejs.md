@@ -12,13 +12,11 @@ layout:
     visible: true
 ---
 
-# nodejs
+# Nodejs
 
-This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../) to create an end-to-end **encrypted portal** to a nodejs API.
+Let's connect a nodejs app in one AWS VPC with a nodejs API in another AWS VPC. The example uses AWS CLI to create these VPCs.
 
-We connect a nodejs app in one AWS VPC with a nodejs API in another AWS VPC. The example uses AWS CLI to create these VPCs.
-
-To understand the details of how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../how-does-ockam-work.md)”
+Each company’s network is private, isolated, and doesn't expose ports. To learn how end-to-end trust is established, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../how-does-ockam-work.md)”
 
 <figure><img src="../../.gitbook/assets/nodejs_api.png" alt=""><figcaption></figcaption></figure>
 
@@ -122,8 +120,6 @@ Finally, we wait for the instance to be ready and run the nodejs client applicat
   * [Run the nodejs client application](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run.sh#L60).
 
 ### Recap <a href="#recap" id="recap"></a>
-
-
 
 <figure><img src="../../.gitbook/assets/nodejs_api.png" alt=""><figcaption></figcaption></figure>
 
