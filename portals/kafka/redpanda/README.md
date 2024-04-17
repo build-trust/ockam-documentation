@@ -14,14 +14,12 @@ layout:
 
 # Redpanda
 
-In each example, we connect a kafka consumer and a producer in one private network with Redpanda kafka server in another private network. We send end-to-end encrypted Kafka messages _through_ Redpanda with Ockam.&#x20;
+Create an Ockam **Portal** to send end-to-end encrypted messages _through_ Redpanda.
 
-[<mark style="color:blue;">Ockam</mark>](../../../) encrypts Kafka messages so that only the consumer can decrypt it. This gives the guarantee of tamper-proof data transfer and eliminate exposure in case the Kafka messages are exposed.
+[<mark style="color:blue;">Ockam</mark>](../../../) encrypts messages as they leave a Producer in such a way that they can only be decrypted by a specific Consumer. This guarantees that your data cannot be seen or tampered as it passes through Kafka. Operators of the Kafka cluster only see end-to-end encrypted data.
 
 <figure><img src="../../../.gitbook/assets/redpanda_docker.png" alt=""><figcaption></figcaption></figure>
 
 Please select an example to dig in:
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><a href="docker.md"><mark style="color:blue;"><strong>Redpanda - Docker</strong></mark></a></td><td>We connect a kafka consumer and a producer in one private network with Redpanda kafka server in another virtual private network. The example uses docker and docker compose to create these virtual networks.</td></tr></tbody></table>
-
-
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><a href="docker.md"><mark style="color:blue;"><strong>Redpanda - Docker</strong></mark></a></td><td>We send end-to-end encrypted messages through Redpanda.</td></tr></tbody></table>

@@ -1,12 +1,10 @@
 # Docker
 
-This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../../) to send end-to-end encrypted messages to and from Apache Kafka.
+This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../../) to send end-to-end encrypted messages _through_ Apache Kafka.
 
-We connect a Kafka consumer and a producer in one virtual private network with an Apache Kafka server in another virtual private network. The example uses docker and docker compose to create these virtual networks.
+[<mark style="color:blue;">Ockam</mark>](../../../) encrypts messages as they leave a Producer in such a way that they can only be decrypted by a specific Consumer. This guarantees that your data cannot be seen or tampered as it passes through Kafka. Operators of the Kafka cluster only see end-to-end encrypted data.
 
-To understand the details of how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read:  “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
-
-
+To learn how end-to-end trust is established, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
 
 <figure><img src="../../../.gitbook/assets/apache_kafka_docker.png" alt=""><figcaption></figcaption></figure>
 
@@ -47,11 +45,10 @@ networks:
     driver: bridge
 ```
 
-* Kafka Operator’s [<mark style="color:blue;">docker-compose configuration</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/kafka_operator/docker-compose.yml) is used when run.sh invokes docker-compose. It creates an [<mark style="color:blue;">isolated virtual network</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/kafka_operator/docker-compose.yml#L3-L6) for Kafka Operator.
-* In this network, docker compose starts a [<mark style="color:blue;">container with a Kafka server</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/kafka_operator/docker-compose.yml#L9-L20). This container becomes available at <mark style="background-color:yellow;">kafka:9092</mark> in the Kafka Operator's network.
-* In the Ockam container, the entrypoint creates the Ockam node described by `ockam.yaml`. The node will automatically create an identity,  [<mark style="color:blue;">enroll with your project</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/kafka_operator/run_ockam.sh#L24), and setup Kafka inlet and outlet.
-* The entrypoint script then [<mark style="color:blue;">creates a node</mark> ](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/kafka_operator/run_ockam.sh#L24) that uses this identity and membership credential to authenticate and create a <mark style="color:blue;">relay</mark> in the project, back to the node at <mark style="background-color:yellow;">relay address: kafka</mark>. The run function [<mark style="color:blue;">gave the enrollment ticket permission</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/run.sh#L53C31-L53C73) to use this relay address.
-
+* Kafka Operator’s [<mark style="color:blue;">docker-compose configuration</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/kafka\_operator/docker-compose.yml) is used when run.sh invokes docker-compose. It creates an [<mark style="color:blue;">isolated virtual network</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/kafka\_operator/docker-compose.yml#L3-L6) for Kafka Operator.
+* In this network, docker compose starts a [<mark style="color:blue;">container with a Kafka server</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/kafka\_operator/docker-compose.yml#L9-L20). This container becomes available at <mark style="background-color:yellow;">kafka:9092</mark> in the Kafka Operator's network.
+* In the Ockam container, the entrypoint creates the Ockam node described by `ockam.yaml`. The node will automatically create an identity, [<mark style="color:blue;">enroll with your project</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/kafka\_operator/run\_ockam.sh#L24), and setup Kafka inlet and outlet.
+* The entrypoint script then [<mark style="color:blue;">creates a node</mark> ](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/kafka\_operator/run\_ockam.sh#L24)that uses this identity and membership credential to authenticate and create a <mark style="color:blue;">relay</mark> in the project, back to the node at <mark style="background-color:yellow;">relay address: kafka</mark>. The run function [<mark style="color:blue;">gave the enrollment ticket permission</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/run.sh#L53C31-L53C73) to use this relay address.
 
 #### Application Team
 
@@ -62,9 +59,9 @@ networks:
     driver: bridge
 ```
 
-* Application Team’s [<mark style="color:blue;">docker-compose configuration</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/application_team/docker-compose.yml) is used when run.sh invokes docker-compose. It creates an [<mark style="color:blue;">isolated virtual network</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/application_team/docker-compose.yml#L2-L4) for Application Team. In this network docker compose starts a Kafka consumer container and a Kafka producer container.
-* The Kafka consumer container is created using [<mark style="color:blue;">a dockerfile</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/kafka_ockam.dockerfile) and an [<mark style="color:blue;">entrypoint script</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/application_team/run_ockam.sh). The enrollment ticket from run.sh is [<mark style="color:blue;">passed to the container</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/application_team/docker-compose.yml#L15) via an environment variable.
-* When the Kafka consumer node container starts in the Application Team's network, it runs [<mark style="color:blue;">its entrypoint</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/application_team/run_ockam.sh)<mark style="color:blue;">.</mark> The entrypoint creates the Ockam node described by `ockam.yaml`. The node will automatically create an identity, enroll with your project, and setup the Kafka inlet.
+* Application Team’s [<mark style="color:blue;">docker-compose configuration</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/application\_team/docker-compose.yml) is used when run.sh invokes docker-compose. It creates an [<mark style="color:blue;">isolated virtual network</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/application\_team/docker-compose.yml#L2-L4) for Application Team. In this network docker compose starts a Kafka consumer container and a Kafka producer container.
+* The Kafka consumer container is created using [<mark style="color:blue;">a dockerfile</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/kafka\_ockam.dockerfile) and an [<mark style="color:blue;">entrypoint script</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/application\_team/run\_ockam.sh). The enrollment ticket from run.sh is [<mark style="color:blue;">passed to the container</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/application\_team/docker-compose.yml#L15) via an environment variable.
+* When the Kafka consumer node container starts in the Application Team's network, it runs [<mark style="color:blue;">its entrypoint</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/apache/docker/application\_team/run\_ockam.sh)<mark style="color:blue;">.</mark> The entrypoint creates the Ockam node described by `ockam.yaml`. The node will automatically create an identity, enroll with your project, and setup the Kafka inlet.
 * Next, the entrypoint executes the command present in the docker-compose configuration which launches a Kafka consumer waiting for messages in the <mark style="background-color:yellow;">demo</mark> topic. Once the messages are received, they are printed out.
 * In the producer container the process is analogous. Once the Ockam node is setup the command within docker-compose configuration launches a Kafka producer sending 5 messages spaced 5 seconds apart.
 
@@ -87,6 +84,3 @@ To delete all containers and images:
 ```sh
 ./run.sh cleanup
 ```
-
-
-
