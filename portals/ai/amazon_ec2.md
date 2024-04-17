@@ -65,8 +65,8 @@ First, the `ai_corp/run.sh` script creates a network to host the application exp
 We are now ready to create an EC2 instance where the Ockam outlet node will run:
 
 * We [<mark style="color:blue;">select an AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run.sh#L40-L42).
-* We [<mark style="color:blue;">create a key pair</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run.sh#L40-L42) in order to access the EC2 instance via SSH.
-* Before creating the EC2 instance [<mark style="color:blue;">we check that the AWS region we are using proposes this kind of instance type</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run.sh#L48). Indeed, we need properly sized instance in order to run a large language model, and those instances are not available in all regions. If the instance is not available in the current region, [<mark style="color:blue;">we return the list of all the regions where that instance type is available</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run.sh#L48).
+* We [<mark style="color:blue;">create a key pair</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run.sh#L44-L45) in order to access the EC2 instance via SSH.
+* Before creating the EC2 instance [<mark style="color:blue;">we check that the AWS region we are using proposes this kind of instance type</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run.sh#L48). Indeed, we need properly sized instance in order to run a large language model, and those instances are not available in all regions. If the instance is not available in the current region, <mark style="color:blue;">we return the list of all the regions where that instance type is available</mark>.
 * We [<mark style="color:blue;">start an instance using the selected AMI and right instance type</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run.sh#L51-L53). Starting the instance executes a start script based on `ai_corp/run_ockam.sh` where:
   * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run.sh#L50) created by the administrator and given as a parameter to `ai_corp/run.sh`.
 * We [<mark style="color:blue;">tag the created instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run.sh#L54) and [<mark style="color:blue;">wait for it to be available</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run.sh#L55).
@@ -77,8 +77,8 @@ When the instance is started, the `run_ockam.sh` script is executed:
 * The [<mark style="color:blue;">enrollment ticket is used to create a default identity and make it a project member</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run\_ockam.sh#L26).
 * We then create an Ockam node:
   * With [<mark style="color:blue;">a TCP outlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run\_ockam.sh#L38).
-  * A [<mark style="color:blue;">policy associated to the outlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run\_ockam.sh#L39). The policy authorizes identities with a credential containing the attribute <mark style="background-color:yellow;">ai-inlet="true"</mark>.
-  * With [<mark style="color:blue;">a relay</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run\_ockam.sh#L40) capable of forwarding the TCP traffic to the TCP outlet.
+  * A [<mark style="color:blue;">policy associated to the outlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run\_ockam.sh#L40). The policy authorizes identities with a credential containing the attribute <mark style="background-color:yellow;">ai-inlet="true"</mark>.
+  * With [<mark style="color:blue;">a relay</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/ai\_corp/run\_ockam.sh#L42) capable of forwarding the TCP traffic to the TCP outlet.
 
 ### Health Corp
 
@@ -90,11 +90,11 @@ First, the `health_corp/run.sh` script creates a network to host the `client.js`
 * We [<mark style="color:blue;">create a subnet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run.sh#L23-L27), and associate it to the route table.
 * We finally [<mark style="color:blue;">create a security group</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run.sh#L32-L35) so that there is:
   * [<mark style="color:blue;">One TCP egress to the Internet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run.sh#L34),
-  * And [<mark style="color:blue;">One SSH ingress</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run.sh#L35) to download and install the nodejs application.
+  * And [<mark style="color:blue;">One SSH ingress</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run.sh#L35) to download and install the nodejs client application.
 
 We are now ready to create an EC2 instance where the Ockam inlet node will run:
 
-* We [<mark style="color:blue;">select an AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run.sh#L40).
+* We [<mark style="color:blue;">select an AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run.sh#L40-L42).
 * We [<mark style="color:blue;">start an instance using the AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run.sh#L47-L54) above and a start script based on `run_ockam.sh` where:
   * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run.sh#L47) created by the administrator and given as a parameter to `run.sh`.
 
@@ -104,6 +104,7 @@ The instance is started and the `run_ockam.sh` script is executed:
 * The [<mark style="color:blue;">enrollment ticket is used to create a default identity and make it a project member</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run\_ockam.sh#L26).
 * We then create an Ockam node:
   * With [<mark style="color:blue;">a TCP inlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run\_ockam.sh#L36).
+  * Connected to [the `ai` relay](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run\_ockam.sh#L38).
   * A [<mark style="color:blue;">policy associated to the inlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/run\_ockam.sh#L39). The policy authorizes identities with a credential containing the attribute <mark style="background-color:yellow;">ai-outlet="true"</mark>.
 
 We finally wait for the instance to be ready and install the `client.js` application:
@@ -117,7 +118,7 @@ Once the `client.js` application is started:
 
 * It will [<mark style="color:blue;">connect to the Ockam inlet at port 3000</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/client.js#L3).
 * It [<mark style="color:blue;">sends a query</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/client.js#L11) and waits for a response from the model.
-* The response is then printed on the console [<mark style="color:blue;">sends a query</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/client.js#L23).
+* The response is then [printed on the console](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_ec2/health\_corp/client.js#L23).
 
 ## Recap
 
