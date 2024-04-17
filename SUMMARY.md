@@ -28,8 +28,7 @@
     * [Docker](portals/kafka/apache-kafka/docker.md)
   * [Redpanda](portals/kafka/redpanda/README.md)
     * [Docker](portals/kafka/redpanda/docker.md)
-  * [Apache](portals/kafka/apache/README.md)
-    * [Docker](portals/kafka/apache/docker.md)
+
 ## Reference
 
 * [Command](reference/command/README.md)
