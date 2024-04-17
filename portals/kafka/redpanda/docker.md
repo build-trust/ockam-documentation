@@ -1,6 +1,6 @@
 # Docker
 
-This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../../) to send end-to-end encrypted messages _through_ Redpanda.
+Let's use [<mark style="color:blue;">Ockam</mark>](../../../) to send end-to-end encrypted messages _through_ Redpanda.
 
 [<mark style="color:blue;">Ockam</mark>](../../../) encrypts messages from a Producer to a specific Consumer. Only that specific Consumer can decrypt these messages. This guarantees that your data cannot be observed or tampered as it passes through Kafka. Operators of the Kafka cluster only see end-to-end encrypted data. Any compromise of an operator's infrastructure cannot compromise your business data.
 
@@ -66,19 +66,15 @@ networks:
 * When the Kafka consumer node container starts in the Application Teams network, it runs [<mark style="color:blue;">its entrypoint</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/redpanda/docker/application\_team/run\_ockam.sh)<mark style="color:blue;">.</mark> The entrypoint creates the Ockam node described by `ockam.yaml` described inside the file. The node will automatically create an identity, [<mark style="color:blue;">enroll with your project</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/redpanda/docker/application\_team/run\_ockam.sh#L6-L15), and setup Kafka inlet.
 * Next, the entrypoint at the end executes the command present in the docker-compose configuration, which launches a Kafka consumer waiting for messages in the <mark style="background-color:yellow;">demo</mark> topic. Once the messages are received, they are printed out.
 * In the producer container the process is analogous, once the Ockam node is setup the command within docker-compose configuration launches a Kafka producer, sending 5 messages, each every 5 seconds.
-* You can view the redpanda console available at http://127.0.0.1:8080 to see the encrypted messages
+* You can view the Redpanda console available at http://127.0.0.1:8080 to see the encrypted messages
 
 ### Recap
 
-We connected a Kafka consumer and a producer, in one virtual private network with a Redpanda event storage in another virtual private network over an end-to-end encrypted portal.
+We sent end-to-end encrypted messages _through_ Redpanda.
 
-Messages produced by are always encrypted before leaving the node, and the Redpanda event storage only holds encrypted messages.
+Messages are encrypted with strong forward secrecy as soon as they leave a Producer. Redpanda only sees encrypted messages. The intended Consumer can decrypt messages. Other Consumers can only see encrypted messages.
 
-Sensitive business data in the Redpanda event storage can only be decrypted by Application Teams. Every communication is <mark style="color:blue;">encrypted</mark> with strong forward secrecy as it moves through the Internet. The communication channel is <mark style="color:blue;">mutually authenticated</mark> and <mark style="color:blue;">authorized</mark>. Keys and credentials are automatically rotated. Access to connect with Redpanda can be easily revoked.
-
-Application Teams. does not get unfettered access to Redpanda Operator’s network. It gets access only to run queries on the Redpanda server. Redpanda Operator does not get unfettered access to Application Teams’s network. It gets access only to respond to queries over a tcp connection. Redpanda Operator cannot initiate connections.
-
-All <mark style="color:blue;">access controls</mark> are secure-by-default. Only project members, with valid credentials, can connect with each other. NAT’s are traversed using a relay and outgoing tcp connections. Redpanda Operator or Application Teams don’t expose any listening endpoints on the Internet. Their networks are completely closed and protected from any attacks from the Internet.
+All communication is mutually authenticated and authorized. Keys and credentials are automatically rotated. Access can be easily revoked.
 
 ### Cleanup
 

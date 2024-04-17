@@ -1,6 +1,6 @@
 # Docker
 
-This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../../) to send end-to-end encrypted messages _through_ Apache Kafka.
+Let's use [<mark style="color:blue;">Ockam</mark>](../../../) to send end-to-end encrypted messages _through_ Apache Kafka.
 
 [<mark style="color:blue;">Ockam</mark>](../../../) encrypts messages from a Producer to a specific Consumer. Only that specific Consumer can decrypt these messages. This guarantees that your data cannot be observed or tampered as it passes through Kafka. Operators of the Kafka cluster only see end-to-end encrypted data. Any compromise of an operator's infrastructure cannot compromise your business data.
 
@@ -67,15 +67,11 @@ networks:
 
 ### Recap
 
-We connected a Kafka consumer and a producer in one virtual private network with Apache Kafka in another virtual private network over an end-to-end encrypted portal.
+We sent end-to-end encrypted messages _through_ Apache Kafka.
 
-Messages from the producer are always encrypted before leaving the node, and the Apache Kafka event storage only holds encrypted messages.
+Messages are encrypted with strong forward secrecy as soon as they leave a Producer. Kafka brokers only sees encrypted messages. The intended Consumer can decrypt messages. Other Consumers can only see encrypted messages.
 
-Sensitive business data in Apache Kafka can only be decrypted by Application Team. Every communication is <mark style="background-color:yellow;">encrypted</mark> with strong forward secrecy as it moves through the Internet. The communication channel is <mark style="background-color:yellow;">mutually authenticated</mark> and <mark style="background-color:yellow;">authorized</mark>. Keys and credentials are automatically rotated. Access to connect with Apache Kafka can be easily revoked.
-
-Application Team does not get unfettered access to Apache Kafka Operator’s network. It only gets access to make requests to the Apache Kafka. Apache Kafka Operator does not get unfettered access to Application Team’s network. It only gets access to respond to requests over a tcp connection. Apache Kafka Operator cannot initiate connections.
-
-All <mark style="background-color:yellow;">access controls</mark> are secure-by-default. Only project members with valid credentials can connect with each other. NAT’s are traversed using a relay and outgoing tcp connections. Neither Apache Kafka Operator nor Application Team expose any listening endpoints to the Internet. Their networks are completely closed and protected from any attacks from the Internet.
+All communication is mutually authenticated and authorized. Keys and credentials are automatically rotated. Access can be easily revoked.
 
 ### Cleanup
 
