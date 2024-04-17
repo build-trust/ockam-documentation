@@ -22,6 +22,6 @@ In each example, we connect a kafka consumer and a producer in one private netwo
 
 Please select an example to dig in:
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><a href="docker.md"><mark style="color:blue;"><strong>Kafka - Redpanda</strong></mark></a></td><td>We connect a kafka consumer and a producer in one private network with Redpanda kafka server in another virtual private network. The example uses docker and docker compose to create these virtual networks.</td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><a href="docker.md"><mark style="color:blue;"><strong>Redpanda - Docker</strong></mark></a></td><td>We connect a kafka consumer and a producer in one private network with Redpanda kafka server in another virtual private network. The example uses docker and docker compose to create these virtual networks.</td></tr></tbody></table>
 
 
