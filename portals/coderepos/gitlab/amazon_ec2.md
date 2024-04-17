@@ -62,10 +62,6 @@ First, the `bank_corp/run.sh` script creates a network to host the database:
   * [<mark style="color:blue;">one TCP egress to the Internet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L41),
   * [<mark style="color:blue;">one ingress to EC2 running Gitlab</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L42-L43) from the local machine running the example, to access Gitlab on port 22 and 80.
 
-Then, the `bank_corp/run.sh` script creates a Gitlab server:
-
-* We run [<mark style="color:blue;">a script to create and update auth token and org id</mark> ](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L79)in [<mark style="color:blue;">app.mjs</mark> ](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/analysis\_corp/app.mjs#L10-L11).
-
 We are now ready to create an EC2 instance where the Gitlab server and Ockam outlet node will run:
 
 * An SSH keypair to access gitlab repository is created and, [<mark style="color:blue;">the public key is saved in a variable</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L48-L49).
@@ -73,7 +69,7 @@ We are now ready to create an EC2 instance where the Gitlab server and Ockam out
 * We [<mark style="color:blue;">create an ec2 keypair</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L54-L55) to access EC2 and to obtain gitlab password to be able to login to gitlab console.
 * We [<mark style="color:blue;">start an instance using the AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L61-L63) above and a start script based on `run_ockam.sh` and `run_gitlab.sh` where:
   * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L57) created by the administrator and given as a parameter to `run.sh`.
-  * [<mark style="color:blue;">SSH\_PUBLIC\_KEY</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L59) in `run_gitlab.sh` script
+  * [<mark style="color:blue;">`SSH_PUBLIC_KEY`</mark><mark style="color:blue;"> is replaced with the Public IP of the EC2 instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L58) in `run_gitlab.sh` script
 * We [<mark style="color:blue;">tag the created instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L64) and [<mark style="color:blue;">wait for it to be available</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L65).
 * We wait for 3 minutes for gitlab to be setup and [<mark style="color:blue;">check it's availability</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/coderepos/gitlab/amazon\_ec2/aws\_cli/bank\_corp/run.sh#L68)
 
