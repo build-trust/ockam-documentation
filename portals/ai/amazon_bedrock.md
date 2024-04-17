@@ -89,7 +89,7 @@ The model used in this example is the "Titan Text G1 - Lite" model. In order to 
 
 ### Health Corp
 
-First, the `health_corp/run.sh` script creates a network to host the `client.js` application which will connect to the LLaMA model:
+First, the `health_corp/run.sh` script creates a network to host the `client.js` application which will connect to the Bedrock model:
 
 * We [<mark style="color:blue;">create a VPC</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run.sh#L11-L12) and tag it.
 * We [<mark style="color:blue;">create an Internet gateway</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run.sh#L15-L16) and attach it to the VPC.
