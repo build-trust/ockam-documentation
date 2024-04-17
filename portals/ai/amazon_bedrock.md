@@ -61,14 +61,14 @@ First, the `ai_corp/run.sh` script creates a network to host the application exp
 * We [<mark style="color:blue;">create a subnet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L25-L29), with associate it to the route table.
 * We [<mark style="color:blue;">create a security group</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L34-L37) so that there is:
   * [<mark style="color:blue;">One TCP egress to the Internet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L36),
-  * And [<mark style="color:blue;">one SSH ingress</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L37) to install the model and its application.
+  * And [<mark style="color:blue;">one SSH ingress</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L37) to install the server[https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L39](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L39) application accessing the model.
 * We finally [<mark style="color:blue;">create a private link to the Amazon Bedrock service</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L39-L42) to allow the Bedrock client inside the server application to access the Bedrock model.
 
 We are now ready to create an EC2 instance where the Ockam outlet node will run:
 
 * We [<mark style="color:blue;">select an AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L48-L50).
-* We [<mark style="color:blue;">create a key pair</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L52-L54) in order to access the EC2 instance via SSH.
-* We [<mark style="color:blue;">start an instance using the selected AMI and right instance type</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L55-L59). Starting the instance executes a start script based on `ai_corp/run_ockam.sh` where:
+* We [<mark style="color:blue;">create a key pair</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L52-L53) in order to access the EC2 instance via SSH.
+* We [<mark style="color:blue;">start an instance using the selected AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L55-L59). Starting the instance executes a start script based on `ai_corp/run_ockam.sh` where:
   * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L55) created by the administrator and given as a parameter to `ai_corp/run.sh`.
 * We [<mark style="color:blue;">tag the created instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L59)
 * We [<mark style="color:blue;">create an IAM profile with a role allowing the EC2 instance to access the Bedrock API</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L61-L70)
@@ -80,8 +80,8 @@ When the instance is started, the `run_ockam.sh` script is executed:
 * The [<mark style="color:blue;">enrollment ticket is used to create a default identity and make it a project member</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L26).
 * We then create an Ockam node:
   * With [<mark style="color:blue;">a TCP outlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L38).
-  * A [<mark style="color:blue;">policy associated to the outlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L39). The policy authorizes identities with a credential containing the attribute <mark style="background-color:yellow;">ai-inlet="true"</mark>.
-  * With [<mark style="color:blue;">a relay</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L40) capable of forwarding the TCP traffic to the TCP outlet.
+  * A [<mark style="color:blue;">policy associated to the outlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L40). The policy authorizes identities with a credential containing the attribute <mark style="background-color:yellow;">ai-inlet="true"</mark>.
+  * With [<mark style="color:blue;">a relay</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L42) capable of forwarding the TCP traffic to the TCP outlet.
 
 {% hint style="warning" %}
 The model used in this example is the "Titan Text G1 - Lite" model. In order to use it, [<mark style="color:blue;">you will need to request access to this model</mark>](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html).
@@ -97,11 +97,11 @@ First, the `health_corp/run.sh` script creates a network to host the `client.js`
 * We [<mark style="color:blue;">create a subnet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run.sh#L23-L27), and associate it to the route table.
 * We finally [<mark style="color:blue;">create a security group</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run.sh#L32-L35) so that there is:
   * [<mark style="color:blue;">One TCP egress to the Internet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run.sh#L34),
-  * And [<mark style="color:blue;">One SSH ingress</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run.sh#L35) to download and install the nodejs application.
+  * And [<mark style="color:blue;">one SSH ingress</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run.sh#L35) to download and install the nodejs client application.
 
 We are now ready to create an EC2 instance where the Ockam inlet node will run:
 
-* We [<mark style="color:blue;">select an AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run.sh#L40).
+* We [<mark style="color:blue;">select an AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run.sh#L40-L42).
 * We [<mark style="color:blue;">start an instance using the AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run.sh#L47-L54) above and a start script based on `run_ockam.sh` where:
   * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run.sh#L47) created by the administrator and given as a parameter to `run.sh`.
 
@@ -111,6 +111,7 @@ The instance is started and the `run_ockam.sh` script is executed:
 * The [<mark style="color:blue;">enrollment ticket is used to create a default identity and make it a project member</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L26).
 * We then create an Ockam node:
   * With [<mark style="color:blue;">a TCP inlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L36).
+  * Forwarding messages to [the `ai` relay](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L38)
   * A [<mark style="color:blue;">policy associated to the inlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L39). The policy authorizes identities with a credential containing the attribute <mark style="background-color:yellow;">ai-outlet="true"</mark>.
 
 We finally wait for the instance to be ready and install the `client.js` application:
@@ -124,7 +125,7 @@ Once the `client.js` application is started:
 
 * It will [<mark style="color:blue;">connect to the Ockam inlet at port 3000</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/client.js#L3).
 * It [<mark style="color:blue;">sends a query</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/client.js#L11) and waits for a response from the model.
-* The response is then printed on the console [<mark style="color:blue;">sends a query</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/client.js#L23).
+* The response is then [printed on the console](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/client.js#L25).
 
 ## Recap
 
