@@ -1,3 +1,17 @@
+---
+layout:
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # Kubernetes
 
 Let's connect a nodejs app in one kubernetes cluster with a postgres database in another private kubernetes cluster.&#x20;
