@@ -2,7 +2,7 @@
 
 Let's use [<mark style="color:blue;">Ockam</mark>](../../../) to send end-to-end encrypted messages _through_ Redpanda.
 
-[<mark style="color:blue;">Ockam</mark>](../../../) encrypts messages from a Producer to a specific Consumer. Only that specific Consumer can decrypt these messages. This guarantees that your data cannot be observed or tampered as it passes through Redpanda. Operators of Redpanda only see end-to-end encrypted data. Any compromise of an operator's infrastructure cannot compromise your business data.
+[<mark style="color:blue;">Ockam</mark>](../../../) encrypts messages from a Producer to a specific Consumer. Only that specific Consumer can decrypt these messages. This guarantees that your data cannot be observed or altered as it passes through Redpanda. Operators of Redpanda only see end-to-end encrypted data. Any compromise of an operator's infrastructure cannot compromise your business data.
 
 To learn how end-to-end trust is established, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
 
