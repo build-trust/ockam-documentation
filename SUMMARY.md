@@ -26,7 +26,6 @@
 * [Kafka](portals/kafka/README.md)
   * [Apache Kafka](portals/kafka/apache-kafka/README.md)
     * [Docker](portals/kafka/apache-kafka/docker.md)
-  * [Docker](portals/kafka/apache/docker.md)
   * [Redpanda](portals/kafka/redpanda/README.md)
     * [Docker](portals/kafka/redpanda/docker.md)
 
