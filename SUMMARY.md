@@ -24,6 +24,7 @@
 * [Code Repos](portals/coderepos/README.md)
   * [Gitlab Enterprise](portals/coderepos/gitlab/amazon\_ec2.md)
 * [Kafka](portals/kafka/README.md)
+  * [Apache Kafka](portals/kafka/apache-kafka.md)
   * [Redpanda](portals/kafka/redpanda/README.md)
     * [Docker](portals/kafka/redpanda/docker.md)
 
