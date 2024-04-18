@@ -15,6 +15,8 @@
     * [Docker](portals/databases/mongodb/docker.md)
     * [Kubernetes](portals/databases/mongodb/kubernetes.md)
     * [Amazon EC2](portals/databases/mongodb/ec2.md)
+  * [InfluxDB](portals/databases/influxdb/README.md)
+    * [Amazon Timestream](portals/databases/influxdb/timestream.md)
 * [APIs](portals/apis/README.md)
   * [Nodejs](portals/apis/nodejs.md)
   * [Python](portals/apis/python.md)
