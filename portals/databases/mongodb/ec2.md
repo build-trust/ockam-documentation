@@ -108,7 +108,7 @@ Next, the instance is started and the `run_ockam.sh` script is executed:
 
 Finally, we wait for the instance to be ready and run the nodejs app application:
 
-* The [app.js file](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run.sh/app.js) is [copied to the instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run.sh#L56) (this uses the previously created `key.pem` file to identify).
+* The [app.js file](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/app.js) is [copied to the instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run.sh#L56) (this uses the previously created `key.pem` file to identify).
 * We can then [SSH to the instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run.sh#L57-L61) and:
   * [Install nodejs](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run.sh#L59).
   * [Run the nodejs client application](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run.sh#L60-L61).
