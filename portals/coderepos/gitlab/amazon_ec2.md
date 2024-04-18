@@ -138,7 +138,7 @@ Once the nodejs application is started:
 
 ## Recap
 
-<figure><img src="../../../.gitbook/assets/portals-gitlab.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/portals-gitlabcodebase.png" alt=""><figcaption></figcaption></figure>
 
 We connected a nodejs app in one virtual private network with a Gitlab CodeRepository in another virtual private network over an end-to-end encrypted portal.
 

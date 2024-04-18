@@ -20,7 +20,6 @@ Each company’s network is private, isolated, and doesn't expose ports. To lear
 
 <figure><img src="../../../.gitbook/assets/Screenshot 2024-02-09 at 8.51.05 AM (1).png" alt=""><figcaption></figcaption></figure>
 
-![img.png](img.png)
 
 ## Run
 
