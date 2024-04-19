@@ -128,7 +128,7 @@ We finally wait for the instance to be ready and install the nodejs application:
 
 Once the nodejs application is started:
 
-* It will [<mark style="color:blue;">connect to the Ockam inlet at port 8086</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.js#L9).
+* It will [<mark style="color:blue;">connect to the Ockam inlet at port 8086</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.mjs#L9).
 * It [<mark style="color:blue;">inserts few system metrics of the node and retrieves the same</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.js#L23-L94) to check that the connection with the InfluxDB database works.
 
 ## Recap
