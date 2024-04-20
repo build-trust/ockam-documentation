@@ -165,7 +165,7 @@ Note the message flow and how routing information is manipulated as the message 
 
 #### Routing over many hops
 
-Routing is not limited to [<mark style="color:blue;">one</mark>](https://github.com/build-trust/ockam/blob/develop/documentation/guides/rust/get-started/02-worker#readme) or [<mark style="color:blue;">two hops</mark>](https://github.com/build-trust/ockam/blob/develop/documentation/guides/rust/get-started/03-routing/README.md#app-worker), we can easily create routes with many hops. Let's try that in a quick example:
+Routing is not limited to one or two hops, we can easily create routes with many hops. Let's try that in a quick example:
 
 This time we'll create multiple hop workers between the `"app"` and the `"echoer"` and route our message through them.
 
@@ -225,7 +225,7 @@ An Ockam Transport is a plugin for Ockam Routing. It moves Ockam Routing message
 
 In previous examples, we routed messages locally within one node. Routing messages over transport layer connections looks very similar.
 
-Let's try the TcpTransport, we'll need to create two nodes: a [<mark style="color:blue;">responder</mark>](https://github.com/build-trust/ockam/tree/develop/documentation/guides/rust/get-started/04-transport#responder-node) and an [<mark style="color:blue;">initiator</mark>](https://github.com/build-trust/ockam/tree/develop/documentation/guides/rust/get-started/04-transport#initiator-node).
+Let's try the TcpTransport, we'll need to create two nodes: a [<mark style="color:blue;">responder</mark>](routing.md#responder-node) and an [<mark style="color:blue;">initiator</mark>](routing.md#initiator-node).
 
 Create a new file at:
 
