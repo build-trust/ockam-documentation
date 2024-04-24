@@ -25,7 +25,7 @@ To learn how end-to-end trust is established, please read: “[<mark style="colo
 Please select an example to dig in:
 
 {% hint style="info" %}
-The examples below use Apache Kafka and Redpanda, however, the same setup works for any Kafka API compatible data streaming platform: _Confluent, Instaclustr, Aiven, WarpStream etc._
+The examples below use Apache Kafka, Redpanda and Instaclustr, however, the same setup works for any Kafka API compatible data streaming platform: _Confluent, Aiven, WarpStream etc._
 {% endhint %}
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="apache-kafka/"><mark style="color:blue;"><strong>Apache Kafka</strong></mark></a></td><td>We send end-to-end encrypted messages through Apache Kafka.</td><td><a href="apache-kafka/">apache-kafka</a></td></tr><tr><td><a href="redpanda/"><mark style="color:blue;"><strong>Redpanda</strong></mark></a></td><td>We send end-to-end encrypted messages through Redpanda.</td><td><a href="redpanda/">redpanda</a></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="apache-kafka/"><mark style="color:blue;"><strong>Apache Kafka</strong></mark></a></td><td>We send end-to-end encrypted messages through Apache Kafka.</td><td><a href="apache-kafka/">apache-kafka</a></td></tr><tr><td><a href="redpanda/"><mark style="color:blue;"><strong>Redpanda</strong></mark></a></td><td>We send end-to-end encrypted messages through Redpanda.</td><td><a href="redpanda/">redpanda</a></td></tr><tr><td><a href="instaclustr/"><mark style="color:blue;"><strong>Instaclustr</strong></mark></a></td><td>We send end-to-end encrypted messages through Instaclustr.</td><td><a href="instaclustr/">instaclustr</a></td></tr></tbody></table>
