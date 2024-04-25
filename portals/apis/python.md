@@ -29,7 +29,7 @@ This example requires Bash, Git, and AWS CLI. Please set up these tools for your
 git clone --depth 1 https://github.com/build-trust/ockam && cd ockam
 
 # Navigate to this example’s directory.
-cd examples/command/portals/apis/python/amazon_ec2/aws_cli/run.sh
+cd examples/command/portals/apis/python/amazon_ec2/aws_cli
 
 # Run the example, use Ctrl-C to exit at any point.
 ./run.sh
