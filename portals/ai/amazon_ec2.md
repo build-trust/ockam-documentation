@@ -14,7 +14,7 @@ layout:
 
 # Amazon EC2
 
-Let's connect a nodejs app in one virtual private network with an application serving a LLaMa model in another virtual private network. The example uses the AWS CLI to create these virtual networks.
+Let's connect a nodejs app in one virtual private network with an application serving a self hosted model in another virtual private network. The example uses the AWS CLI to create these virtual networks.
 
 Each company’s network is private, isolated, and doesn't expose ports. To learn how end-to-end trust is established, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../how-does-ockam-work.md)”
 
