@@ -110,7 +110,7 @@ When EC2 starts the instance, it executes the `run_ockam.sh` script:
 
 Next `datastream_corp/run.sh` waits for the instance to be ready and [provisions it using SSH](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L57-L69):
 
-* It copies the [<mark style="color:blue;">app.js and token.txt</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L57-L58) into the instance using SCP
+* It copies [<mark style="color:blue;">app.js and token.txt</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L57-L58) into the instance using SCP
 * It then [<mark style="color:blue;">runs a script, using SSH</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L59-L69), which:
   * [<mark style="color:blue;">Installs nodejs</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L61).
   * [<mark style="color:blue;">Installs the InfluxDB client library</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L63).
