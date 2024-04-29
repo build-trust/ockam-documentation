@@ -24,6 +24,10 @@ To understand the details of how end-to-end trust is established, and how the po
 
 This example requires Bash, Git, AWS CLI. Please set up these tools for your operating system. In particular you need to [<mark style="color:blue;">login to your AWS account</mark>](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-authentication.html).
 
+{% hint style="info" %}
+Amazon Timestream for InfluxDB was added very recently. To run this example, please install the latest version of AWS CLI.
+{% endhint %}
+
 Then run the following commands:
 
 ```bash
