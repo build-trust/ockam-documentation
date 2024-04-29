@@ -63,7 +63,7 @@ First, the `metrics_corp/run.sh` script creates a network to host the database:
 * It [<mark style="color:blue;">creates a security group</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L34-L42) which allows:
   * TCP egress to the Internet.
   * Ingress to InfluxDB from within the subnet.
-  * Ingress with SSH, to provision EC2 instances.
+  * SSH ingress to provision EC2 instances.
 
 Then, the `metrics_corp/run.sh` script creates a InfluxDB [<mark style="color:blue;">database</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L44-L63) using Timestream. Next the script creates an EC2 instance. This instance runs an Ockam TCP Outlet.
 
@@ -92,15 +92,15 @@ First, the `datastream_corp/run.sh` script creates a network to host the nodejs 
 * It [<mark style="color:blue;">creates an Internet gateway</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L15-L16) and attaches it to the VPC.
 * It [<mark style="color:blue;">creates a route table</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L19) and [<mark style="color:blue;">a route</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L20) to the Internet via the gateway.
 * It [<mark style="color:blue;">creates a subnet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L23-L27) and associates it with the route table.
-* It [<mark style="color:blue;">creates a security group</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L29-L36) with allows:
+* It [<mark style="color:blue;">creates a security group</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L29-L36) that allows:
   * TCP egress to the Internet,
-  * Ingress with SSH, to provision EC2 instances.
+  * SSH ingress to provision EC2 instances.
 
 Next, the script creates an EC2 instance. This instance runs an Ockam TCP Inlet.
 
 * It [<mark style="color:blue;">selects an AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L41).
-* It then [<mark style="color:blue;">starts an instance using that AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L49-L51) and a start script based on `run_ockam.sh` where the:
-  * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L48) created by the administrator and given as a parameter to `run.sh`.
+* It then [<mark style="color:blue;">starts an instance using that AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L49-L51) and a start script based on `run_ockam.sh` in which the:
+  * The variable [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L48) created by the administrator and given as a parameter to `run.sh`.
 
 When EC2 starts the instance, it executes the `run_ockam.sh` script:
 
@@ -121,7 +121,7 @@ Next `datastream_corp/run.sh` waits for the instance to be ready and [provisions
 Finally, the nodejs application is started:
 
 * It [<mark style="color:blue;">connects to the Ockam inlet at localhost:8086</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.mjs#L8).
-* It [<mark style="color:blue;">inserts few system metrics into a bucket and retrieves t</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.mjs#L23-L94)<mark style="color:blue;">hem back</mark> to show that the connection with the InfluxDB database is working.
+* It [<mark style="color:blue;">inserts a few system metrics into a bucket and retrieves t</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.mjs#L23-L94)<mark style="color:blue;">hem back</mark> to show that the connection with the InfluxDB database is working.
 
 ## Recap
 
