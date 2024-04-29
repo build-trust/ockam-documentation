@@ -112,17 +112,16 @@ When EC2 starts the instance, it executes the `run_ockam.sh` script:
 
 Next `datastream_corp/run.sh` waits for the instance to be ready and [provisions it using SSH](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L57-L69):
 
-* It copies the app.js and token.txt into the instance using SCP
-* It then r then [<mark style="color:blue;">SSH to the instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L57) and:
-  * [<mark style="color:blue;">Copy run\_app.mjs</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L56)
-  * [<mark style="color:blue;">Install nodejs</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L59).
-  * [<mark style="color:blue;">Install the InfluxDB client library</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L60).
-  * [<mark style="color:blue;">Start the nodejs application</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L61).
+* It copies the [<mark style="color:blue;">app.js and token.txt</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L57-L58) into the instance using SCP
+* It then [<mark style="color:blue;">runs a script, using SSH</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L59-L69), which:
+  * [<mark style="color:blue;">Installs nodejs</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L61).
+  * [<mark style="color:blue;">Installs the InfluxDB client library</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L63).
+  * [<mark style="color:blue;">Starts the nodejs application</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L67-L68).
 
-Finally, the the nodejs application is started:
+Finally, the nodejs application is started:
 
-* It will [<mark style="color:blue;">connect to the Ockam inlet at port 8086</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.mjs#L9).
-* It [<mark style="color:blue;">inserts few system metrics of the node and retrieves the same</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.mjs#L23-L94) to check that the connection with the InfluxDB database works.
+* It [<mark style="color:blue;">connects to the Ockam inlet at localhost:8086</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.mjs#L8).
+* It [<mark style="color:blue;">inserts few system metrics into a bucket and retrieves t</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.mjs#L23-L94)<mark style="color:blue;">hem back</mark> to show that the connection with the InfluxDB database is working.
 
 ## Recap
 
