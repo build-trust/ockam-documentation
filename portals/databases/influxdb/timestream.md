@@ -14,9 +14,7 @@ layout:
 
 # Amazon Timestream
 
-This hands-on example uses [<mark style="color:blue;">Ockam</mark>](../../../) to create an end-to-end **encrypted portal** to InfluxDB.
-
-Let's connect a nodejs app in one Amazon VPC with a Amazon Timestream managed InfluxDB database in another Amazon VPC. The example uses AWS CLI to create these VPCs.
+Let's connect a nodejs app in one Amazon VPC with a Amazon Timestream managed InfluxDB database in another Amazon VPC. We’ll create an end-to-end encrypted Ockam Portal to InfluxDB.
 
 To understand the details of how end-to-end trust is established, and how the portal works even though the two networks are isolated with no exposed ports, please read: “[<mark style="color:blue;">How does Ockam work?</mark>](../../../how-does-ockam-work.md)”
 
