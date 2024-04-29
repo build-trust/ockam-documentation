@@ -63,26 +63,20 @@ First, the `metrics_corp/run.sh` script creates a network to host the database:
 * It [<mark style="color:blue;">creates a security group</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L34-L42) so that there is:
   * TCP egress to the Internet.
   * Ingress to InfluxDB from within the subnet.
-  * Ingress to SSH into the EC2 .
+  * Ingress to SSH, to provision EC2 instances.
 
-Then, the `metrics_corp/run.sh` script creates a Timestream InfluxDB database:
+Then, the `metrics_corp/run.sh` script creates a InfluxDB [<mark style="color:blue;">database</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L44-L63) using Timestream. Next the script creates an EC2 instance. This instance runs an Ockam TCP Outlet.
 
-* We create a [<mark style="color:blue;">database</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L48-L59)
-* After the creation, [<mark style="color:blue;">the address of the database is saved in a variable</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L76).
-* We run [<mark style="color:blue;">a script to create and update auth token and org id</mark> ](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L79)in [<mark style="color:blue;">app.mjs</mark> ](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.mjs#L10-L11).
-
-We are now ready to create an EC2 instance where the Ockam outlet node will run:
-
-* We [<mark style="color:blue;">select an AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L83).
-* We [<mark style="color:blue;">start an instance using the AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L90-L93) above and a start script based on `run_ockam.sh` where:
-  * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L88) created by the administrator and given as a parameter to `run.sh`.
-  * [<mark style="color:blue;">`INFLUXDB_ADDRESS`</mark> <mark style="color:blue;">is replaced by the database address</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L89) that we previously saved.
-* We [<mark style="color:blue;">tag the created instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L94) and [<mark style="color:blue;">wait for it to be available</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L95).
-* We update security group with [<mark style="color:blue;">one ingress from Public IP of EC2 to InfluxDB</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L97)
+* It [<mark style="color:blue;">selects an AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L68-L70).
+* It then [<mark style="color:blue;">starts an instance using this AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L77-L79) and a start script based on `run_ockam.sh` where:
+  * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L75) created by the administrator and given as a parameter to `run.sh`.
+  * [<mark style="color:blue;">`INFLUXDB_ADDRESS`</mark> <mark style="color:blue;">is replaced by the database address</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L76) that we previously saved.
+* It [<mark style="color:blue;">tags the created instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L80) and [<mark style="color:blue;">waits for it to be available</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run.sh#L81).
 
 When the instance is started, the `run_ockam.sh` script is executed:
 
-* The [<mark style="color:blue;">`ockam`</mark> <mark style="color:blue;">executable is installed</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run\_ockam.sh#L10-L11).
+* It install&#x20;
+* It installs the [<mark style="color:blue;">`ockam`</mark> <mark style="color:blue;">executable is installed</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run\_ockam.sh#L10-L11).
 * The [<mark style="color:blue;">enrollment ticket is used to create a default identity and make it a project member</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run\_ockam.sh#L26).
 * We then create an Ockam node:
   * With [<mark style="color:blue;">a TCP outlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/metrics\_corp/run\_ockam.sh#L38).
