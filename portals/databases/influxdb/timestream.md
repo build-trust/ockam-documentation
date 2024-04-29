@@ -108,7 +108,7 @@ When EC2 starts the instance, it executes the `run_ockam.sh` script:
   * A TCP inlet.
   * An access control [<mark style="color:blue;">policy associated with the inlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run\_ockam.sh#L39). The policy authorizes identities with a credential attesting to the attribute <mark style="background-color:yellow;">influxdb-outlet="true"</mark>.
 
-Next `datastream_corp/run.sh` waits for the instance to be ready and [provisions it using SSH](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L57-L69):
+Next `datastream_corp/run.sh` waits for the instance to be ready and [<mark style="color:blue;">provisions it using SSH</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L57-L69):
 
 * It copies [<mark style="color:blue;">app.js and token.txt</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L57-L58) into the instance using SCP
 * It then [<mark style="color:blue;">runs a script, using SSH</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/run.sh#L59-L69), which:
@@ -119,7 +119,7 @@ Next `datastream_corp/run.sh` waits for the instance to be ready and [provisions
 Finally, the nodejs application is started:
 
 * It [<mark style="color:blue;">connects to the Ockam inlet at localhost:8086</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.mjs#L8).
-* It [<mark style="color:blue;">inserts a few system metrics into a bucket and retrieves t</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.mjs#L23-L94)<mark style="color:blue;">hem back</mark> to show that the connection with the InfluxDB database is working.
+* It [<mark style="color:blue;">inserts a few system metrics into a bucket and retrieves t</mark><mark style="color:blue;">hem back</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/influxdb/amazon\_timestream/aws\_cli/datastream\_corp/app.mjs#L23-L94) to show that the connection with the InfluxDB database is working.
 
 ## Recap
 
