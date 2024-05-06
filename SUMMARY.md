@@ -30,6 +30,14 @@
     * [Docker](portals/kafka/apache-kafka/docker.md)
   * [Redpanda](portals/kafka/redpanda/README.md)
     * [Self Hosted](portals/kafka/redpanda/self\_hosted.md)
+  * [Confluent](portals/kafka/confluent/README.md)
+    * [Cloud](portals/kafka/confluent/confluent.md)
+  * [Warpstream](portals/kafka/warpstream/README.md)
+    * [Cloud](portals/kafka/warpstream/warpstream.md)
+  * [Instaclustr](portals/kafka/instaclustr/README.md)
+    * [Cloud](portals/kafka/instaclustr/instaclustr.md)
+  * [Aiven](portals/kafka/aiven/README.md)
+    * [Cloud](portals/kafka/aiven/aiven.md)
 
 ## Reference
 
