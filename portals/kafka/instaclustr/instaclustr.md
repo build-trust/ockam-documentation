@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Instaclustr - Docker
+# Instaclustr Cloud
 
 In this hands-on example we send end-to-end encrypted messages _through_ Instaclustr.
 
