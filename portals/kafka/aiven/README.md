@@ -24,4 +24,4 @@ To learn how end-to-end trust is established, please read: “[<mark style="colo
 
 Please select an example to dig in:
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><a href="self_hosted.md"><mark style="color:blue;"><strong>Aiven - </strong></mark></a><mark style="color:blue;"><strong>Self Hosted</strong></mark></td><td>Send end-to-end encrypted messages through Aiven.</td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><a href="aiven.md"><mark style="color:blue;"><strong>Aiven - Cloud</strong></mark></td><td>Send end-to-end encrypted messages through Aiven.</td></tr></tbody></table>
