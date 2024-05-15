@@ -90,7 +90,7 @@ networks:
 * Next, the [<mark style="color:blue;">entrypoint at the end</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/instaclustr/docker/application\_team/docker-compose.yml#L19) executes the [<mark style="color:blue;">consumer commands</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/instaclustr/docker/application\_team/docker-compose.yml#L23-L37), which launches a Kafka consumer waiting for messages in the <mark style="background-color:yellow;">demo</mark> topic. Once the messages are received, they are printed out.
 * In the producer container, the process is analogous, once the Ockam node is set up the [<mark style="color:blue;">command within docker-compose configuration</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/instaclustr/docker/application\_team/docker-compose.yml#L48-L73) launches a Kafka producer that sends messages.
 * Both consumer and producer uses [<mark style="color:blue;">kafka.config</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/instaclustr/docker/application\_team/run_ockam.sh#L4-L11) that has credentials of the kafka user created when setting up the cluster
-* You can view the Kafak UI available at http://127.0.0.1:8080 to see the encrypted messages
+* You can view the Kafak UI available at [http://127.0.0.1:8080](http://127.0.0.1:8080) to see the encrypted messages
 
 ### Recap
 

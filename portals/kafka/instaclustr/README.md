@@ -24,4 +24,4 @@ To learn how end-to-end trust is established, please read: “[<mark style="colo
 
 Please select an example to dig in:
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><a href="docker.md"><mark style="color:blue;"><strong>Instaclustr - Docker</strong></mark></td><td>Send end-to-end encrypted messages through Instaclustr.</td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><a href="instaclustr.md"><mark style="color:blue;"><strong>Instaclustr - Cloud</strong></mark></td><td>Send end-to-end encrypted messages through Instaclustr.</td></tr></tbody></table>
