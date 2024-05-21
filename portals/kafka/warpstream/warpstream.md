@@ -24,7 +24,7 @@ To learn how end-to-end trust is established, please read: “[<mark style="colo
 
 ### Run
 
-This example requires Bash, JQ, Git, Curl, Docker, and Docker Compose. Please set up these tools for your operating system. It's also necessary to include your warpstream API key as an environment variable when running the example, example can be run as following:
+This example requires Bash, Git, Curl, Docker, and Docker Compose. Please set up these tools for your operating system. It's also necessary to include your warpstream API key as an environment variable when running the example, example can be run as following:
 
 ```bash
 # Clone the Ockam repo from Github.
