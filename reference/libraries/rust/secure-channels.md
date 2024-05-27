@@ -88,6 +88,7 @@ Add the following code to this file:
 
 use hello_ockam::Relay;
 use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
+use ockam_core::route;
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -101,7 +102,7 @@ async fn main(ctx: Context) -> Result<()> {
     let connection_to_bob = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
     // Start a Relay to forward messages to Bob using the TCP connection.
-    node.start_worker("forward_to_bob", Relay(connection_to_bob.into()))
+    node.start_worker("forward_to_bob", Relay::new(route![connection_to_bob]))
         .await?;
 
     // Create a TCP listener and wait for incoming connections.
