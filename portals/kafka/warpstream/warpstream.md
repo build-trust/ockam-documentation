@@ -24,7 +24,7 @@ To learn how end-to-end trust is established, please read: “[<mark style="colo
 
 ### Run
 
-This example requires Bash, Git, Curl, Docker, and Docker Compose. Please set up these tools for your operating system. It's also necessary to include your warpstream API key as an environment variable when running the example, example can be run as following:
+This example requires Bash, Git, Curl, Docker, and Docker Compose. Please set up these tools for your operating system. It's also necessary to include your warpstream application key as an environment variable when running the example, example can be run as following:
 
 ```bash
 # Clone the Ockam repo from Github.
@@ -33,8 +33,8 @@ git clone --depth 1 https://github.com/build-trust/ockam && cd ockam
 # Navigate to this example’s directory.
 cd examples/command/portals/kafka/warpstream/
 
-# Run the example by calling the run.sh script and passing your warpstream api key as an argument, use Ctrl-C to exit at any point.
-./run.sh _warpstream_api_key_
+# Run the example by calling the run.sh script and passing your warpstream application key as an argument, use Ctrl-C to exit at any point.
+./run.sh _warpstream_application_key_
 ```
 
 If everything runs as expected, you'll see the message: _The example run was successful 🥳_
@@ -46,7 +46,7 @@ The [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-tr
 #### Administrator
 
 * The [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/warpstream/run.sh) calls the [<mark style="color:blue;">run function</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/warpstream/run.sh#L15) which invokes the [<mark style="color:blue;">enroll command</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/warpstream/run.sh#L29) to create a new identity, sign in to Ockam Orchestrator, set up a new Ockam project, make you the administrator of this project, and get a project membership [<mark style="color:blue;">credential</mark>](../../../reference/protocols/identities.md#credentials).
-* The run function then [<mark style="color:blue;">creates a new Kafka cluster</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/warpstream/run.sh#L31-L45) by using your Warpstream's API key.
+* The run function then [<mark style="color:blue;">creates a new Kafka cluster</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/warpstream/run.sh#L31-L45) by using your Warpstream's Application key.
 * An Ockam relay is then started [<mark style="color:blue;">using the Ockam Kafka addon</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/warpstream/run.sh#L48) which creates an encrypted relay that transmits Kafka messages over a secure portal.
 * We then [<mark style="color:blue;">generate two new enrollment tickets</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/warpstream/run.sh#50-L56), each valid for 10 minutes, and can be redeemed only once. The [<mark style="color:blue;">two tickets</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/warpstream/run.sh#L50-L56) are meant for the Consumer and Producer, in the Ockam node that will run in Application Team’s network.
 * In a typical production setup, an administrator or provisioning pipeline generates enrollment tickets and gives them to nodes that are being provisioned. In our example, the run function is acting on your behalf as the administrator of the Ockam project. It creates a Kafka relay using a pre-baked Ockam Kafka addon which will host the Warpstream Kafka server and [<mark style="color:blue;">Application Team’s network</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/kafka/warpstream/run.sh#L63C36-L62C160), passing them their tickets using environment variables.
@@ -81,5 +81,5 @@ All communication is mutually authenticated and authorized. Keys and credentials
 To delete all containers and images:
 
 ```sh
-./run.sh cleanup _warpstream_api_key
+./run.sh cleanup _warpstream_application_key
 ```
