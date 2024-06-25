@@ -46,7 +46,7 @@ The [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-tr
 * The [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/run.sh) calls the [<mark style="color:blue;">run function</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/run.sh#L15) which invokes the [<mark style="color:blue;">enroll command</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/run.sh#L28) to create an new identity, sign into Ockam Orchestrator, set up a new Ockam project, make you the administrator of this project, and get a project membership [<mark style="color:blue;">credential</mark>](../../reference/protocols/identities.md#credentials).
 * The run function then [<mark style="color:blue;">generates two new enrollment tickets</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/run.sh#L30-L46). The tickets are valid for 60 minutes. Each ticket can be redeemed only once and assigns [<mark style="color:blue;">attributes</mark>](../../reference/protocols/identities.md#credentials) to its redeemer. The [<mark style="color:blue;">first ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/run.sh#L30-L38) is meant for the Ockam node that will run in Monitoring Corp.’s network. The [<mark style="color:blue;">second ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/run.sh#L40-L46) is meant for the Ockam node that will run in Travel App Corp.’s network.
 * In a typical production setup an administrator or provisioning pipeline generates enrollment tickets and gives them to nodes that are being provisioned. In our example, the run function is acting on your behalf as the administrator of the Ockam project.
-* The run function passes the enrollment tickets as variables of the run scripts provisioning [Monitoring Corp.’s network](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/run.sh#L51C43-L51C68) and [Travel App Corp.’s network](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/run.sh#L56C43-L56C68).
+* The run function passes the enrollment tickets as variables of the run scripts provisioning [Monitoring Corp.’s network](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/run.sh#L55C43-L55C68) and [Travel App Corp.’s network](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/run.sh#L60C43-L60C68).
 
 ### Monitoring Corp
 
@@ -63,27 +63,27 @@ First, the `monitoring_corp/run.sh` script creates a network to host the databas
 Then, the `monitoring_corp/run.sh` script creates an EC2 instance where the Ockam outlet node will run:
 
 * We [select an AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L40-L42).
-*   We [start an instance using the AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L48-L50) above and a start script based on `run_ockam.sh` where the
+*   We [start an instance using the AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L49-L51) above and a start script based on `run_ockam.sh` where the
 
     [`ENROLLMENT_TICKET` is replaced by the enrollment ticket](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L47) created by the administrator and given as a parameter to `run.sh`.
-* We [tag the created instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L51) and [wait for it to be available](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L52).
+* We [tag the created instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L52) and [wait for it to be available](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L53).
 
 Next, the instance is started and the `run_ockam.sh` script is executed:
 
-* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L10).
-* The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L26).
+* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L11).
+* The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L27).
 * We then create an Ockam node:
-  * With [a TCP outlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L40).
-  * A [policy associated to the outlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L39). The policy authorizes identities with a credential containing the attribute monitoring-api-inlet="true".
-  * With [a relay](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L38) capable of forwarding the TCP traffic to the TCP outlet.
+  * With [a TCP outlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L41).
+  * A [policy associated to the outlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L40). The policy authorizes identities with a credential containing the attribute monitoring-api-inlet="true".
+  * With [a relay](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L39) capable of forwarding the TCP traffic to the TCP outlet.
 
 Finally, we wait for the instance to be ready and run the python api application:
 
-* The [app.py file](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/app.py) is [copied to the instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L56) (this uses the previously created `key.pem` file to identify).
-* We can then [SSH to the instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon\_rds/aws\_cli/analysis\_corp/run.sh#L57) and:
-  * [Install python](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L59).
-  * [Install dependencies](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L62).
-  * [Run the python flask api application](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L64).
+* The [app.py file](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/app.py) is [copied to the instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L57) (this uses the previously created `key.pem` file to identify).
+* We can then [SSH to the instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/postgres/amazon\_rds/aws\_cli/analysis\_corp/run.sh#L58) and:
+  * [Install python](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L60).
+  * [Install dependencies](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L63).
+  * [Run the python flask api application](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L65).
 
 #### Travel App Corp <a href="#analysis-corp" id="analysis-corp"></a>
 
@@ -106,16 +106,16 @@ Then, we create an EC2 instance where the Ockam inlet node will run:
 
 Next, the instance is started and the `run_ockam.sh` script is executed:
 
-* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L10).
-* The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L26).
+* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L11).
+* The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L27).
 * We then create an Ockam node:
-  * With [a TCP inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L37).
-  * A [policy associated to the inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L36). The policy authorizes identities with a credential containing the attribute monitoring-api-outlet="true".
+  * With [a TCP inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L38).
+  * A [policy associated to the inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L37). The policy authorizes identities with a credential containing the attribute monitoring-api-outlet="true".
 
 Finally, we wait for the instance to be ready and run the python client application:
 
 * The [client.py file](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/client.py) is [copied to the instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run.sh#L56) (this uses the previously created `key.pem` file to identify).
-* We can then [SSH to the instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run.sh#L57-L60) and:
+* We can then [SSH to the instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run.sh#L57-L63) and:
   * [Install python](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run.sh#L59).
   * [Install dependencies](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run.sh#L62).
   * [Run the python client application](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/python/amazon\_ec2/aws\_cli/travel\_app\_corp/run.sh#L63).
