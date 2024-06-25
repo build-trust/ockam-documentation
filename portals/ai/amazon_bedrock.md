@@ -48,7 +48,7 @@ The [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-tr
 * The [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/run.sh) calls the [<mark style="color:blue;">run function</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/run.sh#L14) which invokes the [<mark style="color:blue;">enroll command</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/run.sh#L27) to create an new identity, sign into Ockam Orchestrator, set up a new Ockam project, make you the administrator of this project, and get a project membership [<mark style="color:blue;">credential</mark>](../../reference/protocols/identities.md#credentials).
 * The run function then [<mark style="color:blue;">generates two new enrollment tickets</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/run.sh#L36-L45). The tickets are valid for 10 minutes. Each ticket can be redeemed only once and assigns [<mark style="color:blue;">attributes</mark>](../../reference/protocols/identities.md#credentials) to its redeemer. The [<mark style="color:blue;">first ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/run.sh#L36-L37) is meant for the Ockam node that will run in AI Corp.’s network. The [<mark style="color:blue;">second ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/run.sh#L44-L45) is meant for the Ockam node that will run in Health Corp.’s network.
 * In a typical production setup an administrator or provisioning pipeline generates enrollment tickets and gives them to nodes that are being provisioned. In our example, the run function is acting on your behalf as the administrator of the Ockam project.
-* The run function passes the enrollment tickets as variables of the run scripts provisioning [<mark style="color:blue;">AI Corp.'s network</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/run.sh#L50C35-L50C52) and [<mark style="color:blue;">Health Corp.'s network</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/run.sh#L55C39-L55C60).
+* The run function passes the enrollment tickets as variables of the run scripts provisioning [<mark style="color:blue;">AI Corp.'s network</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/run.sh#L54C35-L54C52) and [<mark style="color:blue;">Health Corp.'s network</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/run.sh#L60C39-L60C60).
 
 ### AI Corp
 
@@ -68,20 +68,20 @@ We are now ready to create an EC2 instance where the Ockam outlet node will run:
 
 * We [<mark style="color:blue;">select an AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L48-L50).
 * We [<mark style="color:blue;">create a key pair</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L52-L53) in order to access the EC2 instance via SSH.
-* We [<mark style="color:blue;">start an instance using the selected AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L55-L59). Starting the instance executes a start script based on `ai_corp/run_ockam.sh` where:
+* We [<mark style="color:blue;">start an instance using the selected AMI</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L55-L60). Starting the instance executes a start script based on `ai_corp/run_ockam.sh` where:
   * [<mark style="color:blue;">`ENROLLMENT_TICKET`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">is replaced by the enrollment ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L55) created by the administrator and given as a parameter to `ai_corp/run.sh`.
-* We [<mark style="color:blue;">tag the created instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L59)
-* We [<mark style="color:blue;">create an IAM profile with a role allowing the EC2 instance to access the Bedrock API</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L61-L70)
-* We [<mark style="color:blue;">wait for it to be available</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L72).
+* We [<mark style="color:blue;">tag the created instance</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L60)
+* We [<mark style="color:blue;">create an IAM profile with a role allowing the EC2 instance to access the Bedrock API</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L62-L71)
+* We [<mark style="color:blue;">wait for it to be available</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run.sh#L73).
 
 When the instance is started, the `run_ockam.sh` script is executed:
 
-* The [<mark style="color:blue;">`ockam`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">executable is installed</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L10-L11).
-* The [<mark style="color:blue;">enrollment ticket is used to create a default identity and make it a project member</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L26).
+* The [<mark style="color:blue;">`ockam`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">executable is installed</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L11-L12).
+* The [<mark style="color:blue;">enrollment ticket is used to create a default identity and make it a project member</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L27).
 * We then create an Ockam node:
-  * With [<mark style="color:blue;">a TCP outlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L38).
-  * A [<mark style="color:blue;">policy associated to the outlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L40). The policy authorizes identities with a credential containing the attribute <mark style="background-color:yellow;">ai-inlet="true"</mark>.
-  * With [<mark style="color:blue;">a relay</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L42) capable of forwarding the TCP traffic to the TCP outlet.
+  * With [<mark style="color:blue;">a TCP outlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L39).
+  * A [<mark style="color:blue;">policy associated to the outlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L41). The policy authorizes identities with a credential containing the attribute <mark style="background-color:yellow;">ai-inlet="true"</mark>.
+  * With [<mark style="color:blue;">a relay</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/ai\_corp/run\_ockam.sh#L43) capable of forwarding the TCP traffic to the TCP outlet.
 
 {% hint style="warning" %}
 The model used in this example is the "Titan Text G1 - Lite" model. In order to use it, [<mark style="color:blue;">you will need to request access to this model</mark>](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html).
@@ -107,12 +107,12 @@ We are now ready to create an EC2 instance where the Ockam inlet node will run:
 
 The instance is started and the `run_ockam.sh` script is executed:
 
-* The [<mark style="color:blue;">`ockam`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">executable is installed</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L10-L11).
-* The [<mark style="color:blue;">enrollment ticket is used to create a default identity and make it a project member</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L26).
+* The [<mark style="color:blue;">`ockam`</mark> <mark style="color:blue;"></mark><mark style="color:blue;">executable is installed</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L11-L12).
+* The [<mark style="color:blue;">enrollment ticket is used to create a default identity and make it a project member</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L27).
 * We then create an Ockam node:
-  * With [<mark style="color:blue;">a TCP inlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L36).
-  * Forwarding messages to [the `ai` relay](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L38)
-  * A [<mark style="color:blue;">policy associated to the inlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L39). The policy authorizes identities with a credential containing the attribute <mark style="background-color:yellow;">ai-outlet="true"</mark>.
+  * With [<mark style="color:blue;">a TCP inlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L37).
+  * Forwarding messages to [the `ai` relay](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L39)
+  * A [<mark style="color:blue;">policy associated to the inlet</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/ai/amazon\_bedrock/health\_corp/run\_ockam.sh#L40). The policy authorizes identities with a credential containing the attribute <mark style="background-color:yellow;">ai-outlet="true"</mark>.
 
 We finally wait for the instance to be ready and install the `client.js` application:
 

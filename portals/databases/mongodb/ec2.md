@@ -45,9 +45,9 @@ The [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-tr
 
 * The [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh) calls the [<mark style="color:blue;">run function</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L14) which invokes the [<mark style="color:blue;">enroll command</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L15-L27) to create a new identity, sign into Ockam Orchestrator, set up a new Ockam project, make you the administrator of this project, and get a project membership [<mark style="color:blue;">credential</mark>](../../../reference/protocols/identities.md#credentials).
 * The run function then [<mark style="color:blue;">generates two new enrollment tickets</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L29-L45). The tickets are valid for 10 minutes. Each ticket can be redeemed only once and assigns [<mark style="color:blue;">attributes</mark>](../../../reference/protocols/identities.md#credentials) to its redeemer. The [<mark style="color:blue;">first ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L29-L37) is meant for the Ockam node that will run in Bank Corp.’s network. The [<mark style="color:blue;">second ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L39-L45) is meant for the Ockam node that will run in Analysis Corp.’s network.
-* In a typical production setup, an administrator or provisioning pipeline generates enrollment tickets and gives them to nodes that are being provisioned. In our example, the run function is acting on your behalf as the administrator of the Ockam project. It passes the enrollment tickets as a [<mark style="color:blue;">function argument</mark> ](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L55C37-L55C56)to provision Ockam nodes in Bank Corp network and also passes the enrollment key as an [<mark style="color:blue;">function argument</mark> ](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L55C41-L55C64)to provision Ockam nodes in Analysis Corp.’s network.
-* For Bank Corp, the run function calls a [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L55) which will create an Amazon VPC that will host our MongoDB instance over a closed network this will be hosted by Bank Corp.
-* For Analysis Corp, we will also call a [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L55) which will run a nodejs app that will write to our mongoDB data hosted by Bank Corp.
+* In a typical production setup, an administrator or provisioning pipeline generates enrollment tickets and gives them to nodes that are being provisioned. In our example, the run function is acting on your behalf as the administrator of the Ockam project. It passes the enrollment tickets as a [<mark style="color:blue;">function argument</mark> ](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L57C37-L57C56)to provision Ockam nodes in Bank Corp network and also passes the enrollment key as an [<mark style="color:blue;">function argument</mark> ](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L62C41-L62C64)to provision Ockam nodes in Analysis Corp.’s network.
+* For Bank Corp, the run function calls a [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L57) which will create an Amazon VPC that will host our MongoDB instance over a closed network this will be hosted by Bank Corp.
+* For Analysis Corp, we will also call a [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/run.sh#L62) which will run a nodejs app that will write to our mongoDB data hosted by Bank Corp.
 
 ### Bank Corp
 
@@ -64,20 +64,20 @@ First, the `bank_corp/run.sh` script creates a network to host the database:
 Then, the `bank_corp/run.sh` script creates an EC2 instance where the Ockam outlet node will run:
 
 * We [select an AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run.sh#L40-L42).
-*   We [start an instance using the AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run.sh#L48-L50) above and a start script based on `run_ockam.sh` where the
+*   We [start an instance using the AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run.sh#L46-L48) above and a start script based on `run_ockam.sh` where the
 
     [`ENROLLMENT_TICKET` is replaced by the enrollment ticket](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run.sh#L44) created by the administrator and given as a parameter to `run.sh`.
-* We [tag the created instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run.sh#L48) and [wait for it to be available](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run.sh#L49).
+* We [tag the created instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run.sh#L49) and [wait for it to be available](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run.sh#L50).
 
 Next, the instance is started and the `run_ockam.sh` script is executed:
 
 * [MongoDB is installed using yum package installer](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run\_ockam.sh#L10-L20)
-* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run\_ockam.sh#L23-L25).
-* The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run\_ockam.sh#L40).
+* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run\_ockam.sh#L25-L26).
+* The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run\_ockam.sh#L41).
 * We then create an Ockam node:
-  * With [a TCP outlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run\_ockam.sh#L52).
-  * A [policy associated to the outlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run\_ockam.sh#L51). The policy authorizes identities with a credential containing the attribute monitoring-api-inlet="true".
-  * With [a relay](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run\_ockam.sh#L50) capable of forwarding the TCP traffic to the TCP outlet.
+  * With [a TCP outlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run\_ockam.sh#L53).
+  * A [policy associated to the outlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run\_ockam.sh#L52). The policy authorizes identities with a credential containing the attribute monitoring-api-inlet="true".
+  * With [a relay](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/bank\_corp/run\_ockam.sh#L51) capable of forwarding the TCP traffic to the TCP outlet.
 
 #### Analysis Corp
 
@@ -94,17 +94,17 @@ First, the `analysis_corp/run.sh` script creates a network to host the nodejs ap
 Then, we create an EC2 instance where the Ockam inlet node will run:
 
 * We [select an AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run.sh#L40-L42).
-*   We [start an instance using the AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run.sh#L48-L50) above and a start script based on `run_ockam.sh` where the
+*   We [start an instance using the AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run.sh#L49-L51) above and a start script based on `run_ockam.sh` where the
 
     [`ENROLLMENT_TICKET` is replaced by the enrollment ticket](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run.sh#L47) created by the administrator and given as a parameter to `run.sh`.
 
 Next, the instance is started and the `run_ockam.sh` script is executed:
 
-* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run\_ockam.sh#10).
-* The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run\_ockam.sh#L26).
+* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run\_ockam.sh#11).
+* The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run\_ockam.sh#L27).
 * We then create an Ockam node:
-  * With [a TCP inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run\_ockam.sh#L37).
-  * A [policy associated to the inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run\_ockam.sh#L36). The policy authorizes identities with a credential containing the attribute monitoring-api-outlet="true".
+  * With [a TCP inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run\_ockam.sh#L38).
+  * A [policy associated to the inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/databases/mongodb/amazon\_vpc/analysis\_corp/run\_ockam.sh#L37). The policy authorizes identities with a credential containing the attribute monitoring-api-outlet="true".
 
 Finally, we wait for the instance to be ready and run the nodejs app application:
 

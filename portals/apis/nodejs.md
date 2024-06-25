@@ -46,7 +46,7 @@ The [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-tr
 * The [<mark style="color:blue;">run.sh script</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/run.sh) calls the [<mark style="color:blue;">run function</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/run.sh#L14) which invokes the [<mark style="color:blue;">enroll command</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/run.sh#L27) to create an new identity, sign into Ockam Orchestrator, set up a new Ockam project, make you the administrator of this project, and get a project membership [<mark style="color:blue;">credential</mark>](../../reference/protocols/identities.md#credentials).
 * The run function then [<mark style="color:blue;">generates two new enrollment tickets</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/run.sh#L29-L45). The tickets are valid for 60 minutes. Each ticket can be redeemed only once and assigns [<mark style="color:blue;">attributes</mark>](../../reference/protocols/identities.md#credentials) to its redeemer. The [<mark style="color:blue;">first ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/run.sh#L29-L37) is meant for the Ockam node that will run in Monitoring Corp.’s network. The [<mark style="color:blue;">second ticket</mark>](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/run.sh#L39-L45) is meant for the Ockam node that will run in Travel App Corp.’s network.
 * In a typical production setup an administrator or provisioning pipeline generates enrollment tickets and gives them to nodes that are being provisioned. In our example, the run function is acting on your behalf as the administrator of the Ockam project.
-* The run function passes the enrollment tickets as variables of the run scripts provisioning [Monitoring Corp.’s network](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/run.sh#L50C43-L50C68) and [Travel App Corp.’s network](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/run.sh#L55C43-L55C68).
+* The run function passes the enrollment tickets as variables of the run scripts provisioning [Monitoring Corp.’s network](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/run.sh#L54C43-L54C68) and [Travel App Corp.’s network](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/run.sh#L59C43-L59C68).
 
 ### Monitoring Corp
 
@@ -63,19 +63,19 @@ First, the `monitoring_corp/run.sh` script creates a network to host the databas
 Then, the `monitoring_corp/run.sh` script creates an EC2 instance where the Ockam outlet node will run:
 
 * We [select an AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L40-L42).
-*   We [start an instance using the AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L48-L50) above and a start script based on `run_ockam.sh` where the
+*   We [start an instance using the AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L49-L51) above and a start script based on `run_ockam.sh` where the
 
     [`ENROLLMENT_TICKET` is replaced by the enrollment ticket](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L47) created by the administrator and given as a parameter to `run.sh`.
-* We [tag the created instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L51) and [wait for it to be available](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L52).
+* We [tag the created instance](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L52) and [wait for it to be available](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run.sh#L53).
 
 Next, the instance is started and the `run_ockam.sh` script is executed:
 
-* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L10).
-* The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L26).
+* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L11).
+* The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L27).
 * We then create an Ockam node:
-  * With [a TCP outlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L40).
-  * A [policy associated to the outlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L39). The policy authorizes identities with a credential containing the attribute monitoring-api-inlet="true".
-  * With [a relay](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L38) capable of forwarding the TCP traffic to the TCP outlet.
+  * With [a TCP outlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L41).
+  * A [policy associated to the outlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L40). The policy authorizes identities with a credential containing the attribute monitoring-api-inlet="true".
+  * With [a relay](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/monitoring\_corp/run\_ockam.sh#L39) capable of forwarding the TCP traffic to the TCP outlet.
 
 Finally, we wait for the instance to be ready and run the nodejs api application:
 
@@ -100,17 +100,17 @@ First, the `travel_app_corp/run.sh` script creates a network to host the nodejs 
 Then, we create an EC2 instance where the Ockam inlet node will run:
 
 * We [select an AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run.sh#L40-L42).
-*   We [start an instance using the AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run.sh#L48-L50) above and a start script based on `run_ockam.sh` where the
+*   We [start an instance using the AMI](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run.sh#L49-L51) above and a start script based on `run_ockam.sh` where the
 
     [`ENROLLMENT_TICKET` is replaced by the enrollment ticket](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run.sh#L47) created by the administrator and given as a parameter to `run.sh`.
 
 Next, the instance is started and the `run_ockam.sh` script is executed:
 
-* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L10).
-* The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L26).
+* The [`ockam` executable is installed](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L11).
+* The [enrollment ticket is used to create a default identity and make it a project member](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L27).
 * We then create an Ockam node:
-  * With [a TCP inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L37).
-  * A [policy associated to the inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L36). The policy authorizes identities with a credential containing the attribute monitoring-api-outlet="true".
+  * With [a TCP inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L38).
+  * A [policy associated to the inlet](https://github.com/build-trust/ockam/blob/develop/examples/command/portals/apis/nodejs/amazon\_ec2/aws\_cli/travel\_app\_corp/run\_ockam.sh#L37). The policy authorizes identities with a credential containing the attribute monitoring-api-outlet="true".
 
 Finally, we wait for the instance to be ready and run the nodejs client application:
 
