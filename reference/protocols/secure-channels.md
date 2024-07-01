@@ -53,7 +53,8 @@ Let's see this in action before we dive into the protocol. The following example
 
 use hello_ockam::Echoer;
 use ockam::identity::SecureChannelListenerOptions;
-use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
+use ockam::tcp::{TcpListenerOptions, TcpTransportExtension};
+use ockam::{node, Context, Result};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -102,8 +103,8 @@ async fn main(ctx: Context) -> Result<()> {
 // It then runs forever waiting to route messages.
 
 use hello_ockam::Relay;
-use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
-use ockam_core::route;
+use ockam::tcp::{TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
+use ockam::{node, route, Context, Result};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -142,7 +143,8 @@ async fn main(ctx: Context) -> Result<()> {
 // It then routes a message, to a worker on a different node, through this encrypted channel.
 
 use ockam::identity::SecureChannelOptions;
-use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpTransportExtension};
+use ockam::tcp::{TcpConnectionOptions, TcpTransportExtension};
+use ockam::{node, route, Context, Result};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
