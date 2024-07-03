@@ -241,7 +241,8 @@ Add the following code to this file:
 // It then runs forever waiting for messages.
 
 use hello_ockam::Echoer;
-use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
+use ockam::tcp::{TcpListenerOptions, TcpTransportExtension};
+use ockam::{node, Context, Result};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -280,7 +281,8 @@ Add the following code to this file:
 // examples/04-routing-over-transport-initiator.rs
 // This node routes a message, to a worker on a different node, over the tcp transport.
 
-use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpTransportExtension};
+use ockam::tcp::{TcpConnectionOptions, TcpTransportExtension};
+use ockam::{node, route, Context, Result};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -426,7 +428,8 @@ Add the following code to this file:
 // It then runs forever waiting for messages.
 
 use hello_ockam::Echoer;
-use ockam::{node, Context, Result, TcpListenerOptions, TcpTransportExtension};
+use ockam::tcp::{TcpListenerOptions, TcpTransportExtension};
+use ockam::{node, Context, Result};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -469,7 +472,8 @@ Add the following code to this file:
 // It then runs forever waiting to route messages.
 
 use hello_ockam::Relay;
-use ockam::{node, Context, Result, TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
+use ockam::tcp::{TcpConnectionOptions, TcpListenerOptions, TcpTransportExtension};
+use ockam::{node, Context, Result};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -513,7 +517,8 @@ Add the following code to this file:
 // examples/04-routing-over-transport-two-hops-initiator.rs
 // This node routes a message, to a worker on a different node, over two tcp transport hops.
 
-use ockam::{node, route, Context, Result, TcpConnectionOptions, TcpTransportExtension};
+use ockam::tcp::{TcpConnectionOptions, TcpTransportExtension};
+use ockam::{node, route, Context, Result};
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
