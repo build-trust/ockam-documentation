@@ -50,9 +50,9 @@ use ockam::compat::sync::Arc;
 use ockam::identity::utils::now;
 use ockam::identity::SecureChannelListenerOptions;
 use ockam::identity::{Identifier, Vault};
+use ockam::tcp::{TcpListenerOptions, TcpTransportExtension};
 use ockam::vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
-use ockam::{Context, Result, TcpListenerOptions};
-use ockam::{Node, TcpTransportExtension};
+use ockam::{Context, Node, Result};
 use ockam_api::authenticator::credential_issuer::CredentialIssuerWorker;
 use ockam_api::authenticator::{AuthorityMembersRepository, AuthorityMembersSqlxDatabase, PreTrustedIdentity};
 use ockam_api::DefaultAddress;
@@ -178,9 +178,9 @@ touch examples/06-credential-exchange-server.rs
 use hello_ockam::Echoer;
 use ockam::abac::{IncomingAbac, OutgoingAbac};
 use ockam::identity::{SecureChannelListenerOptions, Vault};
+use ockam::tcp::{TcpListenerOptions, TcpTransportExtension};
 use ockam::vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
-use ockam::{Context, Result, TcpListenerOptions};
-use ockam::{Node, TcpTransportExtension};
+use ockam::{Context, Node, Result};
 use ockam_api::enroll::enrollment::Enrollment;
 use ockam_api::nodes::NodeManager;
 use ockam_api::DefaultAddress;
@@ -311,9 +311,9 @@ touch examples/06-credential-exchange-client.rs
 ```rust
 // examples/06-credentials-exchange-client.rs
 use ockam::identity::{SecureChannelOptions, Vault};
+use ockam::tcp::{TcpConnectionOptions, TcpTransportExtension};
 use ockam::vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
-use ockam::{route, Context, Result, TcpConnectionOptions};
-use ockam::{Node, TcpTransportExtension};
+use ockam::{route, Context, Node, Result};
 use ockam_api::enroll::enrollment::Enrollment;
 use ockam_api::nodes::NodeManager;
 use ockam_api::DefaultAddress;
