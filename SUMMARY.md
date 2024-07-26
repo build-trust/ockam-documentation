@@ -48,6 +48,8 @@
   * [Identities and Vaults](reference/command/identities.md)
   * [Secure Channels](reference/command/secure-channels.md)
   * [Verifiable Credentials](reference/command/credentials.md)
+  * [Guides](reference/command/guides/README.md)
+    * [AWS Marketplace](reference/command/guides/aws-marketplace.md)
   * [Manual](https://command.ockam.io/manual/)
 * [Programming Libraries](reference/libraries/README.md)
   * [Rust](reference/libraries/rust/README.md)
