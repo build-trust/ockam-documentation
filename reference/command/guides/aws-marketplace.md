@@ -42,7 +42,7 @@ ockam project ticket --expires-in 10h --usage-count 1 \
     > "outlet.ticket"
 
 # Enrollment ticket for Ockam Inlet Node
-ockam project ticket --expires-in 24h --usage-count 20 \
+ockam project ticket --expires-in 10h --usage-count 1 \
   --attribute example-inlet \
     > "inlet.ticket"
     
@@ -52,7 +52,8 @@ ockam project ticket --expires-in 24h --usage-count 20 \
 
 * Login to AWS Account you would like to use
 * Subscribe to "[Ockam - Node" ](https://aws.amazon.com/marketplace/pp/prodview-gov6p3wh224ho?sr=0-1\&ref\_=beagle\&applicationId=AWSMPContessa) in AWS Marketplace&#x20;
-* Navigate to `AWS Marketplace -> Manage subscriptions`. Select `Ockam - Node` from the list of subscriptions. Select `Actions-> Launch Cloudformation stack` Select the Region you want to deploy and click `Continue to Launch`. Under Actions, select `Launch Cloudformation`
+* Navigate to `AWS Marketplace -> Manage subscriptions`. Select `Ockam - Node` from the list of subscriptions. Select `Actions-> Launch Cloudformation stack`&#x20;
+* Select the Region you want to deploy and click `Continue to Launch`. Under Actions, select `Launch Cloudformation`
 * Create stack with below details
   * Stack name: `example-outlet` or any name you prefer
   * Network Configuration
@@ -60,7 +61,7 @@ ockam project ticket --expires-in 24h --usage-count 20 \
       * Default instance type is `m6a.8xlarge` because of the predictable network bandwidth of 12.5 Gbps. Adjust instance type if you need to
   * Ockam Configuration
     * `Enrollment ticket`: Copy and paste the content of the `outlet.ticket` generated above
-      * `JSON Node Configuration: Copy and paste the below configuration. Note that only`&#x20;
+    * `JSON Node Configuration: Copy and paste the below configuration. Note that only`&#x20;
 
 ```json
 {
@@ -92,7 +93,8 @@ ockam project ticket --expires-in 24h --usage-count 20 \
 
 * Login to AWS Account you would like to use
 * Subscribe to "[Ockam - Node" ](https://aws.amazon.com/marketplace/pp/prodview-gov6p3wh224ho?sr=0-1\&ref\_=beagle\&applicationId=AWSMPContessa) in AWS Marketplace&#x20;
-* Navigate to `AWS Marketplace -> Manage subscriptions`. Select `Ockam - Node` from the list of subscriptions. Select `Actions-> Launch Cloudformation stack` Select the Region you want to deploy and click `Continue to Launch`. Under Actions, select `Launch Cloudformation`
+* Navigate to `AWS Marketplace -> Manage subscriptions`. Select `Ockam - Node` from the list of subscriptions. Select `Actions-> Launch Cloudformation stack`&#x20;
+* Select the Region you want to deploy and click `Continue to Launch`. Under Actions, select `Launch Cloudformation`
 * Create stack with below details
   * Stack name: `example-inlet` or any name you prefer
   * Network Configuration
@@ -100,7 +102,7 @@ ockam project ticket --expires-in 24h --usage-count 20 \
       * Default instance type is `m6a.8xlarge` because of the predictable network bandwidth of 12.5 Gbps. Adjust instance type if you need to
   * Ockam Configuration
     * `Enrollment ticket`: Copy and paste the content of the `outlet.ticket` generated above
-      * `JSON Node Configuration: Copy and paste the below configuration. Note that only`&#x20;
+    * `JSON Node Configuration: Copy and paste the below configuration. Note that only`&#x20;
 
 ```json
 {
