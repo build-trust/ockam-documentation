@@ -61,7 +61,7 @@ ockam project ticket --expires-in 10h --usage-count 1 \
       * Default instance type is `m6a.8xlarge` because of the predictable network bandwidth of 12.5 Gbps. Adjust instance type if you need to
   * Ockam Configuration
     * `Enrollment ticket`: Copy and paste the content of the `outlet.ticket` generated above
-    * `JSON Node Configuration: Copy and paste the below configuration. Note that only`&#x20;
+    * `JSON Node Configuration`: Copy and paste the below configuration.&#x20;
 
 ```json
 {
@@ -102,7 +102,7 @@ ockam project ticket --expires-in 10h --usage-count 1 \
       * Default instance type is `m6a.8xlarge` because of the predictable network bandwidth of 12.5 Gbps. Adjust instance type if you need to
   * Ockam Configuration
     * `Enrollment ticket`: Copy and paste the content of the `outlet.ticket` generated above
-    * `JSON Node Configuration: Copy and paste the below configuration. Note that only`&#x20;
+    * `JSON Node Configuration`: Copy and paste the below configuration. &#x20;
 
 ```json
 {
