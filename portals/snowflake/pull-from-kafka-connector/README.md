@@ -191,3 +191,23 @@ Of course for the final test you can select data from the ingestion table:
 ```sqlite-sql
 SELECT * FROM consumer_table;
 ```
+
+## Reset the configuration
+
+If you made any configuration error, you can remove the existing configuration:
+```sqlite-sql
+-- Remove the external integration reference
+CALL PULL_FROM_KAFKA__CONNECTOR.external.register_reference('OCKAM_ORCHESTRATOR_EXTERNAL_ACCESS_INTEGRATION_REFERENCE', 'CLEAR', '');
+
+-- Remove the target table reference
+CALL PULL_FROM_KAFKA__CONNECTOR.external.register_reference('TARGET_TABLE', 'CLEAR', '');
+
+-- Remove the warehouse reference
+CALL PULL_FROM_KAFKA__CONNECTOR.external.register_reference('WAREHOUSE', 'CLEAR', '');
+
+-- Remove the Ockam / Kafka reference
+DELETE FROM PULL_FROM_KAFKA__CONNECTOR.internal.configuration;
+```
+
+Then go to "Apps", select the **Pull From Kafka - Connector** application and click on the configuration tab, to
+restart the configuration screen.
