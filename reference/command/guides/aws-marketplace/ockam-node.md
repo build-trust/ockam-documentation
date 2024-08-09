@@ -2,18 +2,18 @@
 description: Create an ockam node using Cloudformation template
 ---
 
-# AWS Marketplace
+# Ockam Node
 
 This guide contains instructions to launch within AWS environment, an&#x20;
 
 * Ockam Outlet Node
 * Ockam Inlet Node
 
-The walkthrough demostrates running both outlet and inlet nodes and verify communication between them.&#x20;
+The walkthrough demonstrates running both outlet and inlet nodes and verify communication between them.&#x20;
 
 Read: “[How does Ockam work?](https://docs.ockam.io/how-does-ockam-work)” to learn about end-to-end trust establishment.
 
-<figure><img src="../../../.gitbook/assets/aws_mp_ockam_node.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/aws_mp_ockam_node.png" alt=""><figcaption></figcaption></figure>
 
 ### Create an Orchestrator Project
 
@@ -164,3 +164,4 @@ You have now successfully created an Ockam Portal and verified secure communicat
 ```shell
 ockam reset
 ```
+
