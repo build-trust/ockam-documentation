@@ -61,7 +61,7 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 ### Setup Ockam Kafka Outlet Node
 
 * Login to AWS Account you would like to use
-* Subscribe to "Ockam - Node for Amazon MSK"  in AWS Marketplace&#x20;
+* Subscribe to "[Ockam - Node for Amazon MSK](https://aws.amazon.com/marketplace/pp/prodview-iztqd27voc4xg)"  in AWS Marketplace&#x20;
 * Navigate to `AWS Marketplace -> Manage subscriptions`. Select `Ockam - Node for Amazon MSK` from the list of subscriptions. Select `Actions-> Launch Cloudformation stack`&#x20;
 * Select the Region you want to deploy and click `Continue to Launch`. Under Actions, select `Launch Cloudformation`
 * Create stack with the following details
