@@ -59,7 +59,7 @@ The \`enroll\` command does a lot!  All at once it...
 
 Congrats! Your dev machine Node has a secure, encrypted Ockam Portal connection to your Project Node inside of Ockam Orchestrator over a Secure Channel!
 
-<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Install Ockam Command and create an Ockam Node in AWS
 
@@ -77,7 +77,7 @@ You now have an Ockam Node running in your VPC. As before, this Node will have
 1. a set of private key Identifiers, stored in a local Vault
 2. a Membership Credential that will allow this Ockam Node to join your Project in Orchestrator.&#x20;
 
-<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Create a Portal Outlet in this Ockam Node
 

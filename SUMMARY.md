@@ -52,6 +52,7 @@
     * [AWS Marketplace](reference/command/guides/aws-marketplace/README.md)
       * [Ockam Node](reference/command/guides/aws-marketplace/ockam-node.md)
       * [Ockam Node for Amazon MSK](reference/command/guides/aws-marketplace/ockam-node-for-amazon-msk.md)
+      * [Ockam Node for Amazon RDS Postgres](reference/command/guides/aws-marketplace/ockam-node-for-amazon-rds-postgres.md)
   * [Manual](https://command.ockam.io/manual/)
 * [Programming Libraries](reference/libraries/README.md)
   * [Rust](reference/libraries/rust/README.md)

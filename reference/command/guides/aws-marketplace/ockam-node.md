@@ -117,7 +117,7 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 ```
 
 * Click Next to launch the CloudFormation run.
-* A successful CloudFormation stack run configures the Ockam outlet node on an EC2 machine.
+* A successful CloudFormation stack run configures the Ockam inlet node on an EC2 machine.
 * EC2 machine mounts an EFS volume created in the same subnet. Ockam state is stored in the EFS volume.
 * Connect to the EC2 machine via AWS Session Manager. To view the log file, run `sudo cat /var/log/cloud-init-output.log`.&#x20;
 * View the Ockam node status in CloudWatch.
