@@ -2,6 +2,9 @@
 
 * [What is Ockam?](README.md)
 * [How does Ockam work?](how-does-ockam-work.md)
+* [Quickstarts](quickstarts/README.md)
+  * [Snowflake to Kafka](https://www.ockam.io/blog/snowflake-push-kafka)
+  * [Add secure connectivity to your SaaS product](https://www.ockam.io/blog/building-secure-saas-platforms)
 
 ## ENCRYPTED PORTALS TO ... <a href="#portals" id="portals"></a>
 
