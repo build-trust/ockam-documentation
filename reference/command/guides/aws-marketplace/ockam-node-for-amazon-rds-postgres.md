@@ -59,7 +59,7 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 ### Setup Ockam Postgres Outlet Node
 
 * Login to AWS Account you would like to use
-* Subscribe to "Ockam - Node for Amazon RDS Postgres"  in AWS Marketplace&#x20;
+* Subscribe to "[Ockam - Node for Amazon RDS Postgres](https://aws.amazon.com/marketplace/pp/prodview-zjugwdx5hp2le)"  in AWS Marketplace&#x20;
 * Navigate to `AWS Marketplace -> Manage subscriptions`. Select `Ockam - Node for Amazon RDS Postgres` from the list of subscriptions. Select `Actions-> Launch Cloudformation stack`&#x20;
 * Select the Region you want to deploy and click `Continue to Launch`. Under Actions, select `Launch Cloudformation`
 * Create stack with the following details
