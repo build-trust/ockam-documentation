@@ -1,0 +1,52 @@
+.chip {
+    display: inline-block;
+    padding: 0 10px;
+    height: 32px;
+    font-size: 1.4rem;
+    line-height: 32px;
+    border-radius: 3px;
+    background-color: #f6f7f6;
+    vertical-align: top;
+}
+
+/* Tooltips */
+
+.t {
+    position: relative;
+    display: inline-block;
+}
+
+.t .tt {
+    visibility: hidden;
+    font-size: 0.8em;
+    line-height: 1.5em;
+    width: 450px;
+    background-color: #555;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+}
+
+.t:hover .tt {
+    visibility: visible;
+}
+
+.tt {
+    top: 135%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tt::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 13%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent;
+}
+
