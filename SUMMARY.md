@@ -58,6 +58,7 @@
       * [Ockam Node for Amazon RDS Postgres](reference/command/guides/aws-marketplace/ockam-node-for-amazon-rds-postgres.md)
       * [Ockam Node for Amazon Timestream InfluxDB](reference/command/guides/aws-marketplace/ockam-node-for-amazon-timestream-influxdb.md)
       * [Ockam Node for Amazon Redshift](reference/command/guides/aws-marketplace/ockam-node-for-amazon-redshift.md)
+      * [Ockam Node for Amazon Bedrock](reference/command/guides/aws-marketplace/ockam-node-for-amazon-bedrock.md)
   * [Manual](https://command.ockam.io/manual/)
 * [Programming Libraries](reference/libraries/README.md)
   * [Rust](reference/libraries/rust/README.md)
