@@ -3,8 +3,15 @@
 * [What is Ockam?](README.md)
 * [How does Ockam work?](how-does-ockam-work.md)
 * [Quickstarts](quickstarts/README.md)
-  * [Snowflake to Kafka](https://www.ockam.io/blog/snowflake-push-kafka)
   * [Add secure connectivity to your SaaS product](https://www.ockam.io/blog/building-secure-saas-platforms)
+  * [Snowflake federated queries to Postgres](https://www.ockam.io/blog/snowflake-query-postgres)
+  * [Postgres to Snowflake](https://www.ockam.io/blog/snowflake-pull-postgres)
+  * [Snowflake to Postgres](https://www.ockam.io/blog/snowflake-push-postgres)
+  * [Kafka to Snowflake](https://www.ockam.io/blog/snowflake-pull-kafka)
+  * [Snowflake to Kafka](https://www.ockam.io/blog/snowflake-push-kafka)
+  * [Snowflake stage as SFTP server](https://www.ockam.io/blog/snowflake-stage-data-sftp)
+  * [Snowflake stage as WebDAV file share](https://www.ockam.io/blog/snowflake-stage-data-webdav)
+  * [Snowflake hosted private APIs](https://www.ockam.io/blog/snowflake-call-private-api)
 
 ## ENCRYPTED PORTALS TO ... <a href="#portals" id="portals"></a>
 
