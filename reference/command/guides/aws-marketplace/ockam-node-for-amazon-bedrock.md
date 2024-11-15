@@ -45,7 +45,7 @@ Read: “[How does Ockam work?](https://docs.ockam.io/how-does-ockam-work)” to
 
 ### PreRequisite
 
-* You have permission to subscribe and launch Cloudformation stack from AWS Marketplace on the AWS Account running Amazon Redshift.
+* You have permission to subscribe and launch Cloudformation stack from AWS Marketplace on the AWS Account running Amazon Bedrock.
 * Make sure AWS Bedrock is available in the region you are deploying the cloudformation template.&#x20;
 
 ### Create an Orchestrator Project
