@@ -17,6 +17,7 @@ jobs:
   release_update_docs:
     name: Release - update documentation
     runs-on: ubuntu-22.04
+    environment: release
     permissions:
       contents: write
     steps:
