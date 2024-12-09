@@ -93,7 +93,6 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 
 ```json
 {
-    "http-server-port": 23345,
     "relay": "bedrock",
     "tcp-outlet": {
         "to": "$BEDROCK_RUNTIME_ENDPOINT:443",

@@ -74,13 +74,12 @@ ockam project ticket --expires-in 10h --usage-count 1 \
     * **Enrollment ticket**: Copy and paste the content of the `outlet.ticket` generated above
     * **Amazon MSK Bootstrap Server with Port**: To configure the Ockam Kafka Outlet Node, you'll need to specify the bootstrap servers for your Amazon MSK cluster. This configuration allows the Ockam Kafka Outlet Node to connect to the Kafka brokers.
       * **Go to the MSK cluster in the AWS Management Console** and select the cluster name.
-      * **In the Connectivity Summary** section**,** select **View Client information**, copy the **Bootstrap servers (plaintext)** string with port `9092`.
+      * **In the Connectivity Summary** sectio&#x6E;**,** select **View Client information**, copy the **Bootstrap servers (plaintext)** string with port `9092`.
     * **JSON Node Configuration**: Copy and paste the below configuration. Note that the configuration values match with the enrollment tickets created in the previous step
 
 ```json
 {
     "name": "amazon_msk_kafka_outlet",
-    "http-server-port": 23345,
     "relay": "kafka",
     "kafka-outlet": {
       "bootstrap-server": "$BOOTSTRAP_SERVER_WITH_PORT",
@@ -122,7 +121,6 @@ To set up an Inlet Node in AWS,  follow similar steps as the Outlet Node setup, 
 ```json
 {
     "name": "amazon_msk_kafka_inlet",
-    "http-server-port": 23345,
     "kafka-inlet": {
       "from": "127.0.0.1:9092",
       "disable-content-encryption": true,
@@ -157,7 +155,6 @@ services:
       - --node-config
       - |
         name: amazon_msk_kafka_inlet
-        http-server-port: 23345
         ticket: ${ENROLLMENT_TICKET}
 
         kafka-inlet:

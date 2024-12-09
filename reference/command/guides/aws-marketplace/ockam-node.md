@@ -51,7 +51,7 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 ### Setup Ockam Outlet Node
 
 * Login to AWS Account you would like to use
-* Subscribe to "[Ockam - Node" ](https://aws.amazon.com/marketplace/pp/prodview-gov6p3wh224ho?sr=0-1\&ref\_=beagle\&applicationId=AWSMPContessa) in AWS Marketplace&#x20;
+* Subscribe to "[Ockam - Node" ](https://aws.amazon.com/marketplace/pp/prodview-gov6p3wh224ho?sr=0-1\&ref_=beagle\&applicationId=AWSMPContessa) in AWS Marketplace&#x20;
 * Navigate to `AWS Marketplace -> Manage subscriptions`. Select `Ockam - Node` from the list of subscriptions. Select `Actions-> Launch Cloudformation stack`&#x20;
 * Select the Region you want to deploy and click `Continue to Launch`. Under Actions, select `Launch Cloudformation`
 * Create stack with below details
@@ -66,7 +66,6 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 ```json
 {
     "name": "outlet_node",
-    "http-server-port": 23345,
     "relay": "outlet",
     "tcp-outlet": {
         "to": "localhost:7777",
@@ -92,7 +91,7 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 ### Setup Ockam Inlet Node
 
 * Login to AWS Account you would like to use
-* Subscribe to "[Ockam - Node" ](https://aws.amazon.com/marketplace/pp/prodview-gov6p3wh224ho?sr=0-1\&ref\_=beagle\&applicationId=AWSMPContessa) in AWS Marketplace&#x20;
+* Subscribe to "[Ockam - Node" ](https://aws.amazon.com/marketplace/pp/prodview-gov6p3wh224ho?sr=0-1\&ref_=beagle\&applicationId=AWSMPContessa) in AWS Marketplace&#x20;
 * Navigate to `AWS Marketplace -> Manage subscriptions`. Select `Ockam - Node` from the list of subscriptions. Select `Actions-> Launch Cloudformation stack`&#x20;
 * Select the Region you want to deploy and click `Continue to Launch`. Under Actions, select `Launch Cloudformation`
 * Create stack with below details
@@ -107,7 +106,6 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 ```json
 {
     "name": "inlet_node",
-    "http-server-port": 23345,
     "tcp-inlet": {
       "from": "0.0.0.0:17777",
       "via": "outlet",

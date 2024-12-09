@@ -62,7 +62,7 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 * &#x20;Use Influx CLI to create a token. For instructions, please see: [Install and use the influx CLI](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/).
 * Configure your CLI to use `--username-password` to be able to create the operator:
 
-```
+```bash
 INFLUXDB_ORG="REPLACE_WITH_ORG_NAME"
 INFLUXDB_USERNAME="REPLACE_WITH_USERNAME"
 INFLUXDB_PASSWORD="REPLACE_WITH_PASSWORD"
@@ -88,7 +88,7 @@ influx auth create --all-access --json | jq -r .token
 
 * Create influxDB token as secret within secret manager.  Note the ARN of the secret.
 
-```
+```bash
 SECRET_NAME="influxdb-token" #Update as necessary
 INFLUXDB_TOKEN="REPLACE_WITH_TOKEN"
 AWS_REGION="us-east-1"
@@ -147,8 +147,7 @@ aws secretsmanager describe-secret --secret-id $SECRET_NAME --query ARN --output
 * **NodeConfig**: Copy and paste the below configuration. Note that the configuration values match with the enrollment tickets created in the previous step. `INFLUX_ENDPOINT`, `INFLUX_ORG_ID` and `INFLUX_TOKEN` will be replaced during runtime.
 
 <pre class="language-json"><code class="lang-json"><strong>{
-</strong>    "http-server-port": 23345,
-    "relay": "influxdb",
+</strong>    "relay": "influxdb",
     "influxdb-outlet": {
       "to": "INFLUX_ENDPOINT:8086",
       "tls": true,
@@ -377,7 +376,7 @@ ENROLLMENT_TICKET=$(cat inlet.ticket) docker-compose up -d
 docker exec -it influxdb-inlet /ockam node show
 ```
 
-* Connect to influxdb**-client** container and run commands
+* Connect to influxd&#x62;**-client** container and run commands
 
 <pre class="language-bash"><code class="lang-bash"># Connect to the container
 <strong>docker exec -it node-app /bin/bash
@@ -395,7 +394,7 @@ node app.mjs
 **Option 2: Setup Inlet Node in AWS**
 
 * Login to AWS Account you would like to use
-* Subscribe to "[Ockam - Node" ](https://aws.amazon.com/marketplace/pp/prodview-gov6p3wh224ho?sr=0-1\&ref\_=beagle\&applicationId=AWSMPContessa) in AWS Marketplace&#x20;
+* Subscribe to "[Ockam - Node" ](https://aws.amazon.com/marketplace/pp/prodview-gov6p3wh224ho?sr=0-1\&ref_=beagle\&applicationId=AWSMPContessa) in AWS Marketplace&#x20;
 * Navigate to `AWS Marketplace -> Manage subscriptions`. Select `Ockam - Node` from the list of subscriptions. Select `Actions-> Launch Cloudformation stack`&#x20;
 * Select the Region you want to deploy and click `Continue to Launch`. Under Actions, select `Launch Cloudformation`
 * Create stack with below details
@@ -409,7 +408,6 @@ node app.mjs
 
 ```json
 {
-    "http-server-port": 23345,
     "influxdb-inlet": {
       "from": "0.0.0.0:8086",
       "allow": "amazon-influxdb-outlet",

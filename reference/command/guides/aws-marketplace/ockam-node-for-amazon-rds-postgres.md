@@ -75,7 +75,6 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 
 ```json
 {
-    "http-server-port": 23345,
     "relay": "postgres",
     "tcp-outlet": {
         "to": "$POSTGRES_ENDPOINT:5432",
@@ -107,7 +106,7 @@ You can set up an Ockam Postgres Inlet Node either in AWS or locally using Docke
 **Option 1: Setup Inlet Node in AWS**
 
 * Login to AWS Account you would like to use
-* Subscribe to "[Ockam - Node" ](https://aws.amazon.com/marketplace/pp/prodview-gov6p3wh224ho?sr=0-1\&ref\_=beagle\&applicationId=AWSMPContessa) in AWS Marketplace&#x20;
+* Subscribe to "[Ockam - Node" ](https://aws.amazon.com/marketplace/pp/prodview-gov6p3wh224ho?sr=0-1\&ref_=beagle\&applicationId=AWSMPContessa) in AWS Marketplace&#x20;
 * Navigate to `AWS Marketplace -> Manage subscriptions`. Select `Ockam - Node` from the list of subscriptions. Select `Actions-> Launch Cloudformation stack`&#x20;
 * Select the Region you want to deploy and click `Continue to Launch`. Under Actions, select `Launch Cloudformation`
 * Create stack with below details
@@ -120,8 +119,7 @@ You can set up an Ockam Postgres Inlet Node either in AWS or locally using Docke
     * **`JSON Node Configuration`**: Copy and paste the below configuration. &#x20;
 
 <pre class="language-json"><code class="lang-json"><strong>{
-</strong>    "http-server-port": 23345,
-    "tcp-inlet": {
+</strong>    "tcp-inlet": {
       "from": "0.0.0.0:15432",
       "via": "postgres",
       "allow": "amazon-rds-postgres-outlet"
