@@ -75,10 +75,10 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 
 ```json
 {
-    "relay": "postgres",
+    "relay": "postgresql",
     "tcp-outlet": {
         "to": "$POSTGRES_ENDPOINT:5432",
-        "allow": "amazon-rds-postgres-inlet"
+        "allow": "amazon-rds-postgresql-inlet"
     }
 }
     
@@ -121,8 +121,8 @@ You can set up an Ockam Postgres Inlet Node either in AWS or locally using Docke
 <pre class="language-json"><code class="lang-json"><strong>{
 </strong>    "tcp-inlet": {
       "from": "0.0.0.0:15432",
-      "via": "postgres",
-      "allow": "amazon-rds-postgres-outlet"
+      "via": "postgresql",
+      "allow": "amazon-rds-postgresql-outlet"
     }
 }
 </code></pre>
@@ -166,8 +166,8 @@ services:
         ticket: ${ENROLLMENT_TICKET}
         tcp-inlet:
           from: 127.0.0.1:15432
-          via: postgres
-          allow: amazon-rds-postgres-outlet
+          via: postgresql
+          allow: amazon-rds-postgresql-outlet
     network_mode: host
 
   psql-client:

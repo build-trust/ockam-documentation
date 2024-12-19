@@ -65,7 +65,6 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 
 ```json
 {
-    "name": "outlet_node",
     "relay": "outlet",
     "tcp-outlet": {
         "to": "localhost:7777",
@@ -105,7 +104,6 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 
 ```json
 {
-    "name": "inlet_node",
     "tcp-inlet": {
       "from": "0.0.0.0:17777",
       "via": "outlet",

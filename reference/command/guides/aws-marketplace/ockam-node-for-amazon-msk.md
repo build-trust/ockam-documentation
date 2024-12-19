@@ -79,7 +79,6 @@ ockam project ticket --expires-in 10h --usage-count 1 \
 
 ```json
 {
-    "name": "amazon_msk_kafka_outlet",
     "relay": "kafka",
     "kafka-outlet": {
       "bootstrap-server": "$BOOTSTRAP_SERVER_WITH_PORT",
@@ -120,7 +119,6 @@ To set up an Inlet Node in AWS,  follow similar steps as the Outlet Node setup, 
 
 ```json
 {
-    "name": "amazon_msk_kafka_inlet",
     "kafka-inlet": {
       "from": "127.0.0.1:9092",
       "disable-content-encryption": true,
@@ -154,7 +152,6 @@ services:
       - --foreground
       - --node-config
       - |
-        name: amazon_msk_kafka_inlet
         ticket: ${ENROLLMENT_TICKET}
 
         kafka-inlet:
