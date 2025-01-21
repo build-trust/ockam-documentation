@@ -50,7 +50,7 @@ async fn main(ctx: Context) -> Result<()> {
     let mut node = node(ctx).await?;
 
     // Stop the node as soon as it starts.
-    node.stop().await
+    node.shutdown().await
 }
 
 ```
@@ -113,7 +113,7 @@ impl Worker for Echoer {
     type Message = String;
 
     async fn handle_message(&mut self, ctx: &mut Context, msg: Routed<String>) -> Result<()> {
-        println!("Address: {}, Received: {:?}", ctx.address(), msg);
+        println!("Address: {}, Received: {:?}", ctx.primary_address(), msg);
 
         // Echo the message body back on its return_route.
         ctx.send(msg.return_route().clone(), msg.into_body()?).await
@@ -162,7 +162,7 @@ async fn main(ctx: Context) -> Result<()> {
     let mut node = node(ctx).await?;
 
     // Start a worker, of type Echoer, at address "echoer"
-    node.start_worker("echoer", Echoer).await?;
+    node.start_worker("echoer", Echoer)?;
 
     // Send a message to the worker at address "echoer".
     node.send("echoer", "Hello Ockam!".to_string()).await?;
@@ -172,7 +172,7 @@ async fn main(ctx: Context) -> Result<()> {
     println!("App Received: {}", reply.into_body()?); // should print "Hello Ockam!"
 
     // Stop all workers, stop the node, cleanup and return.
-    node.stop().await
+    node.shutdown().await
 }
 
 ```
