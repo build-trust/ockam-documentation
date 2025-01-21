@@ -62,9 +62,9 @@ async fn main(ctx: Context) -> Result<()> {
     let node = node(ctx).await?;
 
     // Initialize the TCP Transport.
-    let tcp = node.create_tcp_transport().await?;
+    let tcp = node.create_tcp_transport()?;
 
-    node.start_worker("echoer", Echoer).await?;
+    node.start_worker("echoer", Echoer)?;
 
     let bob = node.create_identity().await?;
 
@@ -73,19 +73,17 @@ async fn main(ctx: Context) -> Result<()> {
 
     // Create a secure channel listener for Bob that will wait for requests to
     // initiate an Authenticated Key Exchange.
-    let secure_channel_listener = node
-        .create_secure_channel_listener(
-            &bob,
-            "bob_listener",
-            SecureChannelListenerOptions::new().as_consumer(listener.flow_control_id()),
-        )
-        .await?;
+    let secure_channel_listener = node.create_secure_channel_listener(
+        &bob,
+        "bob_listener",
+        SecureChannelListenerOptions::new().as_consumer(listener.flow_control_id()),
+    )?;
 
     // Allow access to the Echoer via Secure Channels
     node.flow_controls()
-        .add_consumer("echoer", secure_channel_listener.flow_control_id());
+        .add_consumer(&"echoer".into(), secure_channel_listener.flow_control_id());
 
-    // Don't call node.stop() here so this node runs forever.
+    // Don't call node.shutdown() here so this node runs forever.
     Ok(())
 }
 
@@ -112,22 +110,21 @@ async fn main(ctx: Context) -> Result<()> {
     let node = node(ctx).await?;
 
     // Initialize the TCP Transport
-    let tcp = node.create_tcp_transport().await?;
+    let tcp = node.create_tcp_transport()?;
 
     // Create a TCP connection to Bob.
     let connection_to_bob = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
     // Start a Relay to forward messages to Bob using the TCP connection.
-    node.start_worker("forward_to_bob", Relay::new(route![connection_to_bob]))
-        .await?;
+    node.start_worker("forward_to_bob", Relay::new(route![connection_to_bob]))?;
 
     // Create a TCP listener and wait for incoming connections.
     let listener = tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
 
     node.flow_controls()
-        .add_consumer("forward_to_bob", listener.flow_control_id());
+        .add_consumer(&"forward_to_bob".into(), listener.flow_control_id());
 
-    // Don't call node.stop() here so this node runs forever.
+    // Don't call node.shutdown() here so this node runs forever.
     Ok(())
 }
 
@@ -155,7 +152,7 @@ async fn main(ctx: Context) -> Result<()> {
     let alice = node.create_identity().await?;
 
     // Create a TCP connection to the middle node.
-    let tcp = node.create_tcp_transport().await?;
+    let tcp = node.create_tcp_transport()?;
     let connection_to_middle_node = tcp.connect("localhost:3000", TcpConnectionOptions::new()).await?;
 
     // Connect to a secure channel listener and perform a handshake.
@@ -172,7 +169,7 @@ async fn main(ctx: Context) -> Result<()> {
     println!("App Received: {}", reply); // should print "Hello Ockam!"
 
     // Stop all workers, stop the node, cleanup and return.
-    node.stop().await
+    node.shutdown().await
 }
 
 ```

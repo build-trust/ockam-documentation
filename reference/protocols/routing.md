@@ -68,10 +68,10 @@ impl Worker for Hop {
     /// This handle function takes any incoming message and forwards
     /// it to the next hop in it's onward route
     async fn handle_message(&mut self, ctx: &mut Context, msg: Routed<Any>) -> Result<()> {
-        println!("Address: {}, Received: {:?}", ctx.address(), msg);
+        println!("Address: {}, Received: {:?}", ctx.primary_address(), msg);
 
         // Send the message to the next worker on its onward_route
-        ctx.forward(msg.into_local_message().step_forward(&ctx.address())?)
+        ctx.forward(msg.into_local_message().step_forward(ctx.primary_address().clone())?)
             .await
     }
 }
@@ -99,10 +99,10 @@ async fn main(ctx: Context) -> Result<()> {
     let mut node = node(ctx).await?;
 
     // Start a worker, of type Echoer, at address "echoer"
-    node.start_worker("echoer", Echoer).await?;
+    node.start_worker("echoer", Echoer)?;
 
     // Start a worker, of type Hop, at address "h1"
-    node.start_worker("h1", Hop).await?;
+    node.start_worker("h1", Hop)?;
 
     // Send a message to the worker at address "echoer",
     // via the worker at address "h1"
@@ -113,7 +113,7 @@ async fn main(ctx: Context) -> Result<()> {
     println!("App Received: {}", reply.into_body()?); // should print "Hello Ockam!"
 
     // Stop all workers, stop the node, cleanup and return.
-    node.stop().await
+    node.shutdown().await
 }
 
 ```
@@ -143,12 +143,12 @@ async fn main(ctx: Context) -> Result<()> {
     let mut node = node(ctx).await?;
 
     // Start an Echoer worker at address "echoer"
-    node.start_worker("echoer", Echoer).await?;
+    node.start_worker("echoer", Echoer)?;
 
     // Start 3 hop workers at addresses "h1", "h2" and "h3".
-    node.start_worker("h1", Hop).await?;
-    node.start_worker("h2", Hop).await?;
-    node.start_worker("h3", Hop).await?;
+    node.start_worker("h1", Hop)?;
+    node.start_worker("h2", Hop)?;
+    node.start_worker("h3", Hop)?;
 
     // Send a message to the echoer worker via the "h1", "h2", and "h3" workers
     let r = route!["h1", "h2", "h3", "echoer"];
@@ -159,7 +159,7 @@ async fn main(ctx: Context) -> Result<()> {
     println!("App Received: {}", reply.into_body()?); // should print "Hello Ockam!"
 
     // Stop all workers, stop the node, cleanup and return.
-    node.stop().await
+    node.shutdown().await
 }
 
 ```
@@ -197,18 +197,19 @@ async fn main(ctx: Context) -> Result<()> {
     let node = node(ctx).await?;
 
     // Initialize the TCP Transport
-    let tcp = node.create_tcp_transport().await?;
+    let tcp = node.create_tcp_transport()?;
 
     // Create an echoer worker
-    node.start_worker("echoer", Echoer).await?;
+    node.start_worker("echoer", Echoer)?;
 
     // Create a TCP listener and wait for incoming connections.
     let listener = tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
 
     // Allow access to the Echoer via TCP connections from the TCP listener
-    node.flow_controls().add_consumer("echoer", listener.flow_control_id());
+    node.flow_controls()
+        .add_consumer(&"echoer".into(), listener.flow_control_id());
 
-    // Don't call node.stop() here so this node runs forever.
+    // Don't call node.shutdown() here so this node runs forever.
     Ok(())
 }
 
@@ -231,7 +232,7 @@ async fn main(ctx: Context) -> Result<()> {
     let mut node = node(ctx).await?;
 
     // Initialize the TCP Transport.
-    let tcp = node.create_tcp_transport().await?;
+    let tcp = node.create_tcp_transport()?;
 
     // Create a TCP connection to a different node.
     let connection_to_responder = tcp.connect("localhost:4000", TcpConnectionOptions::new()).await?;
@@ -244,7 +245,7 @@ async fn main(ctx: Context) -> Result<()> {
     println!("App Received: {}", reply); // should print "Hello Ockam!"
 
     // Stop all workers, stop the node, cleanup and return.
-    node.stop().await
+    node.shutdown().await
 }
 
 ```
@@ -292,18 +293,19 @@ async fn main(ctx: Context) -> Result<()> {
     let node = node(ctx).await?;
 
     // Initialize the TCP Transport
-    let tcp = node.create_tcp_transport().await?;
+    let tcp = node.create_tcp_transport()?;
 
     // Create an echoer worker
-    node.start_worker("echoer", Echoer).await?;
+    node.start_worker("echoer", Echoer)?;
 
     // Create a TCP listener and wait for incoming connections.
     let listener = tcp.listen("127.0.0.1:4000", TcpListenerOptions::new()).await?;
 
     // Allow access to the Echoer via TCP connections from the TCP listener
-    node.flow_controls().add_consumer("echoer", listener.flow_control_id());
+    node.flow_controls()
+        .add_consumer(&"echoer".into(), listener.flow_control_id());
 
-    // Don't call node.stop() here so this node runs forever.
+    // Don't call node.shutdown() here so this node runs forever.
     Ok(())
 }
 
@@ -345,7 +347,7 @@ impl Worker for Relay {
     /// This handle function takes any incoming message and forwards
     /// it to the next hop in it's onward route
     async fn handle_message(&mut self, ctx: &mut Context, msg: Routed<Any>) -> Result<()> {
-        println!("Address: {}, Received: {:?}", ctx.address(), msg);
+        println!("Address: {}, Received: {:?}", ctx.primary_address(), msg);
 
         let next_on_route = self.route.next()?.clone();
 
@@ -353,7 +355,7 @@ impl Worker for Relay {
         let mut local_message = msg.into_local_message();
 
         local_message = local_message.pop_front_onward_route()?;
-        local_message = local_message.prepend_front_onward_route(&self.route); // Prepend predefined route to the onward_route
+        local_message = local_message.prepend_front_onward_route(self.route.clone()); // Prepend predefined route to the onward_route
 
         let prev_hop = local_message.return_route().next()?.clone();
 
@@ -361,12 +363,11 @@ impl Worker for Relay {
             .flow_controls()
             .find_flow_control_with_producer_address(&next_on_route)
         {
-            ctx.flow_controls()
-                .add_consumer(prev_hop.clone(), info.flow_control_id());
+            ctx.flow_controls().add_consumer(&prev_hop, info.flow_control_id());
         }
 
         if let Some(info) = ctx.flow_controls().find_flow_control_with_producer_address(&prev_hop) {
-            ctx.flow_controls().add_consumer(next_on_route, info.flow_control_id());
+            ctx.flow_controls().add_consumer(&next_on_route, info.flow_control_id());
         }
 
         // Send the message on its onward_route
@@ -395,23 +396,22 @@ async fn main(ctx: Context) -> Result<()> {
     let node = node(ctx).await?;
 
     // Initialize the TCP Transport
-    let tcp = node.create_tcp_transport().await?;
+    let tcp = node.create_tcp_transport()?;
 
     // Create a TCP connection to the responder node.
     let connection_to_responder = tcp.connect("127.0.0.1:4000", TcpConnectionOptions::new()).await?;
 
     // Create and start a Relay worker
-    node.start_worker("forward_to_responder", Relay::new(connection_to_responder))
-        .await?;
+    node.start_worker("forward_to_responder", Relay::new(connection_to_responder))?;
 
     // Create a TCP listener and wait for incoming connections.
     let listener = tcp.listen("127.0.0.1:3000", TcpListenerOptions::new()).await?;
 
     // Allow access to the Relay via TCP connections from the TCP listener
     node.flow_controls()
-        .add_consumer("forward_to_responder", listener.flow_control_id());
+        .add_consumer(&"forward_to_responder".into(), listener.flow_control_id());
 
-    // Don't call node.stop() here so this node runs forever.
+    // Don't call node.shutdown() here so this node runs forever.
     Ok(())
 }
 
@@ -434,7 +434,7 @@ async fn main(ctx: Context) -> Result<()> {
     let mut node = node(ctx).await?;
 
     // Initialize the TCP Transport
-    let tcp = node.create_tcp_transport().await?;
+    let tcp = node.create_tcp_transport()?;
 
     // Create a TCP connection to the middle node.
     let connection_to_middle_node = tcp.connect("localhost:3000", TcpConnectionOptions::new()).await?;
@@ -446,7 +446,7 @@ async fn main(ctx: Context) -> Result<()> {
     println!("App Received: {}", reply); // should print "Hello Ockam!"
 
     // Stop all workers, stop the node, cleanup and return.
-    node.stop().await
+    node.shutdown().await
 }
 
 ```

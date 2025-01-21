@@ -20,7 +20,7 @@ async fn main(ctx: Context) -> Result<()> {
     let _alice = node.create_identity().await?;
 
     // Stop the node.
-    node.stop().await
+    node.shutdown().await
 }
 
 ```

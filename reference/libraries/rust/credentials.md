@@ -74,7 +74,7 @@ async fn main(ctx: Context) -> Result<()> {
     let mut vault = Vault::create().await?;
     vault.identity_vault = identity_vault;
 
-    let node = Node::builder().await?.with_vault(vault).build(&ctx).await?;
+    let node = Node::builder().await?.with_vault(vault).build(&ctx)?;
 
     let issuer_identity = hex::decode("81825837830101583285f68200815820afbca9cf5d440147450f9f0d0a038a337b3fe5c17086163f2c54509558b62ef4f41a654cf97d1a7818fc7d8200815840650c4c939b96142546559aed99c52b64aa8a2f7b242b46534f7f8d0c5cc083d2c97210b93e9bca990e9cb9301acc2b634ffb80be314025f9adc870713e6fde0d").unwrap();
     let issuer = node.import_private_identity(None, &issuer_identity, &secret).await?;
@@ -121,7 +121,7 @@ async fn main(ctx: Context) -> Result<()> {
         pre_trusted_identities.insert(identifier.clone(), attributes.clone());
     }
     members
-        .bootstrap_pre_trusted_members(&pre_trusted_identities.into())
+        .bootstrap_pre_trusted_members(&issuer, &pre_trusted_identities.into())
         .await?;
 
     let tcp_listener_options = TcpListenerOptions::new();
@@ -132,27 +132,25 @@ async fn main(ctx: Context) -> Result<()> {
     // Start a secure channel listener that only allows channels where the identity
     // at the other end of the channel can authenticate with the latest private key
     // corresponding to one of the above known public identifiers.
-    node.create_secure_channel_listener(&issuer, DefaultAddress::SECURE_CHANNEL_LISTENER, sc_listener_options)
-        .await?;
+    node.create_secure_channel_listener(&issuer, DefaultAddress::SECURE_CHANNEL_LISTENER, sc_listener_options)?;
 
     // Start a credential issuer worker that will only accept incoming requests from
     // authenticated secure channels with our known public identifiers.
     let allow_known = IdentityIdAccessControl::new(known_identifiers);
     node.flow_controls()
-        .add_consumer(DefaultAddress::CREDENTIAL_ISSUER, &sc_listener_flow_control_id);
+        .add_consumer(&DefaultAddress::CREDENTIAL_ISSUER.into(), &sc_listener_flow_control_id);
     node.start_worker_with_access_control(
         DefaultAddress::CREDENTIAL_ISSUER,
         credential_issuer,
         allow_known,
         AllowAll,
-    )
-    .await?;
+    )?;
 
     // Initialize TCP Transport, create a TCP listener, and wait for connections.
-    let tcp = node.create_tcp_transport().await?;
+    let tcp = node.create_tcp_transport()?;
     tcp.listen("127.0.0.1:5000", tcp_listener_options).await?;
 
-    // Don't call node.stop() here so this node runs forever.
+    // Don't call node.shutdown() here so this node runs forever.
     println!("issuer started");
     Ok(())
 }
@@ -203,10 +201,10 @@ async fn main(ctx: Context) -> Result<()> {
     let mut vault = Vault::create().await?;
     vault.identity_vault = identity_vault;
 
-    let node = Node::builder().await?.with_vault(vault).build(&ctx).await?;
+    let node = Node::builder().await?.with_vault(vault).build(&ctx)?;
 
     // Initialize the TCP Transport
-    let tcp = node.create_tcp_transport().await?;
+    let tcp = node.create_tcp_transport()?;
 
     // Create an Identity representing the server
     // Load an identity corresponding to the following public identifier
@@ -256,7 +254,7 @@ async fn main(ctx: Context) -> Result<()> {
         .as_consumer(&tcp_listener_options.spawner_flow_control_id());
 
     node.flow_controls().add_consumer(
-        DefaultAddress::ECHO_SERVICE,
+        &DefaultAddress::ECHO_SERVICE.into(),
         &sc_listener_options.spawner_flow_control_id(),
     );
     let allow_production_incoming = IncomingAbac::create_name_value(
@@ -271,25 +269,22 @@ async fn main(ctx: Context) -> Result<()> {
         Some(issuer),
         "cluster",
         "production",
-    )
-    .await?;
+    )?;
     node.start_worker_with_access_control(
         DefaultAddress::ECHO_SERVICE,
         Echoer,
         allow_production_incoming,
         allow_production_outgoing,
-    )
-    .await?;
+    )?;
 
     // Start a secure channel listener that only allows channels with
     // authenticated identities.
-    node.create_secure_channel_listener(&server, DefaultAddress::SECURE_CHANNEL_LISTENER, sc_listener_options)
-        .await?;
+    node.create_secure_channel_listener(&server, DefaultAddress::SECURE_CHANNEL_LISTENER, sc_listener_options)?;
 
     // Create a TCP listener and wait for incoming connections
     tcp.listen("127.0.0.1:4000", tcp_listener_options).await?;
 
-    // Don't call node.stop() here so this node runs forever.
+    // Don't call node.shutdown() here so this node runs forever.
     println!("server started");
     Ok(())
 }
@@ -311,13 +306,14 @@ touch examples/06-credential-exchange-client.rs
 ```rust
 // examples/06-credentials-exchange-client.rs
 use ockam::identity::{SecureChannelOptions, Vault};
-use ockam::tcp::{TcpConnectionOptions, TcpTransportExtension};
+use ockam::tcp::TcpConnectionOptions;
 use ockam::vault::{EdDSACurve25519SecretKey, SigningSecret, SoftwareVaultForSigning};
 use ockam::{route, Context, Node, Result};
 use ockam_api::enroll::enrollment::Enrollment;
 use ockam_api::nodes::NodeManager;
 use ockam_api::DefaultAddress;
 use ockam_multiaddr::MultiAddr;
+use ockam_transport_tcp::TcpTransportExtension;
 
 #[ockam::node]
 async fn main(ctx: Context) -> Result<()> {
@@ -336,9 +332,9 @@ async fn main(ctx: Context) -> Result<()> {
     let mut vault = Vault::create().await?;
     vault.identity_vault = identity_vault;
 
-    let mut node = Node::builder().await?.with_vault(vault).build(&ctx).await?;
+    let mut node = Node::builder().await?.with_vault(vault).build(&ctx)?;
     // Initialize the TCP Transport
-    let tcp = node.create_tcp_transport().await?;
+    let tcp = node.create_tcp_transport()?;
 
     // Create an Identity representing the client
     // We preload the client vault with a change history and secret key corresponding to the identity identifier
@@ -400,7 +396,7 @@ async fn main(ctx: Context) -> Result<()> {
         .await?;
     println!("Received: {}", reply); // should print "Hello Ockam!"
 
-    node.stop().await
+    node.shutdown().await
 }
 
 ```
