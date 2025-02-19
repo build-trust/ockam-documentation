@@ -7,7 +7,7 @@ description: >-
 
 # Secure Channels
 
-To [<mark style="color:blue;">trust data-in-motion</mark>](../../#trust-for-data-in-motion), applications need end-to-end guarantees of data authenticity, integrity, and confidentiality.
+To [<mark style="color:blue;">trust data-in-motion</mark>](<../../README (1).md#trust-for-data-in-motion>), applications need end-to-end guarantees of data authenticity, integrity, and confidentiality.
 
 In previous sections, we saw how Ockam [<mark style="color:blue;">Routing</mark>](routing.md) and [<mark style="color:blue;">Transports</mark>](routing.md#transport)<mark style="color:blue;">,</mark> when combined with the ability to model [<mark style="color:blue;">Bridges</mark>](advanced-routing.md) and [<mark style="color:blue;">Relays</mark>](advanced-routing.md#relay), make it possible to <mark style="color:orange;">create end-to-end, application layer protocols in</mark> <mark style="color:orange;">**any**</mark> <mark style="color:orange;">communication topology</mark> - across networks, clouds, and protocols over many transport layer hops.
 

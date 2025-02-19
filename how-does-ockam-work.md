@@ -12,9 +12,7 @@ layout:
     visible: true
 ---
 
-# How does Ockam work?
-
-Ockam is a stack of[ protocols](https://docs.ockam.io/reference/protocols) to build secure-by-design apps that can trust data-in-motion. We provide a collection of programming libraries, command line tools, deployable components, and cloud services that make it simple for you to use these protocols within your apps.
+# Get started demo
 
 Let’s build a simple example together. We will create an encrypted[ Ockam Portal](https://docs.ockam.io/#portals) from a psql microservice in Azure to a Postgres Database in AWS.
 

@@ -1,7 +1,8 @@
 # Table of contents
 
-* [What is Ockam?](README.md)
-* [How does Ockam work?](how-does-ockam-work.md)
+* [Intro to Ockam](README.md)
+* [Ockam's core concepts](<README (1).md>)
+* [Get started demo](how-does-ockam-work.md)
 * [Quickstarts](quickstarts/README.md)
   * [Add secure connectivity to your SaaS product](https://www.ockam.io/blog/building-secure-saas-platforms)
   * [Snowflake federated queries to Postgres](https://www.ockam.io/blog/snowflake-query-postgres)
