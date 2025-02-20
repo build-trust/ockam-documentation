@@ -13,6 +13,7 @@
   * [Snowflake stage as SFTP server](https://www.ockam.io/blog/snowflake-stage-data-sftp)
   * [Snowflake stage as WebDAV file share](https://www.ockam.io/blog/snowflake-stage-data-webdav)
   * [Snowflake hosted private APIs](https://www.ockam.io/blog/snowflake-call-private-api)
+  * [Federated queries from Snowflake](https://www.ockam.io/blog/snowflake-query-postgres)
 
 ## ENCRYPTED PORTALS TO ... <a href="#portals" id="portals"></a>
 

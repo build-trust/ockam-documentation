@@ -20,6 +20,7 @@ Try one of these demos yourself, or get a video walk through.&#x20;
 * [Snowflake federated queries to Postgres](https://www.ockam.io/blog/snowflake-query-postgres)
 * [Postgres to Snowflake Migrations](https://www.ockam.io/blog/snowflake-pull-postgres)
 * [Snowflake to Postgres for CDC (Change Data Capture)](https://www.ockam.io/blog/snowflake-push-postgres)
+* [Run federated queries from inside of Snowflake](https://www.ockam.io/blog/snowflake-query-postgres)&#x20;
 * [Steam Kafka events to to Snowflake](https://www.ockam.io/blog/snowflake-pull-kafka)&#x20;
 * [Real-Time CDC (Change Data Capture) Pipelines from Snowflake to Kafka](https://www.ockam.io/blog/snowflake-push-kafka)
 * [Access a Snowflake stage with SFTP](https://www.ockam.io/blog/snowflake-stage-data-sftp)
