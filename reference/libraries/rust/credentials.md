@@ -225,7 +225,7 @@ async fn main(ctx: Context) -> Result<()> {
     // as a member of the production cluster so it returns a signed credential
     // attesting to that knowledge.
     let authority_node = NodeManager::authority_node_client(
-        &tcp,
+        tcp.clone(),
         node.secure_channels().clone(),
         &issuer,
         &MultiAddr::try_from("/dnsaddr/localhost/tcp/5000/secure/api").unwrap(),
@@ -356,7 +356,7 @@ async fn main(ctx: Context) -> Result<()> {
     // as a member of the production cluster so it returns a signed credential
     // attesting to that knowledge.
     let authority_node = NodeManager::authority_node_client(
-        &tcp,
+        tcp.clone(),
         node.secure_channels().clone(),
         &issuer,
         &MultiAddr::try_from("/dnsaddr/localhost/tcp/5000/secure/api")?,
@@ -388,8 +388,8 @@ async fn main(ctx: Context) -> Result<()> {
 
     // Send a message to the worker at address "echoer".
     // Wait to receive a reply and print it.
-    let reply = node
-        .send_and_receive::<String>(
+    let reply: String = node
+        .send_and_receive(
             route![channel, DefaultAddress::ECHO_SERVICE],
             "Hello Ockam!".to_string(),
         )
