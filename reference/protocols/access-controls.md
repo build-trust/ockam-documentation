@@ -44,6 +44,85 @@ This table lists all the available operators:
 | `member?` | 2                  | Return true if the first value is present in the second expression, which must be a sequence `Seq` of values |
 | `exists?` | >= 1               | Return true if all the expressions are identifiers with values present in the environment                    |
 
+
+### Examples
+
+Here are a few more examples of policies.
+
+> The subject must have a `component` attribute with a value that is either `web` or `database`:
+
+```scheme
+(or (= subject.component "web")
+    (= subject.component "database"))
+```
+
+Note that attribute names can have dots in their name, so you could also write:
+
+```scheme
+(or (= subject.component.web "true")
+    (= subject.component.database "true"))
+```
+
+You can also declare more complex logical expressions, by nesting `and` and `or` operators:
+
+> The subject must either by the "Smart Factory" application or being a member of the "Field Engineering" department in San Francisco:
+
+```scheme
+(or (= subject.application "Smart Factory") 
+    (and (= subject.department "Field Engineering") 
+         (= subject.city "San Francisco")))
+```
+
+### Boolean policies
+
+Since many policies are just need to test for the presence of an attribute, we provide simpler ways to write them.
+
+For example we can write:
+```scheme
+(or (= subject.web "true")
+    (= subject.database "true"))
+```
+
+Simply as (note that logical operators can now be written as infix operators):
+```scheme
+web or database
+```
+
+String comparisons are still supported, so you could also have a `component` attribute and write:
+```scheme
+component="web" or component="database"
+```
+
+More complex expressions require parentheses:
+```scheme
+(web or not database) and analytics
+```
+
+Since identities are frequently used in policies, we provide a shortcut for them. For example, this is a valid boolean policy:
+```scheme
+I84502ce0d9a0a91bae29026b84e19be69fb4203a6bdd1424c85a43c812772a00
+```
+
+It translates to:
+```scheme
+(= subject.identifier = "I84502ce0d9a0a91bae29026b84e19be69fb4203a6bdd1424c85a43c812772a00")
+```
+
+This table summarizes the elements you can use in a simple boolean policy:
+
+| Operator               | Description                                                                       |
+|------------------------|-----------------------------------------------------------------------------------|
+| `name`                 | Equivalent to `(= subject.name "true")`                                           |
+| `name="string value"`  | Equivalent to `(= subject.name "string value")`                                   |
+| `and`                  | Conjunction of 2 expressions                                                      |
+| `or`                   | Disjunction of 2 expressions                                                      |
+| `not`                  | Negation of an expression                                                         |
+| `identifier`           | Equivalent to `(= subject.identifier "identifier")`                               |
+| `()`                   | Parentheses. Used to group expressions. The precedence rules are `not > and > or` |
+
+
+### Evaluation
+
 We evaluate a policy by doing the following:
 
 * Each attribute `attribute_name/attribute_value` is added to the environment as an identifier `subject.attribute_name` associated to the value `attribute_value` (always as a `String`). In the example of a policy given above the identifier `subject.name` means that we are expecting an attribute `name` associated to the identity which sent a message.
