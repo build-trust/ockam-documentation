@@ -3,8 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Page not found - Ockam Command Manual</title>
-        <base href="/">
+        <title>delete - Ockam Command Manual</title>
 
 
         <!-- Custom HTML head -->
@@ -90,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="ockam.html"><strong aria-hidden="true">1.</strong> ockam</a></li><li class="chapter-item "><a href="ockam-cluster.html"><strong aria-hidden="true">2.</strong> cluster</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-cluster-enroll.html"><strong aria-hidden="true">2.1.</strong> enroll</a></li><li class="chapter-item "><a href="ockam-cluster-ticket.html"><strong aria-hidden="true">2.2.</strong> ticket</a></li><li class="chapter-item "><a href="ockam-cluster-show.html"><strong aria-hidden="true">2.3.</strong> show</a></li></ol></li><li class="chapter-item "><a href="ockam-zone.html"><strong aria-hidden="true">3.</strong> zone</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-zone-init.html"><strong aria-hidden="true">3.1.</strong> init</a></li><li class="chapter-item "><a href="ockam-zone-secret.html"><strong aria-hidden="true">3.2.</strong> secret</a></li><li class="chapter-item "><a href="ockam-zone-create.html"><strong aria-hidden="true">3.3.</strong> create</a></li><li class="chapter-item "><a href="ockam-zone-delete.html"><strong aria-hidden="true">3.4.</strong> delete</a></li><li class="chapter-item "><a href="ockam-zone-inlet.html"><strong aria-hidden="true">3.5.</strong> inlet</a></li><li class="chapter-item "><a href="ockam-zone-outlet.html"><strong aria-hidden="true">3.6.</strong> outlet</a></li><li class="chapter-item "><a href="ockam-zone-repl.html"><strong aria-hidden="true">3.7.</strong> repl</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="ockam.html"><strong aria-hidden="true">1.</strong> ockam</a></li><li class="chapter-item "><a href="ockam-cluster.html"><strong aria-hidden="true">2.</strong> cluster</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-cluster-enroll.html"><strong aria-hidden="true">2.1.</strong> enroll</a></li><li class="chapter-item "><a href="ockam-cluster-ticket.html"><strong aria-hidden="true">2.2.</strong> ticket</a></li><li class="chapter-item "><a href="ockam-cluster-show.html"><strong aria-hidden="true">2.3.</strong> show</a></li></ol></li><li class="chapter-item expanded "><a href="ockam-zone.html"><strong aria-hidden="true">3.</strong> zone</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ockam-zone-init.html"><strong aria-hidden="true">3.1.</strong> init</a></li><li class="chapter-item "><a href="ockam-zone-secret.html"><strong aria-hidden="true">3.2.</strong> secret</a></li><li class="chapter-item "><a href="ockam-zone-create.html"><strong aria-hidden="true">3.3.</strong> create</a></li><li class="chapter-item expanded "><a href="ockam-zone-delete.html" class="active"><strong aria-hidden="true">3.4.</strong> delete</a></li><li class="chapter-item "><a href="ockam-zone-inlet.html"><strong aria-hidden="true">3.5.</strong> inlet</a></li><li class="chapter-item "><a href="ockam-zone-outlet.html"><strong aria-hidden="true">3.6.</strong> outlet</a></li><li class="chapter-item "><a href="ockam-zone-repl.html"><strong aria-hidden="true">3.7.</strong> repl</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -175,14 +174,55 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="document-not-found-404"><a class="header" href="#document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <h2 id="zone-delete"><a class="header" href="#zone-delete">zone delete</a></h2>
+<hr />
+<p>[Preview]</p>
+<p><code>ockam zone delete [OPTIONS] </code></p>
+<h3 id="options"><a class="header" href="#options">Options</a></h3>
+<ul>
+<li>
+<p><code>--zone-name [ZONE_NAME]</code> (optional)<br/>
+The name of the Zone</p>
+</li>
+<li>
+<p><code>--zone-config [ZONE_CONFIG]</code> (optional)<br/>
+The path to the Zone configuration file, in yaml or json format. If not set, the <code>./ockam.yaml</code> file from the current directory will be used</p>
+</li>
+<li>
+<p><code>--use-http-api</code> (optional)<br/>
+Force the command to use the HTTP API. By default, the command will use the Orchestrator API</p>
+</li>
+<li>
+<p><code>--api-endpoint [API_ENDPOINT]</code> (optional)<br/>
+The API endpoint of the Ockam AI Platform. Can be set using the <code>AI_API_BASE_URL</code> environment variable. Defaults to <code>http://localhost:30080</code></p>
+</li>
+<li>
+<p><code>--all</code> (optional)<br/>
+Delete all zones in the cluster</p>
+</li>
+<li>
+<p><code>-y</code>, <code>--yes</code> (optional)<br/>
+Confirm the deletion without prompting</p>
+</li>
+</ul>
+<p>Learn More:</p>
+<p>Use <code>ockam &lt;SUBCOMMAND&gt; --help</code> for more information about a subcommand (e.g., 'cluster' or 'zone').</p>
+<p>Learn more about Command: https://docs.ockam.ai/command/
+Learn more about Ockam: https://docs.ockam.ai/</p>
+<p>Feedback:</p>
+<p>If you have questions, as you explore, join us on the Discord channel https://discord.ockam.io</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ockam-zone-create.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
+                            <a rel="next prefetch" href="ockam-zone-inlet.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -190,7 +230,13 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ockam-zone-create.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
+                    <a rel="next prefetch" href="ockam-zone-inlet.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
