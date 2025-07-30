@@ -52,3 +52,4 @@
 * [Introduction to 'Networkless' connections](video-tutorials/introduction-to-networkless-connections.md)
 * [Don't forget about Data Integrity when you think about Security](video-tutorials/dont-forget-about-data-integrity-when-you-think-about-security.md)
 * [The trick behind Ockam's Magic...how Ockam works.](video-tutorials/the-trick-behind-ockams-magic...how-ockam-works..md)
+* [Authentication, Authorization, Non Human Identity, and more!](video-tutorials/authentication-authorization-non-human-identity-and-more.md)
