@@ -41,6 +41,8 @@
 ## Concepts and use cases
 
 * [Ockam is a new approach to secure connections into a SaaS app](concepts-and-use-cases/ockam-is-a-new-approach-to-secure-connections-into-a-saas-app.md)
+* [Ockam has the traits of Rust because Ockam was built in Rust.](concepts-and-use-cases/ockam-has-the-traits-of-rust-because-ockam-was-built-in-rust..md)
+* [How we built the Ockam Open Source community.](concepts-and-use-cases/how-we-built-the-ockam-open-source-community..md)
 
 ## Video tutorials
 
@@ -48,3 +50,5 @@
 * [Lets compare Ockam to a VPN, Reverse Proxy, and publicly addressable API endpoints.](video-tutorials/lets-compare-ockam-to-a-vpn-reverse-proxy-and-publicly-addressable-api-endpoints..md)
 * [How Product Managers should think about secure connections to customer data](video-tutorials/how-product-managers-should-think-about-secure-connections-to-customer-data.md)
 * [Introduction to 'Networkless' connections](video-tutorials/introduction-to-networkless-connections.md)
+* [Don't forget about Data Integrity when you think about Security](video-tutorials/dont-forget-about-data-integrity-when-you-think-about-security.md)
+* [The trick behind Ockam's Magic...how Ockam works.](video-tutorials/the-trick-behind-ockams-magic...how-ockam-works..md)

@@ -39,3 +39,5 @@ Since Ockam’s routing protocol  is at the application layer, complex network a
 * [x] Sessions recover from network failures
 * [x] ...and a lot more.
 
+{% embed url="https://www.youtube.com/watch?ab_channel=Ockam&v=ufevCYmn8Do" %}
+
