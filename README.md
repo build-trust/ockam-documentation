@@ -1,20 +1,6 @@
----
-layout:
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
----
-
 # Intro to Ockam
 
-Ockam empowers you to build secure-by-design apps that can trust data-in-motion.&#x20;
+Ockam is a popular [Open Source library](https://github.com/build-trust/ockam) that empowers you to build secure-by-design apps that can trust data-in-motion. Hundreds of developers have contributed to building, reviewing the codebase over the past 5 years.
 
 With Ockam:
 
@@ -39,16 +25,17 @@ Over these transport layer connections, Ockam sets up an end-to-end encrypted, m
 
 <figure><img src=".gitbook/assets/Screenshot 2025-02-19 at 7.25.34 PM.png" alt=""><figcaption><p>Examples of Ockam Secure Channels over multiple hops of TCP, Kafka, UDP, or anything else.</p></figcaption></figure>
 
-Since Ockam’s routing protocol  is at the application layer, complex network and infrastructure changes are not required to make these connections. Rather than a months-long infrastructure project, you can connect private systems in minutes while ensuring the risky things are impossible to get wrong. NATs are traversed; Keys are stored in vaults; Credentials are short-lived; Messages are authenticated; Data-integrity is guaranteed; Senders are protected from key compromise impersonation; Encryption keys are ratcheted; Nonces are never reused; Strong forward secrecy is ensured; Sessions recover from network failures; and a lot more.
+Since Ockam’s routing protocol  is at the application layer, complex network and infrastructure changes are not required to make these connections. Rather than a months-long infrastructure project, you can connect private systems in minutes while ensuring the risky things are impossible to get wrong.&#x20;
 
-### Ockam is easy to use
+* [x] NATs are traversed
+* [x] Keys are stored in vaults
+* [x] Credentials are short-lived
+* [x] Messages are authenticated
+* [x] Data-integrity is guaranteed
+* [x] Senders are protected from key compromise impersonation
+* [x] Encryption keys are ratcheted
+* [x] Nonces are never reused
+* [x] Strong forward secrecy is ensured
+* [x] Sessions recover from network failures
+* [x] ...and a lot more.
 
-The magic of Ockam is it's simplicity. All you need to do is subscribe to Ockam Orchestrator, and then deploy one of the following distributions next to the applications you'd like to connect:
-
-* Ockam Programming Libraries (Rust …)
-* Ockam Command
-* Ockam Docker Images
-* RedPanda Connect
-* Managed Ockam Nodes from the AWS Marketplace
-* Snowflake Native Apps
-* Lambda/Serverless Functions
