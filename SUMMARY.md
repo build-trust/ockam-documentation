@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Intro to Ockam](README.md)
+  * [How to access these docs from ChatGPT, Cursor, etc](readme/how-to-access-these-docs-from-chatgpt-cursor-etc.md)
 
 ## Documentation
 
