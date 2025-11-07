@@ -38,6 +38,7 @@
   * [Identities and Credentials](documentation/protocols/identities.md)
   * [Secure Channels](documentation/protocols/secure-channels.md)
   * [Access Controls and Policies](documentation/protocols/access-controls.md)
+* [Audit by Trail of Bits](documentation/audit-by-trail-of-bits.md)
 
 ## Concepts and use cases
 

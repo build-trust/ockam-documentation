@@ -21,7 +21,7 @@ Ockam is composed of a collection of cryptographic and messaging protocols. Thes
 
 ## Ockam has been audited and verified by experts
 
-In October of 2023, a team of security and cryptography experts, from Trail of Bits, conducted an extensive review of Ockam’s protocols. Trail of Bits is renowned for their comprehensive third-party audits of the security of many other critical projects, including Kubernetes and the Linux kernel.
+A team of security and cryptography experts, from Trail of Bits, conducted an extensive review of Ockam’s protocols. Trail of Bits is renowned for their comprehensive third-party audits of the security of many other critical projects, including Kubernetes and the Linux kernel.
 
 The auditors from Trail of Bits conducted in-depth, manual analysis, and formal modeling of the security properties of Ockam’s protocols. After this review was complete, they highlighted:
 
