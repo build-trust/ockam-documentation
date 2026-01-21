@@ -21,6 +21,7 @@ jobs:
   update_manual:
     name: Release - update command manual
     runs-on: ubuntu-22.04
+    environment: release
     permissions:
       contents: write
 
